@@ -169,7 +169,7 @@ function TestQuestion() {
                 )}
                 {isLoading ? (
                     <IsLoadingSpinner>
-                        <TextIsLoading>กำลังประมลผลคำตอบน้า</TextIsLoading>
+                        <TextIsLoading>กำลังประมวลผลคำตอบน้า</TextIsLoading>
                         <Spin size="large" />
                     </IsLoadingSpinner>
                 ) : (

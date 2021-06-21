@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Space, Button, Col, List, Input, Row } from 'antd';
-import { RightOutlined } from '@ant-design/icons';
+import { QuestionCircleTwoTone } from '@ant-design/icons';
 import gamePreviewImg from '../shared/images/gamepreview.png';
 
 export const SearchField = styled(Space)`
@@ -10,7 +10,7 @@ export const SearchField = styled(Space)`
 
 export const InputSearch = styled(Input)`
     border-radius: 10px;
-    width: 300px;
+    width: 320px;
     height: 40px;
     top: 20px;
 `;
@@ -44,17 +44,17 @@ export const ImageTestPage = styled.div`
     margin-top: 40px;
     border-radius: 10px;
     height: 250px;
-    background-attachment: scroll;
     background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
 
     /* display: flex;
     justify-content: center;
     align-items: center; */
 
-    &:hover {
+    /* &:hover {
         cursor: pointer;
-    }
+    } */
 `;
 
 export const ButtonStartGame = styled(Button)`
@@ -62,16 +62,32 @@ export const ButtonStartGame = styled(Button)`
     display: flex;
     background-color: #287fde;
     margin-left: auto;
-    border-radius: 10px;
+    border-radius: 15px;
     font-weight: bolder;
     letter-spacing: 1px;
     justify-content: center;
     margin-right: 20px;
-    width: 85px;
-    height: 35px;
+    width: 100px;
+    height: 40px;
+    align-items: center;
+    font-size: 18px;
 `;
 
-export const TextOnImageTest = styled.div`
+export const ButtonReadOverviewTest = styled.div`
+    color: #ffffff;
+    position: absolute;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    font-size: 18px;
+    position: absolute;
+    transform: translateY(-120%) translateX(10%);
+    padding-left: 20px;
+    &:hover {
+        cursor: pointer;
+    }
+`;
+
+export const TextTopicOnImageTest = styled.div`
     font-weight: bolder;
     color: #ffffff;
     font-size: 22px;
@@ -91,7 +107,7 @@ export const ButtonSeeAllBoard = styled.div`
     color: var(--Blue-300);
     height: 5vh;
     width: 100px;
-    font-weight: 600;
+    font-weight: bolder;
     font-size: 15px;
     padding-top: 25px;
     display: flex;
