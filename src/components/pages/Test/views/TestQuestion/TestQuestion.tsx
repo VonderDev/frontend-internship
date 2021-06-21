@@ -1,12 +1,22 @@
 import { useEffect, useState } from 'react';
 import TestAnimation from '../TestStartPage/TestAnimation';
-import { TextQuestionIndex, ButtonStartOver, TextQuestion, ButtonChoiceStlyed, ContainerButton } from '../../shared/styles/TestQuestion.styled';
+import {
+    TextQuestionIndex,
+    ButtonStartOver,
+    TextQuestion,
+    ButtonChoiceStlyed,
+    ContainerButton,
+    ButtonConfirmStartOver,
+    ButtonCancleStartOver,
+    ContainerButtonStartOver,
+} from '../../shared/styles/TestQuestion.styled';
 import { useHistory } from 'react-router-dom';
 import { API_GetTestData, API_PostTestResult } from '../../apis/test.api';
 import { IQuestion, IUserAns } from '../../shared/interface/Test.interfaces';
-import { SmileFilled } from '@ant-design/icons';
-import { Spin } from 'antd';
+import { Modal, Row, Spin } from 'antd';
 import { IsLoadingSpinner, TextIsLoading } from '../../shared/styles/TestPage.styled';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import React from 'react';
 
 function TestQuestion() {
     //
@@ -17,14 +27,15 @@ function TestQuestion() {
     const [currentQuestion, setCurrentQuestion] = useState<number>(0);
     const [questionList, setQuestionList] = useState<Array<IQuestion> | null>(null);
     const buttonList = [
-        { value: 3, label: 'ใช่มาก', icon: <SmileFilled style={{ fontSize: '20px', color: '#FFF566' }} /> },
-        { value: 2, label: 'ใช่', icon: <SmileFilled style={{ fontSize: '20px', color: '#FFF566' }} /> },
-        { value: 1, label: 'น้อย', icon: <SmileFilled style={{ fontSize: '20px', color: '#FFF566' }} /> },
-        { value: 0, label: 'น้อยมาก', icon: <SmileFilled style={{ fontSize: '20px', color: '#FFF566' }} /> },
+        { value: 3, label: 'จริงมากๆ' },
+        { value: 2, label: 'จริงอยู่นะ' },
+        { value: 1, label: 'ไม่ค่อยจริงอะ' },
+        { value: 0, label: 'ไม่จริงเลย' },
     ];
     const [testScore, setTestScore] = useState<Array<IUserAns>>([]);
     const [isLoading, setLoading] = useState(false);
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const { confirm } = Modal;
 
     useEffect(() => {
         if (!questionList) return;
@@ -73,24 +84,68 @@ function TestQuestion() {
         setCurrentQuestion(currentQuestion - 1);
     }
 
-    const fetchData = () => {
-        console.log(isLoading);
-        setLoading(true);
-        setIsModalVisible(true);
-        setTimeout(() => {
-            console.log('set Loading:', isLoading);
-            setLoading(false);
-            history.push('/resulttest');
-        }, 1500);
+    function showPromiseConfirm() {
+        confirm({
+            title: 'ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?',
+            icon: <ExclamationCircleOutlined />,
+            okText: 'เริ่มใหม่',
+            cancelText: 'ยกเลิก',
+            onOk() {
+                setTimeout(() => {
+                    console.log('set Loading:', isLoading);
+                    setLoading(false);
+                    history.push('/result');
+                }, 1500);
+            },
+            onCancel() {},
+        });
+    }
+
+    const [visible, setVisible] = React.useState(false);
+    const [confirmLoading, setConfirmLoading] = React.useState(false);
+
+    const showModal = () => {
+        setVisible(true);
     };
 
+    const handleOk = () => {
+        setConfirmLoading(true);
+        setTimeout(() => {
+            setVisible(false);
+            setConfirmLoading(false);
+            history.push('/test');
+        }, 500);
+    };
+
+    const handleCancel = () => {
+        console.log('Clicked cancel button');
+        setVisible(false);
+    };
     return (
         <div>
             <TextQuestionIndex>
                 คำถามข้อที่ {currentQuestion + 1}/{questionList?.length}
             </TextQuestionIndex>
             <TextQuestion>{currentQuestionDetail.question}</TextQuestion>
-            <ButtonStartOver onClick={() => history.push('/test')}>เริ่มใหม่</ButtonStartOver>
+            <ButtonStartOver type="primary" onClick={showModal}>
+                เริ่มใหม่{' '}
+            </ButtonStartOver>
+            <Modal
+                visible={visible}
+                okText="เริ่มใหม่"
+                cancelText="ยกเลิก"
+                onOk={handleOk}
+                // footer={[
+                //     <ContainerButtonStartOver>
+                //         <ButtonConfirmStartOver onClick={handleOk}>เริ่มใหม่</ButtonConfirmStartOver>, <ButtonCancleStartOver onClick={handleCancel}>ยกเลิก</ButtonCancleStartOver>
+                //     </ContainerButtonStartOver>,
+                // ]}
+                width={400}
+                confirmLoading={confirmLoading}
+                onCancel={handleCancel}
+            >
+                ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
+            </Modal>
             <TestAnimation />
 
             <div>
@@ -105,7 +160,6 @@ function TestQuestion() {
                                     onClick={() => {
                                         onNextQuestion(item.value);
                                     }}
-                                    icon={item.icon}
                                 >
                                     {item.label}
                                 </ButtonChoiceStlyed>
@@ -115,7 +169,7 @@ function TestQuestion() {
                 )}
                 {isLoading ? (
                     <IsLoadingSpinner>
-                        <TextIsLoading>กำลังประมลผลคำตอบน้า</TextIsLoading>
+                        <TextIsLoading>กำลังประมวลผลคำตอบน้า</TextIsLoading>
                         <Spin size="large" />
                     </IsLoadingSpinner>
                 ) : (
