@@ -65,3 +65,30 @@ export const ButtonChoiceStlyed = styled(Button)`
     letter-spacing: 1px;
     box-shadow: 2px 5px #e2e2e2;
 `;
+
+export const ButtonConfirmStartOver = styled(Button)`
+    border-radius: 15px;
+    font-weight: bolder;
+    color: #ffffff;
+    width: 10rem;
+    height: 6vh;
+    letter-spacing: 1px;
+    margin-left: 5px;
+    background-color: var(--Red-300);
+`;
+
+export const ButtonCancleStartOver = styled.div`
+    font-weight: bolder;
+    color: #3a8ce4;
+    letter-spacing: 1px;
+    margin-right: 60px;
+    &:hover {
+        cursor: pointer;
+    }
+`;
+
+export const ContainerButtonStartOver = styled(Col)`
+    align-items: center;
+    justify-content: center;
+    display: grid;
+`;

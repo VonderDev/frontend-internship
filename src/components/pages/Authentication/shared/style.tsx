@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 import { Button, Image, Input } from 'antd';
-<<<<<<< HEAD
-=======
 import logo from '../../images/logo.png';
->>>>>>> e8c10bd13a73235d067ca5eedaf5e73f954f70f0
 
 export const ButtonColor = styled(Button)`
     border-radius: 15px;
