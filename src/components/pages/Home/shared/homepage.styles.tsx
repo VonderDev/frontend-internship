@@ -1,11 +1,26 @@
 import styled from 'styled-components';
-import { Space, Button, Col, List } from 'antd';
+import { Space, Button, Col, List, Input, Row } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
+import gamePreviewImg from '../shared/images/gamepreview.png';
 
 export const SearchField = styled(Space)`
-    margin-top: 20px;
+    display: flex;
+    justify-content: center;
 `;
 
+export const InputSearch = styled(Input)`
+    border-radius: 10px;
+    width: 300px;
+    height: 40px;
+    top: 20px;
+`;
+
+export const ButtonFilter = styled(Button)`
+    border-radius: 10px;
+    top: 20px;
+    width: 40px;
+    height: 40px;
+`;
 export const TagFilter = styled.div`
     border-color: black;
     font-weight: bolder;
@@ -24,39 +39,45 @@ export const ButtonTagFilter = styled(Button)`
 `;
 
 export const ImageTestPage = styled.div`
-    height: 30vh;
-    width: 500px;
-    flex-direction: column;
+    background-image: url(${gamePreviewImg});
     transition: 0.5s ease;
-    margin: 0 auto;
-    background-color: #7879f1;
+    margin-top: 40px;
     border-radius: 10px;
+    height: 250px;
+    background-attachment: scroll;
+    background-position: center;
+    background-repeat: no-repeat;
 
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 
     &:hover {
-        background-color: #efefef;
-        color: black;
         cursor: pointer;
-        transition: transform 5s;
-        transition: 500ms ease-in-out;
     }
 `;
 
-export const IconArrow = styled(RightOutlined)`
+export const ButtonStartGame = styled(Button)`
     color: #ffffff;
     display: flex;
-    padding: 0px 6px;
+    background-color: #287fde;
     margin-left: auto;
-    transform: translateY(-25px);
+    border-radius: 10px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    justify-content: center;
+    margin-right: 20px;
+    width: 85px;
+    height: 35px;
 `;
 
 export const TextOnImageTest = styled.div`
     font-weight: bolder;
-    color: white;
-    font-size: 25px;
+    color: #ffffff;
+    font-size: 22px;
+    padding-left: 30px;
+    padding-top: 15px;
+    margin-bottom: 140px;
 `;
 export const TextBoard = styled(Col)`
     font-weight: bolder;
@@ -66,25 +87,32 @@ export const TextBoard = styled(Col)`
     flex-direction: column;
 `;
 
-export const ButtonSeeAllBoard = styled(Button)`
-    background-color: #7879f1;
-    color: white;
+export const ButtonSeeAllBoard = styled.div`
+    color: var(--Blue-300);
     height: 5vh;
     width: 100px;
     font-weight: 600;
     font-size: 15px;
-    right: 100px;
-    left: 200px;
+    padding-top: 25px;
+    display: flex;
+    transform: translateX(280%);
+
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const ListBoard = styled(List)`
-    margin-left: 50px;
     font-weight: bolder;
     margin: 0 auto;
 `;
 
 export const ListItemBoard = styled(List.Item)`
-    margin-left: 50px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    box-shadow: 0px 3px 6px #c7c7c7;
+    border-radius: 20px;
+    width: 500px;
 `;
 
 export const ButtonCreateBoard = styled(Button)`

@@ -53,17 +53,22 @@ export const ContainerButton = styled(Col)`
     justify-content: center;
     display: grid;
 `;
-export const ButtonChoiceStlyed = styled(Button)`
+export const ButtonChoiceStlyed = styled.button`
     border-radius: 15px;
     font-weight: bolder;
-    color: white;
-    background-color: #7879f1;
+    color: #000000;
     transform: translateY(2rem);
     width: 15rem;
     height: 6vh;
     margin-top: 5px;
     letter-spacing: 1px;
     box-shadow: 2px 5px #e2e2e2;
+    background-color: white;
+    &:hover {
+        color: black;
+        border-color: white;
+        cursor: pointer;
+    }
 `;
 
 export const ButtonConfirmStartOver = styled(Button)`
