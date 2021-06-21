@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import Burger from 'components/pages/Burger/Burger';
 import { Layout } from 'antd';
 import GlobalStyle from 'shared/style/globalStyle';
+import Container from 'components/Container/Container';
 
 const { Header, Content, Footer } = Layout;
-const Container = styled.div`
+const AppContainer = styled.div`
     max-width: 600px;
     display: flex;
     flex-direction: column;
@@ -23,12 +24,14 @@ const App = () => {
     return (
         <>
         <GlobalStyle/>
-        <Container>
-            <Burger />
-        <MainContent>
-            <Routing />
-        </MainContent>
-        </Container>
+        <AppContainer>
+            <Container  header={{children: "Home" , left: "back" , right: "menu"}}>
+            <MainContent>
+                <Routing />
+            </MainContent>
+            </Container>
+            {/* <Burger /> */}
+        </AppContainer>
         </>
     );
 };
