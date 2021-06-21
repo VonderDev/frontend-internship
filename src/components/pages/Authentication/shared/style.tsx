@@ -6,7 +6,7 @@ export const ButtonColor = styled(Button)`
     border-radius: 15px;
     font-weight: bolder;
     color: white;
-    background-color: #7879f1;
+    background-color: var(--Blue-400);
     width: 342px;
     height: 55px;
     flex-direction: row;
@@ -21,28 +21,11 @@ export const BaseInput = styled(Input)`
     border-radius: 15px;
     width: 324px;
     height: 55px;
-`;
-
-export const BaseInputPassword = styled(Input)`
-    color: grey;
-    font-size: 18px;
-    border-radius: 15px;
-    width: 324px;
-    height: 55px;
-`;
-
-export const BaseInputEmail = styled(Input)`
-    color: grey;
-    font-size: 18px;
-    border-radius: 15px;
-    width: 324px;
-    height: 55px;
+    box-shadow: 0px 3px 6px #c7c7c7;
 `;
 
 export const LogoPage = styled(Image)`
-    width: 98;
-    height: 120;
-    src: logo;
+    padding-top: 20px;
 `;
 
 export const FontText = styled.div`
