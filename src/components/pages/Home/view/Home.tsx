@@ -71,7 +71,7 @@ function Home() {
                     <InputSearch onClick={onSearch} placeholder="Search Form" prefix={<SearchOutlined />} />
                     <ButtonFilter icon={<ControlOutlined />} />
                 </SearchField>
-                <ImageTestPage className="center">
+                <ImageTestPage>
                     <TextTopicOnImageTest>เกมทดสอบพหุปัญญา</TextTopicOnImageTest>
                     <Col>
                         <ButtonStartGame type="primary" onClick={() => history.push('/test')}>
