@@ -25,22 +25,6 @@ export const BaseInput = styled(Input)`
     height: 55px;
 `;
 
-export const BaseInputPassword = styled(Input)`
-    color: grey;
-    font-size: 18px;
-    border-radius: 15px;
-    width: 324px;
-    height: 55px;
-`;
-
-export const BaseInputEmail = styled(Input)`
-    color: grey;
-    font-size: 18px;
-    border-radius: 15px;
-    width: 324px;
-    height: 55px;
-`;
-
 export const LogoPage = styled(Image)`
     width: 98;
     height: 120;

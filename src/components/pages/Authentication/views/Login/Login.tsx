@@ -64,7 +64,7 @@ function Login() {
               },
             ]}
           >
-            <BaseInput placeholder="อีเมล" />
+            <BaseInput type="email" placeholder="อีเมล" />
           </Form.Item>
           <Form.Item
             // validateStatus="error"

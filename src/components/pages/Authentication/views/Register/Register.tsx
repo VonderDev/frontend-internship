@@ -40,22 +40,22 @@ function Register(){
       </Space>
       <Form name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
         <Form.Item name={['user', 'first_name']} rules={[{ required: true }]} >
-          <BaseInput placeholder="ชื่อจริง" />
+          <BaseInput type="text" placeholder="ชื่อจริง" />
         </Form.Item>
         <Form.Item name={['user', 'last_name']} rules={[{ required: true }]} >
-          <BaseInput placeholder="นามสกุล" />
+          <BaseInput type="text" placeholder="นามสกุล" />
         </Form.Item>
         <Form.Item name={['user', 'username']} rules={[{ required: true }]} >
-          <BaseInput placeholder="ชื่อผู้ใช้" />
+          <BaseInput type="text" placeholder="ชื่อผู้ใช้" />
         </Form.Item>
         <Form.Item name={['user', 'email']} rules={[{ type: 'email' }]} >
-          <BaseInput placeholder="อีเมล" />
+          <BaseInput type="email" placeholder="อีเมล" />
         </Form.Item>
         <Form.Item name={['user', 'password']} rules={[{ required: true }]} >
-          <BaseInput placeholder="รหัสผ่าน" />
+          <BaseInput type="password" placeholder="รหัสผ่าน" />
         </Form.Item>
         <Form.Item name={['user', 'repeat_password']} rules={[{ required: true, message: 'Please input your password!' }]} >
-          <BaseInput placeholder="ยืนยันรหัสผ่าน" />
+          <BaseInput type="password" placeholder="ยืนยันรหัสผ่าน" />
         </Form.Item>
         <Form.Item>
             <ButtonColor htmlType="submit" >
