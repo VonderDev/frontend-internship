@@ -1,23 +1,34 @@
 import styled from 'styled-components';
-import { Space, Button, Col, List } from 'antd';
+import { Space, Button, Col, List, Input, Row } from 'antd';
+import { QuestionCircleTwoTone } from '@ant-design/icons';
+import gamePreviewImg from '../shared/images/gamepreview.png';
 
 export const SearchField = styled(Space)`
-    margin-top: 20px;
-    font-family: 'Kanit', sans-serif;
-    margin-left: 150px;
+    display: flex;
+    justify-content: center;
 `;
 
+export const InputSearch = styled(Input)`
+    border-radius: 10px;
+    width: 320px;
+    height: 40px;
+    top: 20px;
+`;
+
+export const ButtonFilter = styled(Button)`
+    border-radius: 10px;
+    top: 20px;
+    width: 40px;
+    height: 40px;
+`;
 export const TagFilter = styled.div`
-    font-family: 'Kanit', sans-serif;
     border-color: black;
     font-weight: bolder;
     margin-top: 20px;
     margin-bottom: 20px;
-    margin-left: 200px;
 `;
 
 export const ButtonTagFilter = styled(Button)`
-    font-family: 'Kanit', sans-serif;
     font-weight: bolder;
     color: black;
     opacity: 0.8;
@@ -28,55 +39,96 @@ export const ButtonTagFilter = styled(Button)`
 `;
 
 export const ImageTestPage = styled.div`
-    height: 30vh;
-    width: 800px;
-    margin-left: 300px;
+    background-image: url(${gamePreviewImg});
     transition: 0.5s ease;
-    display: inline-block;
-    background-color: #7879f1;
-    &:hover {
-        background-color: #efefef;
-        color: black;
+    margin-top: 40px;
+    border-radius: 10px;
+    height: 250px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+
+    /* &:hover {
         cursor: pointer;
-        transition: transform 5s;
-        transition: 500ms ease-in-out;
+    } */
+`;
+
+export const ButtonStartGame = styled(Button)`
+    color: #ffffff;
+    display: flex;
+    background-color: #287fde;
+    margin-left: auto;
+    border-radius: 15px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    justify-content: center;
+    margin-right: 20px;
+    width: 100px;
+    height: 40px;
+    align-items: center;
+    font-size: 18px;
+`;
+
+export const ButtonReadOverviewTest = styled.div`
+    color: #ffffff;
+    position: absolute;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    font-size: 18px;
+    position: absolute;
+    transform: translateY(-120%) translateX(10%);
+    padding-left: 20px;
+    &:hover {
+        cursor: pointer;
     }
 `;
 
-export const TextOnImageTest = styled.div`
-    font-family: 'Kanit', sans-serif;
+export const TextTopicOnImageTest = styled.div`
     font-weight: bolder;
-    color: white;
-    font-size: 25px;
-    text-align: center;
-    transform: translateY(200%);
+    color: #ffffff;
+    font-size: 22px;
+    padding-left: 30px;
+    padding-top: 15px;
+    margin-bottom: 140px;
 `;
 export const TextBoard = styled(Col)`
-    font-family: 'Kanit', sans-serif;
     font-weight: bolder;
-    font-size: 25px;
+    font-size: 20px;
     margin-top: 20px;
     margin-bottom: 10px;
+    flex-direction: column;
 `;
 
-export const ButtonSeeAllBoard = styled(Button)`
-    background-color: #7879f1;
-    color: white;
+export const ButtonSeeAllBoard = styled.div`
+    color: var(--Blue-300);
     height: 5vh;
     width: 100px;
-    font-weight: 600;
-    margin-left: 400px;
+    font-weight: bolder;
     font-size: 15px;
+    padding-top: 25px;
+    display: flex;
+    transform: translateX(280%);
+
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const ListBoard = styled(List)`
-    margin-left: 50px;
     font-weight: bolder;
+    margin: 0 auto;
 `;
 
 export const ListItemBoard = styled(List.Item)`
-    margin-left: 50px;
-    font-family: 'Kanit', sans-serif;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    box-shadow: 0px 3px 6px #c7c7c7;
+    border-radius: 20px;
+    width: 500px;
 `;
 
 export const ButtonCreateBoard = styled(Button)`
@@ -87,7 +139,7 @@ export const ButtonCreateBoard = styled(Button)`
     position: fixed;
     padding-bottom: 50px;
     bottom: 40px;
-    right: 100px;
+    right: 150px;
     width: 60px;
     height: 50px;
 `;
