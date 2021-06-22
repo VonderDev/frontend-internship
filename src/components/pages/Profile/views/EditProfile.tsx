@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { API_Profile_Data } from '../apis/profile.api';
 import { IProfile } from '../shared/Profile.interface';
 import { Form } from 'antd';
-import { Container, MoveCenter, ButtonSubmit, BgColor, FormInput, UserImage, TextTopic, TextUserInfo } from '../shared/Profile.styles';
+import { AlignCenter, ButtonSubmit, FormInput, UserImage, TextUserInfo } from '../shared/Profile.styles';
+import Container from 'components/Container/Container';
 
 function EditProfile() {
     const [cred, setCred] = useState<IProfile>({ name: '', surname: '', email: '', result: '', pic: '', username: '' });
@@ -34,10 +35,8 @@ function EditProfile() {
 
     return (
         <div>
-            <BgColor>
-                <Container>
-                    <MoveCenter>
-                        <TextTopic>แก้ไขข้อมูลส่วนตัว</TextTopic>
+            <Container header={{ left: 'back', children: 'แก้ไขข้อมูลส่วนตัว', right: 'menu'}}>
+                    <AlignCenter>
                         <UserImage src={cred.pic} />
                         <form>
                             <TextUserInfo>ชื่อผู้ใช้</TextUserInfo>
@@ -47,15 +46,6 @@ function EditProfile() {
                                 onChange={({ target: { value, name } }) => {
                                     handleOnChange(name, value);
                                 }}
-                            />
-                            <TextUserInfo>อีเมล</TextUserInfo>
-                            <FormInput
-                                name="email"
-                                value={cred.email}
-                                onChange={({ target: { value, name } }) => {
-                                    handleOnChange(name, value);
-                                }}
-                                disabled
                             />
                             <TextUserInfo>ชื่อจริง</TextUserInfo>
                             <FormInput
@@ -73,14 +63,22 @@ function EditProfile() {
                                     handleOnChange(name, value);
                                 }}
                             />
+                            <TextUserInfo>อีเมล</TextUserInfo>
+                            <FormInput
+                                name="email"
+                                value={cred.email}
+                                onChange={({ target: { value, name } }) => {
+                                    handleOnChange(name, value);
+                                }}
+                                disabled
+                            />
                         </form>
                         <br />
                         <Form.Item>
                             <ButtonSubmit onClick={editedUser}>ยืนยันการเปลี่ยนแปลง</ButtonSubmit>
                         </Form.Item>
-                    </MoveCenter>
-                </Container>
-            </BgColor>
+                    </AlignCenter>
+                    </Container>
         </div>
     );
 }

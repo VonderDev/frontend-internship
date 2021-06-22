@@ -3,15 +3,14 @@ import { API_Profile_Data } from '../apis/profile.api';
 import { Form, List } from 'antd';
 import { useEffect } from 'react';
 import { IIconTextProfile, IListDataProfile, IProfile } from '../shared/Profile.interface';
+import { CalendarOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
 import { useState } from 'react';
 import {
-    Container,
-    MoveCenter,
+    ContainerProfile,
+    AlignCenter,
     AlignRight,
     ButtonSubmit,
-    BgColor,
     TextUserInfo,
-    TextTopic,
     TextUsername,
     ResultCard,
     UserImage,
@@ -21,13 +20,13 @@ import {
     CardText,
     IconArrow,
     LinkResult,
-    HistoryCard,
-    IconLove,
-    IconWrite,
-    ProfileListBoard,
-    ProfileListItemBoard,
+    ListProfile,
+    ProfileListItem,
     HistoryImage,
+    LinkMoreResult,
+    HistoryText
 } from '../shared/Profile.styles';
+import Container from 'components/Container/Container';
 import React from 'react';
 
 function Profile() {
@@ -47,25 +46,29 @@ function Profile() {
     }, []);
 
     const listData: Array<IListDataProfile> = [];
-    for (let i = 1; i < 2; i++) {
+    for (let i = 0; i < 6; i++) {
         listData.push({
             href: '/board',
             title: 'แนะนำหนังสือสำหรับคนอยากไปสายวิศวะ',
-            avatar: 'https://scontent.fbkk12-1.fna.fbcdn.net/v/t1.6435-9/59064493_437047506858059_6394542383404417024_n.png?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=aMf0eSHrFroAX87NAZJ&tn=CeGl5CLqXgfyZu7t&_nc_ht=scontent.fbkk12-1.fna&oh=2b1b5b5642904a40a58edd5a57f17a7e&oe=60CB2D93',
+            avatar: 'https://scontent.fbkk7-3.fna.fbcdn.net/v/t1.6435-9/59064493_437047506858059_6394542383404417024_n.png?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=hlqBNJGZNnMAX83rdoy&_nc_ht=scontent.fbkk7-3.fna&oh=f8cc0917dbba6e533ed8c5ac4f69af53&oe=60D70B13',
             description: 'บทความ',
         });
     }
 
-    const IconText = ({ icon, text }: IIconTextProfile) => React.createElement(icon);
+    const IconText = ({ icon, text }: IIconTextProfile) => (
+        <div>
+            {React.createElement(icon)}
+            {text}
+        </div>
+    );
     return (
         <div>
-            <BgColor>
-                <Container>
-                    <MoveCenter>
-                        <TextTopic>ข้อมูลส่วนตัว</TextTopic>
+            <Container header={{ left: 'back', children: 'ข้อมูลส่วนตัว', right: 'menu' }}>
+                <ContainerProfile>
+                    <AlignCenter>
                         <UserImage src={cred.pic} />
                         <TextUsername>{cred.username}</TextUsername>
-                    </MoveCenter>
+                    </AlignCenter>
                     <TextUserInfo>
                         ชื่อ-นามสกุล :
                         <AlignRight>
@@ -77,14 +80,14 @@ function Profile() {
                     </TextUserInfo>
                     <Link to="/editProfile">
                         <Form.Item>
-                            <MoveCenter>
+                            <AlignCenter>
                                 <ButtonSubmit>แก้ไขข้อมูลส่วนตัว</ButtonSubmit>
-                            </MoveCenter>
+                            </AlignCenter>
                         </Form.Item>
                     </Link>
-                    <TextTopic2>ผลลัพธ์จากแบบทดสอบ</TextTopic2>
-                    <MoveCenter>
-                        <LinkResult to="/">
+                    <TextTopic2>ผลลัพธ์ของคุณ <AlignRight><LinkMoreResult to="/">ดูเพิ่มเติม</LinkMoreResult></AlignRight></TextTopic2>
+                    <AlignCenter>
+                        <LinkResult to="/result">
                             <ResultCard>
                                 <AlignLeft>
                                     <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
@@ -97,35 +100,37 @@ function Profile() {
                                 <IconArrow />
                             </ResultCard>
                         </LinkResult>
-                    </MoveCenter>
-                    <TextTopic2>ประวัติการสร้างกระทู้</TextTopic2>
-                    <MoveCenter>
-                        <HistoryCard onClick={() => history.push('/')}>
-                            <ProfileListBoard
-                                itemLayout="vertical"
-                                size="large"
-                                pagination={{
-                                    onChange: (page) => {
-                                        console.log(page);
-                                    },
-                                    pageSize: 3,
-                                }}
-                                dataSource={listData}
-                                renderItem={(item: any) => (
-                                    <ProfileListItemBoard
-                                        key={item.title}
-                                        actions={[<IconText icon={IconWrite} text="username" key="list-vertical-star-o" />, <IconText icon={IconLove} text="2" key="list-vertical-message" />]}
-                                    >
-                                        <div>
-                                            <List.Item.Meta avatar={<HistoryImage src={item.avatar} width={100} />} title={<a href={item.href}>{item.title}</a>} description={item.description} />
-                                        </div>
-                                    </ProfileListItemBoard>
-                                )}
-                            />
-                        </HistoryCard>
-                    </MoveCenter>
-                </Container>
-            </BgColor>
+                    </AlignCenter>
+                    <TextTopic2>กระทู้ของคุณ <AlignRight><LinkMoreResult to="/">ดูเพิ่มเติม</LinkMoreResult></AlignRight></TextTopic2>
+                    <AlignCenter>
+                        <ListProfile
+                            itemLayout="vertical"
+                            size="large"
+                            pagination={{
+                                onChange: (page) => {
+                                    console.log(page);
+                                },
+                                pageSize: 3,
+                            }}
+                            dataSource={listData}
+                            renderItem={(item: any) => (
+                                <ProfileListItem
+                                    key={item.title}
+                                    actions={[
+                                    <IconText icon={FormOutlined} text="Lookmaii" key="list-vertical-star-o" />,
+                                    <IconText icon={CalendarOutlined} text="11 มิถุนายน 2564" key="list-vertical-like-o" />,
+                                    <IconText icon={HeartFilled} text="12" key="list-vertical-message" />,
+                                ]}
+                                >
+                                    <div onClick={() => history.push('/board')}>
+                                        <List.Item.Meta avatar={<HistoryImage src={item.avatar}/>} title={<a href={item.href}>{item.title}</a>} description={item.description} />
+                                    </div>
+                                </ProfileListItem>
+                            )}
+                        />
+                    </AlignCenter>
+                </ContainerProfile>
+            </Container>
         </div>
     );
 }

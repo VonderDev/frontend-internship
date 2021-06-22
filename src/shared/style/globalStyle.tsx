@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     --Silver-100: #FAFAFC;
 
     //COLORS_BLUE
-    --Blue-700: #093F7A;
+    --Blue-400: #093F7A;
     --Blue-600: #11549E;
     --Blue-500: #1B6ABF;
     --Blue-400: #287FDE;
