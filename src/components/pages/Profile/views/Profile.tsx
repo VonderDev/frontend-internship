@@ -117,9 +117,9 @@ function Profile() {
                                 <ProfileListItem
                                     key={item.title}
                                     actions={[
-                                    <IconText icon={FormOutlined} text="Lookmaii" key="list-vertical-star-o" />,
-                                    <IconText icon={CalendarOutlined} text="11 มิถุนายน 2564" key="list-vertical-like-o" />,
-                                    <IconText icon={HeartFilled} text="12" key="list-vertical-message" />,
+                                    <IconText icon={FormOutlined} text=" Lookmaii" key="list-vertical-star-o" />,
+                                    <IconText icon={CalendarOutlined} text=" 11 มิถุนายน 2564" key="list-vertical-like-o" />,
+                                    <IconText icon={HeartFilled} text=" 12" key="list-vertical-message" />,
                                 ]}
                                 >
                                     <div onClick={() => history.push('/board')}>
