@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled, { css }  from 'styled-components';
 import { Row, Col } from 'antd';
 
+
 export const RowHeader = styled(Row)`
-    margin-top: 10px;
     width: 100%;
-    height: 80;
+    height: 74px;
     top: 0;
     display: flex;
     align-items: center;
@@ -26,10 +26,25 @@ export const TextHeader = styled.div`
 export const BackHeader = styled.div`
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 0 2px #474545;
+    box-shadow:  0 3px 6px #e0e0e0;
     width: 40px;
     height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+`;
+export const LeftDiv = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 10px;
+    align-items: center;
+    cursor: pointer;
+`;
+export const RightDiv = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+    align-items: center;
+    cursor: pointer;
 `;
