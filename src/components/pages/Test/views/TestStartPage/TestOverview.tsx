@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from 'components/Container/Container';
 import { TextTopic, ImgMultipleInterlligences, ParagraphDescrip, TextCategoryName } from '../../shared/styles/TestOverview.styled';
-import { Row, Col } from 'antd';
+import { Col } from 'antd';
 
 function TestOverview() {
     //
@@ -51,7 +51,7 @@ function TestOverview() {
     ];
     return (
         <div>
-            <Container header={{ left: 'back' }}>
+            <Container header={{ left: 'back', children: 'ข้อมูลส่วนตัว', right: 'menu' }}>
                 <TextTopic>พหุปัญญา คืออะไร ?</TextTopic>
                 <ImgMultipleInterlligences />
                 <Col>
