@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ButtonColor, FontTextHeader, BaseInput } from 'components/pages/Authentication/shared/style';
 
 import logo from '../../images/logo.png';
+import Container from 'components/Container/Container';
 
 const validateMessages = {
     required: 'required!',
@@ -28,7 +29,7 @@ const MoveBomttom = styled(Form.Item)`
 
 function Register() {
     return (
-        <div>
+        <Container header={{left: 'back' }}>
             <MoveCenter>
                 <img src={logo} />
                 <Space align="start">
@@ -58,7 +59,7 @@ function Register() {
                     </Form.Item>
                 </Form>
             </MoveCenter>
-        </div>
+        </Container>
     );
 }
 

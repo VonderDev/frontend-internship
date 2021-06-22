@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Form, Space } from 'antd';
 import styled from 'styled-components';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 import { ILogin } from '../../shared/login.interface';
 import { ButtonColor, FontText, FontTextHeader, BaseInput } from 'components/pages/Authentication/shared/style';
+import Container from 'components/Container/Container';
 
 const MoveCeneter = styled.div`
     display: flex;
@@ -43,7 +44,7 @@ function Login() {
     }
 
     return (
-        <div>
+        <Container header={{left: 'back' , right: 'menu'}}>
             <MoveCeneter>
                 <Space align="start">
                     <FontTextHeader>เข้าสู่ระบบ</FontTextHeader>
@@ -83,7 +84,7 @@ function Login() {
                     ยังไม่มีบัญชีใช่ไหม? <a onClick={() => history.push('/register')}>สร้างบัญชีกันเถอะ!</a>
                 </FontText>
             </MoveCeneter>
-        </div>
+        </Container>
     );
 }
 

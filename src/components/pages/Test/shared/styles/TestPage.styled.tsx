@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Button } from 'antd';
 import TestOverview from '../images/TestOverview.png';
 
-export const Container = styled.div`
+export const Containers = styled.div`
     flex-direction: row;
     background-image: url(${TestOverview});
     height: 100vh;

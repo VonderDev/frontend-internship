@@ -10,7 +10,7 @@ export const MoveCenter = styled.div`
     align-items: center;
 `;
 
-export const Container = styled.div`
+export const ContainerProfile = styled.div`
     padding: 10px;
     max-width: 300px;
     margin-left: auto;

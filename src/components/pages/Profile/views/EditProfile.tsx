@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { API_Profile_Data } from '../apis/profile.api';
 import { IProfile } from '../shared/Profile.interface';
 import { Form } from 'antd';
-import { Container, MoveCenter, ButtonSubmit, BgColor, FormInput, UserImage, TextTopic, TextUserInfo } from '../shared/Profile.styles';
+import { ContainerProfile, MoveCenter, ButtonSubmit, FormInput, UserImage, TextTopic, TextUserInfo } from '../shared/Profile.styles';
+import Container from 'components/Container/Container';
 
 function EditProfile() {
     const [cred, setCred] = useState<IProfile>({ name: '', surname: '', email: '', result: '', pic: '', username: '' });
@@ -33,9 +34,8 @@ function EditProfile() {
     }, []);
 
     return (
-        <div>
-            <BgColor>
-                <Container>
+        <Container header={{left: 'back' ,children: 'แก้ไขข้อมูลส่วนตัว' }}>
+                <ContainerProfile>
                     <MoveCenter>
                         <TextTopic>แก้ไขข้อมูลส่วนตัว</TextTopic>
                         <UserImage src={cred.pic} />
@@ -79,9 +79,8 @@ function EditProfile() {
                             <ButtonSubmit onClick={editedUser}>ยืนยันการเปลี่ยนแปลง</ButtonSubmit>
                         </Form.Item>
                     </MoveCenter>
-                </Container>
-            </BgColor>
-        </div>
+                </ContainerProfile>
+        </Container>
     );
 }
 

@@ -5,11 +5,10 @@ import { useEffect } from 'react';
 import { IIconTextProfile, IListDataProfile, IProfile } from '../shared/Profile.interface';
 import { useState } from 'react';
 import {
-    Container,
+    ContainerProfile,
     MoveCenter,
     AlignRight,
     ButtonSubmit,
-    BgColor,
     TextUserInfo,
     TextTopic,
     TextUsername,
@@ -29,6 +28,7 @@ import {
     HistoryImage,
 } from '../shared/Profile.styles';
 import React from 'react';
+import Container from 'components/Container/Container';
 
 function Profile() {
     const [cred, setCred] = useState<IProfile>({ name: '', surname: '', email: '', result: '', pic: '', username: '' });
@@ -58,9 +58,8 @@ function Profile() {
 
     const IconText = ({ icon, text }: IIconTextProfile) => React.createElement(icon);
     return (
-        <div>
-            <BgColor>
-                <Container>
+        <Container header={{left: 'back' ,right: 'menu' ,children: 'ข้อมูลส่วนตัว' }}>
+                <ContainerProfile>
                     <MoveCenter>
                         <TextTopic>ข้อมูลส่วนตัว</TextTopic>
                         <UserImage src={cred.pic} />
@@ -124,9 +123,8 @@ function Profile() {
                             />
                         </HistoryCard>
                     </MoveCenter>
-                </Container>
-            </BgColor>
-        </div>
+                </ContainerProfile>
+        </Container>
     );
 }
 
