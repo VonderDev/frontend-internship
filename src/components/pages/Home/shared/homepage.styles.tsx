@@ -128,7 +128,6 @@ export const ListItemBoard = styled(List.Item)`
     margin-bottom: 10px;
     box-shadow: 0px 3px 6px #c7c7c7;
     border-radius: 20px;
-    width: 500px;
 `;
 
 export const ButtonCreateBoard = styled(Button)`
