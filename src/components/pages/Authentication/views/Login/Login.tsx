@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Form, Space, Row } from 'antd';
+import { Form, Space, Row, Col } from 'antd';
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
 
@@ -76,10 +76,13 @@ function Login() {
               เข้าสู่ระบบ
             </ButtonColor>
           </Form.Item>
+
+          <Form.Item>
+            <MoveBottom>
+              ยังไม่มีบัญชีใช่ไหม? <a onClick={() => history.push('/register')}>สร้างบัญชีกันเถอะ!</a>
+            </MoveBottom>
+          </Form.Item>
         </Form>
-        <Row align="bottom">
-          ยังไม่มีบัญชีใช่ไหม? <a onClick={() => history.push('/register')}>สร้างบัญชีกันเถอะ!</a>
-        </Row>
       </MoveCenter>
     </div>
   );

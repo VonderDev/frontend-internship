@@ -46,11 +46,8 @@ export const MoveCenter = styled.div`
 `;
 
 export const MoveBottom = styled.div`
-    width: 194px;
-    height: 16px;
-    left: 91px;
-    top: 735px;
-    font-size: 18px;
+    display: flex;
+    flex-direction: column;
     position: absolute;
-    /* text-align: center; */
+    /* align-items: center; */
 `;
