@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import Burger from 'components/pages/Burger/Burger';
 import { Layout } from 'antd';
 import GlobalStyle from 'shared/style/globalStyle';
+import Container from 'components/Container/Container';
 
 const { Header, Content, Footer } = Layout;
-const Container = styled.div`
+
+const AppContainer = styled.div`
     max-width: 600px;
     display: flex;
     flex-direction: column;
@@ -13,22 +15,20 @@ const Container = styled.div`
     z-index: 0;
 `;
 const MainContent = styled(Content)`
-    height: calc(100vh - 80px);
+    height: calc(110vh - 80px);
     width: 100%;
     overflow-y: scroll;
-`
-
+`;
 
 const App = () => {
     return (
         <>
-        <GlobalStyle/>
-        <Container>
-            <Burger />
-        <MainContent>
-            <Routing />
-        </MainContent>
-        </Container>
+            <GlobalStyle />
+            <AppContainer>
+                <MainContent>
+                    <Routing />
+                </MainContent>
+            </AppContainer>
         </>
     );
 };
