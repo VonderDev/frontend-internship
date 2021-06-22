@@ -17,6 +17,7 @@ import { Modal, Row, Spin } from 'antd';
 import { IsLoadingSpinner, TextIsLoading } from '../../shared/styles/TestPage.styled';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import React from 'react';
+import Container from 'components/Container/Container';
 
 function TestQuestion() {
     //
@@ -122,7 +123,7 @@ function TestQuestion() {
         setVisible(false);
     };
     return (
-        <div>
+        <Container header={null}>
             <TextQuestionIndex>
                 คำถามข้อที่ {currentQuestion + 1}/{questionList?.length}
             </TextQuestionIndex>
@@ -176,7 +177,7 @@ function TestQuestion() {
                     ''
                 )}
             </div>
-        </div>
+        </Container>
     );
 }
 

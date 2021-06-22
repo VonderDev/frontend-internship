@@ -1,10 +1,12 @@
 import TestAnimation from './TestAnimation';
 import ButtonLoadingStart from './ButtonLoadingStart';
-import { TextHeader, TextDescription, Container } from '../../shared/styles/TestPage.styled';
+import { TextHeader, TextDescription, Containers } from '../../shared/styles/TestPage.styled';
+import Container from 'components/Container/Container';
 
 function TestStartPage() {
     return (
-        <Container>
+        <Container header={null}>
+        <Containers>
             <TextHeader>แบบทดสอบความถนัด</TextHeader>
             <TestAnimation />
             <TextDescription>
@@ -12,6 +14,7 @@ function TestStartPage() {
                 text ever since the 1500s
             </TextDescription>
             <ButtonLoadingStart />
+        </Containers>
         </Container>
     );
 }
