@@ -2,6 +2,7 @@ import Routing from './routes/index';
 import GlobalStyle from 'shared/style/globalStyle';
 import { BrowserRouter as Router  } from 'react-router-dom';
 
+
 const App = () => {
     return (
         <>
@@ -9,7 +10,6 @@ const App = () => {
         <GlobalStyle/>
         <Routing />
         </Router>
-
         </>
     );
 };
