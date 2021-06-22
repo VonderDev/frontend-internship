@@ -1,9 +1,9 @@
 import { useHistory } from "react-router-dom";
 import { Children, createContext, useCallback, useEffect, useState, useContext, useMemo } from "react"
 import { Row, Col } from 'antd';
-import { BackHeader, RowHeader, TextHeader } from './Header.styled';
+import { BackHeader, LeftDiv, Overlay, RightDiv, RowHeader, TextHeader } from './Header.styled';
 import { LeftOutlined,MenuOutlined ,DownloadOutlined } from '@ant-design/icons';
-import Hamburger from "./Hamburger";
+import Hamburger from "../pages/Burger/Burger";
 
 interface HeaderProps {
     children: any 
@@ -13,6 +13,9 @@ interface HeaderProps {
 
 const Header = ({children, right, left}: HeaderProps) => {
     const history = useHistory();
+
+    const [overlay, setOverlay] = useState(false);
+    const showOverlay = () => setOverlay(!overlay);
 
     const goBack = useCallback(() =>{
         history.goBack();
@@ -31,8 +34,8 @@ const Header = ({children, right, left}: HeaderProps) => {
     const rightCon = useMemo(() => {
         if (right === 'menu') {
             return<>
-            <MenuOutlined style={{ color: '#8a8888' ,fontSize: '24px'}}/>
-                <Hamburger/>
+            <MenuOutlined style={{ color: '#8a8888' ,fontSize: '24px'}} onClick={showOverlay} />
+            {overlay ? <Hamburger /> : null }
             </>
         }else if (right === 'save'){
             return<>
@@ -45,9 +48,13 @@ const Header = ({children, right, left}: HeaderProps) => {
     },[])
 
     return (
+        <>
+        <Overlay active={overlay ? 'active' : ''} onClick={showOverlay} />
         <RowHeader justify="space-between">
             <Col span={4}>
+                <LeftDiv>
                 {leftCon}
+                </LeftDiv>
             </Col>
             <Col span={16}>
                 <TextHeader>
@@ -55,9 +62,13 @@ const Header = ({children, right, left}: HeaderProps) => {
                 </TextHeader>
             </Col>
             <Col span={4}>
+                <RightDiv >
                 {rightCon}
+                </RightDiv >
             </Col>
         </RowHeader>
+        </>
+
     );
 };
 
