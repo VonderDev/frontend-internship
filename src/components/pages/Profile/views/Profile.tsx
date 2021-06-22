@@ -49,7 +49,7 @@ function Profile() {
     for (let i = 0; i < 6; i++) {
         listData.push({
             href: '/board',
-            title: 'แนะนำหนังสือสำหรับคนอยากไปสายวิศวะ',
+            title: `แนะนำหนังสือสำหรับคนอยากไปสายวิศวะ ${i}`,
             avatar: 'https://scontent.fbkk7-3.fna.fbcdn.net/v/t1.6435-9/59064493_437047506858059_6394542383404417024_n.png?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=hlqBNJGZNnMAX83rdoy&_nc_ht=scontent.fbkk7-3.fna&oh=f8cc0917dbba6e533ed8c5ac4f69af53&oe=60D70B13',
             description: 'บทความ',
         });
