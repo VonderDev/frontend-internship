@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import logo from '../../images/logo.png';
 import { useState } from 'react';
 import { ILogin } from '../../shared/login.interface';
+import Container from 'components/Container/Container';
 
 const validateMessages = {
   required: 'required!',
@@ -40,7 +41,7 @@ function Register() {
   };
 
   return (
-    <div>
+    <Container header={{left: 'back' }}>
       <MoveCenter>
         <LogoPage src={logo} preview={false} />
         <Space align="start">
@@ -97,7 +98,7 @@ function Register() {
           </Form.Item>
         </Form>
       </MoveCenter>
-    </div>
+      </Container>
   );
 }
 

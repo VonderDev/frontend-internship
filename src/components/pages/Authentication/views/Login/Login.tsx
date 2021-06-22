@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Form, Space, Drawer } from 'antd';
 import styled from 'styled-components';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 import { ILogin } from '../../shared/login.interface';
 import { ButtonColor, FontTextHeader, BaseInput, LogoPage, MoveCenter, MoveBottom } from 'components/pages/Authentication/shared/style';
+import Container from 'components/Container/Container';
 
 import logo from '../../images/logo.png';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
@@ -64,8 +65,7 @@ function Login() {
   // };
 
   return (
-
-    <div>
+      <Container header={{left: 'back' , right: 'menu'}}>
       <MoveCenter>
         <LogoPage src={logo} preview={false} />
         <Space align="start">
@@ -306,8 +306,9 @@ function Login() {
           </Form.Item>
         </Form>
       </MoveCenter>
-    </div>
+    </Container>
   );
+    
 }
 
 export default Login;

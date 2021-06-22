@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { BodyCard, DesText, Hname, Readmore, ResultCard, Resultpic, TextBox } from '../../shared/styles/ResultPage.styled';
 import { useHistory } from 'react-router-dom';
 import BoardAdvice from './BoardAdvice';
+import Container from 'components/Container/Container';
 
 const MockScore = require('../../mocks/result.json');
 
@@ -24,7 +25,7 @@ const ReadMore = () => {
 
     return (
         <>
-            <div>
+            <Container header={{left: 'back', children: 'ผลลัพธ์', right: 'save'}}>
                 <BodyCard>
                 <Hname>
                     {resultDes.skill}
@@ -37,7 +38,7 @@ const ReadMore = () => {
                 </TextBox >        
                 </BodyCard>
                 <BoardAdvice/>
-            </div>
+            </Container>
         </>
     );
 };

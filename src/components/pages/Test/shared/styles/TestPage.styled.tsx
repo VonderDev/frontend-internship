@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Button } from 'antd';
 
-export const Container = styled.div`
+export const Containers = styled.div`
     flex-direction: row;
     align-items: center;
 `;
