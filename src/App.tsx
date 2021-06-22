@@ -1,12 +1,15 @@
 import Routing from './routes/index';
 import GlobalStyle from 'shared/style/globalStyle';
-import Container from 'components/Container/Container';
+import { BrowserRouter as Router  } from 'react-router-dom';
 
 const App = () => {
     return (
         <>
+        <Router>
         <GlobalStyle/>
         <Routing />
+        </Router>
+
         </>
     );
 };
