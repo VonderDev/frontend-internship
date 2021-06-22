@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { API_Profile_Data } from '../apis/profile.api';
 import { IProfile } from '../shared/Profile.interface';
 import { Form } from 'antd';
-import { AlignCenter, ButtonSubmit, FormInput, UserImage, TextUserInfo } from '../shared/Profile.styles';
+import { ContainerProfile, AlignCenter, ButtonSubmit, FormInput, UserImage, TextUserInfo } from '../shared/Profile.styles';
 import Container from 'components/Container/Container';
 
 function EditProfile() {
@@ -34,8 +34,8 @@ function EditProfile() {
     }, []);
 
     return (
-        <div>
-            <Container header={{ left: 'back', children: 'แก้ไขข้อมูลส่วนตัว', right: 'menu'}}>
+        <Container header={{left: 'back' ,children: 'แก้ไขข้อมูลส่วนตัว' }}>
+                <ContainerProfile>
                     <AlignCenter>
                         <UserImage src={cred.pic} />
                         <form>
@@ -78,8 +78,8 @@ function EditProfile() {
                             <ButtonSubmit onClick={editedUser}>ยืนยันการเปลี่ยนแปลง</ButtonSubmit>
                         </Form.Item>
                     </AlignCenter>
-                    </Container>
-        </div>
+                </ContainerProfile>
+        </Container>
     );
 }
 

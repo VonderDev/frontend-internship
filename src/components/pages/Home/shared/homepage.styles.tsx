@@ -10,7 +10,7 @@ export const SearchField = styled(Space)`
 
 export const InputSearch = styled(Input)`
     border-radius: 10px;
-    width: 320px;
+    width: 350px;
     height: 40px;
     top: 20px;
 `;
