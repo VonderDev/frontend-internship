@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Space, Button, Col, List, Input, Row } from 'antd';
-import { QuestionCircleTwoTone } from '@ant-design/icons';
 import gamePreviewImg from '../shared/images/gamepreview.png';
 
 export const SearchField = styled(Space)`

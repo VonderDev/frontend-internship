@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import { Button } from 'antd';
 import TestOverview from '../images/TestOverview.png';
 
-export const Containers = styled.div`
+export const ContainerTestPage = styled.div`
     flex-direction: row;
     background-image: url(${TestOverview});
-    height: 100vh;
     width: 100%;
     background-position: center;
     background-size: cover;
+    height: 100vh;
 `;
 
 export const TextHeader = styled.div`
