@@ -7,16 +7,6 @@ import { Layout, Menu, Avatar, Button } from 'antd';
 
 const { Header, Sider } = Layout;
 
-const Navbar = styled(Header)`
-    background-color: #9696f1;
-    height: 80px;
-    display: flex;
-    justify-content: start;
-    z-index: 1;
-    width: 100%;
-    max-width: 600px;
-    top: 0;
-`;
 const Bar = styled(Link)`
     margin-top: 10px;
     font-size: 2rem;
@@ -113,13 +103,13 @@ const Overlay = styled.div<{ active: 'active' | '' }>`
                 width: 100%;
                 background-color: #0c1066;
                 opacity: 0.3;
-                z-index: 2;
+                z-index: 99;
             `;
         }
     }}
 `;
 
-const Burger = () => {
+const Hamburger = () => {
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
 
@@ -129,14 +119,6 @@ const Burger = () => {
 
     return (
         <>
-            <Navbar>
-                <Bar to="#">
-                    <MenuOutlined style={{ color: '#ffffff' }} onClick={showSidebar} />
-                </Bar>
-            </Navbar>
-
-            <Overlay active={sidebar ? 'active' : ''} onClick={showSidebar} />
-
             <Navmenu active={sidebar ? 'active' : ''}>
                 <Ul onClick={showSidebar}>
                     <Avataruser>
@@ -180,4 +162,4 @@ const Burger = () => {
     );
 };
 
-export default Burger;
+export default Hamburger;
