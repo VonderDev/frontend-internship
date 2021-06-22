@@ -4,7 +4,16 @@ import Burger from 'components/pages/Burger/Burger';
 import { Layout } from 'antd';
 import GlobalStyle from 'shared/style/globalStyle';
 import Container from 'components/Container/Container';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
+declare global {
+    interface Window {
+        chaos: () => string;
+    }
+}
+window.chaos = () => {
+    return 'arai kor dai';
+};
 const { Header, Content, Footer } = Layout;
 
 const AppContainer = styled.div`
@@ -23,12 +32,14 @@ const MainContent = styled(Content)`
 const App = () => {
     return (
         <>
-            <GlobalStyle />
-            <AppContainer>
-                <MainContent>
-                    <Routing />
-                </MainContent>
-            </AppContainer>
+            <Router>
+                <GlobalStyle />
+                <AppContainer>
+                    <MainContent>
+                        <Routing />
+                    </MainContent>
+                </AppContainer>
+            </Router>
         </>
     );
 };
