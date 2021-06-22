@@ -39,6 +39,7 @@ function Login() {
     if (password === currentUser?.password) {
       history.push('/home');
     } else {
+      alert('ไม่ผู้ใช้นี้ อีเมลหรือรหัสผ่านไม่ถูกต้อง')
       console.log('Failed login');
     }
   }
