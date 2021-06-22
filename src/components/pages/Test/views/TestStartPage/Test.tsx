@@ -5,23 +5,21 @@ import { TextHeader, TextDescription, Containers, ButtonBack } from '../../share
 import { LeftOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
-
 function TestStartPage() {
     const history = useHistory();
 
     return (
-
         <Container header={null}>
-        <Containers>
-             <ButtonBack onClick={() => history.push('/')} icon={<LeftOutlined />} />
-            <TextHeader>เกมทดสอบพหุปัญญา</TextHeader>
-            {/* <TestAnimation /> */}
-            <TextDescription>
-                มาค้นหาตัวเอง <br />
-                ผ่านการเดินทางของคุณเองกันเถอะ
-            </TextDescription>
-            <ButtonLoadingStart />
-        </Containers>
+            <Containers>
+                <ButtonBack onClick={() => history.push('/')} icon={<LeftOutlined />} />
+                <TextHeader>เกมทดสอบพหุปัญญา</TextHeader>
+                {/* <TestAnimation /> */}
+                <TextDescription>
+                    มาค้นหาตัวเอง <br />
+                    ผ่านการเดินทางของคุณเองกันเถอะ
+                </TextDescription>
+                <ButtonLoadingStart />
+            </Containers>
         </Container>
     );
 }
