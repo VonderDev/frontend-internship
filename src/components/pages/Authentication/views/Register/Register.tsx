@@ -4,6 +4,8 @@ import { ButtonColor, FontTextHeader, BaseInput, LogoPage, MoveCenter } from 'co
 import { useHistory } from 'react-router';
 
 import logo from '../../images/logo.png';
+import { useState } from 'react';
+import { ILogin } from '../../shared/login.interface';
 
 const validateMessages = {
   required: 'required!',
@@ -12,13 +14,30 @@ const validateMessages = {
   },
 };
 
-const onFinish = (values: any) => {
-  console.log(values);
-};
-
 function Register() {
 
   const history = useHistory();
+  const [firstname, setFirstname] = useState<string>('');
+  const [lastname, setLastname] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [repeatPassword, setRepeatPassword] = useState<string>('');
+
+  const onFinish = (values: ILogin) => {
+    const mockUser = require('../../mocks/user.json');
+    const currentUser = mockUser.find((user: ILogin) => user.username === values.username && user.email === values.email);
+
+    mockUser.find((user: ILogin) => console.log(user));
+    if (values.username === currentUser?.username || values.email === currentUser?.email) {
+      console.log(values);
+      alert('มีผู้ใช้งานนี้แล้ว')
+    } else {
+      console.log("Go to login")
+      history.push('/login');
+    }
+    console.log('Success:', values);
+  };
 
   return (
     <div>
@@ -29,8 +48,8 @@ function Register() {
             สร้างบัญชี
           </FontTextHeader>
         </Space>
-        <Form onFinish={onFinish} validateMessages={validateMessages} onClick={() => history.push('/login')} >
-          <Form.Item name={['user', 'first_name']} hasFeedback rules={[{ required: true, message: 'กรุณาใส่ชื่อจริง!'}]} >
+        <Form onFinish={onFinish} validateMessages={validateMessages} >
+          <Form.Item name={['user', 'first_name']} hasFeedback rules={[{ required: true, message: 'กรุณาใส่ชื่อจริง!' }]} >
             <BaseInput type="text" placeholder="ชื่อจริง" />
           </Form.Item>
           <Form.Item name={['user', 'last_name']} hasFeedback rules={[{ required: true, message: 'กรุณาใส่นามสกุล!' }]} >
@@ -42,14 +61,37 @@ function Register() {
           <Form.Item name={['user', 'email']} hasFeedback rules={[{ required: true, message: 'กรุณาใส่อีเมล!' }]} >
             <BaseInput type="email" placeholder="อีเมล" />
           </Form.Item>
-          <Form.Item name={['user', 'password']} hasFeedback rules={[{ required: true, message: 'กรุณาใส่รหัสผ่าน!' }]} >
+          <Form.Item name="password"
+            rules={[
+              {
+                required: true,
+                message: 'กรุณาใส่รหัสผ่าน!',
+              },
+            ]}
+            hasFeedback >
             <BaseInput type="password" placeholder="รหัสผ่าน" />
           </Form.Item>
-          <Form.Item name={['user', 'repeat_password']} hasFeedback rules={[{ required: true, message: 'กรุณาใส่รหัสผ่าน!' }]} >
+          <Form.Item name="confirm"
+            dependencies={['password']}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: 'กรุณายืนยันรหัสผ่าน',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error('รหัสผ่านยืนยันไม่ตรงกัน!'));
+                },
+              }),
+            ]} >
             <BaseInput type="password" placeholder="ยืนยันรหัสผ่าน" />
           </Form.Item>
           <Form.Item>
-            <ButtonColor htmlType="submit" >
+            <ButtonColor htmlType="submit">
               สร้างบัญชี
             </ButtonColor>
           </Form.Item>
