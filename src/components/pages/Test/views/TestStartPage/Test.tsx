@@ -1,8 +1,7 @@
 import TestAnimation from './TestAnimation';
 import ButtonLoadingStart from './ButtonLoadingStart';
-import { TextHeader, TextDescription, Containers } from '../../shared/styles/TestPage.styled';
 import Container from 'components/Container/Container';
-import { TextHeader, TextDescription, Container, ButtonBack } from '../../shared/styles/TestPage.styled';
+import { TextHeader, TextDescription, Containers, ButtonBack } from '../../shared/styles/TestPage.styled';
 import { LeftOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
