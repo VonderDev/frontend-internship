@@ -24,11 +24,11 @@ function ButtonLoadingStart() {
         <div>
             {isLoading ? (
                 <IsLoadingSpinner>
-                    <TextIsLoading>Fetching Data</TextIsLoading>
+                    {/* <TextIsLoading>Fetching Data</TextIsLoading> */}
                     <Spin size="large" />
                 </IsLoadingSpinner>
             ) : (
-                <ButtonLoading onClick={fetchData}>เริ่มการทดสอบ</ButtonLoading>
+                <ButtonLoading onClick={fetchData}>เริ่มเกม</ButtonLoading>
             )}
         </div>
     );
