@@ -1,18 +1,12 @@
 import { useState } from 'react';
-import { Form, Space } from 'antd';
+import { Form, Space, Row } from 'antd';
 import styled from 'styled-components';
 import { useHistory } from 'react-router';
 
 import { ILogin } from '../../shared/login.interface';
-import { ButtonColor, FontText, FontTextHeader, BaseInput, LogoPage } from 'components/pages/Authentication/shared/style';
+import { ButtonColor, FontTextHeader, BaseInput, LogoPage, MoveCenter, MoveBottom } from 'components/pages/Authentication/shared/style';
 
 import logo from '../../images/logo.png';
-
-const MoveCeneter = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`;
 
 function Login() {
   const history = useHistory();
@@ -46,7 +40,7 @@ function Login() {
 
   return (
     <div>
-      <MoveCeneter>
+      <MoveCenter>
         <LogoPage src={logo} preview={false} />
         <Space align="start">
           <FontTextHeader>เข้าสู่ระบบ</FontTextHeader>
@@ -54,6 +48,7 @@ function Login() {
         <Form initialValues={{ remember: true }} onFinish={onFinish}>
           <Form.Item
             name="email"
+            hasFeedback
             rules={[
               {
                 required: true,
@@ -65,6 +60,7 @@ function Login() {
           </Form.Item>
           <Form.Item
             name="password"
+            hasFeedback
             rules={[
               {
                 required: true,
@@ -81,11 +77,10 @@ function Login() {
             </ButtonColor>
           </Form.Item>
         </Form>
-
-        <FontText>
+        <Row align="bottom">
           ยังไม่มีบัญชีใช่ไหม? <a onClick={() => history.push('/register')}>สร้างบัญชีกันเถอะ!</a>
-        </FontText>
-      </MoveCeneter>
+        </Row>
+      </MoveCenter>
     </div>
   );
 }

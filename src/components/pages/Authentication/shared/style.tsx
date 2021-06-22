@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Button, Image, Input } from 'antd';
-import logo from '../../images/logo.png';
 
 export const ButtonColor = styled(Button)`
     border-radius: 15px;
@@ -25,17 +24,33 @@ export const BaseInput = styled(Input)`
 `;
 
 export const LogoPage = styled(Image)`
+    width: 98;
+    height: 120;
     padding-top: 20px;
 `;
 
 export const FontText = styled.div`
-    font-size: 18px;
-    position: absolute;
-    bottom: 2rem;
+    font-size: 18px; 
 `;
 
 export const FontTextHeader = styled.div`
     font-size: 18px;
     font-weight: bold;
     padding: 30px;
+`;
+
+export const MoveCenter = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+export const MoveBottom = styled.div`
+    width: 194px;
+    height: 16px;
+    left: 91px;
+    top: 735px;
+    font-size: 18px;
+    position: absolute;
+    /* text-align: center; */
 `;
