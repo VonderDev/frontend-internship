@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { Children, createContext, useCallback, useEffect, useState, useContext, useMemo } from "react"
 import { Row, Col } from 'antd';
-import { BackHeader, LeftDiv, Overlay, RightDiv, RowHeader, TextHeader } from './Header.styled';
+import { BackHeader, LeftDiv,  RightDiv, RowHeader, TextHeader } from './Header.styled';
 import { LeftOutlined,MenuOutlined ,DownloadOutlined } from '@ant-design/icons';
 import Hamburger from "../pages/Burger/Burger";
 
@@ -13,9 +13,6 @@ interface HeaderProps {
 
 const Header = ({children, right, left}: HeaderProps) => {
     const history = useHistory();
-
-    const [overlay, setOverlay] = useState(false);
-    const showOverlay = () => setOverlay(!overlay);
 
     const goBack = useCallback(() =>{
         history.goBack();
@@ -34,8 +31,7 @@ const Header = ({children, right, left}: HeaderProps) => {
     const rightCon = useMemo(() => {
         if (right === 'menu') {
             return<>
-            <MenuOutlined style={{ color: '#8a8888' ,fontSize: '24px'}} onClick={showOverlay} />
-            {overlay ? <Hamburger /> : null }
+            <Hamburger />
             </>
         }else if (right === 'save'){
             return<>
@@ -49,7 +45,6 @@ const Header = ({children, right, left}: HeaderProps) => {
 
     return (
         <>
-        <Overlay active={overlay ? 'active' : ''} onClick={showOverlay} />
         <RowHeader justify="space-between">
             <Col span={4}>
                 <LeftDiv>

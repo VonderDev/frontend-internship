@@ -1,10 +1,10 @@
 import styled, { css }  from 'styled-components';
 import { Row, Col } from 'antd';
 
+
 export const RowHeader = styled(Row)`
-    margin-top: 10px;
     width: 100%;
-    height: 74;
+    height: 74px;
     top: 0;
     display: flex;
     align-items: center;
@@ -47,22 +47,4 @@ export const RightDiv = styled.div`
     margin-right: 10px;
     align-items: center;
     cursor: pointer;
-`;
-
-export const Overlay = styled.div<{ active: 'active' | '' }>`
-    ${({ active }) => {
-        if (active === 'active') {
-            return css`
-                position: absolute;
-                display: block;
-                top: 0;
-                left: 0;
-                height: 100vh;
-                width: 100%;
-                background-color: #0c1066;
-                opacity: 0.3;
-                z-index: 99;
-            `;
-        }
-    }}
 `;

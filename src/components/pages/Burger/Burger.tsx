@@ -11,10 +11,15 @@ const Bar = styled(Link)`
     margin-top: 10px;
     font-size: 2rem;
     background: none;
+    width: 100%;
+`;
+const BarBtn = styled(Bar)`
+    display: flex;
+    justify-content: center;
 `;
 
 const Navmenu = styled(Menu)<{ active: 'active' | '' }>`
-    background-color: #9696f1;
+    background-color: var(--White);
     width: 250px;
     height: 100vh;
     justify-content: center;
@@ -22,21 +27,37 @@ const Navmenu = styled(Menu)<{ active: 'active' | '' }>`
     display: flex;
     position: fixed;
     top: 0;
-    left: -100vh;
-    box-shadow: 5px 5px 5px #8080d4 !important;
+    right: -100vh;
+    box-shadow: 0 3px 6px #e0e0e0 !important;
     transition: 850ms;
     z-index: 100;
     ${({ active }) => {
         if (active === 'active') {
             return css`
-                left: 0%;
+                right: 0%;
                 transition: 350ms;
-                border-top-right-radius: 30px;
             `;
         }
     }}
 `;
 
+ const Overlay = styled.div<{ active: 'active' | '' }>`
+    ${({ active }) => {
+        if (active === 'active') {
+            return css`
+                position: absolute;
+                display: flex;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 100%;
+                background-color: #0c1066;
+                opacity: 0.3;
+                z-index: 99;
+            `;
+        }
+    }}
+`;
 const Ul = styled.ul`
     width: 100%;
 `;
@@ -51,7 +72,7 @@ const Listmenu = styled.li`
     }
     &.nav-text a {
         text-decoration: none;
-        color: #ffffff;
+        color: var(--Black);
         font-size: 18px;
         width: 100%;
         height: 100%;
@@ -61,8 +82,8 @@ const Listmenu = styled.li`
         border-radius: 4px;
     }
     &.nav-text a:hover {
-        background-color: #ffffff;
-        color: black;
+        background-color: var(--Blue-300);
+        color: var(--White);
     }
 `;
 
@@ -89,27 +110,15 @@ const LoginBtn = styled(Button)`
     height: 40px;
     border-radius: 10px;
     margin: 10px 0 0 0;
+    box-shadow: 0 3px 6px #e0e0e0 ;
+`;
+const ListmenuLogout = styled(Listmenu)`
+    bottom: 0;
+    display: flex;
 `;
 
-const Overlay = styled.div<{ active: 'active' | '' }>`
-    ${({ active }) => {
-        if (active === 'active') {
-            return css`
-                position: absolute;
-                display: block;
-                top: 0;
-                left: 0;
-                height: 100vh;
-                width: 100%;
-                background-color: #0c1066;
-                opacity: 0.3;
-                z-index: 99;
-            `;
-        }
-    }}
-`;
 
-const Hamburger = () => {
+const Burger = () => {
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
 
@@ -119,15 +128,22 @@ const Hamburger = () => {
 
     return (
         <>
+       
+            <MenuOutlined  style={{ color: '#8a8888' ,fontSize: '24px'}} onClick={showSidebar} />
+            
+            {/* <Overlay active={sidebar ? 'active' : ''} onClick={showSidebar} /> */}
             <Navmenu active={sidebar ? 'active' : ''}>
                 <Ul onClick={showSidebar}>
                     <Avataruser>
                         <Avatar size={75} icon={<UserOutlined />} />
                         <AvatarName> Guest #000</AvatarName>
                         {visible ? null : (
+                            <BarBtn to="/login">
                             <LoginBtn type="primary" onClick={loginAccess}>
                                 Login
                             </LoginBtn>
+                            </BarBtn>
+
                         )}
                     </Avataruser>
                     {visible && (
@@ -149,12 +165,12 @@ const Hamburger = () => {
                         );
                     })}
                     {visible && (
-                        <Listmenu className="nav-text">
+                        <ListmenuLogout className="nav-text">
                             <Bar to="#" onClick={notAccess}>
                                 <LoginOutlined />
                                 <Span> Logout</Span>
                             </Bar>
-                        </Listmenu>
+                        </ListmenuLogout>
                     )}
                 </Ul>
             </Navmenu>
@@ -162,4 +178,4 @@ const Hamburger = () => {
     );
 };
 
-export default Hamburger;
+export default Burger;

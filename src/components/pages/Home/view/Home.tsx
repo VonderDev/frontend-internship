@@ -18,7 +18,7 @@ import {
     ButtonCreateBoard,
 } from '../shared/homepage.styles';
 import { tagsData, IListData, IIconText } from '../shared/home.interface';
-
+import Container from 'components/Container/Container';
 //
 // ─── Set variable ───────────────────────────────────────────────────────────────────
 //
@@ -63,7 +63,7 @@ function Home() {
     const history = useHistory();
 
     return (
-        <div>
+            <Container  header={{children: "Home" , right: "menu"}}>
             <SearchField>
                 <Search placeholder="input search text" allowClear onSearch={onSearch} style={{ width: 250 }} />
             </SearchField>
@@ -119,7 +119,7 @@ function Home() {
             <ButtonCreateBoard onClick={() => history.push('/board')} shape="circle">
                 +
             </ButtonCreateBoard>
-        </div>
+            </Container>
     );
 }
 

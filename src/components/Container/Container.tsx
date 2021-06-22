@@ -1,20 +1,42 @@
-import Header from "./Header";
+import Header from './Header';
+import styled from 'styled-components';
+import { Layout } from 'antd';
 
 interface ContainerProps {
     children: any 
     // footer: any
     header: any
 }
+interface BodyProps {
+    isheader : string
+}
+
+
+const { Content } = Layout;
+const AppContainer = styled.div`
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    z-index: 0;
+`;
+const MainContent = styled(Content)<BodyProps>`
+    height: ${(props) =>{
+        const isheader = props?.isheader ? 74 :0
+        return `calc(100vh - ${isheader}px);`
+    }};
+    width: 100%;
+    overflow-y: scroll;
+`
 
 const Container = ({children ,header} : ContainerProps) => {
     return (
-        <div>
+        <AppContainer>
             {header && <Header {...header}/>}
-            <div>
+            <MainContent isheader ={header? "true" : "false"}>
                {children}
-            </div>
-            
-        </div>
+            </MainContent>
+        </AppContainer>
     );
 };
 
