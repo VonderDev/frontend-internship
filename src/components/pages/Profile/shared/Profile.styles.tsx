@@ -1,6 +1,6 @@
 import { Button, Input, Card, Image, List } from 'antd';
 import styled from 'styled-components';
-import { RightOutlined, HeartOutlined, FormOutlined } from '@ant-design/icons';
+import { RightOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 
 export const AlignCenter = styled.div`
@@ -9,18 +9,18 @@ export const AlignCenter = styled.div`
     align-items: center;
 `;
 
-export const ContainerProfile = styled.div`
-    padding: 10px;
-    max-width: 343px;
-    margin: 0 auto;
-`;
-
 export const AlignRight = styled.div`
     float: right;
 `;
 
 export const AlignLeft = styled.div`
     float: left;
+`;
+
+export const ContainerProfile = styled.div`
+    padding: 10px;
+    max-width: 343px;
+    margin: 0 auto;
 `;
 
 export const ButtonSubmit = styled(Button)`
@@ -103,17 +103,6 @@ export const HistoryText = styled.div`
     font-weight: bolder;
 `;
 
-export const ResultCard = styled(Card)`
-    box-shadow: 0px 3px 6px #c7c7c7;
-    margin-top: 0px;
-    height: 130px;
-    width: 343px;
-    border-radius: 10px;
-    & .ant-card-body {
-        padding: 5px;
-    }
-`;
-
 export const UserImage = styled(Image)`
     width: 120px;
     height: 120px;
@@ -141,19 +130,22 @@ export const IconArrow = styled(RightOutlined)`
     transform: translateY(0%) translateX(160%);
 `;
 
-export const IconLove = styled(HeartOutlined)`
-    width: 100px;
-`;
-
-export const IconWrite = styled(FormOutlined)`
-    width: 100px;
-`;
-
 export const LinkResult = styled(Link)``;
 
 export const LinkMoreResult = styled(Link)`
     font-size: 16px;
     color: var(--Blue-300);
+`;
+
+export const ResultCard = styled(Card)`
+    box-shadow: 0px 3px 6px #c7c7c7;
+    margin-top: 0px;
+    height: 130px;
+    width: 343px;
+    border-radius: 10px;
+    & .ant-card-body {
+        padding: 5px;
+    }
 `;
 
 export const ListProfile = styled(List)`

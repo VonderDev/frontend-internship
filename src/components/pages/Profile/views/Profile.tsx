@@ -52,7 +52,7 @@ function Profile() {
             href: '/board',
             title: `แนะนำหนังสือสำหรับคนอยากไปสายวิศวะ ${i}`,
             avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg',
-            description: 'บทความ',
+            description: 'บทความ'
         });
     }
 
@@ -62,6 +62,7 @@ function Profile() {
             {text}
         </div>
     );
+
     return (
         <div>
             <Container header={{ left: 'back', children: 'ข้อมูลส่วนตัว', right: 'menu' }}>

@@ -1,16 +1,12 @@
 import { useState, useEffect } from 'react';
 import { API_Profile_Data } from '../apis/profile.api';
 import { IProfile } from '../shared/Profile.interface';
-import { Form } from 'antd';
 import { ContainerProfile, AlignCenter, ButtonSave, FormInput, UserImage, TextTopicEditProfile , AlignRight} from '../shared/Profile.styles';
 import Container from 'components/Container/Container';
 
 function EditProfile() {
+
     const [cred, setCred] = useState<IProfile>({ name: '', surname: '', email: '', result: '', pic: '', username: '' });
-    const [userName, setUserName] = useState<string>('');
-    const [name, setName] = useState<string>('');
-    const [surname, setSurname] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
 
     const handleOnChange = (name: string, value: string) => {
         setCred((prev) => ({ ...prev, [name]: value }));
