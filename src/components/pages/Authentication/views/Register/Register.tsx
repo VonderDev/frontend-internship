@@ -32,7 +32,6 @@ function Register() {
     mockUser.find((user: ILogin) => console.log(user));
     if (values.username === currentUser?.username || values.email === currentUser?.email) {
       console.log(values);
-      alert('มีผู้ใช้งานนี้แล้ว')
     } else {
       console.log("Go to login")
       history.push('/login');

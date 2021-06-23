@@ -36,18 +36,19 @@ export const FontTextHeader = styled.div`
     font-size: 18px;
     font-weight: bold;
     padding: 30px;
+    text-align: center;
 `;
 
 export const MoveCenter = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
 `;
 
 export const MoveBottom = styled.div`
     display: flex;
     flex-direction: column;
-    position: absolute;
+    /* position: absolute; */
     /* align-items: center; */
 `;
 export const Pivacy = styled.div`

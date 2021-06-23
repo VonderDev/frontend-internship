@@ -41,9 +41,12 @@ function Login() {
     if (password === currentUser?.password) {
       history.push('/home');
     } else {
-      alert('ไม่ผู้ใช้นี้ อีเมลหรือรหัสผ่านไม่ถูกต้อง')
       console.log('Failed login');
     }
+  }
+
+  function confirmPolicy() {
+    history.push('/register');
   }
 
   const showDrawer = () => {
@@ -69,6 +72,7 @@ function Login() {
   return (
       <Container header={{left: 'back' , right: 'menu'}}>
       <Pivacy>
+      <LogoPage src={logo} preview={false} />
       <MoveCenter>
         <Drawer 
               title="Privacy Policy"
@@ -269,15 +273,17 @@ function Login() {
 
               <p>นโยบายความเป็นส่วนตัวฉบับนี้ใช้สำหรับการบริการ และการใช้งานบนเว็บไซต์ของเราเท่านั้น หากคุณเข้าชมเว็บไซต์อื่นแม้จะผ่านช่องทางเว็บไซต์ของเรา การคุ้มครองข้อมูลส่วนบุคคลต่าง ๆ จะเป็นไปตามนโยบายความเป็นส่วนตัวของเว็บไซต์นั้น ซึ่งเราไม่มีส่วนเกี่ยวข้องด้วย</p>
               </div>
-              <Checkbox checked={(true)} disabled={(true)} onChange={onChange}>
-                
+              <Checkbox checked={(true)} disabled={(true)} onChange={onChange} >
+                I've read and agreed to the Privacy Policy
+                <ButtonColor onClick={confirmPolicy} htmlType="submit">
+                  ยืนยัน
+                </ButtonColor>
               </Checkbox>
             </Drawer>
        
-        <LogoPage src={logo} preview={false} />
-        <Space align="start">
+        
           <FontTextHeader>เข้าสู่ระบบ</FontTextHeader>
-        </Space>
+
         <Form initialValues={{ remember: true }} onFinish={onFinish}>
           <Form.Item
             name="email"
