@@ -12,13 +12,14 @@ import Result from 'components/pages/Test/views/ResultPage/Result';
 import editProfile from 'components/pages/Profile/views/EditProfile';
 import ReadMore from 'components/pages/Test/views/ResultPage/Readmore';
 import TestOverview from 'components/pages/Test/views/TestStartPage/TestOverview';
+import PrivateRoute from 'components/AuthContext/PrivateRoute';
 
 function Routing() {
     return (
         <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/board" component={Board} />
-            <Route exact path="/profile" component={Profile} />
+            <PrivateRoute exact path="/profile" component={Profile} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/testresult" component={TestResult} />
@@ -29,7 +30,7 @@ function Routing() {
                     <TestQuestion />
                 </TestProvider>
             </Route>
-            <Route exact path="/editProfile" component={editProfile} />
+            <PrivateRoute exact path="/editProfile" component={editProfile} />
             <Route exact path="/result" component={Result} />
             <Route exact path="/readmore" component={ReadMore} />
         </Switch>
