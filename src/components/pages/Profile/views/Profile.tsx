@@ -10,7 +10,8 @@ import {
     AlignCenter,
     AlignRight,
     ButtonSubmit,
-    TextUserInfo,
+    TextUserInfo1,
+    TextUserInfo2,
     TextUsername,
     ResultCard,
     UserImage,
@@ -50,7 +51,7 @@ function Profile() {
         listData.push({
             href: '/board',
             title: `แนะนำหนังสือสำหรับคนอยากไปสายวิศวะ ${i}`,
-            avatar: 'https://scontent.fbkk7-3.fna.fbcdn.net/v/t1.6435-9/59064493_437047506858059_6394542383404417024_n.png?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=hlqBNJGZNnMAX83rdoy&_nc_ht=scontent.fbkk7-3.fna&oh=f8cc0917dbba6e533ed8c5ac4f69af53&oe=60D70B13',
+            avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg',
             description: 'บทความ',
         });
     }
@@ -69,15 +70,17 @@ function Profile() {
                         <UserImage src={cred.pic} />
                         <TextUsername>{cred.username}</TextUsername>
                     </AlignCenter>
-                    <TextUserInfo>
+                    <TextUserInfo1>
                         ชื่อ-นามสกุล :
+                        <TextUserInfo2>
                         <AlignRight>
                             {cred.name} {cred.surname}
                         </AlignRight>
-                    </TextUserInfo>
-                    <TextUserInfo>
-                        อีเมล : <AlignRight>{cred.email}</AlignRight>
-                    </TextUserInfo>
+                        </TextUserInfo2>
+                    </TextUserInfo1>
+                    <TextUserInfo1>
+                        อีเมล : <TextUserInfo2><AlignRight>{cred.email}</AlignRight></TextUserInfo2>
+                    </TextUserInfo1>
                     <Link to="/editProfile">
                         <Form.Item>
                             <AlignCenter>
@@ -122,9 +125,9 @@ function Profile() {
                                     <IconText icon={HeartFilled} text=" 12" key="list-vertical-message" />,
                                 ]}
                                 >
-                                    <div onClick={() => history.push('/board')}>
+                                    <HistoryText onClick={() => history.push('/board')}>
                                         <List.Item.Meta avatar={<HistoryImage src={item.avatar}/>} title={<a href={item.href}>{item.title}</a>} description={item.description} />
-                                    </div>
+                                    </HistoryText>
                                 </ProfileListItem>
                             )}
                         />
