@@ -1,8 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { API_Profile_Data } from '../apis/profile.api';
 import { IProfile } from '../shared/Profile.interface';
-import { ContainerProfile, AlignCenter, ButtonSave, FormInput, UserImage, TextTopicEditProfile, AlignRight, AlignLeft } from '../shared/Profile.styles';
+import { BackHeader } from 'components/Container/Header.styled';
+import {
+    ContainerProfile,
+    AlignCenter,
+    ButtonSave,
+    FormInput,
+    UserImage,
+    TextTopicEditProfile,
+    AlignRight,
+    ConfirmModal,
+    ButtonLeaveModal,
+    ButtonCancleModal,
+    TextModal,
+    TextUserInfo2,
+} from '../shared/Profile.styles';
+import { LeftOutlined } from '@ant-design/icons';
 import Container from 'components/Container/Container';
+import { Button } from 'antd';
+import { Link, useHistory } from 'react-router-dom';
 
 function EditProfile() {
     const [cred, setCred] = useState<IProfile>({ name: '', surname: '', email: '', result: '', pic: '', username: '' });
@@ -28,12 +45,52 @@ function EditProfile() {
         getStatisticData();
     }, []);
 
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
+    const history = useHistory();
+
+    const goBack = useCallback(() => {
+        history.goBack();
+    }, []);
+
     return (
-        
-        <Container header={{ left: 'back', children: 'แก้ไขข้อมูลส่วนตัว' , right:<ButtonSave onClick={editedUser}>บันทึก</ButtonSave>}}>
-             <AlignRight>
+        <Container
+            header={{
+                left: (
+                    <BackHeader onClick={showModal}>
+                        <LeftOutlined style={{ color: '#8a8888' }} />
+                    </BackHeader>
+                ),
+                children: 'แก้ไขข้อมูลส่วนตัว',
+                right: <ButtonSave onClick={editedUser}>บันทึก</ButtonSave>
+            }}
+        >
+            <AlignRight>
                 <ButtonSave onClick={editedUser}>บันทึก</ButtonSave>
-            </AlignRight> 
+            </AlignRight>
+            <AlignCenter>
+                <ConfirmModal
+                    visible={isModalVisible}
+                    onOk={handleOk}
+                    onCancel={handleCancel}
+                    title={[<TextModal>ออกจากหน้านี้?</TextModal>]}
+                    footer={[<ButtonLeaveModal onClick={goBack}>ออก</ButtonLeaveModal>, <ButtonCancleModal onClick={handleCancel}>ยกเลิก</ButtonCancleModal>]}
+                >
+                    <TextUserInfo2>การเปลี่ยนแปลงทั้งหมดจะไม่ถูกบันทึก</TextUserInfo2>
+                </ConfirmModal>
+            </AlignCenter>
             <ContainerProfile>
                 <AlignCenter>
                     <UserImage src={cred.pic} />
