@@ -127,6 +127,11 @@ export const ListItemBoard = styled(List.Item)`
     margin-bottom: 10px;
     box-shadow: 0px 3px 6px #c7c7c7;
     border-radius: 20px;
+    height: 130px;
+    width: 550px;
+    & .ant-list-item-action {
+        transform: translateY(-300%) translateX(25%);
+    }
 `;
 
 export const ButtonCreateBoard = styled(Button)`
@@ -140,4 +145,11 @@ export const ButtonCreateBoard = styled(Button)`
     right: 150px;
     width: 60px;
     height: 50px;
+`;
+
+export const ImgBoardList = styled.img`
+    transform: translateX(-15%) translateY(-6%);
+    border-radius: 15px;
+    width: 120px;
+    height: 130px;
 `;
