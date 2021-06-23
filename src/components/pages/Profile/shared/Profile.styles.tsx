@@ -77,13 +77,11 @@ export const TextUserInfo1 = styled.div`
     font-weight: bolder;
     font-size: 16px;
     margin-top: 10px;
-    margin-bottom: 5px;
 `;
-export const TextUserInfo2 = styled.text`
+export const TextUserInfo2 = styled.div`
     font-weight: normal;
     font-size: 16px;
     margin-top: 10px;
-    margin-bottom: 5px;
 `;
 
 export const TextUsername = styled.div`
@@ -163,6 +161,10 @@ export const ProfileListItem = styled(List.Item)`
         font-weight: bolder;
         transform: translateY(-20%) translateX(-12%);
         width: 250px;
+        text-overflow: ellipsis; 
+        /* เพิ่ม ... จุดจุดจุดท้ายสุด */  
+        overflow: hidden;  
+        white-space: nowrap;
     }
     & .ant-list-item-meta-description {
         font-size: 12px;

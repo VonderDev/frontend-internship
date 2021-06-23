@@ -31,9 +31,9 @@ function EditProfile() {
     return (
         
         <Container header={{ left: 'back', children: 'แก้ไขข้อมูลส่วนตัว' , right:<ButtonSave onClick={editedUser}>บันทึก</ButtonSave>}}>
-            {/* <AlignRight>
+             <AlignRight>
                 <ButtonSave onClick={editedUser}>บันทึก</ButtonSave>
-            </AlignRight> */}
+            </AlignRight> 
             <ContainerProfile>
                 <AlignCenter>
                     <UserImage src={cred.pic} />
