@@ -18,7 +18,7 @@ function Routing() {
     return (
         <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/board" component={Board} />
+            <PrivateRoute exact path="/board" component={Board} />
             <PrivateRoute exact path="/profile" component={Profile} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />

@@ -1,0 +1,12 @@
+[
+    {
+        "userid": 1,
+        "username": "user1",
+        "password": "123456",
+        "role": "client",
+        "name": "NameA",
+        "lastname": "latNameB",
+        "email": "user1@gmail.com",
+        "image": "img"
+    }
+]
