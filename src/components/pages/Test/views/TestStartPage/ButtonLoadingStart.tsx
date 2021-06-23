@@ -16,7 +16,7 @@ function ButtonLoadingStart() {
         setTimeout(() => {
             console.log('set Loading:', isLoading);
             setLoading(false);
-            history.push('/testquestion');
+            history.push('/teststory');
         }, 1500);
     };
 
