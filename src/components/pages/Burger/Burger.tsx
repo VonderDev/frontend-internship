@@ -123,11 +123,7 @@ const Burger = () => {
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
 
-    const [visible, setVisble] = useState(false);
-    const loginAccess = () => setVisble(true);
-    const notAccess = () => setVisble(false);
-
-    const { loginUser, login, logout } = useAuthContext()
+    const { loginUser, logout } = useAuthContext()
     return (
         <>
        
@@ -139,16 +135,16 @@ const Burger = () => {
                     <Avataruser>
                         <Avatar size={75} icon={<UserOutlined />} />
                         <AvatarName> Guest #000</AvatarName>
-                        {visible ? null : (
+                        {loginUser ? null : (
                             <BarBtn to="/login">
-                            <LoginBtn type="primary" onClick={loginAccess}>
+                            <LoginBtn type="primary">
                                 Login
                             </LoginBtn>
                             </BarBtn>
 
                         )}
                     </Avataruser>
-                    {visible && (
+                    {loginUser && (
                         <Listmenu className="nav-text">
                             <Bar to="/profile">
                                 <UserOutlined />
@@ -166,9 +162,9 @@ const Burger = () => {
                             </Listmenu>
                         );
                     })}
-                    {visible && (
+                    {loginUser && (
                         <ListmenuLogout className="nav-text">
-                            <Bar to="#" onClick={notAccess}>
+                            <Bar to="#" onClick={ logout }>
                                 <LoginOutlined />
                                 <Span> Logout</Span>
                             </Bar>

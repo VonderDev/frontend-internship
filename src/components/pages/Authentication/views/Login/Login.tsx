@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import { Form, Space, Drawer } from 'antd';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-
 import { ILogin } from '../../shared/login.interface';
 import { ButtonColor, FontTextHeader, BaseInput, LogoPage, MoveCenter, MoveBottom, Pivacy } from 'components/pages/Authentication/shared/style';
 import Container from 'components/Container/Container';
-
 import logo from '../../images/logo.png';
-import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
+import { useAuthContext } from 'components/AuthContext/AuthContext';
 
 
 function Login() {
@@ -32,19 +29,6 @@ function Login() {
     console.log('Success:', values);
   };
 
-  function checkdatajson() {
-    const mockUser = require('../../mocks/user.json');
-    const currentUser = mockUser.find((user: ILogin) => user.email === email);
-
-    mockUser.find((user: ILogin) => console.log(user));
-    if (password === currentUser?.password) {
-      history.push('/home');
-    } else {
-      alert('ไม่ผู้ใช้นี้ อีเมลหรือรหัสผ่านไม่ถูกต้อง')
-      console.log('Failed login');
-    }
-  }
-
   const showDrawer = () => {
     setVisible(true);
   };
@@ -52,7 +36,7 @@ function Login() {
   const onClose = () => {
     setVisible(false);
   };
-
+  const { loginUser, login } = useAuthContext();
   return (
       <Container header={{left: 'back' , right: 'menu'}}>
       <Pivacy>
@@ -289,7 +273,7 @@ function Login() {
           </Form.Item>
 
           <Form.Item>
-            <ButtonColor onClick={checkdatajson} htmlType="submit">
+            <ButtonColor onClick={login} htmlType="submit">
               เข้าสู่ระบบ
             </ButtonColor>
           </Form.Item>
