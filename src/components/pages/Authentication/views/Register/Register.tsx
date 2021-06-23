@@ -1,6 +1,6 @@
 import { Form, Space } from 'antd';
 import styled from 'styled-components';
-import { ButtonColor, FontTextHeader, BaseInput, LogoPage, MoveCenter } from 'components/pages/Authentication/shared/style';
+import { ButtonColor, FontTextHeader, BaseInput, LogoPage, MoveCenter, LogoPageCenter } from 'components/pages/Authentication/shared/style';
 import { useHistory } from 'react-router';
 
 import logo from '../../images/logo.png';
@@ -40,14 +40,14 @@ function Register() {
   };
 
   return (
-    <Container header={{left: 'back' }}>
-      <MoveCenter>
+    <Container header={{ left: 'back' }}>
+      <LogoPageCenter>
         <LogoPage src={logo} preview={false} />
-        <Space align="start">
-          <FontTextHeader>
-            สร้างบัญชี
-          </FontTextHeader>
-        </Space>
+      </LogoPageCenter>
+      <FontTextHeader>
+        สร้างบัญชี
+      </FontTextHeader>
+      <MoveCenter>
         <Form onFinish={onFinish} validateMessages={validateMessages} >
           <Form.Item name={['user', 'first_name']} hasFeedback rules={[{ required: true, message: 'กรุณาใส่ชื่อจริง!' }]} >
             <BaseInput type="text" placeholder="ชื่อจริง" />
@@ -97,7 +97,7 @@ function Register() {
           </Form.Item>
         </Form>
       </MoveCenter>
-      </Container>
+    </Container>
   );
 }
 

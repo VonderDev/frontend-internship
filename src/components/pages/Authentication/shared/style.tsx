@@ -23,9 +23,11 @@ export const BaseInput = styled(Input)`
 `;
 
 export const LogoPage = styled(Image)`
-    width: 98;
-    height: 120;
     padding-top: 20px;
+`;
+
+export const LogoPageCenter = styled.div`
+    text-align: center;
 `;
 
 export const FontText = styled.div`
@@ -42,14 +44,12 @@ export const FontTextHeader = styled.div`
 export const MoveCenter = styled.div`
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
+    align-items: center;
 `;
 
 export const MoveBottom = styled.div`
     display: flex;
     flex-direction: column;
-    /* position: absolute; */
-    /* align-items: center; */
 `;
 export const Pivacy = styled.div`
   position: relative;
