@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Form, Space, Drawer } from 'antd';
+import { Form, Space, Drawer, Checkbox } from 'antd';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
@@ -8,8 +8,6 @@ import { ButtonColor, FontTextHeader, BaseInput, LogoPage, MoveCenter, MoveBotto
 import Container from 'components/Container/Container';
 
 import logo from '../../images/logo.png';
-import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
-
 
 function Login() {
   const history = useHistory();
@@ -18,6 +16,9 @@ function Login() {
 
   const [visible, setVisible] = useState(false);
   const [placement, setPlacement] = useState<string>('bottom');
+
+  const [cheked, setChecked] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
   const onFinish = (values: ILogin) => {
     const mockUser = require('../../mocks/user.json');
@@ -51,6 +52,18 @@ function Login() {
 
   const onClose = () => {
     setVisible(false);
+  };
+
+  const toggleChecked = () => {
+    setChecked(false);
+  }
+
+  const toggleVisible = () => {
+    setVisible(false);
+  }
+
+  const onChange = () => {
+
   };
 
   return (
@@ -256,6 +269,9 @@ function Login() {
 
               <p>นโยบายความเป็นส่วนตัวฉบับนี้ใช้สำหรับการบริการ และการใช้งานบนเว็บไซต์ของเราเท่านั้น หากคุณเข้าชมเว็บไซต์อื่นแม้จะผ่านช่องทางเว็บไซต์ของเรา การคุ้มครองข้อมูลส่วนบุคคลต่าง ๆ จะเป็นไปตามนโยบายความเป็นส่วนตัวของเว็บไซต์นั้น ซึ่งเราไม่มีส่วนเกี่ยวข้องด้วย</p>
               </div>
+              <Checkbox checked={(true)} disabled={(true)} onChange={onChange}>
+                
+              </Checkbox>
             </Drawer>
        
         <LogoPage src={logo} preview={false} />

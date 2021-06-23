@@ -11,7 +11,6 @@ export const ButtonColor = styled(Button)`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    position: absolute;
 `;
 
 export const BaseInput = styled(Input)`
