@@ -1,12 +1,10 @@
-[
     {
-        "userid": 1,
+        "token": "1",
         "username": "user1",
         "password": "123456",
         "role": "client",
         "name": "NameA",
-        "lastname": "latNameB",
+        "lastname": "latNameA",
         "email": "user1@gmail.com",
         "image": "img"
     }
-]

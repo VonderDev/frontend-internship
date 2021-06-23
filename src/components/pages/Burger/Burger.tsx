@@ -4,6 +4,7 @@ import { ListMenu } from './ListMenu';
 import styled, { css } from 'styled-components';
 import { MenuOutlined, UserOutlined, LoginOutlined } from '@ant-design/icons';
 import { Layout, Menu, Avatar, Button } from 'antd';
+import { useAuthContext } from 'components/AuthContext/AuthContext';
 
 const { Header, Sider } = Layout;
 
@@ -126,6 +127,7 @@ const Burger = () => {
     const loginAccess = () => setVisble(true);
     const notAccess = () => setVisble(false);
 
+    const { loginUser, login, logout } = useAuthContext()
     return (
         <>
        

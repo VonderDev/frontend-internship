@@ -1,56 +1,55 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext, useCallback } from "react";
 import { Router } from "react-router-dom";
 import authMock from './Authmock.json'
-import { authData } from './User.type'
 
-    async function userAPI() {
-        console.log("userInfo :",authMock)
-       return authMock as Array<authData> | [];
-    }
+const data = JSON.stringify(authMock)
 
-  interface IAuthContext {
-    loggedInUser: authData | null,
-    setAuthUser: (user: authData | null) => void
-    }
-
-  const AuthContext = createContext<IAuthContext>( {
-    loggedInUser: null,
-    setAuthUser: () => {},
-  })
-  
   interface IAuthProps {
     children: any 
     }
   
-  const { Provider } = AuthContext
-  
+    const AuthContext = createContext<any>(null);
   
   const AuthProvider =  (({children}: IAuthProps) => {
-    const [authState, setAuthState] = useState<authData>()
    
-    const [loggedInUser, setLoggedInUser] = useState<authData | null>(null)
+    const [loginUser, setLoginUser] = useState<boolean>(false)
+ 
+    const login = useCallback(() => {
+            localStorage.setItem('token', data);
+            const tokenKey = localStorage.getItem('token') || '';
+            tokenKey ? 
+            setLoginUser(true) 
+            : setLoginUser(false)
+            return ;
+        },[loginUser],)
 
-    async function getUser() {
-        const response = await userAPI();
-        if (response) {
-
-        } else {
-            console.log('error');
-        }
+    const logout = () => {
+        localStorage.removeItem('token')
     }
-    useEffect(() => {
-        getUser();
-    }, []);
 
-    const setAuthUser = (user: authData | null) => setLoggedInUser(user)
+    useEffect(() => {
+       console.log('Data' ,data)
+       }, []);
+
     return (
-      <Provider value= {{
-        loggedInUser,
-        setAuthUser,
+      <AuthContext.Provider value= {{
+        loginUser,
+        login,
+        logout
       }}>
            {children}
-        </Provider>
+        </AuthContext.Provider>
     );
+
+    
   })
+
+  const useAuthContext = () => {
+    const context = useContext(AuthContext);
+    if (context === undefined) {
+        throw new Error(" error AuthContext")
+    }
+    return context
+}
   
-export { AuthContext, AuthProvider }
+export { AuthContext, AuthProvider ,useAuthContext  }

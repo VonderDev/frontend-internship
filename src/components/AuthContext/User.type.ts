@@ -1,7 +1,7 @@
 export type Role = 'CLIENT' | 'ADMIN' 
 
 export interface authData {
-  id: string
+  token: string
   username: string
   password: string
   email: string
