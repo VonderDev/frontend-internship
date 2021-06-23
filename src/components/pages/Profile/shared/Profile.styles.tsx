@@ -18,7 +18,7 @@ export const AlignLeft = styled.div`
 `;
 
 export const ContainerProfile = styled.div`
-    padding: 10px;
+    padding: 0px;
     max-width: 343px;
     margin: 0 auto;
 `;
@@ -40,12 +40,11 @@ export const ButtonSave = styled(Button)`
     font-weight: bolder;
     font-size: 16px;
     border: none;
+    padding: 0px;
     color: var(--Blue-400);
     width: 65px;
     height: 19px;
-    //transform: translateY(-120%);
-    position: relative;
-    z-index: 20;
+    transform: translateY(0%);
 `;
 
 export const FormInput = styled(Input)`
@@ -154,7 +153,6 @@ export const ListProfile = styled(List)`
 `;
 
 export const ProfileListItem = styled(List.Item)`
-    margin-left: -10px;
     margin-bottom: 10px;
     height: 88px;
     box-shadow: 0px 3px 6px #c7c7c7;
