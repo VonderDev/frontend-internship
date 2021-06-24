@@ -34,7 +34,6 @@ export const ButtonStartOver = styled(Button)`
     display: block;
     width: 100px;
     height: 40px;
-    z-index: 100px;
 `;
 
 export const ButtonNextQuestion = styled(Button)`

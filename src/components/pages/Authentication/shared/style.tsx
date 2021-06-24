@@ -30,7 +30,7 @@ export const LogoPage = styled(Image)`
 `;
 
 export const FontText = styled.div`
-    font-size: 18px; 
+    font-size: 18px;
 `;
 
 export const FontTextHeader = styled.div`
@@ -52,11 +52,11 @@ export const MoveBottom = styled.div`
     /* align-items: center; */
 `;
 export const Pivacy = styled.div`
-  position: relative;
-  height: 100%;
-  padding: 48px;
-  overflow: hidden;
-  text-align: center;
-  border: 1px solid #ebedf0;
-  border-radius: 2px;
+    position: relative;
+    height: 100%;
+    padding: 48px;
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid #ebedf0;
+    border-radius: 2px;
 `;

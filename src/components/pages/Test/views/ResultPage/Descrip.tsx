@@ -17,27 +17,26 @@ const Descrip = () => {
     }, []);
     return (
         <>
-                {Namemax.map((item: any, index: any) => {
-                    return (
-                        <ResultCard key={index} onClick={() => history.push({ pathname: "/readmore" ,search: `categoryID=${item.categoryID}` })}>
-                            <BodyCard>
-                                <Hname>
-                                    {item.skill} : <br/>{item.score} คะแนน
-                                </Hname>
-                                <Boxpic>
-                                    {' '}
-                                    <TextBoxDescript>Character<br/>ตามผลลัพธ์</TextBoxDescript>
-                                </Boxpic>
-                                <DesBox>
-                                    <DesText>{item.description}</DesText>
-                                </DesBox>
-                                <Readmore>
-                                    <p>อ่านเพิ่มเติม</p>
-                                </Readmore>
-                            </BodyCard>
-                        </ResultCard>
-                    );
-                })}
+            {Namemax.map((item: any, index: any) => {
+                return (
+                    <ResultCard key={index} onClick={() => history.push({ pathname: '/readmore', search: `categoryID=${item.categoryID}` })}>
+                        <BodyCard>
+                            <Hname>
+                                {item.skill} : <br />
+                                {item.score} คะแนน
+                            </Hname>
+                            <Boxpic src={item.image_charactor} />
+
+                            <DesBox>
+                                <DesText>{item.description}</DesText>
+                            </DesBox>
+                            <Readmore>
+                                <p>อ่านเพิ่มเติม</p>
+                            </Readmore>
+                        </BodyCard>
+                    </ResultCard>
+                );
+            })}
         </>
     );
 };

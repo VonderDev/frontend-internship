@@ -2,7 +2,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { API_Profile_Data } from '../apis/profile.api';
 import { Form, List, Col, Row } from 'antd';
 import { useEffect } from 'react';
-import { IIconTextProfile, IListDataBoardHistory , IProfile } from '../shared/Profile.interface';
+import { IIconTextProfile, IListDataBoardHistory, IProfile } from '../shared/Profile.interface';
 import { CalendarOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
 import { useState } from 'react';
 import {
@@ -122,7 +122,7 @@ function Profile() {
                                         </CardText>
                                     </Col>
                                     <Col span={2}>
-                                            <IconArrow />
+                                        <IconArrow />
                                     </Col>
                                 </Row>
                             </ResultCard>
@@ -155,7 +155,7 @@ function Profile() {
                                     ]}
                                 >
                                     <HistoryText onClick={() => history.push('/board')}>
-                                        <List.Item.Meta avatar={<HistoryImage src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} description={item.description}/>
+                                        <List.Item.Meta avatar={<HistoryImage src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} description={item.description} />
                                     </HistoryText>
                                 </ProfileListItem>
                             )}

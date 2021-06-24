@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Container from 'components/Container/Container';
 import { ContainerTestStoryPage, TextStory } from '../../shared/styles/TestStory.styled';
 import { useHistory } from 'react-router-dom';
@@ -7,14 +7,12 @@ import { API_GetTestData } from '../../apis/test.api';
 import { Col, Modal } from 'antd';
 import { ButtonStartOver, TextQuestionIndex } from '../../shared/styles/TestQuestion.styled';
 
-function TestStory(){
-
+function TestStory() {
     const history = useHistory();
     const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ categoryID: 0, question: '', questionIndex: 0 });
     const [currentQuestion, setCurrentQuestion] = useState<number>(0);
     const [questionList, setQuestionList] = useState<Array<IQuestion> | null>(null);
 
-    
     useEffect(() => {
         if (!questionList) return;
         setCurrentQuestionDetail(questionList[currentQuestion]);
@@ -56,10 +54,10 @@ function TestStory(){
         setVisible(false);
     };
 
-    return(
+    return (
         <Container header={null}>
             <ContainerTestStoryPage onClick={() => history.push('/testquestion')}>
-            <Col>
+                <Col>
                     <TextQuestionIndex>
                         คำถามข้อที่ {currentQuestion + 1}/{questionList?.length}
                     </TextQuestionIndex>
@@ -67,21 +65,13 @@ function TestStory(){
                         เริ่มใหม่{' '}
                     </ButtonStartOver>
                 </Col>
-                <Modal
-                    visible={visible}
-                    okText="เริ่มใหม่"
-                    cancelText="ยกเลิก"
-                    onOk={handleOk}
-                    width={400}
-                    confirmLoading={confirmLoading}
-                    onCancel={handleCancel}
-                >
+                <Modal visible={visible} okText="เริ่มใหม่" cancelText="ยกเลิก" onOk={handleOk} width={400} confirmLoading={confirmLoading} onCancel={handleCancel}>
                     ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
                 </Modal>
                 <TextStory>(แตะหน้าจอเพื่อไปต่อ)</TextStory>
             </ContainerTestStoryPage>
         </Container>
-    )
+    );
 }
 
 export default TestStory;

@@ -23,7 +23,7 @@ const AppContainer = styled.div`
 const MainContent = styled(Content)<BodyProps>`
     height: ${(props) => {
         const isheader = props?.isheader ? 74 : 0;
-        return `calc(100vh - ${isheader}px);`;
+        return `calc(100vh - ${isheader}px); `;
     }};
     width: 100%;
     overflow-y: scroll;
@@ -33,7 +33,7 @@ const Container = ({ children, header }: ContainerProps) => {
     return (
         <AppContainer>
             {header && <Header {...header} />}
-            <MainContent isheader={header ? 'true' : 'false'}>{children}</MainContent>
+            <MainContent isheader={header ? 'true' : 'false'}> {children}</MainContent>
         </AppContainer>
     );
 };

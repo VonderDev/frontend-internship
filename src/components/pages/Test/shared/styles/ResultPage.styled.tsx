@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Button, Typography, Card, Row } from 'antd';
 import Chart from 'react-apexcharts';
-import Meta from 'antd/lib/card/Meta';
 
 const { Title } = Typography;
 
@@ -93,7 +92,7 @@ export const ResultCard = styled(Card)`
     margin-right: auto;
 `;
 
-export const Boxpic = styled.div`
+export const Boxpic = styled.img`
     border-radius: 20px;
     border: none;
     display: flex;
@@ -155,7 +154,7 @@ export const TextBox = styled.div`
     font-size: 16px;
 `;
 
-export const Resultpic = styled.div`
+export const Resultpic = styled.img`
     border-radius: 20px;
     border: none;
     display: flex;

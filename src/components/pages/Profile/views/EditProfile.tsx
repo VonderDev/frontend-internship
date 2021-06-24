@@ -74,13 +74,13 @@ function EditProfile() {
                     </BackHeader>
                 ),
                 children: 'แก้ไขข้อมูลส่วนตัว',
-                right: <ButtonSave onClick={editedUser}>บันทึก</ButtonSave>
+                right: <ButtonSave onClick={editedUser}>บันทึก</ButtonSave>,
             }}
         >
             <AlignRight>
                 <ButtonSave onClick={editedUser}>บันทึก</ButtonSave>
             </AlignRight>
-            <AlignCenter>
+            <AlignCenter key={1}>
                 <ConfirmModal
                     visible={isModalVisible}
                     onOk={handleOk}
