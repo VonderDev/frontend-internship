@@ -4,6 +4,7 @@ import { ListMenu } from './ListMenu';
 import styled, { css } from 'styled-components';
 import { MenuOutlined, UserOutlined, LoginOutlined } from '@ant-design/icons';
 import { Layout, Menu, Avatar, Button } from 'antd';
+import { useAuthContext } from 'components/AuthContext/AuthContext';
 
 const { Header, Sider } = Layout;
 
@@ -122,10 +123,7 @@ const Burger = () => {
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
 
-    const [visible, setVisble] = useState(false);
-    const loginAccess = () => setVisble(true);
-    const notAccess = () => setVisble(false);
-
+    const { loginUser, logout,user } = useAuthContext()
     return (
         <>
        
@@ -136,17 +134,18 @@ const Burger = () => {
                 <Ul onClick={showSidebar}>
                     <Avataruser>
                         <Avatar size={75} icon={<UserOutlined />} />
-                        <AvatarName> Guest #000</AvatarName>
-                        {visible ? null : (
+                        { loginUser ? (<AvatarName>{ user.username }</AvatarName>) : (<AvatarName> Guest #000  </AvatarName> )}
+                        
+                        {loginUser ? null : (
                             <BarBtn to="/login">
-                            <LoginBtn type="primary" onClick={loginAccess}>
+                            <LoginBtn type="primary">
                                 Login
                             </LoginBtn>
                             </BarBtn>
 
                         )}
                     </Avataruser>
-                    {visible && (
+                    {loginUser && (
                         <Listmenu className="nav-text">
                             <Bar to="/profile">
                                 <UserOutlined />
@@ -164,9 +163,9 @@ const Burger = () => {
                             </Listmenu>
                         );
                     })}
-                    {visible && (
+                    {loginUser && (
                         <ListmenuLogout className="nav-text">
-                            <Bar to="#" onClick={notAccess}>
+                            <Bar to="#" onClick={ logout }>
                                 <LoginOutlined />
                                 <Span> Logout</Span>
                             </Bar>

@@ -50,17 +50,24 @@ const Header = ({ children, right, left }: HeaderProps) => {
 
     return (
         <>
-            <RowHeader justify="space-between">
-                <Col span={4}>
-                    <LeftDiv>{leftCon}</LeftDiv>
-                </Col>
-                <Col span={16}>
-                    <TextHeader>{children}</TextHeader>
-                </Col>
-                <Col span={4}>
-                    <RightDiv>{rightCon}</RightDiv>
-                </Col>
-            </RowHeader>
+        <RowHeader justify="space-between">
+            <Col span={4}>
+                <LeftDiv>
+                {leftCon}
+                </LeftDiv>
+            </Col>
+            <Col span={16}>
+                <TextHeader>
+                    {children}
+                </TextHeader>
+
+            </Col>
+            <Col span={4}>
+                <RightDiv >
+                {rightCon}
+                </RightDiv >
+            </Col>
+        </RowHeader>
         </>
     );
 };
