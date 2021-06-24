@@ -1,20 +1,18 @@
 import { useEffect, useState } from 'react';
-import TestAnimation from '../TestStartPage/TestAnimation';
 import {
     TextQuestionIndex,
     ButtonStartOver,
     TextQuestion,
     ButtonChoiceStlyed,
     ContainerButton,
-    ButtonConfirmStartOver,
-    ButtonCancleStartOver,
-    ContainerButtonStartOver,
+    ContainerTestQuestion,
+    IsLoadingSpinnerTestQuestion,
+    TextIsLoadingTestQuestion,
 } from '../../shared/styles/TestQuestion.styled';
 import { useHistory } from 'react-router-dom';
 import { API_GetTestData, API_PostTestResult } from '../../apis/test.api';
 import { IQuestion, IUserAns } from '../../shared/interface/Test.interfaces';
-import { Modal, Row, Spin } from 'antd';
-import { IsLoadingSpinner, TextIsLoading } from '../../shared/styles/TestPage.styled';
+import { Col, Modal, Spin } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import React from 'react';
 import Container from 'components/Container/Container';
@@ -28,10 +26,10 @@ function TestQuestion() {
     const [currentQuestion, setCurrentQuestion] = useState<number>(0);
     const [questionList, setQuestionList] = useState<Array<IQuestion> | null>(null);
     const buttonList = [
-        { value: 3, label: 'จริงมากๆ' },
-        { value: 2, label: 'จริงอยู่นะ' },
-        { value: 1, label: 'ไม่ค่อยจริงอะ' },
-        { value: 0, label: 'ไม่จริงเลย' },
+        { value: 3, label: 'ใช่ที่สุด' },
+        { value: 2, label: 'ปานกลาง' },
+        { value: 1, label: 'น้อย' },
+        { value: 0, label: 'ไม่เลย' },
     ];
     const [testScore, setTestScore] = useState<Array<IUserAns>>([]);
     const [isLoading, setLoading] = useState(false);
@@ -124,59 +122,61 @@ function TestQuestion() {
     };
     return (
         <Container header={null}>
-            <TextQuestionIndex>
-                คำถามข้อที่ {currentQuestion + 1}/{questionList?.length}
-            </TextQuestionIndex>
-            <TextQuestion>{currentQuestionDetail.question}</TextQuestion>
-            <ButtonStartOver type="primary" onClick={showModal}>
-                เริ่มใหม่{' '}
-            </ButtonStartOver>
-            <Modal
-                visible={visible}
-                okText="เริ่มใหม่"
-                cancelText="ยกเลิก"
-                onOk={handleOk}
-                // footer={[
-                //     <ContainerButtonStartOver>
-                //         <ButtonConfirmStartOver onClick={handleOk}>เริ่มใหม่</ButtonConfirmStartOver>, <ButtonCancleStartOver onClick={handleCancel}>ยกเลิก</ButtonCancleStartOver>
-                //     </ContainerButtonStartOver>,
-                // ]}
-                width={400}
-                confirmLoading={confirmLoading}
-                onCancel={handleCancel}
-            >
-                ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
-            </Modal>
-            <TestAnimation />
-
-            <div>
-                {isLoading ? (
-                    ''
-                ) : (
-                    <ContainerButton>
-                        {buttonList.map((item, index) => {
-                            return (
-                                <ButtonChoiceStlyed
-                                    key={index}
-                                    onClick={() => {
-                                        onNextQuestion(item.value);
-                                    }}
-                                >
-                                    {item.label}
-                                </ButtonChoiceStlyed>
-                            );
-                        })}
-                    </ContainerButton>
-                )}
-                {isLoading ? (
-                    <IsLoadingSpinner>
-                        <TextIsLoading>กำลังประมวลผลคำตอบน้า</TextIsLoading>
-                        <Spin size="large" />
-                    </IsLoadingSpinner>
-                ) : (
-                    ''
-                )}
-            </div>
+            <ContainerTestQuestion>
+                <Col>
+                    <TextQuestionIndex>
+                        คำถามข้อที่ {currentQuestion + 1}/{questionList?.length}
+                    </TextQuestionIndex>
+                    <ButtonStartOver type="primary" onClick={showModal}>
+                        เริ่มใหม่{' '}
+                    </ButtonStartOver>
+                </Col>
+                <Modal
+                    visible={visible}
+                    okText="เริ่มใหม่"
+                    cancelText="ยกเลิก"
+                    onOk={handleOk}
+                    // footer={[
+                    //     <ContainerButtonStartOver>
+                    //         <ButtonConfirmStartOver onClick={handleOk}>เริ่มใหม่</ButtonConfirmStartOver>, <ButtonCancleStartOver onClick={handleCancel}>ยกเลิก</ButtonCancleStartOver>
+                    //     </ContainerButtonStartOver>,
+                    // ]}
+                    width={400}
+                    confirmLoading={confirmLoading}
+                    onCancel={handleCancel}
+                >
+                    ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
+                </Modal>
+                <TextQuestion>{currentQuestionDetail.question}</TextQuestion>
+                <div>
+                    {isLoading ? (
+                        ''
+                    ) : (
+                        <ContainerButton>
+                            {buttonList.map((item, index) => {
+                                return (
+                                    <ButtonChoiceStlyed
+                                        key={index}
+                                        onClick={() => {
+                                            onNextQuestion(item.value);
+                                        }}
+                                    >
+                                        {item.label}
+                                    </ButtonChoiceStlyed>
+                                );
+                            })}
+                        </ContainerButton>
+                    )}
+                    {isLoading ? (
+                        <IsLoadingSpinnerTestQuestion>
+                            <TextIsLoadingTestQuestion>กำลังประมวลผลคำตอบน้า</TextIsLoadingTestQuestion>
+                            <Spin size="large" />
+                        </IsLoadingSpinnerTestQuestion>
+                    ) : (
+                        ''
+                    )}
+                </div>
+            </ContainerTestQuestion>
         </Container>
     );
 }

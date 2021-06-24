@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
+import { TextFeature,ChartStyled } from '../../shared/styles/ResultPage.styled';
 
 interface Chartprop {
     options: any;
@@ -56,7 +57,8 @@ const Charts = () => {
     return (
         <>
         <div>
-            <Chart
+          <TextFeature>ลักษณะเด่นของคุณ</TextFeature>
+            <ChartStyled
             options = { chartValue.options } 
             series = { chartValue.series }
             type ="radar"
