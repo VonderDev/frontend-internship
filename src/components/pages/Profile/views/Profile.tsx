@@ -103,7 +103,7 @@ function Profile() {
                     <TextTopic2>
                         ผลลัพธ์ของคุณ
                         <AlignRight>
-                            <LinkMoreResult to="/profileresult">ดูเพิ่มเติม</LinkMoreResult>
+                            <LinkMoreResult  onClick={() => history.push("/profileresult") } >ดูเพิ่มเติม</LinkMoreResult>
                         </AlignRight>
                     </TextTopic2>
                     <AlignCenter>
@@ -131,7 +131,7 @@ function Profile() {
                     <TextTopic2>
                         กระทู้ของคุณ
                         <AlignRight>
-                            <LinkMoreResult to="/boardhistory">ดูเพิ่มเติม</LinkMoreResult>
+                            <LinkMoreResult onClick={() => history.push("/boardhistory") }>ดูเพิ่มเติม</LinkMoreResult>
                         </AlignRight>
                     </TextTopic2>
                     <AlignCenter>

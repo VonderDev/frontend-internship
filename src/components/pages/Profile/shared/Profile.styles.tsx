@@ -157,7 +157,7 @@ export const IconArrow = styled(RightOutlined)`
     transform: translateY(350%);
 `;
 
-export const LinkMoreResult = styled(Link)`
+export const LinkMoreResult = styled.div`
     font-size: 16px;
     color: var(--Blue-300);
 `;
