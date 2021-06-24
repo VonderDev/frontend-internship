@@ -130,7 +130,8 @@ export const ListItemBoard = styled(List.Item)`
     height: 130px;
     width: 550px;
     & .ant-list-item-action {
-        transform: translateY(-300%) translateX(25%);
+        transform: translateY(-300%);
+        padding-left: 135px;
     }
 `;
 

@@ -161,6 +161,7 @@ function TestQuestion() {
                                             onNextQuestion(item.value);
                                         }}
                                     >
+                                        {index}
                                         {item.label}
                                     </ButtonChoiceStlyed>
                                 );
