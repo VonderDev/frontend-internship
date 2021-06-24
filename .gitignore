@@ -23,6 +23,3 @@ yarn-debug.log*
 yarn-error.log*
 
 READMETEST.md
-/.circleci
-.firebaserc
-firebase.json
