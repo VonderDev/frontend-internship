@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BodyCard, DesText, Hname, Readmore, ResultCard, Resultpic, TextBox } from '../../shared/styles/ResultPage.styled';
+import { BodyCard, Boxpic, DesText, Hname, Readmore, ResultCard, Resultpic, TextBox, TextBoxDescript } from '../../shared/styles/ResultPage.styled';
 import { useHistory } from 'react-router-dom';
 import BoardAdvice from './BoardAdvice';
 import Container from 'components/Container/Container';
@@ -31,11 +31,15 @@ const ReadMore = () => {
                     {resultDes.skill}
                 </Hname>
                 <Resultpic>
-                    <h1>Character </h1>
-                </Resultpic>
+                                    {' '}
+                                    <TextBoxDescript>Character<br/>ตามผลลัพธ์</TextBoxDescript>
+                                </Resultpic>
                 <TextBox >
                     <DesText>{resultDes.description}</DesText>
-                </TextBox >        
+                </TextBox >   
+                <TextBox >
+                    <DesText>{resultDes.description_career}</DesText>
+                </TextBox >       
                 </BodyCard>
                 <BoardAdvice/>
             </Container>

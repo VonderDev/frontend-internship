@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Space, Button, Col, List, Input, Row } from 'antd';
-import { QuestionCircleTwoTone } from '@ant-design/icons';
 import gamePreviewImg from '../shared/images/gamepreview.png';
 
 export const SearchField = styled(Space)`
@@ -128,6 +127,12 @@ export const ListItemBoard = styled(List.Item)`
     margin-bottom: 10px;
     box-shadow: 0px 3px 6px #c7c7c7;
     border-radius: 20px;
+    height: 130px;
+    width: 550px;
+    & .ant-list-item-action {
+        transform: translateY(-300%);
+        padding-left: 135px;
+    }
 `;
 
 export const ButtonCreateBoard = styled(Button)`
@@ -141,4 +146,11 @@ export const ButtonCreateBoard = styled(Button)`
     right: 150px;
     width: 60px;
     height: 50px;
+`;
+
+export const ImgBoardList = styled.img`
+    transform: translateX(-15%) translateY(-6%);
+    border-radius: 15px;
+    width: 120px;
+    height: 130px;
 `;

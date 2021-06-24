@@ -17,6 +17,7 @@ import {
     ButtonStartGame,
     TextTopicOnImageTest,
     ButtonReadOverviewTest,
+    ImgBoardList,
 } from '../shared/homepage.styles';
 import { tagsData, IListData, IIconText } from '../shared/home.interface';
 import gamePreview from '../shared/images/gamepreview.png';
@@ -67,10 +68,10 @@ function Home() {
     return (
         <div>
             <Container header={{ children: 'Vonder Me', right: 'menu' }}>
-                <SearchField>
+                {/* <SearchField>
                     <InputSearch onClick={onSearch} placeholder="Search Form" prefix={<SearchOutlined />} />
                     <ButtonFilter icon={<ControlOutlined />} />
-                </SearchField>
+                </SearchField> */}
                 <ImageTestPage>
                     <TextTopicOnImageTest>เกมทดสอบพหุปัญญา</TextTopicOnImageTest>
                     <Col>
@@ -109,7 +110,7 @@ function Home() {
                             ]}
                         >
                             <div onClick={() => history.push('/board')}>
-                                <List.Item.Meta avatar={<img src={item.avatar} width={120} />} title={<a href={item.href}>{item.title}</a>} description={item.description} />
+                                <List.Item.Meta avatar={<ImgBoardList src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} description={item.description} />
                             </div>
                         </ListItemBoard>
                     )}

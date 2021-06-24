@@ -2,13 +2,13 @@ import styled from 'styled-components';
 import { Button } from 'antd';
 import TestOverview from '../images/TestOverview.png';
 
-export const Containers = styled.div`
+export const ContainerTestPage = styled.div`
     flex-direction: row;
     background-image: url(${TestOverview});
-    height: 100vh;
     width: 100%;
     background-position: center;
     background-size: cover;
+    height: 100vh;
 `;
 
 export const TextHeader = styled.div`
@@ -16,7 +16,6 @@ export const TextHeader = styled.div`
     font-size: 30px;
     font-weight: bolder;
     padding-top: 100%;
-    /* transform: translateY(150%); */
 `;
 
 export const BoxAnimation = styled.div`
@@ -40,7 +39,7 @@ export const TextDescription = styled.div`
     text-align: center;
     font-size: 18px;
     font-weight: bolder;
-    padding-top: 20px;
+    padding-top: 5px;
     padding-bottom: 20px;
 `;
 
@@ -57,6 +56,7 @@ export const ButtonLoading = styled(Button)`
     align-items: center;
     justify-content: center;
     font-size: 18px;
+    position: relative;
 `;
 
 export const IsLoadingSpinner = styled.div`
@@ -78,4 +78,8 @@ export const ButtonBack = styled(Button)`
     width: 40px;
     height: 40px;
     transform: translateX(20%) translateY(30%);
+`;
+
+export const ContainerButtonLoading = styled.div`
+    transform: translateY(10%);
 `;
