@@ -12,6 +12,8 @@ import Result from 'components/pages/Test/views/ResultPage/Result';
 import editProfile from 'components/pages/Profile/views/EditProfile';
 import ReadMore from 'components/pages/Test/views/ResultPage/Readmore';
 import TestOverview from 'components/pages/Test/views/TestStartPage/TestOverview';
+import ProfileResult from 'components/pages/Profile/views/ProfileResult';
+import BoardHistory from 'components/pages/Profile/views/BoardHistory';
 
 function Routing() {
     return (
@@ -32,6 +34,9 @@ function Routing() {
             <Route exact path="/editProfile" component={editProfile} />
             <Route exact path="/result" component={Result} />
             <Route exact path="/readmore" component={ReadMore} />
+            <Route exact path="/profileresult" component={ProfileResult} />
+            <Route exact path="/boardhistory" component={BoardHistory} />
+
         </Switch>
     );
 }

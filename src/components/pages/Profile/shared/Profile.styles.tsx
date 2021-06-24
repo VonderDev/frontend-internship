@@ -173,6 +173,17 @@ export const ResultCard = styled(Card)`
     }
 `;
 
+export const ResultCardHistory = styled(Card)`
+    box-shadow: 0px 3px 6px #c7c7c7;
+    margin-top: 10px;
+    height: 130px;
+    width: 343px;
+    border-radius: 10px;
+    & .ant-card-body {
+        padding: 5px;
+    }
+`;
+
 export const ListProfile = styled(List)`
     font-weight: bolder;
 `;

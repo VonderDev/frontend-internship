@@ -7,7 +7,14 @@ export interface IProfile {
     pic: string;
 }
 
-export interface IListDataProfile {
+export interface IListDataBoardHistory {
+    href: string;
+    title: string;
+    avatar: string;
+    description: string;
+}
+
+export interface IListDataResult {
     href: string;
     title: string;
     avatar: string;

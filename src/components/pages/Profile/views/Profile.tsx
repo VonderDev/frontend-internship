@@ -2,7 +2,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { API_Profile_Data } from '../apis/profile.api';
 import { Form, List, Col, Row } from 'antd';
 import { useEffect } from 'react';
-import { IIconTextProfile, IListDataProfile, IProfile } from '../shared/Profile.interface';
+import { IIconTextProfile, IListDataBoardHistory , IProfile } from '../shared/Profile.interface';
 import { CalendarOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
 import { useState } from 'react';
 import {
@@ -45,7 +45,7 @@ function Profile() {
         getStatisticData();
     }, []);
 
-    const listData: Array<IListDataProfile> = [];
+    const listData: Array<IListDataBoardHistory> = [];
     for (let i = 0; i < 6; i++) {
         listData.push({
             href: '/board',
@@ -103,7 +103,7 @@ function Profile() {
                     <TextTopic2>
                         ผลลัพธ์ของคุณ
                         <AlignRight>
-                            <LinkMoreResult to="/result">ดูเพิ่มเติม</LinkMoreResult>
+                            <LinkMoreResult to="/profileresult">ดูเพิ่มเติม</LinkMoreResult>
                         </AlignRight>
                     </TextTopic2>
                     <AlignCenter>
@@ -131,7 +131,7 @@ function Profile() {
                     <TextTopic2>
                         กระทู้ของคุณ
                         <AlignRight>
-                            <LinkMoreResult to="/board">ดูเพิ่มเติม</LinkMoreResult>
+                            <LinkMoreResult to="/boardhistory">ดูเพิ่มเติม</LinkMoreResult>
                         </AlignRight>
                     </TextTopic2>
                     <AlignCenter>
