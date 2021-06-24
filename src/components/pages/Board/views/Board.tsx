@@ -1,10 +1,11 @@
+import Container from 'components/Container/Container';
 import React from 'react'
 
 function Board() {
     return (
-      <div className="App">
-        <h1>Board Page</h1>
-      </div>
+      <Container header={null}>
+      <h1>Board Page</h1>
+      </Container>
     );
   }
 

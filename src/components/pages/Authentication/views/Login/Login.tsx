@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
 import { ILogin } from '../../shared/login.interface';
-import { ButtonColor, FontTextHeader, BaseInput, LogoPage, MoveCenter, MoveBottom } from 'components/pages/Authentication/shared/style';
+import { ButtonColor, FontTextHeader, BaseInput, LogoPage, MoveCenter, MoveBottom, Pivacy } from 'components/pages/Authentication/shared/style';
 import Container from 'components/Container/Container';
 
 import logo from '../../images/logo.png';
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
+
 
 function Login() {
   const history = useHistory();
@@ -45,78 +46,29 @@ function Login() {
   }
 
   const showDrawer = () => {
-    // this.setState({
-    //   visible: true,
-    // })
     setVisible(true);
   };
 
   const onClose = () => {
-    // this.setState({
-    //   visible: false,
-    // });
     setVisible(false);
   };
 
-  // const onChange = e => {
-  //   // this.setState({
-  //   //     placement: e.target.value
-  //   // });
-  //   setPlacement(e.target.value);
-  // };
-
   return (
       <Container header={{left: 'back' , right: 'menu'}}>
+      <Pivacy>
       <MoveCenter>
-        <LogoPage src={logo} preview={false} />
-        <Space align="start">
-          <FontTextHeader>เข้าสู่ระบบ</FontTextHeader>
-        </Space>
-        <Form initialValues={{ remember: true }} onFinish={onFinish}>
-          <Form.Item
-            name="email"
-            hasFeedback
-            rules={[
-              {
-                required: true,
-                message: 'กรุณาใส่อีเมล!',
-              },
-            ]}
-          >
-            <BaseInput type="email" placeholder="อีเมล" />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            hasFeedback
-            rules={[
-              {
-                required: true,
-                message: 'กรุณาใส่รหัสผ่าน!',
-              },
-            ]}
-          >
-            <BaseInput type="password" placeholder="รหัสผ่าน" />
-          </Form.Item>
-
-          <Form.Item>
-            <ButtonColor onClick={checkdatajson} htmlType="submit">
-              เข้าสู่ระบบ
-            </ButtonColor>
-          </Form.Item>
-
-          <Form.Item>
-            <MoveBottom>
-              ยังไม่มีบัญชีใช่ไหม? <a onClick={showDrawer}>สร้างบัญชีกันเถอะ!</a>
-            </MoveBottom>
-
-            <Drawer title="Privacy Policy"
+        <Drawer 
+              title="Privacy Policy"
               placement="bottom"
               closable={false}
               onClose={onClose}
               visible={visible}
               key={placement}
-              height="top"
+              getContainer={false}
+              height= {500}
+              style={{ position: 'absolute'}}
             >
+              <div>
               <p>นโยบายความเป็นส่วนตัว</p>
               <p>
                 บริษัท วอนเดอร์ (ไทยแลนด์) จำกัด ให้ความสำคัญกับการคุ้มครองข้อมูลส่วนบุคคลของคุณ โดยนโยบายความเป็นส่วนตัวฉบับนี้ได้อธิบายแนวปฏิบัติเกี่ยวกับการเก็บรวบรวม ใช้ หรือเปิดเผยข้อมูลส่วนบุคคล รวมถึงสิทธิต่าง ๆ ของเจ้าของข้อมูลส่วนบุคคล ตามกฎหมายคุ้มครองข้อมูลส่วนบุคคล
@@ -303,10 +255,53 @@ function Login() {
               <p>นโยบายความเป็นส่วนตัวของเว็บไซต์อื่น</p>
 
               <p>นโยบายความเป็นส่วนตัวฉบับนี้ใช้สำหรับการบริการ และการใช้งานบนเว็บไซต์ของเราเท่านั้น หากคุณเข้าชมเว็บไซต์อื่นแม้จะผ่านช่องทางเว็บไซต์ของเรา การคุ้มครองข้อมูลส่วนบุคคลต่าง ๆ จะเป็นไปตามนโยบายความเป็นส่วนตัวของเว็บไซต์นั้น ซึ่งเราไม่มีส่วนเกี่ยวข้องด้วย</p>
+              </div>
             </Drawer>
+       
+        <LogoPage src={logo} preview={false} />
+        <Space align="start">
+          <FontTextHeader>เข้าสู่ระบบ</FontTextHeader>
+        </Space>
+        <Form initialValues={{ remember: true }} onFinish={onFinish}>
+          <Form.Item
+            name="email"
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: 'กรุณาใส่อีเมล!',
+              },
+            ]}
+          >
+            <BaseInput type="email" placeholder="อีเมล" />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: 'กรุณาใส่รหัสผ่าน!',
+              },
+            ]}
+          >
+            <BaseInput type="password" placeholder="รหัสผ่าน" />
+          </Form.Item>
+
+          <Form.Item>
+            <ButtonColor onClick={checkdatajson} htmlType="submit">
+              เข้าสู่ระบบ
+            </ButtonColor>
+          </Form.Item>
+
+          <Form.Item>
+            <MoveBottom>
+              ยังไม่มีบัญชีใช่ไหม? <a onClick={showDrawer}>สร้างบัญชีกันเถอะ!</a>
+            </MoveBottom>
           </Form.Item>
         </Form>
       </MoveCenter>
+      </Pivacy>
     </Container>
   );
     

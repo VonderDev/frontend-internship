@@ -51,3 +51,12 @@ export const MoveBottom = styled.div`
     position: absolute;
     /* align-items: center; */
 `;
+export const Pivacy = styled.div`
+  position: relative;
+  height: 100%;
+  padding: 48px;
+  overflow: hidden;
+  text-align: center;
+  border: 1px solid #ebedf0;
+  border-radius: 2px;
+`;
