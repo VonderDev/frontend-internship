@@ -46,6 +46,7 @@ export const TextFeature = styled.div`
 
 export const ChartStyled = styled(Chart)`
     transform: translateY(-20%);
+    width: 580px;
 `;
 
 export const ButtonHome = styled(Button)`
