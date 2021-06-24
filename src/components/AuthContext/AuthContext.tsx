@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, useContext, useCallback } from "react";
-import { Router } from "react-router-dom";
+import { Redirect, Router, useHistory } from "react-router-dom";
 import authMock from './Authmock.json'
 import { authData } from "./User.type";
 import axios from 'axios'
@@ -12,12 +12,15 @@ const data = JSON.stringify(authMock)
   
     const AuthContext = createContext<any>(null);
   
-  const AuthProvider =  (({children}: IAuthProps) => {
-   
+    const AuthProvider =  (({children}: IAuthProps) => {
+    const history = useHistory();
     const [loginUser, setLoginUser] = useState<boolean>(false)
- 
-    const login =  useCallback( () => 
+    const [user ,setUser] = useState<boolean>(false)
+    
+    const login =  useCallback( ({email, password}: authData) => 
     {
+    
+      email && password ? setUser(true) : setUser(false) ;
     //     try {
     //         await axios.get('./Authmock.json')
     //         .then(respons=>{
@@ -28,25 +31,31 @@ const data = JSON.stringify(authMock)
     // }catch (err) {
     //     return console.log('Error connecting...')
     // }
-        // const currentUser = authMock.find((user: authData) => user.email === values.email) || '';
+      const accessLogin = password === authMock.password && email === authMock.email
 
-        // if (values.password === currentUser?.password) {
-        //     history.push('/home');
-        // } else {
-        //     alert('ไม่ผู้ใช้นี้ อีเมลหรือรหัสผ่านไม่ถูกต้อง')
-        //     console.log('Failed login');
-        // }
-            localStorage.setItem('token', data);
-            const tokenKey = localStorage.getItem('token') || '';
+        if (user) {
+          if(accessLogin){
+            localStorage.setItem('accesstoken', data);
+            const tokenKey = localStorage.getItem('accesstoken') || '';
             tokenKey ? 
-            setLoginUser(true) 
-            : setLoginUser(false)
-            return ;
-        },[loginUser],)
+            setLoginUser(true)
+            : setLoginUser(false);
+          }else {
+            alert('ไม่ผู้ใช้นี้ อีเมลหรือรหัสผ่านไม่ถูกต้อง')
+            console.log('Failed login');
+          } 
+        } else {
+          return user;
+        }
+        console.log('props: ',{email, password});
+        console.log('access:' , accessLogin ,'user?:',user)
+        return user;
+        },[loginUser , user],)
 
     const logout = () => {
         setLoginUser(false)
-        localStorage.removeItem('token')
+        setUser(false)
+        localStorage.removeItem('accesstoken')
     }
 
     useEffect(() => {

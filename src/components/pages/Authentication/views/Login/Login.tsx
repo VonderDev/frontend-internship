@@ -1,34 +1,29 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Form, Space, Drawer } from 'antd';
-import { useHistory } from 'react-router-dom';
-import { ILogin } from '../../shared/login.interface';
+import { useHistory ,Redirect} from 'react-router-dom';
 import { ButtonColor, FontTextHeader, BaseInput, LogoPage, MoveCenter, MoveBottom, Pivacy } from 'components/pages/Authentication/shared/style';
 import Container from 'components/Container/Container';
 import logo from '../../images/logo.png';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
+import { authData } from 'components/AuthContext/User.type';
 
 
 function Login() {
-  const history = useHistory();
+
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState<boolean>(false);
   const [placement, setPlacement] = useState<string>('bottom');
+  const { loginUser, login } = useAuthContext();
 
-  const onFinish = (values: ILogin) => {
-    const mockUser = require('../../mocks/user.json');
-    const currentUser = mockUser.find((user: ILogin) => user.email === values.email);
+  const onFinish = useCallback((values: authData) => {
+    const currentUser = values.email && values.password ;
+    setEmail(values.email)
+    setPassword(values.password)
+    currentUser? console.log('Input Success:', values) : console.log('No input yet?');
 
-    mockUser.find((user: ILogin) => console.log(user));
-    if (values.password === currentUser?.password) {
-      history.push('/');
-    } else {
-      console.log('Failed login');
-    }
-    console.log('Success:', values);
-  };
-
+  },[email,password]);
+  
   const showDrawer = () => {
     setVisible(true);
   };
@@ -36,7 +31,8 @@ function Login() {
   const onClose = () => {
     setVisible(false);
   };
-  const { loginUser, login } = useAuthContext();
+
+  if (loginUser){return  <Redirect to='/'/>}
   return (
       <Container header={{left: 'back' , right: 'menu'}}>
       <Pivacy>
@@ -273,7 +269,7 @@ function Login() {
           </Form.Item>
 
           <Form.Item>
-            <ButtonColor onClick={login} htmlType="submit">
+            <ButtonColor onClick={login({email,password}) } htmlType="submit">
               เข้าสู่ระบบ
             </ButtonColor>
           </Form.Item>
@@ -288,6 +284,7 @@ function Login() {
       </Pivacy>
     </Container>
   );
+        
     
 }
 
