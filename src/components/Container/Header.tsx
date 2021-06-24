@@ -55,6 +55,7 @@ const Header = ({children, right, left}: HeaderProps) => {
                 <TextHeader>
                     {children}
                 </TextHeader>
+
             </Col>
             <Col span={4}>
                 <RightDiv >

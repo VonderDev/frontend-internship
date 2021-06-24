@@ -8,7 +8,7 @@ import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { authData } from 'components/AuthContext/User.type';
 
 
-function Login() {
+const Login = () => {
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -16,14 +16,6 @@ function Login() {
   const [placement, setPlacement] = useState<string>('bottom');
   const { loginUser, login } = useAuthContext();
 
-  const onFinish = useCallback((values: authData) => {
-    const currentUser = values.email && values.password ;
-    setEmail(values.email)
-    setPassword(values.password)
-    currentUser? console.log('Input Success:', values) : console.log('No input yet?');
-
-  },[email,password]);
-  
   const showDrawer = () => {
     setVisible(true);
   };
@@ -242,7 +234,7 @@ function Login() {
         <Space align="start">
           <FontTextHeader>เข้าสู่ระบบ</FontTextHeader>
         </Space>
-        <Form initialValues={{ remember: true }} onFinish={onFinish}>
+        <Form initialValues={{ remember: true }}>
           <Form.Item
             name="email"
             hasFeedback
@@ -253,7 +245,7 @@ function Login() {
               },
             ]}
           >
-            <BaseInput type="email" placeholder="อีเมล" />
+            <BaseInput type="email" placeholder="อีเมล" onChange = { ({target: {value}}) =>  {setEmail(value)} }/>
           </Form.Item>
           <Form.Item
             name="password"
@@ -265,11 +257,11 @@ function Login() {
               },
             ]}
           >
-            <BaseInput type="password" placeholder="รหัสผ่าน" />
+            <BaseInput type="password" placeholder="รหัสผ่าน" onChange = { ({target: {value}}) =>  {setPassword(value)} }/>
           </Form.Item>
 
           <Form.Item>
-            <ButtonColor onClick={login({email,password}) } htmlType="submit">
+            <ButtonColor onClick={()=> login({email,password}) }>
               เข้าสู่ระบบ
             </ButtonColor>
           </Form.Item>

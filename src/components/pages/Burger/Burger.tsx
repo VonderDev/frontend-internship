@@ -123,7 +123,7 @@ const Burger = () => {
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
 
-    const { loginUser, logout } = useAuthContext()
+    const { loginUser, logout,user } = useAuthContext()
     return (
         <>
        
@@ -134,7 +134,8 @@ const Burger = () => {
                 <Ul onClick={showSidebar}>
                     <Avataruser>
                         <Avatar size={75} icon={<UserOutlined />} />
-                        <AvatarName> Guest #000</AvatarName>
+                        { loginUser ? (<AvatarName>{ user.username }</AvatarName>) : (<AvatarName> Guest #000  </AvatarName> )}
+                        
                         {loginUser ? null : (
                             <BarBtn to="/login">
                             <LoginBtn type="primary">
