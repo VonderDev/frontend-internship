@@ -15,7 +15,7 @@ export const TextHeader = styled.div`
     text-align: center;
     font-size: 30px;
     font-weight: bolder;
-    padding-top: 85%;
+    padding-top: 100%;
 `;
 
 export const BoxAnimation = styled.div`
