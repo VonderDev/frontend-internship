@@ -12,6 +12,7 @@ import Result from 'components/pages/Test/views/ResultPage/Result';
 import editProfile from 'components/pages/Profile/views/EditProfile';
 import ReadMore from 'components/pages/Test/views/ResultPage/Readmore';
 import TestOverview from 'components/pages/Test/views/TestStartPage/TestOverview';
+import TestStory from 'components/pages/Test/views/TestStartPage/TestStory';
 
 function Routing() {
     return (
@@ -24,6 +25,7 @@ function Routing() {
             <Route exact path="/testresult" component={TestResult} />
             <Route exact path="/test" component={Test} />
             <Route exact path="/testoverview" component={TestOverview} />
+            <Route exact path="/teststory" component={TestStory} />
             <Route exact path="/testquestion">
                 <TestProvider>
                     <TestQuestion />

@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react';
-import { BodyCard, Boxpic, DesBox, DesText, Hname, Readmore, ResultCard } from '../../shared/styles/ResultPage.styled';
+import { BodyCard, Boxpic, DesBox, DesText, Hname, Readmore, ResultCard, TextBoxDescript } from '../../shared/styles/ResultPage.styled';
 import { useHistory } from 'react-router-dom';
 
 const MockScore = require('../../mocks/result.json');
 const chartScore = Object.keys(MockScore).map((key) => MockScore[key].score);
 const Max = Math.max(...chartScore);
-
-// const Max = MockScore.reduce((prev: { score: number; }, current: { score: number; }) =>
-//     prev.score > current.score ? prev : current
-//   );
 
 const Namemax = MockScore.filter((data: { score: number }) => data.score === Max);
 
@@ -21,17 +17,16 @@ const Descrip = () => {
     }, []);
     return (
         <>
-            <div>
                 {Namemax.map((item: any, index: any) => {
                     return (
                         <ResultCard key={index} onClick={() => history.push({ pathname: "/readmore" ,search: `categoryID=${item.categoryID}` })}>
                             <BodyCard>
                                 <Hname>
-                                    {item.skill} : {item.score} คะแนน
+                                    {item.skill} : <br/>{item.score} คะแนน
                                 </Hname>
                                 <Boxpic>
                                     {' '}
-                                    <h1>Character </h1>
+                                    <TextBoxDescript>Character<br/>ตามผลลัพธ์</TextBoxDescript>
                                 </Boxpic>
                                 <DesBox>
                                     <DesText>{item.description}</DesText>
@@ -43,7 +38,6 @@ const Descrip = () => {
                         </ResultCard>
                     );
                 })}
-            </div>
         </>
     );
 };
