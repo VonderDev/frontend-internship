@@ -1,8 +1,8 @@
 import { Link, useHistory } from 'react-router-dom';
 import { API_Profile_Data } from '../apis/profile.api';
-import { Form, List } from 'antd';
+import { Form, List, Col, Row } from 'antd';
 import { useEffect } from 'react';
-import { IIconTextProfile, IListDataProfile, IProfile } from '../shared/Profile.interface';
+import { IIconTextProfile, IListDataBoardHistory , IProfile } from '../shared/Profile.interface';
 import { CalendarOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
 import { useState } from 'react';
 import {
@@ -10,7 +10,8 @@ import {
     AlignCenter,
     AlignRight,
     ButtonSubmit,
-    TextUserInfo,
+    TextUserInfo1,
+    TextUserInfo2,
     TextUsername,
     ResultCard,
     UserImage,
@@ -19,12 +20,11 @@ import {
     ResultImage,
     CardText,
     IconArrow,
-    LinkResult,
     ListProfile,
     ProfileListItem,
     HistoryImage,
     LinkMoreResult,
-    HistoryText
+    HistoryText,
 } from '../shared/Profile.styles';
 import Container from 'components/Container/Container';
 import React from 'react';
@@ -45,12 +45,12 @@ function Profile() {
         getStatisticData();
     }, []);
 
-    const listData: Array<IListDataProfile> = [];
+    const listData: Array<IListDataBoardHistory> = [];
     for (let i = 0; i < 6; i++) {
         listData.push({
             href: '/board',
-            title: `แนะนำหนังสือสำหรับคนอยากไปสายวิศวะ ${i}`,
-            avatar: 'https://scontent.fbkk7-3.fna.fbcdn.net/v/t1.6435-9/59064493_437047506858059_6394542383404417024_n.png?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=hlqBNJGZNnMAX83rdoy&_nc_ht=scontent.fbkk7-3.fna&oh=f8cc0917dbba6e533ed8c5ac4f69af53&oe=60D70B13',
+            title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ${i}`,
+            avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg',
             description: 'บทความ',
         });
     }
@@ -61,6 +61,7 @@ function Profile() {
             {text}
         </div>
     );
+
     return (
         <div>
             <Container header={{ left: 'back', children: 'ข้อมูลส่วนตัว', right: 'menu' }}>
@@ -69,15 +70,29 @@ function Profile() {
                         <UserImage src={cred.pic} />
                         <TextUsername>{cred.username}</TextUsername>
                     </AlignCenter>
-                    <TextUserInfo>
-                        ชื่อ-นามสกุล :
-                        <AlignRight>
-                            {cred.name} {cred.surname}
-                        </AlignRight>
-                    </TextUserInfo>
-                    <TextUserInfo>
-                        อีเมล : <AlignRight>{cred.email}</AlignRight>
-                    </TextUserInfo>
+                    <Row>
+                        <Col span={8}>
+                            <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
+                        </Col>
+                        <Col span={16}>
+                            <AlignRight>
+                                <TextUserInfo2>
+                                    {cred.name} {cred.surname}
+                                </TextUserInfo2>
+                            </AlignRight>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={8}>
+                            <TextUserInfo1>อีเมล :</TextUserInfo1>
+                        </Col>
+                        <Col span={16}>
+                            <AlignRight>
+                                <TextUserInfo2>{cred.email}</TextUserInfo2>
+                            </AlignRight>
+                        </Col>
+                    </Row>
+
                     <Link to="/editProfile">
                         <Form.Item>
                             <AlignCenter>
@@ -85,23 +100,40 @@ function Profile() {
                             </AlignCenter>
                         </Form.Item>
                     </Link>
-                    <TextTopic2>ผลลัพธ์ของคุณ <AlignRight><LinkMoreResult to="/">ดูเพิ่มเติม</LinkMoreResult></AlignRight></TextTopic2>
+                    <TextTopic2>
+                        ผลลัพธ์ของคุณ
+                        <AlignRight>
+                            <LinkMoreResult to="/profileresult">ดูเพิ่มเติม</LinkMoreResult>
+                        </AlignRight>
+                    </TextTopic2>
                     <AlignCenter>
-                        <LinkResult to="/result">
+                        <Link to="/result">
                             <ResultCard>
-                                <AlignLeft>
-                                    <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
-                                </AlignLeft>
-                                <CardText>
-                                    ลักษณะเด่นของคุณ
-                                    <br />
-                                    วันที่ 15 มิ.ย. 2564
-                                </CardText>
-                                <IconArrow />
+                                <Row>
+                                    <Col span={8}>
+                                        <AlignLeft>
+                                            <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
+                                        </AlignLeft>
+                                    </Col>
+                                    <Col span={14}>
+                                        <CardText>
+                                            <Row>ลักษณะเด่นของคุณ</Row>
+                                            <Row>วันที่ 15 มิ.ย. 2564</Row>
+                                        </CardText>
+                                    </Col>
+                                    <Col span={2}>
+                                            <IconArrow />
+                                    </Col>
+                                </Row>
                             </ResultCard>
-                        </LinkResult>
+                        </Link>
                     </AlignCenter>
-                    <TextTopic2>กระทู้ของคุณ <AlignRight><LinkMoreResult to="/">ดูเพิ่มเติม</LinkMoreResult></AlignRight></TextTopic2>
+                    <TextTopic2>
+                        กระทู้ของคุณ
+                        <AlignRight>
+                            <LinkMoreResult to="/boardhistory">ดูเพิ่มเติม</LinkMoreResult>
+                        </AlignRight>
+                    </TextTopic2>
                     <AlignCenter>
                         <ListProfile
                             itemLayout="vertical"
@@ -117,14 +149,14 @@ function Profile() {
                                 <ProfileListItem
                                     key={item.title}
                                     actions={[
-                                    <IconText icon={FormOutlined} text=" Lookmaii" key="list-vertical-star-o" />,
-                                    <IconText icon={CalendarOutlined} text=" 11 มิถุนายน 2564" key="list-vertical-like-o" />,
-                                    <IconText icon={HeartFilled} text=" 12" key="list-vertical-message" />,
-                                ]}
+                                        <IconText icon={FormOutlined} text=" Lookmaii" key="list-vertical-star-o" />,
+                                        <IconText icon={CalendarOutlined} text=" 11 มิถุนายน 2564" key="list-vertical-like-o" />,
+                                        <IconText icon={HeartFilled} text=" 12" key="list-vertical-message" />,
+                                    ]}
                                 >
-                                    <div onClick={() => history.push('/board')}>
-                                        <List.Item.Meta avatar={<HistoryImage src={item.avatar}/>} title={<a href={item.href}>{item.title}</a>} description={item.description} />
-                                    </div>
+                                    <HistoryText onClick={() => history.push('/board')}>
+                                        <List.Item.Meta avatar={<HistoryImage src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} description={item.description}/>
+                                    </HistoryText>
                                 </ProfileListItem>
                             )}
                         />
