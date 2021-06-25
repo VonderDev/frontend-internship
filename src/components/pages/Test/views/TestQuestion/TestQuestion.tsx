@@ -16,13 +16,14 @@ import { Col, Modal, Spin } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import React from 'react';
 import Container from 'components/Container/Container';
+import useSWR from 'swr';
 
 function TestQuestion() {
     //
     // ─── Set variable ───────────────────────────────────────────────────────────────────
     //
     const history = useHistory();
-    const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ categoryID: 0, question: '', questionIndex: 0 });
+    const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ question_category: '', question_body: '', question_no: 0 });
     const [currentQuestion, setCurrentQuestion] = useState<number>(0);
     const [questionList, setQuestionList] = useState<Array<IQuestion> | null>(null);
     const buttonList = [
@@ -58,7 +59,7 @@ function TestQuestion() {
     function onNextQuestion(value: number) {
         console.log('[Debug]: score == ' + value);
         let newTestScore = testScore;
-        newTestScore.push({ categoryID: currentQuestionDetail.categoryID, score: value });
+        newTestScore.push({ question_category: currentQuestionDetail.question_category, score: value });
         setTestScore(newTestScore);
 
         if (!questionList) return;
@@ -120,6 +121,7 @@ function TestQuestion() {
         console.log('Clicked cancel button');
         setVisible(false);
     };
+
     return (
         <Container header={null}>
             <ContainerTestQuestion>
@@ -147,7 +149,7 @@ function TestQuestion() {
                 >
                     ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
                 </Modal>
-                <TextQuestion>{currentQuestionDetail.question}</TextQuestion>
+                <TextQuestion>{currentQuestionDetail.question_body}</TextQuestion>
                 <div>
                     {isLoading ? (
                         ''

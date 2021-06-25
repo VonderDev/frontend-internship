@@ -1,16 +1,24 @@
-import mockTestData from '../mocks/question.json'
-import { IQuestion, IUserAns } from '../shared/interface/Test.interfaces'
-import axios from 'axios'
-
+import mockTestData from '../mocks/question.json';
+import { IQuestion, IUserAns } from '../shared/interface/Test.interfaces';
+import axios from 'axios';
+import useSWR from 'swr';
 
 export async function API_GetTestData() {
-    console.log("[Mock Data] :",mockTestData)
-   return mockTestData as unknown as Array<IQuestion>
+    //    return mockTestData as unknown as Array<IQuestion>
+    return await axios
+        .get('http://localhost:5000/questions')
+        .then((response) => {
+            console.log('[Function API_GetTestData] :', response.data);
+            return response.data;
+        })
+        .catch((err) => {
+            console.error(err);
+        });
 }
 
-export async function API_PostTestResult(data : any) {
-    console.log("[Result Data] :",data)
-    return mockTestData as unknown as Array<IQuestion>
+export async function API_PostTestResult(data: any) {
+    console.log('[Result Data] :', data);
+    return mockTestData as unknown as Array<IQuestion>;
     //
     // ─── Use axios.post when backend finish ───────────────────
     //
@@ -18,3 +26,15 @@ export async function API_PostTestResult(data : any) {
     //     return res.data
     // })
 }
+
+axios({
+    method: 'get',
+    url: 'http://localhost:5000/questions',
+})
+    .then((response) => {
+        console.log('[Question detail from backend]: ', response.data);
+        // do something about response
+    })
+    .catch((err) => {
+        console.error(err);
+    });

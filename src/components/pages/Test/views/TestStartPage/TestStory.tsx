@@ -9,7 +9,7 @@ import { ButtonStartOver, TextQuestionIndex } from '../../shared/styles/TestQues
 
 function TestStory() {
     const history = useHistory();
-    const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ categoryID: 0, question: '', questionIndex: 0 });
+    const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ question_category: '', question_body: '', question_no: 0 });
     const [currentQuestion, setCurrentQuestion] = useState<number>(0);
     const [questionList, setQuestionList] = useState<Array<IQuestion> | null>(null);
 
