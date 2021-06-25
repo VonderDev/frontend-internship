@@ -69,7 +69,7 @@ workflows:
   version: 2
   dev:
     jobs:
-      - build-deploy-test:
+      - build-deploy-dev:
           filters:
             branches:
               only: develop
