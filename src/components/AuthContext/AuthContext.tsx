@@ -10,9 +10,10 @@ import axios from 'axios'
 interface datauser {
       name: string | null
   }
+
+
   
     const AuthContext = createContext<any>(null);
-
 
     const AuthProvider =  (({children}: IAuthProps) => {
     const [loginUser, setLoginUser] = useState<boolean>(false)
@@ -21,6 +22,20 @@ interface datauser {
     
     const login =  useCallback( ({email, password}: authData) => 
     {
+      const getToken = async () => {
+        return await axios.post('', {
+          method: 'post',
+          url: 'http://localhost:5000/login',
+          headers: { },
+          data : JSON.stringify({ email , password })
+        }).then((response)=>{
+          return response.data
+        }).catch(err => {
+          console.error(err)
+        })
+      }
+      const response = getToken();
+
     if (email &&  password){
 
       const accessLogin = password === authMock.password && email === authMock.email
@@ -29,8 +44,8 @@ interface datauser {
           if(accessLogin){
             const data = JSON.stringify(authMock)
             setUser(JSON.parse(data))
-            localStorage.setItem('accesstoken', "00215484");
-            const tokenKey = localStorage.getItem('accesstoken') || '';
+            localStorage.setItem('token', "00215484");
+            const tokenKey = localStorage.getItem('token') || '';
             tokenKey ? setLoginUser(true) : setLoginUser(false);
             
           }else {
@@ -49,13 +64,13 @@ interface datauser {
     const logout = () => {
         setLoginUser(false)
         setUser({name: ''})
-        localStorage.removeItem('accesstoken')
+        localStorage.removeItem('token')
     }
     // const data = JSON.stringify(authMock)
     // setUser(JSON.parse(data))
 
     useEffect(() => {
-      const tokenKey = localStorage.getItem('accesstoken');
+      const tokenKey = localStorage.getItem('token');
       if (!tokenKey) {
         gotoLogin
       }
