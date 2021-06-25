@@ -43,7 +43,7 @@ commands:
           command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN" --non-interactive --only hosting:<< parameters.env >>
 
 jobs:
-  build-deploy-test:
+  build-deploy-dev:
     executor: node14
     steps:
       - build
@@ -67,7 +67,7 @@ jobs:
 
 workflows:
   version: 2
-  test:
+  dev:
     jobs:
       - build-deploy-test:
           filters:
