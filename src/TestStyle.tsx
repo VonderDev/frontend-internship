@@ -1,4 +1,4 @@
-import { Box, ButtonLarge, ButtonMeduim, ButtonSmall } from "shared/style/theme/component";
+import { Box, ButtonStyle } from "shared/style/theme/component";
 import Typography from "shared/style/theme/Typograhy"
 
 const TestStyle = () => {
@@ -11,10 +11,16 @@ const TestStyle = () => {
         <Typography.Description>Des สวัสดี</Typography.Description>
         <Typography.Info>Info สวัสดี</Typography.Info>
         <Typography.Link href='/'>Link สวัสดี</Typography.Link>
-        <ButtonLarge>Test</ButtonLarge>
-        <ButtonLarge Size="60" Background="var(--White)" Color="var(--Blue-400)">Test Size 60</ButtonLarge>
-        <ButtonMeduim Size="60" >Medium  Size 60 </ButtonMeduim>
-        <ButtonSmall Size="20">Small</ButtonSmall>
+        
+        <ButtonStyle typebutton="Large">Large</ButtonStyle>
+        <ButtonStyle
+         typebutton="Medium"
+         sizebutton="60" 
+         backgroundbutton="var(--White)" 
+         colorbutton="var(--Blue-400)">
+             Medium
+             </ButtonStyle>
+        <ButtonStyle typebutton="Small"  sizebutton="20">Small</ButtonStyle>
         </Box>
         </>
     );
