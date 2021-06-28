@@ -6,44 +6,45 @@ import {
     ContainerProfile,
     AlignCenter,
     ButtonSave,
-    FormInput,
-    UserImage,
-    TextTopicEditProfile,
-    AlignRight,
     ConfirmModal,
     ButtonLeaveModal,
     ButtonCancleModal,
     TextModal,
     TextUserInfo2,
 } from '../shared/Profile.styles';
+import { ProfileInput } from './ProfileInput';
 import { LeftOutlined } from '@ant-design/icons';
 import Container from 'components/Container/Container';
-import { Button } from 'antd';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-function EditProfile() {
-    const [cred, setCred] = useState<IProfile>({ name: '', surname: '', email: '', result: '', pic: '', username: '' });
+const EditProfile = () => {
+    const { ListInput } = ProfileInput();
+    // const [cred, setCred] = useState<IProfile>({ name: '', surname: '', email: '', result: '', pic: '', username: '' });
+    // const [username, setUsername] = useState<string>('');
+    // const [name, setName] = useState<string>('');
+    // const [surname, setSurname] = useState<string>('');
+    // const [email, setEmail] = useState<string>('');
 
-    const handleOnChange = (name: string, value: string) => {
-        setCred((prev) => ({ ...prev, [name]: value }));
-        console.log(cred.username);
+    // const handleOnChange = (name: string, value: string) => {
+    //     setCred((prev) => ({ ...prev, [name]: value }));
+
+    // };
+
+    const handleOnClick = () => {
+        console.log();
     };
 
-    const editedUser = () => {
-        console.log(cred);
-    };
-
-    async function getStatisticData() {
-        const response = await API_Profile_Data();
-        if (response) {
-            setCred((prevState) => ({ ...prevState, name: response.name, surname: response.surname, email: response.email, result: response.result, pic: response.pic, username: response.username }));
-        } else {
-            console.log('error');
-        }
-    }
-    useEffect(() => {
-        getStatisticData();
-    }, []);
+    // async function getStatisticData() {
+    //     const response = await API_Profile_Data();
+    //     if (response) {
+    //         setCred((prevState) => ({ ...prevState, name: response.name, surname: response.surname, email: response.email, result: response.result, pic: response.pic, username: response.username }));
+    //     } else {
+    //         console.log('error');
+    //     }
+    // }
+    // useEffect(() => {
+    //     getStatisticData();
+    // }, []);
 
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -74,12 +75,12 @@ function EditProfile() {
                     </BackHeader>
                 ),
                 children: 'แก้ไขข้อมูลส่วนตัว',
-                right: <ButtonSave onClick={editedUser}>บันทึก</ButtonSave>,
+                right: <ButtonSave onClick={handleOnClick}>บันทึก</ButtonSave>,
             }}
         >
-            <AlignRight>
-                <ButtonSave onClick={editedUser}>บันทึก</ButtonSave>
-            </AlignRight>
+            {/* <AlignRight>
+                <ButtonSave onClick={handleOnClick}>บันทึก</ButtonSave>
+            </AlignRight> */}
             <AlignCenter key={1}>
                 <ConfirmModal
                     visible={isModalVisible}
@@ -92,53 +93,10 @@ function EditProfile() {
                 </ConfirmModal>
             </AlignCenter>
             <ContainerProfile>
-                <AlignCenter>
-                    <UserImage src={cred.pic} />
-                </AlignCenter>
-                <TextTopicEditProfile>ชื่อผู้ใช้</TextTopicEditProfile>
-                <AlignCenter>
-                    <FormInput
-                        name="username"
-                        value={cred.username}
-                        onChange={({ target: { value, name } }) => {
-                            handleOnChange(name, value);
-                        }}
-                    />
-                </AlignCenter>
-                <TextTopicEditProfile>ชื่อจริง</TextTopicEditProfile>
-                <AlignCenter>
-                    <FormInput
-                        name="name"
-                        value={cred.name}
-                        onChange={({ target: { value, name } }) => {
-                            handleOnChange(name, value);
-                        }}
-                    />
-                </AlignCenter>
-                <TextTopicEditProfile>นามสกุล</TextTopicEditProfile>
-                <AlignCenter>
-                    <FormInput
-                        name="surname"
-                        value={cred.surname}
-                        onChange={({ target: { value, name } }) => {
-                            handleOnChange(name, value);
-                        }}
-                    />
-                </AlignCenter>
-                <TextTopicEditProfile>อีเมล</TextTopicEditProfile>
-                <AlignCenter>
-                    <FormInput
-                        name="email"
-                        value={cred.email}
-                        onChange={({ target: { value, name } }) => {
-                            handleOnChange(name, value);
-                        }}
-                        disabled
-                    />
-                </AlignCenter>
+                {ListInput}
             </ContainerProfile>
         </Container>
     );
-}
+};
 
 export default EditProfile;

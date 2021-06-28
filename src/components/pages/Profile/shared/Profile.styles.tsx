@@ -83,6 +83,8 @@ export const FormInput = styled(Input)`
 `;
 
 export const TextTopicEditProfile = styled.div`
+    width: 343px;
+    text-align: left;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
