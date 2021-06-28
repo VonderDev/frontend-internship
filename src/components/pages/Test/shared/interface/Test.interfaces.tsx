@@ -1,7 +1,7 @@
 export interface IQuestion {
-    question_no: number;
-    question_category: string;
-    question_body: string;
+    questionIndex: number;
+    categoryIndex: number;
+    questionBody: string;
 }
 
 export interface IState {
@@ -10,6 +10,6 @@ export interface IState {
 }
 
 export interface IUserAns {
-    question_category: string;
+    categoryIndex: number;
     score: number;
 }

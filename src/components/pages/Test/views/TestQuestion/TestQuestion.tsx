@@ -23,7 +23,7 @@ function TestQuestion() {
     // ─── Set variable ───────────────────────────────────────────────────────────────────
     //
     const history = useHistory();
-    const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ question_category: '', question_body: '', question_no: 0 });
+    const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ questionIndex: 0, questionBody: '', categoryIndex: 0 });
     const [currentQuestion, setCurrentQuestion] = useState<number>(0);
     const [questionList, setQuestionList] = useState<Array<IQuestion> | null>(null);
     const [isSWRTriggered, isSetSWRTriggered] = useState<boolean>(false);
@@ -61,7 +61,7 @@ function TestQuestion() {
     function onNextQuestion(value: number) {
         console.log('[Debug]: score == ' + value);
         let newTestScore = testScore;
-        newTestScore.push({ question_category: currentQuestionDetail.question_category, score: value });
+        newTestScore.push({ categoryIndex: currentQuestionDetail.categoryIndex, score: value });
         setTestScore(newTestScore);
 
         if (!questionList) return;
@@ -190,7 +190,7 @@ function TestQuestion() {
                 >
                     ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
                 </Modal>
-                <TextQuestion>{currentQuestionDetail.question_body}</TextQuestion>
+                <TextQuestion>{currentQuestionDetail.questionBody}</TextQuestion>
                 {/* <TextQuestion>{data[currentQuestion].question_body}</TextQuestion> */}
                 <div>
                     {isLoading ? (
