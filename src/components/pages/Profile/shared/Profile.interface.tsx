@@ -25,3 +25,10 @@ export interface IIconTextProfile {
     icon: React.ForwardRefExoticComponent<any>;
     text: string;
 }
+export interface IInput {
+    username: string;
+    name: string;
+    surname: string;
+    email: string;
+    pic: string;
+}
