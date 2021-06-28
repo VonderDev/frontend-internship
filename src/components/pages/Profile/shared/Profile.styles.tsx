@@ -1,13 +1,9 @@
 import { Button, Input, Card, Image, List, Modal } from 'antd';
 import styled from 'styled-components';
 import { RightOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
 
 export const AlignCenter = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    
 `;
 
 export const AlignRight = styled.div`
@@ -22,6 +18,10 @@ export const ContainerProfile = styled.div`
     padding: 0px;
     max-width: 343px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const ButtonSubmit = styled(Button)`
@@ -94,6 +94,7 @@ export const TextTopicEditProfile = styled.div`
 `;
 
 export const TextTopic2 = styled.div`
+    width: 343px;
     padding-top: 15px;
     font-weight: bolder;
     font-size: 22px;
@@ -102,11 +103,16 @@ export const TextTopic2 = styled.div`
 `;
 
 export const TextUserInfo1 = styled.div`
+    width: 343px;
+    text-align: left;
     font-weight: bolder;
     font-size: 16px;
     margin-top: 10px;
 `;
 export const TextUserInfo2 = styled.div`
+    width: 343px;
+    text-align: right;
+    float: right;
     font-weight: normal;
     font-size: 16px;
     margin-top: 10px;
@@ -118,9 +124,13 @@ export const TextUsername = styled.div`
     margin-top: 10px;
     padding-bottom: 0px;
 `;
-export const TextModal = styled.div`
+export const TextHeadModal = styled.div`
     font-weight: bolder;
     font-size: 24px;
+`;
+export const TextBodyModal = styled.div`
+font-weight: normal;
+font-size: 16px;
 `;
 
 export const CardText = styled.div`
@@ -160,6 +170,9 @@ export const IconArrow = styled(RightOutlined)`
 `;
 
 export const LinkMoreResult = styled.div`
+    width: 343px;
+    float: right;
+    text-align: right;
     font-size: 16px;
     color: var(--Blue-300);
 `;
@@ -223,31 +236,30 @@ export const ProfileListItem = styled(List.Item)`
 `;
 export const ConfirmModal = styled(Modal)`
         display: flex;
-        flex-direction: column;
-        align-items: center;
         justify-content: center;
     & .ant-modal-content {
         width: 343px;
         height: 249px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         border-radius: 15px;
     }
     & .ant-modal-header {
         height: 89px;
         display: flex;
         align-items: center;
+        justify-content: center;
+        border-radius: 15px;
     }
     & .ant-modal-body {
         height: 30px;
         display: flex;
-        align-items: center;
+        align-items: center; 
+        text-align: center;
+        justify-content: center;
     }
     & .ant-modal-footer {
         height: 130px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        align-items: center; 
+        text-align: center;
+        justify-content: center;
     }
 `;

@@ -7,7 +7,6 @@ import { CalendarOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
 import { useState } from 'react';
 import {
     ContainerProfile,
-    AlignCenter,
     AlignRight,
     ButtonSubmit,
     TextUserInfo1,
@@ -16,7 +15,6 @@ import {
     ResultCard,
     UserImage,
     TextTopic2,
-    AlignLeft,
     ResultImage,
     CardText,
     IconArrow,
@@ -66,20 +64,16 @@ function Profile() {
         <div>
             <Container header={{ left: 'back', children: 'ข้อมูลส่วนตัว', right: 'menu' }}>
                 <ContainerProfile>
-                    <AlignCenter>
-                        <UserImage src={cred.pic} />
-                        <TextUsername>{cred.username}</TextUsername>
-                    </AlignCenter>
+                    <UserImage src={cred.pic} />
+                    <TextUsername>{cred.username}</TextUsername>
                     <Row>
                         <Col span={8}>
                             <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
                         </Col>
                         <Col span={16}>
-                            <AlignRight>
-                                <TextUserInfo2>
-                                    {cred.name} {cred.surname}
-                                </TextUserInfo2>
-                            </AlignRight>
+                            <TextUserInfo2>
+                                {cred.name} {cred.surname}
+                            </TextUserInfo2>
                         </Col>
                     </Row>
                     <Row>
@@ -92,75 +86,59 @@ function Profile() {
                             </AlignRight>
                         </Col>
                     </Row>
-
                     <Link to="/editProfile">
-                        <Form.Item>
-                            <AlignCenter>
-                                <ButtonSubmit>แก้ไขข้อมูลส่วนตัว</ButtonSubmit>
-                            </AlignCenter>
-                        </Form.Item>
+                        <ButtonSubmit>แก้ไขข้อมูลส่วนตัว</ButtonSubmit>
+                    </Link>
+                    <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
+                    <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
+
+                    <Link to="/result">
+                        <ResultCard>
+                            <Row>
+                                <Col span={8}>
+                                    <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
+                                </Col>
+                                <Col span={14}>
+                                    <CardText>
+                                        <Row>ลักษณะเด่นของคุณ</Row>
+                                        <Row>วันที่ 15 มิ.ย. 2564</Row>
+                                    </CardText>
+                                </Col>
+                                <Col span={2}>
+                                    <IconArrow />
+                                </Col>
+                            </Row>
+                        </ResultCard>
                     </Link>
                     <TextTopic2>
-                        ผลลัพธ์ของคุณ
-                        <AlignRight>
-                            <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
-                        </AlignRight>
-                    </TextTopic2>
-                    <AlignCenter>
-                        <Link to="/result">
-                            <ResultCard>
-                                <Row>
-                                    <Col span={8}>
-                                        <AlignLeft>
-                                            <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
-                                        </AlignLeft>
-                                    </Col>
-                                    <Col span={14}>
-                                        <CardText>
-                                            <Row>ลักษณะเด่นของคุณ</Row>
-                                            <Row>วันที่ 15 มิ.ย. 2564</Row>
-                                        </CardText>
-                                    </Col>
-                                    <Col span={2}>
-                                        <IconArrow />
-                                    </Col>
-                                </Row>
-                            </ResultCard>
-                        </Link>
-                    </AlignCenter>
-                    <TextTopic2>
                         กระทู้ของคุณ
-                        <AlignRight>
-                            <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
-                        </AlignRight>
+                        <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
                     </TextTopic2>
-                    <AlignCenter>
-                        <ListProfile
-                            itemLayout="vertical"
-                            size="large"
-                            pagination={{
-                                onChange: (page) => {
-                                    console.log(page);
-                                },
-                                pageSize: 3,
-                            }}
-                            dataSource={listData}
-                            renderItem={(item: any) => (
-                                <ProfileListItem
-                                    key={item.title}
-                                    actions={[
-                                        <IconText icon={FormOutlined} text=" Lookmaii" key="list-vertical-star-o" />,
-                                        <IconText icon={CalendarOutlined} text=" 11 มิถุนายน 2564" key="list-vertical-like-o" />,
-                                        <IconText icon={HeartFilled} text=" 12" key="list-vertical-message" />,
-                                    ]}
-                                >
-                                    <HistoryText onClick={() => history.push('/board')}>
-                                        <List.Item.Meta avatar={<HistoryImage src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} description={item.description} />
-                                    </HistoryText>
-                                </ProfileListItem>
-                            )}
-                        />
-                    </AlignCenter>
+                    <ListProfile
+                        itemLayout="vertical"
+                        size="large"
+                        pagination={{
+                            onChange: (page) => {
+                                console.log(page);
+                            },
+                            pageSize: 3,
+                        }}
+                        dataSource={listData}
+                        renderItem={(item: any) => (
+                            <ProfileListItem
+                                key={item.title}
+                                actions={[
+                                    <IconText icon={FormOutlined} text=" Lookmaii" key="list-vertical-star-o" />,
+                                    <IconText icon={CalendarOutlined} text=" 11 มิถุนายน 2564" key="list-vertical-like-o" />,
+                                    <IconText icon={HeartFilled} text=" 12" key="list-vertical-message" />,
+                                ]}
+                            >
+                                <HistoryText onClick={() => history.push('/board')}>
+                                    <List.Item.Meta avatar={<HistoryImage src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} description={item.description} />
+                                </HistoryText>
+                            </ProfileListItem>
+                        )}
+                    />
                 </ContainerProfile>
             </Container>
         </div>
