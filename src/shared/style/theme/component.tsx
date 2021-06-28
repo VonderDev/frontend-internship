@@ -20,18 +20,19 @@ align-items: ${({ align }) => (align ? align: " ")};
 flex-direction: ${({ direction }) => (direction ? direction: " ")};
 `
 type Sizebutton = "Large" | "Medium" | "Small" ;
+type Typebutton = "Light" | "Text";
 interface ButtonProps {
-    sizebutton?: any
-    backgroundbutton?: any
+    sizebutton?: number
+    backgroundbutton?: string
     colorbutton?: any
     typebutton ?: Sizebutton
+    pattern?: Typebutton
+    
   }
  
-
   export const ButtonStyle = styled(Button)<ButtonProps>`
       ${css`
     width : ${(props: ButtonProps) => props.sizebutton? props.sizebutton  : 100 }%;
-    background-color: ${(props: ButtonProps) => props.backgroundbutton? props.backgroundbutton : 'var(--Blue-400)'};
     color:  ${(props: ButtonProps) => props.colorbutton? props.colorbutton : 'var(--White)'};
     `}
     border-radius: var(--Radius-15);
@@ -51,6 +52,52 @@ interface ButtonProps {
         return css`
         height: 35px; 
         `
+    }else{
+        return css`
+        height: 51px; 
+        `
     }}
     }
+    ${( props: ButtonProps ) =>  {
+       if ( props.backgroundbutton ){
+        return css`
+        background-color: ${props.backgroundbutton} !important ;
+        &:hover{
+            border: 2px solid ${props.backgroundbutton};
+            color: ${props.backgroundbutton};
+            background-color: transparent !important ;
+        }
+        `
+    }else{
+        return css`
+         background-color: var(--Red-400);
+        `
+    }}
+    }
+
+    ${( props: ButtonProps ) =>  {
+       if ( props.pattern == "Light"){
+        return css`
+        background-color: var(--White);
+        border: 2px solid var(--Blue-400);
+        color: var(--Blue-400);
+        &:hover{
+            color: var(--White);
+            background-color: var(--Blue-400);
+        }
+        `
+        }else if( props.pattern == "Text"){
+            return css`
+            background-color: transparent;
+            border: none;
+            color: var(--Blue-400);
+            `
+        }
+        else{
+        return css`
+         background-color: var(--Blue-400);
+        `
+    }}
+    }
+
     `;
