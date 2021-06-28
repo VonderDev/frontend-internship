@@ -33,7 +33,7 @@ const EditProfile = () => {
                     </BackHeader>
                 ),
                 children: 'แก้ไขข้อมูลส่วนตัว',
-                right: <ButtonSave onClick={handleOnClick}>บันทึก</ButtonSave>,
+                right: <ButtonSave htmlType="submit" onClick={handleOnClick}>บันทึก</ButtonSave>,
             }}
         >
             <ConfirmModal
