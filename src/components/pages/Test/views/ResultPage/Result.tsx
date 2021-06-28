@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { ButtonStartOver } from '../../shared/styles/TestQuestion.styled';
 import { useHistory } from 'react-router-dom';
 import Chart from './Chart';

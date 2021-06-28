@@ -1,4 +1,3 @@
-import TestAnimation from './TestAnimation';
 import ButtonLoadingStart from './ButtonLoadingStart';
 import Container from 'components/Container/Container';
 import { TextHeader, TextDescription, ContainerTestPage, ButtonBack } from '../../shared/styles/TestPage.styled';

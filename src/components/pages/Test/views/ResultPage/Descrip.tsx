@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { BodyCard, Boxpic, DesBox, DesText, Hname, Readmore, ResultCard, TextBoxDescript } from '../../shared/styles/ResultPage.styled';
+import { useEffect } from 'react';
+import { BodyCard, Boxpic, DesBox, DesText, Hname, Readmore, ResultCard } from '../../shared/styles/ResultPage.styled';
 import { useHistory } from 'react-router-dom';
 
 const MockScore = require('../../mocks/result.json');

@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from 'components/Container/Container';
-import { TextTopic, ImgMultipleInterlligences, ParagraphDescrip, TextCategoryName } from '../../shared/styles/TestOverview.styled';
+import { ImgMultipleInterlligences, ParagraphDescription, TextCategoryName, TextTopicTestOverview } from '../../shared/styles/TestOverview.styled';
 import { Col } from 'antd';
 
 function TestOverview() {
@@ -52,14 +52,14 @@ function TestOverview() {
     return (
         <div>
             <Container header={{ left: 'back', children: 'ข้อมูลส่วนตัว', right: 'menu' }}>
-                <TextTopic>พหุปัญญา คืออะไร ?</TextTopic>
+                <TextTopicTestOverview>พหุปัญญา คืออะไร ?</TextTopicTestOverview>
                 <ImgMultipleInterlligences />
                 <Col>
-                    <ParagraphDescrip>
+                    <ParagraphDescription>
                         เพราะปัญญาของคนเราไม่ได้จํากัดอยู่เฉพาะความ สามารถทางคณิตศาสตร์และภาษาเท่านั้น ลองมาสํารวจ ตัวเองด้วยทฤษฎีพหุปัญญา ที่เชื่อว่าเราทุกคนต่างมี ปัญญาโดดเด่นหลากหลายแบ่งออกได้ 8
                         ด้าน ซึ่งทําให้ แต่ละคนมีวิธีการเรียนรู้ และมีความสามารถเฉพาะตัว
-                    </ParagraphDescrip>
-                    <ParagraphDescrip>
+                    </ParagraphDescription>
+                    <ParagraphDescription>
                         {multipleInterlligencesList.map((item, index) => {
                             return (
                                 <div key={index}>
@@ -69,7 +69,7 @@ function TestOverview() {
                                 </div>
                             );
                         })}
-                    </ParagraphDescrip>
+                    </ParagraphDescription>
                 </Col>
             </Container>
         </div>

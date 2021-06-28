@@ -94,7 +94,7 @@ export const TextTopicOnImageTest = styled.div`
     padding-top: 15px;
     margin-bottom: 140px;
 `;
-export const TextBoard = styled(Col)`
+export const TextBoardTopic = styled(Col)`
     font-weight: bolder;
     font-size: 20px;
     margin-top: 20px;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Container from 'components/Container/Container';
 import { ContainerTestStoryPage, TextStory } from '../../shared/styles/TestStory.styled';
 import { useHistory } from 'react-router-dom';
-import { IQuestion, IUserAns } from '../../shared/interface/Test.interfaces';
+import { IQuestion } from '../../shared/interface/Test.interfaces';
 import { API_GetTestData } from '../../apis/test.api';
 import { Col, Modal } from 'antd';
 import { ButtonStartOver, TextQuestionIndex } from '../../shared/styles/TestQuestion.styled';

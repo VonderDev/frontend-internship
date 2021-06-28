@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { BodyCard, Boxpic, DesText, Hname, Readmore, ResultCard, Resultpic, TextBox, TextBoxDescript } from '../../shared/styles/ResultPage.styled';
+import { useEffect } from 'react';
+import { BodyCard, DesText, Hname, Resultpic, TextBox } from '../../shared/styles/ResultPage.styled';
 import { useHistory } from 'react-router-dom';
 import BoardAdvice from './BoardAdvice';
 import Container from 'components/Container/Container';

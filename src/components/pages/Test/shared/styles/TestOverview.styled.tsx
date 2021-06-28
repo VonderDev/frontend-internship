@@ -2,7 +2,7 @@ import { Row } from 'antd';
 import styled from 'styled-components';
 import multipleInterlligences from '../../shared/images/multipleInterlligences.png';
 
-export const TextTopic = styled.div`
+export const TextTopicTestOverview = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +20,7 @@ export const ImgMultipleInterlligences = styled.div`
     height: 350px;
 `;
 
-export const ParagraphDescrip = styled(Row)`
+export const ParagraphDescription = styled(Row)`
     font-size: 16px;
     display: inline-block;
     padding-left: 10px;

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Chart from 'react-apexcharts';
 import { TextFeature, ChartStyled } from '../../shared/styles/ResultPage.styled';
 
 interface Chartprop {
