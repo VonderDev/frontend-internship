@@ -18,13 +18,13 @@ export async function API_GetTestData() {
 
 export async function API_PostTestResult(data: any) {
     console.log('[Result Data] :', data);
-    return mockTestData as unknown as Array<IQuestion>;
+    // return mockTestData as unknown as Array<IQuestion>;
     //
     // ─── Use axios.post when backend finish ───────────────────
     //
-    // return await axios.post('/api/post', data).then((res) => {
-    //     return res.data
-    // })
+    return await axios.post('http://localhost:5000/user/result', data).then((res) => {
+        return res.data
+    })
 }
 
 axios({

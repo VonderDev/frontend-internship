@@ -26,6 +26,8 @@ function TestQuestion() {
     const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ question_category: '', question_body: '', question_no: 0 });
     const [currentQuestion, setCurrentQuestion] = useState<number>(0);
     const [questionList, setQuestionList] = useState<Array<IQuestion> | null>(null);
+    const [isSWRTriggered, isSetSWRTriggered] = useState<boolean>(false);
+
     const buttonList = [
         { value: 3, label: 'ใช่ที่สุด' },
         { value: 2, label: 'ปานกลาง' },
@@ -53,7 +55,7 @@ function TestQuestion() {
         }
     }
     useEffect(() => {
-        getTestData();
+        // getTestData();
     }, []);
 
     function onNextQuestion(value: number) {
@@ -122,9 +124,48 @@ function TestQuestion() {
         setVisible(false);
     };
 
+    const questionListFetcher = (key: any) =>
+        fetch(key).then(async (res) => {
+            console.log('Fetcher triggered');
+            const data = await res.json();
+            setQuestionList(data); // store all question into the hook
+            const resp = data;
+            setCurrentQuestionDetail(resp[currentQuestion]);
+            return data;
+        });
+
+    const { data, error } = useSWR('http://localhost:5000/questions', questionListFetcher);
+    if (error) return <div>failed to load data</div>;
+    if (!data) return <div>loading...</div>;
+
+    //customInterceptor
+    //สามารถทำโดยที่ไม่ต้องมีอีก hook isSWR มาช่วย เพื่อมาเช็คว่า fetch เสร็จเเล้ว เเล้วมาเช็คได้เลยว่า data เสร็จตอนไหน มีวิธีที่ set intercept โดยตรงมั้ย
+    //เพราะมัน rerender ใหม่เพราะมัน setstate ทุกรอบ ไม่จบ loop เลยต้องทำเช็ค boolean มาเพิ่ม
+    // if (data && !isSWRTriggered) {
+    //     console.log('data from useSWR');
+    //     isSetSWRTriggered(true);
+    //     setQuestionList(data); // store all question into the hook
+    //     const resp = data;
+    //     setCurrentQuestionDetail(resp[currentQuestion]);
+    // }
+
+    // useEffect(() => {
+    //     if (data) {
+    //         console.log(data);
+    //     }
+    // }, [data]);
+
+    // const rendered_questions = data.map((ele: any, index: number) => {
+    //     return (
+    //         <>
+    //             <span>{ele.question_no}</span>
+    //         </>
+    //     );
+    // });
     return (
         <Container header={null}>
             <ContainerTestQuestion>
+                {/* {rendered_questions} */}
                 <Col>
                     <TextQuestionIndex>
                         คำถามข้อที่ {currentQuestion + 1}/{questionList?.length}
@@ -150,6 +191,7 @@ function TestQuestion() {
                     ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
                 </Modal>
                 <TextQuestion>{currentQuestionDetail.question_body}</TextQuestion>
+                {/* <TextQuestion>{data[currentQuestion].question_body}</TextQuestion> */}
                 <div>
                     {isLoading ? (
                         ''
