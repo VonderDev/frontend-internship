@@ -40,7 +40,7 @@ export const ButtonTagFilter = styled(Button)`
 export const ImageTestPage = styled.div`
     background-image: url(${gamePreviewImg});
     transition: 0.5s ease;
-    margin-top: 40px;
+    margin-top: 0;
     border-radius: 10px;
     height: 250px;
     background-position: center;

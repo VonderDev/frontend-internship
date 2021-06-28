@@ -4,18 +4,19 @@ import Board from 'components/pages/Board/views/Board';
 import Profile from 'components/pages/Profile/views/Profile';
 import Login from 'components/pages/Authentication/views/Login/Login';
 import Register from 'components/pages/Authentication/views/Register/Register';
-import Test from 'components/pages/Test/views/TestStartPage/Test';
-import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion';
-import { TestProvider } from 'components/pages/Test/views/TestQuestion/TestContext';
-import TestResult from 'components/pages/Test/views/TestQuestion/TestResult';
-import Result from 'components/pages/Test/views/ResultPage/Result';
 import editProfile from 'components/pages/Profile/views/EditProfile';
-import ReadMore from 'components/pages/Test/views/ResultPage/Readmore';
+import PrivateRoute from 'components/AuthContext/PrivateRoute';
+import TestStyle from 'TestStyle';
+import TestResult from 'components/pages/Test/views/TestQuestion/TestResult';
+import Test from 'components/pages/Test/views/TestStartPage/Test';
+import TestStory from 'components/pages/Test/views/TestStartPage/TestStory';
 import TestOverview from 'components/pages/Test/views/TestStartPage/TestOverview';
+import { TestProvider } from 'components/pages/Test/views/TestQuestion/TestContext';
+import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion';
+import Result from 'components/pages/Test/views/ResultPage/Result';
+import ReadMore from 'components/pages/Test/views/ResultPage/Readmore';
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
-import PrivateRoute from 'components/AuthContext/PrivateRoute';
-import TestStory from 'components/pages/Test/views/TestStartPage/TestStory';
 
 function Routing() {
     return (
@@ -39,7 +40,7 @@ function Routing() {
             <Route exact path="/readmore" component={ReadMore} />
             <PrivateRoute exact path="/profileresult" component={ProfileResult} />
             <PrivateRoute exact path="/boardhistory" component={BoardHistory} />
-
+            <Route exact path="/teststyle" component={TestStyle} />
         </Switch>
     );
 }

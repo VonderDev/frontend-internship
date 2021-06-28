@@ -4,33 +4,49 @@ import TextParagraph from "antd/lib/typography/Paragraph";
 import TextLink from "antd/lib/typography/Link";
 import Title from "antd/lib/typography/Title";
 
-const HeadlineText = styled(Title)<any>`
+type TextProps = {
+  fontSize?: any
+  Color?: any
+};
+
+const HeadlineText = styled(Title)<TextProps>`
   font-size: ${({ fontSize }) =>
     fontSize ? `${fontSize} !important` : "var(--font-22) !important"};
-  font-weight: 700;
+    font-weight: 700;
+    color: ${({Color}) => Color? `${Color}  !important` : "var(--Gray-400) !important "};
 `;
 
-const SubHeadlineText = styled(TextParagraph)`
+const SubHeadlineText = styled(TextParagraph)<TextProps>`
   font-size: var(--font-18) !important;
+  font-weight: 700;
+  color: ${({Color}) => Color? `${Color}  !important` : "var(--Gray-400) !important "};
 `;
 
-const DescriptionText = styled(TextParagraph)`
+const DescriptionText = styled(TextParagraph)<TextProps>`
   font-size: var(--font-16) !important;
+  font-weight: 400;
+  color: ${({Color}) => Color? `${Color}  !important` : "var(--Gray-400) !important "};
 `;
 
-const BodyText = styled(TextParagraph)`
+const BodyText = styled(TextParagraph)<TextProps>`
   font-size: var(--font-14) !important;
+  font-weight: 400;
+  color: ${({Color}) => Color? `${Color}  !important` : "var(--Gray-400) !important "};
 `;
 
-const InfoText = styled(Text)<any>`
+const InfoText = styled(Text)<TextProps>`
   font-size: ${({ fontSize }) =>
     fontSize ? `${fontSize} !important` : "var(--font-12) !important"};
+    font-weight: 700;
+    color: ${({Color}) => Color? `${Color}  !important` : "var(--Gray-400) !important "};
 
 `;
 
-const LinkText = styled(TextLink)<any>`
+const LinkText = styled(TextLink)<TextProps>`
   font-size: ${({ fontSize }) =>
     fontSize ? `${fontSize} !important` : "var(--font-14) !important"};
+    font-weight: 700;
+    color: ${({Color}) => Color? `${Color}  !important` : "var(--Gray-400) !important "};
 `;
 
 const Headline: React.FC<any> = (props) => {
