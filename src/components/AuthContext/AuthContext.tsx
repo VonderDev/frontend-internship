@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, useContext, useCallback } from "react";
-import { Redirect, Router, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import authMock from './Authmock.json'
 import { authData } from "./User.type";
 import axios from 'axios'
@@ -11,30 +11,29 @@ interface datauser {
       name: string | null
   }
 
-
+      // const getToken = async () => {
+      //   return await axios.post('', {
+      //     method: 'post',
+      //     url: 'http://localhost:5000/login',
+      //     headers: { },
+      //     data : JSON.stringify({ email , password })
+      //   }).then((response)=>{
+      //     return response.data
+      //   }).catch(err => {
+      //     console.error(err)
+      //   })
+      // }
+      // const response = getToken();
   
     const AuthContext = createContext<any>(null);
+    const data = JSON.stringify(authMock)
 
     const AuthProvider =  (({children}: IAuthProps) => {
-    const [loginUser, setLoginUser] = useState<boolean>(false)
-    const [user ,setUser] = useState<datauser>({name: ''}) ;
-    const history = useHistory();
-    
-    const login =  useCallback( ({email, password}: authData) => 
+    const [user ,setUser] = useState<datauser | null >() ;
+    const [token ,setToken] = useState<any | null >() ;
+
+    const login =  async ({email, password}: authData) => 
     {
-      const getToken = async () => {
-        return await axios.post('', {
-          method: 'post',
-          url: 'http://localhost:5000/login',
-          headers: { },
-          data : JSON.stringify({ email , password })
-        }).then((response)=>{
-          return response.data
-        }).catch(err => {
-          console.error(err)
-        })
-      }
-      const response = getToken();
 
     if (email &&  password){
 
@@ -42,47 +41,48 @@ interface datauser {
       console.log('props: ',{email, password});
         
           if(accessLogin){
-            const data = JSON.stringify(authMock)
             setUser(JSON.parse(data))
             localStorage.setItem('token', "00215484");
-            const tokenKey = localStorage.getItem('token') || '';
-            tokenKey ? setLoginUser(true) : setLoginUser(false);
-            
+            setToken(localStorage.getItem('token'));
+
           }else {
             alert('ไม่ผู้ใช้นี้ อีเมลหรือรหัสผ่านไม่ถูกต้อง')
             console.log('Failed login');
           }
     }else{
-      return false;
+      return [user,token];
     }
-        },[loginUser , user],)
+        };
 
     const gotoLogin = () =>{
       return  <Redirect to='/login'/>
     }
-
     const logout = () => {
-        setLoginUser(false)
-        setUser({name: ''})
         localStorage.removeItem('token')
+        setUser(undefined)
     }
     // const data = JSON.stringify(authMock)
     // setUser(JSON.parse(data))
-
+    console.log('Data' ,user)
+    
     useEffect(() => {
       const tokenKey = localStorage.getItem('token');
-      if (!tokenKey) {
+      if (tokenKey ) {
+        // setUser(JSON.parse(data))
+        console.log('token' ,tokenKey)
+        console.log('Data2' ,user)
+        window.location.reload;
+      }else{
         gotoLogin
       }
-      console.log('Data' ,user)
-       }, [ user,loginUser]);
+       }, []);
 
     return (
       <AuthContext.Provider value= {{
-        loginUser,
         login,
         logout,
-        user
+        user,
+        token
       }}>
            {children}
         </AuthContext.Provider>

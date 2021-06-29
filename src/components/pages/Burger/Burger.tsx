@@ -122,8 +122,8 @@ const ListmenuLogout = styled(Listmenu)`
 const Burger = () => {
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
-
-    const { loginUser, logout,user } = useAuthContext()
+    const token = localStorage.getItem('token');
+    const { logout,user} = useAuthContext()
     return (
         <>
        
@@ -134,9 +134,9 @@ const Burger = () => {
                 <Ul onClick={showSidebar}>
                     <Avataruser>
                         <Avatar size={75} icon={<UserOutlined />} />
-                        { loginUser ? (<AvatarName>{ user.username }</AvatarName>) : (<AvatarName> Guest #000  </AvatarName> )}
+                        { token ? (<AvatarName>{ user.username }</AvatarName>) : (<AvatarName> Guest #000  </AvatarName> )}
                         
-                        {loginUser ? null : (
+                        {token ? null : (
                             <BarBtn to="/login">
                             <LoginBtn type="primary">
                                 Login
@@ -145,7 +145,7 @@ const Burger = () => {
 
                         )}
                     </Avataruser>
-                    {loginUser && (
+                    {token && (
                         <Listmenu className="nav-text">
                             <Bar to="/profile">
                                 <UserOutlined />
@@ -163,7 +163,7 @@ const Burger = () => {
                             </Listmenu>
                         );
                     })}
-                    {loginUser && (
+                    {token && (
                         <ListmenuLogout className="nav-text">
                             <Bar to="#" onClick={ logout }>
                                 <LoginOutlined />
