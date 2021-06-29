@@ -105,23 +105,23 @@ interface ButtonProps {
     type SizeInput = "Large" | "Medium" | "Small" ;
     interface InputProps{
         sizeinput?: number
-        typeInput?: SizeInput
+        typeinput?: SizeInput
     }
-
+    
 export const InputStyle = styled(Input)<InputProps>`
 ${css`
     width : ${(props: InputProps) => props.sizeinput? props.sizeinput  : 100 }%;
     `}
     ${( props: InputProps ) =>  {
-       if ( props.typeInput == "Large"){
+       if ( props.typeinput == "Large"){
         return css`
         height: 51px; 
         `
-    }else if(props.typeInput == "Medium"){
+    }else if(props.typeinput == "Medium"){
         return css`
         height: 43px; 
         `
-    }else if(props.typeInput == "Small"){
+    }else if(props.typeinput == "Small"){
         return css`
         height: 35px; 
         `

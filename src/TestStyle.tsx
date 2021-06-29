@@ -19,7 +19,7 @@ const TestStyle = () => {
         <ButtonStyle typebutton="Small"  sizebutton={20}>Small</ButtonStyle>
         <ButtonStyle typebutton="Large" pattern="Light" sizebutton={15}>Special</ButtonStyle>
         <ButtonStyle typebutton="Small" pattern="Text" sizebutton={10}>Special</ButtonStyle>
-        <InputStyle sizeinput={60} type="password" typeInput="Medium"></InputStyle>
+        <InputStyle sizeinput={60} type="password" typeinput="Medium"></InputStyle>
         </Box>
         </>
     );
