@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { BodyCard, DesText, Hname, Resultpic, TextBox } from '../../shared/styles/ResultPage.styled';
+import { CategoryName, ContainerCharactorDetail, DesText, Resultpic, TextBox } from '../../shared/styles/ResultPage.styled';
 import { useHistory } from 'react-router-dom';
 import BoardAdvice from './BoardAdvice';
 import Container from 'components/Container/Container';
 
 const MockScore = require('../../mocks/result.json');
 
-const ReadMore = () => {
+const CharactorDetail = () => {
     const history = useHistory();
     const idResult = window.location.search;
     const params = new URLSearchParams(idResult);
@@ -23,22 +23,23 @@ const ReadMore = () => {
 
     return (
         <>
-            <Container header={{ left: 'back', children: 'ผลลัพธ์', right: 'save' }}>
-                <BodyCard>
-                    <Hname>{resultDes.skill}</Hname>
-                    <Resultpic src={resultDes.image_charactor} />
-
+            <Container header={null}>
+                <Resultpic preview={false} src={resultDes.image_charactor} />
+                <ContainerCharactorDetail>
+                    <CategoryName>{resultDes.skill}</CategoryName>
                     <TextBox>
                         <DesText>{resultDes.description}</DesText>
                     </TextBox>
+                    <CategoryName>อาชีพที่เหมาะสม</CategoryName>
+
                     <TextBox>
                         <DesText>{resultDes.description_career}</DesText>
                     </TextBox>
-                </BodyCard>
+                </ContainerCharactorDetail>
                 <BoardAdvice />
             </Container>
         </>
     );
 };
 
-export default ReadMore;
+export default CharactorDetail;

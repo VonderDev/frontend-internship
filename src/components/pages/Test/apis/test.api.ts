@@ -1,7 +1,6 @@
 import mockTestData from '../mocks/question.json';
 import { IQuestion, IUserAns } from '../shared/interface/Test.interfaces';
 import axios from 'axios';
-import useSWR from 'swr';
 
 export async function API_GetTestData() {
     //    return mockTestData as unknown as Array<IQuestion>

@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { IQuestion } from '../../shared/interface/Test.interfaces';
 import { API_GetTestData } from '../../apis/test.api';
 import { Col, Modal } from 'antd';
-import { ButtonStartOver, TextQuestionIndex } from '../../shared/styles/TestQuestion.styled';
+import { ButtonSeeAllResults, TextQuestionIndex } from '../../shared/styles/TestQuestion.styled';
 
 function TestStory() {
     const history = useHistory();
@@ -61,9 +61,9 @@ function TestStory() {
                     <TextQuestionIndex>
                         คำถามข้อที่ {currentQuestion + 1}/{questionList?.length}
                     </TextQuestionIndex>
-                    <ButtonStartOver type="primary" onClick={showModal}>
+                    <ButtonSeeAllResults type="primary" onClick={showModal}>
                         เริ่มใหม่{' '}
-                    </ButtonStartOver>
+                    </ButtonSeeAllResults>
                 </Col>
                 <Modal visible={visible} okText="เริ่มใหม่" cancelText="ยกเลิก" onOk={handleOk} width={400} confirmLoading={confirmLoading} onCancel={handleCancel}>
                     ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?

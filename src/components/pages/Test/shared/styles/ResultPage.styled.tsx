@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Typography, Card, Row, Progress } from 'antd';
+import { Button, Typography, Card, Row, Progress, Image } from 'antd';
 import Chart from 'react-apexcharts';
 
 const { Title } = Typography;
@@ -33,13 +33,13 @@ export const ButtonGoHome = styled(Button)`
     justify-content: center;
     font-size: 18px;
 `;
-export const TextFeature = styled.div`
+export const TextTopicResultOverview = styled.div`
     text-align: center;
     font-size: 22px;
     padding: 30px;
     font-weight: bolder;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 `;
 
@@ -85,30 +85,42 @@ export const ResultCard = styled(Card)`
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translateY(-40%);
+    transform: translateY(-10%);
     width: 400px;
     height: 400px;
     margin-left: auto;
     margin-right: auto;
 `;
 
-export const Boxpic = styled.img`
+export const Boxpic = styled(Image)`
     border-radius: 20px;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ffd6d2;
-    width: 50%;
-    height: 150px;
+    width: 80%;
+    height: 100px;
 `;
-export const Hname = styled.h1`
+
+export const ImagePreview = styled(Image)`
+    border-radius: 20px;
+    width: 80%;
+    height: 100px;
+    :hover {
+        cursor: pointer;
+    }
+`;
+
+export const ContainerImagePreview = styled(Image.PreviewGroup)`
+    & .ant-image {
+        padding-left: 20px;
+        position: absolute;
+    }
+`;
+
+export const CategoryName = styled.h1`
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
     font-size: 22px;
     font-weight: bolder;
-    text-align: center;
+    padding-top: 20px;
 `;
 export const DesText = styled.div`
     display: flex;
@@ -128,6 +140,15 @@ export const BodyCard = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20%;
+`;
+
+export const ContainerCharactorDetail = styled.div`
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 5%;
 `;
 export const Readmore = styled.div`
     display: flex;
@@ -154,16 +175,10 @@ export const TextBox = styled.div`
     font-size: 16px;
 `;
 
-export const Resultpic = styled.img`
-    border-radius: 20px;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ffd6d2;
-    width: 343px;
-    height: 343px;
-    font-size: 20px;
+export const Resultpic = styled(Image)`
+    width: 100%;
+    height: 50vh;
+    margin-top: 20px;
 `;
 
 export const BoardRecomment = styled(Card)`

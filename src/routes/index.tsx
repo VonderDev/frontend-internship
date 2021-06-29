@@ -10,13 +10,14 @@ import { TestProvider } from 'components/pages/Test/views/TestQuestion/TestConte
 import TestResult from 'components/pages/Test/views/TestQuestion/TestResult';
 import Result from 'components/pages/Test/views/ResultPage/Result';
 import editProfile from 'components/pages/Profile/views/EditProfile';
-import ReadMore from 'components/pages/Test/views/ResultPage/Readmore';
+import CharactorDetail from 'components/pages/Test/views/ResultPage/CharactorDetail';
 import TestOverview from 'components/pages/Test/views/TestStartPage/TestOverview';
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
 import PrivateRoute from 'components/AuthContext/PrivateRoute';
 import TestStory from 'components/pages/Test/views/TestStartPage/TestStory';
 import ResultOverview from 'components/pages/Test/views/ResultPage/ResultOverview';
+import ResultInfo from 'components/pages/Test/views/ResultPage/ResultInfo';
 
 function Routing() {
     return (
@@ -36,9 +37,10 @@ function Routing() {
                 </TestProvider>
             </Route>
             <Route exact path="/resultoverview" component={ResultOverview} />
+            <Route exact path="/resultinfo" component={ResultInfo} />
             <PrivateRoute exact path="/editProfile" component={editProfile} />
             <Route exact path="/result" component={Result} />
-            <Route exact path="/readmore" component={ReadMore} />
+            <Route exact path="/charactordetail" component={CharactorDetail} />
             <PrivateRoute exact path="/profileresult" component={ProfileResult} />
             <PrivateRoute exact path="/boardhistory" component={BoardHistory} />
         </Switch>

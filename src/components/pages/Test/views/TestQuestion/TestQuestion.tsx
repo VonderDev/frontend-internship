@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import {
     TextQuestionIndex,
-    ButtonStartOver,
     TextQuestion,
     ButtonChoiceStlyed,
     ContainerButton,
     ContainerTestQuestion,
     IsLoadingSpinnerTestQuestion,
     TextIsLoadingTestQuestion,
+    ButtonSeeAllResults,
 } from '../../shared/styles/TestQuestion.styled';
 import { useHistory } from 'react-router-dom';
 import { API_GetTestData, API_PostTestResult } from '../../apis/test.api';
@@ -170,9 +170,9 @@ function TestQuestion() {
                     <TextQuestionIndex>
                         คำถามข้อที่ {currentQuestion + 1}/{questionList?.length}
                     </TextQuestionIndex>
-                    <ButtonStartOver type="primary" onClick={showModal}>
+                    <ButtonSeeAllResults type="primary" onClick={showModal}>
                         เริ่มใหม่{' '}
-                    </ButtonStartOver>
+                    </ButtonSeeAllResults>
                 </Col>
                 <Modal
                     visible={visible}

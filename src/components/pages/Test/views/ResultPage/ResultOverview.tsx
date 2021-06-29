@@ -1,4 +1,4 @@
-import { Progress, Row } from 'antd';
+import { Progress, Tabs } from 'antd';
 import Container from 'components/Container/Container';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -16,8 +16,9 @@ function ResultOverview() {
     useEffect(() => {
         console.log('[Sort score]:', scoreList);
     }, []);
+
     return (
-        <div>
+        <>
             <Container header={null}>
                 <Chart />
                 {scoreList.map((item: any, index: any) => {
@@ -31,7 +32,7 @@ function ResultOverview() {
                 })}
                 <ButtonGoHome onClick={() => history.push('/result')}>กลับหน้าหลัก</ButtonGoHome>
             </Container>
-        </div>
+        </>
     );
 }
 
