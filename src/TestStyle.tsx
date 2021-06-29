@@ -1,4 +1,4 @@
-import { Box, ButtonStyle, InputStyle } from "shared/style/theme/component";
+import { Box, ButtonStyle, CardStyle, InputStyle } from "shared/style/theme/component";
 import Typography from "shared/style/theme/Typograhy"
 
 const TestStyle = () => {
@@ -20,6 +20,10 @@ const TestStyle = () => {
         <ButtonStyle typebutton="Large" pattern="Light" sizebutton={15}>Special</ButtonStyle>
         <ButtonStyle typebutton="Small" pattern="Text" sizebutton={10}>Special</ButtonStyle>
         <InputStyle sizeinput={60} type="password" typeInput="Medium"></InputStyle>
+        <Box justify="center" align="center" direction="row">
+            <CardStyle typecard="Vertical" heightcard={300}> CardVer </CardStyle>
+            <CardStyle typecard="Horizontal" widthcard={80}> CardHor </CardStyle>
+        </Box>
         </Box>
         </>
     );

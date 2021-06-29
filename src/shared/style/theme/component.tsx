@@ -1,4 +1,4 @@
-import { Button, Input } from "antd";
+import { Button, Input ,Card } from "antd";
 import styled, { css } from "styled-components";
 
 export const Box = styled.div<{ justify?: "flex-start" 
@@ -38,7 +38,6 @@ interface ButtonProps {
     `}
     border-radius: var(--Radius-15);
     box-shadow: var(--Shadow-light-bottom);
-    margin: 10px;
 
     ${( props: ButtonProps ) =>  {
        if ( props.typebutton == "Large"){
@@ -135,4 +134,37 @@ ${css`
     border-radius: var(--Radius-15);
     background-color: var(--White);
     box-shadow: var(--Shadow-light-bottom);
+`;
+
+type CardType = "Vertical" | "Horizontal" ;
+interface CardProps{
+    sizecard?: number
+    typecard?: CardType
+    widthcard?: number
+    heightcard?: number
+}
+export const CardStyle = styled(Card)<CardProps>`
+    border-radius: var(--Radius-12);
+    box-shadow: var(--Shadow-light-bottom);
+    margin: 10px;
+    padding: 5px;
+${( props: CardProps ) =>  {
+       if ( props.typecard == "Vertical"){
+        return css`
+            width : ${(props: CardProps) => props.widthcard? props.widthcard  : 205 }px;
+            height: ${(props: CardProps) => props.heightcard? props.heightcard  : 254 }px;
+        `
+        }else if( props.typecard == "Horizontal"){
+            return css`
+            height: ${(props: CardProps) => props.heightcard? props.heightcard  : 90 }px;
+            width : ${(props: CardProps) => props.widthcard? props.widthcard  : 100 }%;
+            `
+        }
+        else{
+        return css`
+            height: ${(props: CardProps) => props.heightcard? props.heightcard  : 100 }px;
+            width : ${(props: CardProps) => props.widthcard? props.widthcard  : 100 }px;
+        `
+    }}
+    }
 `;
