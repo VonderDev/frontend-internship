@@ -1,4 +1,4 @@
-import { Box, ButtonStyle } from "shared/style/theme/component";
+import { Box, ButtonStyle, InputStyle } from "shared/style/theme/component";
 import Typography from "shared/style/theme/Typograhy"
 
 const TestStyle = () => {
@@ -19,6 +19,7 @@ const TestStyle = () => {
         <ButtonStyle typebutton="Small"  sizebutton={20}>Small</ButtonStyle>
         <ButtonStyle typebutton="Large" pattern="Light" sizebutton={15}>Special</ButtonStyle>
         <ButtonStyle typebutton="Small" pattern="Text" sizebutton={10}>Special</ButtonStyle>
+        <InputStyle sizeinput={60} type="password" typeInput="Medium"></InputStyle>
         </Box>
         </>
     );

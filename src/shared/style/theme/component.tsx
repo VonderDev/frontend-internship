@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, Input } from "antd";
 import styled, { css } from "styled-components";
 
 export const Box = styled.div<{ justify?: "flex-start" 
@@ -18,7 +18,8 @@ display: flex;
 justify-content: ${({ justify }) => (justify ? justify: " ")};
 align-items: ${({ align }) => (align ? align: " ")};
 flex-direction: ${({ direction }) => (direction ? direction: " ")};
-`
+`;
+
 type Sizebutton = "Large" | "Medium" | "Small" ;
 type Typebutton = "Light" | "Text";
 interface ButtonProps {
@@ -101,3 +102,37 @@ interface ButtonProps {
     }
 
     `;
+    type SizeInput = "Large" | "Medium" | "Small" ;
+    interface InputProps{
+        sizeinput?: number
+        typeInput?: SizeInput
+    }
+
+export const InputStyle = styled(Input)<InputProps>`
+${css`
+    width : ${(props: InputProps) => props.sizeinput? props.sizeinput  : 100 }%;
+    `}
+    ${( props: InputProps ) =>  {
+       if ( props.typeInput == "Large"){
+        return css`
+        height: 51px; 
+        `
+    }else if(props.typeInput == "Medium"){
+        return css`
+        height: 43px; 
+        `
+    }else if(props.typeInput == "Small"){
+        return css`
+        height: 35px; 
+        `
+    }else{
+        return css`
+        height: 51px; 
+        `
+    }}
+    }
+    font-size: var(--font-16);
+    border-radius: var(--Radius-15);
+    background-color: var(--White);
+    box-shadow: var(--Shadow-light-bottom);
+`;
