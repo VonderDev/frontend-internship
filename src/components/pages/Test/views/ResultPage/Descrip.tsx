@@ -1,25 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { BodyCard, Boxpic, ContainerImagePreview, DesBox, DesText, CategoryName, ImagePreview, Readmore, ResultCard, Resultpic, TextBox } from '../../shared/styles/ResultPage.styled';
 import { useHistory } from 'react-router-dom';
 import { Col, Row, Image } from 'antd';
 import { API_Get_ResultData } from '../../apis/Result.api';
 import { IResult } from '../../shared/interface/Result.interfaces';
 import BoardAdvice from './BoardAdvice';
+import CharactorDetail from './CharactorDetail';
 
 const MockScore = require('../../mocks/result.json');
 const chartScore = Object.keys(MockScore).map((key) => MockScore[key].score);
 const Max = Math.max(...chartScore);
-const Namemax = MockScore.filter((data: { score: number }) => data.score === Max);
+const maxScore = MockScore.filter((data: { score: number }) => data.score === Max);
 
 const Descrip = () => {
     const history = useHistory();
 
     useEffect(() => {
         console.log('Maxscore: ', Max);
-        console.log('Name: ', Namemax);
+        console.log('Name: ', maxScore);
     }, []);
 
-    const [detailCharactor, setDetailCharactor] = useState<IResult>({ categoryID: 0, skill: 0, score: 0, description: '', description_career: '', image_charactor: '', skill_summerize: '' });
+    const [detailCharactor, setDetailCharactor] = useState<IResult>({ skill: '', image_charactor: '', description: '', description_career: '' });
+    const [description, setDescription] = useState<string>('');
+    const [descriptionCareer, setDescriptionCareer] = useState<string>('');
+    const [categoryName, setCategoryName] = useState<string>('');
+    const [imgCharactor, setImgCharactor] = useState<string>('');
 
     async function getResultData() {
         const response = await API_Get_ResultData();
@@ -29,51 +34,43 @@ const Descrip = () => {
             console.log('error');
         }
     }
-    useEffect(() => {
-        getResultData();
-    }, [detailCharactor]);
+    // useEffect(() => {
+    //     console.log(getResultData);
+    //     getResultData();
+    // }, [detailCharactor]);
+
+    function onClickImage(description: string, description_career: string, skill: string, image_charactor: string) {
+        console.log(description_career, description, categoryName);
+        console.log(skill);
+        console.log(image_charactor);
+        console.log(detailCharactor);
+        setDetailCharactor({ description, description_career, image_charactor, skill });
+    }
+
     return (
         <>
-            {Namemax.map((item: any, index: any) => {
+            {maxScore.map((item: any, index: any) => {
                 return (
                     <>
                         <ContainerImagePreview key={index}>
                             <ImagePreview
                                 preview={false}
-                                onClick={() => history.push({ pathname: '/charactordetail', search: `categoryID=${item.categoryID}` })}
+                                onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)}
                                 width={200}
                                 src={item.image_charactor}
                             >
                                 <div>{item.skill}</div>
                             </ImagePreview>
                         </ContainerImagePreview>
-                        {/* <BodyCard>
-                            <Resultpic src={item.image_charactor} />
-                            <Hname>{item.skill}</Hname>
-                            <TextBox>
-                                <DesText>{item.description}</DesText>
-                            </TextBox>
-                            <TextBox>
-                                <DesText>{item.description_career}</DesText>
-                            </TextBox>
-                            <TextBox></TextBox>
-                        </BodyCard>
-                        <BoardAdvice /> */}
                     </>
                 );
             })}
-            {/* <BodyCard>
-                <Resultpic src={detailCharactor.image_charactor} />
-                <CategoryName>{detailCharactor.skill}</CategoryName>
-                <TextBox>
-                    <DesText>{detailCharactor.description}</DesText>
-                </TextBox>
-                <TextBox>
-                    <DesText>{detailCharactor.description_career}</DesText>
-                </TextBox>
-                <TextBox></TextBox>
-            </BodyCard>
-            <BoardAdvice /> */}
+            <CharactorDetail
+                description={detailCharactor.description}
+                description_career={detailCharactor.description_career}
+                skill={detailCharactor.skill}
+                img_charactor={detailCharactor.image_charactor}
+            />
         </>
     );
 };

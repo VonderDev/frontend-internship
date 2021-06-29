@@ -3,38 +3,43 @@ import { CategoryName, ContainerCharactorDetail, DesText, Resultpic, TextBox } f
 import { useHistory } from 'react-router-dom';
 import BoardAdvice from './BoardAdvice';
 import Container from 'components/Container/Container';
+import React from 'react';
 
 const MockScore = require('../../mocks/result.json');
 
-const CharactorDetail = () => {
+interface Props {
+    description: string;
+    description_career: string;
+    skill: string;
+    img_charactor: string;
+}
+
+const CharactorDetail: React.FC<Props> = ({ description, description_career, skill, img_charactor }) => {
     const history = useHistory();
     const idResult = window.location.search;
     const params = new URLSearchParams(idResult);
     const key = params.get('categoryID');
     const keyID = key ? parseInt(key) : 'Null';
-    const resultDes = MockScore.find((data: { categoryID: number }) => data.categoryID === keyID);
+    const resultInfo = MockScore.find((data: { categoryID: number }) => data.categoryID === keyID);
 
     useEffect(() => {
         console.log(window.location.href);
         console.log(window.location.search);
         console.log('ID :', key);
-        console.log('Result :', resultDes);
+        console.log('Result :', resultInfo);
     }, []);
 
     return (
         <>
             <Container header={null}>
-                <Resultpic preview={false} src={resultDes.image_charactor} />
+                <Resultpic preview={false} src={img_charactor} />
                 <ContainerCharactorDetail>
-                    <CategoryName>{resultDes.skill}</CategoryName>
+                    <CategoryName>{skill}</CategoryName>
                     <TextBox>
-                        <DesText>{resultDes.description}</DesText>
+                        <DesText>{description}</DesText>
                     </TextBox>
                     <CategoryName>อาชีพที่เหมาะสม</CategoryName>
-
-                    <TextBox>
-                        <DesText>{resultDes.description_career}</DesText>
-                    </TextBox>
+                    <TextBox>{description_career}</TextBox>
                 </ContainerCharactorDetail>
                 <BoardAdvice />
             </Container>
