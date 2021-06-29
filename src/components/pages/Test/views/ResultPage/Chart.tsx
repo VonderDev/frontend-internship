@@ -1,3 +1,4 @@
+import { Progress } from 'antd';
 import { useEffect, useState } from 'react';
 import { TextFeature, ChartStyled } from '../../shared/styles/ResultPage.styled';
 
@@ -49,14 +50,14 @@ const Charts = () => {
 
     useEffect(() => {
         console.log(chartValue.options);
-        console.log(chartValue.series);
-        console.log(MockScore);
+        // console.log(chartValue.series);
+        // console.log(MockScore);
     }, []);
 
     return (
         <>
             <div>
-                <TextFeature>ลักษณะเด่นของคุณ</TextFeature>
+                <TextFeature>แผนภูมิพหุปัญญา</TextFeature>
                 <ChartStyled options={chartValue.options} series={chartValue.series} type="radar" />
             </div>
         </>

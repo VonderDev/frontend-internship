@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Typography, Card, Row } from 'antd';
+import { Button, Typography, Card, Row, Progress } from 'antd';
 import Chart from 'react-apexcharts';
 
 const { Title } = Typography;
@@ -23,7 +23,7 @@ export const ButtonGoHome = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Blue-400);
-    transform: translateY(-280%);
+    transform: translateY(-150%);
     margin-left: auto;
     margin-right: auto;
     width: 400px;
@@ -41,7 +41,6 @@ export const TextFeature = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    transform: translateY(-50%);
 `;
 
 export const ChartStyled = styled(Chart)`
@@ -188,4 +187,14 @@ export const CardTag = styled(Card.Meta)`
 
 export const RowDetailCard = styled(Row)`
     padding-top: 15px;
+`;
+
+export const ProgressScore = styled(Progress)``;
+
+export const ContainerProgressScore = styled.div`
+    padding-left: 20px;
+    transform: translateY(-150%);
+`;
+export const TextNameSkill = styled.div`
+    font-weight: bolder;
 `;

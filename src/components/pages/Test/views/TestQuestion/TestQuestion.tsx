@@ -129,8 +129,8 @@ function TestQuestion() {
             console.log('Fetcher triggered');
             const data = await res.json();
             setQuestionList(data); // store all question into the hook
-            const resp = data;
-            setCurrentQuestionDetail(resp[currentQuestion]);
+            const response = data;
+            setCurrentQuestionDetail(response[currentQuestion]);
             return data;
         });
 

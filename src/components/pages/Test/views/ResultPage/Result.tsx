@@ -17,7 +17,7 @@ const Result = () => {
                     </ButtonStartOver>
                     <Chart />
                     <Descrip />
-                    <ButtonGoHome onClick={() => history.push('/')}>กลับหน้าหลัก</ButtonGoHome>
+                    <ButtonGoHome onClick={() => history.push('/resultoverview')}>Chart Overview</ButtonGoHome>
                 </ContainerResult>
             </Container>
         </>

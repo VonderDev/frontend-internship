@@ -16,6 +16,7 @@ import ProfileResult from 'components/pages/Profile/views/ProfileResult';
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
 import PrivateRoute from 'components/AuthContext/PrivateRoute';
 import TestStory from 'components/pages/Test/views/TestStartPage/TestStory';
+import ResultOverview from 'components/pages/Test/views/ResultPage/ResultOverview';
 
 function Routing() {
     return (
@@ -34,12 +35,12 @@ function Routing() {
                     <TestQuestion />
                 </TestProvider>
             </Route>
+            <Route exact path="/resultoverview" component={ResultOverview} />
             <PrivateRoute exact path="/editProfile" component={editProfile} />
             <Route exact path="/result" component={Result} />
             <Route exact path="/readmore" component={ReadMore} />
             <PrivateRoute exact path="/profileresult" component={ProfileResult} />
             <PrivateRoute exact path="/boardhistory" component={BoardHistory} />
-
         </Switch>
     );
 }
