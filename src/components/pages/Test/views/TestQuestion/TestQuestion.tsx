@@ -55,7 +55,7 @@ function TestQuestion() {
         }
     }
     useEffect(() => {
-        // getTestData();
+        getTestData();
     }, []);
 
     function onNextQuestion(value: number) {

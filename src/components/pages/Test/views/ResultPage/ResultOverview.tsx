@@ -19,19 +19,17 @@ function ResultOverview() {
 
     return (
         <>
-            <Container header={null}>
-                <Chart />
-                {scoreList.map((item: any, index: any) => {
-                    return (
-                        <ContainerProgressScore key={index}>
-                            <TextNameSkill>{item.skill}</TextNameSkill>
-                            <div>{item.skill_summarize}</div>
-                            <Progress style={{ width: 400 }} strokeLinecap="square" percent={item.score} />
-                        </ContainerProgressScore>
-                    );
-                })}
-                <ButtonGoHome onClick={() => history.push('/result')}>กลับหน้าหลัก</ButtonGoHome>
-            </Container>
+            <Chart />
+            {scoreList.map((item: any, index: any) => {
+                return (
+                    <ContainerProgressScore key={index}>
+                        <TextNameSkill>{item.skill}</TextNameSkill>
+                        <div>{item.skill_summarize}</div>
+                        <Progress style={{ width: 400 }} strokeLinecap="square" percent={item.score} />
+                    </ContainerProgressScore>
+                );
+            })}
+            <ButtonGoHome onClick={() => history.push('/result')}>กลับหน้าหลัก</ButtonGoHome>
         </>
     );
 }

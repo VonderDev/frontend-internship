@@ -1,4 +1,3 @@
-
 import mockResultData from '../mocks/result.json';
 import { IResult } from '../shared/interface/Result.interfaces';
 

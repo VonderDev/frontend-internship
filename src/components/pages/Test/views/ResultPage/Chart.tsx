@@ -1,6 +1,6 @@
 import { Progress } from 'antd';
 import { useEffect, useState } from 'react';
-import { ChartStyled, TextTopicResultOverview } from '../../shared/styles/ResultPage.styled';
+import { ChartStyled, TextHeaderResult } from '../../shared/styles/ResultPage.styled';
 
 interface Chartprop {
     options: any;
@@ -57,7 +57,7 @@ const Charts = () => {
     return (
         <>
             <div>
-                <TextTopicResultOverview>แผนภูมิพหุปัญญา</TextTopicResultOverview>
+                <TextHeaderResult>แผนภูมิพหุปัญญา</TextHeaderResult>
                 <ChartStyled options={chartValue.options} series={chartValue.series} type="radar" />
             </div>
         </>

@@ -23,21 +23,19 @@ const BoardAdvice = () => {
             author: 'Maneemena',
             imgCardBoard: 'https://sites.google.com/site/englishbydao99aaa/_/rsrc/1484476698203/hnwy-thi-4-kheiyn-xyangri-hi-thuk-khorngsrang/49.jpg',
         },
-        {
-            title: 'วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัว',
-            tag: 'บทความ #ตรรกะ  #มิติสัมพันธ์',
-            date: '11 มิถุนายน 2564',
-            author: 'Lookmai',
-            imgCardBoard: 'https://sites.google.com/site/englishbydao99aaa/_/rsrc/1484476698203/hnwy-thi-4-kheiyn-xyangri-hi-thuk-khorngsrang/49.jpg',
-        },
+        // {
+        //     title: 'วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัว',
+        //     tag: 'บทความ #ตรรกะ  #มิติสัมพันธ์',
+        //     date: '11 มิถุนายน 2564',
+        //     author: 'Lookmai',
+        //     imgCardBoard: 'https://sites.google.com/site/englishbydao99aaa/_/rsrc/1484476698203/hnwy-thi-4-kheiyn-xyangri-hi-thuk-khorngsrang/49.jpg',
+        // },
     ];
 
     return (
         <>
             <Row>
-                <TextBoardTopic xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-                    แนะนำสำหรับคุณ
-                </TextBoardTopic>
+                <TextBoardTopic>แนะนำสำหรับคุณ</TextBoardTopic>
                 <ButtonSeeAllBoard onClick={() => history.push('/board')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
             </Row>
             <ContainerBoard>

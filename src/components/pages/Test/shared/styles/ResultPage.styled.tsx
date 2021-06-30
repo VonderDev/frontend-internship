@@ -33,7 +33,7 @@ export const ButtonGoHome = styled(Button)`
     justify-content: center;
     font-size: 18px;
 `;
-export const TextTopicResultOverview = styled.div`
+export const TextHeaderResult = styled.div`
     text-align: center;
     font-size: 22px;
     padding: 30px;
@@ -107,6 +107,15 @@ export const ImagePreview = styled(Image)`
     }
 `;
 
+export const ImageCharactorCarousel = styled(Image)`
+    border-radius: 15px;
+    width: 100%;
+    height: 100vh;
+    :hover {
+        cursor: pointer;
+    }
+`;
+
 export const ContainerImagePreview = styled(Image.PreviewGroup)`
     & .ant-image {
         padding-left: 20px;
@@ -121,6 +130,16 @@ export const CategoryName = styled.h1`
     font-size: 22px;
     font-weight: bolder;
     padding-top: 20px;
+`;
+
+export const SkillName = styled.h1`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bolder;
+    padding-top: 20px;
+    text-align: center;
 `;
 export const DesText = styled.div`
     display: flex;
@@ -181,6 +200,19 @@ export const Resultpic = styled(Image)`
     margin-top: 20px;
 `;
 
+export const ImgCharactorSummarize = styled(Image)`
+    width: 80%;
+    height: 50vh;
+    transform: translateX(10%);
+`;
+
+export const ContainerCharactorSummarize = styled.div`
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 5%;
+`;
 export const BoardRecomment = styled(Card)`
     border-radius: 15px;
     margin-bottom: 50px;
@@ -192,8 +224,9 @@ export const TextDateBoard = styled.div`
 
 export const ContainerBoard = styled.div`
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 4%;
 `;
 
 export const CardTag = styled(Card.Meta)`

@@ -7,3 +7,8 @@ export interface IResult {
     image_charactor: string;
     skill_summerize?: string;
 }
+export interface IResultSummarize {
+    skill: string;
+    image_charactor: string;
+    skill_summarize: string;
+}

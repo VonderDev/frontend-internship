@@ -29,6 +29,7 @@ export async function API_PostTestResult(data: any) {
 axios({
     method: 'get',
     url: 'http://localhost:5000/questions',
+
 })
     .then((response) => {
         console.log('[Question detail from backend]: ', response.data);
@@ -37,3 +38,4 @@ axios({
     .catch((err) => {
         console.error(err);
     });
+
