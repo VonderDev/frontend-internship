@@ -1,6 +1,6 @@
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { API_Profile_Data } from '../apis/profile.api';
-import { Form, List, Col, Row } from 'antd';
+import { Col, Row } from 'antd';
 import { useEffect } from 'react';
 import { IIconTextProfile, IListDataBoardHistory, IProfile } from '../shared/Profile.interface';
 import { CalendarOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
@@ -18,11 +18,12 @@ import {
     ResultImage,
     CardText,
     IconArrow,
-    ListProfile,
-    ProfileListItem,
     HistoryImage,
     LinkMoreResult,
     HistoryText,
+    RowStyled,
+    BoardCard
+    
 } from '../shared/Profile.styles';
 import Container from 'components/Container/Container';
 import React from 'react';
@@ -44,7 +45,7 @@ function Profile() {
     }, []);
 
     const listData: Array<IListDataBoardHistory> = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 3; i++) {
         listData.push({
             href: '/board',
             title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ${i}`,
@@ -52,6 +53,11 @@ function Profile() {
             description: 'บทความ',
         });
     }
+    const cardList = [
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', },
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', },
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', }
+    ];
 
     const IconText = ({ icon, text }: IIconTextProfile) => (
         <div>
@@ -66,7 +72,7 @@ function Profile() {
                 <ContainerProfile>
                     <UserImage src={cred.pic} />
                     <TextUsername>{cred.username}</TextUsername>
-                    <Row>
+                    <RowStyled>
                         <Col span={8}>
                             <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
                         </Col>
@@ -75,50 +81,51 @@ function Profile() {
                                 {cred.name} {cred.surname}
                             </TextUserInfo2>
                         </Col>
-                    </Row>
-                    <Row>
-                        <Col span={20}>
+                    </RowStyled>
+                    <RowStyled>
+                        <Col span={8}>
                             <TextUserInfo1>อีเมล :</TextUserInfo1>
                         </Col>
-                        <Col span={4}>
-                                <TextUserInfo2>{cred.email}</TextUserInfo2>
+                        <Col span={16}>
+                            <TextUserInfo2>{cred.email}</TextUserInfo2>
                         </Col>
-                    </Row>
-                        <ButtonSubmit onClick={() => history.push('/editProfile')}>แก้ไขข้อมูลส่วนตัว</ButtonSubmit>
-                    <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
-                    <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
-
-                    <Link to="/result">
-                        <ResultCard>
-                            <Row>
-                                <Col span={8}>
-                                    <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
-                                </Col>
-                                <Col span={14}>
-                                    <CardText>
-                                        <Row>ลักษณะเด่นของคุณ</Row>
-                                        <Row>วันที่ 15 มิ.ย. 2564</Row>
-                                    </CardText>
-                                </Col>
-                                <Col span={2}>
-                                    <IconArrow />
-                                </Col>
-                            </Row>
-                        </ResultCard>
-                    </Link>
-                    <TextTopic2>
-                        กระทู้ของคุณ
-                        <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
-                    </TextTopic2>
-                    <ListProfile
+                    </RowStyled>
+                    <ButtonSubmit onClick={() => history.push('/editProfile')}>แก้ไขข้อมูลส่วนตัว</ButtonSubmit>
+                    <RowStyled>
+                        <Col span={16}>
+                            <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
+                        </Col>
+                        <Col span={8}>
+                            <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
+                        </Col>
+                    </RowStyled>
+                    <ResultCard onClick={() => history.push('/result')}>
+                        <RowStyled>
+                            <Col span={8}>
+                                <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
+                            </Col>
+                            <Col span={14}>
+                                <CardText>
+                                    <RowStyled>ลักษณะเด่นของคุณ</RowStyled>
+                                    <RowStyled>วันที่ 15 มิ.ย. 2564</RowStyled>
+                                </CardText>
+                            </Col>
+                            <Col span={2}>
+                                <IconArrow />
+                            </Col>
+                        </RowStyled>
+                    </ResultCard>
+                    <RowStyled>
+                        <Col span={16}>
+                            <TextTopic2>กระทู้ของคุณ</TextTopic2>
+                        </Col>
+                        <Col span={8}>
+                            <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
+                        </Col>
+                    </RowStyled>
+                    {/* <ListProfile
                         itemLayout="vertical"
                         size="large"
-                        pagination={{
-                            onChange: (page) => {
-                                console.log(page);
-                            },
-                            pageSize: 3,
-                        }}
                         dataSource={listData}
                         renderItem={(item: any) => (
                             <ProfileListItem
@@ -134,11 +141,32 @@ function Profile() {
                                 </HistoryText>
                             </ProfileListItem>
                         )}
-                    />
+                    /> */}
+                    {cardList.map((item, index) => {
+                        return (
+                            <BoardCard
+                                key={index}
+                                onClick={() => {
+                                    history.push('/Board');
+                                }}
+                            >
+                                <RowStyled>
+                                    <Col span={6}>
+                                            <HistoryImage src={item.avatar} />
+                                    </Col>
+                                    <Col span={16}>
+                                        <CardText>
+                                            <Row><HistoryText>{item.title}</HistoryText></Row>
+                                            <Row><HistoryText>{item.description}</HistoryText></Row>
+                                        </CardText>
+                                    </Col>
+                                </RowStyled>
+                            </BoardCard>
+                        );
+                    })}
                 </ContainerProfile>
             </Container>
         </div>
     );
 }
-
 export default Profile;

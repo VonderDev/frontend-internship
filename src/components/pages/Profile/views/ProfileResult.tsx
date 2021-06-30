@@ -1,4 +1,4 @@
-import { List, Row, Col } from 'antd';
+import { Row, Col } from 'antd';
 import Container from 'components/Container/Container';
 import React from 'react';
 import { useHistory } from 'react-router-dom';

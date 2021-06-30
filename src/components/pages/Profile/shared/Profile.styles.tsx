@@ -1,4 +1,4 @@
-import { Button, Input, Card, Image, List, Modal } from 'antd';
+import { Button , Input , Card , Image , List , Modal , Row} from 'antd';
 import styled from 'styled-components';
 import { RightOutlined } from '@ant-design/icons';
 
@@ -12,7 +12,7 @@ export const AlignLeft = styled.div`
 
 export const ContainerProfile = styled.div`
     padding: 0px;
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -26,7 +26,7 @@ export const ButtonSubmit = styled(Button)`
     border-radius: 10px;
     color: var(--Blue-400);
     border-color: var(--Blue-400);
-    width: 80%;
+    width: 100%;
     height: 51px;
     margin-top: 15px;
     margin-bottom: 0px;
@@ -94,7 +94,11 @@ export const TextTopicEditProfile = styled.div`
 `;
 
 export const TextTopic2 = styled.div`
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
     padding-top: 15px;
+    text-align: left;
     font-weight: bolder;
     font-size: 22px;
     margin-top: 15px;
@@ -138,6 +142,7 @@ export const CardText = styled.div`
 export const HistoryText = styled.div`
     font-size: 14px;
     font-weight: bolder;
+    transform: translateY(-100%) translateX(0%);
 `;
 
 export const UserImage = styled(Image)`
@@ -156,9 +161,9 @@ export const ResultImage = styled.img`
 export const HistoryImage = styled.img`
     width: 88px;
     height: 88px;
-    transform: translateY(-18%) translateX(-28%);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    transform: translateY(-1%);
 `;
 
 export const IconArrow = styled(RightOutlined)`
@@ -167,8 +172,9 @@ export const IconArrow = styled(RightOutlined)`
 `;
 
 export const LinkMoreResult = styled.div`
-    width: 343px;
-    float: right;
+    width: 100%;
+    padding-top: 15px;
+    margin-top: 15px;
     text-align: right;
     font-size: 16px;
     color: var(--Blue-300);
@@ -178,10 +184,21 @@ export const ResultCard = styled(Card)`
     box-shadow: 0px 3px 6px #c7c7c7;
     margin-top: 0px;
     height: 130px;
-    width: 343px;
+    width: 100%;
     border-radius: 10px;
     & .ant-card-body {
         padding: 5px;
+    }
+`;
+
+export const BoardCard = styled(Card)`
+    margin-bottom: 10px;
+    height: 88px;
+    margin-top: 10px;
+    box-shadow: 0px 3px 6px #c7c7c7;
+    border-radius: 10px;
+    & .ant-card-body {
+        padding: 0px;
     }
 `;
 
@@ -198,6 +215,11 @@ export const ResultCardHistory = styled(Card)`
 
 export const ListProfile = styled(List)`
     font-weight: bolder;
+    width: 100%;
+`;
+
+export const RowStyled = styled(Row)`
+    width: 100%;
 `;
 
 export const ProfileListItem = styled(List.Item)`
@@ -205,7 +227,6 @@ export const ProfileListItem = styled(List.Item)`
     height: 88px;
     box-shadow: 0px 3px 6px #c7c7c7;
     border-radius: 10px;
-    width: 343px;
     & .ant-list-item-meta-title {
         font-size: 14px;
         font-weight: bolder;
