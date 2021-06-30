@@ -2,8 +2,8 @@ import { List, Row, Col } from 'antd';
 import Container from 'components/Container/Container';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { IIconTextProfile, IListDataResult } from '../shared/Profile.interface';
-import { ContainerProfile, AlignCenter , ResultCardHistory, AlignLeft, ResultImage, CardText, IconArrow } from '../shared/Profile.styles';
+import { IIconTextProfile } from '../shared/Profile.interface';
+import { ContainerProfile, ResultCardHistory, AlignLeft, ResultImage, CardText, IconArrow } from '../shared/Profile.styles';
 
 function ProfileResult() {
     const history = useHistory();
@@ -25,7 +25,6 @@ function ProfileResult() {
     return (
         <Container header={{ left: 'back', children: 'ผลลัพธ์ของคุณ', right: 'menu' }}>
             <ContainerProfile>
-                <AlignCenter>
                     {cardList.map((item, index) => {
                         return (
                             <ResultCardHistory
@@ -53,7 +52,6 @@ function ProfileResult() {
                             </ResultCardHistory>
                         );
                     })}
-                </AlignCenter>
             </ContainerProfile>
         </Container>
     );

@@ -1,15 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { BackHeader } from 'components/Container/Header.styled';
-import { ButtonSave, ConfirmModal, ButtonLeaveModal, ButtonCancleModal, TextHeadModal, TextBodyModal} from '../shared/Profile.styles';
+import { ConfirmModal, ButtonLeaveModal, ButtonCancleModal, TextHeadModal, TextBodyModal } from '../shared/Profile.styles';
 import { ProfileInput } from './ProfileInput';
 import { LeftOutlined } from '@ant-design/icons';
 import Container from 'components/Container/Container';
 import { useHistory } from 'react-router-dom';
 
 const EditProfile = () => {
-    const handleOnClick = () => {
-        console.log();
-    };
     const [isModalVisible, setIsModalVisible] = useState(false);
     const showModal = () => {
         setIsModalVisible(true);
@@ -21,6 +18,7 @@ const EditProfile = () => {
         setIsModalVisible(false);
     };
     const history = useHistory();
+
     const goBack = useCallback(() => {
         history.goBack();
     }, []);
@@ -33,7 +31,7 @@ const EditProfile = () => {
                     </BackHeader>
                 ),
                 children: 'แก้ไขข้อมูลส่วนตัว',
-                right: <ButtonSave htmlType="submit" onClick={handleOnClick}>บันทึก</ButtonSave>,
+                right: '',
             }}
         >
             <ConfirmModal
@@ -45,7 +43,7 @@ const EditProfile = () => {
             >
                 <TextBodyModal>การเปลี่ยนแปลงทั้งหมดจะไม่ถูกบันทึก</TextBodyModal>
             </ConfirmModal>
-            <ProfileInput/>
+            <ProfileInput />
         </Container>
     );
 };

@@ -2,10 +2,6 @@ import { Button, Input, Card, Image, List, Modal } from 'antd';
 import styled from 'styled-components';
 import { RightOutlined } from '@ant-design/icons';
 
-export const AlignCenter = styled.div`
-    
-`;
-
 export const AlignRight = styled.div`
     float: right;
 `;
@@ -16,7 +12,7 @@ export const AlignLeft = styled.div`
 
 export const ContainerProfile = styled.div`
     padding: 0px;
-    max-width: 343px;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -30,7 +26,7 @@ export const ButtonSubmit = styled(Button)`
     border-radius: 10px;
     color: var(--Blue-400);
     border-color: var(--Blue-400);
-    width: 343px;
+    width: 80%;
     height: 51px;
     margin-top: 15px;
     margin-bottom: 0px;
@@ -40,13 +36,17 @@ export const ButtonSubmit = styled(Button)`
 export const ButtonSave = styled(Button)`
     font-weight: bolder;
     font-size: 16px;
-    border: none;
+    position: absolute;
+    float: left;
+    top: 0;
     background-color: transparent;
+    border: none;
     padding: 0px;
     color: var(--Blue-400);
     width: 65px;
     height: 19px;
-    transform: translateY(0%);
+    z-index: 999;
+    transform: translateX(48vh) translateY(2.5vh);
 `;
 
 export const ButtonLeaveModal = styled(Button)`
@@ -94,7 +94,6 @@ export const TextTopicEditProfile = styled.div`
 `;
 
 export const TextTopic2 = styled.div`
-    width: 343px;
     padding-top: 15px;
     font-weight: bolder;
     font-size: 22px;
@@ -103,14 +102,12 @@ export const TextTopic2 = styled.div`
 `;
 
 export const TextUserInfo1 = styled.div`
-    width: 343px;
     text-align: left;
     font-weight: bolder;
     font-size: 16px;
     margin-top: 10px;
 `;
 export const TextUserInfo2 = styled.div`
-    width: 343px;
     text-align: right;
     float: right;
     font-weight: normal;

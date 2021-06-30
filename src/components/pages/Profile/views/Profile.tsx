@@ -77,18 +77,14 @@ function Profile() {
                         </Col>
                     </Row>
                     <Row>
-                        <Col span={8}>
+                        <Col span={20}>
                             <TextUserInfo1>อีเมล :</TextUserInfo1>
                         </Col>
-                        <Col span={16}>
-                            <AlignRight>
+                        <Col span={4}>
                                 <TextUserInfo2>{cred.email}</TextUserInfo2>
-                            </AlignRight>
                         </Col>
                     </Row>
-                    <Link to="/editProfile">
-                        <ButtonSubmit>แก้ไขข้อมูลส่วนตัว</ButtonSubmit>
-                    </Link>
+                        <ButtonSubmit onClick={() => history.push('/editProfile')}>แก้ไขข้อมูลส่วนตัว</ButtonSubmit>
                     <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
                     <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
 
