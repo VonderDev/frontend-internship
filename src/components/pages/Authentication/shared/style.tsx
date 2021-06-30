@@ -1,28 +1,11 @@
 import styled from 'styled-components';
-import { Button, Image, Input, Checkbox, Drawer, Typography, Form } from 'antd';
+import { Image, Checkbox, Drawer, Typography, Form } from 'antd';
 
-export const ButtonColor = styled(Button)`
-    border-radius: 15px;
-    font-weight: bolder;
-    color: white;
-    background-color: var(--Blue-400);
-    width: 324px;
-    height: 55px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+export const FormLogin = styled(Form)`
+    width: 90%
 `;
 
-export const BaseInput = styled(Input)`
-    color: grey;
-    font-size: var(--font-18);
-    border-radius: 15px;
-    width: 324px;
-    height: 55px;
-    box-shadow: 0px 3px 6px #c7c7c7;
-`;
-
-export const FormItem = styled(Form.Item)`
+export const FormItemTextValidate = styled(Form.Item)`
     & .ant-form-item-control {
     text-align: left;
     }
@@ -61,7 +44,7 @@ export const PrivacyContainer = styled.div`
   text-align: center;
   border: 1px solid #ebedf0;
   border-radius: 2px;
-`;  
+`;
 
 export const CheckboxPrivacy = styled(Checkbox)`
     padding-top: 20px;
@@ -106,10 +89,16 @@ export const TextboxPrivacyCenter = styled.div`
 `;
 
 export const DrawerRadius = styled(Drawer)`
+    & .ant-drawer-header {
+        border-bottom: none;
+    }
     & .ant-drawer-content {
         border-radius: 12px 12px 0px 0px;
     }
     & .ant-drawer-title {
+        padding-top: 30px;
+        font-size: var(--font-22);
+        align-items: center;
         font-weight: bold;
     }
     & .ant-drawer-body {

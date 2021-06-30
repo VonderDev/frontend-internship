@@ -1,28 +1,24 @@
 import { useState } from 'react';
-import { Form} from 'antd';
-import { useHistory ,Redirect} from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
+import { useAuthContext } from 'components/AuthContext/AuthContext';
 import {
-  ButtonColor,
   FontTextHeader,
-  FormItem,
-  BaseInput,
   LogoPage,
   MoveCenter,
   PrivacyContainer,
   CheckboxPrivacy,
   DrawerRadius,
-  TextRegister,
-  TextAgree
+  TextAgree,
+  TextRegister
 } from 'components/pages/Authentication/shared/style';
+import { LoginForm } from './LoginForm';
 import Container from 'components/Container/Container';
 import logo from '../../images/logo.png';
-import { useAuthContext } from 'components/AuthContext/AuthContext';
 import Privacy from './Privacy';
+import { ButtonStyle } from 'shared/style/theme/component';
 
 const Login = () => {
 
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
   const [visible, setVisible] = useState<boolean>(false);
   const [placement, setPlacement] = useState<string>('bottom');
   const { loginUser, login } = useAuthContext();
@@ -41,14 +37,14 @@ const Login = () => {
     setVisible(false);
   };
 
-  if (loginUser){return  <Redirect to='/'/>}
+  if (loginUser) { return <Redirect to='/' /> }
   return (
     <Container header={{ left: 'back', right: 'menu' }}>
       <PrivacyContainer>
         <LogoPage src={logo} preview={false} />
         <MoveCenter>
           <DrawerRadius
-            title="Privacy Policy"
+            title="นโยบายความเป็นส่วนตัว"
             placement="bottom"
             closable={false}
             onClose={onClose}
@@ -58,38 +54,19 @@ const Login = () => {
             height={650}
             style={{ position: 'absolute', overflowY: 'hidden' }}
           >
-              <Privacy />
-            <CheckboxPrivacy checked={checked} onChange={() => { setChecked( prev => !prev )}} >
+            <Privacy />
+            <CheckboxPrivacy checked={checked} onChange={() => { setChecked(prev => !prev) }} >
               <TextAgree> I've read and agreed to the <span style={{ color: '#3A8CE4', fontWeight: 'bold' }}>Privacy Policy</span></TextAgree>
             </CheckboxPrivacy>
-            <ButtonColor onClick={confirmPolicy} htmlType="submit" disabled={!checked}>
+            <ButtonStyle typebutton="Large" sizebutton={95} onClick={confirmPolicy} htmlType="submit" disabled={!checked}>
               ยืนยัน
-            </ButtonColor>
+            </ButtonStyle>
           </DrawerRadius>
-
           <FontTextHeader>เข้าสู่ระบบ</FontTextHeader>
-          <Form initialValues={{ remember: true }} layout="horizontal">
-
-              <FormItem name="email"  rules={[{ required: true, message: 'กรุณาใส่อีเมล!' }]} >
-                <BaseInput type="email" placeholder="อีเมล"onChange = { ({target: {value}}) =>  {setEmail(value)} } />
-              </FormItem>
-
-              <FormItem name="password"  rules={[{ required: true, message: 'กรุณาใส่รหัสผ่าน!' }]} >
-                <BaseInput type="password" placeholder="รหัสผ่าน" onChange = { ({target: {value}}) =>  {setPassword(value)} } />
-              </FormItem>
-
-            <FormItem>
-              <ButtonColor onClick={()=> login({email,password}) } >
-                เข้าสู่ระบบ
-              </ButtonColor>
-            </FormItem>
-
-            <Form.Item>
-              <TextRegister>
-                ไม่มีบัญชีใช่ไหม? <a onClick={showDrawer} style={{ fontWeight: 'bold' }}>สร้างบัญชีกันเถอะ!</a>
-              </TextRegister>
-            </Form.Item>
-          </Form>
+          <LoginForm />
+          <TextRegister>
+            ไม่มีบัญชีใช่ไหม? <a onClick={showDrawer} style={{ fontWeight: 'bold' }}>สร้างบัญชีกันเถอะ!</a>
+          </TextRegister>
         </MoveCenter>
       </PrivacyContainer>
     </Container>
