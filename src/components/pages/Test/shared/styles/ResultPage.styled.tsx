@@ -107,15 +107,6 @@ export const ImagePreview = styled(Image)`
     }
 `;
 
-export const ImageCharactorCarousel = styled(Image)`
-    border-radius: 15px;
-    width: 100%;
-    height: 100vh;
-    :hover {
-        cursor: pointer;
-    }
-`;
-
 export const ContainerImagePreview = styled(Image.PreviewGroup)`
     & .ant-image {
         padding-left: 20px;

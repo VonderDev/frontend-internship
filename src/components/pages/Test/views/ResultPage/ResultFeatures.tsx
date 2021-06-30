@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { ContainerImagePreview, ImagePreview, TextHeaderResult } from '../../shared/styles/ResultPage.styled';
-import { useHistory } from 'react-router-dom';
-import { Col, Row, Image } from 'antd';
 import { API_Get_ResultData } from '../../apis/Result.api';
 import { IResult } from '../../shared/interface/Result.interfaces';
 import CharactorDetail from './CharactorDetail';
@@ -19,11 +17,12 @@ const Descrip = () => {
         console.log('Name: ', maxScoreList.length);
     }, []);
 
-    const [detailCharactor, setDetailCharactor] = useState<IResult>({ skill: '', image_charactor: '', description: '', description_career: '' });
-    // const [description, setDescription] = useState<string>('');
-    // const [descriptionCareer, setDescriptionCareer] = useState<string>('');
-    // const [categoryName, setCategoryName] = useState<string>('');
-    // const [imgCharactor, setImgCharactor] = useState<string>('');
+    const [detailCharactor, setDetailCharactor] = useState<IResult>({
+        skill: maxScoreList[0].skill,
+        image_charactor: maxScoreList[0].image_charactor,
+        description: maxScoreList[0].description,
+        description_career: maxScoreList[0].description_career,
+    });
 
     async function getResultData() {
         const response = await API_Get_ResultData();
@@ -51,18 +50,11 @@ const Descrip = () => {
             <TextHeaderResult>ลักษณะเด่นของคุณ ({maxScoreList.length}ด้าน)</TextHeaderResult>
             {maxScoreList.map((item: any, index: any) => {
                 return (
-                    <>
-                        <ContainerImagePreview key={index}>
-                            <ImagePreview
-                                preview={false}
-                                onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)}
-                                width={200}
-                                src={item.image_charactor}
-                            >
-                                <div>{item.skill}</div>
-                            </ImagePreview>
-                        </ContainerImagePreview>
-                    </>
+                    <ContainerImagePreview key={index}>
+                        <ImagePreview preview={false} onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)} width={200} src={item.image_charactor}>
+                            <div>{item.skill}</div>
+                        </ImagePreview>
+                    </ContainerImagePreview>
                 );
             })}
             <CharactorDetail

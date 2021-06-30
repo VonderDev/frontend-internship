@@ -1,5 +1,4 @@
 import { Progress, Tabs } from 'antd';
-import Container from 'components/Container/Container';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ButtonGoHome, ContainerProgressScore, TextNameSkill } from '../../shared/styles/ResultPage.styled';

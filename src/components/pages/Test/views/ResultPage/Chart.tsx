@@ -1,4 +1,3 @@
-import { Progress } from 'antd';
 import { useEffect, useState } from 'react';
 import { ChartStyled, TextHeaderResult } from '../../shared/styles/ResultPage.styled';
 

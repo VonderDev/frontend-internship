@@ -1,6 +1,5 @@
 import { CategoryName, ContainerCharactorDetail, DesText, Resultpic, TextBox } from '../../shared/styles/ResultPage.styled';
 import BoardAdvice from './BoardAdvice';
-import Container from 'components/Container/Container';
 import React from 'react';
 
 interface ResultProps {
