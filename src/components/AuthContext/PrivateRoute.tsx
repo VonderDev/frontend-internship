@@ -4,8 +4,7 @@ import { useAuthContext } from './AuthContext';
 
     const PrivateRoute = ({component: Component, ...rest}: any) => {
         const token = localStorage.getItem('token');
-        const { user } = useAuthContext()
-        console.log(token)
+        console.log('token',token)
         const routeComponent = (props: any) => (
             token
                 ? <Component {...props} />
