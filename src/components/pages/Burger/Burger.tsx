@@ -5,6 +5,8 @@ import styled, { css } from 'styled-components';
 import { MenuOutlined, UserOutlined, LoginOutlined } from '@ant-design/icons';
 import { Layout, Menu, Avatar, Button, Spin } from 'antd';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
+import LoadingPage from 'components/AuthContext/LoadingPage';
+import axios from 'axios';
 
 const { Header, Sider } = Layout;
 
@@ -122,29 +124,45 @@ const ListmenuLogout = styled(Listmenu)`
 const Burger = () => {
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [username, setUsername] = useState('');
     const token = localStorage.getItem('token');
-    const { logout,user} = useAuthContext();
+    const { logout ,user ,getUser } = useAuthContext();
     function delay(ms: number) {
         return new Promise( resolve => setTimeout(resolve, ms) );
     }
 
-    // const getUsername = async () => { 
-    //     await delay(2000); 
-    //     console.log('burger',user.resuit.username )
-    //     return user.resuit.username 
+    const getUserInfo = async() =>{
+        const token = localStorage.getItem('token');
+        const response = await getUser();
+        if(token){
+            if (response) {
+                setUsername(response.username)
+                console.log(response);
+            } else {
+                console.log('error');
+            }
+        } else {
+            console.log('none');
+        }
 
-    // };
+      }
+  
+    useEffect(() => {
+        if(token){
+        getUserInfo()
+    }else{
+        window.location.reload;
+    };
+    }, []);
 
     return (
-        <>
+            <>
             <MenuOutlined  style={{ color: '#8a8888' ,fontSize: '24px'}} onClick={showSidebar} />
-            
             <Navmenu active={sidebar ? 'active' : ''}>
                 <Ul onClick={showSidebar}>
                     <Avataruser>
                         <Avatar size={75} icon={<UserOutlined />} />
-                        { token ? (<AvatarName>{user.resuit.username }</AvatarName>)
+                        { token ? (<AvatarName>{username}</AvatarName>)
                         : (<AvatarName> Guest #000  </AvatarName> )}
                         
                         {token ? null : (
@@ -184,7 +202,8 @@ const Burger = () => {
                     )}
                 </Ul>
             </Navmenu>
-        </>
+             </>
+        
     );
 };
 
