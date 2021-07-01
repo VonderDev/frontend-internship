@@ -1,10 +1,8 @@
-export interface IProfile {
+export interface IUser {
     username: string;
-    name: string;
-    surname: string;
+    firstName: string;
+    lastName: string;
     email: string;
-    result: string;
-    pic: string;
 }
 
 export interface IListDataBoardHistory {

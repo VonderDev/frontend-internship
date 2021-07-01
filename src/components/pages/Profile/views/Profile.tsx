@@ -1,13 +1,12 @@
 import { useHistory } from 'react-router-dom';
-import { API_Profile_Data } from '../apis/profile.api';
+import { API_USER_Data } from '../apis/profile.api';
 import { Col, Row } from 'antd';
 import { useEffect } from 'react';
-import { IIconTextProfile, IListDataBoardHistory, IProfile } from '../shared/Profile.interface';
+import { IIconTextProfile, IListDataBoardHistory, IUser } from '../shared/Profile.interface';
 import { CalendarOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
 import { useState } from 'react';
 import {
     ContainerProfile,
-    AlignRight,
     ButtonSubmit,
     TextUserInfo1,
     TextUserInfo2,
@@ -22,20 +21,19 @@ import {
     LinkMoreResult,
     HistoryText,
     RowStyled,
-    BoardCard
-    
+    BoardCard,
 } from '../shared/Profile.styles';
 import Container from 'components/Container/Container';
 import React from 'react';
 
 function Profile() {
-    const [cred, setCred] = useState<IProfile>({ name: '', surname: '', email: '', result: '', pic: '', username: '' });
+    const [cred, setCred] = useState<IUser>({ firstName: '', lastName: '', email: '', username: '' });
     const history = useHistory();
     async function getStatisticData() {
-        const response = await API_Profile_Data();
+        const response = await API_USER_Data();
         if (response) {
             console.log(response.name);
-            setCred((prevState) => ({ ...prevState, name: response.name, surname: response.surname, email: response.email, result: response.result, pic: response.pic, username: response.username }));
+            setCred((prevState) => ({ ...prevState, firstName: response.firstName, lastName: response.lastName, email: response.email, username: response.username }));
         } else {
             console.log('error');
         }
@@ -54,9 +52,9 @@ function Profile() {
         });
     }
     const cardList = [
-        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', },
-        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', },
-        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', }
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ' },
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ' },
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ' },
     ];
 
     const IconText = ({ icon, text }: IIconTextProfile) => (
@@ -70,7 +68,7 @@ function Profile() {
         <div>
             <Container header={{ left: 'back', children: 'ข้อมูลส่วนตัว', right: 'menu' }}>
                 <ContainerProfile>
-                    <UserImage src={cred.pic} />
+                    <UserImage  />
                     <TextUsername>{cred.username}</TextUsername>
                     <RowStyled>
                         <Col span={8}>
@@ -78,7 +76,7 @@ function Profile() {
                         </Col>
                         <Col span={16}>
                             <TextUserInfo2>
-                                {cred.name} {cred.surname}
+                                {cred.firstName} {cred.lastName}
                             </TextUserInfo2>
                         </Col>
                     </RowStyled>
@@ -152,12 +150,16 @@ function Profile() {
                             >
                                 <RowStyled>
                                     <Col span={6}>
-                                            <HistoryImage src={item.avatar} />
+                                        <HistoryImage src={item.avatar} />
                                     </Col>
                                     <Col span={16}>
                                         <CardText>
-                                            <Row><HistoryText>{item.title}</HistoryText></Row>
-                                            <Row><HistoryText>{item.description}</HistoryText></Row>
+                                            <Row>
+                                                <HistoryText>{item.title}</HistoryText>
+                                            </Row>
+                                            <Row>
+                                                <HistoryText>{item.description}</HistoryText>
+                                            </Row>
                                         </CardText>
                                     </Col>
                                 </RowStyled>
