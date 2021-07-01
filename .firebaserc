@@ -1,0 +1,20 @@
+{
+  "projects": {
+    "default": "vonder-me-fe"
+  },
+  "targets": {
+    "vonder-me-fe": {
+      "hosting": {
+        "dev": [
+          "vonder-me-fe-dev"
+        ],
+        "staging": [
+          "vonder-me-fe-stag"
+        ],
+        "production": [
+          "vonder-me-fe"
+        ]
+      }
+    }
+  }
+}
