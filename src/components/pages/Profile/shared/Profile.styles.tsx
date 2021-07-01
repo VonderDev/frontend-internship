@@ -194,7 +194,7 @@ export const ResultCard = styled(Card)`
 export const BoardCard = styled(Card)`
     margin-bottom: 10px;
     height: 88px;
-    margin-top: 10px;
+    width: 100%;
     box-shadow: 0px 3px 6px #c7c7c7;
     border-radius: 10px;
     & .ant-card-body {
