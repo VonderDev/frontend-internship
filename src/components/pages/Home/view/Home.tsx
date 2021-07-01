@@ -67,7 +67,7 @@ function Home() {
 
     return (
         <div>
-            <Container header={{ children: 'Vonder Me', right: 'menu' }}>
+            <Container header={{ title: 'Vonder Me', right: 'menu' }}>
                 {/* <SearchField>
                     <InputSearch onClick={onSearch} placeholder="Search Form" prefix={<SearchOutlined />} />
                     <ButtonFilter icon={<ControlOutlined />} />

@@ -27,7 +27,7 @@ function BoardHistory() {
     );
 
     return (
-        <Container header={{ left: 'back', children: 'กระทู้ของคุณ', right: 'menu' }}>
+        <Container header={{ left: 'back', title: 'กระทู้ของคุณ', right: 'menu' }}>
             <ContainerProfile>
                 <AlignCenter>
                     <ListProfile

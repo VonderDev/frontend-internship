@@ -64,7 +64,7 @@ function Profile() {
 
     return (
         <div>
-            <Container header={{ left: 'back', children: 'ข้อมูลส่วนตัว', right: 'menu' }}>
+            <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
                 <ContainerProfile>
                     <AlignCenter>
                         <UserImage src={cred.pic} />
