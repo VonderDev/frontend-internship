@@ -21,7 +21,7 @@ const Login = () => {
 
   const [visible, setVisible] = useState<boolean>(false);
   const [placement, setPlacement] = useState<string>('bottom');
-  const { loginUser, login } = useAuthContext();
+  const { user, login,token } = useAuthContext();
   const [checked, setChecked] = useState(false);
   const history = useHistory();
 
@@ -37,7 +37,7 @@ const Login = () => {
     setVisible(false);
   };
 
-  if (loginUser) { return <Redirect to='/' /> }
+  if (token){return  <Redirect to='/'/>}
   return (
     <Container header={{ left: 'back', right: 'menu' }}>
       <PrivacyContainer>

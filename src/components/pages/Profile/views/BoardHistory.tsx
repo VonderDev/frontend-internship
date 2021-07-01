@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Container from 'components/Container/Container';
 import React from 'react';
 import { IIconTextProfile, IListDataBoardHistory } from '../shared/Profile.interface';
-import { ContainerProfile , AlignCenter , ListProfile , ProfileListItem , HistoryText , HistoryImage} from '../shared/Profile.styles';
+import { ContainerProfile , ListProfile , ProfileListItem , HistoryText , HistoryImage} from '../shared/Profile.styles';
 import { CalendarOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
 
 function BoardHistory() {
@@ -29,7 +29,6 @@ function BoardHistory() {
     return (
         <Container header={{ left: 'back', children: 'กระทู้ของคุณ', right: 'menu' }}>
             <ContainerProfile>
-                <AlignCenter>
                     <ListProfile
                         itemLayout="vertical"
                         size="large"
@@ -55,7 +54,6 @@ function BoardHistory() {
                             </ProfileListItem>
                         )}
                     />
-                </AlignCenter>
             </ContainerProfile>
         </Container>
     );

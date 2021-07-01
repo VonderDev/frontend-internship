@@ -8,7 +8,10 @@ export async function API_Login_Data() {
 }
 
 export async function API_PostDataUser(data : any) {
-    return await axios.post('http://localhost:5000/signup').then((res) => {
+    console.log(data);
+    return await axios.post('http://localhost:5000/signup', data)
+    .then((res) => {
         return res.data
     })
+    
 }

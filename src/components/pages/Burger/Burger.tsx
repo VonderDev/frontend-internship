@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ListMenu } from './ListMenu';
 import styled, { css } from 'styled-components';
 import { MenuOutlined, UserOutlined, LoginOutlined } from '@ant-design/icons';
-import { Layout, Menu, Avatar, Button } from 'antd';
+import { Layout, Menu, Avatar, Button, Spin } from 'antd';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
 
 const { Header, Sider } = Layout;
@@ -117,26 +117,37 @@ const ListmenuLogout = styled(Listmenu)`
     bottom: 0;
     display: flex;
 `;
-
+ {/* <Overlay active={sidebar ? 'active' : ''} onClick={showSidebar} /> */}
 
 const Burger = () => {
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
+    const [loading, setLoading] = useState<boolean>(true);
+    const token = localStorage.getItem('token');
+    const { logout,user} = useAuthContext();
+    function delay(ms: number) {
+        return new Promise( resolve => setTimeout(resolve, ms) );
+    }
 
-    const { loginUser, logout,user } = useAuthContext()
+    // const getUsername = async () => { 
+    //     await delay(2000); 
+    //     console.log('burger',user.resuit.username )
+    //     return user.resuit.username 
+
+    // };
+
     return (
         <>
-       
             <MenuOutlined  style={{ color: '#8a8888' ,fontSize: '24px'}} onClick={showSidebar} />
             
-            {/* <Overlay active={sidebar ? 'active' : ''} onClick={showSidebar} /> */}
             <Navmenu active={sidebar ? 'active' : ''}>
                 <Ul onClick={showSidebar}>
                     <Avataruser>
                         <Avatar size={75} icon={<UserOutlined />} />
-                        { loginUser ? (<AvatarName>{ user.username }</AvatarName>) : (<AvatarName> Guest #000  </AvatarName> )}
+                        { token ? (<AvatarName>dfdsfsd</AvatarName>)
+                        : (<AvatarName> Guest #000  </AvatarName> )}
                         
-                        {loginUser ? null : (
+                        {token ? null : (
                             <BarBtn to="/login">
                             <LoginBtn type="primary">
                                 Login
@@ -145,7 +156,7 @@ const Burger = () => {
 
                         )}
                     </Avataruser>
-                    {loginUser && (
+                    {token && (
                         <Listmenu className="nav-text">
                             <Bar to="/profile">
                                 <UserOutlined />
@@ -163,7 +174,7 @@ const Burger = () => {
                             </Listmenu>
                         );
                     })}
-                    {loginUser && (
+                    {token && (
                         <ListmenuLogout className="nav-text">
                             <Bar to="#" onClick={ logout }>
                                 <LoginOutlined />
