@@ -75,13 +75,27 @@ const GlobalStyle = createGlobalStyle`
     --font-14: 14px;
 
     //BREAKPOINT
-    --mobile-small: 300px;
-    --mobile-medium: 400px;
-    --mobile-large: 500px ;
-    
-    
+    --mobile-small: (max-width: 300px);
+    --mobile-medium: (max-width: 400px);
+    --mobile-large: (max-width: 500px) ;
 
+    //Radius
+    --Radius-12: 12px;
+    --Radius-15: 15px;
+
+    //SHADOW
+    --Shadow-light-bottom:  0 3px 6px #e0e0e0;
+    --Shadow-medium-top: 0px -8px 16px #00000014;
   }
+
+  body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+  }
+
 `;
+
  
 export default GlobalStyle;

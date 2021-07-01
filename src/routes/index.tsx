@@ -4,8 +4,13 @@ import Board from 'components/pages/Board/views/Board';
 import Profile from 'components/pages/Profile/views/Profile';
 import Login from 'components/pages/Authentication/views/Login/Login';
 import Register from 'components/pages/Authentication/views/Register/Register';
+import editProfile from 'components/pages/Profile/views/EditProfile';
+import PrivateRoute from 'components/AuthContext/PrivateRoute';
+import TestStyle from 'TestStyle';
+import TestResult from 'components/pages/Test/views/TestQuestion/TestResult';
 import Test from 'components/pages/Test/views/TestStartPage/Test';
-import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion';
+import TestStory from 'components/pages/Test/views/TestStartPage/TestStory';
+import TestOverview from 'components/pages/Test/views/TestStartPage/TestOverview';
 import { TestProvider } from 'components/pages/Test/views/TestQuestion/TestContext';
 import Result from 'components/pages/Test/views/ResultPage/Result';
 import editProfile from 'components/pages/Profile/views/EditProfile';
@@ -17,6 +22,10 @@ import PrivateRoute from 'components/AuthContext/PrivateRoute';
 import TestStory from 'components/pages/Test/views/TestStartPage/TestStory';
 import ResultOverview from 'components/pages/Test/views/ResultPage/ResultInfo/ResultOverview';
 import ResultInfo from 'components/pages/Test/views/ResultPage/ResultInfo/ResultInfo';
+import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion';
+import ProfileResult from 'components/pages/Profile/views/ProfileResult';
+import BoardHistory from 'components/pages/Profile/views/BoardHistory';
+
 
 function Routing() {
     return (
@@ -41,6 +50,7 @@ function Routing() {
             <Route exact path="/charactordetail" component={CharactorDetail} />
             <PrivateRoute exact path="/profileresult" component={ProfileResult} />
             <PrivateRoute exact path="/boardhistory" component={BoardHistory} />
+            <Route exact path="/teststyle" component={TestStyle} />
         </Switch>
     );
 }

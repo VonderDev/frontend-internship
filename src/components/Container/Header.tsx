@@ -3,15 +3,15 @@ import { Children, createContext, useCallback, useEffect, useState, useContext, 
 import { Row, Col } from 'antd';
 import { BackHeader, LeftDiv, RightDiv, RowHeader, TextHeader } from './Header.styled';
 import { LeftOutlined, MenuOutlined, DownloadOutlined } from '@ant-design/icons';
-import Burger from '../pages/Burger/Burger';
+import Burger  from '../pages/Burger/Burger';
 
 interface HeaderProps {
-    children: any;
+    title: string;
     right: string;
     left: string;
 }
 
-const Header = ({ children, right, left }: HeaderProps) => {
+const Header = ({ title, right, left }: HeaderProps) => {
     const history = useHistory();
 
     const goBack = useCallback(() => {
@@ -34,7 +34,7 @@ const Header = ({ children, right, left }: HeaderProps) => {
         if (right === 'menu') {
             return (
                 <>
-                    <Burger />
+                    <Burger  />
                 </>
             );
         } else if (right === 'save') {
@@ -46,21 +46,28 @@ const Header = ({ children, right, left }: HeaderProps) => {
         } else {
             return right;
         }
-    }, []);
+    }, [right]);
 
     return (
         <>
-            <RowHeader justify="space-between">
-                <Col span={4}>
-                    <LeftDiv>{leftCon}</LeftDiv>
-                </Col>
-                <Col span={16}>
-                    <TextHeader>{children}</TextHeader>
-                </Col>
-                <Col span={4}>
-                    <RightDiv>{rightCon}</RightDiv>
-                </Col>
-            </RowHeader>
+        <RowHeader justify="space-between">
+            <Col span={4}>
+                <LeftDiv>
+                {leftCon}
+                </LeftDiv>
+            </Col>
+            <Col span={16}>
+                <TextHeader>
+                    {title}
+                </TextHeader>
+
+            </Col>
+            <Col span={4}>
+                <RightDiv >
+                {rightCon}
+                </RightDiv >
+            </Col>
+        </RowHeader>
         </>
     );
 };

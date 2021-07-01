@@ -25,7 +25,7 @@ export const TextHeader = styled.div`
 
 export const BackHeader = styled.div`
     background-color: #ffffff;
-    border-radius: 10px;
+    border-radius: 12px;
     box-shadow:  0 3px 6px #e0e0e0;
     width: 40px;
     height: 40px;

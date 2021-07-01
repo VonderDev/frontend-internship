@@ -5,6 +5,8 @@ import styled, { css } from 'styled-components';
 import { MenuOutlined, UserOutlined, LoginOutlined } from '@ant-design/icons';
 import { Layout, Menu, Avatar, Button, Spin } from 'antd';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
+import LoadingPage from 'components/AuthContext/LoadingPage';
+import axios from 'axios';
 
 const { Header, Sider } = Layout;
 
@@ -42,7 +44,7 @@ const Navmenu = styled(Menu)<{ active: 'active' | '' }>`
     }}
 `;
 
-const Overlay = styled.div<{ active: 'active' | '' }>`
+ const Overlay = styled.div<{ active: 'active' | '' }>`
     ${({ active }) => {
         if (active === 'active') {
             return css`
@@ -111,51 +113,65 @@ const LoginBtn = styled(Button)`
     height: 40px;
     border-radius: 10px;
     margin: 10px 0 0 0;
-    box-shadow: 0 3px 6px #e0e0e0;
+    box-shadow: 0 3px 6px #e0e0e0 ;
 `;
 const ListmenuLogout = styled(Listmenu)`
     bottom: 0;
     display: flex;
 `;
-{
-    /* <Overlay active={sidebar ? 'active' : ''} onClick={showSidebar} /> */
-}
+ {/* <Overlay active={sidebar ? 'active' : ''} onClick={showSidebar} /> */}
 
 const Burger = () => {
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [username, setUsername] = useState('');
     const token = localStorage.getItem('token');
-    const { logout, user } = useAuthContext();
-    async function getUser() {
-        const res = await user;
-        if (res) {
-            setLoading(false);
-        } else {
-            setLoading(true);
-        }
+    const { logout ,getUser } = useAuthContext();
+    function delay(ms: number) {
+        return new Promise( resolve => setTimeout(resolve, ms) );
     }
-    const userName = () => {
-        loading ? <Spin size="large" /> : <AvatarName>{user.username}</AvatarName>;
-    };
-    console.log('user', user);
-    useEffect(() => {
-        getUser();
-    }, []);
-    return (
-        <>
-            <MenuOutlined style={{ color: '#8a8888', fontSize: '24px' }} onClick={showSidebar} />
 
+    const getUserInfo = async() =>{
+        const token = localStorage.getItem('token');
+        const response = await getUser();
+        if(token){
+            if (response) {
+                setUsername(response.username)
+                console.log(response);
+            } else {
+                console.log('error');
+            }
+        } else {
+            console.log('none');
+        }
+
+      }
+  
+    useEffect(() => {
+        if(token){
+        getUserInfo()
+    }else{
+        window.location.reload;
+    };
+    }, []);
+
+    return (
+            <>
+            <MenuOutlined  style={{ color: '#8a8888' ,fontSize: '24px'}} onClick={showSidebar} />
             <Navmenu active={sidebar ? 'active' : ''}>
                 <Ul onClick={showSidebar}>
                     <Avataruser>
                         <Avatar size={75} icon={<UserOutlined />} />
-                        {token ? <AvatarName>user1</AvatarName> : <AvatarName> Guest #000 </AvatarName>}
-
+                        { token ? (<AvatarName>{username}</AvatarName>)
+                        : (<AvatarName> Guest #000  </AvatarName> )}
+                        
                         {token ? null : (
                             <BarBtn to="/login">
-                                <LoginBtn type="primary">Login</LoginBtn>
+                            <LoginBtn type="primary">
+                                Login
+                            </LoginBtn>
                             </BarBtn>
+
                         )}
                     </Avataruser>
                     {token && (
@@ -178,7 +194,7 @@ const Burger = () => {
                     })}
                     {token && (
                         <ListmenuLogout className="nav-text">
-                            <Bar to="#" onClick={logout}>
+                            <Bar to="#" onClick={ logout }>
                                 <LoginOutlined />
                                 <Span> Logout</Span>
                             </Bar>
@@ -186,7 +202,8 @@ const Burger = () => {
                     )}
                 </Ul>
             </Navmenu>
-        </>
+             </>
+        
     );
 };
 
