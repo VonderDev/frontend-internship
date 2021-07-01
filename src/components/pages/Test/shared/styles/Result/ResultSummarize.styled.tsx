@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Image } from 'antd';
+import { Button, Carousel, Image } from 'antd';
 
 export const ImageCharactorCarousel = styled.img`
     width: 100%;
@@ -39,8 +39,8 @@ export const ButtonSeeAllResult = styled(Button)`
     font-size: 16px;
     margin-left: auto;
     margin-right: auto;
-    width: 450px;
-    height: 50px;
+    width: 80%;
+    height: 7vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,4 +52,11 @@ export const ContainerResultSummarize = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+`;
+
+export const ContainerCarousel = styled(Carousel)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
 `;

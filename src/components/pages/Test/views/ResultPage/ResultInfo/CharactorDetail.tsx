@@ -1,5 +1,5 @@
-import { CategoryName, ContainerCharactorDetail, DesText, Resultpic, TextBox } from '../../shared/styles/ResultPage.styled';
-import BoardAdvice from './BoardAdvice';
+import { CategoryName, ContainerCharactorDetail, DesText, Resultpic, TextBox } from '../../../shared/styles/Result/ResultPage.styled';
+import BoardAdvice from '../BoardAdvice';
 import React from 'react';
 
 interface ResultProps {

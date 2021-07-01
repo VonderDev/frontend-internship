@@ -15,9 +15,6 @@ export const TextHeader = styled.div`
     color: var(--Gray-400);
 `;
 
-export const ContainerResult = styled.div`
-    height: 100vh;
-`;
 export const ButtonGoHome = styled(Button)`
     border-radius: 15px;
     font-weight: bolder;
@@ -46,15 +43,9 @@ export const TextHeaderResult = styled.div`
 export const ChartStyled = styled(Chart)`
     transform: translateY(-20%);
     width: 580px;
-`;
-
-export const ButtonHome = styled(Button)`
-    border-radius: 0 25px 25px 0;
-    color: #ffffff;
-    background-color: #7879f1;
-    width: 5rem;
-    height: 7vh;
-    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const TextBoxDescript = styled.div`

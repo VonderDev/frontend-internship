@@ -1,12 +1,12 @@
 import { Progress, Tabs } from 'antd';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ButtonGoHome, ContainerProgressScore, TextNameSkill } from '../../shared/styles/ResultPage.styled';
-import Chart from './Chart';
+import { ButtonGoHome, ContainerProgressScore, TextNameSkill } from '../../../shared/styles/Result/ResultPage.styled';
+import Chart from '../Chart';
 
 function ResultOverview() {
     const history = useHistory();
-    const mockScore = require('../../mocks/result.json');
+    const mockScore = require('../../../mocks/result.json');
     const scoreList = mockScore.filter((data: { score: number }) => data.score);
 
     scoreList.sort(function (a: any, b: any): number {

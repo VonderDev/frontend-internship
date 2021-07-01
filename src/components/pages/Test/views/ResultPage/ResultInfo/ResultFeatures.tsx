@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { ContainerImagePreview, ImagePreview, TextHeaderResult } from '../../shared/styles/ResultPage.styled';
-import { API_Get_ResultData } from '../../apis/Result.api';
-import { IResult } from '../../shared/interface/Result.interfaces';
+import { ContainerImagePreview, ImagePreview, TextHeaderResult } from '../../../shared/styles/Result/ResultPage.styled';
+import { API_Get_ResultData } from '../../../apis/Result.api';
+import { IResult } from '../../../shared/interface/Result.interfaces';
 import CharactorDetail from './CharactorDetail';
 //
 // ─── import mockData ───────────────────────────────────────────────────────────────────
 //
-const mockResult = require('../../mocks/result.json');
+const mockResult = require('../../../mocks/result.json');
 const chartScore = Object.keys(mockResult).map((key) => mockResult[key].score);
 const max = Math.max(...chartScore);
 const maxScoreList = mockResult.filter((data: { score: number }) => data.score === max);

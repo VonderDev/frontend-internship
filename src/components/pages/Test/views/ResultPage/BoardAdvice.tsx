@@ -3,7 +3,7 @@ import { IIconText } from 'components/pages/Home/shared/home.interface';
 import { ButtonSeeAllBoard, SearchField, TextBoardTopic } from 'components/pages/Home/shared/homepage.styles';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { BoardRecomment, CardTag, ContainerBoard, RowDetailCard, TextDateBoard } from '../../shared/styles/ResultPage.styled';
+import { BoardRecomment, CardTag, ContainerBoard, RowDetailCard, TextDateBoard } from '../../shared/styles/Result/ResultPage.styled';
 import { FormOutlined } from '@ant-design/icons';
 
 const IconText = ({ icon, text }: IIconText) => (

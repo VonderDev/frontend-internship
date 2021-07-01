@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Button, Col } from 'antd';
-import ImgTestQuestion from '../../shared/images/TestQuestion.png';
+import ImgTestQuestion from '../../../shared/images/TestQuestion.png';
 
 export const ContainerTestQuestion = styled.div`
     flex-direction: row;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ChartStyled, TextHeaderResult } from '../../shared/styles/ResultPage.styled';
+import { ChartStyled, TextHeaderResult } from '../../shared/styles/Result/ResultPage.styled';
 
 interface Chartprop {
     options: any;

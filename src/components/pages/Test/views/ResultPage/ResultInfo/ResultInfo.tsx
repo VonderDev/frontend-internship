@@ -1,6 +1,6 @@
 import { Tabs } from 'antd';
 import Container from 'components/Container/Container';
-import ResultOverview from './ResultOverview';
+import ResultOverview from '../ResultInfo/ResultOverview';
 import ResultFeatures from './ResultFeatures';
 
 function ResultInfo() {

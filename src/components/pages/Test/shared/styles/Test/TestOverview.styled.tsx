@@ -1,6 +1,6 @@
 import { Row } from 'antd';
 import styled from 'styled-components';
-import multipleInterlligences from '../../shared/images/multipleInterlligences.png';
+import multipleInterlligences from '../../../shared/images/multipleInterlligences.png';
 
 export const TextTopicTestOverview = styled.div`
     display: flex;

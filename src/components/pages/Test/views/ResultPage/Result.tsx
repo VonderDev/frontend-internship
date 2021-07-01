@@ -1,9 +1,16 @@
 import { useHistory } from 'react-router-dom';
-import { ContainerResult } from '../../shared/styles/ResultPage.styled';
 import Container from 'components/Container/Container';
 import { useEffect } from 'react';
-import { Carousel } from 'antd';
-import { ButtonSeeAllResult, ContainerResultSummarize, HeaderResultFeature, ImageCharactorCarousel, TextSkillName, TextSkillSummarize } from '../../shared/styles/ResultSummarize.styled';
+import {
+    ButtonSeeAllResult,
+    ContainerCarousel,
+    ContainerResultSummarize,
+    HeaderResultFeature,
+    ImageCharactorCarousel,
+    TextSkillName,
+    TextSkillSummarize,
+} from '../../shared/styles/Result/ResultSummarize.styled';
+
 // ─── import mockData ───────────────────────────────────────────────────────────────────
 //
 const mockResult = require('../../mocks/result.json');
@@ -19,29 +26,25 @@ const Result = () => {
     }, []);
 
     return (
-        <>
-            <Container header={null}>
-                <ContainerResult>
-                    <Carousel vertical>
-                        {maxScoreList.map((item: any, index: any) => {
-                            return (
-                                <>
-                                    <ContainerResultSummarize>
-                                        <HeaderResultFeature>คุณมีลักษณะเด่น {maxScoreList.length} ด้าน</HeaderResultFeature>
-                                        <ImageCharactorCarousel src={item.image_charactor} />
-                                        <TextSkillName>{item.skill}</TextSkillName>
-                                        <TextSkillSummarize>{item.skill_summarize}</TextSkillSummarize>
-                                    </ContainerResultSummarize>
-                                </>
-                            );
-                        })}
-                    </Carousel>
-                    <ButtonSeeAllResult type="primary" onClick={() => history.push('/resultinfo')}>
-                        ดูผลลัพธ์ทั้งหมด
-                    </ButtonSeeAllResult>
-                </ContainerResult>
-            </Container>
-        </>
+        <Container header={null}>
+            <ContainerCarousel>
+                {maxScoreList.map((item: any, index: any) => {
+                    return (
+                        <div key={index}>
+                            <ContainerResultSummarize>
+                                <HeaderResultFeature>คุณมีลักษณะเด่น {maxScoreList.length} ด้าน</HeaderResultFeature>
+                                <ImageCharactorCarousel src={item.image_charactor} />
+                                <TextSkillName>{item.skill}</TextSkillName>
+                                <TextSkillSummarize>{item.skill_summarize}</TextSkillSummarize>
+                            </ContainerResultSummarize>
+                        </div>
+                    );
+                })}
+            </ContainerCarousel>
+            <ButtonSeeAllResult type="primary" onClick={() => history.push('/resultinfo')}>
+                ดูผลลัพธ์ทั้งหมด
+            </ButtonSeeAllResult>
+        </Container>
     );
 };
 

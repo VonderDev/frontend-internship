@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from 'components/Container/Container';
-import { ImgMultipleInterlligences, ParagraphDescription, TextCategoryName, TextTopicTestOverview } from '../../shared/styles/TestOverview.styled';
+import { ImgMultipleInterlligences, ParagraphDescription, TextCategoryName, TextTopicTestOverview } from '../../shared/styles/Test/TestOverview.styled';
 import { Col } from 'antd';
 
 function TestOverview() {

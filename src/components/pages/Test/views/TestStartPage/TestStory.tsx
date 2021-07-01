@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Container from 'components/Container/Container';
-import { ContainerTestStoryPage, TextStory } from '../../shared/styles/TestStory.styled';
+import { ContainerTestStoryPage, TextStory } from '../../shared/styles/Test/TestStory.styled';
 import { useHistory } from 'react-router-dom';
 import { IQuestion } from '../../shared/interface/Test.interfaces';
 import { ApiGetTestData } from '../../apis/test.api';
 import { Col, Modal } from 'antd';
-import { ButtonSeeAllResults, TextQuestionIndex } from '../../shared/styles/TestQuestion.styled';
+import { ButtonSeeAllResults, TextQuestionIndex } from '../../shared/styles/Test/TestQuestion.styled';
 
 function TestStory() {
     const history = useHistory();

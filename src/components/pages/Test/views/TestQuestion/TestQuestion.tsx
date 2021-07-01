@@ -8,7 +8,7 @@ import {
     IsLoadingSpinnerTestQuestion,
     TextIsLoadingTestQuestion,
     ButtonSeeAllResults,
-} from '../../shared/styles/TestQuestion.styled';
+} from '../../shared/styles/Test/TestQuestion.styled';
 import { useHistory } from 'react-router-dom';
 import { ApiGetTestData, ApiPostTestResult } from '../../apis/test.api';
 import { IQuestion, IUserAns } from '../../shared/interface/Test.interfaces';
