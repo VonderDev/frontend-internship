@@ -12,51 +12,37 @@ import { stringify } from "querystring";
 export const RegisterForm = () => {
 
     const history = useHistory();
-    const [userData, setUserData] = useState<ILogin>({ firstName: '', lastName: '', email: '',  username: '', password: ''});
+    const [userData, setUserData] = useState<ILogin>({ firstName: '', lastName: '', email: '', username: '', password: '' });
     const [username, setUsername] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    
-    // async function registerUser() {
-    //     let user = {username, firstName, lastName, email, password}
-    //     console.warn(user);
 
-    //     let result = await fetch("http://localhost:5000/signup", {
-    //         method: 'POST',
-    //         body: JSON.stringify(user),
-    //         headers: {
-    //             "Content-Type" : 'application/json',
-    //             "Accept" : 'application/json'
-    //         }
-    //     })
-    //     result = await result.json()
-    //     console.warn("result : ", result)
-    // }
+    async function ApiRegister() {
 
-    async function API_register() {
-        // let data = {username, firstName, lastName, email, password}
-        // console.warn(data);
-            // API_PostDataUser(userData);
-        let userData = {
-            username : username,
-            firstName : firstName,
-            lastName : lastName,
-            email : email,
-            password : password
+        const userData = {
+            username: username,
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password
         }
-        const data = await axios.post("http://localhost:5000/signup", userData)
-            .then((res) => {
-                console.log(res.data);
-                console.log("Go to home");
-                history.push("/");
-            })
-            .catch((error) => {
-                console.log(error.response)
+
+        if (username && firstName && lastName && email && password) {        
+            try {
+                const { data } = await axios.post("http://localhost:5000/signup", userData)
+                if (data) {
+                    console.log(data);
+                    console.log("Go to home");
+                    history.push("/");
+                }
+            } catch (error){
+                console.log(error)
                 console.log("Failed");
-                return error.response.message
-            });
+                return error.message
+            }
+        }
     }
 
     return (
@@ -101,8 +87,7 @@ export const RegisterForm = () => {
                 <InputStyle sizeinput={100} type="password" placeholder="ยืนยันรหัสผ่าน" />
             </FormItemTextValidate>
 
-
-            <ButtonStyle typebutton="Large" sizebutton={100} style={{ marginBottom: "15px" }} htmlType="submit" onClick={API_register} >
+            <ButtonStyle typebutton="Large" sizebutton={100} style={{ marginBottom: "15px" }} htmlType="submit" onClick={ApiRegister} >
                 สร้างบัญชี
             </ButtonStyle>
 
