@@ -144,7 +144,7 @@ const Burger = () => {
                 <Ul onClick={showSidebar}>
                     <Avataruser>
                         <Avatar size={75} icon={<UserOutlined />} />
-                        { token ? (<AvatarName>{user.resuit.username }</AvatarName>)
+                        { token ? (<AvatarName>dfdsfsd</AvatarName>)
                         : (<AvatarName> Guest #000  </AvatarName> )}
                         
                         {token ? null : (

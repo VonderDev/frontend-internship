@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { IIconTextProfile, IListDataBoardHistory, IUser } from '../shared/Profile.interface';
 import { CalendarOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
 import { useState } from 'react';
+import ProfileMascot from '../../Profile/images/ProfileMascot.png'
 import {
     ContainerProfile,
     ButtonSubmit,
@@ -63,12 +64,11 @@ function Profile() {
             {text}
         </div>
     );
-
     return (
         <div>
             <Container header={{ left: 'back', children: 'ข้อมูลส่วนตัว', right: 'menu' }}>
                 <ContainerProfile>
-                    <UserImage  />
+                    <UserImage src={ProfileMascot}/>
                     <TextUsername>{cred.username}</TextUsername>
                     <RowStyled>
                         <Col span={8}>

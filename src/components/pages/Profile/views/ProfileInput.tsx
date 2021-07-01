@@ -4,6 +4,7 @@ import { API_USER_Data } from '../apis/profile.api';
 import { IUser } from '../shared/Profile.interface';
 import { ButtonSave, ContainerProfile, FormInput, TextTopicEditProfile, UserImage } from '../shared/Profile.styles';
 import { Form } from 'antd';
+import ProfileMascot from '../../Profile/images/ProfileMascot.png'
 export const ProfileInput = memo(() => {
     const [userInfo, setUserInfo] = useState<IUser>({ firstName: '', lastName: '', email: '',  username: '' });
     async function getStatisticData() {
@@ -37,7 +38,7 @@ export const ProfileInput = memo(() => {
         <>
         <ButtonSave htmlType="submit" onClick={passDataOnClick}>บันทึก</ButtonSave>
         <ContainerProfile>
-            <UserImage  />
+            <UserImage src={ProfileMascot} />
             <TextTopicEditProfile>ชื่อผู้ใช้</TextTopicEditProfile>
             <Form>
                 <Form.Item rules={[{ required: true, message: 'กรุณาใส่ชื่อผู้ใช้!' }]}>
