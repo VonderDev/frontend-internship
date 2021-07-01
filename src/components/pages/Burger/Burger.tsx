@@ -125,6 +125,16 @@ const Burger = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const token = localStorage.getItem('token');
     const { logout,user} = useAuthContext();
+    function delay(ms: number) {
+        return new Promise( resolve => setTimeout(resolve, ms) );
+    }
+
+    // const getUsername = async () => { 
+    //     await delay(2000); 
+    //     console.log('burger',user.resuit.username )
+    //     return user.resuit.username 
+
+    // };
 
     return (
         <>
@@ -134,7 +144,7 @@ const Burger = () => {
                 <Ul onClick={showSidebar}>
                     <Avataruser>
                         <Avatar size={75} icon={<UserOutlined />} />
-                        { token ? (<AvatarName>{user.resuit.username}</AvatarName>) 
+                        { token ? (<AvatarName>{user.resuit.username }</AvatarName>)
                         : (<AvatarName> Guest #000  </AvatarName> )}
                         
                         {token ? null : (

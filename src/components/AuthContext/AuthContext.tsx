@@ -27,13 +27,19 @@ interface datauser {
         localStorage.setItem('token', response.data.token);
         setToken(localStorage.getItem('token'))
         setUser(response.data)
-        return response.data
+        return user
       }).catch(err => {
         console.error(err)
         alert('ไม่ผู้ใช้นี้ อีเมลหรือรหัสผ่านไม่ถูกต้อง')
         console.log('Failed login');
       });
         };
+    
+    const getUserInfo = () =>{
+      const token = localStorage.getItem('token');
+      setToken(token)
+      
+    }
 
     const gotoLogin = () =>{
       return  <Redirect to='/login'/>
