@@ -1,18 +1,13 @@
 import { createContext, useEffect, useState, useContext, useCallback } from "react";
 import { Redirect } from "react-router-dom";
-import authMock from './Authmock.json'
 import { authData } from "./User.type";
 import axios from 'axios'
 
   interface IAuthProps {
     children: any 
     }
-interface datauser {
-      name: string | null
-  }
-    const AuthContext = createContext<any>(null);
-    const data = JSON.stringify(authMock)
 
+    const AuthContext = createContext<any>(null);
     const AuthProvider =  (({children}: IAuthProps) => {
     const [user ,setUser] = useState<any | null >() ;
     const [token ,setToken] = useState<any | null >() ;

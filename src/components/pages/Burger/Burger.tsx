@@ -126,7 +126,7 @@ const Burger = () => {
     const showSidebar = () => setSidebar(!sidebar);
     const [username, setUsername] = useState('');
     const token = localStorage.getItem('token');
-    const { logout ,user ,getUser } = useAuthContext();
+    const { logout ,getUser } = useAuthContext();
     function delay(ms: number) {
         return new Promise( resolve => setTimeout(resolve, ms) );
     }
