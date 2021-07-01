@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router-dom';
-import { API_USER_Data } from '../apis/profile.api';
+import { API_GET_USER_Data } from '../apis/profile.api';
 import { Col, Row } from 'antd';
 import { useEffect } from 'react';
 import { IIconTextProfile, IListDataBoardHistory, IUser } from '../shared/Profile.interface';
@@ -31,7 +31,7 @@ function Profile() {
     const [cred, setCred] = useState<IUser>({ firstName: '', lastName: '', email: '', username: '' });
     const history = useHistory();
     async function getStatisticData() {
-        const response = await API_USER_Data();
+        const response = await API_GET_USER_Data();
         if (response) {
             console.log(response.name);
             setCred((prevState) => ({ ...prevState, firstName: response.firstName, lastName: response.lastName, email: response.email, username: response.username }));

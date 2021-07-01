@@ -1,6 +1,6 @@
 import { memo, useMemo } from 'react';
 import { useEffect, useState } from 'react';
-import { API_USER_Data } from '../apis/profile.api';
+import { API_GET_USER_Data , API_PUT_USER_DATA } from '../apis/profile.api';
 import { IUser } from '../shared/Profile.interface';
 import { ButtonSave, ContainerProfile, FormInput, TextTopicEditProfile, UserImage } from '../shared/Profile.styles';
 import { Form } from 'antd';
@@ -8,9 +8,8 @@ import ProfileMascot from '../../Profile/images/ProfileMascot.png'
 export const ProfileInput = memo(() => {
     const [userInfo, setUserInfo] = useState<IUser>({ firstName: '', lastName: '', email: '',  username: '' });
     async function getStatisticData() {
-        const response = await API_USER_Data();
+        const response = await API_GET_USER_Data();
         if (response) {
-            console.log(response.name);
             setUserInfo((prevState) => ({
                 ...prevState,
                 firstName: response.firstName,
@@ -30,13 +29,15 @@ export const ProfileInput = memo(() => {
         setUserInfo((prev) => ({ ...prev, [name]: value }));
     };
 
-    const passDataOnClick = () => {
-        console.log(userInfo);
+    const putDataOnClick = () => {
+        API_PUT_USER_DATA(
+            userInfo
+        )
     };
 
     return (
         <>
-        <ButtonSave htmlType="submit" onClick={passDataOnClick}>บันทึก</ButtonSave>
+        <ButtonSave htmlType="submit" onClick={putDataOnClick}>บันทึก</ButtonSave>
         <ContainerProfile>
             <UserImage src={ProfileMascot} />
             <TextTopicEditProfile>ชื่อผู้ใช้</TextTopicEditProfile>
@@ -53,7 +54,7 @@ export const ProfileInput = memo(() => {
                 <TextTopicEditProfile>ชื่อจริง</TextTopicEditProfile>
                 <Form.Item rules={[{ required: true, message: 'กรุณาใส่ชื่อจริง!' }]}>
                     <FormInput
-                        name="name"
+                        name="firstName"
                         value={userInfo.firstName}
                         onChange={({ target: { value, name } }) => {
                             handleOnChange(name, value);
@@ -63,7 +64,7 @@ export const ProfileInput = memo(() => {
                 <TextTopicEditProfile>นามสกุล</TextTopicEditProfile>
                 <Form.Item rules={[{ required: true, message: 'กรุณาใส่นามสกุล!' }]}>
                     <FormInput
-                        name="surname"
+                        name="lastName"
                         value={userInfo.lastName}
                         onChange={({ target: { value, name } }) => {
                             handleOnChange(name, value);
