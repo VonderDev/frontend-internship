@@ -30,6 +30,7 @@ function EditProfile() {
     };
 
     const editedUser = () => {
+        console.log('test')
         console.log(cred);
     };
 
@@ -64,6 +65,7 @@ function EditProfile() {
     const goBack = useCallback(() => {
         history.goBack();
     }, []);
+    console.log('logg',cred)
 
     return (
         <Container
@@ -74,12 +76,12 @@ function EditProfile() {
                     </BackHeader>
                 ),
                 children: 'แก้ไขข้อมูลส่วนตัว',
-                right: <ButtonSave onClick={editedUser}>บันทึก</ButtonSave>,
+                right: <ButtonSave onClick={()=> editedUser()}>บันทึก</ButtonSave>,
             }}
         >
-            <AlignRight>
+            {/* <AlignRight>
                 <ButtonSave onClick={editedUser}>บันทึก</ButtonSave>
-            </AlignRight>
+            </AlignRight> */}
             <AlignCenter key={1}>
                 <ConfirmModal
                     visible={isModalVisible}

@@ -14,19 +14,19 @@ import axios from 'axios'
 
     const getUser = async() =>{
       const token = localStorage.getItem('token');
-      return await axios
-          .get('http://localhost:5000/user/find',
+      try{
+        const {data}  = await axios.get('http://localhost:5000/user/find',
           { headers :{
           Authorization : `Bearer ${token}`
           }})
-          .then((response) => {
-              setUser(response.data.resuit)
-              console.log(' USER_DATA :', user);
-              return response.data;
-          })
-          .catch((err) => {
-              console.error(err);
-          });
+          if(data) {
+            setUser(data.resuit)
+            console.log(' USER_DATA :', user);
+            return data;
+          }
+      }catch(err){
+        console.error(err);
+      }
   }
 
     const login = ({email, password}: authData) => 
@@ -54,7 +54,7 @@ import axios from 'axios'
         setUser(undefined)
     }
   
-    
+    console.log('user',user)
     useEffect(() => {
       const tokenkey = localStorage.getItem('token');
       if (tokenkey ) {
