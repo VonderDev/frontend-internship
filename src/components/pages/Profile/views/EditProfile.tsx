@@ -33,15 +33,23 @@ function EditProfile() {
         console.log(cred);
     };
 
-    async function getStatisticData() {
-        const response = await API_Profile_Data();
-        if (response) {
-            setCred((prevState) => ({ ...prevState, name: response.name, surname: response.surname, email: response.email, result: response.result, pic: response.pic, username: response.username }));
-        } else {
-            console.log('error');
-        }
-    }
     useEffect(() => {
+        async function getStatisticData() {
+            const response = await API_Profile_Data();
+            if (response) {
+                setCred((prevState) => ({
+                    ...prevState,
+                    name: response.name,
+                    surname: response.surname,
+                    email: response.email,
+                    result: response.result,
+                    pic: response.pic,
+                    username: response.username,
+                }));
+            } else {
+                console.log('error');
+            }
+        }
         getStatisticData();
     }, []);
 
@@ -74,12 +82,12 @@ function EditProfile() {
                     </BackHeader>
                 ),
                 children: 'แก้ไขข้อมูลส่วนตัว',
-                right: <ButtonSave onClick={editedUser}>บันทึก</ButtonSave>,
+                right: <ButtonSave onClick={() => console.log('cred : ', cred)}>บันทึก</ButtonSave>,
             }}
         >
-            <AlignRight>
+            {/* <AlignRight>
                 <ButtonSave onClick={editedUser}>บันทึก</ButtonSave>
-            </AlignRight>
+            </AlignRight> */}
             <AlignCenter key={1}>
                 <ConfirmModal
                     visible={isModalVisible}
