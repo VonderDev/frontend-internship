@@ -10,6 +10,6 @@ export interface IState {
 }
 
 export interface IUserAns {
-    categoryIndex: number;
+    categoryId: number;
     score: number;
 }

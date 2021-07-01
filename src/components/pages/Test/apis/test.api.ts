@@ -1,9 +1,8 @@
-import mockTestData from '../mocks/question.json';
-import { IQuestion, IUserAns } from '../shared/interface/Test.interfaces';
 import axios from 'axios';
 
-export async function API_GetTestData() {
-    //    return mockTestData as unknown as Array<IQuestion>
+const token = localStorage.getItem('token');
+
+export async function ApiGetTestData() {
     return await axios
         .get('http://localhost:5000/questions')
         .then((response) => {
@@ -15,27 +14,19 @@ export async function API_GetTestData() {
         });
 }
 
-export async function API_PostTestResult(data: any) {
+export async function ApiPostTestResult(data: any) {
     console.log('[Result Data] :', data);
+    console.log('[Result length]:', data.length)
     // return mockTestData as unknown as Array<IQuestion>;
     //
     // ─── Use axios.post when backend finish ───────────────────
     //
-    return await axios.post('http://localhost:5000/user/result', data).then((res) => {
+    return await axios.post('http://localhost:5000/user/result', data ,
+    {headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
         return res.data
-    })
-}
-
-axios({
-    method: 'get',
-    url: 'http://localhost:5000/questions',
-
-})
-    .then((response) => {
-        console.log('[Question detail from backend]: ', response.data);
-        // do something about response
     })
     .catch((err) => {
         console.error(err);
+        console.log('Cannot post result');
     });
-
+}

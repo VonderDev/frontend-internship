@@ -10,7 +10,7 @@ import {
     ButtonSeeAllResults,
 } from '../../shared/styles/TestQuestion.styled';
 import { useHistory } from 'react-router-dom';
-import { API_GetTestData, API_PostTestResult } from '../../apis/test.api';
+import { ApiGetTestData, ApiPostTestResult } from '../../apis/test.api';
 import { IQuestion, IUserAns } from '../../shared/interface/Test.interfaces';
 import { Col, Modal, Spin } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
@@ -45,7 +45,7 @@ function TestQuestion() {
     }, [currentQuestion, questionList]);
 
     async function getTestData() {
-        const response = await API_GetTestData();
+        const response = await ApiGetTestData();
         if (response) {
             setQuestionList(response); // store all question into the hook
             const resp = response;
@@ -58,23 +58,20 @@ function TestQuestion() {
         getTestData();
     }, []);
 
-    function onNextQuestion(value: number) {
+    async function onNextQuestion(value: number) {
         console.log('[Debug]: score == ' + value);
         let newTestScore = testScore;
-        newTestScore.push({ categoryIndex: currentQuestionDetail.categoryIndex, score: value });
+        newTestScore.push({ categoryId: currentQuestionDetail.categoryIndex, score: value });
         setTestScore(newTestScore);
 
         if (!questionList) return;
         // ถ้ามากกว่า 23 ก็คือ 24 ให้ Post Test Result
         if (currentQuestion + 1 > questionList.length - 1) {
             setLoading(true);
-            setTimeout(() => {
-                console.log('set Loading:', isLoading);
-                setLoading(false);
-                API_PostTestResult(testScore);
-                history.push('/result');
-            }, 1500);
-
+            console.log('set Loading:', isLoading);
+            await ApiPostTestResult(testScore);
+            setLoading(false);
+            history.push('/result');
             return;
         }
         setCurrentQuestion(currentQuestion + 1);
@@ -138,9 +135,6 @@ function TestQuestion() {
     if (error) return <div>failed to load data</div>;
     if (!data) return <div>loading...</div>;
 
-    //customInterceptor
-    //สามารถทำโดยที่ไม่ต้องมีอีก hook isSWR มาช่วย เพื่อมาเช็คว่า fetch เสร็จเเล้ว เเล้วมาเช็คได้เลยว่า data เสร็จตอนไหน มีวิธีที่ set intercept โดยตรงมั้ย
-    //เพราะมัน rerender ใหม่เพราะมัน setstate ทุกรอบ ไม่จบ loop เลยต้องทำเช็ค boolean มาเพิ่ม
     // if (data && !isSWRTriggered) {
     //     console.log('data from useSWR');
     //     isSetSWRTriggered(true);
@@ -174,20 +168,7 @@ function TestQuestion() {
                         เริ่มใหม่{' '}
                     </ButtonSeeAllResults>
                 </Col>
-                <Modal
-                    visible={visible}
-                    okText="เริ่มใหม่"
-                    cancelText="ยกเลิก"
-                    onOk={handleOk}
-                    // footer={[
-                    //     <ContainerButtonStartOver>
-                    //         <ButtonConfirmStartOver onClick={handleOk}>เริ่มใหม่</ButtonConfirmStartOver>, <ButtonCancleStartOver onClick={handleCancel}>ยกเลิก</ButtonCancleStartOver>
-                    //     </ContainerButtonStartOver>,
-                    // ]}
-                    width={400}
-                    confirmLoading={confirmLoading}
-                    onCancel={handleCancel}
-                >
+                <Modal visible={visible} okText="เริ่มใหม่" cancelText="ยกเลิก" onOk={handleOk} width={400} confirmLoading={confirmLoading} onCancel={handleCancel}>
                     ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
                 </Modal>
                 <TextQuestion>{currentQuestionDetail.questionBody}</TextQuestion>

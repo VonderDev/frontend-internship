@@ -45,7 +45,7 @@ export const ButtonSeeAllResult = styled(Button)`
     align-items: center;
     justify-content: center;
     position: relative;
-    box-shadow: 5px 8px 50px 40px #ffffff;
+    box-shadow: 5px 8px 50px 20px #ffffff;
 `;
 
 export const ContainerResultSummarize = styled.div`

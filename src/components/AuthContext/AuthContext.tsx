@@ -1,86 +1,80 @@
-import { createContext, useEffect, useState, useContext, useCallback } from "react";
-import { Redirect, Router, useHistory } from "react-router-dom";
-import authMock from './Authmock.json'
-import { authData } from "./User.type";
-import axios from 'axios'
+import { createContext, useEffect, useState, useContext, useCallback } from 'react';
+import { Redirect } from 'react-router-dom';
+import authMock from './Authmock.json';
+import { authData } from './User.type';
+import axios from 'axios';
 
-  interface IAuthProps {
-    children: any 
-    }
+interface IAuthProps {
+    children: any;
+}
 interface datauser {
-      name: string | null
-  }
-  
-    const AuthContext = createContext<any>(null);
+    name: string | null;
+}
 
+const AuthContext = createContext<any>(null);
+const data = JSON.stringify(authMock);
 
-    const AuthProvider =  (({children}: IAuthProps) => {
-    const [loginUser, setLoginUser] = useState<boolean>(false)
-    const [user ,setUser] = useState<datauser>({name: ''}) ;
-    const history = useHistory();
-    
-    const login =  useCallback( ({email, password}: authData) => 
-    {
-    if (email &&  password){
+const AuthProvider = ({ children }: IAuthProps) => {
+    const [user, setUser] = useState<any | null>();
+    const [token, setToken] = useState<any | null>();
 
-      const accessLogin = password === authMock.password && email === authMock.email
-      console.log('props: ',{email, password});
-        
-          if(accessLogin){
-            const data = JSON.stringify(authMock)
-            setUser(JSON.parse(data))
-            localStorage.setItem('accesstoken', "00215484");
-            const tokenKey = localStorage.getItem('accesstoken') || '';
-            tokenKey ? setLoginUser(true) : setLoginUser(false);
-            
-          }else {
-            alert('ไม่ผู้ใช้นี้ อีเมลหรือรหัสผ่านไม่ถูกต้อง')
-            console.log('Failed login');
-          }
-    }else{
-      return false;
-    }
-        },[loginUser , user],)
+    const login = ({ email, password }: authData) => {
+        console.log('props: ', { email, password });
+        return axios
+            .post('http://localhost:5000/login', { email, password })
+            .then((response) => {
+                if (response.data.token) localStorage.setItem('token', response.data.token);
+                setToken(localStorage.getItem('token'));
+                setUser(response.data);
+                return response.data;
+            })
+            .catch((err) => {
+                console.error(err);
+                alert('ไม่ผู้ใช้นี้ อีเมลหรือรหัสผ่านไม่ถูกต้อง');
+                console.log('Failed login');
+            });
+    };
 
-    const gotoLogin = () =>{
-      return  <Redirect to='/login'/>
-    }
-
+    const gotoLogin = () => {
+        return <Redirect to="/login" />;
+    };
     const logout = () => {
-        setLoginUser(false)
-        setUser({name: ''})
-        localStorage.removeItem('accesstoken')
-    }
-    // const data = JSON.stringify(authMock)
-    // setUser(JSON.parse(data))
+        localStorage.removeItem('token');
+        setUser(undefined);
+    };
+    console.log('Data', user);
 
     useEffect(() => {
-      const tokenKey = localStorage.getItem('accesstoken');
-      if (!tokenKey) {
-        gotoLogin
-      }
-      console.log('Data' ,user)
-       }, [ user,loginUser]);
+        const tokenkey = localStorage.getItem('token');
+        if (tokenkey) {
+            console.log('token', tokenkey);
+            console.log('Data2', user);
+            window.location.reload;
+        } else {
+            gotoLogin;
+        }
+    }, []);
 
     return (
-      <AuthContext.Provider value= {{
-        loginUser,
-        login,
-        logout,
-        user
-      }}>
-           {children}
+        <AuthContext.Provider
+            value={{
+                login,
+                logout,
+                user,
+                token,
+            }}
+        >
+            {children}
         </AuthContext.Provider>
     );
-  })
+};
 
-  
-  const useAuthContext = () => {
+const useAuthContext = () => {
     const context = useContext(AuthContext);
     if (context === undefined) {
-        throw new Error(" error AuthContext")
+        throw new Error(' error AuthContext');
     }
-    return context
-}
-  
-export { AuthContext, AuthProvider ,useAuthContext  }
+    return context;
+};
+
+export { AuthContext, AuthProvider, useAuthContext };

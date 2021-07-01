@@ -3,7 +3,7 @@ import Container from 'components/Container/Container';
 import { ContainerTestStoryPage, TextStory } from '../../shared/styles/TestStory.styled';
 import { useHistory } from 'react-router-dom';
 import { IQuestion } from '../../shared/interface/Test.interfaces';
-import { API_GetTestData } from '../../apis/test.api';
+import { ApiGetTestData } from '../../apis/test.api';
 import { Col, Modal } from 'antd';
 import { ButtonSeeAllResults, TextQuestionIndex } from '../../shared/styles/TestQuestion.styled';
 
@@ -19,7 +19,7 @@ function TestStory() {
     }, [currentQuestion, questionList]);
 
     async function getTestData() {
-        const response = await API_GetTestData();
+        const response = await ApiGetTestData();
         if (response) {
             setQuestionList(response); // store all question into the hook
             const resp = response;
