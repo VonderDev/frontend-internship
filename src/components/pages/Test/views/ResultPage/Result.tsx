@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import Container from 'components/Container/Container';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
     ButtonSeeAllResult,
     ContainerCarousel,
@@ -10,7 +10,9 @@ import {
     TextSkillName,
     TextSkillSummarize,
 } from '../../shared/styles/Result/ResultSummarize.styled';
-
+import useSWR from 'swr';
+import axios from 'axios';
+import { ResultSummarizeProps } from '../../shared/interface/Result.interfaces';
 // ─── import mockData ───────────────────────────────────────────────────────────────────
 //
 const mockResult = require('../../mocks/result.json');
@@ -20,11 +22,51 @@ const maxScoreList = mockResult.filter((data: { score: number }) => data.score =
 
 const Result = () => {
     const history = useHistory();
+    const [resultList, setResultList] = useState<Array<ResultSummarizeProps> | null>(null);
+    const [questionList, setQuestionList] = useState<Array<ResultSummarizeProps> | null>(null);
+    const [detailResult, setDetailResult] = useState<ResultSummarizeProps>({
+        skill: '',
+        charactor_summarize: '',
+        image_charactor: '',
+        category_id: 0,
+        description: '',
+        description_career: '',
+        skill_summarize: '',
+        score: 0,
+    });
     useEffect(() => {
         console.log('Maxscore: ', max);
         console.log('Name: ', maxScoreList.length);
     }, []);
 
+    function fetcher(url: string) {
+        return fetch(url, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => response.json());
+    }
+
+    const questionListFetcher = (key: any) =>
+        fetch(key, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+        }).then(async (res) => {
+            console.log('Fetcher triggered');
+            const data = await res.json();
+            setResultList(data); // store all question into the hook
+            const response = data;
+            setDetailResult(response);
+            return data;
+        });
+
+    const { data, error } = useSWR('http://localhost:5000/user/result', questionListFetcher);
+    console.log('[Result Test Game]:', data);
+    // const chartScore = Object.keys(data).map((key) => data[key].score);
+    // console.log(chartScore);
     return (
         <Container header={null}>
             <ContainerCarousel>
