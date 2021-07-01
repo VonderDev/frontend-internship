@@ -125,21 +125,17 @@ const Burger = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const token = localStorage.getItem('token');
     const { logout,user} = useAuthContext();
-    async function getUser() {
-        const res = await user;
-        if (res) {
-            setLoading(false)
-        } else {
-            setLoading(true)
-        }
+    function delay(ms: number) {
+        return new Promise( resolve => setTimeout(resolve, ms) );
     }
-    const userName = () =>{
-            loading ? (<Spin size="large" />) :(<AvatarName>{ user.username }</AvatarName>) 
-        }
-    console.log('user',user)
-    useEffect(() => {
-        getUser();
-    }, []);
+
+    // const getUsername = async () => { 
+    //     await delay(2000); 
+    //     console.log('burger',user.resuit.username )
+    //     return user.resuit.username 
+
+    // };
+
     return (
         <>
             <MenuOutlined  style={{ color: '#8a8888' ,fontSize: '24px'}} onClick={showSidebar} />
@@ -148,7 +144,7 @@ const Burger = () => {
                 <Ul onClick={showSidebar}>
                     <Avataruser>
                         <Avatar size={75} icon={<UserOutlined />} />
-                        { token ? (<AvatarName>user1</AvatarName>) 
+                        { token ? (<AvatarName>{user.resuit.username }</AvatarName>)
                         : (<AvatarName> Guest #000  </AvatarName> )}
                         
                         {token ? null : (
