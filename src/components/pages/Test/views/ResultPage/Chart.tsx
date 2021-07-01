@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import Chart from 'react-apexcharts';
-import { TextFeature, ChartStyled } from '../../shared/styles/ResultPage.styled';
+import { ChartStyled, TextHeaderResult } from '../../shared/styles/Result/ResultPage.styled';
 
 interface Chartprop {
     options: any;
@@ -50,14 +49,14 @@ const Charts = () => {
 
     useEffect(() => {
         console.log(chartValue.options);
-        console.log(chartValue.series);
-        console.log(MockScore);
+        // console.log(chartValue.series);
+        // console.log(MockScore);
     }, []);
 
     return (
         <>
             <div>
-                <TextFeature>ลักษณะเด่นของคุณ</TextFeature>
+                <TextHeaderResult>แผนภูมิพหุปัญญา</TextHeaderResult>
                 <ChartStyled options={chartValue.options} series={chartValue.series} type="radar" />
             </div>
         </>

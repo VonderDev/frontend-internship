@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import BgTestStory from '../images/TestStory.png';
+import BgTestStory from '../../images/TestStory.png';
 
 export const ContainerTestStoryPage = styled.div`
     flex-direction: row;
@@ -9,7 +9,6 @@ export const ContainerTestStoryPage = styled.div`
     background-size: cover;
     height: 100vh;
     &:hover {
-       
         cursor: pointer;
     }
 `;
@@ -19,7 +18,7 @@ export const TextStory = styled.div`
     width: 300px;
     height: 100px;
     font-size: 20px;
-    color:var(--Gray-300);
+    color: var(--Gray-300);
     border-radius: 50%;
     box-shadow: 0px 3px 30px #ffffff;
     opacity: 0.7;
@@ -30,5 +29,4 @@ export const TextStory = styled.div`
     margin-left: auto;
     margin-right: auto;
     font-weight: bolder;
-
-`
+`;

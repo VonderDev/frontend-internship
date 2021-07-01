@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Typography, Card, Row } from 'antd';
+import { Button, Typography, Card, Row, Progress, Image } from 'antd';
 import Chart from 'react-apexcharts';
 
 const { Title } = Typography;
@@ -15,15 +15,12 @@ export const TextHeader = styled.div`
     color: var(--Gray-400);
 `;
 
-export const ContainerResult = styled.div`
-    height: 100vh;
-`;
 export const ButtonGoHome = styled(Button)`
     border-radius: 15px;
     font-weight: bolder;
     color: white;
     background-color: var(--Blue-400);
-    transform: translateY(-280%);
+    transform: translateY(-150%);
     margin-left: auto;
     margin-right: auto;
     width: 400px;
@@ -33,29 +30,22 @@ export const ButtonGoHome = styled(Button)`
     justify-content: center;
     font-size: 18px;
 `;
-export const TextFeature = styled.div`
+export const TextHeaderResult = styled.div`
     text-align: center;
     font-size: 22px;
     padding: 30px;
     font-weight: bolder;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    transform: translateY(-50%);
 `;
 
 export const ChartStyled = styled(Chart)`
     transform: translateY(-20%);
     width: 580px;
-`;
-
-export const ButtonHome = styled(Button)`
-    border-radius: 0 25px 25px 0;
-    color: #ffffff;
-    background-color: #7879f1;
-    width: 5rem;
-    height: 7vh;
-    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const TextBoxDescript = styled.div`
@@ -86,29 +76,51 @@ export const ResultCard = styled(Card)`
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: translateY(-40%);
+    transform: translateY(-10%);
     width: 400px;
     height: 400px;
     margin-left: auto;
     margin-right: auto;
 `;
 
-export const Boxpic = styled.img`
+export const Boxpic = styled(Image)`
     border-radius: 20px;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ffd6d2;
-    width: 50%;
-    height: 150px;
+    width: 80%;
+    height: 100px;
 `;
-export const Hname = styled.h1`
+
+export const ImagePreview = styled(Image)`
+    border-radius: 20px;
+    width: 80%;
+    height: 100px;
+    :hover {
+        cursor: pointer;
+    }
+`;
+
+export const ContainerImagePreview = styled(Image.PreviewGroup)`
+    & .ant-image {
+        padding-left: 20px;
+        position: absolute;
+    }
+`;
+
+export const CategoryName = styled.h1`
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 22px;
+    font-weight: bolder;
+    padding-top: 20px;
+`;
+
+export const SkillName = styled.h1`
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 22px;
     font-weight: bolder;
+    padding-top: 20px;
     text-align: center;
 `;
 export const DesText = styled.div`
@@ -129,6 +141,15 @@ export const BodyCard = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20%;
+`;
+
+export const ContainerCharactorDetail = styled.div`
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 5%;
 `;
 export const Readmore = styled.div`
     display: flex;
@@ -155,18 +176,25 @@ export const TextBox = styled.div`
     font-size: 16px;
 `;
 
-export const Resultpic = styled.img`
-    border-radius: 20px;
-    border: none;
+export const Resultpic = styled(Image)`
+    width: 100%;
+    height: 50vh;
+    margin-top: 20px;
+`;
+
+export const ImgCharactorSummarize = styled(Image)`
+    width: 80%;
+    height: 50vh;
+    transform: translateX(10%);
+`;
+
+export const ContainerCharactorSummarize = styled.div`
+    flex-direction: column;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffd6d2;
-    width: 343px;
-    height: 343px;
-    font-size: 20px;
+    padding-left: 5%;
 `;
-
 export const BoardRecomment = styled(Card)`
     border-radius: 15px;
     margin-bottom: 50px;
@@ -178,8 +206,9 @@ export const TextDateBoard = styled.div`
 
 export const ContainerBoard = styled.div`
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 4%;
 `;
 
 export const CardTag = styled(Card.Meta)`
@@ -188,4 +217,14 @@ export const CardTag = styled(Card.Meta)`
 
 export const RowDetailCard = styled(Row)`
     padding-top: 15px;
+`;
+
+export const ProgressScore = styled(Progress)``;
+
+export const ContainerProgressScore = styled.div`
+    padding-left: 20px;
+    transform: translateY(-150%);
+`;
+export const TextNameSkill = styled.div`
+    font-weight: bolder;
 `;

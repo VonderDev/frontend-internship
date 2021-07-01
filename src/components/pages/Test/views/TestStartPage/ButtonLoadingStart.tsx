@@ -1,6 +1,6 @@
 import { Spin } from 'antd';
 import { useState } from 'react';
-import { ButtonLoading, ContainerButtonLoading, IsLoadingSpinner } from '../../shared/styles/TestPage.styled';
+import { ButtonLoading, ContainerButtonLoading, IsLoadingSpinner } from '../../shared/styles/Test/TestPage.styled';
 import { useHistory } from 'react-router-dom';
 
 function ButtonLoadingStart() {
@@ -24,7 +24,6 @@ function ButtonLoadingStart() {
         <ContainerButtonLoading>
             {isLoading ? (
                 <IsLoadingSpinner>
-                    {/* <TextIsLoading>Fetching Data</TextIsLoading> */}
                     <Spin size="large" />
                 </IsLoadingSpinner>
             ) : (

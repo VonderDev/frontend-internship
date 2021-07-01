@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Button, Col } from 'antd';
-import ImgTestQuestion from '../../shared/images/TestQuestion.png';
+import ImgTestQuestion from '../../../shared/images/TestQuestion.png';
 
 export const ContainerTestQuestion = styled.div`
     flex-direction: row;
@@ -21,7 +21,7 @@ export const TextQuestionIndex = styled.div`
     align-items: center;
 `;
 
-export const ButtonStartOver = styled(Button)`
+export const ButtonSeeAllResults = styled(Button)`
     border-radius: 12px;
     border: 2px solid var(--Blue-300);
     font-weight: bolder;
@@ -29,10 +29,10 @@ export const ButtonStartOver = styled(Button)`
     background-color: #ffffff;
     margin-right: 0;
     margin-left: auto;
-    transform: translateY(-160%) translateX(-15%);
+    transform: translateY(-160%) translateX(-20%);
     font-size: 16px;
     display: block;
-    width: 100px;
+    width: 120px;
     height: 40px;
 `;
 
