@@ -1,6 +1,6 @@
 import { memo, useMemo } from 'react';
 import { useEffect, useState } from 'react';
-import { API_GET_USER_Data , API_PUT_USER_DATA } from '../apis/profile.api';
+import { ApiGetUserData , ApiPutUserData } from '../apis/profile.api';
 import { IUser } from '../shared/Profile.interface';
 import { ButtonSave, ContainerProfile, FormInput, TextTopicEditProfile, UserImage } from '../shared/Profile.styles';
 import { Form } from 'antd';
@@ -8,7 +8,8 @@ import ProfileMascot from '../../Profile/images/ProfileMascot.png'
 export const ProfileInput = memo(() => {
     const [userInfo, setUserInfo] = useState<IUser>({ firstName: '', lastName: '', email: '',  username: '' });
     async function getStatisticData() {
-        const response = await API_GET_USER_Data();
+        const response = await ApiGetUserData();
+        //Swr ใช้เป็น custom hook
         if (response) {
             setUserInfo((prevState) => ({
                 ...prevState,
@@ -30,7 +31,8 @@ export const ProfileInput = memo(() => {
     };
 
     const putDataOnClick = () => {
-        API_PUT_USER_DATA(
+        //เพิ่ม async await , Loading
+        ApiPutUserData(
             userInfo
         )
     };
