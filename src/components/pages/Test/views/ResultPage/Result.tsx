@@ -65,8 +65,7 @@ const Result = () => {
 
     const { data, error } = useSWR('http://localhost:5000/user/result', questionListFetcher);
     console.log('[Result Test Game]:', data);
-    // const chartScore = Object.keys(data).map((key) => data[key].score);
-    // console.log(chartScore);
+
     return (
         <Container header={null}>
             <ContainerCarousel>
