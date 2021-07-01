@@ -3,7 +3,7 @@ import { Children, createContext, useCallback, useEffect, useState, useContext, 
 import { Row, Col } from 'antd';
 import { BackHeader, LeftDiv, RightDiv, RowHeader, TextHeader } from './Header.styled';
 import { LeftOutlined, MenuOutlined, DownloadOutlined } from '@ant-design/icons';
-import Hamburger from '../pages/Burger/Burger';
+import Burger  from '../pages/Burger/Burger';
 
 interface HeaderProps {
     children: any;
@@ -34,7 +34,7 @@ const Header = ({ children, right, left }: HeaderProps) => {
         if (right === 'menu') {
             return (
                 <>
-                    <Hamburger />
+                    <Burger  />
                 </>
             );
         } else if (right === 'save') {
