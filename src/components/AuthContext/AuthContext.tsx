@@ -51,6 +51,7 @@ import axios from 'axios'
     }
     const logout = () => {
         localStorage.removeItem('token')
+        setToken(localStorage.getItem('token'))
         setUser(undefined)
     }
   
@@ -59,7 +60,6 @@ import axios from 'axios'
       const tokenkey = localStorage.getItem('token');
       if (tokenkey ) {
         console.log('token' , tokenkey)
-        window.location.reload;
       }else{
         gotoLogin
       }
