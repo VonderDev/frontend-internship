@@ -1,53 +1,58 @@
-import { Link, useHistory } from 'react-router-dom';
-import { API_Profile_Data } from '../apis/profile.api';
-import { Form, List, Col, Row } from 'antd';
+import { useHistory } from 'react-router-dom';
+import { ApiGetUserData } from '../apis/profile.api';
+import { Col, Row } from 'antd';
 import { useEffect } from 'react';
-import { IIconTextProfile, IListDataBoardHistory, IProfile } from '../shared/Profile.interface';
+import { IIconTextProfile, IListDataBoardHistory, IUser } from '../shared/Profile.interface';
 import { CalendarOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
 import { useState } from 'react';
+import ProfileMascot from '../../Profile/images/ProfileMascot.png';
 import {
     ContainerProfile,
-    AlignCenter,
-    AlignRight,
-    ButtonSubmit,
     TextUserInfo1,
     TextUserInfo2,
     TextUsername,
     ResultCard,
     UserImage,
     TextTopic2,
-    AlignLeft,
     ResultImage,
     CardText,
     IconArrow,
-    ListProfile,
-    ProfileListItem,
     HistoryImage,
     LinkMoreResult,
     HistoryText,
+    RowStyled,
+    BoardCard,
 } from '../shared/Profile.styles';
 import Container from 'components/Container/Container';
 import React from 'react';
 import useSWR from 'swr';
+import axios from 'axios';
+import { Box, ButtonStyle } from 'shared/style/theme/component';
 
 function Profile() {
-    const [cred, setCred] = useState<IProfile>({ name: '', surname: '', email: '', result: '', pic: '', username: '' });
     const history = useHistory();
-    // async function getStatisticData() {
-    //     const response = await API_Profile_Data();
-    //     if (response) {
-    //         console.log(response.name);
-    //         setCred((prevState) => ({ ...prevState, name: response.name, surname: response.surname, email: response.email, result: response.result, pic: response.pic, username: response.username }));
-    //     } else {
-    //         console.log('error');
-    //     }
-    // }
-    // useEffect(() => {
-    //     getStatisticData();
-    // }, []);
+    const [userInfo, setUserInfo] = useState<IUser>({ firstName: '', lastName: '', email: '', username: '' });
+    async function getStatisticData() {
+        const response = await ApiGetUserData();
+        //Swr ใช้เป็น custom hook
+        if (response) {
+            setUserInfo((prevState) => ({
+                ...prevState,
+                firstName: response.firstName,
+                lastName: response.lastName,
+                email: response.email,
+                username: response.username,
+            }));
+        } else {
+            console.log('error');
+        }
+    }
+    useEffect(() => {
+        getStatisticData();
+    }, []);
 
     const listData: Array<IListDataBoardHistory> = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 3; i++) {
         listData.push({
             href: '/board',
             title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ${i}`,
@@ -55,6 +60,11 @@ function Profile() {
             description: 'บทความ',
         });
     }
+    const cardList = [
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ' },
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ' },
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ' },
+    ];
 
     const IconText = ({ icon, text }: IIconTextProfile) => (
         <div>
@@ -63,125 +73,101 @@ function Profile() {
         </div>
     );
 
-    const { data, error } = useSWR('http://localhost:5000/user/find');
-    const isLoading = !data && !error;
-    console.log('Profile Data', data);
-
-    useEffect(() => {
-        if (data) {
-            console.log('[useEffect data username] :', data.username);
-            console.log('[useEffect data email] :', data.email);
-        }
-    }, [data]);
+    // const { data: userInfo, error } = useSWR('http://localhost:5000/user/find');
+    // console.log('[User Data]:', userInfo);
+    // console.log(error);
+    // useEffect(() => {
+    //     console.log(userInfo);
+    // }, [userInfo]);
 
     return (
         <div>
             <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
-                {error && <div>error </div>}
-                {isLoading ? (
-                    <div>loading ...</div>
-                ) : (
-                    <ContainerProfile>
-                        <AlignCenter>
-                            <UserImage src={cred.pic} />
-                            <TextUsername>{data?.username}</TextUsername>
-                        </AlignCenter>
-                        <Row>
+                <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
+                    <UserImage src={ProfileMascot} />
+                    <TextUsername>{userInfo.username}</TextUsername>
+                    <RowStyled>
+                        <Col span={8}>
+                            <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
+                        </Col>
+                        <Col span={16}>
+                            <TextUserInfo2>
+                                {userInfo.firstName} {userInfo.lastName}
+                            </TextUserInfo2>
+                        </Col>
+                    </RowStyled>
+                    <RowStyled>
+                        <Col span={8}>
+                            <TextUserInfo1>อีเมล :</TextUserInfo1>
+                        </Col>
+                        <Col span={16}>
+                            <TextUserInfo2>{userInfo.email}</TextUserInfo2>
+                        </Col>
+                    </RowStyled>
+                    <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
+                        แก้ไขข้อมูลส่วนตัว
+                    </ButtonStyle>
+                    <RowStyled>
+                        <Col span={16}>
+                            <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
+                        </Col>
+                        <Col span={8}>
+                            <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
+                        </Col>
+                    </RowStyled>
+                    <ResultCard onClick={() => history.push('/result')}>
+                        <RowStyled>
                             <Col span={8}>
-                                <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
+                                <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
                             </Col>
-                            <Col span={16}>
-                                <AlignRight>
-                                    <TextUserInfo2>
-                                        {data.name} {data.surname}
-                                    </TextUserInfo2>
-                                </AlignRight>
+                            <Col span={14}>
+                                <CardText>
+                                    <RowStyled>ลักษณะเด่นของคุณ</RowStyled>
+                                    <RowStyled>วันที่ 15 มิ.ย. 2564</RowStyled>
+                                </CardText>
                             </Col>
-                        </Row>
-                        <Row>
-                            <Col span={8}>
-                                <TextUserInfo1>อีเมล :</TextUserInfo1>
+                            <Col span={2}>
+                                <IconArrow />
                             </Col>
-                            <Col span={16}>
-                                <AlignRight>
-                                    <TextUserInfo2>{data.email}</TextUserInfo2>
-                                </AlignRight>
-                            </Col>
-                        </Row>
-
-                        <Link to="/editProfile">
-                            <Form.Item>
-                                <AlignCenter>
-                                    <ButtonSubmit>แก้ไขข้อมูลส่วนตัว</ButtonSubmit>
-                                </AlignCenter>
-                            </Form.Item>
-                        </Link>
-                        <TextTopic2>
-                            ผลลัพธ์ของคุณ
-                            <AlignRight>
-                                <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
-                            </AlignRight>
-                        </TextTopic2>
-                        <AlignCenter>
-                            <Link to="/result">
-                                <ResultCard>
-                                    <Row>
-                                        <Col span={8}>
-                                            <AlignLeft>
-                                                <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
-                                            </AlignLeft>
-                                        </Col>
-                                        <Col span={14}>
-                                            <CardText>
-                                                <Row>ลักษณะเด่นของคุณ</Row>
-                                                <Row>วันที่ 15 มิ.ย. 2564</Row>
-                                            </CardText>
-                                        </Col>
-                                        <Col span={2}>
-                                            <IconArrow />
-                                        </Col>
-                                    </Row>
-                                </ResultCard>
-                            </Link>
-                        </AlignCenter>
-                        <TextTopic2>
-                            กระทู้ของคุณ
-                            <AlignRight>
-                                <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
-                            </AlignRight>
-                        </TextTopic2>
-                        <AlignCenter>
-                            <ListProfile
-                                itemLayout="vertical"
-                                size="large"
-                                pagination={{
-                                    onChange: (page) => {
-                                        console.log(page);
-                                    },
-                                    pageSize: 3,
+                        </RowStyled>
+                    </ResultCard>
+                    <RowStyled>
+                        <Col span={16}>
+                            <TextTopic2>กระทู้ของคุณ</TextTopic2>
+                        </Col>
+                        <Col span={8}>
+                            <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
+                        </Col>
+                    </RowStyled>
+                    {cardList.map((item, index) => {
+                        return (
+                            <BoardCard
+                                key={index}
+                                onClick={() => {
+                                    history.push('/Board');
                                 }}
-                                dataSource={listData}
-                                renderItem={(item: any) => (
-                                    <ProfileListItem
-                                        key={item.title}
-                                        actions={[
-                                            <IconText icon={FormOutlined} text=" Lookmaii" key="list-vertical-star-o" />,
-                                            <IconText icon={CalendarOutlined} text=" 11 มิถุนายน 2564" key="list-vertical-like-o" />,
-                                            <IconText icon={HeartFilled} text=" 12" key="list-vertical-message" />,
-                                        ]}
-                                    >
-                                        <HistoryText onClick={() => history.push('/board')}>
-                                            <List.Item.Meta avatar={<HistoryImage src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} description={item.description} />
-                                        </HistoryText>
-                                    </ProfileListItem>
-                                )}
-                            />
-                        </AlignCenter>
-                    </ContainerProfile>
-                )}
+                            >
+                                <RowStyled>
+                                    <Col span={6}>
+                                        <HistoryImage src={item.avatar} />
+                                    </Col>
+                                    <Col span={16}>
+                                        <CardText>
+                                            <Row>
+                                                <HistoryText>{item.title}</HistoryText>
+                                            </Row>
+                                            <Row>
+                                                <HistoryText>{item.description}</HistoryText>
+                                            </Row>
+                                        </CardText>
+                                    </Col>
+                                </RowStyled>
+                            </BoardCard>
+                        );
+                    })}
+                </Box>
             </Container>
         </div>
     );
 }
-
 export default Profile;
