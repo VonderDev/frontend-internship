@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { Button, Typography, Card, Row, Progress, Image } from 'antd';
+import { Button, Typography, Card, Row, Progress, Image, Tabs } from 'antd';
 import Chart from 'react-apexcharts';
+import { Tab } from 'react-bootstrap';
 
 const { Title } = Typography;
 
@@ -230,3 +231,19 @@ export const TextNameSkill = styled.div`
 `;
 
 //------------ STYLED RESULT INFO TAB ------------//
+export const TabsInfo = styled(Tabs)`
+    border-radius: 15px;
+    & .ant-tabs-nav .ant-tabs-nav-wrap {
+        padding-top: 3%;
+        justify-content: center;
+    }
+    & .ant-tabs-nav .ant-tabs-tab {
+        background-color: #ffffff;
+        border-radius: 12px 12px !important;
+        padding: 8px 60px;
+        border: 1px solid #f0f0f0;
+    }
+    & .ant-tabs-nav .ant-tabs-tab-active {
+        background-color: var(--Gray-500);
+    }
+`;
