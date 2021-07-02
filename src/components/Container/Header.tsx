@@ -6,12 +6,12 @@ import { LeftOutlined, MenuOutlined, DownloadOutlined } from '@ant-design/icons'
 import Burger  from '../pages/Burger/Burger';
 
 interface HeaderProps {
-    children: any;
+    title: string;
     right: string;
     left: string;
 }
 
-const Header = ({ children, right, left }: HeaderProps) => {
+const Header = ({ title, right, left }: HeaderProps) => {
     const history = useHistory();
 
     const goBack = useCallback(() => {
@@ -46,7 +46,7 @@ const Header = ({ children, right, left }: HeaderProps) => {
         } else {
             return right;
         }
-    }, []);
+    }, [right]);
 
     return (
         <>
@@ -58,7 +58,7 @@ const Header = ({ children, right, left }: HeaderProps) => {
             </Col>
             <Col span={16}>
                 <TextHeader>
-                    {children}
+                    {title}
                 </TextHeader>
 
             </Col>

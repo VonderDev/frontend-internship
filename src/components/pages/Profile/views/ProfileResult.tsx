@@ -23,7 +23,7 @@ function ProfileResult() {
     );
 
     return (
-        <Container header={{ left: 'back', children: 'ผลลัพธ์ของคุณ', right: 'menu' }}>
+        <Container header={{ left: 'back', title: 'ผลลัพธ์ของคุณ', right: 'menu' }}>
             <ContainerProfile>
                     {cardList.map((item, index) => {
                         return (

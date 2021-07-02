@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useAuthContext } from './AuthContext';
 
-    const PrivateRoute = ({component: Component, ...rest}: any) => {
+const PrivateRoute = ({component: Component, ...rest}: any) => {
         const token = localStorage.getItem('token');
         console.log('token',token)
         const routeComponent = (props: any) => (

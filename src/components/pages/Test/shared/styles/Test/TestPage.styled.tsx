@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Button } from 'antd';
-import TestOverview from '../images/TestOverview.png';
+import TestOverview from '../../images/TestOverview.png';
 
 export const ContainerTestPage = styled.div`
     flex-direction: row;
@@ -15,7 +15,7 @@ export const TextHeader = styled.div`
     text-align: center;
     font-size: 30px;
     font-weight: bolder;
-    padding-top: 100%;
+    padding-top: 80%;
 `;
 
 export const BoxAnimation = styled.div`
@@ -50,8 +50,8 @@ export const ButtonLoading = styled(Button)`
     background-color: var(--Blue-400);
     margin-left: auto;
     margin-right: auto;
-    width: 400px;
-    height: 51px;
+    width: 72%;
+    height: 7vh;
     display: flex;
     align-items: center;
     justify-content: center;

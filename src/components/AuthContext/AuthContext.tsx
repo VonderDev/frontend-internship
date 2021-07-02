@@ -1,22 +1,33 @@
 import { createContext, useEffect, useState, useContext, useCallback } from "react";
 import { Redirect } from "react-router-dom";
-import authMock from './Authmock.json'
 import { authData } from "./User.type";
 import axios from 'axios'
 
   interface IAuthProps {
     children: any 
     }
-interface datauser {
-      name: string | null
-  }
 
     const AuthContext = createContext<any>(null);
-    const data = JSON.stringify(authMock)
-
     const AuthProvider =  (({children}: IAuthProps) => {
     const [user ,setUser] = useState<any | null >() ;
     const [token ,setToken] = useState<any | null >() ;
+
+    const getUser = async() =>{
+      const token = localStorage.getItem('token');
+      try{
+        const {data}  = await axios.get('http://localhost:5000/user/find',
+          { headers :{
+          Authorization : `Bearer ${token}`
+          }})
+          if(data) {
+            setUser(data.resuit)
+            console.log(' USER_DATA :', user);
+            return data;
+          }
+      }catch(err){
+        console.error(err);
+      }
+  }
 
     const login = ({email, password}: authData) => 
     {
@@ -26,7 +37,7 @@ interface datauser {
         if (response.data.token)
         localStorage.setItem('token', response.data.token);
         setToken(localStorage.getItem('token'))
-        setUser(response.data)
+        setUser(response.data.resuit)
         return user
       }).catch(err => {
         console.error(err)
@@ -34,12 +45,6 @@ interface datauser {
         console.log('Failed login');
       });
         };
-    
-    const getUserInfo = () =>{
-      const token = localStorage.getItem('token');
-      setToken(token)
-      
-    }
 
     const gotoLogin = () =>{
       return  <Redirect to='/login'/>
@@ -48,13 +53,12 @@ interface datauser {
         localStorage.removeItem('token')
         setUser(undefined)
     }
-    console.log('Data' ,user)
-    
+  
+    console.log('user',user)
     useEffect(() => {
       const tokenkey = localStorage.getItem('token');
       if (tokenkey ) {
         console.log('token' , tokenkey)
-        console.log('Data2' ,user)
         window.location.reload;
       }else{
         gotoLogin
@@ -66,7 +70,8 @@ interface datauser {
         login,
         logout,
         user,
-        token
+        token,
+        getUser
       }}>
            {children}
         </AuthContext.Provider>
