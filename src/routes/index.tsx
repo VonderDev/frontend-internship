@@ -19,7 +19,6 @@ import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion'
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
 
-
 function Routing() {
     return (
         <Switch>

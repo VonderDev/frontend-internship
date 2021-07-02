@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
- 
+
 const GlobalStyle = createGlobalStyle`
   html{
     //COLORS
@@ -92,10 +92,9 @@ const GlobalStyle = createGlobalStyle`
   margin: 0;
   padding: 0;
   font-family: 'Kanit', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   }
 
 `;
 
- 
 export default GlobalStyle;
