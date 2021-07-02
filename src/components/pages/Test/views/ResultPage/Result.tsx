@@ -39,15 +39,6 @@ const Result = () => {
         console.log('Name: ', maxScoreList.length);
     }, []);
 
-    function fetcher(url: string) {
-        return fetch(url, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-                'Content-Type': 'application/json',
-            },
-        }).then((response) => response.json());
-    }
-
     const questionListFetcher = (key: any) =>
         fetch(key, {
             headers: {
@@ -63,7 +54,7 @@ const Result = () => {
             return data;
         });
 
-    const { data, error } = useSWR('http://localhost:5000/user/result', questionListFetcher);
+    const { data, error } = useSWR('http://localhost:5000/user/result');
     console.log('[Result Test Game]:', data);
 
     return (
