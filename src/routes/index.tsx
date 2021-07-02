@@ -11,14 +11,11 @@ import Result from 'components/pages/Test/views/ResultPage/Result';
 import editProfile from 'components/pages/Profile/views/EditProfile';
 import CharactorDetail from 'components/pages/Test/views/ResultPage/ResultInfo/CharactorDetail';
 import TestOverview from 'components/pages/Test/views/TestStartPage/TestOverview';
-import ProfileResult from 'components/pages/Profile/views/ProfileResult';
-import BoardHistory from 'components/pages/Profile/views/BoardHistory';
 import PrivateRoute from 'components/AuthContext/PrivateRoute';
 import TestStory from 'components/pages/Test/views/TestStartPage/TestStory';
 import ResultOverview from 'components/pages/Test/views/ResultPage/ResultInfo/ResultOverview';
 import ResultInfo from 'components/pages/Test/views/ResultPage/ResultInfo/ResultInfo';
 import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion';
-
 
 function Routing() {
     return (
