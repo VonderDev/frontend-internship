@@ -11,26 +11,8 @@ export const AlignLeft = styled.div`
 `;
 
 export const ContainerProfile = styled.div`
-    padding: 0px;
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-`;
-
-export const ButtonSubmit = styled(Button)`
-    font-weight: bolder;
-    font-size: 15px;
-    border-radius: 10px;
-    color: var(--Blue-400);
-    border-color: var(--Blue-400);
-    width: 100%;
-    height: 51px;
-    margin-top: 15px;
-    margin-bottom: 0px;
-    box-shadow: 0px 3px 6px #c7c7c7;
+    margin-left: 20px;
+    margin-right: 20px;
 `;
 
 export const ButtonSave = styled(Button)`
@@ -65,15 +47,6 @@ export const ButtonCancleModal = styled(Button)`
     height: 19px;
     margin-top: 15px;
     transform: translateY(0%);
-`;
-
-export const FormInput = styled(Input)`
-    font-size: 16px;
-    border-radius: 10px;
-    background-color: white;
-    width: 343px;
-    height: 51px;
-    box-shadow: 0px 1px 6px #c7c7c7;
 `;
 
 export const TextTopicEditProfile = styled.div`
