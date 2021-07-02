@@ -28,22 +28,23 @@ import {
 } from '../shared/Profile.styles';
 import Container from 'components/Container/Container';
 import React from 'react';
+import useSWR from 'swr';
 
 function Profile() {
     const [cred, setCred] = useState<IProfile>({ name: '', surname: '', email: '', result: '', pic: '', username: '' });
     const history = useHistory();
-    async function getStatisticData() {
-        const response = await API_Profile_Data();
-        if (response) {
-            console.log(response.name);
-            setCred((prevState) => ({ ...prevState, name: response.name, surname: response.surname, email: response.email, result: response.result, pic: response.pic, username: response.username }));
-        } else {
-            console.log('error');
-        }
-    }
-    useEffect(() => {
-        getStatisticData();
-    }, []);
+    // async function getStatisticData() {
+    //     const response = await API_Profile_Data();
+    //     if (response) {
+    //         console.log(response.name);
+    //         setCred((prevState) => ({ ...prevState, name: response.name, surname: response.surname, email: response.email, result: response.result, pic: response.pic, username: response.username }));
+    //     } else {
+    //         console.log('error');
+    //     }
+    // }
+    // useEffect(() => {
+    //     getStatisticData();
+    // }, []);
 
     const listData: Array<IListDataBoardHistory> = [];
     for (let i = 0; i < 6; i++) {
@@ -62,106 +63,122 @@ function Profile() {
         </div>
     );
 
+    const { data, error } = useSWR('http://localhost:5000/user/find');
+    const isLoading = !data && !error;
+    console.log('Profile Data', data);
+
+    useEffect(() => {
+        if (data) {
+            console.log('[useEffect data username] :', data.username);
+            console.log('[useEffect data email] :', data.email);
+        }
+    }, [data]);
+
     return (
         <div>
             <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
-                <ContainerProfile>
-                    <AlignCenter>
-                        <UserImage src={cred.pic} />
-                        <TextUsername>{cred.username}</TextUsername>
-                    </AlignCenter>
-                    <Row>
-                        <Col span={8}>
-                            <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
-                        </Col>
-                        <Col span={16}>
-                            <AlignRight>
-                                <TextUserInfo2>
-                                    {cred.name} {cred.surname}
-                                </TextUserInfo2>
-                            </AlignRight>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col span={8}>
-                            <TextUserInfo1>อีเมล :</TextUserInfo1>
-                        </Col>
-                        <Col span={16}>
-                            <AlignRight>
-                                <TextUserInfo2>{cred.email}</TextUserInfo2>
-                            </AlignRight>
-                        </Col>
-                    </Row>
+                {error && <div>error </div>}
+                {isLoading ? (
+                    <div>loading ...</div>
+                ) : (
+                    <ContainerProfile>
+                        <AlignCenter>
+                            <UserImage src={cred.pic} />
+                            <TextUsername>{data?.username}</TextUsername>
+                        </AlignCenter>
+                        <Row>
+                            <Col span={8}>
+                                <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
+                            </Col>
+                            <Col span={16}>
+                                <AlignRight>
+                                    <TextUserInfo2>
+                                        {data.name} {data.surname}
+                                    </TextUserInfo2>
+                                </AlignRight>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col span={8}>
+                                <TextUserInfo1>อีเมล :</TextUserInfo1>
+                            </Col>
+                            <Col span={16}>
+                                <AlignRight>
+                                    <TextUserInfo2>{data.email}</TextUserInfo2>
+                                </AlignRight>
+                            </Col>
+                        </Row>
 
-                    <Link to="/editProfile">
-                        <Form.Item>
-                            <AlignCenter>
-                                <ButtonSubmit>แก้ไขข้อมูลส่วนตัว</ButtonSubmit>
-                            </AlignCenter>
-                        </Form.Item>
-                    </Link>
-                    <TextTopic2>
-                        ผลลัพธ์ของคุณ
-                        <AlignRight>
-                            <LinkMoreResult  onClick={() => history.push("/profileresult") } >ดูเพิ่มเติม</LinkMoreResult>
-                        </AlignRight>
-                    </TextTopic2>
-                    <AlignCenter>
-                        <Link to="/result">
-                            <ResultCard>
-                                <Row>
-                                    <Col span={8}>
-                                        <AlignLeft>
-                                            <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
-                                        </AlignLeft>
-                                    </Col>
-                                    <Col span={14}>
-                                        <CardText>
-                                            <Row>ลักษณะเด่นของคุณ</Row>
-                                            <Row>วันที่ 15 มิ.ย. 2564</Row>
-                                        </CardText>
-                                    </Col>
-                                    <Col span={2}>
-                                        <IconArrow />
-                                    </Col>
-                                </Row>
-                            </ResultCard>
+                        <Link to="/editProfile">
+                            <Form.Item>
+                                <AlignCenter>
+                                    <ButtonSubmit>แก้ไขข้อมูลส่วนตัว</ButtonSubmit>
+                                </AlignCenter>
+                            </Form.Item>
                         </Link>
-                    </AlignCenter>
-                    <TextTopic2>
-                        กระทู้ของคุณ
-                        <AlignRight>
-                            <LinkMoreResult onClick={() => history.push("/boardhistory") }>ดูเพิ่มเติม</LinkMoreResult>
-                        </AlignRight>
-                    </TextTopic2>
-                    <AlignCenter>
-                        <ListProfile
-                            itemLayout="vertical"
-                            size="large"
-                            pagination={{
-                                onChange: (page) => {
-                                    console.log(page);
-                                },
-                                pageSize: 3,
-                            }}
-                            dataSource={listData}
-                            renderItem={(item: any) => (
-                                <ProfileListItem
-                                    key={item.title}
-                                    actions={[
-                                        <IconText icon={FormOutlined} text=" Lookmaii" key="list-vertical-star-o" />,
-                                        <IconText icon={CalendarOutlined} text=" 11 มิถุนายน 2564" key="list-vertical-like-o" />,
-                                        <IconText icon={HeartFilled} text=" 12" key="list-vertical-message" />,
-                                    ]}
-                                >
-                                    <HistoryText onClick={() => history.push('/board')}>
-                                        <List.Item.Meta avatar={<HistoryImage src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} description={item.description} />
-                                    </HistoryText>
-                                </ProfileListItem>
-                            )}
-                        />
-                    </AlignCenter>
-                </ContainerProfile>
+                        <TextTopic2>
+                            ผลลัพธ์ของคุณ
+                            <AlignRight>
+                                <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
+                            </AlignRight>
+                        </TextTopic2>
+                        <AlignCenter>
+                            <Link to="/result">
+                                <ResultCard>
+                                    <Row>
+                                        <Col span={8}>
+                                            <AlignLeft>
+                                                <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
+                                            </AlignLeft>
+                                        </Col>
+                                        <Col span={14}>
+                                            <CardText>
+                                                <Row>ลักษณะเด่นของคุณ</Row>
+                                                <Row>วันที่ 15 มิ.ย. 2564</Row>
+                                            </CardText>
+                                        </Col>
+                                        <Col span={2}>
+                                            <IconArrow />
+                                        </Col>
+                                    </Row>
+                                </ResultCard>
+                            </Link>
+                        </AlignCenter>
+                        <TextTopic2>
+                            กระทู้ของคุณ
+                            <AlignRight>
+                                <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
+                            </AlignRight>
+                        </TextTopic2>
+                        <AlignCenter>
+                            <ListProfile
+                                itemLayout="vertical"
+                                size="large"
+                                pagination={{
+                                    onChange: (page) => {
+                                        console.log(page);
+                                    },
+                                    pageSize: 3,
+                                }}
+                                dataSource={listData}
+                                renderItem={(item: any) => (
+                                    <ProfileListItem
+                                        key={item.title}
+                                        actions={[
+                                            <IconText icon={FormOutlined} text=" Lookmaii" key="list-vertical-star-o" />,
+                                            <IconText icon={CalendarOutlined} text=" 11 มิถุนายน 2564" key="list-vertical-like-o" />,
+                                            <IconText icon={HeartFilled} text=" 12" key="list-vertical-message" />,
+                                        ]}
+                                    >
+                                        <HistoryText onClick={() => history.push('/board')}>
+                                            <List.Item.Meta avatar={<HistoryImage src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} description={item.description} />
+                                        </HistoryText>
+                                    </ProfileListItem>
+                                )}
+                            />
+                        </AlignCenter>
+                    </ContainerProfile>
+                )}
             </Container>
         </div>
     );

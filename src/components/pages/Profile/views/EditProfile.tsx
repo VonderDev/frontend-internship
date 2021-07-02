@@ -30,7 +30,7 @@ function EditProfile() {
     };
 
     const editedUser = () => {
-        console.log('test')
+        console.log('test');
         console.log(cred);
     };
 
@@ -65,7 +65,7 @@ function EditProfile() {
     const goBack = useCallback(() => {
         history.goBack();
     }, []);
-    console.log('logg',cred)
+    console.log('logg', cred);
 
     return (
         <Container
@@ -76,7 +76,7 @@ function EditProfile() {
                     </BackHeader>
                 ),
                 title: 'แก้ไขข้อมูลส่วนตัว',
-                right: <ButtonSave onClick={()=> editedUser()}>บันทึก</ButtonSave>,
+                right: <ButtonSave onClick={() => editedUser()}>บันทึก</ButtonSave>,
             }}
         >
             <AlignCenter key={1}>
