@@ -36,17 +36,11 @@ export const ButtonSubmit = styled(Button)`
 export const ButtonSave = styled(Button)`
     font-weight: bolder;
     font-size: 16px;
-    position: absolute;
-    float: left;
-    top: 0;
     background-color: transparent;
     border: none;
-    padding: 0px;
+    padding: 5px;
+    margin: 5px;
     color: var(--Blue-400);
-    width: 65px;
-    height: 19px;
-    z-index: 999;
-    transform: translateX(48vh) translateY(2.5vh);
 `;
 
 export const ButtonLeaveModal = styled(Button)`
