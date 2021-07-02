@@ -228,3 +228,5 @@ export const ContainerProgressScore = styled.div`
 export const TextNameSkill = styled.div`
     font-weight: bolder;
 `;
+
+//------------ STYLED RESULT INFO TAB ------------//

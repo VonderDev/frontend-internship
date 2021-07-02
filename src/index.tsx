@@ -12,7 +12,10 @@ const fetcher = (url: string) =>
             Authorization: `Bearer ${localStorage.getItem('token')}`,
             'Content-Type': 'application/json',
         },
-    }).then((response) => response.json());
+    }).then(async (response) => {
+        const data = await response.json();
+        return data;
+    });
 
 const AppWithRouter = () => (
     <SWRConfig value={{ fetcher }}>

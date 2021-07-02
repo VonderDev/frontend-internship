@@ -39,25 +39,12 @@ const Result = () => {
         console.log('Name: ', maxScoreList.length);
     }, []);
 
-    const questionListFetcher = (key: any) =>
-        fetch(key, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-                'Content-Type': 'application/json',
-            },
-        }).then(async (res) => {
-            console.log('Fetcher triggered');
-            const data = await res.json();
-            setResultList(data); // store all question into the hook
-            const response = data;
-            setDetailResult(response);
-            return data;
-        });
+    const { data: resultData, error } = useSWR('http://localhost:5000/user/result');
+    console.log('[Result Test Game]:', resultData);
+    useEffect(() => {
+        console.log(resultData);
+    }, [resultData]);
 
-    const { data, error } = useSWR('http://localhost:5000/user/result');
-    console.log('[Result Test Game]:', data);
-    // const chartScore = Object.keys(data).map((key) => data[key].score);
-    // console.log(chartScore);
     return (
         <Container header={null}>
             <ContainerCarousel>
