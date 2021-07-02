@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { IIconTextProfile, IListDataBoardHistory, IUser } from '../shared/Profile.interface';
 import { CalendarOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
 import { useState } from 'react';
-import ProfileMascot from '../../Profile/images/ProfileMascot.png'
+import ProfileMascot from '../../Profile/images/ProfileMascot.png';
 import {
     ContainerProfile,
     ButtonSubmit,
@@ -26,22 +26,23 @@ import {
 } from '../shared/Profile.styles';
 import Container from 'components/Container/Container';
 import React from 'react';
+import useSWR from 'swr';
 
 function Profile() {
     const [cred, setCred] = useState<IUser>({ firstName: '', lastName: '', email: '', username: '' });
     const history = useHistory();
-    async function getStatisticData() {
-        const response = await ApiGetUserData();
-        if (response) {
-            console.log(response.name);
-            setCred((prevState) => ({ ...prevState, firstName: response.firstName, lastName: response.lastName, email: response.email, username: response.username }));
-        } else {
-            console.log('error');
-        }
-    }
-    useEffect(() => {
-        getStatisticData();
-    }, []);
+    // async function getStatisticData() {
+    //     const response = await ApiGetUserData();
+    //     if (response) {
+    //         console.log(response.name);
+    //         setCred((prevState) => ({ ...prevState, firstName: response.firstName, lastName: response.lastName, email: response.email, username: response.username }));
+    //     } else {
+    //         console.log('error');
+    //     }
+    // }
+    // useEffect(() => {
+    //     getStatisticData();
+    // }, []);
 
     const listData: Array<IListDataBoardHistory> = [];
     for (let i = 0; i < 3; i++) {
@@ -64,11 +65,17 @@ function Profile() {
             {text}
         </div>
     );
+
+    const { data, error } = useSWR('http://localhost:5000/user/find');
+
+    console.log('Profile data from SWR', data);
+    console.log('error Profile', error);
+
     return (
         <div>
             <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
                 <ContainerProfile>
-                    <UserImage src={ProfileMascot}/>
+                    <UserImage src={ProfileMascot} />
                     <TextUsername>{cred.username}</TextUsername>
                     <RowStyled>
                         <Col span={8}>

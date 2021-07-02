@@ -55,7 +55,7 @@ const Result = () => {
         });
 
     const { data, error } = useSWR('http://localhost:5000/user/result');
-    console.log('[Result Test Game]:', data);
+    console.log('[Result Test Game from useSWR]:', data);
 
     return (
         <Container header={null}>
