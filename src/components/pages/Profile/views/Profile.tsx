@@ -32,24 +32,24 @@ import { Box, ButtonStyle } from 'shared/style/theme/component';
 function Profile() {
     const history = useHistory();
     const [userInfo, setUserInfo] = useState<IUser>({ firstName: '', lastName: '', email: '', username: '' });
-    async function getStatisticData() {
-        const response = await ApiGetUserData();
-        //Swr ใช้เป็น custom hook
-        if (response) {
-            setUserInfo((prevState) => ({
-                ...prevState,
-                firstName: response.firstName,
-                lastName: response.lastName,
-                email: response.email,
-                username: response.username,
-            }));
-        } else {
-            console.log('error');
-        }
-    }
-    useEffect(() => {
-        getStatisticData();
-    }, []);
+    // async function getStatisticData() {
+    //     const response = await ApiGetUserData();
+    //     //Swr ใช้เป็น custom hook
+    //     if (response) {
+    //         setUserInfo((prevState) => ({
+    //             ...prevState,
+    //             firstName: response.firstName,
+    //             lastName: response.lastName,
+    //             email: response.email,
+    //             username: response.username,
+    //         }));
+    //     } else {
+    //         console.log('error');
+    //     }
+    // }
+    // useEffect(() => {
+    //     getStatisticData();
+    // }, []);
 
     const listData: Array<IListDataBoardHistory> = [];
     for (let i = 0; i < 3; i++) {
@@ -73,99 +73,108 @@ function Profile() {
         </div>
     );
 
-    // const { data: userInfo, error } = useSWR('http://localhost:5000/user/find');
-    // console.log('[User Data]:', userInfo);
-    // console.log(error);
-    // useEffect(() => {
-    //     console.log(userInfo);
-    // }, [userInfo]);
+    const { data, error } = useSWR('http://localhost:5000/user/find');
+    const isLoading = !data && !error;
+    console.log('Profile Data', data);
+
+    useEffect(() => {
+        if (data) {
+            console.log('[useEffect data username] :', data.username);
+            console.log('[useEffect data email] :', data.email);
+        }
+    }, [data]);
 
     return (
         <div>
             <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
-                <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
-                    <UserImage src={ProfileMascot} />
-                    <TextUsername>{userInfo.username}</TextUsername>
-                    <RowStyled>
-                        <Col span={8}>
-                            <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
-                        </Col>
-                        <Col span={16}>
-                            <TextUserInfo2>
-                                {userInfo.firstName} {userInfo.lastName}
-                            </TextUserInfo2>
-                        </Col>
-                    </RowStyled>
-                    <RowStyled>
-                        <Col span={8}>
-                            <TextUserInfo1>อีเมล :</TextUserInfo1>
-                        </Col>
-                        <Col span={16}>
-                            <TextUserInfo2>{userInfo.email}</TextUserInfo2>
-                        </Col>
-                    </RowStyled>
-                    <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
-                        แก้ไขข้อมูลส่วนตัว
-                    </ButtonStyle>
-                    <RowStyled>
-                        <Col span={16}>
-                            <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
-                        </Col>
-                        <Col span={8}>
-                            <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
-                        </Col>
-                    </RowStyled>
-                    <ResultCard onClick={() => history.push('/result')}>
+                {error && <div>error </div>}
+                {isLoading ? (
+                    <div>loading ...</div>
+                ) : (
+                    <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
+                        <UserImage src={ProfileMascot} />
+                        <TextUsername>{data.username}</TextUsername>
                         <RowStyled>
                             <Col span={8}>
-                                <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
+                                <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
                             </Col>
-                            <Col span={14}>
-                                <CardText>
-                                    <RowStyled>ลักษณะเด่นของคุณ</RowStyled>
-                                    <RowStyled>วันที่ 15 มิ.ย. 2564</RowStyled>
-                                </CardText>
-                            </Col>
-                            <Col span={2}>
-                                <IconArrow />
+                            <Col span={16}>
+                                <TextUserInfo2>
+                                    {data.firstName} {data.lastName}
+                                </TextUserInfo2>
                             </Col>
                         </RowStyled>
-                    </ResultCard>
-                    <RowStyled>
-                        <Col span={16}>
-                            <TextTopic2>กระทู้ของคุณ</TextTopic2>
-                        </Col>
-                        <Col span={8}>
-                            <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
-                        </Col>
-                    </RowStyled>
-                    {cardList.map((item, index) => {
-                        return (
-                            <BoardCard
-                                key={index}
-                                onClick={() => {
-                                    history.push('/Board');
-                                }}
-                            >
-                                <RowStyled>
-                                    <Col span={6}>
-                                        <HistoryImage src={item.avatar} />
-                                    </Col>
-                                    <Col span={16}>
-                                        <CardText>
-                                            <Row>
-                                                <HistoryText>{item.title}</HistoryText>
-                                            </Row>
-                                            <Row>
-                                                <HistoryText>{item.description}</HistoryText>
-                                            </Row>
-                                        </CardText>
-                                    </Col>
-                                </RowStyled>
-                            </BoardCard>
-                        );
-                    })}
-                </Box>
+                        <RowStyled>
+                            <Col span={8}>
+                                <TextUserInfo1>อีเมล :</TextUserInfo1>
+                            </Col>
+                            <Col span={16}>
+                                <TextUserInfo2>{data.email}</TextUserInfo2>
+                            </Col>
+                        </RowStyled>
+                        <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
+                            แก้ไขข้อมูลส่วนตัว
+                        </ButtonStyle>
+                        <RowStyled>
+                            <Col span={16}>
+                                <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
+                            </Col>
+                            <Col span={8}>
+                                <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
+                            </Col>
+                        </RowStyled>
+                        <ResultCard onClick={() => history.push('/result')}>
+                            <RowStyled>
+                                <Col span={8}>
+                                    <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
+                                </Col>
+                                <Col span={14}>
+                                    <CardText>
+                                        <RowStyled>ลักษณะเด่นของคุณ</RowStyled>
+                                        <RowStyled>วันที่ 15 มิ.ย. 2564</RowStyled>
+                                    </CardText>
+                                </Col>
+                                <Col span={2}>
+                                    <IconArrow />
+                                </Col>
+                            </RowStyled>
+                        </ResultCard>
+                        <RowStyled>
+                            <Col span={16}>
+                                <TextTopic2>กระทู้ของคุณ</TextTopic2>
+                            </Col>
+                            <Col span={8}>
+                                <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
+                            </Col>
+                        </RowStyled>
+                        {cardList.map((item, index) => {
+                            return (
+                                <BoardCard
+                                    key={index}
+                                    onClick={() => {
+                                        history.push('/Board');
+                                    }}
+                                >
+                                    <RowStyled>
+                                        <Col span={6}>
+                                            <HistoryImage src={item.avatar} />
+                                        </Col>
+                                        <Col span={16}>
+                                            <CardText>
+                                                <Row>
+                                                    <HistoryText>{item.title}</HistoryText>
+                                                </Row>
+                                                <Row>
+                                                    <HistoryText>{item.description}</HistoryText>
+                                                </Row>
+                                            </CardText>
+                                        </Col>
+                                    </RowStyled>
+                                </BoardCard>
+                            );
+                        })}
+                    </Box>
+                )}
             </Container>
         </div>
     );
