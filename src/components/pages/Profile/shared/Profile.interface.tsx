@@ -1,10 +1,8 @@
-export interface IProfile {
+export interface IUser {
     username: string;
-    name: string;
-    surname: string;
+    firstName: string;
+    lastName: string;
     email: string;
-    result: string;
-    pic: string;
 }
 
 export interface IListDataBoardHistory {
@@ -24,4 +22,11 @@ export interface IListDataResult {
 export interface IIconTextProfile {
     icon: React.ForwardRefExoticComponent<any>;
     text: string;
+}
+export interface IInput {
+    username: string;
+    name: string;
+    surname: string;
+    email: string;
+    pic: string;
 }
