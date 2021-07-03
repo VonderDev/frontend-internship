@@ -1,4 +1,4 @@
-import { CategoryName, ContainerCharactorDetail, DesText, Resultpic, TextBox } from '../../../shared/styles/Result/ResultPage.styled';
+import { CategoryName, ContainerCharactorDetail, DescriptionText, ResultImgCharactorDetail, TextBoxDescription } from '../../../shared/styles/Result/ResultPage.styled';
 import BoardAdvice from '../BoardAdvice';
 import React from 'react';
 
@@ -12,14 +12,14 @@ interface ResultProps {
 const CharactorDetail: React.FC<ResultProps> = ({ description, description_career, skill, img_charactor }) => {
     return (
         <>
-            <Resultpic preview={false} src={img_charactor} />
+            <ResultImgCharactorDetail preview={false} src={img_charactor} />
             <ContainerCharactorDetail>
                 <CategoryName>{skill}</CategoryName>
-                <TextBox>
-                    <DesText>{description}</DesText>
-                </TextBox>
+                <TextBoxDescription>
+                    <DescriptionText>{description}</DescriptionText>
+                </TextBoxDescription>
                 <CategoryName>อาชีพที่เหมาะสม</CategoryName>
-                <TextBox>{description_career}</TextBox>
+                <TextBoxDescription>{description_career}</TextBoxDescription>
             </ContainerCharactorDetail>
             <BoardAdvice />
         </>

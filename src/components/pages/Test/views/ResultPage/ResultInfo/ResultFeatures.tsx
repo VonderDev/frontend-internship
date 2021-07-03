@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import { ContainerImagePreview, ImagePreview, TextHeaderResult } from '../../../shared/styles/Result/ResultPage.styled';
+import { ContainerImagePreview, ContainerResultFeature, ImagePreview, TextHeaderResult, TextNameSkillInImg, TextNameSkillResultFeature } from '../../../shared/styles/Result/ResultPage.styled';
 import { API_Get_ResultData } from '../../../apis/Result.api';
 import { IResult } from '../../../shared/interface/Result.interfaces';
 import CharactorDetail from './CharactorDetail';
+import { ContainerResultSummarize } from 'components/pages/Test/shared/styles/Result/ResultSummarize.styled';
+import { Col, Row } from 'antd';
 //
 // ─── import mockData ───────────────────────────────────────────────────────────────────
 //
@@ -44,6 +46,7 @@ const Descrip = () => {
         console.log(detailCharactor);
         setDetailCharactor({ description, description_career, image_charactor, skill });
     }
+    const style = { background: '#0092ff', padding: '8px 0' };
 
     return (
         <>
@@ -51,9 +54,8 @@ const Descrip = () => {
             {maxScoreList.map((item: any, index: any) => {
                 return (
                     <ContainerImagePreview key={index}>
-                        <ImagePreview preview={false} onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)} width={200} src={item.image_charactor}>
-                            <div>{item.skill}</div>
-                        </ImagePreview>
+                        <ImagePreview onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)} src={item.image_charactor} />
+                        {/* <TextNameSkillInImg>{item.skill}</TextNameSkillInImg> */}
                     </ContainerImagePreview>
                 );
             })}

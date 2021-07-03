@@ -2,6 +2,7 @@ import { useHistory } from 'react-router-dom';
 import Container from 'components/Container/Container';
 import { useEffect, useState } from 'react';
 import {
+    ButtonSaveResult,
     ButtonSeeAllResult,
     ContainerCarousel,
     ContainerResultSummarize,
@@ -11,7 +12,7 @@ import {
     TextSkillSummarize,
 } from '../../shared/styles/Result/ResultSummarize.styled';
 import useSWR from 'swr';
-import axios from 'axios';
+import { UploadOutlined } from '@ant-design/icons';
 import { ResultSummarizeProps } from '../../shared/interface/Result.interfaces';
 // ─── import mockData ───────────────────────────────────────────────────────────────────
 //
@@ -45,9 +46,20 @@ const Result = () => {
         console.log(resultData);
     }, [resultData]);
 
+    const download = () => {
+        var element = document.createElement('a');
+        var file = new Blob(['https://cdn.discordapp.com/attachments/821804175767764995/857648803897540678/Nature.png'], { type: 'image/*' });
+        element.href = URL.createObjectURL(file);
+        element.download = 'image.png';
+        element.click();
+    };
     return (
         <Container header={null}>
             <ContainerCarousel>
+                {/* <a href="https://www.jqueryscript.net/images/Create-Smooth-Image-Zoom-Pan-Effects-With-jQuery-EasyZoom.jpg" download onClick={() => download()}>
+                    <i className="fa fa-download" />
+                    download
+                </a> */}
                 {maxScoreList.map((item: any, index: any) => {
                     return (
                         <div key={index}>
@@ -56,6 +68,10 @@ const Result = () => {
                                 <ImageCharactorCarousel src={item.image_charactor} />
                                 <TextSkillName>{item.skill}</TextSkillName>
                                 <TextSkillSummarize>{item.skill_summarize}</TextSkillSummarize>
+                                <ButtonSaveResult href={item.image_charactor} download onClick={() => download()}>
+                                    <UploadOutlined />
+                                    บันทึกผลลัพธ์
+                                </ButtonSaveResult>
                             </ContainerResultSummarize>
                         </div>
                     );

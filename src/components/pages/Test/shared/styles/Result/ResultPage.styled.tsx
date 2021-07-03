@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Button, Typography, Card, Row, Progress, Image, Tabs } from 'antd';
 import Chart from 'react-apexcharts';
-import { Tab } from 'react-bootstrap';
 
 const { Title } = Typography;
 
@@ -16,21 +15,6 @@ export const TextHeader = styled.div`
     color: var(--Gray-400);
 `;
 
-export const ButtonGoHome = styled(Button)`
-    border-radius: 15px;
-    font-weight: bolder;
-    color: white;
-    background-color: var(--Blue-400);
-    transform: translateY(-150%);
-    margin-left: auto;
-    margin-right: auto;
-    width: 400px;
-    height: 51px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-`;
 export const TextHeaderResult = styled.div`
     text-align: center;
     font-size: 22px;
@@ -90,31 +74,6 @@ export const Boxpic = styled(Image)`
     height: 100px;
 `;
 
-export const ImagePreview = styled(Image)`
-    border-radius: 20px;
-    width: 80%;
-    height: 100px;
-    :hover {
-        cursor: pointer;
-    }
-`;
-
-export const ContainerImagePreview = styled(Image.PreviewGroup)`
-    & .ant-image {
-        padding-left: 20px;
-        position: absolute;
-    }
-`;
-
-export const CategoryName = styled.h1`
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    font-size: 22px;
-    font-weight: bolder;
-    padding-top: 20px;
-`;
-
 export const SkillName = styled.h1`
     display: flex;
     align-items: center;
@@ -124,11 +83,7 @@ export const SkillName = styled.h1`
     padding-top: 20px;
     text-align: center;
 `;
-export const DesText = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
+
 export const DesBox = styled.div`
     margin-top: 10px;
     display: flex;
@@ -145,13 +100,6 @@ export const BodyCard = styled.div`
     margin-bottom: 20%;
 `;
 
-export const ContainerCharactorDetail = styled.div`
-    flex-direction: column;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding-left: 5%;
-`;
 export const Readmore = styled.div`
     display: flex;
     align-items: center;
@@ -166,21 +114,6 @@ export const Readmore = styled.div`
     &:hover {
         cursor: pointer;
     }
-`;
-
-export const TextBox = styled.div`
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-    font-size: 16px;
-`;
-
-export const Resultpic = styled(Image)`
-    width: 100%;
-    height: 50vh;
-    margin-top: 20px;
 `;
 
 export const ImgCharactorSummarize = styled(Image)`
@@ -232,7 +165,10 @@ export const TextNameSkill = styled.div`
 
 //------------ STYLED RESULT INFO TAB ------------//
 export const TabsInfo = styled(Tabs)`
-    border-radius: 15px;
+    & .ant-tabs-tab {
+        font-size: 16px;
+        font-weight: bolder;
+    }
     & .ant-tabs-nav .ant-tabs-nav-wrap {
         padding-top: 3%;
         justify-content: center;
@@ -242,8 +178,107 @@ export const TabsInfo = styled(Tabs)`
         border-radius: 12px 12px !important;
         padding: 8px 60px;
         border: 1px solid #f0f0f0;
+        margin: 0;
+        letter-spacing: 1px;
+        color: black;
     }
     & .ant-tabs-nav .ant-tabs-tab-active {
         background-color: var(--Gray-500);
+        height: 52px;
+        border-radius: 12px 12px 12px 0px !important;
+        letter-spacing: 1px;
     }
+
+    & .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+        color: white !important;
+        font-weight: bolder;
+        font-size: 16px;
+    }
+`;
+
+//------------ STYLED RESULT FEATURE / CHARACTOR DETAIL ------------//
+export const ImagePreview = styled.img`
+    position: relative;
+    border-radius: 12px;
+    padding: 5px;
+    margin-left: 10px;
+    width: 25%;
+    height: 95px;
+    border: 3px solid var(--Silver-100);
+    background: no-repeat;
+    transform: translateX(10%);
+    box-shadow: inset 10px 10px 50px #fff;
+    :hover {
+        cursor: pointer;
+    }
+`;
+
+export const ContainerImagePreview = styled(Image.PreviewGroup)`
+    & .ant-imgage {
+        position: relative;
+        display: inline-block;
+        margin-left: 15% !important;
+    }
+`;
+
+export const TextNameSkillResultFeature = styled.div`
+    position: relative;
+    font-size: 14px;
+    font-weight: bolder;
+    top: 33%;
+    left: 32%;
+    transform: translateX(-370%) translateY(320%);
+`;
+
+export const ContainerResultFeature = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+`;
+
+export const CategoryName = styled.h1`
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 22px;
+    font-weight: bolder;
+    padding-top: 20px;
+`;
+
+export const TextBoxDescription = styled.div`
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    font-size: 16px;
+`;
+
+export const TextNameSkillInImg = styled.div`
+    position: absolute;
+    font-size: 14px;
+    font-weight: bolder;
+    margin-left: 100px;
+    transform: translateX(100%) translateY(-150%);
+    white-space: pre-wrap !important;
+`;
+
+export const ResultImgCharactorDetail = styled(Image)`
+    width: 100%;
+    height: 55vh;
+    margin-top: 20px;
+`;
+
+export const ContainerCharactorDetail = styled.div`
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-left: 5%;
+`;
+
+export const DescriptionText = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;

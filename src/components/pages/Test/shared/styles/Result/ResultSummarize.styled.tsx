@@ -4,6 +4,7 @@ import { Button, Carousel, Image } from 'antd';
 export const ImageCharactorCarousel = styled.img`
     width: 100%;
     height: 90vh;
+    /* box-shadow: 10px 100px 100px 100px #fff; */
     :hover {
         cursor: pointer;
     }
@@ -45,7 +46,7 @@ export const ButtonSeeAllResult = styled(Button)`
     align-items: center;
     justify-content: center;
     position: relative;
-    box-shadow: 5px 8px 50px 20px #ffffff;
+    box-shadow: 10px 100px 100px 120px #fff;
 `;
 
 export const ContainerResultSummarize = styled.div`
@@ -59,4 +60,26 @@ export const ContainerCarousel = styled(Carousel)`
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    & .slick-dots li.slick-active button {
+        background: #3e4357 !important;
+        height: 10px !important;
+        border-radius: 15px;
+        transform: translateY(-30px);
+    }
+
+    & .slick-dots li button {
+        height: 10px !important;
+        background: #ffffff;
+        border-radius: 15px;
+        margin-right: 30px !important;
+        opacity: 0.9;
+        transform: translateY(-30px);
+    }
+`;
+
+export const ButtonSaveResult = styled.a`
+    position: absolute;
+    font-size: 18px;
+    bottom: 10%;
+    color: var(--Blue-300);
 `;
