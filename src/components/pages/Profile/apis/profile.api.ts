@@ -19,7 +19,7 @@ export async function ApiGetUserData()  {
     
 }
 
-export async function ApiPutUserData(data: any) {
+export async function ApiPutUserData(data: object) {
     const token = localStorage.getItem("token");
     console.log('[Edited data] :', data);
     return await axios

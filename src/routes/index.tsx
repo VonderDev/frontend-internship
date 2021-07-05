@@ -1,6 +1,6 @@
 import { Switch, Route } from 'react-router-dom';
 import Home from 'components/pages/Home/view/Home';
-import Board from 'components/pages/Board/views/Board';
+import BoardCreateContent from 'components/pages/Board/views/CreateContent/BoardCrateContent';
 import Profile from 'components/pages/Profile/views/Profile';
 import Login from 'components/pages/Authentication/views/Login/Login';
 import Register from 'components/pages/Authentication/views/Register/Register';
@@ -23,7 +23,7 @@ function Routing() {
     return (
         <Switch>
             <Route exact path="/" component={Home} />
-            <PrivateRoute exact path="/board" component={Board} />
+            <PrivateRoute exact path="/boardcreate" component={BoardCreateContent} />
             <PrivateRoute exact path="/profile" component={Profile} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />

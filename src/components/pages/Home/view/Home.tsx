@@ -3,14 +3,13 @@ import React, { useEffect } from 'react';
 import { API_getStatistics } from '../apis/home.api';
 import { useHistory } from 'react-router-dom';
 import { Input, Row, List, Col } from 'antd';
-import { CalendarOutlined, ControlOutlined, SearchOutlined, FormOutlined, HeartFilled, QuestionCircleTwoTone } from '@ant-design/icons';
+import { CalendarOutlined, FileAddOutlined, FormOutlined, HeartFilled, QuestionCircleTwoTone } from '@ant-design/icons';
 import {
     SearchField,
     ImageTestPage,
     ButtonSeeAllBoard,
     ListItemBoard,
     ListBoard,
-    ButtonCreateBoard,
     InputSearch,
     ButtonFilter,
     ButtonStartGame,
@@ -18,6 +17,7 @@ import {
     ButtonReadOverviewTest,
     ImgBoardList,
     TextBoardTopic,
+    ButtonCreatePost,
 } from '../shared/homepage.styles';
 import { tagsData, IListData, IIconText } from '../shared/home.interface';
 import gamePreview from '../shared/images/gamepreview.png';
@@ -68,10 +68,6 @@ function Home() {
     return (
         <div>
             <Container header={{ title: 'Vonder Me', right: 'menu' }}>
-                {/* <SearchField>
-                    <InputSearch onClick={onSearch} placeholder="Search Form" prefix={<SearchOutlined />} />
-                    <ButtonFilter icon={<ControlOutlined />} />
-                </SearchField> */}
                 <ImageTestPage>
                     <TextTopicOnImageTest>เกมทดสอบพหุปัญญา</TextTopicOnImageTest>
                     <Col>
@@ -115,9 +111,9 @@ function Home() {
                         </ListItemBoard>
                     )}
                 />
-                <ButtonCreateBoard onClick={() => history.push('/board')} shape="circle">
-                    +
-                </ButtonCreateBoard>
+                <ButtonCreatePost onClick={() => history.push('/boardcreate')} shape="circle">
+                    <FileAddOutlined />
+                </ButtonCreatePost>
             </Container>
         </div>
     );
