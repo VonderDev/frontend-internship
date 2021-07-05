@@ -41,7 +41,7 @@ import axios from 'axios'
         return user
       }).catch(err => {
         console.error(err)
-        alert('ไม่ผู้ใช้นี้ อีเมลหรือรหัสผ่านไม่ถูกต้อง')
+        alert('อีเมลและรหัสผ่านที่คุณกรอกไม่ตรงกับข้อมูลในระบบ \nโปรดตรวจสอบและลองอีกครั้ง')
         console.log('Failed login');
       });
         };

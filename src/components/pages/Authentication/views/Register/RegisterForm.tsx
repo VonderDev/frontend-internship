@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { ButtonStyle, InputStyle } from "shared/style/theme/component";
 import { FormItemTextValidate, FormLogin } from "../../shared/style";
 import axios from "axios";
+import useSWR from "swr";
+import { ApiGetUserData } from "components/pages/Profile/apis/profile.api";
 
 export const RegisterForm = () => {
 
@@ -44,31 +46,44 @@ export const RegisterForm = () => {
     }
 
     async function PostUser() {
-
-
+        if (userData.username && userData.firstName && userData.lastName && userData.email && userData.password){
+            try {
+                API_PostDataUser(userData);
+            } catch (error) {
+                console.log(error);
+                console.log("API failed");
+                return error.message;
+            }
+        } 
     }
+
+    useEffect(() => {
+        if(userData) {
+            // setUserData()
+        }
+    }, [userData])
 
     return (
 
         <FormLogin layout="horizontal">
             <FormItemTextValidate name="username" rules={[{ required: true, message: 'กรุณากรอกชื่อผู้ใช้' }]} >
-                <InputStyle sizeinput={100} type="text" value={username} placeholder="ชื่อผู้ใช้" onChange={({ target: { value } }) => { setUsername(value); }} />
+                <InputStyle sizeinput={100} type="text" value={userData.username} placeholder="ชื่อผู้ใช้" onChange={({ target: { value } }) => { setUsername(value); }} />
             </FormItemTextValidate>
 
             <FormItemTextValidate name="firstname" rules={[{ required: true, message: 'กรุณากรอกชื่อจริง' }]} >
-                <InputStyle sizeinput={100} type="text" value={firstName} placeholder="ชื่อจริง" onChange={({ target: { value } }) => { setFirstName(value) }} />
+                <InputStyle sizeinput={100} type="text" value={userData.firstName} placeholder="ชื่อจริง" onChange={({ target: { value } }) => { setFirstName(value) }} />
             </FormItemTextValidate>
 
             <FormItemTextValidate name="lastname" rules={[{ required: true, message: 'กรุณากรอกนามสกุล' }]} >
-                <InputStyle sizeinput={100} type="text" value={lastName} placeholder="นามสกุล" onChange={({ target: { value } }) => { setLastName(value) }} />
+                <InputStyle sizeinput={100} type="text" value={userData.lastName} placeholder="นามสกุล" onChange={({ target: { value } }) => { setLastName(value) }} />
             </FormItemTextValidate>
 
             <FormItemTextValidate name="email" rules={[{ required: true, message: 'กรุณากรอกอีเมล' }]} >
-                <InputStyle sizeinput={100} type="email" value={email} placeholder="อีเมล" onChange={({ target: { value } }) => { setEmail(value) }} />
+                <InputStyle sizeinput={100} type="email" value={userData.email} placeholder="อีเมล" onChange={({ target: { value } }) => { setEmail(value) }} />
             </FormItemTextValidate>
 
             <FormItemTextValidate name="password" rules={[{ required: true, message: 'กรุณากรอกรหัสผ่าน' }]} >
-                <InputStyle sizeinput={100} type="password" value={password} placeholder="รหัสผ่าน" onChange={({ target: { value } }) => { setPassword(value) }} />
+                <InputStyle sizeinput={100} type="password" value={userData.password} placeholder="รหัสผ่าน" onChange={({ target: { value } }) => { setPassword(value) }} />
             </FormItemTextValidate>
 
             <FormItemTextValidate name="confirm"
@@ -90,7 +105,7 @@ export const RegisterForm = () => {
                 <InputStyle sizeinput={100} type="password" placeholder="ยืนยันรหัสผ่าน" />
             </FormItemTextValidate>
 
-            <ButtonStyle typebutton="Large" sizebutton={100} style={{ marginBottom: "15px" }} htmlType="submit" onClick={ApiRegister} >
+            <ButtonStyle typebutton="Large" sizebutton={100} style={{ marginBottom: "15px" }} htmlType="submit" onClick={PostUser} >
                 สร้างบัญชี
             </ButtonStyle>
 

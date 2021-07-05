@@ -56,7 +56,7 @@ const Login = () => {
           >
             <Privacy />
             <CheckboxPrivacy checked={checked} onChange={() => { setChecked(prev => !prev) }} >
-              <TextAgree> ฉันได้ืำความเข้าใจ และยินยอมตาม <span style={{ color: '#3A8CE4', fontWeight: 'bold' }}>นโยบายความเป็นส่วนตัว</span></TextAgree>
+              <TextAgree> ฉันได้ทำความเข้าใจ และยินยอมตาม <span style={{ color: '#3A8CE4', fontWeight: 'bold' }}>นโยบายความเป็นส่วนตัว</span></TextAgree>
             </CheckboxPrivacy>
             <ButtonStyle typebutton="Large" sizebutton={95} onClick={confirmPolicy} htmlType="submit" disabled={!checked}>
               ยืนยัน
