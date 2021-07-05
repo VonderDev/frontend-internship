@@ -31,7 +31,10 @@ const fetcher = (url: string, token: string) =>
             Authorization: `Bearer ${localStorage.getItem('token')}`,
             'Content-Type': 'application/json',
         },
-    }).then((response) => response.json());
+    }).then(async (response) => {
+        const data = await response.json();
+        return data;
+    });
 
 // const fetcher = async (url: string) => {
 //     const token = localStorage.getItem('token');

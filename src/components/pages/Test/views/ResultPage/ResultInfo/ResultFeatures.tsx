@@ -11,7 +11,7 @@ const chartScore = Object.keys(mockResult).map((key) => mockResult[key].score);
 const max = Math.max(...chartScore);
 const maxScoreList = mockResult.filter((data: { score: number }) => data.score === max);
 
-const Descrip = () => {
+const ResultFeatures = () => {
     useEffect(() => {
         console.log('Maxscore: ', max);
         console.log('Name: ', maxScoreList.length);
@@ -32,10 +32,6 @@ const Descrip = () => {
             console.log('error');
         }
     }
-    // useEffect(() => {
-    //     console.log(getResultData);
-    //     getResultData();
-    // }, [detailCharactor]);
 
     function onClickImage(description: string, description_career: string, skill: string, image_charactor: string) {
         console.log('[คำอธิบาย , อาชีพ]', description, description_career);
@@ -51,9 +47,8 @@ const Descrip = () => {
             {maxScoreList.map((item: any, index: any) => {
                 return (
                     <ContainerImagePreview key={index}>
-                        <ImagePreview preview={false} onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)} width={200} src={item.image_charactor}>
-                            <div>{item.skill}</div>
-                        </ImagePreview>
+                        <ImagePreview onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)} src={item.image_charactor} />
+                        {/* <TextNameSkillInImg>{item.skill}</TextNameSkillInImg> */}
                     </ContainerImagePreview>
                 );
             })}
@@ -67,4 +62,4 @@ const Descrip = () => {
     );
 };
 
-export default Descrip;
+export default ResultFeatures;

@@ -49,8 +49,6 @@ const Charts = () => {
 
     useEffect(() => {
         console.log(chartValue.options);
-        // console.log(chartValue.series);
-        // console.log(MockScore);
     }, []);
 
     return (

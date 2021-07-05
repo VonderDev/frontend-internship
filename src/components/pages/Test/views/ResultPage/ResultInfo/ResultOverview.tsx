@@ -1,7 +1,7 @@
-import { Progress, Tabs } from 'antd';
+import { ButtonGoHomeInResult, ProgressBar } from 'components/pages/Test/shared/styles/Result/ResultOverview.styled';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ButtonGoHome, ContainerProgressScore, TextNameSkill } from '../../../shared/styles/Result/ResultPage.styled';
+import { ContainerProgressScore, TextNameSkill } from '../../../shared/styles/Result/ResultPage.styled';
 import Chart from '../Chart';
 
 function ResultOverview() {
@@ -24,11 +24,11 @@ function ResultOverview() {
                     <ContainerProgressScore key={index}>
                         <TextNameSkill>{item.skill}</TextNameSkill>
                         <div>{item.skill_summarize}</div>
-                        <Progress style={{ width: 400 }} strokeLinecap="square" percent={item.score} />
+                        <ProgressBar style={{ width: 400 /* height: 8px; */ }} strokeLinecap="square" percent={item.score} />
                     </ContainerProgressScore>
                 );
             })}
-            <ButtonGoHome onClick={() => history.push('/result')}>กลับหน้าหลัก</ButtonGoHome>
+            <ButtonGoHomeInResult onClick={() => history.push('/result')}>กลับหน้าหลัก</ButtonGoHomeInResult>
         </>
     );
 }

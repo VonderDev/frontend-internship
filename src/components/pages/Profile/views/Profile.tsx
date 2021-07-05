@@ -8,7 +8,6 @@ import { useState } from 'react';
 import ProfileMascot from '../../Profile/images/ProfileMascot.png';
 import {
     ContainerProfile,
-    ButtonSubmit,
     TextUserInfo1,
     TextUserInfo2,
     TextUsername,
@@ -27,15 +26,23 @@ import {
 import Container from 'components/Container/Container';
 import React from 'react';
 import useSWR from 'swr';
+import axios from 'axios';
+import { Box, ButtonStyle } from 'shared/style/theme/component';
 
 function Profile() {
-    const [cred, setCred] = useState<IUser>({ firstName: '', lastName: '', email: '', username: '' });
     const history = useHistory();
+    const [userInfo, setUserInfo] = useState<IUser>({ firstName: '', lastName: '', email: '', username: '' });
     // async function getStatisticData() {
     //     const response = await ApiGetUserData();
+    //     //Swr ใช้เป็น custom hook
     //     if (response) {
-    //         console.log(response.name);
-    //         setCred((prevState) => ({ ...prevState, firstName: response.firstName, lastName: response.lastName, email: response.email, username: response.username }));
+    //         setUserInfo((prevState) => ({
+    //             ...prevState,
+    //             firstName: response.firstName,
+    //             lastName: response.lastName,
+    //             email: response.email,
+    //             username: response.username,
+    //         }));
     //     } else {
     //         console.log('error');
     //     }
@@ -67,113 +74,107 @@ function Profile() {
     );
 
     const { data, error } = useSWR('http://localhost:5000/user/find');
+    const isLoading = !data && !error;
+    console.log('Profile Data', data);
 
-    console.log('Profile data from SWR', data);
-    console.log('error Profile', error);
+    useEffect(() => {
+        if (data) {
+            console.log('[useEffect data username] :', data.username);
+            console.log('[useEffect data email] :', data.email);
+        }
+    }, [data]);
 
     return (
         <div>
             <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
-                <ContainerProfile>
-                    <UserImage src={ProfileMascot} />
-                    <TextUsername>{cred.username}</TextUsername>
-                    <RowStyled>
-                        <Col span={8}>
-                            <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
-                        </Col>
-                        <Col span={16}>
-                            <TextUserInfo2>
-                                {cred.firstName} {cred.lastName}
-                            </TextUserInfo2>
-                        </Col>
-                    </RowStyled>
-                    <RowStyled>
-                        <Col span={8}>
-                            <TextUserInfo1>อีเมล :</TextUserInfo1>
-                        </Col>
-                        <Col span={16}>
-                            <TextUserInfo2>{cred.email}</TextUserInfo2>
-                        </Col>
-                    </RowStyled>
-                    <ButtonSubmit onClick={() => history.push('/editProfile')}>แก้ไขข้อมูลส่วนตัว</ButtonSubmit>
-                    <RowStyled>
-                        <Col span={16}>
-                            <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
-                        </Col>
-                        <Col span={8}>
-                            <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
-                        </Col>
-                    </RowStyled>
-                    <ResultCard onClick={() => history.push('/result')}>
+                {error && <div>error </div>}
+                {isLoading ? (
+                    <div>loading ...</div>
+                ) : (
+                    <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
+                        <UserImage src={ProfileMascot} />
+                        <TextUsername>{data.username}</TextUsername>
                         <RowStyled>
                             <Col span={8}>
-                                <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
+                                <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
                             </Col>
-                            <Col span={14}>
-                                <CardText>
-                                    <RowStyled>ลักษณะเด่นของคุณ</RowStyled>
-                                    <RowStyled>วันที่ 15 มิ.ย. 2564</RowStyled>
-                                </CardText>
-                            </Col>
-                            <Col span={2}>
-                                <IconArrow />
+                            <Col span={16}>
+                                <TextUserInfo2>
+                                    {data.firstName} {data.lastName}
+                                </TextUserInfo2>
                             </Col>
                         </RowStyled>
-                    </ResultCard>
-                    <RowStyled>
-                        <Col span={16}>
-                            <TextTopic2>กระทู้ของคุณ</TextTopic2>
-                        </Col>
-                        <Col span={8}>
-                            <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
-                        </Col>
-                    </RowStyled>
-                    {/* <ListProfile
-                        itemLayout="vertical"
-                        size="large"
-                        dataSource={listData}
-                        renderItem={(item: any) => (
-                            <ProfileListItem
-                                key={item.title}
-                                actions={[
-                                    <IconText icon={FormOutlined} text=" Lookmaii" key="list-vertical-star-o" />,
-                                    <IconText icon={CalendarOutlined} text=" 11 มิถุนายน 2564" key="list-vertical-like-o" />,
-                                    <IconText icon={HeartFilled} text=" 12" key="list-vertical-message" />,
-                                ]}
-                            >
-                                <HistoryText onClick={() => history.push('/board')}>
-                                    <List.Item.Meta avatar={<HistoryImage src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} description={item.description} />
-                                </HistoryText>
-                            </ProfileListItem>
-                        )}
-                    /> */}
-                    {cardList.map((item, index) => {
-                        return (
-                            <BoardCard
-                                key={index}
-                                onClick={() => {
-                                    history.push('/Board');
-                                }}
-                            >
-                                <RowStyled>
-                                    <Col span={6}>
-                                        <HistoryImage src={item.avatar} />
-                                    </Col>
-                                    <Col span={16}>
-                                        <CardText>
-                                            <Row>
-                                                <HistoryText>{item.title}</HistoryText>
-                                            </Row>
-                                            <Row>
-                                                <HistoryText>{item.description}</HistoryText>
-                                            </Row>
-                                        </CardText>
-                                    </Col>
-                                </RowStyled>
-                            </BoardCard>
-                        );
-                    })}
-                </ContainerProfile>
+                        <RowStyled>
+                            <Col span={8}>
+                                <TextUserInfo1>อีเมล :</TextUserInfo1>
+                            </Col>
+                            <Col span={16}>
+                                <TextUserInfo2>{data.email}</TextUserInfo2>
+                            </Col>
+                        </RowStyled>
+                        <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
+                            แก้ไขข้อมูลส่วนตัว
+                        </ButtonStyle>
+                        <RowStyled>
+                            <Col span={16}>
+                                <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
+                            </Col>
+                            <Col span={8}>
+                                <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
+                            </Col>
+                        </RowStyled>
+                        <ResultCard onClick={() => history.push('/result')}>
+                            <RowStyled>
+                                <Col span={8}>
+                                    <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
+                                </Col>
+                                <Col span={14}>
+                                    <CardText>
+                                        <RowStyled>ลักษณะเด่นของคุณ</RowStyled>
+                                        <RowStyled>วันที่ 15 มิ.ย. 2564</RowStyled>
+                                    </CardText>
+                                </Col>
+                                <Col span={2}>
+                                    <IconArrow />
+                                </Col>
+                            </RowStyled>
+                        </ResultCard>
+                        <RowStyled>
+                            <Col span={16}>
+                                <TextTopic2>กระทู้ของคุณ</TextTopic2>
+                            </Col>
+                            <Col span={8}>
+                                <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
+                            </Col>
+                        </RowStyled>
+                        {cardList.map((item, index) => {
+                            return (
+                                <BoardCard
+                                    key={index}
+                                    onClick={() => {
+                                        history.push('/Board');
+                                    }}
+                                >
+                                    <RowStyled>
+                                        <Col span={6}>
+                                            <HistoryImage src={item.avatar} />
+                                        </Col>
+                                        <Col span={16}>
+                                            <CardText>
+                                                <Row>
+                                                    <HistoryText>{item.title}</HistoryText>
+                                                </Row>
+                                                <Row>
+                                                    <HistoryText>{item.description}</HistoryText>
+                                                </Row>
+                                            </CardText>
+                                        </Col>
+                                    </RowStyled>
+                                </BoardCard>
+                            );
+                        })}
+                    </Box>
+                )}
             </Container>
         </div>
     );
