@@ -86,7 +86,7 @@ const EditProfile = () => {
                             <LeftOutlined style={{ color: '#8a8888' }} />
                         </BackHeader>
                     ),
-                    children: 'แก้ไขข้อมูลส่วนตัว',
+                    title: 'แก้ไขข้อมูลส่วนตัว',
                     right: (
                         <ButtonSave htmlType="submit" onClick={putDataOnClick}>
                             บันทึก
