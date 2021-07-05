@@ -52,11 +52,14 @@ export const CheckboxPrivacy = styled(Checkbox)`
 `;
 
 export const TextboxPrivacy = styled.div`
-    width: 80%;
+    width: 90%;
     height: 75%;
     border-radius: 12px;
     overflow-y: scroll;
     background-color: #F3F3F3;
+    text-align: left;
+    padding-left : 10px;
+    padding-right : 10px;
 `;
 
 export const TextAgree = styled(Typography)`

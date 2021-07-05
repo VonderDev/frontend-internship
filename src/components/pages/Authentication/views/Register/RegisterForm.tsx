@@ -6,8 +6,6 @@ import { useEffect } from "react";
 import { ButtonStyle, InputStyle } from "shared/style/theme/component";
 import { FormItemTextValidate, FormLogin } from "../../shared/style";
 import axios from "axios";
-import { error } from "console";
-import { stringify } from "querystring";
 
 export const RegisterForm = () => {
 
@@ -29,20 +27,25 @@ export const RegisterForm = () => {
             password: password
         }
 
-        if (username && firstName && lastName && email && password) {        
+        if (username && firstName && lastName && email && password) {
             try {
                 const { data } = await axios.post("http://localhost:5000/signup", userData)
                 if (data) {
                     console.log(data);
-                    console.log("Go to home");
-                    history.push("/");
+                    console.log("Go to login");
+                    history.push("/login");
                 }
-            } catch (error){
+            } catch (error) {
                 console.log(error)
                 console.log("Failed");
                 return error.message
             }
         }
+    }
+
+    async function PostUser() {
+
+
     }
 
     return (

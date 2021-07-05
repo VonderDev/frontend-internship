@@ -16,6 +16,8 @@ import TestStory from 'components/pages/Test/views/TestStartPage/TestStory';
 import ResultOverview from 'components/pages/Test/views/ResultPage/ResultInfo/ResultOverview';
 import ResultInfo from 'components/pages/Test/views/ResultPage/ResultInfo/ResultInfo';
 import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion';
+import BoardHistory from 'components/pages/Profile/views/BoardHistory';
+import ProfileResult from 'components/pages/Profile/views/ProfileResult';
 
 function Routing() {
     return (
