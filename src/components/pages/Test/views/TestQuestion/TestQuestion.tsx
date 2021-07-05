@@ -134,6 +134,7 @@ function TestQuestion() {
     const { data, error } = useSWR('http://localhost:5000/questions', questionListFetcher);
     if (error) return <div>failed to load data</div>;
     if (!data) return <div>loading...</div>;
+    //-------------- OTHER SOLUTION -------------- //
     // if (data && !isSWRTriggered) {
     //     console.log('data from useSWR');
     //     isSetSWRTriggered(true);

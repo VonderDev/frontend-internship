@@ -32,24 +32,24 @@ import { Box, ButtonStyle } from 'shared/style/theme/component';
 function Profile() {
     const history = useHistory();
     const [userInfo, setUserInfo] = useState<IUser>({ firstName: '', lastName: '', email: '', username: '' });
-    async function getStatisticData() {
-        const response = await ApiGetUserData();
-        //Swr ใช้เป็น custom hook
-        if (response) {
-            setUserInfo((prevState) => ({
-                ...prevState,
-                firstName: response.firstName,
-                lastName: response.lastName,
-                email: response.email,
-                username: response.username,
-            }));
-        } else {
-            console.log('error');
-        }
-    }
-    useEffect(() => {
-        getStatisticData();
-    }, []);
+    // async function getStatisticData() {
+    //     const response = await ApiGetUserData();
+    //     //Swr ใช้เป็น custom hook
+    //     if (response) {
+    //         setUserInfo((prevState) => ({
+    //             ...prevState,
+    //             firstName: response.firstName,
+    //             lastName: response.lastName,
+    //             email: response.email,
+    //             username: response.username,
+    //         }));
+    //     } else {
+    //         console.log('error');
+    //     }
+    // }
+    // useEffect(() => {
+    //     getStatisticData();
+    // }, []);
 
     const listData: Array<IListDataBoardHistory> = [];
     for (let i = 0; i < 3; i++) {
@@ -73,38 +73,49 @@ function Profile() {
         </div>
     );
 
-    // const { data: userInfo, error } = useSWR('http://localhost:5000/user/find');
-    // console.log('[User Data]:', userInfo);
-    // console.log(error);
-    // useEffect(() => {
-    //     console.log(userInfo);
-    // }, [userInfo]);
+    const { data, error } = useSWR('http://localhost:5000/user/find');
+    const isLoading = !data && !error;
+    console.log('Profile Data', data);
+
+    useEffect(() => {
+        if (data) {
+            console.log('[useEffect data username] :', data.username);
+            console.log('[useEffect data email] :', data.email);
+        }
+    }, [data]);
 
     return (
         <div>
             <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
-                <Box style={{marginLeft: "20px", marginRight: "20px"}}justify="center" align="center" direction="column">
-                    <UserImage src={ProfileMascot} />
-                    <TextUsername>{userInfo.username}</TextUsername>
+                {error && <div>error </div>}
+                {isLoading ? (
+                    <div>loading ...</div>
+                ) : (
+                    <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
+                        <UserImage src={ProfileMascot} />
+                        <TextUsername>{data.username}</TextUsername>
                         <RowStyled>
                             <Col span={8}>
                                 <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
                             </Col>
                             <Col span={16}>
                                 <TextUserInfo2>
-                                    {userInfo.firstName} {userInfo.lastName}
+                                    {data.firstName} {data.lastName}
                                 </TextUserInfo2>
                             </Col>
                         </RowStyled>
                         <RowStyled>
+                            <Col span={16}>
+                                <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
+                            </Col>
                             <Col span={8}>
                                 <TextUserInfo1>อีเมล :</TextUserInfo1>
                             </Col>
                             <Col span={16}>
-                                <TextUserInfo2>{userInfo.email}</TextUserInfo2>
+                                <TextUserInfo2>{data.email}</TextUserInfo2>
                             </Col>
                         </RowStyled>
-                        <ButtonStyle style={{marginTop: "10px"}} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
+                        <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
                             แก้ไขข้อมูลส่วนตัว
                         </ButtonStyle>
                         <RowStyled>
@@ -112,7 +123,7 @@ function Profile() {
                                 <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
                             </Col>
                             <Col span={8}>
-                            <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
+                                <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
                             </Col>
                         </RowStyled>
                         <ResultCard onClick={() => history.push('/result')}>
@@ -165,7 +176,8 @@ function Profile() {
                                 </BoardCard>
                             );
                         })}
-                </Box>
+                    </Box>
+                )}
             </Container>
         </div>
     );
