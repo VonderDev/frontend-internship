@@ -22,6 +22,8 @@ import {
     HistoryText,
     RowStyled,
     BoardCard,
+    CommentIcon,
+    HeartIcon,
 } from '../shared/Profile.styles';
 import Container from 'components/Container/Container';
 import React from 'react';
@@ -61,9 +63,9 @@ function Profile() {
         });
     }
     const cardList = [
-        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ' },
-        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ' },
-        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ' },
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
     ];
 
     const IconText = ({ icon, text }: IIconTextProfile) => (
@@ -105,9 +107,6 @@ function Profile() {
                             </Col>
                         </RowStyled>
                         <RowStyled>
-                            <Col span={16}>
-                                <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
-                            </Col>
                             <Col span={8}>
                                 <TextUserInfo1>อีเมล :</TextUserInfo1>
                             </Col>
@@ -128,11 +127,11 @@ function Profile() {
                         </RowStyled>
                         <ResultCard onClick={() => history.push('/result')}>
                             <RowStyled>
-                                <Col span={8}>
+                                <Col span={10}>
                                     <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
                                 </Col>
-                                <Col span={14}>
-                                    <CardText>
+                                <Col span={12}>
+                                    <CardText style={{ transform: 'translateY(67%)' }}>
                                         <RowStyled>ลักษณะเด่นของคุณ</RowStyled>
                                         <RowStyled>วันที่ 15 มิ.ย. 2564</RowStyled>
                                     </CardText>
@@ -159,16 +158,33 @@ function Profile() {
                                     }}
                                 >
                                     <RowStyled>
-                                        <Col span={6}>
+                                        <Col span={7}>
                                             <HistoryImage src={item.avatar} />
                                         </Col>
-                                        <Col span={16}>
+                                        <Col span={17}>
                                             <CardText>
                                                 <Row>
                                                     <HistoryText>{item.title}</HistoryText>
                                                 </Row>
                                                 <Row>
                                                     <HistoryText>{item.description}</HistoryText>
+                                                </Row>
+                                                <Row>
+                                                    <Col span={2}>
+                                                        <CommentIcon />
+                                                    </Col>
+                                                    <Col span={10}>
+                                                        <HistoryText>{item.username}</HistoryText>
+                                                    </Col>
+                                                    <Col span={8}>
+                                                        <HistoryText>25 มิ.ย. 2564</HistoryText>
+                                                    </Col>
+                                                    <Col span={2}>
+                                                        <HeartIcon />
+                                                    </Col>
+                                                    <Col span={2}>
+                                                    <HistoryText>12</HistoryText>
+                                                    </Col>
                                                 </Row>
                                             </CardText>
                                         </Col>

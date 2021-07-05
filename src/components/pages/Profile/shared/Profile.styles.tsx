@@ -1,6 +1,6 @@
-import { Button , Input , Card , Image , List , Modal , Row} from 'antd';
+import { Button, Input, Card, Image, List, Modal, Row } from 'antd';
 import styled from 'styled-components';
-import { RightOutlined } from '@ant-design/icons';
+import { RightOutlined, FormOutlined , HeartFilled } from '@ant-design/icons';
 
 export const AlignRight = styled.div`
     float: right;
@@ -97,19 +97,22 @@ export const TextHeadModal = styled.div`
     font-size: 24px;
 `;
 export const TextBodyModal = styled.div`
-font-weight: normal;
-font-size: 16px;
+    font-weight: normal;
+    font-size: 16px;
 `;
 
 export const CardText = styled.div`
     font-weight: bolder;
     font-size: 16px;
-    transform: translateY(67%) translateX(12%);
 `;
 export const HistoryText = styled.div`
+    margin-top: 5px;
     font-size: 14px;
     font-weight: bolder;
-    transform: translateY(-100%) translateX(0%);
+    text-overflow: ellipsis; /* เพิ่ม ... จุดจุดจุดท้ายสุด */
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
 `;
 
 export const UserImage = styled(Image)`
@@ -220,8 +223,8 @@ export const ProfileListItem = styled(List.Item)`
     }
 `;
 export const ConfirmModal = styled(Modal)`
-        display: flex;
-        justify-content: center;
+    display: flex;
+    justify-content: center;
     & .ant-modal-content {
         width: 343px;
         height: 249px;
@@ -237,14 +240,24 @@ export const ConfirmModal = styled(Modal)`
     & .ant-modal-body {
         height: 30px;
         display: flex;
-        align-items: center; 
+        align-items: center;
         text-align: center;
         justify-content: center;
     }
     & .ant-modal-footer {
         height: 130px;
-        align-items: center; 
+        align-items: center;
         text-align: center;
         justify-content: center;
     }
+`;
+export const CommentIcon = styled(FormOutlined)`
+    color: var(--Gray-100);
+    transform: translateY(20%);
+    margin-right: 5px;
+`;
+export const HeartIcon = styled(HeartFilled)`
+    color: var(--Gray-100);
+    transform: translateY(20%);
+    margin-right: 5px;
 `;

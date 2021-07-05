@@ -49,8 +49,16 @@ const EditProfile = () => {
     };
 
     const putDataOnClick = () => {
-        //เพิ่ม async await , Loading
-        ApiPutUserData(userInfo);
+        if (userInfo.username === '') {
+            alert('กรุณากรอกชื่อผู้ใช้!');
+        } else if (userInfo.firstName === '') {
+            alert('กรุณากรอกชื่อจริง!');
+        } else if (userInfo.lastName === '') {
+            alert('กรุณากรอกนามสกุล!');
+        } else {
+            ApiPutUserData(userInfo);
+        }
+        console.log(typeof userInfo.username);
     };
 
     return (
@@ -86,59 +94,59 @@ const EditProfile = () => {
                     ),
                 }}
             >
-                <Box style={{marginLeft: "20px", marginRight: "20px"}} justify="center" align="center" direction="column">
+                <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
                     <UserImage src={ProfileMascot} />
-                        <TextTopicEditProfile>ชื่อผู้ใช้</TextTopicEditProfile>
-                        <Form>
-                            <Form.Item rules={[{ required: true, message: 'กรุณาใส่ชื่อผู้ใช้!' }]}>
-                                <InputStyle
-                                    type="text"
-                                    typeinput="Large"
-                                    name="username"
-                                    value={userInfo.username}
-                                    onChange={({ target: { value, name } }) => {
-                                        handleOnChange(name, value);
-                                    }}
-                                />
-                            </Form.Item>
-                            <TextTopicEditProfile>ชื่อจริง</TextTopicEditProfile>
-                            <Form.Item rules={[{ required: true, message: 'กรุณาใส่ชื่อจริง!' }]}>
-                                <InputStyle
-                                    type="text"
-                                    typeinput="Large"
-                                    name="firstName"
-                                    value={userInfo.firstName}
-                                    onChange={({ target: { value, name } }) => {
-                                        handleOnChange(name, value);
-                                    }}
-                                />
-                            </Form.Item>
-                            <TextTopicEditProfile>นามสกุล</TextTopicEditProfile>
-                            <Form.Item rules={[{ required: true, message: 'กรุณาใส่นามสกุล!' }]}>
-                                <InputStyle
-                                    type="text"
-                                    typeinput="Large"
-                                    name="lastName"
-                                    value={userInfo.lastName}
-                                    onChange={({ target: { value, name } }) => {
-                                        handleOnChange(name, value);
-                                    }}
-                                />
-                            </Form.Item>
-                            <TextTopicEditProfile>อีเมล</TextTopicEditProfile>
-                            <Form.Item rules={[{ required: true, message: 'กรุณาใส่อีเมล!' }]}>
-                                <InputStyle
-                                    type="text"
-                                    typeinput="Large"
-                                    name="email"
-                                    value={userInfo.email}
-                                    onChange={({ target: { value, name } }) => {
-                                        handleOnChange(name, value);
-                                    }}
-                                    disabled
-                                />
-                            </Form.Item>
-                        </Form>
+                    <TextTopicEditProfile>ชื่อผู้ใช้</TextTopicEditProfile>
+                    <Form>
+                        <Form.Item rules={[{ required: true, message: 'กรุณาใส่ชื่อผู้ใช้!' }]}>
+                            <InputStyle
+                                type="text"
+                                typeinput="Large"
+                                name="username"
+                                value={userInfo.username}
+                                onChange={({ target: { value, name } }) => {
+                                    handleOnChange(name, value);
+                                }}
+                            />
+                        </Form.Item>
+                        <TextTopicEditProfile>ชื่อจริง</TextTopicEditProfile>
+                        <Form.Item rules={[{ required: true, message: 'กรุณาใส่ชื่อจริง!' }]}>
+                            <InputStyle
+                                type="text"
+                                typeinput="Large"
+                                name="firstName"
+                                value={userInfo.firstName}
+                                onChange={({ target: { value, name } }) => {
+                                    handleOnChange(name, value);
+                                }}
+                            />
+                        </Form.Item>
+                        <TextTopicEditProfile>นามสกุล</TextTopicEditProfile>
+                        <Form.Item rules={[{ required: true, message: 'กรุณาใส่นามสกุล!' }]}>
+                            <InputStyle
+                                type="text"
+                                typeinput="Large"
+                                name="lastName"
+                                value={userInfo.lastName}
+                                onChange={({ target: { value, name } }) => {
+                                    handleOnChange(name, value);
+                                }}
+                            />
+                        </Form.Item>
+                        <TextTopicEditProfile>อีเมล</TextTopicEditProfile>
+                        <Form.Item rules={[{ required: true, message: 'กรุณาใส่อีเมล!' }]}>
+                            <InputStyle
+                                type="text"
+                                typeinput="Large"
+                                name="email"
+                                value={userInfo.email}
+                                onChange={({ target: { value, name } }) => {
+                                    handleOnChange(name, value);
+                                }}
+                                disabled
+                            />
+                        </Form.Item>
+                    </Form>
                 </Box>
             </Container>
         </>
