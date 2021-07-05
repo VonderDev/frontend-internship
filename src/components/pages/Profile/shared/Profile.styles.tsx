@@ -1,19 +1,6 @@
-import { Button, Input, Card, Image, List, Modal, Row } from 'antd';
+import { Button, Card, Image, Modal, Row } from 'antd';
 import styled from 'styled-components';
 import { RightOutlined, FormOutlined , HeartFilled } from '@ant-design/icons';
-
-export const AlignRight = styled.div`
-    float: right;
-`;
-
-export const AlignLeft = styled.div`
-    float: left;
-`;
-
-export const ContainerProfile = styled.div`
-    margin-left: 20px;
-    margin-right: 20px;
-`;
 
 export const ButtonSave = styled(Button)`
     font-weight: bolder;
@@ -136,11 +123,6 @@ export const HistoryImage = styled.img`
     transform: translateY(-1%);
 `;
 
-export const IconArrow = styled(RightOutlined)`
-    color: #3a8ce4;
-    transform: translateY(350%);
-`;
-
 export const LinkMoreResult = styled.div`
     width: 100%;
     padding-top: 15px;
@@ -172,56 +154,10 @@ export const BoardCard = styled(Card)`
     }
 `;
 
-export const ResultCardHistory = styled(Card)`
-    box-shadow: 0px 3px 6px #c7c7c7;
-    margin-top: 10px;
-    height: 130px;
-    width: 343px;
-    border-radius: 10px;
-    & .ant-card-body {
-        padding: 5px;
-    }
-`;
-
-export const ListProfile = styled(List)`
-    font-weight: bolder;
-    width: 100%;
-`;
-
 export const RowStyled = styled(Row)`
     width: 100%;
 `;
 
-export const ProfileListItem = styled(List.Item)`
-    margin-bottom: 10px;
-    height: 88px;
-    box-shadow: 0px 3px 6px #c7c7c7;
-    border-radius: 10px;
-    & .ant-list-item-meta-title {
-        font-size: 14px;
-        font-weight: bolder;
-        transform: translateY(-20%) translateX(-12%);
-        width: 250px;
-        text-overflow: ellipsis;
-        /* เพิ่ม ... จุดจุดจุดท้ายสุด */
-        overflow: hidden;
-        white-space: nowrap;
-    }
-    & .ant-list-item-meta-description {
-        font-size: 12px;
-        transform: translateY(-100%) translateX(-12%);
-        width: 250px;
-    }
-    & .ant-list-item-action {
-        transform: translateY(-300%) translateX(25%);
-    }
-    & li {
-        font-size: 12px;
-    }
-    & .ant-list-item-action > li {
-        padding: 0 12px;
-    }
-`;
 export const ConfirmModal = styled(Modal)`
     display: flex;
     justify-content: center;
@@ -250,6 +186,11 @@ export const ConfirmModal = styled(Modal)`
         text-align: center;
         justify-content: center;
     }
+`;
+
+export const IconArrow = styled(RightOutlined)`
+    color: #3a8ce4;
+    transform: translateY(350%);
 `;
 export const CommentIcon = styled(FormOutlined)`
     color: var(--Gray-100);
