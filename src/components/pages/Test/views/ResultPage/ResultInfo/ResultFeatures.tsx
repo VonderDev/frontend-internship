@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
-import { ContainerImagePreview, ContainerResultFeature, ImagePreview, TextHeaderResult, TextNameSkillInImg, TextNameSkillResultFeature } from '../../../shared/styles/Result/ResultPage.styled';
+import { ContainerImagePreview, ImagePreview, TextHeaderResult } from '../../../shared/styles/Result/ResultPage.styled';
 import { API_Get_ResultData } from '../../../apis/Result.api';
 import { IResult } from '../../../shared/interface/Result.interfaces';
 import CharactorDetail from './CharactorDetail';
-import { ContainerResultSummarize } from 'components/pages/Test/shared/styles/Result/ResultSummarize.styled';
-import { Col, Row } from 'antd';
 //
 // ─── import mockData ───────────────────────────────────────────────────────────────────
 //
@@ -13,7 +11,7 @@ const chartScore = Object.keys(mockResult).map((key) => mockResult[key].score);
 const max = Math.max(...chartScore);
 const maxScoreList = mockResult.filter((data: { score: number }) => data.score === max);
 
-const Descrip = () => {
+const ResultFeatures = () => {
     useEffect(() => {
         console.log('Maxscore: ', max);
         console.log('Name: ', maxScoreList.length);
@@ -34,10 +32,6 @@ const Descrip = () => {
             console.log('error');
         }
     }
-    // useEffect(() => {
-    //     console.log(getResultData);
-    //     getResultData();
-    // }, [detailCharactor]);
 
     function onClickImage(description: string, description_career: string, skill: string, image_charactor: string) {
         console.log('[คำอธิบาย , อาชีพ]', description, description_career);
@@ -46,7 +40,6 @@ const Descrip = () => {
         console.log(detailCharactor);
         setDetailCharactor({ description, description_career, image_charactor, skill });
     }
-    const style = { background: '#0092ff', padding: '8px 0' };
 
     return (
         <>
@@ -69,4 +62,4 @@ const Descrip = () => {
     );
 };
 
-export default Descrip;
+export default ResultFeatures;

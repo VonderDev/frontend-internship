@@ -8,6 +8,7 @@ import {
     ContainerResultSummarize,
     HeaderResultFeature,
     ImageCharactorCarousel,
+    ImgContainer,
     TextSkillName,
     TextSkillSummarize,
 } from '../../shared/styles/Result/ResultSummarize.styled';
@@ -23,18 +24,6 @@ const maxScoreList = mockResult.filter((data: { score: number }) => data.score =
 
 const Result = () => {
     const history = useHistory();
-    const [resultList, setResultList] = useState<Array<ResultSummarizeProps> | null>(null);
-    const [questionList, setQuestionList] = useState<Array<ResultSummarizeProps> | null>(null);
-    const [detailResult, setDetailResult] = useState<ResultSummarizeProps>({
-        skill: '',
-        charactor_summarize: '',
-        image_charactor: '',
-        category_id: 0,
-        description: '',
-        description_career: '',
-        skill_summarize: '',
-        score: 0,
-    });
     useEffect(() => {
         console.log('Maxscore: ', max);
         console.log('Name: ', maxScoreList.length);
@@ -56,10 +45,6 @@ const Result = () => {
     return (
         <Container header={null}>
             <ContainerCarousel>
-                {/* <a href="https://www.jqueryscript.net/images/Create-Smooth-Image-Zoom-Pan-Effects-With-jQuery-EasyZoom.jpg" download onClick={() => download()}>
-                    <i className="fa fa-download" />
-                    download
-                </a> */}
                 {maxScoreList.map((item: any, index: any) => {
                     return (
                         <div key={index}>

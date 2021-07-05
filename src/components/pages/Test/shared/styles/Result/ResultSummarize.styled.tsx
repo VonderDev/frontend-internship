@@ -83,3 +83,5 @@ export const ButtonSaveResult = styled.a`
     bottom: 10%;
     color: var(--Blue-300);
 `;
+
+export const ImgContainer = styled.img``;
