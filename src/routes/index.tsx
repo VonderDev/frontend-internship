@@ -18,6 +18,7 @@ import ResultInfo from 'components/pages/Test/views/ResultPage/ResultInfo/Result
 import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion';
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
+import Filter from 'components/pages/Board/views/Filter'
 
 function Routing() {
     return (
@@ -43,6 +44,7 @@ function Routing() {
             <PrivateRoute exact path="/profileresult" component={ProfileResult} />
             <PrivateRoute exact path="/boardhistory" component={BoardHistory} />
             <Route exact path="/teststyle" component={TestStyle} />
+            <Route exact path="/filter" component={Filter} />
         </Switch>
     );
 }
