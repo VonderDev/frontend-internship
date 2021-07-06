@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BackHeader } from 'components/Container/Header.styled';
-import { ConfirmModal, ButtonLeaveModal, ButtonCancleModal, TextHeadModal, TextBodyModal, ButtonSave, TextTopicEditProfile , UserImage } from '../shared/Profile.styles';
+import { ConfirmModal, ButtonLeaveModal, ButtonCancleModal, TextHeadModal, TextBodyModal, ButtonSave, TextTopicEditProfile, UserImage } from '../shared/Profile.styles';
 import { LeftOutlined } from '@ant-design/icons';
 import Container from 'components/Container/Container';
 import { useHistory } from 'react-router-dom';
@@ -57,6 +57,9 @@ const EditProfile = () => {
             alert('กรุณากรอกนามสกุล!');
         } else {
             ApiPutUserData(userInfo);
+            setTimeout(() => {
+                history.push('/profile');
+            }, 1200);
         }
         console.log(typeof userInfo.username);
     };
