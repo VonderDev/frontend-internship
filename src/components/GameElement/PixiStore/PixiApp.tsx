@@ -27,7 +27,6 @@ const createPixiApp = (view:any, options:any) => {
       width,
       height,
     });
-    const [isCurrent] = useState(appRef.current)
   
     useEffect(() => {
       if (appRef.current) {

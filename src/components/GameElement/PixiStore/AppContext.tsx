@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 const AppContext = createContext<any>(null);
 
-const useWindowSize = (scene: any) => {
+const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState({
     width: 0,
     height: 0,
@@ -20,14 +20,11 @@ const useWindowSize = (scene: any) => {
         maxHeight: window.innerHeight,
       });
     }
-
     // Add event listener
     window.addEventListener("resize", handleResize);
-
     handleResize();
-
     return () => window.removeEventListener("resize", handleResize);
-  }, [scene]);
+  }, []);
 
   return windowSize;
 }
@@ -36,7 +33,7 @@ function AppProvider({ children }: any) {
   const gameRef = useRef({});
 //   const audioRef = useRef(new AppAudio());
 //   const updateRatioRef = useRef(new UpdateRatio());
-  const size = useWindowSize({});
+  const size = useWindowSize();
   const [width, setWidth] = useState<number>(size.width);
   const [height, setHeight] = useState<number>(size.height);
 

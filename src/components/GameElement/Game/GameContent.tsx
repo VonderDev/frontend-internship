@@ -14,7 +14,7 @@ const style = {
   height: height
   
 };
-const GameContent = (app: any) => {
+const GameContent = (app: any,gameRef: any) => {
 
     const container = new PIXI.Container();
 
@@ -26,8 +26,14 @@ const GameContent = (app: any) => {
       console.log("resource", resource);
       console.log("resource['ground']", resource["ground"]);
     });
-  
+    
     const texture = PIXI.Texture.from(ground);
+    const dirt = new PIXI.Sprite(texture);
+    container.addChild(dirt)
+
+    const onRelease = () => { console.log('Nothing') }
+    console.log("container", container);
+    return [app , onRelease]
 };
 
 export default GameContent;
