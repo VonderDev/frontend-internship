@@ -1,32 +1,49 @@
-import { Button, Form } from 'antd';
+import { Button, Form, Input } from 'antd';
 import Container from 'components/Container/Container';
-import { BoardForm, ButtonGoNextCreateContent, ButtonSummitPost, ContainerBoardCreate, CountOfPage, FormInputContent, FormInputNameContent, TextTopicContent } from '../../shared/BoardCreate.styled';
-import { Upload } from 'antd';
+import {
+    ButtonGoNextCreateContent,
+    ButtonOfCategory,
+    ButtonSummitPost,
+    ButtonUseHashtags,
+    ContainerBoardCreate,
+    CountOfPageCreateContent,
+    CreateContentForm,
+    DrawerOfHashtag,
+    FormInputContent,
+    FormInputNameContent,
+    InputHashtagInDrawer,
+    OptionalTagName,
+    TextTopicContent,
+    UploadImage,
+} from '../../shared/BoardCreate.styled';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { FileImageTwoTone } from '@ant-design/icons';
 
 function BoardCreateContent() {
-    const history = useHistory();
-    const [form, setForm] = useState({
-        email: '',
-        name: '',
-        password: '',
-    });
+    //----------------- CREATE HOOK FOR POST CONTENT -----------------//
     const [countPage, setCountPage] = useState(1);
-
-    const updateForm = (e: any) => {
-        setForm({
-            ...form,
+    const [contentData, setContentData] = useState({
+        title: '',
+        content_body: '',
+        content_type: '',
+        tag: [],
+    });
+    const updateContentData = (e: any) => {
+        setContentData({
+            ...contentData,
             [e.target.name]: e.target.value,
         });
     };
-
-    // useEffect(() => {
-    //     console.log(form);
-    //     console.log(form.name);
-    // }, [form]);
-    //----------- CREATE FUNCTION UPLOAD IMAGE -----------//
+    useEffect(() => {
+        console.log('[Content data]:', contentData);
+    }, [contentData]);
+    //----------------- CREATE VARIABLE FOR MAP CATEGORY BOARD -----------------//
+    const categoryContentList = [
+        { value: 'บทความ', label: 'บทความ' },
+        { value: 'คำถาม', label: 'คำถาม' },
+    ];
+    //----------------- CREATE FUNCTION UPLOAD IMAGE -----------------//
     const [defaultFileList, setDefaultFileList] = useState([]);
 
     const uploadImage = async (options: any) => {
@@ -53,8 +70,29 @@ function BoardCreateContent() {
         console.log('[FileList]:', fileList);
         //Using Hooks to update the state to the current filelist
         setDefaultFileList(fileList);
-        //filelist - [{uid: "-1",url:'Some url to image'}]
     };
+
+    //----------------- CREATE VARIABLE FOR DRAWER -----------------//
+    const [visible, setVisible] = useState<boolean>(false);
+    const [placement, setPlacement] = useState<string>('bottom');
+    const showDrawer = () => {
+        setVisible(true);
+    };
+    const onClose = () => {
+        setVisible(false);
+    };
+
+    //----------------- CREATE VARIABLE FOR HASHTAG -----------------//
+    const optionalTag = [
+        { value: 'word smart', tagName: 'ภาษา' },
+        { value: 'logic smart', tagName: 'ตรรกะ' },
+        { value: 'music smart', tagName: 'ดนตรี' },
+        { value: 'nature smart', tagName: 'ธรรมชาติ' },
+        { value: 'picture smart', tagName: 'มิติสัมพันธ์' },
+        { value: 'body smart', tagName: 'การเคลื่อนไหว' },
+        { value: 'people smart', tagName: 'มนุษยสัมพันธ์' },
+        { value: 'self smart', tagName: 'เข้าใจตนเอง' },
+    ];
 
     return (
         <>
@@ -63,43 +101,81 @@ function BoardCreateContent() {
                     <>
                         <ContainerBoardCreate>
                             <TextTopicContent>ชื่อกระทู้</TextTopicContent>
-                            <Form initialValues={{ remember: true }}>
-                                <BoardForm name="text" rules={[{ required: true, message: 'กรุณากรอกชื่อกระทู้ก่อนดำเนินการต่อ' }]}>
-                                    <FormInputNameContent type="text" placeholder="กรุณากรอกชื่อกระทู้" />
-                                </BoardForm>
-                            </Form>
 
-                            <TextTopicContent>รูปประกอบ (Optional)</TextTopicContent>
-                            <Upload accept="image/*" customRequest={uploadImage} onChange={handleOnChange} listType="picture-card" defaultFileList={defaultFileList} className="image-upload-grid">
-                                {defaultFileList.length >= 2 ? null : <div>Upload image</div>}
-                            </Upload>
-                            <TextTopicContent>เนื้อหากระทู้</TextTopicContent>
-                            <Form initialValues={{ remember: true }}>
-                                <BoardForm name="text" rules={[{ required: true, message: 'กรุณากรอกเนื้อหากระทู้ก่อนดำเนินการต่อ' }]}>
-                                    <FormInputContent type="text" placeholder="กรุณากรอกเนื้อหาของกระทู้" />
-                                </BoardForm>
+                            <Form>
+                                <CreateContentForm name="nameContent" rules={[{ required: true, message: 'กรุณากรอกชื่อกระทู้ก่อนดำเนินการต่อ' }]}>
+                                    <FormInputNameContent name="title" type="text" placeholder="กรุณากรอกชื่อกระทู้" onChange={updateContentData} />
+                                </CreateContentForm>
+                                <TextTopicContent>รูปประกอบ (Optional)</TextTopicContent>
+                                <UploadImage
+                                    accept="image/*"
+                                    customRequest={uploadImage}
+                                    onChange={handleOnChange}
+                                    listType="picture-card"
+                                    defaultFileList={defaultFileList}
+                                    className="image-upload-grid"
+                                >
+                                    {defaultFileList.length >= 2 ? null : (
+                                        <div>
+                                            <FileImageTwoTone style={{ fontSize: '35px' }} />
+                                        </div>
+                                    )}
+                                </UploadImage>
+                                <TextTopicContent>เนื้อหากระทู้</TextTopicContent>
+                                <CreateContentForm name="content" rules={[{ required: true, message: 'กรุณากรอกเนื้อหากระทู้ก่อนดำเนินการต่อ' }]}>
+                                    <FormInputContent name="content_body" placeholder="กรุณากรอกเนื้อหาของกระทู้" onChange={updateContentData} />
+                                </CreateContentForm>
                             </Form>
                         </ContainerBoardCreate>
-                        <CountOfPage>{countPage} of 2</CountOfPage>
-                        <ButtonGoNextCreateContent type="submit" onClick={() => setCountPage(countPage + 1)} disabled={countPage > 1}>
+                        <CountOfPageCreateContent>{countPage} / 2</CountOfPageCreateContent>
+                        <ButtonGoNextCreateContent htmlType="submit" onClick={() => setCountPage(countPage + 1)} disabled={countPage > 2}>
                             ดำเนินการต่อ
                         </ButtonGoNextCreateContent>
                     </>
                 ) : null}
                 {countPage === 2 ? (
                     <>
+                        <DrawerOfHashtag placement="bottom" closable={false} onClose={onClose} visible={visible} key={placement} height="90vh">
+                            <InputHashtagInDrawer placeholder="#ตรรกะ #ดนตรี" />
+                            {optionalTag.map((item, index) => {
+                                return <OptionalTagName key={index}>#{item.tagName}</OptionalTagName>;
+                            })}
+                            <ButtonUseHashtags>ใช้แฮชเเท็ก</ButtonUseHashtags>
+                        </DrawerOfHashtag>
                         <ContainerBoardCreate>
                             <TextTopicContent>ประเภทของกระทู้</TextTopicContent>
-                            <Button>บทความ</Button>
-                            <Button>คำถาม</Button>
-                            <TextTopicContent>แฮชเเท็กของกระทุ้</TextTopicContent>
+                            {categoryContentList.map((item, index) => {
+                                return (
+                                    <ButtonOfCategory
+                                        key={index}
+                                        name="content_type"
+                                        onClick={() => {
+                                            console.log('เลือกประเภทบทความ :', item.value);
+                                            setContentData({
+                                                ...contentData,
+                                                content_type: item.value,
+                                            });
+                                        }}
+                                    >
+                                        {item.label}
+                                    </ButtonOfCategory>
+                                );
+                            })}
+                            <TextTopicContent>แฮชเเท็กของกระทู้ (Optional)</TextTopicContent>
                             <Form initialValues={{ remember: true }}>
-                                <BoardForm name="text" rules={[{ required: true, message: 'กรุณากรอกชื่อกระทู้ก่อนดำเนินการต่อ' }]}>
-                                    <FormInputNameContent type="text" placeholder="กรุณาเลือกแฮชเเท็กของกระทู้" />
-                                </BoardForm>
+                                <CreateContentForm>
+                                    <FormInputNameContent onClick={showDrawer} type="text" placeholder="กรุณาเลือกแฮชเเท็กของกระทู้" />
+                                </CreateContentForm>
                             </Form>
                         </ContainerBoardCreate>
-                        <ButtonSummitPost>สร้างกระทู้</ButtonSummitPost>
+                        <CountOfPageCreateContent>{countPage} / 2</CountOfPageCreateContent>
+                        <ButtonSummitPost
+                            onClick={() => {
+                                console.log('Content data sent to backend:', contentData);
+                            }}
+                        >
+                            สร้างกระทู้
+                        </ButtonSummitPost>
                         <button className="btn btn-dark" type="submit" onClick={() => setCountPage(countPage - 1)} disabled={countPage < 2}>
                             Back
                         </button>
