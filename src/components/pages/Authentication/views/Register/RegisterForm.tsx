@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { ILogin } from "../../shared/login.interface";
 import { useHistory } from 'react-router';
 import { API_PostDataUser } from "../../apis/user.api";
@@ -13,77 +13,47 @@ export const RegisterForm = () => {
 
     const history = useHistory();
     const [userData, setUserData] = useState<ILogin>({ firstName: '', lastName: '', email: '', username: '', password: '' });
-    const [username, setUsername] = useState("");
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-    async function ApiRegister() {
-
-        const userData = {
-            username: username,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password
-        }
-
-        if (username && firstName && lastName && email && password) {
-            try {
-                const { data } = await axios.post("http://localhost:5000/signup", userData)
-                if (data) {
-                    console.log(data);
-                    console.log("Go to login");
-                    history.push("/login");
-                }
-            } catch (error) {
-                console.log(error)
-                console.log("Failed");
-                return error.message
-            }
-        }
-    }
 
     async function PostUser() {
-        if (userData.username && userData.firstName && userData.lastName && userData.email && userData.password){
+        if (userData.username && userData.firstName && userData.lastName && userData.email && userData.password) {
             try {
                 API_PostDataUser(userData);
+                console.log("new User is : " ,userData);
+                console.log("Go to login")
+                history.push("/login");
             } catch (error) {
                 console.log(error);
                 console.log("API failed");
                 return error.message;
             }
-        } 
+        }
     }
 
-    useEffect(() => {
-        if(userData) {
-            // setUserData()
-        }
-    }, [userData])
+    const handleOnChange = (name: string, value: string) => {
+        setUserData((prev) => ({ ...prev, [name]: value }));
+    };
 
     return (
 
         <FormLogin layout="horizontal">
             <FormItemTextValidate name="username" rules={[{ required: true, message: 'กรุณากรอกชื่อผู้ใช้' }]} >
-                <InputStyle sizeinput={100} type="text" value={userData.username} placeholder="ชื่อผู้ใช้" onChange={({ target: { value } }) => { setUsername(value); }} />
+                <InputStyle sizeinput={100} type="text" name="username" value={userData.username} placeholder="ชื่อผู้ใช้" onChange={({ target: { value, name } }) => { handleOnChange(name, value) }} />
             </FormItemTextValidate>
 
             <FormItemTextValidate name="firstname" rules={[{ required: true, message: 'กรุณากรอกชื่อจริง' }]} >
-                <InputStyle sizeinput={100} type="text" value={userData.firstName} placeholder="ชื่อจริง" onChange={({ target: { value } }) => { setFirstName(value) }} />
+                <InputStyle sizeinput={100} type="text" name="firstName" value={userData.firstName} placeholder="ชื่อจริง" onChange={({ target: { value, name } }) => { handleOnChange(name, value) }} />
             </FormItemTextValidate>
 
             <FormItemTextValidate name="lastname" rules={[{ required: true, message: 'กรุณากรอกนามสกุล' }]} >
-                <InputStyle sizeinput={100} type="text" value={userData.lastName} placeholder="นามสกุล" onChange={({ target: { value } }) => { setLastName(value) }} />
+                <InputStyle sizeinput={100} type="text" name="lastName" value={userData.lastName} placeholder="นามสกุล" onChange={({ target: { value,name } }) => { handleOnChange(name, value) }} />
             </FormItemTextValidate>
 
             <FormItemTextValidate name="email" rules={[{ required: true, message: 'กรุณากรอกอีเมล' }]} >
-                <InputStyle sizeinput={100} type="email" value={userData.email} placeholder="อีเมล" onChange={({ target: { value } }) => { setEmail(value) }} />
+                <InputStyle sizeinput={100} type="email" name="email" value={userData.email} placeholder="อีเมล" onChange={({ target: { value, name } }) => { handleOnChange(name, value) }} />
             </FormItemTextValidate>
 
             <FormItemTextValidate name="password" rules={[{ required: true, message: 'กรุณากรอกรหัสผ่าน' }]} >
-                <InputStyle sizeinput={100} type="password" value={userData.password} placeholder="รหัสผ่าน" onChange={({ target: { value } }) => { setPassword(value) }} />
+                <InputStyle sizeinput={100} type="password" name="password" value={userData.password} placeholder="รหัสผ่าน" onChange={({ target: { value,name } }) => { handleOnChange(name, value) }} />
             </FormItemTextValidate>
 
             <FormItemTextValidate name="confirm"
@@ -95,7 +65,7 @@ export const RegisterForm = () => {
                     },
                     {
                         validator(_, value) {
-                            if (!value || password === value) {
+                            if (!value || userData.password === value) {
                                 return Promise.resolve();
                             }
                             return Promise.reject(new Error('รหัสผ่านที่กรอกไม่ตรงกัน โปรดลองอีกครั้ง'));
