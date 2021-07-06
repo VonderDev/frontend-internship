@@ -34,14 +34,14 @@ const Filter = () => {
         >
             <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="flex-start" align="flex-start" direction="column">
             <DrawerRadius
-            title="Privacy Policy"
+            title="ตัวกรอง"
             placement="bottom"
             closable={false}
             onClose={onClose}
             visible={visible}
             key={placement}
             getContainer={false}
-            height={650}
+            height={870}
             style={{ position: 'absolute', overflowY: 'hidden' }}
           ></DrawerRadius>
                 <SearchField>
