@@ -1,30 +1,71 @@
 import { useState, useContext, useEffect, useRef } from "react";
 import * as PIXI from 'pixi.js'
+import { AppContext } from "./AppContext";
+import { PixiContext } from "./PixiContext";
+
+const createPixiApp = (view:any, options:any) => {
+  PIXI.utils.skipHello();
+  const newOptions = { ...options, view };
+  let app = new PIXI.Application(newOptions);
+  return app;
+};
 
   const PixiApp = ({ content }: any) => {
-    let app = new PIXI.Application({ 
-        width: 256, 
-        height: 256,                       
-        transparent: false, 
-        resolution: 1
+    const {
+      width,
+      height,
+      maxWidth,
+      maxHeight,
+      gameRef,
+    } = useContext(AppContext);
+    const pixiContext = useContext(PixiContext);
+    const { resolution } = pixiContext;
+    const viewRef = useRef<any>();
+    const appRef = useRef<any>();
+    const [initialOption] = useState({
+      ...pixiContext,
+      width,
+      height,
+    });
+    const [isCurrent] = useState(appRef.current)
+  
+    useEffect(() => {
+      if (appRef.current) {
+        console.error(
+          "PIXI Application will be reset if context is changed. Please don't change context!"
+        );
+      } else {
+        const [app, onRelease] = content(
+          createPixiApp(viewRef.current, initialOption),
+          gameRef
+        );
+        appRef.current = app;
+        return () => {
+          onRelease();
+        };
       }
-    );
-    const viewRef = useRef();
-    const appRef = useRef();
-    document.body.appendChild(app.view);
-    app.renderer.view.style.position = "absolute"
-    app.renderer.view.style.display = "block";  
-    app.renderer.view.style.border = "1px dashed black";
-    app.renderer.resize(512, 512);
-    app.renderer.backgroundColor = 0x061639;
+    }, [ content, gameRef, initialOption]);
+  
+    useEffect(() => {
+      if(appRef.current){
+        appRef.current.renderer.resolution = resolution;
+      }
+    }, [resolution]);
+  
+    useEffect(() => {
+      if(appRef.current){
+        appRef.current.renderer.resize(width, height);
+      }
+    }, [width, height]);
+
     return (
         <canvas
-        // ref={viewRef}
+        ref={viewRef}
         style={{
-          width: 256,
-          height: 256,
-          maxWidth: 600,
-          maxHeight: 100,
+          width: width,
+          height: height,
+          maxWidth: maxWidth,
+          maxHeight: maxHeight,
           zIndex: 1,
         }}
       />
