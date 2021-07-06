@@ -1,4 +1,4 @@
-import { Row, Card, Col } from 'antd';
+import { Row, Col } from 'antd';
 import { IIconText } from 'components/pages/Home/shared/home.interface';
 import { ButtonSeeAllBoard, SearchField, TextBoardTopic } from 'components/pages/Home/shared/homepage.styles';
 import React from 'react';
@@ -23,13 +23,6 @@ const BoardAdvice = () => {
             author: 'Maneemena',
             imgCardBoard: 'https://sites.google.com/site/englishbydao99aaa/_/rsrc/1484476698203/hnwy-thi-4-kheiyn-xyangri-hi-thuk-khorngsrang/49.jpg',
         },
-        // {
-        //     title: 'วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัว',
-        //     tag: 'บทความ #ตรรกะ  #มิติสัมพันธ์',
-        //     date: '11 มิถุนายน 2564',
-        //     author: 'Lookmai',
-        //     imgCardBoard: 'https://sites.google.com/site/englishbydao99aaa/_/rsrc/1484476698203/hnwy-thi-4-kheiyn-xyangri-hi-thuk-khorngsrang/49.jpg',
-        // },
     ];
 
     return (
