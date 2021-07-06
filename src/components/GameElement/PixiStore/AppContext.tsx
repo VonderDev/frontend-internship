@@ -37,11 +37,11 @@ function AppProvider({ children }: any) {
 //   const audioRef = useRef(new AppAudio());
 //   const updateRatioRef = useRef(new UpdateRatio());
   const size = useWindowSize({});
-  const [width, setWidth] = useState<number|null>(size.width);
-  const [height, setHeight] = useState<number|null>(size.height);
+  const [width, setWidth] = useState<number>(size.width);
+  const [height, setHeight] = useState<number>(size.height);
 
-  const [maxWidth, setMaxWidth] = useState<number|null>(size.maxWidth);
-  const [maxHeight, setMaxHeight] = useState<number|null>(size.maxHeight);
+  const [maxWidth, setMaxWidth] = useState<number>(size.maxWidth);
+  const [maxHeight, setMaxHeight] = useState<number>(size.maxHeight);
 
   useEffect(() => {
     if (size) {
