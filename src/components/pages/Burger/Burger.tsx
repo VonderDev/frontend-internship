@@ -126,7 +126,7 @@ const Burger = () => {
     const showSidebar = () => setSidebar(!sidebar);
     const [username, setUsername] = useState('');
     const token = localStorage.getItem('token');
-    const { logout ,getUser } = useAuthContext();
+    const { logout ,getUser,user } = useAuthContext();
     function delay(ms: number) {
         return new Promise( resolve => setTimeout(resolve, ms) );
     }
@@ -137,7 +137,7 @@ const Burger = () => {
         if(token){
             if (response) {
                 setUsername(response.username)
-                console.log(response);
+                console.log('UserName :' , response.username);
             } else {
                 console.log('error');
             }
