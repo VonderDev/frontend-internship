@@ -1,23 +1,19 @@
-import { List } from 'antd';
+import { Col , Row } from 'antd';
 import { useHistory } from 'react-router-dom';
 import Container from 'components/Container/Container';
 import React from 'react';
-import { IIconTextProfile, IListDataBoardHistory } from '../shared/Profile.interface';
-import { ContainerProfile , ListProfile , ProfileListItem , HistoryText , HistoryImage} from '../shared/Profile.styles';
-import { CalendarOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
+import { IIconTextProfile } from '../shared/Profile.interface';
+import { HistoryText, HistoryImage, BoardCard, RowStyled, CardText, CommentIcon, HeartIcon } from '../shared/Profile.styles';
+import { Box } from 'shared/style/theme/component';
 
 function BoardHistory() {
     const history = useHistory();
 
-    const listData: Array<IListDataBoardHistory> = [];
-    for (let i = 0; i < 6; i++) {
-        listData.push({
-            href: '/board',
-            title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ${i}`,
-            avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg',
-            description: 'บทความ',
-        });
-    }
+    const cardList = [
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
+    ];
 
     const IconText = ({ icon, text }: IIconTextProfile) => (
         <div>
@@ -28,33 +24,51 @@ function BoardHistory() {
 
     return (
         <Container header={{ left: 'back', title: 'กระทู้ของคุณ', right: 'menu' }}>
-            <ContainerProfile>
-                    <ListProfile
-                        itemLayout="vertical"
-                        size="large"
-                        pagination={{
-                            onChange: (page) => {
-                                console.log(page);
-                            },
-                            pageSize: 4,
-                        }}
-                        dataSource={listData}
-                        renderItem={(item: any) => (
-                            <ProfileListItem
-                                key={item.title}
-                                actions={[
-                                    <IconText icon={FormOutlined} text=" Lookmaii" key="list-vertical-star-o" />,
-                                    <IconText icon={CalendarOutlined} text=" 11 มิถุนายน 2564" key="list-vertical-like-o" />,
-                                    <IconText icon={HeartFilled} text=" 12" key="list-vertical-message" />,
-                                ]}
-                            >
-                                <HistoryText onClick={() => history.push('/board')}>
-                                    <List.Item.Meta avatar={<HistoryImage src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} description={item.description} />
-                                </HistoryText>
-                            </ProfileListItem>
-                        )}
-                    />
-            </ContainerProfile>
+            <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
+                {cardList.map((item, index) => {
+                    return (
+                        <BoardCard
+                            key={index}
+                            onClick={() => {
+                                history.push('/Board');
+                            }}
+                        >
+                            <RowStyled>
+                                <Col span={7}>
+                                    <HistoryImage src={item.avatar} />
+                                </Col>
+                                <Col span={17}>
+                                    <CardText>
+                                        <Row>
+                                            <HistoryText>{item.title}</HistoryText>
+                                        </Row>
+                                        <Row>
+                                            <HistoryText>{item.description}</HistoryText>
+                                        </Row>
+                                        <Row>
+                                            <Col span={2}>
+                                                <CommentIcon />
+                                            </Col>
+                                            <Col span={10}>
+                                                <HistoryText>{item.username}</HistoryText>
+                                            </Col>
+                                            <Col span={8}>
+                                                <HistoryText>25 มิ.ย. 2564</HistoryText>
+                                            </Col>
+                                            <Col span={2}>
+                                                <HeartIcon />
+                                            </Col>
+                                            <Col span={2}>
+                                                <HistoryText>12</HistoryText>
+                                            </Col>
+                                        </Row>
+                                    </CardText>
+                                </Col>
+                            </RowStyled>
+                        </BoardCard>
+                    );
+                })}
+            </Box>
         </Container>
     );
 }

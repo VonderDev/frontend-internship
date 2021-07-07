@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 import { ChartStyled, TextHeaderResult } from '../../shared/styles/Result/ResultPage.styled';
 
 interface Chartprop {
@@ -7,15 +8,15 @@ interface Chartprop {
 }
 
 const Charts = () => {
-    const MockScore = require('../../mocks/result.json');
-    const chartScore = MockScore.map((key: { score: any }) => key.score);
-    const chartSkill = Object.keys(MockScore).map((key) => MockScore[key].skill);
+    //--------------- FETCHING SCORE & SKILL DATA USING SWR ---------------//
+    const { data: resultData, error } = useSWR('http://localhost:5000/user/result');
+    const isLoading = !resultData && !error;
 
     const [chartValue, setchartValue] = useState<Chartprop>({
         series: [
             {
                 name: 'Skill',
-                data: chartScore,
+                data: resultData?.map((key: { score: number }) => key.score),
             },
         ],
         options: {
@@ -42,20 +43,20 @@ const Charts = () => {
                 },
             },
             xaxis: {
-                categories: chartSkill,
+                categories: resultData?.map((key: { skill: string }) => key.skill),
             },
         },
     });
-
     useEffect(() => {
-        console.log(chartValue.options);
-    }, []);
-
+        if (!isLoading) {
+            setchartValue(chartValue);
+        }
+    }, [chartValue]);
     return (
         <>
             <div>
                 <TextHeaderResult>แผนภูมิพหุปัญญา</TextHeaderResult>
-                <ChartStyled options={chartValue.options} series={chartValue.series} type="radar" />
+                {isLoading ? <div>is loading </div> : <ChartStyled options={chartValue.options} series={chartValue.series} type="radar" />}
             </div>
         </>
     );

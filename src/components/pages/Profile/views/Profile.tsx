@@ -1,13 +1,11 @@
 import { useHistory } from 'react-router-dom';
-import { ApiGetUserData } from '../apis/profile.api';
 import { Col, Row } from 'antd';
 import { useEffect } from 'react';
-import { IIconTextProfile, IListDataBoardHistory, IUser } from '../shared/Profile.interface';
-import { CalendarOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
-import { useState } from 'react';
+import Container from 'components/Container/Container';
+import useSWR from 'swr';
+import { Box, ButtonStyle } from 'shared/style/theme/component';
 import ProfileMascot from '../../Profile/images/ProfileMascot.png';
 import {
-    ContainerProfile,
     TextUserInfo1,
     TextUserInfo2,
     TextUsername,
@@ -22,56 +20,17 @@ import {
     HistoryText,
     RowStyled,
     BoardCard,
+    CommentIcon,
+    HeartIcon,
 } from '../shared/Profile.styles';
-import Container from 'components/Container/Container';
-import React from 'react';
-import useSWR from 'swr';
-import axios from 'axios';
-import { Box, ButtonStyle } from 'shared/style/theme/component';
 
 function Profile() {
     const history = useHistory();
-    const [userInfo, setUserInfo] = useState<IUser>({ firstName: '', lastName: '', email: '', username: '' });
-    // async function getStatisticData() {
-    //     const response = await ApiGetUserData();
-    //     //Swr ใช้เป็น custom hook
-    //     if (response) {
-    //         setUserInfo((prevState) => ({
-    //             ...prevState,
-    //             firstName: response.firstName,
-    //             lastName: response.lastName,
-    //             email: response.email,
-    //             username: response.username,
-    //         }));
-    //     } else {
-    //         console.log('error');
-    //     }
-    // }
-    // useEffect(() => {
-    //     getStatisticData();
-    // }, []);
-
-    const listData: Array<IListDataBoardHistory> = [];
-    for (let i = 0; i < 3; i++) {
-        listData.push({
-            href: '/board',
-            title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ${i}`,
-            avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg',
-            description: 'บทความ',
-        });
-    }
     const cardList = [
-        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ' },
-        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ' },
-        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ' },
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
+        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
     ];
-
-    const IconText = ({ icon, text }: IIconTextProfile) => (
-        <div>
-            {React.createElement(icon)}
-            {text}
-        </div>
-    );
 
     const { data, error } = useSWR('http://localhost:5000/user/find');
     const isLoading = !data && !error;
@@ -85,7 +44,6 @@ function Profile() {
     }, [data]);
 
     return (
-        <div>
             <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
                 {error && <div>error </div>}
                 {isLoading ? (
@@ -125,11 +83,11 @@ function Profile() {
                         </RowStyled>
                         <ResultCard onClick={() => history.push('/result')}>
                             <RowStyled>
-                                <Col span={8}>
+                                <Col span={10}>
                                     <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
                                 </Col>
-                                <Col span={14}>
-                                    <CardText>
+                                <Col span={12}>
+                                    <CardText style={{ transform: 'translateY(67%)' }}>
                                         <RowStyled>ลักษณะเด่นของคุณ</RowStyled>
                                         <RowStyled>วันที่ 15 มิ.ย. 2564</RowStyled>
                                     </CardText>
@@ -156,16 +114,33 @@ function Profile() {
                                     }}
                                 >
                                     <RowStyled>
-                                        <Col span={6}>
+                                        <Col span={7}>
                                             <HistoryImage src={item.avatar} />
                                         </Col>
-                                        <Col span={16}>
+                                        <Col span={17}>
                                             <CardText>
                                                 <Row>
                                                     <HistoryText>{item.title}</HistoryText>
                                                 </Row>
                                                 <Row>
                                                     <HistoryText>{item.description}</HistoryText>
+                                                </Row>
+                                                <Row>
+                                                    <Col span={2}>
+                                                        <CommentIcon />
+                                                    </Col>
+                                                    <Col span={10}>
+                                                        <HistoryText>{item.username}</HistoryText>
+                                                    </Col>
+                                                    <Col span={8}>
+                                                        <HistoryText>25 มิ.ย. 2564</HistoryText>
+                                                    </Col>
+                                                    <Col span={2}>
+                                                        <HeartIcon />
+                                                    </Col>
+                                                    <Col span={2}>
+                                                        <HistoryText>12</HistoryText>
+                                                    </Col>
                                                 </Row>
                                             </CardText>
                                         </Col>
@@ -176,7 +151,6 @@ function Profile() {
                     </Box>
                 )}
             </Container>
-        </div>
     );
 }
 export default Profile;
