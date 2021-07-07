@@ -9,18 +9,15 @@ interface Chartprop {
 }
 
 const Charts = () => {
-    //--------------- FETCHING SCORE & SKILL DATA USING SWR ---------------//
-    const [isData, isSetData] = useState<boolean>(false);
+    //--------------- FETCHING SCORE & SKILL DATA USING SWR ---------------/
 
     const { data: resultData, error } = useSWR('http://localhost:5000/user/result');
     const isLoading = !resultData && !error;
 
-    if (resultData && !isData) {
-        isSetData(true);
-    }
-
     useEffect(() => {
-        console.log('result Data', resultData);
+        if(!isLoading){
+            console.log('result Data', resultData);
+        }
     }, [resultData]);
 
     const MockScore = require('../../mocks/result.json');
@@ -67,7 +64,8 @@ const Charts = () => {
         },
     });
     useEffect(() => {
-        if (!isLoading) {
+        if(!isLoading){
+            setchartValue(chartValue)
             console.log('This is chart value', chartValue.series);
         }
     }, [chartValue]);
@@ -75,7 +73,7 @@ const Charts = () => {
         <>
             <div>
                 <TextHeaderResult>แผนภูมิพหุปัญญา</TextHeaderResult>
-                {!isLoading ? <div>loading ...</div> : <ChartStyled options={chartValue.options} series={chartValue.series} type="radar" />}
+                {isLoading ? (<div>loading ...</div>) :( <ChartStyled options={chartValue.options} series={chartValue.series} type="radar" />)}
             </div>
         </>
     );

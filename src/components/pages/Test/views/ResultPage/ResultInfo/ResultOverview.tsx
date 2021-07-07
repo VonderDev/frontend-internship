@@ -33,7 +33,8 @@ function ResultOverview() {
     }, [result]);
     return (
         <>
-            <Chart />
+        {isLoading ? (<div>is loading...</div>) : ( <Chart />)}
+           
             {result?.map((item: any, index: any) => {
                 return (
                     <ContainerProgressScore key={index}>
