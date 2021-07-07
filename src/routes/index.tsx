@@ -1,6 +1,6 @@
 import { Switch, Route } from 'react-router-dom';
 import Home from 'components/pages/Home/view/Home';
-import Board from 'components/pages/Board/views/Board';
+import Board from 'components/pages/Board/views/BoardPage/Board';
 import Profile from 'components/pages/Profile/views/Profile';
 import Login from 'components/pages/Authentication/views/Login/Login';
 import Register from 'components/pages/Authentication/views/Register/Register';
