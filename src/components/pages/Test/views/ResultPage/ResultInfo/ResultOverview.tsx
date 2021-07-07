@@ -8,14 +8,11 @@ import Chart from '../Chart';
 
 function ResultOverview() {
     const history = useHistory();
-    const mockScore = require('../../../mocks/result.json');
-    const scoreList = mockScore.filter((data: { score: number }) => data.score);
     //-------------- CREATE MAX SCORE LIST USE SWR--------------//
     const [isData, isSetData] = useState<boolean>(false);
     const [result, setResultData] = useState<Array<IResult> | null>(null);
 
     const { data: resultData, error } = useSWR('http://localhost:5000/user/result');
-    console.log('[Result Test Game]:', resultData);
     const isLoading = !resultData && !error;
 
     if (resultData && !isData) {
@@ -33,17 +30,17 @@ function ResultOverview() {
     }, [result]);
     return (
         <>
-            <Chart />
+            {isLoading ? <div>loading ...</div> : <Chart />}
             {result?.map((item: any, index: any) => {
                 return (
                     <ContainerProgressScore key={index}>
                         <TextNameSkill>{item.skill}</TextNameSkill>
                         <div>{item.skill_summarize}</div>
-                        <ProgressBar style={{ width: 400 /* height: 8px; */ }} strokeLinecap="square" percent={item.score} />
+                        <ProgressBar style={{ width: 400 }} strokeLinecap="square" percent={item.score} />
                     </ContainerProgressScore>
                 );
             })}
-            <ButtonGoHomeInResult onClick={() => history.push('/result')}>กลับหน้าหลัก</ButtonGoHomeInResult>
+            <ButtonGoHomeInResult onClick={() => history.push('/')}>กลับหน้าหลัก</ButtonGoHomeInResult>
         </>
     );
 }

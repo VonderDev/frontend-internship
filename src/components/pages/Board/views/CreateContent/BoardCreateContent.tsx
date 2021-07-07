@@ -38,11 +38,13 @@ function BoardCreateContent() {
     useEffect(() => {
         console.log('[Content data]:', contentData);
     }, [contentData]);
+
     //----------------- CREATE VARIABLE FOR MAP CATEGORY BOARD -----------------//
     const categoryContentList = [
         { value: 'บทความ', label: 'บทความ' },
         { value: 'คำถาม', label: 'คำถาม' },
     ];
+
     //----------------- CREATE FUNCTION UPLOAD IMAGE -----------------//
     const [defaultFileList, setDefaultFileList] = useState([]);
 

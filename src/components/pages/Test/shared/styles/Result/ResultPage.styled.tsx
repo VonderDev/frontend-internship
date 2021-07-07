@@ -282,3 +282,19 @@ export const DescriptionText = styled.div`
     align-items: center;
     justify-content: center;
 `;
+
+export const ButtonGoHomeInResultFeature = styled(Button)`
+    border-radius: 12px;
+    font-weight: bolder;
+    color: white;
+    background-color: var(--Blue-400);
+    transform: translateY(-90%);
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+`;

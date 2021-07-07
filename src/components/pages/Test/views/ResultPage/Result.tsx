@@ -17,6 +17,7 @@ import { IResult } from '../../shared/interface/Result.interfaces';
 
 const Result = () => {
     const history = useHistory();
+
     //-------------- CREATE MAX SCORE LIST USE SWR--------------//
     const [isData, isSetData] = useState<boolean>(false);
     const [result, setResultData] = useState<Array<IResult> | null>(null);
@@ -27,13 +28,12 @@ const Result = () => {
 
     if (resultData && !isData) {
         isSetData(true);
-        const chartScoreReal = Object.keys(resultData).map((key) => resultData[key].score);
-        const maxScoreListReal = resultData.filter((data: { score: number }) => data.score === Math.max(...chartScoreReal));
-        setResultData(maxScoreListReal); // store all question into the hook
-        console.log('[max Score List from useSWR]', maxScoreListReal);
+        const chartScore = Object.keys(resultData).map((key) => resultData[key].score);
+        const maxScoreList = resultData.filter((data: { score: number }) => data.score === Math.max(...chartScore));
+        setResultData(maxScoreList);
     }
 
-    const download = () => {
+    const downloadImage = () => {
         var element = document.createElement('a');
         var file = new Blob(['https://cdn.discordapp.com/attachments/821804175767764995/857648803897540678/Nature.png'], { type: 'image/*' });
         element.href = URL.createObjectURL(file);
@@ -72,7 +72,7 @@ const Result = () => {
                                     <ImageCharactorCarousel src={item.image_charactor} />
                                     <TextSkillName>{item.skill}</TextSkillName>
                                     <TextSkillSummarize>{item.skill_summarize}</TextSkillSummarize>
-                                    <ButtonSaveResult href={item.image_charactor} download onClick={() => download()}>
+                                    <ButtonSaveResult href={item.image_charactor} download onClick={() => downloadImage()}>
                                         <UploadOutlined />
                                         บันทึกผลลัพธ์
                                     </ButtonSaveResult>
