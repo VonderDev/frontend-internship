@@ -7,7 +7,7 @@ export async function API_Login_Data() {
    return mockData as unknown as Array<ILogin>
 }
 
-export async function API_PostDataUser(data : any) {
+export async function ApiPostDataUser(data : any) {
     console.log(data);
     try {
         await axios.post('http://localhost:5000/signup', data)
@@ -17,7 +17,8 @@ export async function API_PostDataUser(data : any) {
         console.log("error from api message : " , error.response.message);
         console.log(error)
         if(error.response.status === 500) {
-            console.log("มีชื่อผู้ใช้งานหรืออีเมลนี้แล้ว");
+            console.log(error.response);
+            alert('มีผู้ใช้งงานนี้แล้ว')
         }
         return error
     }
