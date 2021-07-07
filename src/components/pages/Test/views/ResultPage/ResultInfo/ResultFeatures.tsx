@@ -30,7 +30,7 @@ const ResultFeatures = () => {
             skill: maxScoreDefault.skill,
             image_charactor: maxScoreDefault.image_charactor,
             description: maxScoreDefault.description,
-            description_career: maxScoreDefault.description,
+            description_career: maxScoreDefault.description_career,
         });
         console.log('[max Score List from useSWR]', maxScoreList);
     }
