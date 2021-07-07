@@ -4,32 +4,24 @@ import { useHistory } from 'react-router';
 import { ApiPostDataUser } from "../../apis/user.api";
 import { ButtonStyle, InputStyle } from "shared/style/theme/component";
 import { FormItemTextValidate, FormLogin } from "../../shared/style";
-
+import { Form } from 'antd';
 export const RegisterForm = () => {
 
+    const [form] = Form.useForm();
     const history = useHistory();
     const [userData, setUserData] = useState<ILogin>({ firstName: '', lastName: '', email: '', username: '', password: '' });
-
     async function RegisterUser() {
         if (userData.username && userData.firstName && userData.lastName && userData.email && userData.password) {
             try {
                 const response = await ApiPostDataUser(userData)
                 console.log("API response :", response)
                 if(response.message){
-                    console.log("มีผู้ใช้งานหรืออีเมลนี้แล้ว");
-                    setUserData({
-                        username: '',
-                        firstName: '',
-                        lastName: '',
-                        email: '',
-                        password: ''
-                    })
+                    form.resetFields();
                     history.push("/register");
                 } else {
                     history.push("/login");
                 }
             } catch (error) {
-                console.log("error : ", error.response.message)
                 console.log("Stay still in register")
                 history.push("/register");
             }
@@ -40,15 +32,14 @@ export const RegisterForm = () => {
 
     const handleOnChange = (name: string, value: string) => {
         setUserData((prev) => ({ ...prev, [name]: value }));
-        // setUserData({name : value});
+        // setUserData(value)
     };
 
     return (
-
-        <FormLogin layout="horizontal">
+        <FormLogin form={form} layout="horizontal">
             <FormItemTextValidate name="username" rules={[{ required: true, message: 'กรุณากรอกชื่อผู้ใช้' }]} >
                 <InputStyle sizeinput={100} type="text" name="username" value={userData.username}
-                    placeholder="ชื่อผู้ใช้" onChange={({ target: { value, name } }) => { handleOnChange(name, value) }} />
+                    placeholder="ชื่อผู้ใช้" onChange={({ target: { value, name } }) => { handleOnChange(name ,value) }} />
             </FormItemTextValidate>
 
             <FormItemTextValidate name="firstname" rules={[{ required: true, message: 'กรุณากรอกชื่อจริง' }]} >
