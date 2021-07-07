@@ -9,7 +9,7 @@ import { ButtonSeeAllResults, TextQuestionIndex } from '../../shared/styles/Test
 
 function TestStory() {
     const history = useHistory();
-    const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ questionIndex: 0, questionBody: '', categoryIndex: 0 });
+    const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ questionIndex: 0, questionBody: '', category_id: 0 });
     const [currentQuestion, setCurrentQuestion] = useState<number>(0);
     const [questionList, setQuestionList] = useState<Array<IQuestion> | null>(null);
 

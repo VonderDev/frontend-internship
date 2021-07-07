@@ -1,6 +1,5 @@
 import { Switch, Route } from 'react-router-dom';
 import Home from 'components/pages/Home/view/Home';
-import BoardCreateContent from 'components/pages/Board/views/CreateContent/BoardCrateContent';
 import Profile from 'components/pages/Profile/views/Profile';
 import Login from 'components/pages/Authentication/views/Login/Login';
 import Register from 'components/pages/Authentication/views/Register/Register';
@@ -18,6 +17,7 @@ import ResultInfo from 'components/pages/Test/views/ResultPage/ResultInfo/Result
 import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion';
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
+import BoardCreateContent from 'components/pages/Board/views/CreateContent/BoardCreateContent';
 
 function Routing() {
     return (
