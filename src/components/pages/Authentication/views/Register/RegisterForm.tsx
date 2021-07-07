@@ -2,12 +2,8 @@ import { useState, useCallback } from "react";
 import { ILogin } from "../../shared/login.interface";
 import { useHistory } from 'react-router';
 import { API_PostDataUser } from "../../apis/user.api";
-import { useEffect } from "react";
 import { ButtonStyle, InputStyle } from "shared/style/theme/component";
 import { FormItemTextValidate, FormLogin } from "../../shared/style";
-import axios from "axios";
-import useSWR from "swr";
-import { ApiGetUserData } from "components/pages/Profile/apis/profile.api";
 
 export const RegisterForm = () => {
 
@@ -16,16 +12,15 @@ export const RegisterForm = () => {
 
     async function PostUser() {
         if (userData.username && userData.firstName && userData.lastName && userData.email && userData.password) {
-            try {
-                API_PostDataUser(userData);
-                console.log("new User is : " ,userData);
-                console.log("Go to login")
+            const response = await API_PostDataUser(userData)
+            if(response){
                 history.push("/login");
-            } catch (error) {
-                console.log(error);
-                console.log("API failed");
-                return error.message;
+                console.log("Go to login [from api]")
+            } else {
+                
             }
+        } else {
+            console.log("ไม่ได้กรอก")
         }
     }
 
@@ -45,7 +40,7 @@ export const RegisterForm = () => {
             </FormItemTextValidate>
 
             <FormItemTextValidate name="lastname" rules={[{ required: true, message: 'กรุณากรอกนามสกุล' }]} >
-                <InputStyle sizeinput={100} type="text" name="lastName" value={userData.lastName} placeholder="นามสกุล" onChange={({ target: { value,name } }) => { handleOnChange(name, value) }} />
+                <InputStyle sizeinput={100} type="text" name="lastName" value={userData.lastName} placeholder="นามสกุล" onChange={({ target: { value, name } }) => { handleOnChange(name, value) }} />
             </FormItemTextValidate>
 
             <FormItemTextValidate name="email" rules={[{ required: true, message: 'กรุณากรอกอีเมล' }]} >
@@ -53,7 +48,7 @@ export const RegisterForm = () => {
             </FormItemTextValidate>
 
             <FormItemTextValidate name="password" rules={[{ required: true, message: 'กรุณากรอกรหัสผ่าน' }]} >
-                <InputStyle sizeinput={100} type="password" name="password" value={userData.password} placeholder="รหัสผ่าน" onChange={({ target: { value,name } }) => { handleOnChange(name, value) }} />
+                <InputStyle sizeinput={100} type="password" name="password" value={userData.password} placeholder="รหัสผ่าน" onChange={({ target: { value, name } }) => { handleOnChange(name, value) }} />
             </FormItemTextValidate>
 
             <FormItemTextValidate name="confirm"
