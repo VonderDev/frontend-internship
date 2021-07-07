@@ -1,17 +1,17 @@
 import { useHistory } from 'react-router-dom';
-import { Children, createContext, useCallback, useEffect, useState, useContext, useMemo } from 'react';
+import { Children, createContext, useCallback, useEffect, useState, useContext, useMemo, memo } from 'react';
 import { Row, Col } from 'antd';
 import { BackHeader, LeftDiv, RightDiv, RowHeader, TextHeader } from './Header.styled';
 import { LeftOutlined, MenuOutlined, DownloadOutlined } from '@ant-design/icons';
-import Hamburger from '../pages/Burger/Burger';
+import Burger  from '../pages/Burger/Burger';
 
 interface HeaderProps {
-    children: any;
+    title: string;
     right: string;
     left: string;
 }
 
-const Header = ({ children, right, left }: HeaderProps) => {
+const Header = memo(({ title, right, left }: HeaderProps) => {
     const history = useHistory();
 
     const goBack = useCallback(() => {
@@ -28,13 +28,13 @@ const Header = ({ children, right, left }: HeaderProps) => {
         } else {
             return left;
         }
-    }, []);
+    }, [left]);
 
     const rightCon = useMemo(() => {
         if (right === 'menu') {
             return (
                 <>
-                    <Hamburger />
+                    <Burger  />
                 </>
             );
         } else if (right === 'save') {
@@ -46,30 +46,23 @@ const Header = ({ children, right, left }: HeaderProps) => {
         } else {
             return right;
         }
-    }, []);
+    }, [right]);
 
     return (
         <>
-        <RowHeader justify="space-between">
-            <Col span={4}>
-                <LeftDiv>
-                {leftCon}
-                </LeftDiv>
-            </Col>
-            <Col span={16}>
-                <TextHeader>
-                    {children}
-                </TextHeader>
-
-            </Col>
-            <Col span={4}>
-                <RightDiv >
-                {rightCon}
-                </RightDiv >
-            </Col>
-        </RowHeader>
+            <RowHeader justify="space-between">
+                <Col span={4}>
+                    <LeftDiv>{leftCon}</LeftDiv>
+                </Col>
+                <Col span={16}>
+                    <TextHeader>{title}</TextHeader>
+                </Col>
+                <Col span={4}>
+                    <RightDiv>{rightCon}</RightDiv>
+                </Col>
+            </RowHeader>
         </>
     );
-};
+});
 
 export default Header;

@@ -7,7 +7,6 @@ import { CalendarOutlined, ControlOutlined, SearchOutlined, FormOutlined, HeartF
 import {
     SearchField,
     ImageTestPage,
-    TextBoard,
     ButtonSeeAllBoard,
     ListItemBoard,
     ListBoard,
@@ -18,6 +17,7 @@ import {
     TextTopicOnImageTest,
     ButtonReadOverviewTest,
     ImgBoardList,
+    TextBoardTopic,
 } from '../shared/homepage.styles';
 import { tagsData, IListData, IIconText } from '../shared/home.interface';
 import gamePreview from '../shared/images/gamepreview.png';
@@ -67,7 +67,7 @@ function Home() {
 
     return (
         <div>
-            <Container header={{ children: 'Vonder Me', right: 'menu' }}>
+            <Container header={{ title: 'Vonder Me', right: 'menu' }}>
                 {/* <SearchField>
                     <InputSearch onClick={onSearch} placeholder="Search Form" prefix={<SearchOutlined />} />
                     <ButtonFilter icon={<ControlOutlined />} />
@@ -86,9 +86,9 @@ function Home() {
                     </Col>
                 </ImageTestPage>
                 <Row>
-                    <TextBoard xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+                    <TextBoardTopic xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
                         กระทู้
-                    </TextBoard>
+                    </TextBoardTopic>
                     <ButtonSeeAllBoard onClick={() => history.push('/board')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
                 </Row>
                 <ListBoard

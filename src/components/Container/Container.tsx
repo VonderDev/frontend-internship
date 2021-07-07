@@ -1,6 +1,7 @@
 import Header from './Header';
 import styled from 'styled-components';
 import { Layout } from 'antd';
+import { memo } from 'react';
 
 interface ContainerProps {
     children: any;
@@ -29,13 +30,13 @@ const MainContent = styled(Content)<BodyProps>`
     overflow-y: scroll;
 `;
 
-const Container = ({ children, header }: ContainerProps) => {
+const Container = memo(({ children, header }: ContainerProps) => {
     return (
         <AppContainer>
             {header && <Header {...header} />}
             <MainContent isheader={header ? 'true' : 'false'}> {children}</MainContent>
         </AppContainer>
     );
-};
+});
 
 export default Container;

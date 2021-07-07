@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Container from 'components/Container/Container';
-import { ContainerTestStoryPage, TextStory } from '../../shared/styles/TestStory.styled';
+import { ContainerTestStoryPage, TextStory } from '../../shared/styles/Test/TestStory.styled';
 import { useHistory } from 'react-router-dom';
-import { IQuestion, IUserAns } from '../../shared/interface/Test.interfaces';
-import { API_GetTestData } from '../../apis/test.api';
+import { IQuestion } from '../../shared/interface/Test.interfaces';
+import { ApiGetTestData } from '../../apis/test.api';
 import { Col, Modal } from 'antd';
-import { ButtonStartOver, TextQuestionIndex } from '../../shared/styles/TestQuestion.styled';
+import { ButtonSeeAllResults, TextQuestionIndex } from '../../shared/styles/Test/TestQuestion.styled';
 
 function TestStory() {
     const history = useHistory();
-    const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ categoryID: 0, question: '', questionIndex: 0 });
+    const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ questionIndex: 0, questionBody: '', categoryIndex: 0 });
     const [currentQuestion, setCurrentQuestion] = useState<number>(0);
     const [questionList, setQuestionList] = useState<Array<IQuestion> | null>(null);
 
@@ -19,7 +19,7 @@ function TestStory() {
     }, [currentQuestion, questionList]);
 
     async function getTestData() {
-        const response = await API_GetTestData();
+        const response = await ApiGetTestData();
         if (response) {
             setQuestionList(response); // store all question into the hook
             const resp = response;
@@ -61,9 +61,9 @@ function TestStory() {
                     <TextQuestionIndex>
                         คำถามข้อที่ {currentQuestion + 1}/{questionList?.length}
                     </TextQuestionIndex>
-                    <ButtonStartOver type="primary" onClick={showModal}>
+                    <ButtonSeeAllResults type="primary" onClick={showModal}>
                         เริ่มใหม่{' '}
-                    </ButtonStartOver>
+                    </ButtonSeeAllResults>
                 </Col>
                 <Modal visible={visible} okText="เริ่มใหม่" cancelText="ยกเลิก" onOk={handleOk} width={400} confirmLoading={confirmLoading} onCancel={handleCancel}>
                     ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?

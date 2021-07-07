@@ -1,42 +1,41 @@
-import { useState, useEffect, useCallback } from 'react';
-import { API_Profile_Data } from '../apis/profile.api';
-import { IProfile } from '../shared/Profile.interface';
+import { useEffect, useState } from 'react';
 import { BackHeader } from 'components/Container/Header.styled';
-import {
-    ContainerProfile,
-    AlignCenter,
-    ButtonSave,
-    FormInput,
-    UserImage,
-    TextTopicEditProfile,
-    AlignRight,
-    ConfirmModal,
-    ButtonLeaveModal,
-    ButtonCancleModal,
-    TextModal,
-    TextUserInfo2,
-} from '../shared/Profile.styles';
+import { ConfirmModal, ButtonLeaveModal, ButtonCancleModal, TextHeadModal, TextBodyModal, ButtonSave, TextTopicEditProfile, UserImage } from '../shared/Profile.styles';
 import { LeftOutlined } from '@ant-design/icons';
 import Container from 'components/Container/Container';
-import { Button } from 'antd';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { Form } from 'antd';
+import { ApiGetUserData, ApiPutUserData } from '../apis/profile.api';
+import { IUser } from '../shared/Profile.interface';
+import ProfileMascot from '../../Profile/images/ProfileMascot.png';
+import { Box, InputStyle } from 'shared/style/theme/component';
+const EditProfile = () => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+    const history = useHistory();
 
-function EditProfile() {
-    const [cred, setCred] = useState<IProfile>({ name: '', surname: '', email: '', result: '', pic: '', username: '' });
-
-    const handleOnChange = (name: string, value: string) => {
-        setCred((prev) => ({ ...prev, [name]: value }));
-        console.log(cred.username);
+    const handleOk = () => {
+        history.goBack();
+        setIsModalVisible(false);
     };
 
-    const editedUser = () => {
-        console.log(cred);
-    };
-
+    const [userInfo, setUserInfo] = useState<IUser>({ firstName: '', lastName: '', email: '', username: '' });
     async function getStatisticData() {
-        const response = await API_Profile_Data();
+        const response = await ApiGetUserData();
+        //Swr ใช้เป็น custom hook
         if (response) {
-            setCred((prevState) => ({ ...prevState, name: response.name, surname: response.surname, email: response.email, result: response.result, pic: response.pic, username: response.username }));
+            setUserInfo((prevState) => ({
+                ...prevState,
+                firstName: response.firstName,
+                lastName: response.lastName,
+                email: response.email,
+                username: response.username,
+            }));
         } else {
             console.log('error');
         }
@@ -45,100 +44,116 @@ function EditProfile() {
         getStatisticData();
     }, []);
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
-    const showModal = () => {
-        setIsModalVisible(true);
+    const handleOnChange = (name: string, value: string) => {
+        setUserInfo((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleOk = () => {
-        setIsModalVisible(false);
+    const putDataOnClick = () => {
+        if (userInfo.username === '') {
+            alert('กรุณากรอกชื่อผู้ใช้!');
+        } else if (userInfo.firstName === '') {
+            alert('กรุณากรอกชื่อจริง!');
+        } else if (userInfo.lastName === '') {
+            alert('กรุณากรอกนามสกุล!');
+        } else {
+            ApiPutUserData(userInfo);
+            setTimeout(() => {
+                history.push('/profile');
+            }, 1200);
+        }
+        console.log(typeof userInfo.username);
     };
-
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
-
-    const history = useHistory();
-
-    const goBack = useCallback(() => {
-        history.goBack();
-    }, []);
 
     return (
-        <Container
-            header={{
-                left: (
-                    <BackHeader onClick={showModal}>
-                        <LeftOutlined style={{ color: '#8a8888' }} />
-                    </BackHeader>
-                ),
-                children: 'แก้ไขข้อมูลส่วนตัว',
-                right: <ButtonSave onClick={editedUser}>บันทึก</ButtonSave>,
-            }}
-        >
-            <AlignRight>
-                <ButtonSave onClick={editedUser}>บันทึก</ButtonSave>
-            </AlignRight>
-            <AlignCenter key={1}>
-                <ConfirmModal
-                    visible={isModalVisible}
-                    onOk={handleOk}
-                    onCancel={handleCancel}
-                    title={[<TextModal>ออกจากหน้านี้?</TextModal>]}
-                    footer={[<ButtonLeaveModal onClick={goBack}>ออก</ButtonLeaveModal>, <ButtonCancleModal onClick={handleCancel}>ยกเลิก</ButtonCancleModal>]}
-                >
-                    <TextUserInfo2>การเปลี่ยนแปลงทั้งหมดจะไม่ถูกบันทึก</TextUserInfo2>
-                </ConfirmModal>
-            </AlignCenter>
-            <ContainerProfile>
-                <AlignCenter>
-                    <UserImage src={cred.pic} />
-                </AlignCenter>
-                <TextTopicEditProfile>ชื่อผู้ใช้</TextTopicEditProfile>
-                <AlignCenter>
-                    <FormInput
-                        name="username"
-                        value={cred.username}
-                        onChange={({ target: { value, name } }) => {
-                            handleOnChange(name, value);
-                        }}
-                    />
-                </AlignCenter>
-                <TextTopicEditProfile>ชื่อจริง</TextTopicEditProfile>
-                <AlignCenter>
-                    <FormInput
-                        name="name"
-                        value={cred.name}
-                        onChange={({ target: { value, name } }) => {
-                            handleOnChange(name, value);
-                        }}
-                    />
-                </AlignCenter>
-                <TextTopicEditProfile>นามสกุล</TextTopicEditProfile>
-                <AlignCenter>
-                    <FormInput
-                        name="surname"
-                        value={cred.surname}
-                        onChange={({ target: { value, name } }) => {
-                            handleOnChange(name, value);
-                        }}
-                    />
-                </AlignCenter>
-                <TextTopicEditProfile>อีเมล</TextTopicEditProfile>
-                <AlignCenter>
-                    <FormInput
-                        name="email"
-                        value={cred.email}
-                        onChange={({ target: { value, name } }) => {
-                            handleOnChange(name, value);
-                        }}
-                        disabled
-                    />
-                </AlignCenter>
-            </ContainerProfile>
-        </Container>
+        <>
+            <ConfirmModal
+                visible={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                title={<TextHeadModal>ออกจากหน้านี้?</TextHeadModal>}
+                footer={[
+                    <ButtonLeaveModal key="back" onClick={handleOk}>
+                        ออก
+                    </ButtonLeaveModal>,
+                    <ButtonCancleModal key="submit" onClick={handleCancel}>
+                        ยกเลิก
+                    </ButtonCancleModal>,
+                ]}
+            >
+                <TextBodyModal>การเปลี่ยนแปลงทั้งหมดจะไม่ถูกบันทึก</TextBodyModal>
+            </ConfirmModal>
+            <Container
+                header={{
+                    left: (
+                        <BackHeader onClick={showModal}>
+                            <LeftOutlined style={{ color: '#8a8888' }} />
+                        </BackHeader>
+                    ),
+                    title: 'แก้ไขข้อมูลส่วนตัว',
+                    right: (
+                        <ButtonSave htmlType="submit" onClick={putDataOnClick}>
+                            บันทึก
+                        </ButtonSave>
+                    ),
+                }}
+            >
+                <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
+                    <UserImage src={ProfileMascot} />
+                    <TextTopicEditProfile>ชื่อผู้ใช้</TextTopicEditProfile>
+                    <Form>
+                        <Form.Item rules={[{ required: true, message: 'กรุณาใส่ชื่อผู้ใช้!' }]}>
+                            <InputStyle
+                                type="text"
+                                typeinput="Large"
+                                name="username"
+                                value={userInfo.username}
+                                onChange={({ target: { value, name } }) => {
+                                    handleOnChange(name, value);
+                                }}
+                            />
+                        </Form.Item>
+                        <TextTopicEditProfile>ชื่อจริง</TextTopicEditProfile>
+                        <Form.Item rules={[{ required: true, message: 'กรุณาใส่ชื่อจริง!' }]}>
+                            <InputStyle
+                                type="text"
+                                typeinput="Large"
+                                name="firstName"
+                                value={userInfo.firstName}
+                                onChange={({ target: { value, name } }) => {
+                                    handleOnChange(name, value);
+                                }}
+                            />
+                        </Form.Item>
+                        <TextTopicEditProfile>นามสกุล</TextTopicEditProfile>
+                        <Form.Item rules={[{ required: true, message: 'กรุณาใส่นามสกุล!' }]}>
+                            <InputStyle
+                                type="text"
+                                typeinput="Large"
+                                name="lastName"
+                                value={userInfo.lastName}
+                                onChange={({ target: { value, name } }) => {
+                                    handleOnChange(name, value);
+                                }}
+                            />
+                        </Form.Item>
+                        <TextTopicEditProfile>อีเมล</TextTopicEditProfile>
+                        <Form.Item rules={[{ required: true, message: 'กรุณาใส่อีเมล!' }]}>
+                            <InputStyle
+                                type="text"
+                                typeinput="Large"
+                                name="email"
+                                value={userInfo.email}
+                                onChange={({ target: { value, name } }) => {
+                                    handleOnChange(name, value);
+                                }}
+                                disabled
+                            />
+                        </Form.Item>
+                    </Form>
+                </Box>
+            </Container>
+        </>
     );
-}
+};
 
 export default EditProfile;

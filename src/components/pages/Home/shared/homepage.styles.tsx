@@ -40,7 +40,7 @@ export const ButtonTagFilter = styled(Button)`
 export const ImageTestPage = styled.div`
     background-image: url(${gamePreviewImg});
     transition: 0.5s ease;
-    margin-top: 40px;
+    margin-top: 0;
     border-radius: 10px;
     height: 250px;
     background-position: center;
@@ -94,12 +94,14 @@ export const TextTopicOnImageTest = styled.div`
     padding-top: 15px;
     margin-bottom: 140px;
 `;
-export const TextBoard = styled(Col)`
+export const TextBoardTopic = styled(Col)`
     font-weight: bolder;
     font-size: 20px;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    display: flex;
     flex-direction: column;
+    padding-left: 5%;
+    margin-top: 15px;
+    margin-bottom: 15px;
 `;
 
 export const ButtonSeeAllBoard = styled.div`
@@ -108,7 +110,7 @@ export const ButtonSeeAllBoard = styled.div`
     width: 100px;
     font-weight: bolder;
     font-size: 15px;
-    padding-top: 25px;
+    padding-top: 20px;
     display: flex;
     transform: translateX(280%);
 

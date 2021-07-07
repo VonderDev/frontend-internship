@@ -1,73 +1,73 @@
 import { createContext, useEffect, useState, useContext, useCallback } from "react";
-import { Redirect, Router, useHistory } from "react-router-dom";
-import authMock from './Authmock.json'
+import { Redirect } from "react-router-dom";
 import { authData } from "./User.type";
 import axios from 'axios'
 
   interface IAuthProps {
     children: any 
     }
-interface datauser {
-      name: string | null
-  }
-  
+
     const AuthContext = createContext<any>(null);
-
-
     const AuthProvider =  (({children}: IAuthProps) => {
-    const [loginUser, setLoginUser] = useState<boolean>(false)
-    const [user ,setUser] = useState<datauser>({name: ''}) ;
-    const history = useHistory();
-    
-    const login =  useCallback( ({email, password}: authData) => 
-    {
-    if (email &&  password){
+    const [user ,setUser] = useState<any | null >() ;
+    const [token ,setToken] = useState<any | null >() ;
 
-      const accessLogin = password === authMock.password && email === authMock.email
+    const getUser = async() =>{
+      const token = localStorage.getItem('token');
+      try{
+        const {data}  = await axios.get('http://localhost:5000/user/find',
+          { headers :{
+          Authorization : `Bearer ${token}`
+          }})
+            return data;
+      }catch(err){
+        console.error(err);
+      }
+  }
+
+    const login = ({email, password}: authData) => 
+    {
       console.log('props: ',{email, password});
-        
-          if(accessLogin){
-            const data = JSON.stringify(authMock)
-            setUser(JSON.parse(data))
-            localStorage.setItem('accesstoken', "00215484");
-            const tokenKey = localStorage.getItem('accesstoken') || '';
-            tokenKey ? setLoginUser(true) : setLoginUser(false);
-            
-          }else {
-            alert('ไม่ผู้ใช้นี้ อีเมลหรือรหัสผ่านไม่ถูกต้อง')
-            console.log('Failed login');
-          }
-    }else{
-      return false;
-    }
-        },[loginUser , user],)
+      return axios.post('http://localhost:5000/login', {email ,password }
+      ).then((response)=>{
+        if (response.data.token)
+        localStorage.setItem('token', response.data.token);
+        setToken(localStorage.getItem('token'))
+        setUser(response.data.resuit)
+        return user
+      }).catch(err => {
+        console.error(err)
+        alert('อีเมลและรหัสผ่านที่คุณกรอกไม่ตรงกับข้อมูลในระบบ \nโปรดตรวจสอบและลองอีกครั้ง')
+        console.log('Failed login');
+      });
+        };
 
     const gotoLogin = () =>{
       return  <Redirect to='/login'/>
     }
-
     const logout = () => {
-        setLoginUser(false)
-        setUser({name: ''})
-        localStorage.removeItem('accesstoken')
+        localStorage.removeItem('token')
+        setToken(localStorage.getItem('token'))
+        setUser(undefined)
     }
-    // const data = JSON.stringify(authMock)
-    // setUser(JSON.parse(data))
-
+  
+    console.log('user',user)
     useEffect(() => {
-      const tokenKey = localStorage.getItem('accesstoken');
-      if (!tokenKey) {
+      const tokenkey = localStorage.getItem('token');
+      if (tokenkey ) {
+        console.log('token' , tokenkey)
+      }else{
         gotoLogin
       }
-      console.log('Data' ,user)
-       }, [ user,loginUser]);
+       }, []);
 
     return (
       <AuthContext.Provider value= {{
-        loginUser,
         login,
         logout,
-        user
+        user,
+        token,
+        getUser
       }}>
            {children}
         </AuthContext.Provider>
