@@ -20,6 +20,7 @@ import BoardHistory from 'components/pages/Profile/views/BoardHistory';
 import BoardCreateContent from 'components/pages/Board/views/CreateContent/BoardCreateContent';
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
 
+import TestPixi from 'components/GameElement/Game/testpixi';
 
 function Routing() {
     return (
@@ -46,6 +47,7 @@ function Routing() {
             <PrivateRoute exact path="/profileresult" component={ProfileResult} />
             <PrivateRoute exact path="/boardhistory" component={BoardHistory} />
             <Route exact path="/teststyle" component={TestStyle} />
+            <Route exact path="/pixi" component={TestPixi} />
         </Switch>
     );
 }

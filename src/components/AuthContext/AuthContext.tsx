@@ -51,7 +51,6 @@ import axios from 'axios'
         setUser(undefined)
     }
   
-    console.log('user',user)
     useEffect(() => {
       const tokenkey = localStorage.getItem('token');
       if (tokenkey ) {
