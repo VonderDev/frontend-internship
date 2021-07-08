@@ -10,7 +10,7 @@ const ResultFeatures = () => {
     //---------------- FETCHING RESULT DATA USE SWR ----------------//
     const [result, setResultData] = useState<Array<IResult> | null>(null);
     const [isData, isSetData] = useState<boolean>(false);
-    const { data: resultData, error } = useSWR('http://localhost:5000/user/result');
+    const { data: resultData, error } = useSWR('http://18.139.108.242:5000/user/result');
     const isLoading = !resultData && !error;
 
     const [detailCharacter, setDetailCharacter] = useState<IResult>({
