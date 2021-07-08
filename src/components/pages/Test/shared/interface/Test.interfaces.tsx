@@ -1,6 +1,6 @@
 export interface IQuestion {
     questionIndex: number;
-    categoryIndex: number;
+    category_id: number;
     questionBody: string;
 }
 

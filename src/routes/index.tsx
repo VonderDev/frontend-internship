@@ -16,14 +16,16 @@ import TestStory from 'components/pages/Test/views/TestStartPage/TestStory';
 import ResultOverview from 'components/pages/Test/views/ResultPage/ResultInfo/ResultOverview';
 import ResultInfo from 'components/pages/Test/views/ResultPage/ResultInfo/ResultInfo';
 import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion';
-import ProfileResult from 'components/pages/Profile/views/ProfileResult';
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
+import BoardCreateContent from 'components/pages/Board/views/CreateContent/BoardCreateContent';
+import ProfileResult from 'components/pages/Profile/views/ProfileResult';
+
 
 function Routing() {
     return (
         <Switch>
             <Route exact path="/" component={Home} />
-            <PrivateRoute exact path="/board" component={Board} />
+            <PrivateRoute exact path="/boardcreate" component={BoardCreateContent} />
             <PrivateRoute exact path="/profile" component={Profile} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />

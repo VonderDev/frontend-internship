@@ -23,7 +23,7 @@ function TestQuestion() {
     // ─── Set variable ───────────────────────────────────────────────────────────────────
     //
     const history = useHistory();
-    const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ questionIndex: 0, questionBody: '', categoryIndex: 0 });
+    const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ questionIndex: 0, questionBody: '', category_id: 0 });
     const [currentQuestion, setCurrentQuestion] = useState<number>(0);
     const [questionList, setQuestionList] = useState<Array<IQuestion> | null>(null);
     const [isSWRTriggered, isSetSWRTriggered] = useState<boolean>(false);
@@ -61,7 +61,7 @@ function TestQuestion() {
     async function onNextQuestion(value: number) {
         console.log('[Debug]: score == ' + value);
         let newTestScore = testScore;
-        newTestScore.push({ categoryId: currentQuestionDetail.categoryIndex, score: value });
+        newTestScore.push({ categoryId: currentQuestionDetail.category_id, score: value });
         setTestScore(newTestScore);
 
         if (!questionList) return;

@@ -15,7 +15,7 @@ import axios from 'axios'
     const getUser = async() =>{
       const token = localStorage.getItem('token');
       try{
-        const {data}  = await axios.get('http://localhost:5000/user/find',
+        const {data}  = await axios.get('/user/find',
           { headers :{
           Authorization : `Bearer ${token}`
           }})
@@ -28,7 +28,7 @@ import axios from 'axios'
     const login = ({email, password}: authData) => 
     {
       console.log('props: ',{email, password});
-      return axios.post('http://localhost:5000/login', {email ,password }
+      return axios.post('/login', {email ,password }
       ).then((response)=>{
         if (response.data.token)
         localStorage.setItem('token', response.data.token);
@@ -37,7 +37,7 @@ import axios from 'axios'
         return user
       }).catch(err => {
         console.error(err)
-        alert('ไม่ผู้ใช้นี้ อีเมลหรือรหัสผ่านไม่ถูกต้อง')
+        alert('อีเมลและรหัสผ่านที่คุณกรอกไม่ตรงกับข้อมูลในระบบ \nโปรดตรวจสอบและลองอีกครั้ง')
         console.log('Failed login');
       });
         };
