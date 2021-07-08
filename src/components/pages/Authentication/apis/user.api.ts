@@ -10,7 +10,7 @@ export async function API_Login_Data() {
 export async function ApiPostDataUser(data : any) {
     console.log(data);
     try {
-        await axios.post('http://localhost:5000/signup', data)
+        await axios.post('/signup', data)
         return data
     } catch (error) {
         console.log("error from api status : " , error.response.status);
