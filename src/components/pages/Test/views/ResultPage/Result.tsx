@@ -14,6 +14,7 @@ import {
 import useSWR from 'swr';
 import { UploadOutlined } from '@ant-design/icons';
 import { IResult } from '../../shared/interface/Result.interfaces';
+import { ApiGetResult } from '../../apis/test.api';
 
 const Result = () => {
     const history = useHistory();
@@ -41,23 +42,26 @@ const Result = () => {
         element.click();
     };
 
-    //------------------------ IF USING AXIOS FETCH DATA --------------------//
-    // async function getResultData() {
-    //     const response = await ApiGetResult();
-    //     if (response) {
-    //         const chartScoreReal = Object.keys(response).map((key) => response[key].score);
-    //         const maxScoreListReal = response.filter((data: { score: number }) => data.score === Math.max(...chartScoreReal));
-    //         setResultData(maxScoreListReal);
-    //         console.log('max score list from axios', maxScoreListReal);
-    //     } else {
-    //         console.log('error');
-    //     }
-    // }
+    // ------------------------ IF USING AXIOS FETCH DATA --------------------//
+    async function getResultData() {
+        const response = await ApiGetResult();
+        if (response) {
+            const chartScoreReal = Object.keys(response).map((key) => response[key].score);
+            const maxScoreListReal = response.filter((data: { score: number }) => data.score === Math.max(...chartScoreReal));
+            setResultData(maxScoreListReal);
+            console.log('max score list from axios', maxScoreListReal);
+        } else {
+            console.log('error');
+        }
+    }
 
     useEffect(() => {
         console.log('Result of max score', result);
     }, [result]);
 
+    useEffect(() => {
+        getResultData();
+    }, []);
     return (
         <Container header={null}>
             {isLoading ? (
