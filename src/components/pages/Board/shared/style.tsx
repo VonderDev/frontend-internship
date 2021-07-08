@@ -48,7 +48,13 @@ export const RowStyled = styled(Row)`
 
 export const GridBox = styled.div`
     display: flex;
+    justify-content: flex-start;
     flex-direction: row;
+    overflow-x: scroll;
+    ::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+    }
 `;
 
 export const HistoryImage = styled.img`
