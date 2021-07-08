@@ -18,10 +18,10 @@ import { ApiGetResult } from '../../apis/test.api';
 
 const Result = () => {
     const history = useHistory();
+    const [result, setResultData] = useState<Array<IResult> | null>(null);
 
     //-------------- CREATE MAX SCORE LIST USE SWR--------------//
     // const [isData, isSetData] = useState<boolean>(false);
-    const [result, setResultData] = useState<Array<IResult> | null>(null);
     // const { data: resultData, error } = useSWR('http://18.139.108.242:5000/user/result');
     // console.log('[Result Test Game]:', resultData);
     // const isLoading = !resultData && !error;

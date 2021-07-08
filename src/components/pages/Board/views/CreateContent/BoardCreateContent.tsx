@@ -80,7 +80,7 @@ function BoardCreateContent() {
     const showDrawer = () => {
         setVisible(true);
     };
-    const onClose = () => {
+    const onCloseDrawer = () => {
         setVisible(false);
     };
 
@@ -144,7 +144,7 @@ function BoardCreateContent() {
                 ) : null}
                 {countPage === 2 ? (
                     <>
-                        <DrawerOfHashtag placement="bottom" closable={false} onClose={onClose} visible={visible} key={placement} height="90vh">
+                        <DrawerOfHashtag placement="bottom" closable={false} onClose={onCloseDrawer} visible={visible} key={placement} height="90vh">
                             <InputHashtagInDrawer
                                 dropdownStyle={{ boxShadow: 'none' }}
                                 mode="multiple"
