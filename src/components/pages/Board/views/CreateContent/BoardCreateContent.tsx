@@ -1,4 +1,4 @@
-import { Button, Form, Input } from 'antd';
+import { Select, Form, Input } from 'antd';
 import Container from 'components/Container/Container';
 import {
     ButtonGoNextCreateContent,
@@ -12,7 +12,7 @@ import {
     FormInputContent,
     FormInputNameContent,
     InputHashtagInDrawer,
-    OptionalTagName,
+    OptionHashtag,
     TextTopicContent,
     UploadImage,
 } from '../../shared/BoardCreate.styled';
@@ -96,6 +96,13 @@ function BoardCreateContent() {
         { value: 'self smart', tagName: 'เข้าใจตนเอง' },
     ];
 
+    function handleChangeOfHashtag(value: any) {
+        console.log(`[เลือกประเภทแฮชเเท็ก] = ${value}`);
+        setContentData({
+            ...contentData,
+            tag: value,
+        });
+    }
     return (
         <>
             <Container header={{ title: 'สร้างกระทู้', right: 'menu', left: 'back' }}>
@@ -138,11 +145,30 @@ function BoardCreateContent() {
                 {countPage === 2 ? (
                     <>
                         <DrawerOfHashtag placement="bottom" closable={false} onClose={onClose} visible={visible} key={placement} height="90vh">
-                            <InputHashtagInDrawer placeholder="#ตรรกะ #ดนตรี" />
-                            {optionalTag.map((item, index) => {
-                                return <OptionalTagName key={index}>#{item.tagName}</OptionalTagName>;
-                            })}
-                            <ButtonUseHashtags>ใช้แฮชเเท็ก</ButtonUseHashtags>
+                            <InputHashtagInDrawer
+                                dropdownStyle={{ boxShadow: 'none' }}
+                                mode="multiple"
+                                defaultOpen={true}
+                                style={{ width: '100%' }}
+                                placeholder="#ตรรกะ #ดนตรี"
+                                onChange={handleChangeOfHashtag}
+                            >
+                                {' '}
+                                {optionalTag.map((item, index) => {
+                                    return (
+                                        <OptionHashtag value={item.value} key={index}>
+                                            #{item.tagName}
+                                        </OptionHashtag>
+                                    );
+                                })}
+                            </InputHashtagInDrawer>
+                            <ButtonUseHashtags
+                                onClick={() => {
+                                    console.log('เลือกประเภทแฮชเเท๊ก :', contentData);
+                                }}
+                            >
+                                ใช้แฮชเเท็ก
+                            </ButtonUseHashtags>
                         </DrawerOfHashtag>
                         <ContainerBoardCreate>
                             <TextTopicContent>ประเภทของกระทู้</TextTopicContent>

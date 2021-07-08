@@ -1,4 +1,4 @@
-import { Button, Drawer, Form, Input, Upload } from 'antd';
+import { Button, Drawer, Form, Input, Select, Upload } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import styled from 'styled-components';
 
@@ -122,9 +122,27 @@ export const ButtonOfCategory = styled(Button)`
 `;
 
 //------------------ CREATE DRAWER OF HASHTAG ------------------//
-export const InputHashtagInDrawer = styled(Input)`
-    border-radius: 12px;
-    height: 6vh;
+export const InputHashtagInDrawer = styled(Select)`
+    & .ant-select-selection-overflow {
+        height: 6vh;
+    }
+    & .ant-select-selector {
+        border-radius: 12px !important;
+    }
+
+    & .ant-select-selection-selected-value {
+        border-radius: 0px 8px 8px 0px;
+        height: 53px;
+    }
+`;
+
+export const OptionHashtag = styled(Select.Option)`
+    color: whitesmoke;
+    & .ant-select-dropdown .ant-select-dropdown-placement-bottomLeft {
+        color: blue !important;
+        box-shadow: red !important;
+    }
+    background-color: red;
 `;
 
 export const OptionalTagName = styled.div`
@@ -155,6 +173,6 @@ export const ButtonUseHashtags = styled(Button)`
     font-weight: bolder;
     border-radius: 12px;
     left: 70%;
-    top: 10%;
+    top: 80%;
     font-size: 16px;
 `;
