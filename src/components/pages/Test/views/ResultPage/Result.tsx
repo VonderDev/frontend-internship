@@ -20,19 +20,18 @@ const Result = () => {
     const history = useHistory();
 
     //-------------- CREATE MAX SCORE LIST USE SWR--------------//
-    const [isData, isSetData] = useState<boolean>(false);
+    // const [isData, isSetData] = useState<boolean>(false);
     const [result, setResultData] = useState<Array<IResult> | null>(null);
+    // const { data: resultData, error } = useSWR('http://18.139.108.242:5000/user/result');
+    // console.log('[Result Test Game]:', resultData);
+    // const isLoading = !resultData && !error;
 
-    const { data: resultData, error } = useSWR('http://18.139.108.242:5000/user/result');
-    console.log('[Result Test Game]:', resultData);
-    const isLoading = !resultData && !error;
-
-    if (resultData && !isData) {
-        isSetData(true);
-        const chartScore = Object.keys(resultData).map((key) => resultData[key].score);
-        const maxScoreList = resultData.filter((data: { score: number }) => data.score === Math.max(...chartScore));
-        setResultData(maxScoreList);
-    }
+    // if (resultData && !isData) {
+    //     isSetData(true);
+    //     const chartScore = Object.keys(resultData).map((key) => resultData[key].score);
+    //     const maxScoreList = resultData.filter((data: { score: number }) => data.score === Math.max(...chartScore));
+    //     setResultData(maxScoreList);
+    // }
 
     const downloadImage = () => {
         var element = document.createElement('a');
@@ -64,28 +63,25 @@ const Result = () => {
     }, []);
     return (
         <Container header={null}>
-            {isLoading ? (
-                <div>loading ...</div>
-            ) : (
-                <ContainerCarousel>
-                    {result?.map((item: any, index: any) => {
-                        return (
-                            <div key={index}>
-                                <ContainerResultSummarize>
-                                    <HeaderResultFeature>คุณมีลักษณะเด่น {result.length} ด้าน</HeaderResultFeature>
-                                    <ImageCharactorCarousel src={item.image_charactor} />
-                                    <TextSkillName>{item.skill}</TextSkillName>
-                                    <TextSkillSummarize>{item.skill_summarize}</TextSkillSummarize>
-                                    <ButtonSaveResult href={item.image_charactor} download onClick={() => downloadImage()}>
-                                        <UploadOutlined />
-                                        บันทึกผลลัพธ์
-                                    </ButtonSaveResult>
-                                </ContainerResultSummarize>
-                            </div>
-                        );
-                    })}
-                </ContainerCarousel>
-            )}
+            <ContainerCarousel>
+                {result?.map((item: any, index: any) => {
+                    return (
+                        <div key={index}>
+                            <ContainerResultSummarize>
+                                <HeaderResultFeature>คุณมีลักษณะเด่น {result.length} ด้าน</HeaderResultFeature>
+                                <ImageCharactorCarousel src={item.image_charactor} />
+                                <TextSkillName>{item.skill}</TextSkillName>
+                                <TextSkillSummarize>{item.skill_summarize}</TextSkillSummarize>
+                                <ButtonSaveResult href={item.image_charactor} download onClick={() => downloadImage()}>
+                                    <UploadOutlined />
+                                    บันทึกผลลัพธ์
+                                </ButtonSaveResult>
+                            </ContainerResultSummarize>
+                        </div>
+                    );
+                })}
+            </ContainerCarousel>
+
             <ButtonSeeAllResult type="primary" onClick={() => history.push('/resultinfo')}>
                 ดูผลลัพธ์ทั้งหมด
             </ButtonSeeAllResult>
