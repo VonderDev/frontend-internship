@@ -27,7 +27,7 @@ function BoardCreateContent() {
         title: '',
         content_body: '',
         content_type: '',
-        tag: {},
+        tag: [],
     });
     const updateContentData = (e: any) => {
         setContentData({
