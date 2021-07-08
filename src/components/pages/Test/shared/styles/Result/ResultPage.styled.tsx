@@ -199,6 +199,7 @@ export const TabsInfo = styled(Tabs)`
 //------------ STYLED RESULT FEATURE / CHARACTOR DETAIL ------------//
 export const ImagePreview = styled.img`
     position: relative;
+    object-fit: cover;
     border-radius: 12px;
     padding: 5px;
     margin-left: 10px;
@@ -206,7 +207,7 @@ export const ImagePreview = styled.img`
     height: 95px;
     border: 3px solid var(--Silver-100);
     background: no-repeat;
-    transform: translateX(10%);
+    transform: translateX(10%) translateY(-16%);
     box-shadow: inset 10px 10px 50px #fff;
     :hover {
         cursor: pointer;
@@ -218,6 +219,7 @@ export const ContainerImagePreview = styled(Image.PreviewGroup)`
         position: relative;
         display: inline-block;
         margin-left: 15% !important;
+        overflow-x: scroll;
     }
 `;
 
@@ -266,7 +268,6 @@ export const TextNameSkillInImg = styled.div`
 export const ResultImgCharactorDetail = styled(Image)`
     width: 100%;
     height: 55vh;
-    margin-top: 20px;
 `;
 
 export const ContainerCharactorDetail = styled.div`

@@ -31,6 +31,7 @@ function ResultOverview() {
     return (
         <>
             {isLoading ? <div>loading ...</div> : <Chart />}
+
             {result?.map((item: any, index: any) => {
                 return (
                     <ContainerProgressScore key={index}>

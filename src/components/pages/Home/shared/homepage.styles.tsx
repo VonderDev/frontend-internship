@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Space, Button, Col, List, Input, Row } from 'antd';
+import { Space, Button, Col, List, Input } from 'antd';
 import gamePreviewImg from '../shared/images/gamepreview.png';
 
 export const SearchField = styled(Space)`
@@ -46,14 +46,6 @@ export const ImageTestPage = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-
-    /* &:hover {
-        cursor: pointer;
-    } */
 `;
 
 export const ButtonStartGame = styled(Button)`
@@ -66,8 +58,8 @@ export const ButtonStartGame = styled(Button)`
     letter-spacing: 1px;
     justify-content: center;
     margin-right: 20px;
-    width: 100px;
-    height: 40px;
+    width: 25%;
+    height: 6vh;
     align-items: center;
     font-size: 18px;
 `;
@@ -78,6 +70,7 @@ export const ButtonReadOverviewTest = styled.div`
     font-weight: bolder;
     letter-spacing: 1px;
     font-size: 18px;
+    text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px white;
     position: absolute;
     transform: translateY(-120%) translateX(10%);
     padding-left: 20px;
@@ -89,10 +82,11 @@ export const ButtonReadOverviewTest = styled.div`
 export const TextTopicOnImageTest = styled.div`
     font-weight: bolder;
     color: #ffffff;
-    font-size: 22px;
+    font-size: 23px;
     padding-left: 30px;
     padding-top: 15px;
     margin-bottom: 140px;
+    text-shadow: 1px 1px 2px black, 0 0 25px #afd4ff, 0 0 5px white;
 `;
 export const TextBoardTopic = styled(Col)`
     font-weight: bolder;

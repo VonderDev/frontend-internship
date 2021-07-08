@@ -52,11 +52,12 @@ const Charts = () => {
             setchartValue(chartValue);
         }
     }, [chartValue]);
+
     return (
         <>
             <div>
                 <TextHeaderResult>แผนภูมิพหุปัญญา</TextHeaderResult>
-                {isLoading ? <div>is loading </div> : <ChartStyled options={chartValue.options} series={chartValue.series} type="radar" />}
+                {isLoading ? <div>is loading ... </div> : <ChartStyled options={chartValue.options} series={chartValue.series} type="radar" />}
             </div>
         </>
     );

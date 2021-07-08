@@ -4,7 +4,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-import { mutate, SWRConfig } from 'swr';
+import { SWRConfig } from 'swr';
+import axios from 'axios';
 
 const fetcher = (url: string, token: string) =>
     fetch(url, {
