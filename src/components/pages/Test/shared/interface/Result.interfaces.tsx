@@ -6,6 +6,7 @@ export interface IResult {
     description_career: string;
     image_charactor: string;
     skill_summerize?: string;
+    charactor_summarize?: string;
 }
 export interface IResultSummarize {
     skill: string;
