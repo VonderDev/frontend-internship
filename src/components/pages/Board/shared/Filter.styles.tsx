@@ -1,12 +1,11 @@
-import { Drawer, Input } from "antd";
-import styled from "styled-components";
-
-
+import { Drawer, Input, Tag } from 'antd';
+import CheckableTag from 'antd/lib/tag/CheckableTag';
+import styled, { css } from 'styled-components';
 
 export const ButtonFilter = styled.div`
     background-color: #ffffff;
     border-radius: 12px;
-    box-shadow:  0 3px 6px #e0e0e0;
+    box-shadow: 0 3px 6px #e0e0e0;
     width: 40px;
     height: 40px;
     display: flex;
@@ -34,8 +33,57 @@ export const DrawerRadius = styled(Drawer)`
         font-weight: bold;
     }
     & .ant-drawer-body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-grow: 1;
+        padding: 24px;
+        overflow: auto;
+        font-size: 14px;
+        line-height: 1.5715;
+        word-wrap: break-word;
     }
+`;
+export const CustomTag = styled(Tag)<{ active: 'active' | '' }>`
+    font-size: 16px;
+    width: 107px;
+    height: 47px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    margin-top: 5px;
+    background-color: #f2f2f5;
+    border: none;
+    ${({ active }) => {
+        if (active === 'active') {
+            return css`
+                background-color: #daebfd;
+                color: #3a8ce4;
+            `;
+        }
+    }}
+`;
+export const CustomCheckableTag = styled(CheckableTag)`
+    font-size: 16px;
+    color: #6E7282;
+    width: 107px;
+    height: 47px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    margin-top: 5px;
+    background-color: #f2f2f5 !important;
+    border: none;
+
+    &.ant-tag-checkable-checked {
+        background-color:#DAEBFD !important;
+        color: #3A8CE4 !important;
+    }
+    &.ant-tag-checkable {
+        background-color: transparent;
+        border-color: transparent;
+        cursor: pointer;
+    }
+    &.ant-tag-checkable:not(.ant-tag-checkable-checked):hover {
+    color: #6E7282;
+}
 `;
