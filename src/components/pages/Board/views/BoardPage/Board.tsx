@@ -1,13 +1,16 @@
 import Container from 'components/Container/Container';
 import React from 'react'
-import Typography from 'shared/style/theme/Typograhy';
 import {
   TextRecommendBoardTopic,
-  ButtonSeeAllBoard
+  ButtonSeeAllBoard,
+  CardContainer
 } from '../../shared/style';
 import { Row, Col } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { CardStyle } from 'shared/style/theme/component';
+import { CardLatest } from './CardLatest';
+import { CardRecommended } from './CardRecommended';
+import { CardTopTen } from './CardTopTen';
 
 function Board() {
 
@@ -22,19 +25,33 @@ function Board() {
         <ButtonSeeAllBoard onClick={() => history.push('/board')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
       </Row>
 
-      <Row>
-        <Col>
-          <CardStyle typecard="Vertical" heightcard={300}> CardVer </CardStyle>
-        </Col>
-        <Col>
-          <CardStyle typecard="Vertical" heightcard={300}> CardVer </CardStyle>
-        </Col>
+      <CardContainer>
+        <CardRecommended />
+      </CardContainer>
 
+      <Row>
+        <TextRecommendBoardTopic xs={{ span: 7, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+          10 อันดับสูงสุด
+        </TextRecommendBoardTopic>
+        <ButtonSeeAllBoard onClick={() => history.push('/board')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
       </Row>
+
+      <CardContainer>
+        <CardTopTen />
+      </CardContainer>
+
+      <Row>
+        <TextRecommendBoardTopic xs={{ span: 7, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+          ล่าสุด
+        </TextRecommendBoardTopic>
+      </Row>
+
+      <CardContainer>
+        <CardLatest />
+      </CardContainer>
 
     </Container>
   );
 }
 
 export default Board;
-

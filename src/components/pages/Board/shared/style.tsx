@@ -1,5 +1,6 @@
-import { Card, Col } from 'antd';
+import { Card, Col, Row } from 'antd';
 import styled from 'styled-components';
+import { RightOutlined, FormOutlined , HeartFilled } from '@ant-design/icons';
 
 export const TextRecommendBoardTopic = styled(Col)`
     font-weight: bolder;
@@ -26,6 +27,61 @@ export const ButtonSeeAllBoard = styled.div`
     }
 `;
 
-export const ArticleCard = styled(Card)`
+export const CardContainer = styled.div`
+    /* overflow-x: scroll; */
+`;
 
+export const BoardCard = styled(Card)`
+    margin-bottom: 10px;
+    height: 88px;
+    width: 100%;
+    box-shadow: 0px 3px 6px #c7c7c7;
+    border-radius: 10px;
+    & .ant-card-body {
+        padding: 0px;
+    }
+`;
+
+export const RowStyled = styled(Row)`
+    width: 100%;
+`;
+
+export const GridBox = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+export const HistoryImage = styled.img`
+    width: 88px;
+    height: 88px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transform: translateY(-1%);
+`;
+
+export const CardText = styled.div`
+    font-weight: bolder;
+    font-size: 16px;
+`;
+
+export const HistoryText = styled.div`
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bolder;
+    text-overflow: ellipsis; /* เพิ่ม ... จุดจุดจุดท้ายสุด */
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+`;
+
+export const CommentIcon = styled(FormOutlined)`
+    color: var(--Gray-100);
+    transform: translateY(20%);
+    margin-right: 5px;
+`;
+
+export const HeartIcon = styled(HeartFilled)`
+    color: var(--Gray-100);
+    transform: translateY(20%);
+    margin-right: 5px;
 `;
