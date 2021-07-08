@@ -4,7 +4,7 @@ const token = localStorage.getItem('token');
 
 export async function ApiGetTestData() {
     return await axios
-        .get('http://localhost:5000/questions')
+        .get('/questions')
         .then((response) => {
             console.log('[Function API_GetTestData] :', response.data);
             return response.data;
@@ -16,7 +16,7 @@ export async function ApiGetTestData() {
 
 export async function ApiGetResult() {
     return await axios
-        .get('http://localhost:5000/user/result',  {headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
+        .get('/user/result',  {headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
             console.log('[Result Data] :', res.data); 
         return res.data
         })
@@ -33,7 +33,7 @@ export async function ApiPostTestResult(data: any) {
     //
     // ─── Use axios.post when backend finish ───────────────────
     //
-    return await axios.post('http://localhost:5000/user/result', data ,
+    return await axios.post('/user/result', data ,
     {headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
         return res.data
     })

@@ -2,23 +2,29 @@ import Routing from './routes/index';
 import GlobalStyle from 'shared/style/globalStyle';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AuthProvider } from 'components/AuthContext/AuthContext';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import axios from 'axios';
-import { SWRConfig } from 'swr';
-
-let axiosDefaults = require('axios/lib/defaults');
-axiosDefaults.baseURL = 'http://localhost:5000';
-
-const token = localStorage.getItem('token');
-
-if (token) {
-    axios.defaults.headers.common['Authorization'] = token;
-}
 
 const App = () => {
-    useEffect(() => {
-        console.log(token);
-    }, [token]);
+
+    const axiosGlobalConfig = useCallback(() => {
+        const token = localStorage.getItem("token");
+    
+        axios.interceptors.request.use((config) => {
+          if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+          } 
+          config.baseURL = `${process.env.REACT_APP_API_URL}`;
+          return config;
+        }, (error) => {
+            return Promise.reject(error);
+        });
+    
+      }, []);
+
+  useEffect(() => {
+    axiosGlobalConfig();
+  }, [axiosGlobalConfig]);
 
     return (
         <>

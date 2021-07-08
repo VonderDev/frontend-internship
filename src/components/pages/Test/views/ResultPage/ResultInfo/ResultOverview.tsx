@@ -12,7 +12,7 @@ function ResultOverview() {
     const [isData, isSetData] = useState<boolean>(false);
     const [result, setResultData] = useState<Array<IResult> | null>(null);
 
-    const { data: resultData, error } = useSWR('http://localhost:5000/user/result');
+    const { data: resultData, error } = useSWR('http://18.139.108.242:5000/user/result');
     const isLoading = !resultData && !error;
 
     if (resultData && !isData) {
