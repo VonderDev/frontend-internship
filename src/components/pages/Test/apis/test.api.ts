@@ -16,7 +16,7 @@ export async function ApiGetTestData() {
 
 export async function ApiGetResult() {
     return await axios
-        .get('http://localhost:5000/user/result',  {headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
+        .get('http://18.139.108.242:5000/user/result',  {headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
             console.log('[Result Data] :', res.data); 
         return res.data
         })
