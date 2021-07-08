@@ -137,17 +137,17 @@ export const ListItemBoard = styled(List.Item)`
     }
 `;
 
-export const ButtonCreateBoard = styled(Button)`
-    background-color: #252525;
+export const ButtonCreatePost = styled(Button)`
+    background-color: var(--Blue-300);
     color: white;
     font-weight: bolder;
     font-size: 30px;
-    position: fixed;
+    position: sticky;
     padding-bottom: 50px;
     bottom: 40px;
-    right: 150px;
     width: 60px;
     height: 50px;
+    left: 480px;
 `;
 
 export const ImgBoardList = styled.img`

@@ -14,6 +14,18 @@ export async function ApiGetTestData() {
         });
 }
 
+export async function ApiGetResult() {
+    return await axios
+        .get('http://localhost:5000/user/result',  {headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
+            console.log('[Result Data] :', res.data); 
+        return res.data
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+}
+
+
 export async function ApiPostTestResult(data: any) {
     console.log('[Result Data] :', data);
     console.log('[Result length]:', data.length)
