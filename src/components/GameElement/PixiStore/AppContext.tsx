@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-// import UpdateRatio from "./UpdateRatio";
 
 const AppContext = createContext<any>(null);
 
@@ -31,8 +30,6 @@ const useWindowSize = () => {
 
 function AppProvider({ children }: any) {
   const gameRef = useRef({});
-//   const audioRef = useRef(new AppAudio());
-//   const updateRatioRef = useRef(new UpdateRatio());
   const size = useWindowSize();
   const [width, setWidth] = useState<number>(size.width);
   const [height, setHeight] = useState<number>(size.height);

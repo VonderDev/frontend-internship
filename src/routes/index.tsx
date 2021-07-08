@@ -18,7 +18,6 @@ import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion'
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
 import BoardCreateContent from 'components/pages/Board/views/CreateContent/BoardCreateContent';
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
-
 import TestPixi from 'components/GameElement/Game/testpixi';
 
 function Routing() {
