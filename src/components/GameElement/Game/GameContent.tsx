@@ -85,6 +85,17 @@ const GameContent = (app: any,gameRef: any) => {
     Bush4.position.set(450,550);
     container.addChild(Bush4)
 
+    // const onMainResize = (width, height) => {
+    //   // TODO: resize game container at here
+    //   container.position.set(width / 2, height / 2);
+    // };
+    // updateRatioRef.current.add(onMainResize);
+    // const onRelease = () => {
+    //   updateRatioRef.current.remove(onMainResize);
+    //   console.warn("pixi released");
+    // };
+
+
     const onRelease = () => { console.log('Nothing') }
     console.log("container", container);
     return [app , onRelease]
