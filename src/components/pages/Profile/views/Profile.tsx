@@ -32,7 +32,7 @@ function Profile() {
         { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
     ];
 
-    const { data, error } = useSWR('http://18.139.108.242:5000/user/find');
+    const { data, error } = useSWR('/user/find');
     const isLoading = !data && !error;
     console.log('Profile Data', data);
 
