@@ -129,7 +129,6 @@ export const InputHashtagInDrawer = styled(Select)`
     & .ant-select-selector {
         border-radius: 12px !important;
     }
-
     & .ant-select-selection-selected-value {
         border-radius: 0px 8px 8px 0px;
         height: 53px;
@@ -141,6 +140,12 @@ export const OptionHashtag = styled(Select.Option)`
     & .ant-select-dropdown .ant-select-dropdown-placement-bottomLeft {
         color: blue !important;
         box-shadow: red !important;
+    }
+    &:last-child{
+        font-size: 30px !important;
+    }
+    &.ant-select-item-option-content {
+        font-size: 30px !important;
     }
     background-color: red;
 `;

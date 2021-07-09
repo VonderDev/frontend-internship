@@ -11,7 +11,9 @@ const UpdateRatio = () => {
     const [width, setWidth] = useState<number>(0)
     const [height, setHeight] = useState<number>(0)
 
-    const add = ({width, height}: ListProps) =>{
+    const add = (callback : (width : number, height : number)=>void ) =>{
+        // list.push(callback);
+        // callback(width, height);
         setList((prev: List) =>{
             const newList = [...prev];
             newList.push({width, height});
@@ -34,7 +36,7 @@ const UpdateRatio = () => {
     // const update = ({width, height}: IList) =>{
     //   setWidth(width);
     //   setHeight(height);
-    //   this.list.forEach((callback) => {
+    //   list.forEach((callback) => {
     //     callback(width, height);
     //   });
     // }

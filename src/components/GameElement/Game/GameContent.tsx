@@ -9,7 +9,7 @@ import bush4 from '../Assets/Item/Bush/Bush_4.png'
 import treef1 from '../Assets/Item/Tree/TreeF_1.png'
 import treef2 from '../Assets/Item/Tree/TreeF_2.png'
 
-const GameContent = (app: any,gameRef: any) => {
+const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 
     const container = new PIXI.Container();
 
@@ -85,7 +85,7 @@ const GameContent = (app: any,gameRef: any) => {
     Bush4.position.set(450,550);
     container.addChild(Bush4)
 
-    // const onMainResize = (width, height) => {
+    // const onMainResize = (width:number , height:number) => {
     //   // TODO: resize game container at here
     //   container.position.set(width / 2, height / 2);
     // };

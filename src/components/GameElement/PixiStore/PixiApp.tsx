@@ -16,6 +16,7 @@ const createPixiApp = (view:any, options:any) => {
       height,
       maxWidth,
       maxHeight,
+      updateRatioRef,
       gameRef,
     } = useContext(AppContext);
     const pixiContext = useContext(PixiContext);
@@ -36,14 +37,14 @@ const createPixiApp = (view:any, options:any) => {
       } else {
         const [app, onRelease] = content(
           createPixiApp(viewRef.current, initialOption),
-          gameRef
+          gameRef,updateRatioRef
         );
         appRef.current = app;
         return () => {
           onRelease();
         };
       }
-    }, [ content, gameRef, initialOption]);
+    }, [ content, gameRef, initialOption,updateRatioRef]);
   
     useEffect(() => {
       if(appRef.current){
@@ -54,6 +55,7 @@ const createPixiApp = (view:any, options:any) => {
     useEffect(() => {
       if(appRef.current){
         appRef.current.renderer.resize(width, height);
+        // updateRatioRef.current.update(width, height);
       }
     }, [width, height]);
 
