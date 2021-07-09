@@ -1,10 +1,9 @@
 import Container from 'components/Container/Container';
 import { Box } from 'shared/style/theme/component';
 import { ControlOutlined, SearchOutlined } from '@ant-design/icons';
-import { ButtonFilter, SearchField, InputSearch, DrawerRadius, CustomTag, CustomCheckableTag } from '../../Board/shared/Filter.styles';
+import { ButtonFilter, SearchField, InputSearch, DrawerRadius, CustomCheckableTag } from '../../Board/shared/Filter.styles';
 import { useEffect, useState } from 'react';
 const Filter = () => {
-    const [isActive, setIsActive] = useState<boolean>(false);
 
     const [selectedCatagories, setSelectedCatagories] = useState<any>(Array);
     const [selectedTags, setSelectedTags] = useState<any>(Array);
