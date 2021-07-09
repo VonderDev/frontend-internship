@@ -1,29 +1,27 @@
 import Container from 'components/Container/Container';
 import { Box } from 'shared/style/theme/component';
 import { ControlOutlined, SearchOutlined } from '@ant-design/icons';
-import { ButtonFilter, SearchField, InputSearch, DrawerRadius, CustomCheckableTag } from '../../Board/shared/Filter.styles';
+import { ButtonFilter, SearchField, InputSearch, DrawerRadius, CustomCheckableTag , TagBox , Topic } from '../../Board/shared/Filter.styles';
 import { useEffect, useState } from 'react';
 const Filter = () => {
-
+    /*--------------------------------------------------------------------------------*/
     const [selectedCatagories, setSelectedCatagories] = useState<any>(Array);
     const [selectedTags, setSelectedTags] = useState<any>(Array);
-
-    const handleChangeCatagories = (tag: any, checked: any) => {
+    const handleChangeCatagories = (tag: string, checked: boolean) => {
         const nextSelectedCatagories = checked ? [...selectedCatagories, tag] : selectedCatagories.filter((t: any) => t !== tag);
         setSelectedCatagories(nextSelectedCatagories);
     };
-    const handleChangeTag = (tag: any, checked: any) => {
+    const handleChangeTag = (tag: string, checked: boolean) => {
         const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter((t: any) => t !== tag);
         setSelectedTags(nextSelectedTags);
     };
-
+    console.log(typeof(selectedCatagories))
     useEffect(() => {
         console.log('Catagories ', selectedCatagories);
     }, [selectedCatagories]);
     useEffect(() => {
         console.log('Tag ', selectedTags);
     }, [selectedTags]);
-
     const catagories = [
         { tag: 'บทความ', value: 'board' },
         { tag: 'คำถาม', value: 'question' },
@@ -38,17 +36,19 @@ const Filter = () => {
         { tag: 'มนุษยสัมพันธ์', value: 'people smart' },
         { tag: 'เข้าใจตนเอง', value: 'self smart' },
     ];
+     /*--------------------------------------------------------------------------------*/
     const [visible, setVisible] = useState<boolean>(false);
     //const { Search } = Input;
     const onSearch = (value: any) => console.log(value);
     const showDrawer = () => {
         setVisible(true);
     };
-    const onClose = () => {
+    const closeDrawer = () => {
         setVisible(false);
     };
-    //console.log(isActive);
+     /*--------------------------------------------------------------------------------*/
     return (
+        
         <Container
             header={{
                 left: '',
@@ -56,34 +56,32 @@ const Filter = () => {
                 right: '',
             }}
         >
-            <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="flex-start" align="flex-start" direction="column">
-                <DrawerRadius
+            <DrawerRadius
                     title="ตัวกรอง"
                     placement="bottom"
                     closable={false}
-                    onClose={onClose}
+                    onClose={closeDrawer}
                     visible={visible}
-                    getContainer={false}
                     height={650}
-                    style={{ position: 'absolute', overflowY: 'hidden' }}
                 >
-                    <span style={{ fontSize: '18px', fontWeight: 'bold' }}>ประเภทของกระทู้</span>
-                    <div style={{ flexFlow: 'row wrap', display: 'flex', fontWeight: 'bolder' }}>
+                    <Topic>ประเภทของกระทู้</Topic>
+                    <TagBox style={{fontWeight: "bolder"}}>
                         {catagories.map((item) => (
                             <CustomCheckableTag key={item.value} checked={selectedCatagories.indexOf(item.value) > -1} onChange={(checked) => handleChangeCatagories(item.value, checked)}>
                                 {item.tag}
                             </CustomCheckableTag>
                         ))}
-                    </div>
-                    <span style={{ fontSize: '18px', fontWeight: 'bold' }}>แฮชแท็กของกระทู้</span>
-                    <div style={{ flexFlow: 'row wrap', display: 'flex' }}>
+                    </TagBox>
+                    <Topic>แฮชแท็กของกระทู้</Topic>
+                    <TagBox>
                         {hashtag.map((item) => (
                             <CustomCheckableTag key={item.value} checked={selectedTags.indexOf(item.value) > -1} onChange={(checked) => handleChangeTag(item.value, checked)}>
                                 #{item.tag}
                             </CustomCheckableTag>
                         ))}
-                    </div>
+                    </TagBox>
                 </DrawerRadius>
+            <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="flex-start" align="flex-start" direction="column">
                 <SearchField>
                     <InputSearch onClick={onSearch} placeholder="Search Form" prefix={<SearchOutlined />} />
                     <ButtonFilter onClick={showDrawer}>

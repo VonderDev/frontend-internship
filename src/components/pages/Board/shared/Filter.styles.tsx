@@ -18,6 +18,16 @@ export const SearchField = styled.div`
     justify-content: center;
     width: 100%;
 `;
+export const TagBox = styled.div`
+    display: flex;
+    flex-flow: row wrap;
+    margin-top: 5px;
+    margin-bottom: 5px;
+`;
+export const Topic = styled.div`
+    font-size: 18px;
+    font-weight: bold;
+`;
 export const InputSearch = styled(Input)`
     border-radius: 10px;
     width: 80%;
@@ -63,7 +73,7 @@ export const CustomTag = styled(Tag)<{ active: 'active' | '' }>`
 `;
 export const CustomCheckableTag = styled(CheckableTag)`
     font-size: 16px;
-    color: #6E7282;
+    color: #6e7282;
     width: 107px;
     height: 47px;
     display: flex;
@@ -75,8 +85,8 @@ export const CustomCheckableTag = styled(CheckableTag)`
     border: none;
 
     &.ant-tag-checkable-checked {
-        background-color:#DAEBFD !important;
-        color: #3A8CE4 !important;
+        background-color: #daebfd !important;
+        color: #3a8ce4 !important;
     }
     &.ant-tag-checkable {
         background-color: transparent;
@@ -84,6 +94,6 @@ export const CustomCheckableTag = styled(CheckableTag)`
         cursor: pointer;
     }
     &.ant-tag-checkable:not(.ant-tag-checkable-checked):hover {
-    color: #6E7282;
-}
+        color: #6e7282;
+    }
 `;
