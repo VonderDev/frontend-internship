@@ -121,28 +121,52 @@ export const ButtonOfCategory = styled(Button)`
     }
 `;
 
+export const ButtonBackToFirstPage = styled(Button)`
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 3px 6px #f5f5f5;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+`;
+
 //------------------ CREATE DRAWER OF HASHTAG ------------------//
 export const InputHashtagInDrawer = styled(Select)`
-    & .ant-select-selection-overflow {
+    .ant-select-selection-overflow {
         height: 6vh;
     }
-    & .ant-select-selector {
+    .ant-select-selector {
         border-radius: 12px !important;
+        background-color: pink;
     }
 
-    & .ant-select-selection-selected-value {
-        border-radius: 0px 8px 8px 0px;
-        height: 53px;
+    &.ant-select-item {
+        color: blue !important;
+        font-size: 30px !important;
     }
 `;
 
 export const OptionHashtag = styled(Select.Option)`
     color: whitesmoke;
-    & .ant-select-dropdown .ant-select-dropdown-placement-bottomLeft {
+    font-size: 30px !important;
+    & .ant-select-dropdown-placement-bottomLeft {
         color: blue !important;
         box-shadow: red !important;
     }
-    background-color: red;
+    &.ant-select-item-option-selected {
+        color: blue !important;
+    }
+    &.ant-select-item {
+        color: blue !important;
+        font-size: 30px !important;
+    }
+    &.ant-select-item-option-content {
+        color: blue !important;
+        font-size: 30px;
+    }
 `;
 
 export const OptionalTagName = styled.div`
@@ -175,4 +199,11 @@ export const ButtonUseHashtags = styled(Button)`
     left: 70%;
     top: 80%;
     font-size: 16px;
+`;
+
+export const DrawerContainer = styled.div`
+    position: relative;
+    height: 100%;
+    padding: 48px;
+    overflow: hidden;
 `;

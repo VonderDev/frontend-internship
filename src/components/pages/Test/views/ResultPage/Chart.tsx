@@ -9,55 +9,65 @@ interface Chartprop {
 
 const Charts = () => {
     //--------------- FETCHING SCORE & SKILL DATA USING SWR ---------------//
-    const { data: resultData, error } = useSWR('http://18.139.108.242:5000/user/result');
-    const isLoading = !resultData && !error;
 
-    const [chartValue, setchartValue] = useState<Chartprop>({
-        series: [
-            {
-                name: 'Skill',
-                data: resultData?.map((key: { score: number }) => key.score),
-            },
-        ],
-        options: {
-            chart: {
-                height: 350,
-                type: 'radar',
-                dropShadow: {
-                    enabled: true,
-                    blur: 1,
-                    left: 1,
-                    top: 1,
-                },
-            },
-            stroke: {
-                width: 2,
-            },
-            fill: {
-                opacity: 0.1,
-            },
-            markers: {
-                size: 5,
-                hover: {
-                    size: 10,
-                },
-            },
-            xaxis: {
-                categories: resultData?.map((key: { skill: string }) => key.skill),
-            },
-        },
-    });
+    const { data: resultData, error } = useSWR('/user/result');
+    const isLoading = !resultData && !error;
+    const [score, setScore] = useState([]);
+    const [skill, setSkill] = useState([]);
+    const [data, setData] = useState();
+
     useEffect(() => {
-        if (!isLoading) {
-            setchartValue(chartValue);
+        if (resultData) {
+            console.log('Result', resultData);
+            setScore(resultData.map((key: { score: any }) => key.score));
+            setSkill(resultData.map((key: any) => key.skill));
         }
-    }, [chartValue]);
+    }, [resultData]);
 
     return (
         <>
             <div>
                 <TextHeaderResult>แผนภูมิพหุปัญญา</TextHeaderResult>
-                {isLoading ? <div>is loading ... </div> : <ChartStyled options={chartValue.options} series={chartValue.series} type="radar" />}
+                {isLoading ? (
+                    <div>is loading ... </div>
+                ) : (
+                    <ChartStyled
+                        options={{
+                            chart: {
+                                height: 350,
+                                type: 'radar',
+                                dropShadow: {
+                                    enabled: true,
+                                    blur: 1,
+                                    left: 1,
+                                    top: 1,
+                                },
+                            },
+                            stroke: {
+                                width: 2,
+                            },
+                            fill: {
+                                opacity: 0.1,
+                            },
+                            markers: {
+                                size: 5,
+                                hover: {
+                                    size: 10,
+                                },
+                            },
+                            xaxis: {
+                                categories: skill,
+                            },
+                        }}
+                        series={[
+                            {
+                                name: 'Skill',
+                                data: score,
+                            },
+                        ]}
+                        type="radar"
+                    />
+                )}
             </div>
         </>
     );
