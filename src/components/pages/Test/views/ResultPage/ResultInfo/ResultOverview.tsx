@@ -28,7 +28,7 @@ function ResultOverview() {
                     </ContainerProgressScore>
                 );
             })}
-            <ButtonGoHomeInResult onClick={() => history.push('/result')}>กลับหน้าหลัก</ButtonGoHomeInResult>
+            <ButtonGoHomeInResult onClick={() => history.push('/')}>กลับหน้าหลัก</ButtonGoHomeInResult>
         </>
     );
 }

@@ -19,11 +19,7 @@ import axios from 'axios'
           { headers :{
           Authorization : `Bearer ${token}`
           }})
-          if(data) {
-            setUser(data.resuit)
-            console.log(' USER_DATA :', user);
             return data;
-          }
       }catch(err){
         console.error(err);
       }
