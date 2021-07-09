@@ -39,24 +39,25 @@ function TestQuestion() {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const { confirm } = Modal;
 
-    useEffect(() => {
-        if (!questionList) return;
-        setCurrentQuestionDetail(questionList[currentQuestion]);
-    }, [currentQuestion, questionList]);
+    //---------------- if using AXIOS ----------------//
+    // useEffect(() => {
+    //     if (!questionList) return;
+    //     setCurrentQuestionDetail(questionList[currentQuestion]);
+    // }, [currentQuestion, questionList]);
 
-    async function getTestData() {
-        const response = await ApiGetTestData();
-        if (response) {
-            setQuestionList(response); // store all question into the hook
-            const resp = response;
-            setCurrentQuestionDetail(resp[currentQuestion]);
-        } else {
-            console.log('error');
-        }
-    }
-    useEffect(() => {
-        getTestData();
-    }, []);
+    // async function getTestData() {
+    //     const response = await ApiGetTestData();
+    //     if (response) {
+    //         setQuestionList(response); // store all question into the hook
+    //         const resp = response;
+    //         setCurrentQuestionDetail(resp[currentQuestion]);
+    //     } else {
+    //         console.log('error');
+    //     }
+    // }
+    // useEffect(() => {
+    //     getTestData();
+    // }, []);
 
     async function onNextQuestion(value: number) {
         console.log('[Debug]: score == ' + value);
@@ -121,41 +122,28 @@ function TestQuestion() {
         setVisible(false);
     };
 
-    const questionListFetcher = (key: any) =>
-        fetch(key).then(async (res) => {
-            console.log('Fetcher triggered');
-            const data = await res.json();
-            setQuestionList(data); // store all question into the hook
-            const response = data;
-            setCurrentQuestionDetail(response[currentQuestion]);
-            return data;
-        });
+    // const questionListFetcher = (key: any) =>
+    //     fetch(key).then(async (res) => {
+    //         console.log('Fetcher triggered');
+    //         const data = await res.json();
+    //         setQuestionList(data); // store all question into the hook
+    //         const response = data;
+    //         setCurrentQuestionDetail(response[currentQuestion]);
+    //         return data;
+    //     });
 
-    const { data, error } = useSWR('http://18.139.108.242:5000/questions', questionListFetcher);
-    if (error) return <div>failed to load data</div>;
+    const { data, error } = useSWR('/questions');
+    if (error) return <div>failed to load data , please waiting</div>;
     if (!data) return <div>loading...</div>;
-    //-------------- OTHER SOLUTION -------------- //
-    // if (data && !isSWRTriggered) {
-    //     console.log('data from useSWR');
-    //     isSetSWRTriggered(true);
-    //     setQuestionList(data); // store all question into the hook
-    //     const resp = data;
-    //     setCurrentQuestionDetail(resp[currentQuestion]);
-    // }
+    // -------------- OTHER SOLUTION -------------- //
+    if (data && !isSWRTriggered) {
+        console.log('data from useSWR');
+        isSetSWRTriggered(true);
+        setQuestionList(data); // store all question into the hook
+        const resp = data;
+        setCurrentQuestionDetail(resp[currentQuestion]);
+    }
 
-    // useEffect(() => {
-    //     if (data) {
-    //         console.log(data);
-    //     }
-    // }, [data]);
-
-    // const rendered_questions = data.map((ele: any, index: number) => {
-    //     return (
-    //         <>
-    //             <span>{ele.question_no}</span>
-    //         </>
-    //     );
-    // });
     return (
         <Container header={null}>
             <ContainerTestQuestion>

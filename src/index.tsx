@@ -7,19 +7,14 @@ import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import { SWRConfig } from 'swr';
 import axios from 'axios';
 
-const fetcher = (url: string, token: string) =>
-    fetch(url, {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            'Content-Type': 'application/json',
-        },
-    }).then(async (response) => {
-        const data = await response.json();
+const fetcher = (url: string) =>
+    axios(url).then(async (response) => {
+        const data = await response.data;
         return data;
     });
 
 const AppWithRouter = () => (
-    <SWRConfig value={{ refreshInterval: 3000, fetcher }}>
+    <SWRConfig value={{ fetcher }}>
         <BrowserRouter>
             <App />
         </BrowserRouter>
