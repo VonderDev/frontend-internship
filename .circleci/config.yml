@@ -33,7 +33,7 @@ commands:
       - checkout
       - run:
           name: "What a number in this .env"
-          command: touch .env ; echo "REACT_APP_API=$REAC_APP_DEV" >> .env
+          command: touch .env ; echo "REACT_APP_API=$REACT_APP_DEV" >> .env
       - run:
           name: "Check file .env"
           command: ls -la ; cat .env
