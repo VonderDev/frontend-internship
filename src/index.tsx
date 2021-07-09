@@ -8,7 +8,14 @@ import { SWRConfig } from 'swr';
 import axios from 'axios';
 
 const fetcher = (url: string) =>
-    axios(url).then(async (response) => {
+    axios(url, {
+        headers: {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+        },
+    }).then(async (response) => {
         const data = await response.data;
         return data;
     });
