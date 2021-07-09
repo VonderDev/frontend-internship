@@ -27,6 +27,7 @@ const App = () => {
         axiosGlobalConfig();
     }, [axiosGlobalConfig]);
 
+    console.log('ENV :' ,`${process.env.REACT_APP_API}`)
     return (
         <>
             <AuthProvider>
