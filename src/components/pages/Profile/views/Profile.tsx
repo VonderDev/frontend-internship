@@ -36,12 +36,18 @@ function Profile() {
     const isLoading = !data && !error;
     console.log('Profile Data', data);
 
+    const { data: boardData, error: boardError } = useSWR('http://localhost:5000/user/content/get');
+    const isLoadingBoardData = !boardData && !boardError;
+    console.log('Board Data', boardData);
+
     useEffect(() => {
         if (data) {
             console.log('[useEffect data username] :', data.username);
             console.log('[useEffect data email] :', data.email);
         }
     }, [data]);
+
+    
 
     return (
             <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
@@ -130,7 +136,7 @@ function Profile() {
                                                         <CommentIcon />
                                                     </Col>
                                                     <Col span={10}>
-                                                        <HistoryText>{item.username}</HistoryText>
+                                                        <HistoryText>{data.username}</HistoryText>
                                                     </Col>
                                                     <Col span={8}>
                                                         <HistoryText>25 มิ.ย. 2564</HistoryText>
