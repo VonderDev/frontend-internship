@@ -14,7 +14,6 @@ const Charts = () => {
     const isLoading = !resultData && !error;
     const [score, setScore] = useState([]);
     const [skill, setSkill] = useState([]);
-    const [data, setData] = useState();
 
     useEffect(() => {
         if (resultData) {

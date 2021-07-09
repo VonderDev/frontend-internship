@@ -40,6 +40,11 @@ function TestQuestion() {
     const { confirm } = Modal;
 
     //---------------- if using AXIOS ----------------//
+    useEffect(() => {
+        if (!questionList) return;
+        setCurrentQuestionDetail(questionList[currentQuestion]);
+    }, [currentQuestion, questionList]);
+
     // async function getTestData() {
     //     const response = await ApiGetTestData();
     //     if (response) {
@@ -126,11 +131,6 @@ function TestQuestion() {
     //         setCurrentQuestionDetail(response[currentQuestion]);
     //         return data;
     //     });
-
-    useEffect(() => {
-        if (!questionList) return;
-        setCurrentQuestionDetail(questionList[currentQuestion]);
-    }, [currentQuestion, questionList]);
 
     const { data, error } = useSWR('/questions');
     if (error) return <div>failed to load data , please waiting</div>;
