@@ -1,6 +1,7 @@
-import { Button, Form, Input } from 'antd';
+import { Select, Form, Input, Tag } from 'antd';
 import Container from 'components/Container/Container';
 import {
+    ButtonBackToFirstPage,
     ButtonGoNextCreateContent,
     ButtonOfCategory,
     ButtonSummitPost,
@@ -8,17 +9,22 @@ import {
     ContainerBoardCreate,
     CountOfPageCreateContent,
     CreateContentForm,
+    DrawerContainer,
     DrawerOfHashtag,
     FormInputContent,
     FormInputNameContent,
     InputHashtagInDrawer,
-    OptionalTagName,
+    OptionHashtag,
     TextTopicContent,
     UploadImage,
 } from '../../shared/BoardCreate.styled';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FileImageTwoTone } from '@ant-design/icons';
+import { LeftOutlined } from '@ant-design/icons';
+import styles from '../../shared/TestPage.less';
+import { ApiPostContent } from '../../apis/boardCreate.api';
+import { DrawerRadius, PrivacyContainer, TextRegister } from 'components/pages/Authentication/shared/style';
 
 function BoardCreateContent() {
     //----------------- CREATE HOOK FOR POST CONTENT -----------------//
@@ -80,7 +86,7 @@ function BoardCreateContent() {
     const showDrawer = () => {
         setVisible(true);
     };
-    const onClose = () => {
+    const onCloseDrawer = () => {
         setVisible(false);
     };
 
@@ -96,9 +102,33 @@ function BoardCreateContent() {
         { value: 'self smart', tagName: 'เข้าใจตนเอง' },
     ];
 
+    function handleChangeOfHashtag(value: any) {
+        console.log(`[เลือกประเภทแฮชเเท็ก] = ${value}`);
+        setContentData({
+            ...contentData,
+            tag: value,
+        });
+    }
+
+    //------------ POST CONTENT FUNCTION --------------//
+    function postContent() {
+        console.log('content data sent to backend', contentData);
+        ApiPostContent(contentData);
+    }
+
     return (
         <>
-            <Container header={{ title: 'สร้างกระทู้', right: 'menu', left: 'back' }}>
+            <Container
+                header={{
+                    title: 'สร้างกระทู้',
+                    right: 'menu',
+                    left: (
+                        <ButtonBackToFirstPage onClick={() => setCountPage(countPage - 1)} disabled={countPage < 2}>
+                            <LeftOutlined style={{ color: '#8a8888' }} />
+                        </ButtonBackToFirstPage>
+                    ),
+                }}
+            >
                 {countPage === 1 ? (
                     <>
                         <ContainerBoardCreate>
@@ -137,50 +167,83 @@ function BoardCreateContent() {
                 ) : null}
                 {countPage === 2 ? (
                     <>
-                        <DrawerOfHashtag placement="bottom" closable={false} onClose={onClose} visible={visible} key={placement} height="90vh">
-                            <InputHashtagInDrawer placeholder="#ตรรกะ #ดนตรี" />
-                            {optionalTag.map((item, index) => {
-                                return <OptionalTagName key={index}>#{item.tagName}</OptionalTagName>;
-                            })}
-                            <ButtonUseHashtags>ใช้แฮชเเท็ก</ButtonUseHashtags>
-                        </DrawerOfHashtag>
-                        <ContainerBoardCreate>
-                            <TextTopicContent>ประเภทของกระทู้</TextTopicContent>
-                            {categoryContentList.map((item, index) => {
-                                return (
-                                    <ButtonOfCategory
-                                        key={index}
-                                        name="content_type"
-                                        onClick={() => {
-                                            console.log('เลือกประเภทบทความ :', item.value);
-                                            setContentData({
-                                                ...contentData,
-                                                content_type: item.value,
-                                            });
-                                        }}
-                                    >
-                                        {item.label}
-                                    </ButtonOfCategory>
-                                );
-                            })}
+                        {/* {contentData.map((item, index) => {
+                            <Tag closable onClose={log}>
+                                {contentData.tag[index]}
+                            </Tag>;
+                        })} */}
+                        {/* <Tag closable onClose={log}>
+                            {contentData.tag[0]}
+                        </Tag> */}
+                        <DrawerContainer>
+                            <DrawerOfHashtag
+                                placement="bottom"
+                                style={{ position: 'absolute', overflowY: 'hidden' }}
+                                getContainer={false}
+                                closable={false}
+                                onClose={onCloseDrawer}
+                                visible={visible}
+                                key={placement}
+                                height="85vh"
+                            >
+                                <InputHashtagInDrawer
+                                    dropdownStyle={{ boxShadow: 'unset' }}
+                                    mode="multiple"
+                                    // defaultOpen={true}
+                                    style={{ width: '100%' }}
+                                    placeholder="#ตรรกะ #ดนตรี"
+                                    onChange={handleChangeOfHashtag}
+                                    className={styles.customSelect}
+                                >
+                                    {' '}
+                                    {optionalTag.map((item, index) => {
+                                        return (
+                                            <OptionHashtag value={item.value} key={index}>
+                                                #{item.tagName}
+                                            </OptionHashtag>
+                                        );
+                                    })}
+                                </InputHashtagInDrawer>
+                                <ButtonUseHashtags
+                                    onClick={() => {
+                                        console.log('เลือกประเภทแฮชเเท๊ก :', contentData);
+                                    }}
+                                >
+                                    ใช้แฮชเเท็ก
+                                </ButtonUseHashtags>
+                            </DrawerOfHashtag>
+                            <ContainerBoardCreate>
+                                <TextTopicContent>ประเภทของกระทู้</TextTopicContent>
+                                {categoryContentList.map((item, index) => {
+                                    return (
+                                        <ButtonOfCategory
+                                            key={index}
+                                            name="content_type"
+                                            onClick={() => {
+                                                console.log('เลือกประเภทบทความ :', item.value);
+                                                setContentData({
+                                                    ...contentData,
+                                                    content_type: item.value,
+                                                });
+                                            }}
+                                        >
+                                            {item.label}
+                                        </ButtonOfCategory>
+                                    );
+                                })}
+                            </ContainerBoardCreate>
                             <TextTopicContent>แฮชเเท็กของกระทู้ (Optional)</TextTopicContent>
                             <Form initialValues={{ remember: true }}>
                                 <CreateContentForm>
                                     <FormInputNameContent onClick={showDrawer} type="text" placeholder="กรุณาเลือกแฮชเเท็กของกระทู้" />
                                 </CreateContentForm>
                             </Form>
-                        </ContainerBoardCreate>
-                        <CountOfPageCreateContent>{countPage} / 2</CountOfPageCreateContent>
-                        <ButtonSummitPost
-                            onClick={() => {
-                                console.log('Content data sent to backend:', contentData);
-                            }}
-                        >
-                            สร้างกระทู้
-                        </ButtonSummitPost>
-                        <button className="btn btn-dark" type="submit" onClick={() => setCountPage(countPage - 1)} disabled={countPage < 2}>
-                            Back
-                        </button>
+
+                            <CountOfPageCreateContent>{countPage} / 2</CountOfPageCreateContent>
+                            <ButtonSummitPost type="submit" onClick={postContent}>
+                                สร้างกระทู้
+                            </ButtonSummitPost>
+                        </DrawerContainer>
                     </>
                 ) : null}
             </Container>

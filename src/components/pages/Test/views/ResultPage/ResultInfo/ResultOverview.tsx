@@ -8,11 +8,12 @@ import Chart from '../Chart';
 
 function ResultOverview() {
     const history = useHistory();
+
     //-------------- CREATE MAX SCORE LIST USE SWR--------------//
     const [isData, isSetData] = useState<boolean>(false);
     const [result, setResultData] = useState<Array<IResult> | null>(null);
 
-    const { data: resultData, error } = useSWR('http://18.139.108.242:5000/user/result');
+    const { data: resultData, error } = useSWR('/user/result');
     const isLoading = !resultData && !error;
 
     if (resultData && !isData) {
@@ -31,6 +32,7 @@ function ResultOverview() {
     return (
         <>
             {isLoading ? <div>loading ...</div> : <Chart />}
+
             {result?.map((item: any, index: any) => {
                 return (
                     <ContainerProgressScore key={index}>

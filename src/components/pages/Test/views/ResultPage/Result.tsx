@@ -17,21 +17,18 @@ import { IResult } from '../../shared/interface/Result.interfaces';
 
 const Result = () => {
     const history = useHistory();
-
-    //-------------- CREATE MAX SCORE LIST USE SWR--------------//
-    const [isData, isSetData] = useState<boolean>(false);
     const [result, setResultData] = useState<Array<IResult> | null>(null);
 
-    const { data: resultData, error } = useSWR('http://18.139.108.242:5000/user/result');
+    //-------------- CREATE MAX SCORE LIST USE SWR--------------//
+    const { data: resultData, error } = useSWR('/user/result');
     console.log('[Result Test Game]:', resultData);
-    const isLoading = !resultData && !error;
 
-    if (resultData && !isData) {
-        isSetData(true);
-        const chartScore = Object.keys(resultData).map((key) => resultData[key].score);
-        const maxScoreList = resultData.filter((data: { score: number }) => data.score === Math.max(...chartScore));
-        setResultData(maxScoreList);
-    }
+    useEffect(() => {
+        if (resultData) {
+            setResultData(resultData.filter((data: { score: number }) => data.score === Math.max(...Object.keys(resultData).map((key) => resultData[key].score))));
+            console.log('[Result data]:', result);
+        }
+    }, [resultData]);
 
     const downloadImage = () => {
         var element = document.createElement('a');
@@ -41,7 +38,7 @@ const Result = () => {
         element.click();
     };
 
-    //------------------------ IF USING AXIOS FETCH DATA --------------------//
+    // ------------------------ IF USING AXIOS FETCH DATA --------------------//
     // async function getResultData() {
     //     const response = await ApiGetResult();
     //     if (response) {
@@ -54,13 +51,16 @@ const Result = () => {
     //     }
     // }
 
-    useEffect(() => {
-        console.log('Result of max score', result);
-    }, [result]);
+    // useEffect(() => {
+    //     console.log('Result of max score', result);
+    // }, [result]);
 
+    // useEffect(() => {
+    //     getResultData();
+    // }, []);
     return (
         <Container header={null}>
-            {isLoading ? (
+            {!resultData ? (
                 <div>loading ...</div>
             ) : (
                 <ContainerCarousel>

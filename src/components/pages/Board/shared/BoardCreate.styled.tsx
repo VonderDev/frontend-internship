@@ -1,4 +1,4 @@
-import { Button, Drawer, Form, Input, Upload } from 'antd';
+import { Button, Drawer, Form, Input, Select, Upload } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import styled from 'styled-components';
 
@@ -121,10 +121,52 @@ export const ButtonOfCategory = styled(Button)`
     }
 `;
 
-//------------------ CREATE DRAWER OF HASHTAG ------------------//
-export const InputHashtagInDrawer = styled(Input)`
+export const ButtonBackToFirstPage = styled(Button)`
+    background-color: #ffffff;
     border-radius: 12px;
-    height: 6vh;
+    box-shadow: 0 3px 6px #f5f5f5;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+`;
+
+//------------------ CREATE DRAWER OF HASHTAG ------------------//
+export const InputHashtagInDrawer = styled(Select)`
+    .ant-select-selection-overflow {
+        height: 6vh;
+    }
+    .ant-select-selector {
+        border-radius: 12px !important;
+        background-color: pink;
+    }
+
+    &.ant-select-item {
+        color: blue !important;
+        font-size: 30px !important;
+    }
+`;
+
+export const OptionHashtag = styled(Select.Option)`
+    color: whitesmoke;
+    font-size: 30px !important;
+    & .ant-select-dropdown-placement-bottomLeft {
+        color: blue !important;
+        box-shadow: red !important;
+    }
+    &.ant-select-item-option-selected {
+        color: blue !important;
+    }
+    &.ant-select-item {
+        color: blue !important;
+        font-size: 30px !important;
+    }
+    &.ant-select-item-option-content {
+        color: blue !important;
+        font-size: 30px;
+    }
 `;
 
 export const OptionalTagName = styled.div`
@@ -155,6 +197,13 @@ export const ButtonUseHashtags = styled(Button)`
     font-weight: bolder;
     border-radius: 12px;
     left: 70%;
-    top: 10%;
+    top: 80%;
     font-size: 16px;
+`;
+
+export const DrawerContainer = styled.div`
+    position: relative;
+    height: 100%;
+    padding: 48px;
+    overflow: hidden;
 `;

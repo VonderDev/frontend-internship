@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import { Image, Checkbox, Drawer, Typography, Form } from 'antd';
 
 export const FormLogin = styled(Form)`
-    width: 90%
+    width: 90%;
 `;
 
 export const FormItemTextValidate = styled(Form.Item)`
     & .ant-form-item-control {
-    text-align: left;
+        text-align: left;
     }
 `;
 
@@ -20,7 +20,7 @@ export const LogoPageCenter = styled.div`
 `;
 
 export const FontText = styled.div`
-    font-size: var(--font-18); 
+    font-size: var(--font-18);
 `;
 
 export const FontTextHeader = styled.div`
@@ -37,13 +37,13 @@ export const MoveCenter = styled.div`
 `;
 
 export const PrivacyContainer = styled.div`
-  position: relative;
-  height: 100%;
-  padding: 48px;
-  overflow: hidden;
-  text-align: center;
-  border: 1px solid #ebedf0;
-  border-radius: 2px;
+    position: relative;
+    height: 100%;
+    padding: 48px;
+    overflow: hidden;
+    text-align: center;
+    border: 1px solid #ebedf0;
+    border-radius: 2px;
 `;
 
 export const CheckboxPrivacy = styled(Checkbox)`
@@ -56,10 +56,10 @@ export const TextboxPrivacy = styled.div`
     height: 75%;
     border-radius: 12px;
     overflow-y: scroll;
-    background-color: #F3F3F3;
+    background-color: #f3f3f3;
     text-align: left;
-    padding-left : 10px;
-    padding-right : 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 `;
 
 export const TextAgree = styled(Typography)`
