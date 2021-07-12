@@ -32,9 +32,9 @@ function Profile() {
         { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
     ];
 
-    const { data, error } = useSWR('/user/find');
+    const { data, error } = useSWR('http://18.139.108.242:5000/user/find');
     console.log(data)
-    const { data: boardData, error: boardError } = useSWR('/user/content');
+    const { data: boardData, error: boardError } = useSWR('http://18.139.108.242:5000/user/content');
     console.log(boardData)
     const isLoading = !data && !error && !boardData && !boardError;
 
@@ -45,8 +45,6 @@ function Profile() {
     useEffect(() => {
         if (data & boardData) {
             console.log('[useEffect data username] :', data.username);
-            console.log('[useEffect data email] :', data.email);
-            console.log('[useEffect boardData email] :', boardData.title);
         }
     }, [data , boardData]);
 
@@ -114,7 +112,7 @@ function Profile() {
                             <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
                         </Col>
                     </RowStyled>
-                    {cardList.map((item, index) => {
+                    {boardData.map((item: any, index: any) => {
                         return (
                             <BoardCard
                                 key={index}
@@ -124,7 +122,7 @@ function Profile() {
                             >
                                 <RowStyled>
                                     <Col span={7}>
-                                        <HistoryImage src={item.avatar} />
+                                        <HistoryImage src={item.image} />
                                     </Col>
                                     <Col span={17}>
                                         <CardText>
@@ -132,17 +130,17 @@ function Profile() {
                                                 <HistoryText>{item.title}</HistoryText>
                                             </Row>
                                             <Row>
-                                                <HistoryText>{item.description}</HistoryText>
+                                                <HistoryText>{item.content_body}</HistoryText>
                                             </Row>
                                             <Row>
                                                 <Col span={2}>
                                                     <CommentIcon />
                                                 </Col>
                                                 <Col span={10}>
-                                                    <HistoryText>{item.username}</HistoryText>
+                                                    <HistoryText>{data.username}</HistoryText>
                                                 </Col>
                                                 <Col span={8}>
-                                                    <HistoryText>25 มิ.ย. 2564</HistoryText>
+                                                    <HistoryText>{item.created_at}</HistoryText>
                                                 </Col>
                                                 <Col span={2}>
                                                     <HeartIcon />
