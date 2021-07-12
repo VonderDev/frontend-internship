@@ -32,17 +32,17 @@ function Profile() {
         { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
     ];
 
-    const { data, error } = useSWR('http://18.139.108.242:5000/user/find');
-    const { data: boardData, error: boardError } = useSWR('http://18.139.108.242:5000/user/content/get');
+    const { data, error } = useSWR('http://localhost:5000/user/find');
+    const { data: boardData, error: boardError } = useSWR('http://localhost:5000/user/content/get');
     const isLoading = !boardData && !boardError;
-    console.log('Profile Data', boardData);
+    console.log('Profile Data', data);
+    console.log('Board Data', boardData);
 
-    useEffect(() => {
-        if (boardData) {
-            console.log('[useEffect data username] :', boardData.username);
-            console.log('[useEffect data email] :', boardData.email);
-        }
-    }, [boardData]);
+    // useEffect(() => {
+    //     if (boardData) {
+    //         console.log('[useEffect data username] :', boardData.title);
+    //     }
+    // }, [boardData]);
 
     return (
         <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
