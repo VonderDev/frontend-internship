@@ -1,5 +1,5 @@
-import Container from 'components/Container/Container';
 import React from 'react'
+import Container from 'components/Container/Container';
 import {
   TextRecommendBoardTopic,
   ButtonSeeAllBoard,
@@ -7,7 +7,6 @@ import {
 } from '../../shared/style';
 import { Row, Col } from 'antd';
 import { useHistory } from 'react-router-dom';
-import { CardStyle } from 'shared/style/theme/component';
 import { CardLatest } from './CardLatest';
 import { CardRecommended } from './CardRecommended';
 import { CardTopTen } from './CardTopTen';
@@ -22,7 +21,7 @@ function Board() {
         <TextRecommendBoardTopic xs={{ span: 7, offset: 1 }} lg={{ span: 6, offset: 2 }}>
           แนะนำสำหรับคุณ
         </TextRecommendBoardTopic>
-        <ButtonSeeAllBoard onClick={() => history.push('/board')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
+        <ButtonSeeAllBoard onClick={() => history.push('/boardRecommend')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
       </Row>
 
       <CardContainer>
@@ -33,7 +32,7 @@ function Board() {
         <TextRecommendBoardTopic xs={{ span: 7, offset: 1 }} lg={{ span: 6, offset: 2 }}>
           10 อันดับสูงสุด
         </TextRecommendBoardTopic>
-        <ButtonSeeAllBoard onClick={() => history.push('/board')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
+        <ButtonSeeAllBoard onClick={() => history.push('/boardTopTen')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
       </Row>
 
       <CardContainer>

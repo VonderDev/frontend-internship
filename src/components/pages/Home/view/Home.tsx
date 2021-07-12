@@ -105,7 +105,7 @@ function Home() {
                                 <IconText icon={HeartFilled} text="12" key="list-vertical-message" />,
                             ]}
                         >
-                            <div onClick={() => history.push('/board')}>
+                            <div onClick={() => history.push('/boardContent')}>
                                 <List.Item.Meta avatar={<ImgBoardList src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} description={item.description} />
                             </div>
                         </ListItemBoard>

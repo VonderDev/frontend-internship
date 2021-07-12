@@ -19,6 +19,9 @@ import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion'
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
 import BoardCreateContent from 'components/pages/Board/views/CreateContent/BoardCreateContent';
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
+import BoardRecommend from 'components/pages/Board/views/BoardPage/BoardRecommend';
+import BoardTopTen from 'components/pages/Board/views/BoardPage/BoardTopTen';
+import BoardContent from 'components/pages/Board/views/BoardContent/BoardContent';
 
 import TestPixi from 'components/GameElement/Game/testpixi';
 
@@ -29,6 +32,9 @@ function Routing() {
             <PrivateRoute exact path="/boardcreate" component={BoardCreateContent} />
             <PrivateRoute exact path="/profile" component={Profile} />
             <Route exact path="/board" component={Board} />
+            <Route exact path="/boardRecommend" component={BoardRecommend} />
+            <Route exact path="/boardTopTen" component={BoardTopTen} />
+            <Route exact path="/boardContent" component={BoardContent} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/test" component={Test} />

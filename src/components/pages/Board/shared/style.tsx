@@ -1,4 +1,4 @@
-import { Card, Col, Row } from 'antd';
+import { Card, Col, Row, List, Space } from 'antd';
 import styled from 'styled-components';
 import { RightOutlined, FormOutlined , HeartFilled } from '@ant-design/icons';
 
@@ -90,4 +90,34 @@ export const HeartIcon = styled(HeartFilled)`
     color: var(--Gray-100);
     transform: translateY(20%);
     margin-right: 5px;
+`;
+
+export const ListBoard = styled(List)`
+    font-weight: bolder;
+    margin: 0 auto;
+`;
+
+export const ListItemBoard = styled(List.Item)`
+    margin: 0 auto;
+    margin-bottom: 10px;
+    box-shadow: 0px 3px 6px #c7c7c7;
+    border-radius: 20px;
+    height: 130px;
+    width: 550px;
+    & .ant-list-item-action {
+        transform: translateY(-300%);
+        padding-left: 135px;
+    }
+`;
+
+export const SearchField = styled(Space)`
+    display: flex;
+    justify-content: center;
+`;
+
+export const ImgBoardList = styled.img`
+    transform: translateX(-15%) translateY(-6%);
+    border-radius: 15px;
+    width: 120px;
+    height: 130px;
 `;
