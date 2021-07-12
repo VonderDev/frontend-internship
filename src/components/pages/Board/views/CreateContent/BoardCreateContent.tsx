@@ -6,8 +6,10 @@ import { LeftOutlined } from '@ant-design/icons';
 import { ApiPostContent } from '../../apis/boardCreate.api';
 import CreateContentFirstPage from './CreateFirstPage';
 import CreateContentSecondPage from './CreateSecondPage';
+import { useHistory } from 'react-router-dom';
 
 function BoardCreateContent() {
+    const history = useHistory();
     //----------------- CREATE HOOK FOR POST CONTENT -----------------//
     const [countPage, setCountPage] = useState(1);
     const [contentData, setContentData] = useState<{ title: string; content_body: string; content_type: string; tag: Array<string> }>({
@@ -57,14 +59,14 @@ function BoardCreateContent() {
     };
 
     //----------------- CREATE VARIABLE FOR DRAWER -----------------//
-    const [visible, setVisible] = useState<boolean>(false);
-    const [placement, setPlacement] = useState<string>('bottom');
-    const showDrawer = () => {
-        setVisible(true);
-    };
-    const onCloseDrawer = () => {
-        setVisible(false);
-    };
+    // const [visible, setVisible] = useState<boolean>(false);
+    // const [placement, setPlacement] = useState<string>('bottom');
+    // const showDrawer = () => {
+    //     setVisible(true);
+    // };
+    // const onCloseDrawer = () => {
+    //     setVisible(false);
+    // };
 
     //----------------- CREATE FUNCTION FOR SET HASHTAG -----------------//
     function handleChangeOfHashtag(value: any) {
@@ -79,6 +81,7 @@ function BoardCreateContent() {
     function postContent() {
         console.log('content data sent to backend', contentData);
         ApiPostContent(contentData);
+        history.push('/boardcontent');
     }
 
     //------------ SET STATE FOR CONTENT TYPE --------------//
@@ -88,6 +91,7 @@ function BoardCreateContent() {
         console.log('radio checked', e.target.value);
         setContentType(e.target.value);
     };
+
     return (
         <>
             <Container

@@ -26,10 +26,11 @@ const CreateContentFirstPage: React.FC<CreateContentFirstPageProps> = ({ updateC
         <>
             <ContainerBoardCreate>
                 <TextTopicContent>ชื่อกระทู้</TextTopicContent>
-                <Form>
-                    <CreateContentForm name="nameContent" rules={[{ required: true, message: 'กรุณากรอกชื่อกระทู้ก่อนดำเนินการต่อ' }]}>
+                <Form onFinish={() => setCountPage(countPage + 1)} layout="horizontal">
+                    <CreateContentForm name="title" rules={[{ required: true, message: 'กรุณากรอกชื่อกระทู้ก่อนดำเนินการต่อ' }]}>
                         <FormInputNameContent name="title" type="text" placeholder="กรุณากรอกชื่อกระทู้" onChange={updateContentData} />
                     </CreateContentForm>
+
                     <TextTopicContent>รูปประกอบ (Optional)</TextTopicContent>
                     <UploadImage
                         accept="image/*"
@@ -49,12 +50,12 @@ const CreateContentFirstPage: React.FC<CreateContentFirstPageProps> = ({ updateC
                     <CreateContentForm name="content" rules={[{ required: true, message: 'กรุณากรอกเนื้อหากระทู้ก่อนดำเนินการต่อ' }]}>
                         <FormInputContent name="content_body" placeholder="กรุณากรอกเนื้อหาของกระทู้" onChange={updateContentData} />
                     </CreateContentForm>
+                    <ButtonGoNextCreateContent htmlType="submit" disabled={countPage > 2}>
+                        ดำเนินการต่อ
+                    </ButtonGoNextCreateContent>
                 </Form>
             </ContainerBoardCreate>
             <CountOfPageCreateContent>{countPage} / 2</CountOfPageCreateContent>
-            <ButtonGoNextCreateContent htmlType="submit" onClick={() => setCountPage(countPage + 1)} disabled={countPage > 2}>
-                ดำเนินการต่อ
-            </ButtonGoNextCreateContent>
         </>
     );
 };
