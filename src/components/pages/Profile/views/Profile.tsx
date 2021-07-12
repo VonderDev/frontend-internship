@@ -33,19 +33,22 @@ function Profile() {
     ];
 
     const { data, error } = useSWR('http://18.139.108.242:5000/user/find');
-    const isLoading = !data && !error;
-    console.log('Profile Data', data);
+    console.log(data)
+    const { data: boardData, error: boardError } = useSWR('http://18.139.108.242:5000/user/content/get');
+    console.log(boardData)
+    const isLoading = !data && !error && !boardData && !boardError;
 
-    const { data: boardData, error: boardError } = useSWR('http://localhost:5000/user/content/get');
-    const isLoadingBoardData = !boardData && !boardError;
-    console.log('Board Data', boardData);
+    // if(boardData){
+    //     const boardDataOfUser = boardData.filter((data: { authorId: number }) => data.);
+    // }
 
     useEffect(() => {
-        if (data) {
+        if (data & boardData) {
             console.log('[useEffect data username] :', data.username);
             console.log('[useEffect data email] :', data.email);
+            console.log('[useEffect boardData email] :', boardData.title);
         }
-    }, [data]);
+    }, [data , boardData]);
 
     
 
