@@ -33,15 +33,16 @@ function Profile() {
     ];
 
     const { data, error } = useSWR('http://18.139.108.242:5000/user/find');
-    const isLoading = !data && !error;
-    console.log('Profile Data', data);
+    const { data: boardData, error: boardError } = useSWR('http://18.139.108.242:5000/user/content/get');
+    const isLoading = !boardData && !boardError;
+    console.log('Profile Data', boardData);
 
     useEffect(() => {
-        if (data) {
-            console.log('[useEffect data username] :', data.username);
-            console.log('[useEffect data email] :', data.email);
+        if (boardData) {
+            console.log('[useEffect data username] :', boardData.username);
+            console.log('[useEffect data email] :', boardData.email);
         }
-    }, [data]);
+    }, [boardData]);
 
     return (
         <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
@@ -105,7 +106,7 @@ function Profile() {
                             <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
                         </Col>
                     </RowStyled>
-                    {cardList.map((item, index) => {
+                    {boardData.map((item: any, index: any) => {
                         return (
                             <BoardCard
                                 key={index}
@@ -123,17 +124,17 @@ function Profile() {
                                                 <HistoryText>{item.title}</HistoryText>
                                             </Row>
                                             <Row>
-                                                <HistoryText>{item.description}</HistoryText>
+                                                <HistoryText>{item.content_body}</HistoryText>
                                             </Row>
                                             <Row>
                                                 <Col span={2}>
                                                     <CommentIcon />
                                                 </Col>
                                                 <Col span={10}>
-                                                    <HistoryText>{item.username}</HistoryText>
+                                                    <HistoryText>{data.username}</HistoryText>
                                                 </Col>
                                                 <Col span={8}>
-                                                    <HistoryText>25 มิ.ย. 2564</HistoryText>
+                                                    <HistoryText>{item.created_at}</HistoryText>
                                                 </Col>
                                                 <Col span={2}>
                                                     <HeartIcon />

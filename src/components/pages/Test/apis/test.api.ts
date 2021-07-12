@@ -16,7 +16,7 @@ export async function ApiGetTestData() {
 
 export async function ApiGetResult() {
     return await axios
-        .get('http://18.139.108.242:5000/user/result',  {headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
+        .get('/user/result',  {headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
             console.log('[Result Data] :', res.data); 
         return res.data
         })
@@ -33,8 +33,7 @@ export async function ApiPostTestResult(data: any) {
     //
     // ─── Use axios.post when backend finish ───────────────────
     //
-    return await axios.post('/user/result', data ,
-    {headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
+    return await axios.post('/user/result', data,{headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
         console.log("response", res.data)
         return res.data
     })
