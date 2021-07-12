@@ -33,7 +33,11 @@ commands:
       - checkout
       - run:
           name: "What a number in this .env"
-          command: touch .env ; echo "REACT_APP_API=$REACT_APP_DEV" >> .env
+          command: touch .env ; echo "REACT_APP_API=$REACT_APP_DEV" >> .env ; 
+                   echo "REACT_APP_AWS_BUCKET_NAME=$AWS_BUCKET_NAME" >> .env ; 
+                   echo "REACT_APP_AWS_ACCESS_KEY=$AWS_ACCESS_KEY" >> .env ; 
+                   echo "REACT_APP_AWS_BUCKET_REGION=$AWS_BUCKET_REGION" >> .env ; 
+                   echo "REACT_APP_SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY" >> .env
       - run:
           name: "Check file .env"
           command: ls -la ; cat .env
