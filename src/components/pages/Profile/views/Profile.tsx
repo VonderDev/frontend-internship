@@ -32,8 +32,6 @@ function Profile() {
         { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
     ];
 
-    const { data: boardData, error: boardError } = useSWR('http://18.139.108.242:5000/user/content');
-
     const { data, error } = useSWR('http://18.139.108.242:5000/user/find');
     const isLoading = !data && !error;
     console.log('Profile Data', data);
@@ -107,7 +105,7 @@ function Profile() {
                             <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
                         </Col>
                     </RowStyled>
-                    {cardList.map((item: any, index: any) => {
+                    {cardList.map((item, index) => {
                         return (
                             <BoardCard
                                 key={index}
@@ -117,7 +115,7 @@ function Profile() {
                             >
                                 <RowStyled>
                                     <Col span={7}>
-                                        <HistoryImage src={item.image} />
+                                        <HistoryImage src={item.avatar} />
                                     </Col>
                                     <Col span={17}>
                                         <CardText>
@@ -125,17 +123,17 @@ function Profile() {
                                                 <HistoryText>{item.title}</HistoryText>
                                             </Row>
                                             <Row>
-                                                <HistoryText>{item.content_body}</HistoryText>
+                                                <HistoryText>{item.description}</HistoryText>
                                             </Row>
                                             <Row>
                                                 <Col span={2}>
                                                     <CommentIcon />
                                                 </Col>
                                                 <Col span={10}>
-                                                    <HistoryText>{data.username}</HistoryText>
+                                                    <HistoryText>{item.username}</HistoryText>
                                                 </Col>
                                                 <Col span={8}>
-                                                    <HistoryText>{item.created_at}</HistoryText>
+                                                    <HistoryText>25 มิ.ย. 2564</HistoryText>
                                                 </Col>
                                                 <Col span={2}>
                                                     <HeartIcon />
