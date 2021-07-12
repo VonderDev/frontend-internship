@@ -18,7 +18,7 @@ import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion'
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
 import BoardCreateContent from 'components/pages/Board/views/CreateContent/BoardCreateContent';
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
-
+import Filter from 'components/pages/Board/views/Filter';
 import TestPixi from 'components/GameElement/Game/testpixi';
 
 function Routing() {
@@ -46,6 +46,7 @@ function Routing() {
             <PrivateRoute exact path="/boardhistory" component={BoardHistory} />
             <Route exact path="/teststyle" component={TestStyle} />
             <Route exact path="/pixi" component={TestPixi} />
+            <Route exact path="/filter" component={Filter} />
         </Switch>
     );
 }

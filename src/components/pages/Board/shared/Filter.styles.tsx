@@ -13,6 +13,19 @@ export const ButtonFilter = styled.div`
     align-items: center;
     cursor: pointer;
 `;
+
+export const ButtonUseFilter = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--Blue-400);
+    color: white;
+    width: 159px;
+    height: 51px;
+    border-radius: 12px;
+    padding: 16px 120px;
+`;
 export const SearchField = styled.div`
     display: flex;
     justify-content: center;
