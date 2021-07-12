@@ -3,7 +3,7 @@ import { Box } from 'shared/style/theme/component';
 import { ControlOutlined, SearchOutlined } from '@ant-design/icons';
 import { ButtonFilter, SearchField, InputSearch, DrawerRadius, CustomCheckableTag , TagBox , Topic , ButtonUseFilter} from '../../Board/shared/Filter.styles';
 import { useEffect, useState } from 'react';
-import { ApiPostFilter } from '../apis/board.api';
+import { ApiGetFilter } from '../apis/board.api'
 const Filter = () => {
     /*--------------------------------------------------------------------------------*/
     const [selectedCatagories, setSelectedCatagories] = useState<any>(Array);
@@ -36,7 +36,7 @@ const Filter = () => {
             content_type: selectedCatagories,
             tag: selectedTags,
         });
-        ApiPostFilter(contentData);
+        ApiGetFilter(contentData);
     }
 
     useEffect(() => {

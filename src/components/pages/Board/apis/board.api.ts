@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const token = localStorage.getItem('token');
 
-export async function ApiPostFilter(data: any) {
+export async function ApiGetFilter(data: any) {
     console.log('[Filter Data] :', data);
     // return mockTestData as unknown as Array<IQuestion>;
     //
@@ -15,6 +15,6 @@ export async function ApiPostFilter(data: any) {
     })
     .catch((err) => {
         console.error(err);
-        console.log('Cannot post Filter');
+        console.log('Cannot Filter');
     });
 }
