@@ -28,7 +28,7 @@ function Routing() {
         <Switch>
             <Route exact path="/" component={Home} />
             <PrivateRoute exact path="/boardcreate" component={BoardCreateContent} />
-            <Route exact path="/boardcontent" component={BoardContent} />
+            <Route exact path="/boardcontent/:id" component={BoardContent} />
             <Route exact path="/filter" component={Filter} />
             <PrivateRoute exact path="/profile" component={Profile} />
             <Route exact path="/login" component={Login} />

@@ -25,9 +25,9 @@ function BoardCreateContent() {
         });
     };
 
-    useEffect(() => {
-        console.log('[Content data]:', contentData);
-    }, [contentData]);
+    // useEffect(() => {
+    //     console.log('[Content data]:', contentData);
+    // }, [contentData]);
 
     //----------------- CREATE FUNCTION UPLOAD IMAGE -----------------//
     const [defaultFileList, setDefaultFileList] = useState([]);
@@ -77,11 +77,13 @@ function BoardCreateContent() {
         });
     }
 
-    //------------ POST CONTENT FUNCTION --------------//
-    function postContent() {
+    //------------ POST CONTENT FUNCTION --------------//W
+    async function postContent() {
         console.log('content data sent to backend', contentData);
-        ApiPostContent(contentData);
-        history.push('/boardcontent');
+        var test = await ApiPostContent(contentData);
+        // history.push({ pathname: '/boardcontent', search: `test${test._id}` });
+        history.push(`/boardcontent/${test._id}`);
+        console.log('Testtttttttt', test._id);
     }
 
     //------------ SET STATE FOR CONTENT TYPE --------------//

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const token = localStorage.getItem('token');
 //----------------------- AXIOS POST CONTENT -----------------------//
@@ -8,6 +9,7 @@ export async function ApiPostContent(data: any) {
     {headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
         console.log("[Response : Post content]", res.data)
         return res.data
+        
     })
     .catch((err) => {
         console.error(err);
@@ -17,7 +19,7 @@ export async function ApiPostContent(data: any) {
 
 export async function ApiGetNewestContent() {
     return await axios
-        .get('/user/newestContent',  {headers: { 'Authorization': `Bearer ${token}` }})
+        .get('/user/newestContent')
         .then((response) => {
             console.log('[Content Post Newest] :', response.data);
             return response.data;

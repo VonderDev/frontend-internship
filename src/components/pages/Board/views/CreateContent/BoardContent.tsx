@@ -1,8 +1,12 @@
 import Container from 'components/Container/Container';
 import { useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { ApiGetNewestContent } from '../../apis/boardCreate.api';
 
 function BoardContent() {
+    const history = useHistory();
+    const param = useParams<{ id: string }>();
+
     //--------------- FETCHING BOARD CONTENT USING SWR ---------------//
     async function getNewestContent() {
         const response = await ApiGetNewestContent();
@@ -14,6 +18,7 @@ function BoardContent() {
     }
     useEffect(() => {
         getNewestContent();
+        console.log('paramm', param);
     }, []);
     return (
         <Container
@@ -23,7 +28,7 @@ function BoardContent() {
                 left: 'back',
             }}
         >
-            <h1> Board post success </h1>
+            <h1>{param.id} </h1>
         </Container>
     );
 }
