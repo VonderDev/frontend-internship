@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const ProgressBar = styled(Progress)`
     width: 80%;
+    padding-bottom: 10px;
     & .ant-progress-success-bg,
     .ant-progress-bg {
         background-color: var(--Blue-200);
@@ -15,7 +16,7 @@ export const ButtonGoHomeInResult = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Blue-400);
-    transform: translateY(-90%);
+    transform: translateY(-130%);
     margin-left: auto;
     margin-right: auto;
     width: 75%;

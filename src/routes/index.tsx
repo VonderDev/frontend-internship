@@ -1,6 +1,5 @@
 import { Switch, Route } from 'react-router-dom';
 import Home from 'components/pages/Home/view/Home';
-import Board from 'components/pages/Board/views/Board';
 import Profile from 'components/pages/Profile/views/Profile';
 import Login from 'components/pages/Authentication/views/Login/Login';
 import Register from 'components/pages/Authentication/views/Register/Register';
@@ -16,15 +15,17 @@ import TestStory from 'components/pages/Test/views/TestStartPage/TestStory';
 import ResultOverview from 'components/pages/Test/views/ResultPage/ResultInfo/ResultOverview';
 import ResultInfo from 'components/pages/Test/views/ResultPage/ResultInfo/ResultInfo';
 import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion';
-import ProfileResult from 'components/pages/Profile/views/ProfileResult';
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
-import Filter from 'components/pages/Board/views/Filter'
+import BoardCreateContent from 'components/pages/Board/views/CreateContent/BoardCreateContent';
+import ProfileResult from 'components/pages/Profile/views/ProfileResult';
+
+import TestPixi from 'components/GameElement/Game/testpixi';
 
 function Routing() {
     return (
         <Switch>
             <Route exact path="/" component={Home} />
-            <PrivateRoute exact path="/board" component={Board} />
+            <PrivateRoute exact path="/boardcreate" component={BoardCreateContent} />
             <PrivateRoute exact path="/profile" component={Profile} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
@@ -44,7 +45,7 @@ function Routing() {
             <PrivateRoute exact path="/profileresult" component={ProfileResult} />
             <PrivateRoute exact path="/boardhistory" component={BoardHistory} />
             <Route exact path="/teststyle" component={TestStyle} />
-            <Route exact path="/filter" component={Filter} />
+            <Route exact path="/pixi" component={TestPixi} />
         </Switch>
     );
 }

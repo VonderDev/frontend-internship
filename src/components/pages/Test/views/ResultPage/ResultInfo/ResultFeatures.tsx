@@ -1,63 +1,71 @@
-import { useEffect, useState } from 'react';
-import { ContainerImagePreview, ImagePreview, TextHeaderResult } from '../../../shared/styles/Result/ResultPage.styled';
-import { API_Get_ResultData } from '../../../apis/Result.api';
+import { useState } from 'react';
+import { ButtonGoHomeInResultFeature, ContainerImagePreview, ImagePreview, TextHeaderResult } from '../../../shared/styles/Result/ResultPage.styled';
 import { IResult } from '../../../shared/interface/Result.interfaces';
 import CharactorDetail from './CharactorDetail';
-//
-// ─── import mockData ───────────────────────────────────────────────────────────────────
-//
-const mockResult = require('../../../mocks/result.json');
-const chartScore = Object.keys(mockResult).map((key) => mockResult[key].score);
-const max = Math.max(...chartScore);
-const maxScoreList = mockResult.filter((data: { score: number }) => data.score === max);
+import useSWR from 'swr';
+import { useHistory } from 'react-router-dom';
 
 const ResultFeatures = () => {
-    useEffect(() => {
-        console.log('Maxscore: ', max);
-        console.log('Name: ', maxScoreList.length);
-    }, []);
+    const history = useHistory();
+    //---------------- FETCHING RESULT DATA USE SWR ----------------//
+    const [result, setResultData] = useState<Array<IResult> | null>(null);
+    const [isData, isSetData] = useState<boolean>(false);
+    const { data: resultData, error } = useSWR('http://18.139.108.242:5000/user/result');
+    const isLoading = !resultData && !error;
 
-    const [detailCharactor, setDetailCharactor] = useState<IResult>({
-        skill: maxScoreList[0].skill,
-        image_charactor: maxScoreList[0].image_charactor,
-        description: maxScoreList[0].description,
-        description_career: maxScoreList[0].description_career,
+    const [detailCharacter, setDetailCharacter] = useState<IResult>({
+        skill: '',
+        image_charactor: '',
+        description: '',
+        description_career: '',
     });
 
-    async function getResultData() {
-        const response = await API_Get_ResultData();
-        if (response) {
-            console.log(response);
-        } else {
-            console.log('error');
-        }
+    if (resultData && !isData) {
+        isSetData(true);
+        const chartScore = Object.keys(resultData).map((key) => resultData[key].score);
+        const maxScoreList = resultData.filter((data: { score: number }) => data.score === Math.max(...chartScore));
+        setResultData(maxScoreList);
+        const maxScoreDefault = maxScoreList[0];
+        setDetailCharacter({
+            skill: maxScoreDefault.skill,
+            image_charactor: maxScoreDefault.image_charactor,
+            description: maxScoreDefault.description,
+            description_career: maxScoreDefault.description_career,
+        });
+        console.log('[max Score List from useSWR]', maxScoreList);
     }
 
     function onClickImage(description: string, description_career: string, skill: string, image_charactor: string) {
         console.log('[คำอธิบาย , อาชีพ]', description, description_career);
         console.log(skill);
         console.log(image_charactor);
-        console.log(detailCharactor);
-        setDetailCharactor({ description, description_career, image_charactor, skill });
+        console.log(detailCharacter);
+        setDetailCharacter({ description, description_career, image_charactor, skill });
     }
 
     return (
         <>
-            <TextHeaderResult>ลักษณะเด่นของคุณ ({maxScoreList.length}ด้าน)</TextHeaderResult>
-            {maxScoreList.map((item: any, index: any) => {
-                return (
-                    <ContainerImagePreview key={index}>
-                        <ImagePreview onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)} src={item.image_charactor} />
-                        {/* <TextNameSkillInImg>{item.skill}</TextNameSkillInImg> */}
-                    </ContainerImagePreview>
-                );
-            })}
+            {isLoading ? (
+                <div>loading ...</div>
+            ) : (
+                <>
+                    <TextHeaderResult>ลักษณะเด่นของคุณ ({result?.length}ด้าน)</TextHeaderResult>
+                    {result?.map((item: any, index: any) => {
+                        return (
+                            <ContainerImagePreview key={index}>
+                                <ImagePreview onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)} src={item.image_charactor} />
+                            </ContainerImagePreview>
+                        );
+                    })}
+                </>
+            )}
             <CharactorDetail
-                description={detailCharactor.description}
-                description_career={detailCharactor.description_career}
-                skill={detailCharactor.skill}
-                img_charactor={detailCharactor.image_charactor}
+                description={detailCharacter.description}
+                description_career={detailCharacter.description_career}
+                skill={detailCharacter.skill}
+                img_charactor={detailCharacter.image_charactor}
             />
+            <ButtonGoHomeInResultFeature onClick={() => history.push('/')}>กลับหน้าหลัก</ButtonGoHomeInResultFeature>
         </>
     );
 };
