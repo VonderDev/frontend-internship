@@ -46,10 +46,12 @@ export const RowStyled = styled(Row)`
     width: 100%;
 `;
 
+export const ScrollCard = styled.div`
+    display : flex;
+`;
+
 export const GridBox = styled.div`
     display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
     overflow-x: scroll;
     ::-webkit-scrollbar {
     width: 0;  /* Remove scrollbar space */

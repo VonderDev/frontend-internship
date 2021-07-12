@@ -1,63 +1,60 @@
-import { Space, Spin } from 'antd';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { Space, Spin, Card } from 'antd';
 import { CardStyle } from 'shared/style/theme/component';
 import useSWR from 'swr';
-import { GridBox } from '../../shared/style';
-import { LoadingOutlined } from '@ant-design/icons';
+import { GridBox, ScrollCard, SearchField } from '../../shared/style';
+import { FormOutlined, LoadingOutlined } from '@ant-design/icons';
+import { IIconText } from '../../shared/Card.interface';
+import { useHistory } from 'react-router';
 
+const { Meta } = Card;
+
+const IconText = ({ icon, text }: IIconText) => (
+  <SearchField>
+    {React.createElement(icon)}
+    {text}
+  </SearchField>
+);
 export const CardTopTen = () => {
 
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const { data, error } = useSWR('/user/content/get');
   const isLoading = !data && !error;
-  console.log('Card Top10 Data', data);
+  console.log('Card Top10 Data : ', data);
+  const history = useHistory();
 
   useEffect(() => {
-    if (data) {
-      console.log('[useEffect card title] :', data.title);
-      console.log('[useEffect card image] :', data.image);
-      console.log('[useEffect card tag] :', data.tag);
-      console.log('[useEffect card image] :', data.author_username);
-    }
-  }, [data])
+
+  }, [])
 
   return (
-    <GridBox>
-      {error && <div>error</div>}
+    <>
       {isLoading ? (
-        <Spin indicator={antIcon} />
+        <div>Loading....</div>
       ) : (
-        <Space direction="horizontal">
-          <div>
-            <CardStyle typecard="Vertical" heightcard={300}
-              cover={
-                <img alt="example" src="" />
-              }
-            >
-              <p> Card content </p>
-              <p> Card content </p>
-            </CardStyle>
-          </div>
-          <div>
-            <CardStyle typecard="Vertical" heightcard={300}>
-              <p> Card content </p>
-              <p> Card content </p>
-            </CardStyle>
-          </div>
-          <div>
-            <CardStyle typecard="Vertical" heightcard={300}>
-              <p> Card content </p>
-              <p> Card content </p>
-            </CardStyle>
-          </div>
-          <div>
-            <CardStyle typecard="Vertical" heightcard={300}>
-              <p> Card content </p>
-              <p> Card content </p>
-            </CardStyle>
-          </div>
-        </Space>
+        <GridBox>
+          <Space direction="horizontal">
+            {data?.slice(0, 10).map((item: any, index: any) => {
+              return (
+                <CardStyle typecard="Vertical" heightcard={200} key={index}
+                  onClick={() => history.push('/boardContent')}
+                  cover={
+                    <img alt="default"
+                      src="https://s.keepmeme.com/files/en_posts/20200908/blurred-surprised-cat-meme-5b734a45210ef3b6657bcbe2831715fa.jpg" />
+                  }
+                  actions={
+                    [
+                      <IconText icon={FormOutlined} text={item.auth_username} />,
+                    ]
+                  }
+                >
+                  <Meta title={item.title} />
+                </CardStyle>
+              )
+            })}
+          </Space>
+        </GridBox>
       )}
-    </GridBox>
+    </>
   )
 }
