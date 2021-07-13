@@ -8,7 +8,7 @@ import {
     InputHashtagInDrawer,
     OptionHashtag,
     TextTopicContent,
-} from '../../shared/BoardCreate.styled';
+} from '../../shared/style/BoardCreate.styled';
 
 interface CreateContentSecondPageProps {
     updateContentData: (event: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;

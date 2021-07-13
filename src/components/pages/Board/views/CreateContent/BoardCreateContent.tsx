@@ -1,5 +1,5 @@
 import Container from 'components/Container/Container';
-import { ButtonBackToFirstPage } from '../../shared/BoardCreate.styled';
+import { ButtonBackToFirstPage } from '../../shared/style/BoardCreate.styled';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { LeftOutlined } from '@ant-design/icons';
@@ -80,10 +80,8 @@ function BoardCreateContent() {
     //------------ POST CONTENT FUNCTION --------------//W
     async function postContent() {
         console.log('content data sent to backend', contentData);
-        var test = await ApiPostContent(contentData);
-        // history.push({ pathname: '/boardcontent', search: `test${test._id}` });
-        history.push(`/boardcontent/${test._id}`);
-        console.log('Testtttttttt', test._id);
+        var objectID = await ApiPostContent(contentData);
+        history.push(`/boardcontent/${objectID._id}`);
     }
 
     //------------ SET STATE FOR CONTENT TYPE --------------//
