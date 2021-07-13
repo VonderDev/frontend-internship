@@ -328,18 +328,32 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       dirtS3.anchor.set(0,-0.5);
       homeScene.addChild(dirtS3)
 
+      Cloud1.scale.set(0.5);
+      Cloud1.position.set(10, 20);
+      homeScene.addChild(Cloud1)
+
+      Cloud2.scale.set(0.5);
+      Cloud2.position.set(500, 150);
+      homeScene.addChild(Cloud2)
+
       const houseTexture = PIXI.Texture.from(house);
       const houseS3 = new PIXI.Sprite(houseTexture);
       houseS3.scale.set(0.5);
       houseS3.position.set(100,200);
       homeScene.addChild(houseS3)
 
+      const fenceTexture = PIXI.Texture.from(fence);
+      const fenceS3 = new PIXI.Sprite(fenceTexture);
+      fenceS3.scale.set(0.8);
+      fenceS3.position.set(50,300);
+      homeScene.addChild(fenceS3)
+
       const treef2Texture = PIXI.Texture.from(treef2);
       const Treef2 = new PIXI.Sprite(treef2Texture);
-      Treef2.scale.set(0.7)
-      Treef2.position.set(400,0);
+      Treef2.scale.set(1)
+      Treef2.position.set(820,-350);
       Treef2.scale.x = -1
-      firstScene.addChild(Treef2)
+      homeScene.addChild(Treef2)
 
     }
     function doorScene3 () {
@@ -349,7 +363,23 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
             bghouse.scale.set(0.7);
             bghouse.anchor.set(0,0);
             doorScene.addChild(bghouse)
+
+            const doorTexture = PIXI.Texture.from(door);
+            const doorS3 = new PIXI.Sprite(doorTexture);
+            doorS3.scale.set(0.5);
+            doorS3.position.set(70,100);
+            doorScene.addChild(doorS3)
+
+            const flowerTexture = PIXI.Texture.from(flower);
+            const flowerS3 = new PIXI.Sprite(flowerTexture);
+            flowerS3.scale.set(0.6);
+            flowerS3.position.set(-100,600);
+            doorScene.addChild(flowerS3)
     
+            const flower2S3 = new PIXI.Sprite(flowerTexture);
+            flower2S3.scale.set(0.6);
+            flower2S3.position.set(450,600);
+            doorScene.addChild(flower2S3)
     }
 
     // const onMainResize = (width:number , height:number) => {
