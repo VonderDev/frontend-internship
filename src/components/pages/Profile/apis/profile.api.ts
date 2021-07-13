@@ -23,7 +23,7 @@ export async function ApiPutUserData(data: object) {
     const token = localStorage.getItem("token");
     console.log('[Edited data] :', data);
     return await axios
-    .put('/user', data , {headers: {
+    .put('http://18.139.108.242:5000/user', data , {headers: {
         "Authorization": `Bearer ${token}`
       }})
       // เปลี่ยนเป็น try catch
