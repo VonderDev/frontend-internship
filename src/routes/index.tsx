@@ -20,7 +20,6 @@ import BoardCreateContent from 'components/pages/Board/views/CreateContent/Board
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
 import Filter from 'components/pages/Board/views/board/Filter';
 import BoardContent from 'components/pages/Board/views/CreateContent/BoardContent';
-
 import TestPixi from 'components/GameElement/Game/testpixi';
 
 function Routing() {

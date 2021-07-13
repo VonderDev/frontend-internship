@@ -1,87 +1,120 @@
 version: 2.1
 
 executors:
-    node14:
-        docker:
-            - image: circleci/node:14.17.0
-        working_directory: ~/project
+  node14:
+    docker:
+      - image: circleci/node:14.17.0
+    working_directory: ~/project
 
 commands:
-    build:
-        description: 'Builds the project'
-        steps:
-            - checkout
-            - restore_cache:
-                  keys:
-                      - v1-npm-deps-{{ checksum "package.json" }}
-                      - v1-npm-deps-
-            - run:
-                  name: Install Dependencies
-                  command: npm install
-            - save_cache:
-                  key: v1-npm-deps-{{ checksum "package.json" }}
-                  paths:
-                      - ./node_modules
-            - run:
-                  name: Build for current environment.
-                  command: npm run build
-    test:
-        description: 'Test project'
-        steps:
-            - checkout
-            - run: npm run test
-    deploy:
-        description: 'Deploy project to the designated environment'
-        parameters:
-            env:
-                type: string
-                default: 'dev'
-        steps:
-            - checkout
-            - run:
-                  name: Firebase Deploy
-                  command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN" --non-interactive --only hosting:<< parameters.env >>
+  # env-prod:
+  #   description: "test .env variable"
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "What a number in this .env"
+  #         command: touch .env ; echo "REACT_APP_API=$REACT_APP_PROD" >> .env
+  #     - run:
+  #         name: "Check file .env"
+  #         command: ls -la ; cat .env
+  # env-stag:
+  #   description: "test .env variable"
+  #   steps:
+  #     - checkout
+  #     - run:
+  #         name: "What a number in this .env"
+  #         command: touch .env ; echo "REACT_APP_DB_API=$REAC_APP_STAG" >> .env
+  #     - run:
+  #         name: "Check file .env"
+  #         command: ls -la ; cat .env
+  env-dev:
+    description: "test .env variable"
+    steps:
+      - checkout
+      - run:
+          name: "What a number in this .env"
+          command: touch .env ; echo "REACT_APP_API=$REACT_APP_DEV" >> .env ; 
+      - run:
+          name: "Check file .env"
+          command: ls -la ; cat .env
+  build:
+    description: "Builds the project"
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-npm-deps-{{ checksum "package.json" }}
+            - v1-npm-deps-
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - save_cache:
+          key: v1-npm-deps-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Build for current environment.
+          command: npm run build
+  test:
+    description: "Test project"
+    steps:
+      - checkout
+      - run: npm run test
+  deploy:
+    description: "Deploy project to the designated environment"
+    parameters:
+      env:
+        type: string
+        default: "dev"
+    steps:
+      - checkout
+      - run:
+          name: Firebase Deploy
+          command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN" --non-interactive --only hosting:<< parameters.env >>
 
 jobs:
-    build-deploy-dev:
-        executor: node14
-        steps:
-            - build
-            - test
-            - deploy:
-                  env: 'dev'
-    build-deploy-staging:
-        executor: node14
-        steps:
-            - build
-            - test
-            - deploy:
-                  env: 'staging'
-    build-deploy-production:
-        executor: node14
-        steps:
-            - build
-            - test
-            - deploy:
-                  env: 'production'
+  build-deploy-dev:
+    executor: node14
+    steps:
+      - env-dev
+      - build
+      - test
+      - deploy:
+          env: "dev"
+  build-deploy-staging:
+    executor: node14
+    steps:
+      # - env-stag
+      - build
+      - test
+      - deploy:
+          env: "staging"
+  build-deploy-production:
+    executor: node14
+    steps:
+      # - env-prod
+      - build
+      - test
+      - deploy:
+          env: "production"
 
 workflows:
-    version: 2
-    dev:
-        jobs:
-            - build-deploy-dev:
-                  filters:
-                      branches:
-                          only: develop
-    staging:
-        jobs:
-            - build-deploy-staging:
-                  filters:
-                      branches:
-                          only: staging
-    production:
-        jobs:
-            - build-deploy-production:
-                  filters:
-                      branches:
-                          only: main
+  version: 2
+  dev:
+    jobs:
+      - build-deploy-dev:
+          filters:
+            branches:
+              only: develop
+  staging:
+    jobs:
+      - build-deploy-staging:
+          filters:
+            branches:
+              only: staging
+  production:
+    jobs:
+      - build-deploy-production:
+          filters:
+            branches:
+              only: main
