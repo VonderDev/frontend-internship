@@ -26,41 +26,36 @@ import {
 
 function Profile() {
     const history = useHistory();
-    //const { data: profileData, error: profileError } = useSWR('/user/profile');
-    const { data: userData, error: userError } = useSWR('/user/find');
-    const { data: boardData, error: boardError } = useSWR('/user/content/get');
-    const isLoading = !userData && !userError && !boardData && !boardError;
-
-    // useEffect(() => {
-    //     if (profileData) {
-    //         console.log('[Profile Data] :',profileData)
-    //     }
-    // }, [profileData]);
+    const { data, error } = useSWR('/user/find');
+    const { data: profile, error: errorProfile } = useSWR('/user/profile');
+    const isLoading = !data && !error && !errorProfile && !profile;
+    //console.log('/user/find data', data);
+    //console.log('[Profile from user/profile]', profile);
 
     useEffect(() => {
-        if (userData && boardData) {
-            console.log('[useEffect data username] :', userData)
-            console.log('[useEffect boardData title] :', boardData);
+        if (data & profile) {
+            console.log('[useEffect data username] :', data);
+            console.log('[useEffect profile] :', profile);
         }
-    }, [userData ,boardData]);
+    }, [data, profile]);
 
 
     return (
         <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
-            {userError && <div>error </div>}
-            {isLoading ? (
+            {error && <div>error </div>}
+            {isLoading? (
                 <div>loading ...</div>
             ) : (
                 <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
                     <UserImage src={ProfileMascot} />
-                    <TextUsername>{userData.username}</TextUsername>
+                    <TextUsername>{data.username}</TextUsername>
                     <RowStyled>
                         <Col span={8}>
                             <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
                         </Col>
                         <Col span={16}>
                             <TextUserInfo2>
-                                {userData.firstName} {userData.lastName}
+                                {data.firstName} {data.lastName}
                             </TextUserInfo2>
                         </Col>
                     </RowStyled>
@@ -69,7 +64,7 @@ function Profile() {
                             <TextUserInfo1>อีเมล :</TextUserInfo1>
                         </Col>
                         <Col span={16}>
-                            <TextUserInfo2>{userData.email}</TextUserInfo2>
+                            <TextUserInfo2>{data.email}</TextUserInfo2>
                         </Col>
                     </RowStyled>
                     <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
@@ -107,7 +102,7 @@ function Profile() {
                             <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
                         </Col>
                     </RowStyled>
-                    {boardData?.map((item: any, index: any) => {
+                    {/* {boardData?.map((item: any, index: any) => {
                         return (
                             <BoardCard
                                 key={index}
@@ -132,7 +127,7 @@ function Profile() {
                                                     <CommentIcon />
                                                 </Col>
                                                 <Col span={10}>
-                                                    <HistoryText>{userData.username}</HistoryText>
+                                                    <HistoryText>{data.username}</HistoryText>
                                                 </Col>
                                                 <Col span={8}>
                                                     <HistoryText>{item.created_at}</HistoryText>
@@ -149,7 +144,7 @@ function Profile() {
                                 </RowStyled>
                             </BoardCard>
                         );
-                    })}
+                    })} */}
                 </Box>
             )}
         </Container>
