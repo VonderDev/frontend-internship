@@ -26,36 +26,33 @@ import {
 
 function Profile() {
     const history = useHistory();
-    const { data, error } = useSWR('/user/find');
     const { data: profile, error: errorProfile } = useSWR('/user/profile');
-    const isLoading = !data && !error && !errorProfile && !profile;
-    //console.log('/user/find data', data);
-    //console.log('[Profile from user/profile]', profile);
+    const isLoading = !errorProfile && !profile;
+    console.log('[Profile from user/profile]', profile);
 
     useEffect(() => {
-        if (data & profile) {
-            console.log('[useEffect data username] :', data);
+        if (profile) {
             console.log('[useEffect profile] :', profile);
         }
-    }, [data, profile]);
+    }, [profile]);
 
 
     return (
         <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
-            {error && <div>error </div>}
+            {errorProfile && <div>error </div>}
             {isLoading? (
                 <div>loading ...</div>
             ) : (
                 <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
                     <UserImage src={ProfileMascot} />
-                    <TextUsername>{data.username}</TextUsername>
+                    <TextUsername>{profile?.auth[0].username}</TextUsername>
                     <RowStyled>
                         <Col span={8}>
                             <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
                         </Col>
                         <Col span={16}>
                             <TextUserInfo2>
-                                {data.firstName} {data.lastName}
+                                {profile?.auth[0].firstName} {profile?.auth[0].lastName}
                             </TextUserInfo2>
                         </Col>
                     </RowStyled>
@@ -64,7 +61,7 @@ function Profile() {
                             <TextUserInfo1>อีเมล :</TextUserInfo1>
                         </Col>
                         <Col span={16}>
-                            <TextUserInfo2>{data.email}</TextUserInfo2>
+                            <TextUserInfo2>{profile?.auth[0].email}</TextUserInfo2>
                         </Col>
                     </RowStyled>
                     <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
@@ -102,7 +99,7 @@ function Profile() {
                             <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
                         </Col>
                     </RowStyled>
-                    {/* {boardData?.map((item: any, index: any) => {
+                    {profile?.contents.slice(0,3).map((item: any, index: any) => {
                         return (
                             <BoardCard
                                 key={index}
@@ -112,7 +109,7 @@ function Profile() {
                             >
                                 <RowStyled>
                                     <Col span={7}>
-                                        <HistoryImage src={item.avatar} />
+                                        <HistoryImage src={item.image} />
                                     </Col>
                                     <Col span={17}>
                                         <CardText>
@@ -127,7 +124,7 @@ function Profile() {
                                                     <CommentIcon />
                                                 </Col>
                                                 <Col span={10}>
-                                                    <HistoryText>{data.username}</HistoryText>
+                                                    <HistoryText>{item.author_username}</HistoryText>
                                                 </Col>
                                                 <Col span={8}>
                                                     <HistoryText>{item.created_at}</HistoryText>
@@ -144,7 +141,7 @@ function Profile() {
                                 </RowStyled>
                             </BoardCard>
                         );
-                    })} */}
+                    })}
                 </Box>
             )}
         </Container>
