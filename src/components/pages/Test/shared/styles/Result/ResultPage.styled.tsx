@@ -23,6 +23,7 @@ export const TextHeaderResult = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    cursor: none;
 `;
 
 export const ChartStyled = styled(Chart)`

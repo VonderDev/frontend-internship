@@ -96,7 +96,6 @@ export const CustomCheckableTag = styled(CheckableTag)`
     margin-top: 5px;
     background-color: #f2f2f5 !important;
     border: none;
-
     &.ant-tag-checkable-checked {
         background-color: #daebfd !important;
         color: #3a8ce4 !important;
