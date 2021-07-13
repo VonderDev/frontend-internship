@@ -35,13 +35,11 @@ function Profile() {
     const { data, error } = useSWR('/user/find');
     const { data: boardData, error: boardError } = useSWR('/user/content/get');
     const isLoading = !data && !error && !boardData && !boardError;
-    console.log('Profile Data', data);
-    console.log('Board Data', boardData);
 
     useEffect(() => {
         if (data && boardData) {
-            console.log('[useEffect data username] :', data.username)
-            console.log('[useEffect boardData title] :', boardData.title);
+            console.log('[useEffect data username] :', data)
+            console.log('[useEffect boardData title] :', boardData);
         }
     }, [data ,boardData]);
 
