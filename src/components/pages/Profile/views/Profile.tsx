@@ -82,7 +82,7 @@ function Profile() {
                                         <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
                                     </Col>
                                     <Col span={12}>
-                                        <CardText style={{ transform: 'translateY(12%)' }}>
+                                        <CardText style={{ transform: 'translateY(67%) translateX(-10%)' }}>
                                             <RowStyled>ลักษณะเด่นของคุณ</RowStyled>
                                             <RowStyled>{item[0].created_at}</RowStyled>
                                         </CardText>
