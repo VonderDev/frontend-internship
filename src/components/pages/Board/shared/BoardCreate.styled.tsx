@@ -1,4 +1,4 @@
-import { Button, Drawer, Form, Input, Select, Upload } from 'antd';
+import { Button, Drawer, Form, Input, Radio, Select, Upload } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import styled from 'styled-components';
 
@@ -7,7 +7,7 @@ export const FormInputNameContent = styled(Input)`
     color: grey;
     font-size: var(--font-16);
     border-radius: 15px;
-    width: 80%;
+    width: 90%;
     height: 45px;
     box-shadow: 0px 3px 6px #f1f1f1;
 `;
@@ -16,7 +16,7 @@ export const FormInputContent = styled(TextArea)`
     color: grey;
     font-size: var(--font-16);
     border-radius: 15px;
-    width: 80%;
+    width: 90%;
     height: 220px;
     box-shadow: 0px 3px 6px #f1f1f1;
     padding-bottom: 30%;
@@ -38,7 +38,7 @@ export const ButtonGoNextCreateContent = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Blue-400);
-    transform: translateY(103%);
+    transform: translateY(180%);
     margin-left: auto;
     margin-right: auto;
     width: 80%;
@@ -72,12 +72,12 @@ export const TextContent = styled(TextArea)`
 `;
 
 //------------------ CREATE CONTENT PAGE 2 ------------------//
-export const ButtonSummitPost = styled.button`
+export const ButtonSummitPost = styled(Button)`
     border-radius: 12px;
     font-weight: bolder;
     color: white;
     background-color: var(--Green-400);
-    transform: translateY(740%);
+    transform: translateY(830%);
     margin-left: auto;
     margin-right: auto;
     width: 80%;
@@ -100,7 +100,7 @@ export const CountOfPageCreateContent = styled.div`
     bottom: 13%;
     left: 0;
     right: 0;
-    position: absolute;
+    position: fixed;
 `;
 
 export const ButtonOfCategory = styled(Button)`
@@ -121,33 +121,85 @@ export const ButtonOfCategory = styled(Button)`
     }
 `;
 
+export const ContainerContentType = styled(Radio.Group)`
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    right: 10px;
+`;
+
+export const ContentTypeButton = styled(Radio.Button)`
+    .ant-radio-inner,
+    .ant-radio-inner:after {
+        border-radius: 0 !important;
+    }
+    .ant-radio-inner:after {
+        border: none !important;
+    }
+    border-radius: 12px !important;
+    & .ant-radio-button-wrapper::first-child {
+        border-color: white !important;
+        border-radius: 12px !important;
+        width: 100px;
+    }
+    & .ant-radio-button {
+        background-color: var(--Blue-000);
+        border-radius: 12px !important;
+        font-size: 14px;
+        color: var(--Gray-500) !important;
+
+        /* border-radius: 12px !important; */
+    }
+`;
+export const ButtonBackToFirstPage = styled(Button)`
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 3px 6px #f5f5f5;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+`;
+
 //------------------ CREATE DRAWER OF HASHTAG ------------------//
 export const InputHashtagInDrawer = styled(Select)`
-    & .ant-select-selection-overflow {
-        height: 6vh;
+    font-size: 16px;
+    padding-top: 15px;
+
+    .ant-select-selection-overflow {
+        height: 45px;
     }
-    & .ant-select-selector {
+    .ant-select-selector {
         border-radius: 12px !important;
+        background-color: pink;
     }
-    & .ant-select-selection-selected-value {
-        border-radius: 0px 8px 8px 0px;
-        height: 53px;
+
+    &.ant-select-item {
+        color: blue !important;
+        font-size: 30px !important;
     }
 `;
 
 export const OptionHashtag = styled(Select.Option)`
     color: whitesmoke;
-    & .ant-select-dropdown .ant-select-dropdown-placement-bottomLeft {
+    font-size: 30px !important;
+    & .ant-select-dropdown-placement-bottomLeft {
         color: blue !important;
         box-shadow: red !important;
     }
-    &:last-child{
+    &.ant-select-item-option-selected {
+        color: blue !important;
+    }
+    &.ant-select-item {
+        color: blue !important;
         font-size: 30px !important;
     }
     &.ant-select-item-option-content {
-        font-size: 30px !important;
+        color: blue !important;
+        font-size: 30px;
     }
-    background-color: red;
 `;
 
 export const OptionalTagName = styled.div`
@@ -180,4 +232,11 @@ export const ButtonUseHashtags = styled(Button)`
     left: 70%;
     top: 80%;
     font-size: 16px;
+`;
+
+export const DrawerContainer = styled.div`
+    position: relative;
+    height: 100%;
+    padding-left: 5%;
+    overflow: hidden;
 `;

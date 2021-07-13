@@ -47,15 +47,13 @@ const AuthProvider = ({ children }: IAuthProps) => {
         return <Redirect to="/login" />;
     };
     const logout = () => {
-
-        localStorage.removeItem('token')
-        setToken(localStorage.getItem('token'))
-        setUser(undefined)
-    }
+        localStorage.removeItem('token');
+        setToken(localStorage.getItem('token'));
+        setUser(undefined);
+    };
     useEffect(() => {
         const tokenkey = localStorage.getItem('token');
         if (tokenkey) {
-            console.log('token', tokenkey);
         } else {
             gotoLogin;
         }
