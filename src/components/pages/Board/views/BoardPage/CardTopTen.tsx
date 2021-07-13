@@ -3,7 +3,7 @@ import { Space, Spin, Card } from 'antd';
 import { CardStyle } from 'shared/style/theme/component';
 import useSWR from 'swr';
 import { GridBox, ScrollCard, SearchField } from '../../shared/style';
-import { FormOutlined, LoadingOutlined } from '@ant-design/icons';
+import { FormOutlined, LoadingOutlined, CalendarOutlined } from '@ant-design/icons';
 import { IIconText } from '../../shared/Card.interface';
 import { useHistory } from 'react-router';
 
@@ -30,13 +30,14 @@ export const CardTopTen = () => {
   return (
     <>
       {isLoading ? (
-        <div>Loading....</div>
+        <Spin indicator={antIcon} tip="Loading..." />
       ) : (
         <GridBox>
           <Space direction="horizontal">
             {data?.slice(0, 10).map((item: any, index: any) => {
               return (
                 <CardStyle typecard="Vertical" heightcard={200} key={index}
+                  hoverable
                   onClick={() => history.push('/boardContent')}
                   cover={
                     <img alt="default"
@@ -44,11 +45,13 @@ export const CardTopTen = () => {
                   }
                   actions={
                     [
-                      <IconText icon={FormOutlined} text={item.auth_username} />,
+                      <IconText icon={FormOutlined} text={item.author_username} />,
+                      <IconText icon={CalendarOutlined} text="date" />,
                     ]
                   }
                 >
                   <Meta title={item.title} />
+                  บทความ #{item.tag}
                 </CardStyle>
               )
             })}

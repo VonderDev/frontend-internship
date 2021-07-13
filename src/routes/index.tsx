@@ -22,6 +22,8 @@ import ProfileResult from 'components/pages/Profile/views/ProfileResult';
 import BoardRecommend from 'components/pages/Board/views/BoardPage/BoardRecommend';
 import BoardTopTen from 'components/pages/Board/views/BoardPage/BoardTopTen';
 import BoardContent from 'components/pages/Board/views/BoardContent/BoardContent';
+import Filter from 'components/pages/Board/views/board/Filter';
+
 
 import TestPixi from 'components/GameElement/Game/testpixi';
 
@@ -30,6 +32,8 @@ function Routing() {
         <Switch>
             <Route exact path="/" component={Home} />
             <PrivateRoute exact path="/boardcreate" component={BoardCreateContent} />
+            <Route exact path="/boardcontent/:id" component={BoardContent} />
+            <Route exact path="/filter" component={Filter} />
             <PrivateRoute exact path="/profile" component={Profile} />
             <Route exact path="/board" component={Board} />
             <Route exact path="/boardRecommend" component={BoardRecommend} />
