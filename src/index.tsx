@@ -19,9 +19,9 @@ const fetcher = (url: string) =>
         const data = await response.data;
         return data;
     });
-
+    
 const AppWithRouter = () => (
-    <SWRConfig value={{ fetcher }}>
+    <SWRConfig value={{ refreshInterval: 3000, fetcher }}>
         <BrowserRouter>
             <App />
         </BrowserRouter>

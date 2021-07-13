@@ -13,3 +13,16 @@ export async function ApiGetBoardUserContent() {
             console.error(err);
         });
 }
+export async function ApiPostFilter(data: object) {
+            const token = localStorage.getItem('token');
+            console.log('[Filter Data] :', data);
+    return await axios.post('/user/content/tag', data)
+    .then((res) => {
+        console.log("response", res.data)
+        return res.data
+    })
+    .catch((err) => {
+        console.error(err);
+        console.log('Cannot Filter');
+    });
+}
