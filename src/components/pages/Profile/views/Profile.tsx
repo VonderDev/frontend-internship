@@ -36,11 +36,10 @@ function Profile() {
         }
     }, [profile]);
 
-
     return (
         <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
             {errorProfile && <div>error </div>}
-            {isLoading? (
+            {isLoading ? (
                 <div>loading ...</div>
             ) : (
                 <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
@@ -75,22 +74,26 @@ function Profile() {
                             <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
                         </Col>
                     </RowStyled>
-                    <ResultCard onClick={() => history.push('/result')}>
-                        <RowStyled>
-                            <Col span={10}>
-                                <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
-                            </Col>
-                            <Col span={12}>
-                                <CardText style={{ transform: 'translateY(67%)' }}>
-                                    <RowStyled>ลักษณะเด่นของคุณ</RowStyled>
-                                    <RowStyled>วันที่ 15 มิ.ย. 2564</RowStyled>
-                                </CardText>
-                            </Col>
-                            <Col span={2}>
-                                <IconArrow />
-                            </Col>
-                        </RowStyled>
-                    </ResultCard>
+                    {profile?.results.slice(0, 1).map((item: any, index: any) => {
+                        return (
+                            <ResultCard key={index} onClick={() => history.push('/result')}>
+                                <RowStyled>
+                                    <Col span={10}>
+                                        <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
+                                    </Col>
+                                    <Col span={12}>
+                                        <CardText style={{ transform: 'translateY(12%)' }}>
+                                            <RowStyled>ลักษณะเด่นของคุณ</RowStyled>
+                                            <RowStyled>{item[0].created_at}</RowStyled>
+                                        </CardText>
+                                    </Col>
+                                    <Col span={2}>
+                                        <IconArrow />
+                                    </Col>
+                                </RowStyled>
+                            </ResultCard>
+                        );
+                    })}
                     <RowStyled>
                         <Col span={16}>
                             <TextTopic2>กระทู้ของคุณ</TextTopic2>
@@ -99,7 +102,7 @@ function Profile() {
                             <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
                         </Col>
                     </RowStyled>
-                    {profile?.contents.slice(0,3).map((item: any, index: any) => {
+                    {profile?.contents.slice(0, 3).map((item: any, index: any) => {
                         return (
                             <BoardCard
                                 key={index}
@@ -133,7 +136,7 @@ function Profile() {
                                                     <HeartIcon />
                                                 </Col>
                                                 <Col span={2}>
-                                                    <HistoryText>12</HistoryText>
+                                                    <HistoryText>{item.likes}</HistoryText>
                                                 </Col>
                                             </Row>
                                         </CardText>
