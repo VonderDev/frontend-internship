@@ -26,39 +26,41 @@ import {
 
 function Profile() {
     const history = useHistory();
-    const cardList = [
-        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
-        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
-        { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
-    ];
-
-    const { data, error } = useSWR('/user/find');
+    //const { data: profileData, error: profileError } = useSWR('/user/profile');
+    const { data: userData, error: userError } = useSWR('/user/find');
     const { data: boardData, error: boardError } = useSWR('/user/content/get');
-    const isLoading = !data && !error && !boardData && !boardError;
+    const isLoading = !userData && !userError && !boardData && !boardError;
+
+    // useEffect(() => {
+    //     if (profileData) {
+    //         console.log('[Profile Data] :',profileData)
+    //     }
+    // }, [profileData]);
 
     useEffect(() => {
-        if (data && boardData) {
-            console.log('[useEffect data username] :', data)
+        if (userData && boardData) {
+            console.log('[useEffect data username] :', userData)
             console.log('[useEffect boardData title] :', boardData);
         }
-    }, [data ,boardData]);
+    }, [userData ,boardData]);
+
 
     return (
         <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
-            {error && <div>error </div>}
+            {userError && <div>error </div>}
             {isLoading ? (
                 <div>loading ...</div>
             ) : (
                 <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
                     <UserImage src={ProfileMascot} />
-                    <TextUsername>{data.username}</TextUsername>
+                    <TextUsername>{userData.username}</TextUsername>
                     <RowStyled>
                         <Col span={8}>
                             <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
                         </Col>
                         <Col span={16}>
                             <TextUserInfo2>
-                                {data.firstName} {data.lastName}
+                                {userData.firstName} {userData.lastName}
                             </TextUserInfo2>
                         </Col>
                     </RowStyled>
@@ -67,7 +69,7 @@ function Profile() {
                             <TextUserInfo1>อีเมล :</TextUserInfo1>
                         </Col>
                         <Col span={16}>
-                            <TextUserInfo2>{data.email}</TextUserInfo2>
+                            <TextUserInfo2>{userData.email}</TextUserInfo2>
                         </Col>
                     </RowStyled>
                     <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
@@ -130,7 +132,7 @@ function Profile() {
                                                     <CommentIcon />
                                                 </Col>
                                                 <Col span={10}>
-                                                    <HistoryText>{data.username}</HistoryText>
+                                                    <HistoryText>{userData.username}</HistoryText>
                                                 </Col>
                                                 <Col span={8}>
                                                     <HistoryText>{item.created_at}</HistoryText>
