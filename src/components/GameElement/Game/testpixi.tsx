@@ -10,6 +10,9 @@ const TestPixi = () => {
             <AppProvider>
             <PixiProvider>
                 <PixiApp content={GameContent}/>
+                <div style={{width:'200px' , height: '200px' ,backgroundColor: 'wheat' ,position: 'absolute', top: '80px', display: 'inline-block',    opacity: 0.5}}>
+                    <h1>This is React Content</h1>
+                </div>
             </PixiProvider>
             </AppProvider>
         </Container>
