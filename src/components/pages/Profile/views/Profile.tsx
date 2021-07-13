@@ -32,17 +32,18 @@ function Profile() {
         { href: '/board', title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมตัวในการสอบ`, avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg', description: 'บทความ', username: 'Bewveeraphat' },
     ];
 
-    const { data, error } = useSWR('http://18.139.108.242:5000/user/find');
-    const { data: boardData, error: boardError } = useSWR('http://18.139.108.242:5000/user/content/get');
-    const isLoading = !boardData && !boardError;
+    const { data, error } = useSWR('/user/find');
+    const { data: boardData, error: boardError } = useSWR('/user/content/get');
+    const isLoading = !data && !error && !boardData && !boardError;
     console.log('Profile Data', data);
     console.log('Board Data', boardData);
 
-    // useEffect(() => {
-    //     if (boardData) {
-    //         console.log('[useEffect data username] :', boardData.title);
-    //     }
-    // }, [boardData]);
+    useEffect(() => {
+        if (data && boardData) {
+            console.log('[useEffect data username] :', data.username)
+            console.log('[useEffect boardData title] :', boardData.title);
+        }
+    }, [data ,boardData]);
 
     return (
         <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
@@ -106,7 +107,7 @@ function Profile() {
                             <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
                         </Col>
                     </RowStyled>
-                    {boardData.map((item: any, index: any) => {
+                    {boardData?.map((item: any, index: any) => {
                         return (
                             <BoardCard
                                 key={index}
