@@ -134,7 +134,7 @@ const Filter = () => {
                                                     <HeartIcon />
                                                 </Col>
                                                 <Col span={2}>
-                                                    <HistoryText>12</HistoryText>
+                                                    <HistoryText>{item.likes}</HistoryText>
                                                 </Col>
                                             </Row>
                                         </CardText>
