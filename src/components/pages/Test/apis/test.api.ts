@@ -33,8 +33,7 @@ export async function ApiPostTestResult(data: any) {
     //
     // ─── Use axios.post when backend finish ───────────────────
     //
-    return await axios.post('/user/result', data ,
-    {headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
+    return await axios.post('/user/newResult', data,{headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
         console.log("response", res.data)
         return res.data
     })
