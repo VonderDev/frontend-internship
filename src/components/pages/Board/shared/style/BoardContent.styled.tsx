@@ -27,6 +27,7 @@ export const ImageOfContent = styled.img`
 
 export const ContentBody = styled.div`
     font-size: 16px;
+    padding-bottom: 35px;
 `;
 
 export const ProfileImage = styled.div`
@@ -57,5 +58,21 @@ export const DateCreatedContent = styled.div`
 
 export const AuthorName = styled.div`
     font-size: 18px;
+    font-weight: bolder;
+`;
+
+export const BoxOfLikeAndComment = styled.span`
+    padding-left: 25%;
+    padding-bottom: 5%;
+    margin-right: 0;
+    margin-left: auto;
+    :hover {
+        cursor: pointer;
+    }
+`;
+
+export const LengthOfLikeAndComment = styled.span`
+    font-size: 18px;
+    color: #3a8ce4;
     font-weight: bolder;
 `;

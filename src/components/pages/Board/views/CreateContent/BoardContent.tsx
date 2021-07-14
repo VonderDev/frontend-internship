@@ -6,16 +6,19 @@ import { LeftOutlined } from '@ant-design/icons';
 import useSWR from 'swr';
 import {
     AuthorName,
+    BoxOfLikeAndComment,
     CategoryTag,
     ContainerBaordContent,
     ContainerUserNameAndDate,
     ContentBody,
     DateCreatedContent,
     ImageOfContent,
+    LengthOfLikeAndComment,
     ProfileImage,
     TextTitleContent,
     TopicTag,
 } from '../../shared/style/BoardContent.styled';
+import { HeartOutlined, CommentOutlined } from '@ant-design/icons';
 
 function BoardContent() {
     const history = useHistory();
@@ -34,7 +37,7 @@ function BoardContent() {
     }, []);
 
     //--------------- FETCHING BOARD CONTENT USING SWR ---------------//
-    const { data: contentData, error: errorcontentData } = useSWR('/user/newestContent');
+    const { data: contentData, error: errorcontentData } = useSWR('/user/contentID/' + paramObjectId.id);
     const isLoadingContentData = !contentData && !errorcontentData;
 
     //--------------- SET DATE CREATED CONTENT FORMAT ---------------//
@@ -47,9 +50,16 @@ function BoardContent() {
             var dateCreatedContent = contentData?.created_at;
             const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
             let createdContentData = new Date(dateCreatedContent);
+            console.log(createdContentData);
             setDateCreatedFormat(createdContentData.getDate() + ' ' + months[createdContentData.getMonth()] + ' ' + createdContentData.getFullYear());
         }
     }, [contentData, dateCreatedFormat]);
+
+    //--------------- CREATE VARIABLE FOR MAP ICON LIKE & COMMENT ---------------//
+    const ButtonLikeAndCommentList = [
+        { icon: <HeartOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />, length: <LengthOfLikeAndComment>{contentData?.likes}</LengthOfLikeAndComment> },
+        { icon: <CommentOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />, length: <LengthOfLikeAndComment>0</LengthOfLikeAndComment> },
+    ];
 
     return (
         <Container
@@ -75,10 +85,19 @@ function BoardContent() {
                     <ProfileImage />
                     <ContainerUserNameAndDate>
                         <AuthorName>{contentData.author_username}</AuthorName>
-                        <DateCreatedContent>{dateCreatedFormat}</DateCreatedContent>
+                        <DateCreatedContent>{contentData.updated_at}</DateCreatedContent>
                     </ContainerUserNameAndDate>
                     <ImageOfContent src={contentData.image}></ImageOfContent>
                     <ContentBody>{contentData.content_body}</ContentBody>
+
+                    {ButtonLikeAndCommentList.map((item, index) => {
+                        return (
+                            <BoxOfLikeAndComment key={index}>
+                                {item.icon}
+                                {item.length}
+                            </BoxOfLikeAndComment>
+                        );
+                    })}
                 </ContainerBaordContent>
             )}
         </Container>

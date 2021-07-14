@@ -12,10 +12,11 @@ function BoardCreateContent() {
     const history = useHistory();
     //----------------- CREATE HOOK FOR POST CONTENT -----------------//
     const [countPage, setCountPage] = useState(1);
-    const [contentData, setContentData] = useState<{ title: string; content_body: string; content_type: string; tag: Array<string> }>({
+    const [contentData, setContentData] = useState<{ title: string; content_body: string; content_type: string; image: string; tag: Array<string> }>({
         title: '',
         content_body: '',
         content_type: '',
+        image: '',
         tag: [],
     });
     const updateContentData = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -25,12 +26,12 @@ function BoardCreateContent() {
         });
     };
 
-    // useEffect(() => {
-    //     console.log('[Content data]:', contentData);
-    // }, [contentData]);
+    useEffect(() => {
+        console.log('[Content data]:', contentData);
+    }, [contentData]);
 
     //----------------- CREATE FUNCTION UPLOAD IMAGE -----------------//
-    const [defaultFileList, setDefaultFileList] = useState([]);
+    const [defaultFileList, setDefaultFileList] = useState('');
 
     const uploadImage = async (options: any) => {
         const { onSuccess, onError, file } = options;
@@ -38,13 +39,17 @@ function BoardCreateContent() {
         const config = {
             headers: { 'Content-Type': 'multipart/form-data' },
         };
-        formData.append('image', file);
+        formData.append('photo', file);
         try {
             console.log('form data', file);
-            const res = await axios.post('https://jsonplaceholder.typicode.com/posts', formData, config);
+            const res = await axios.post('/images', formData, config);
 
             onSuccess('Ok');
-            console.log('server res: ', res);
+            console.log('[Response from post image]: ', res.data);
+            setContentData({
+                ...contentData,
+                image: res.data[0],
+            });
         } catch (err) {
             console.log('Eroor: ', err);
             const error = new Error('Some error');
