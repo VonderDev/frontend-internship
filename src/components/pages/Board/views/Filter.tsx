@@ -92,7 +92,6 @@ const Filter = () => {
                 </TagBox>
                 <div style={{ paddingBottom: '24px', display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', height: '60%' }}>
                     <ButtonUseFilter onClick={filterContentData}>กรอง</ButtonUseFilter>
-                    {/* <ButtonUseFilter onClick={postContentData}>post</ButtonUseFilter> */}
                 </div>
             </DrawerRadius>
             <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="flex-start" align="flex-start" direction="column">
@@ -110,7 +109,7 @@ const Filter = () => {
                             >
                                 <RowStyled>
                                     <Col span={7}>
-                                        <HistoryImage src={""} />
+                                        <HistoryImage src={item.image} />
                                     </Col>
                                     <Col span={17}>
                                         <CardText>
@@ -125,7 +124,7 @@ const Filter = () => {
                                                     <CommentIcon />
                                                 </Col>
                                                 <Col span={10}>
-                                                    <HistoryText>{"name"}</HistoryText>
+                                                    <HistoryText>{item.author_username}</HistoryText>
                                                 </Col>
                                                 <Col span={8}>
                                                     <HistoryText>{item.created_at}</HistoryText>
