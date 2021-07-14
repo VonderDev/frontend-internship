@@ -8,6 +8,7 @@ import {
     IsLoadingSpinnerTestQuestion,
     TextIsLoadingTestQuestion,
     ButtonSeeAllResults,
+    MainContainer
 } from '../../shared/styles/Test/TestQuestion.styled';
 import { useHistory } from 'react-router-dom';
 import { ApiGetTestData, ApiPostTestResult } from '../../apis/test.api';
@@ -17,6 +18,11 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import React from 'react';
 import Container from 'components/Container/Container';
 import useSWR from 'swr';
+import { PixiProvider} from 'components/GameElement/PixiStore/PixiContext';
+import { AppProvider } from 'components/GameElement/PixiStore/AppContext';
+import GameContent from 'components/GameElement/Game/GameContent';
+import PixiApp from 'components/GameElement/PixiStore/PixiApp';
+import { Box } from 'shared/style/theme/component';
 
 function TestQuestion() {
     //
@@ -145,7 +151,11 @@ function TestQuestion() {
     }
 
     return (
-        <Container header={null}>
+        <Box justify='center' align="center" direction='column'>
+        <div style={{height:'100vh', width:'600px' , overflowY: 'scroll', position:'relative'}}>
+            <AppProvider>
+            <PixiProvider>
+                <PixiApp content={GameContent}/>
             <ContainerTestQuestion>
                 {/* {rendered_questions} */}
                 <Col>
@@ -190,7 +200,10 @@ function TestQuestion() {
                     )}
                 </div>
             </ContainerTestQuestion>
-        </Container>
+            </PixiProvider>
+            </AppProvider>
+        </div >
+        </Box>
     );
 }
 
