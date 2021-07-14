@@ -125,7 +125,7 @@ const Filter = () => {
                                                     <CommentIcon />
                                                 </Col>
                                                 <Col span={10}>
-                                                    <HistoryText>{"name"}</HistoryText>
+                                                    <HistoryText>{item.author_username}</HistoryText>
                                                 </Col>
                                                 <Col span={8}>
                                                     <HistoryText>{item.created_at}</HistoryText>
@@ -134,7 +134,7 @@ const Filter = () => {
                                                     <HeartIcon />
                                                 </Col>
                                                 <Col span={2}>
-                                                    <HistoryText>12</HistoryText>
+                                                    <HistoryText>{item.likes}</HistoryText>
                                                 </Col>
                                             </Row>
                                         </CardText>
