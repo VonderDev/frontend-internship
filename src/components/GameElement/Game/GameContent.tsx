@@ -36,6 +36,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     app.stage.addChild(secondScene);
     app.stage.addChild(homeScene);
     app.stage.addChild(doorScene);
+
+
+
     //Preload asset
     window.onload = function(){
 
@@ -92,7 +95,6 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     const Cloud2 = new PIXI.Sprite(cloud2Texture );
     
     function animate() {
-      console.log('Width',firstScene.width)
       if(Cloud1.x + Cloud1.width < firstScene.width){
         Cloud1.x += 0.1 *2
       }
@@ -136,6 +138,16 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     }
     function onClick4() {
       console.log("chang to inHome")
+    }
+
+    if(!gameRef.current) gameRef.current = {};
+    console.log('GameRef:',gameRef.current)
+
+    gameRef.current.changeScene = (prop: string) =>{
+      console.log('prop to pixi:',prop)
+      if(prop == 'S1'){
+        onClick1()
+      }
     }
 
     function gameScene1() {

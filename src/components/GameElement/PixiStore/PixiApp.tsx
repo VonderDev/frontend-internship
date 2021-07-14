@@ -45,7 +45,7 @@ const createPixiApp = (view:any, options:any) => {
         };
       }
     }, [ content, gameRef, initialOption,updateRatioRef]);
-  
+
     useEffect(() => {
       if(appRef.current){
         appRef.current.renderer.resolution = resolution;
