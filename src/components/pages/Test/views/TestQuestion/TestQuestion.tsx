@@ -89,16 +89,10 @@ function TestQuestion() {
             changeScene('S2')
         }else if (currentQuestion +1 === 6){
             changeScene('S3')
-        }else if (currentQuestion +1 === 8){
-            changeScene('S3.2')
-        }else if (currentQuestion +1 === 12){
-            changeScene('S4')
-        }
-        else if (currentQuestion +1 === 14){
-            changeScene('S4.2')
-        }
-        else if (currentQuestion +1 === 15){
+        }else if (currentQuestion +1 === 11){
             changeScene('S4.3')
+        }else if (currentQuestion +1 === 14){
+            changeScene('S5')
         }
     }
 

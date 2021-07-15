@@ -18,16 +18,10 @@ const TestPixi = () => {
             changeScene('S2')
         }else if (value === 6){
             changeScene('S3')
-        }else if (value === 8){
-            changeScene('S3.2')
-        }else if (value === 12){
-            changeScene('S4')
-        }
-        else if (value === 14){
-            changeScene('S4.2')
-        }
-        else if (value === 15){
+        }else if (value === 11){
             changeScene('S4.3')
+        }else if (value === 14){
+            changeScene('S5')
         }
     }
 

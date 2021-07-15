@@ -205,7 +205,11 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     function onClick5() {
       console.log("chang to Scene 5")
     }
-
+    function wait(duration = 0) {
+      return new Promise((resolve, reject) => {
+          setTimeout(resolve, duration);
+      });
+  }
     if(!gameRef.current) gameRef.current = {};
     console.log('GameRef:',gameRef.current)
 
@@ -215,16 +219,20 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         onClick1()
       }else if (prop == 'S3'){
         onClick2()
-      }else if (prop == 'S3.2'){
-        onClick3()
-      }else if (prop == 'S4'){
-        onClick4()
-      }
-      else if (prop == 'S4.2'){
-        onClick4_2()
-      }
-      else if (prop == 'S4.3'){
+        wait(2000).then(() =>{
+          onClick3();
+        })
+        wait(4000).then(() =>{
+          onClick4();
+        })
+        wait(6000).then(() =>{
+          onClick4_2();
+        })
+      }else if (prop == 'S4.3'){
         onClick4_3()
+      }
+      else if (prop == 'S5'){
+        onClick5()
       }
     }
 
