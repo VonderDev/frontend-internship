@@ -11,10 +11,10 @@ const CommentList = ({ commentContent, deleteComment }: CommentProps) => {
         <ContainerOfCommentList>
             <ProfileUserImage />
 
-            <CommentBody>{commentContent.comment}</CommentBody>
+            <CommentBody>{commentContent.comment_body}</CommentBody>
             <ButtonDelete
                 onClick={() => {
-                    deleteComment(commentContent.comment);
+                    deleteComment(commentContent.comment_body);
                 }}
             >
                 X

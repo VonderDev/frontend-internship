@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 
 const token = localStorage.getItem('token');
 //----------------------- AXIOS POST CONTENT -----------------------//

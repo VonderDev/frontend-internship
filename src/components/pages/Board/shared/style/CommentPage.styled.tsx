@@ -10,8 +10,9 @@ export const CommentInput = styled(Input)`
     width: 75%;
     height: 45px;
     box-shadow: 0px 3px 6px #f1f1f1;
-    position: absolute;
-    top: 85%;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 87%;
     left: 5%;
 `;
 
@@ -21,9 +22,10 @@ export const IconSendMessage = styled.div`
     height: 5vh;
     background-size: cover;
     background-position: center;
-    position: absolute;
-    top: 85.8%;
-    right: 10%;
+    position: -webkit-sticky;
+    top: 87.7%;
+    right: 12%;
+    position: sticky;
     float: right;
     :hover {
         cursor: pointer;

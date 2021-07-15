@@ -1,3 +1,4 @@
 export interface IComment {
-    comment: string;
+    comment_body: string;
+    content_id?: string;
 }

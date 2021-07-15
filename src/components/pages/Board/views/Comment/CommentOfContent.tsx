@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { CommentInput, IconSendMessage } from '../../shared/style/CommentPage.styled';
 import TodoTask from './CommentList';
 import { IComment } from '../../shared/interface/Comment.interface';
+import { ApiPostComment } from '../../apis/commentContent.api';
 
 function CommentOfContent() {
     const paramObjectId = useParams<{ id: string }>();
@@ -12,25 +13,47 @@ function CommentOfContent() {
     }, []);
 
     //---------------------- SET STATE & FUNCTION FOR POST COMMENT ----------------------//
-    const [comment, setComment] = useState<string>('');
-    const [commentList, setCommentList] = useState<IComment[]>([]);
+    const [commentData, setCommentData] = useState<{ comment_body: string; content_id: string }>({
+        comment_body: '',
+        content_id: '',
+    });
+    const [commentList, setCommentList] = useState<any>([]);
 
     const handleChangeOfComment = (event: ChangeEvent<HTMLInputElement>): void => {
-        if (event.target.name === 'comment') {
-            setComment(event.target.value);
-        }
+        setCommentData({
+            ...commentData,
+            [event.target.name]: event.target.value,
+            content_id: paramObjectId.id,
+        });
     };
 
-    const addComment = (): void => {
-        const newComment = { comment: comment };
+    useEffect(() => {
+        console.log('[Comment Data] :', commentData);
+    }, [commentData]);
+
+    function postComment() {
+        ApiPostComment(commentData);
+        const newComment = { comment: commentData };
         setCommentList([...commentList, newComment]);
-        setComment('');
-    };
+        setCommentData({
+            comment_body: '',
+            content_id: '',
+        });
+    }
+
+    // const addComment = (): void => {
+    //     const newComment = { comment: commentData };
+    //     setCommentList([...commentList, newComment]);
+    //     setCommentData({
+    //         comment_body: '',
+    //         content_id: '',
+    //     });
+    // };
 
     const deleteComment = (commentToDelete: string): void => {
         setCommentList(
-            commentList.filter((commentContent) => {
-                return commentContent.comment != commentToDelete;
+            commentList.filter((commentContent: any) => {
+                return commentContent.comment_body != commentToDelete;
             }),
         );
     };
@@ -50,8 +73,8 @@ function CommentOfContent() {
             {commentList.map((commentValue: IComment, key: number) => {
                 return <TodoTask key={key} commentContent={commentValue} deleteComment={deleteComment} />;
             })}
-            <IconSendMessage onClick={addComment} />
-            <CommentInput placeholder="แสดงความคิดเห็นของคุณ..." name="comment" value={comment} onChange={handleChangeOfComment} />
+            <CommentInput type="text" placeholder="แสดงความคิดเห็นของคุณ..." name="comment_body" value={commentData.comment_body} onChange={handleChangeOfComment} />
+            <IconSendMessage onClick={postComment} />
         </Container>
     );
 }

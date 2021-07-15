@@ -39,6 +39,8 @@ function BoardContent() {
 
     //--------------- FETCHING BOARD CONTENT USING SWR ---------------//
     const { data: contentData, error: errorcontentData } = useSWR('/user/contentID/' + paramObjectId.id);
+    // const { data, error } = useSWR(`/user/${paramObjectId?.id}/comment`);
+
     const isLoadingContentData = !contentData && !errorcontentData;
 
     //--------------- SET DATE CREATED CONTENT FORMAT ---------------//
