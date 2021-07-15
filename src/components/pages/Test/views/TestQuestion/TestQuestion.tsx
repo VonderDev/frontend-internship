@@ -83,6 +83,7 @@ function TestQuestion() {
             history.push('/result');
             return;
         }
+        // handle condition start stop question
         setCurrentQuestion(currentQuestion + 1);
         console.log("Q number =>>>",currentQuestion )
         if(currentQuestion +1 === 3){
