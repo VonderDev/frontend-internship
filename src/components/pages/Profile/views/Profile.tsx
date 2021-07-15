@@ -33,15 +33,17 @@ function Profile() {
     ];
 
     const { data, error } = useSWR('/user/find');
-    const isLoading = !data && !error;
-    console.log('Profile Data', data);
+    const { data: profile, error: errorProfile } = useSWR('/user/profile');
+    const isLoading = !data && !error && !errorProfile && !profile;
+    console.log('Profile data', data);
+    console.log('[Profile from user/profile]', profile);
 
     useEffect(() => {
-        if (data) {
+        if (data & profile) {
             console.log('[useEffect data username] :', data.username);
-            console.log('[useEffect data email] :', data.email);
+            console.log('[useEffect profile] :', profile);
         }
-    }, [data]);
+    }, [data, profile]);
 
     return (
         <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>

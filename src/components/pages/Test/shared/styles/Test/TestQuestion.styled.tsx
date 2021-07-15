@@ -3,14 +3,19 @@ import { Button, Col } from 'antd';
 import ImgTestQuestion from '../../../shared/images/TestQuestion.png';
 
 export const ContainerTestQuestion = styled.div`
-    flex-direction: row;
     background-image: url(${ImgTestQuestion});
     width: 100%;
     background-position: center;
     background-size: cover;
     height: 100vh;
+    position: absolute;
+    top: 0;
+    display: inline-block;
 `;
 
+export const MainContainer = styled.div`
+    position: relative;
+`;
 export const TextQuestionIndex = styled.div`
     text-align: center;
     font-size: 20px;
