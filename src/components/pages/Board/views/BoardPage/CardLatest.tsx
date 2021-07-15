@@ -42,31 +42,31 @@ export const CardLatest = () => {
               >
                   <RowStyled>
                       <Col span={7}>
-                          <HistoryImage src={item.image} />
+                          <HistoryImage src={item?.image} />
                       </Col>
                       <Col span={17}>
                           <CardText>
                               <Row>
-                                  <HistoryText>{item.title}</HistoryText>
+                                  <HistoryText>{item?.title}</HistoryText>
                               </Row>
                               <Row>
-                                  <HistoryText>{item.content_body}</HistoryText>
+                                  <HistoryText>{item?.content_body}</HistoryText>
                               </Row>
                               <Row>
                                   <Col span={2}>
                                       <CommentIcon />
                                   </Col>
                                   <Col span={10}>
-                                      <HistoryText>{item.author_username}</HistoryText>
+                                      <HistoryText>{item?.author_username}</HistoryText>
                                   </Col>
                                   <Col span={8}>
-                                      <HistoryText>{item.created_at}</HistoryText>
+                                      <HistoryText>{item?.created_at}</HistoryText>
                                   </Col>
                                   <Col span={2}>
                                       <HeartIconList />
                                   </Col>
                                   <Col span={2}>
-                                      <HistoryText>{item.uid_likes.length}</HistoryText>
+                                      <HistoryText>{item?.uid_likes.length}</HistoryText>
                                   </Col>
                               </Row>
                           </CardText>

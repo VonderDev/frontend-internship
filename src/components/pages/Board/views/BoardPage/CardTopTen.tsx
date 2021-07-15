@@ -60,17 +60,17 @@ export const CardTopTen = () => {
                   }
                   actions={
                     [
-                      <IconText icon={FormOutlined} text={item.author_username} />,
-                      <IconText icon={CalendarOutlined} text={item.created_at} />,
+                      <IconText icon={FormOutlined} text={item?.author_username} />,
+                      <IconText icon={CalendarOutlined} text={item?.created_at} />,
                     ]
                   }
                 >
-                  <Meta title={item.title} />
-                  บทความ #{item.tag}
+                  <Meta title={item?.title} />
+                  บทความ #{item?.tag}
                   <div>
                     <HeartIconCard />
                     <HeartText>
-                      {item.uid_likes.length}
+                      {item?.uid_likes.length}
                     </HeartText>
                   </div>
                 </NewCardStyle>

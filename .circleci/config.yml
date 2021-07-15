@@ -80,7 +80,7 @@ jobs:
       - build
       - test
       - deploy:
-          env: "dev"
+          env: 'dev'
   build-deploy-staging:
     executor: node14
     steps:
@@ -88,7 +88,7 @@ jobs:
       - build
       - test
       - deploy:
-          env: "staging"
+          env: 'staging'
   build-deploy-production:
     executor: node14
     steps:
@@ -96,7 +96,7 @@ jobs:
       - build
       - test
       - deploy:
-          env: "production"
+          env: 'production'
 
 workflows:
   version: 2
