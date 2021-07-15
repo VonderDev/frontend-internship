@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CommentInput, IconSendMessage } from '../../shared/style/CommentPage.styled';
 import TodoTask from './CommentList';
-import { IComment } from '../../shared/Comment.interface';
+import { IComment } from '../../shared/interface/Comment.interface';
 
 function CommentOfContent() {
     const paramObjectId = useParams<{ id: string }>();
@@ -47,16 +47,12 @@ function CommentOfContent() {
                 left: 'back',
             }}
         >
-            <div>This is objectId of content: {paramObjectId.id}</div>
-            <span>
-                <IconSendMessage onClick={addComment} />
-                <CommentInput placeholder="แสดงความคิดเห็นของคุณ..." name="comment" value={comment} onChange={handleChangeOfComment} />
-            </span>
-            <div>
-                {commentList.map((commentValue: IComment, key: number) => {
-                    return <TodoTask key={key} commentContent={commentValue} deleteComment={deleteComment} />;
-                })}
-            </div>
+            <IconSendMessage onClick={addComment} />
+            <CommentInput placeholder="แสดงความคิดเห็นของคุณ..." name="comment" value={comment} onChange={handleChangeOfComment} />
+
+            {commentList.map((commentValue: IComment, key: number) => {
+                return <TodoTask key={key} commentContent={commentValue} deleteComment={deleteComment} />;
+            })}
         </Container>
     );
 }

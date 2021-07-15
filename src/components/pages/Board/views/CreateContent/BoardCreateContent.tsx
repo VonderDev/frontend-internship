@@ -26,23 +26,23 @@ function BoardCreateContent() {
         });
     };
 
-    useEffect(() => {
-        console.log('[Content data]:', contentData);
-    }, [contentData]);
+    // useEffect(() => {
+    //     console.log('[Content data]:', contentData);
+    // }, [contentData]);
 
     //----------------- CREATE FUNCTION UPLOAD IMAGE -----------------//
     const [defaultFileList, setDefaultFileList] = useState('');
 
     const uploadImage = async (options: any) => {
         const { onSuccess, onError, file } = options;
-        const formData = new FormData();
+        const ImageformData = new FormData();
         const config = {
             headers: { 'Content-Type': 'multipart/form-data' },
         };
-        formData.append('photo', file);
+        ImageformData.append('photo', file);
         try {
             console.log('form data', file);
-            const res = await axios.post('/images', formData, config);
+            const res = await axios.post('/images', ImageformData, config);
 
             onSuccess('Ok');
             console.log('[Response from post image]: ', res.data);

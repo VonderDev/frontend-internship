@@ -1,22 +1,25 @@
-import { IComment } from '../../shared/Comment.interface';
+import { IComment } from '../../shared/interface/Comment.interface';
+import { ButtonDelete, CommentBody, ContainerOfCommentList, ProfileUserImage } from '../../shared/style/CommentPage.styled';
 
-interface Props {
+interface CommentProps {
     commentContent: IComment;
     deleteComment(taskNameToDelete: string): void;
 }
 
-const TodoTask = ({ commentContent, deleteComment }: Props) => {
+const TodoTask = ({ commentContent, deleteComment }: CommentProps) => {
     return (
-        <div>
-            <span>{commentContent.comment}</span>
-            <button
+        <ContainerOfCommentList>
+            <ProfileUserImage />
+
+            <CommentBody>{commentContent.comment}</CommentBody>
+            <ButtonDelete
                 onClick={() => {
                     deleteComment(commentContent.comment);
                 }}
             >
                 X
-            </button>
-        </div>
+            </ButtonDelete>
+        </ContainerOfCommentList>
     );
 };
 
