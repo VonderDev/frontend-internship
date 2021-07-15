@@ -20,7 +20,7 @@ const Result = () => {
     const [result, setResultData] = useState<Array<IResult> | null>(null);
 
     //-------------- CREATE MAX SCORE LIST USE SWR--------------//
-    const { data: resultData, error } = useSWR('/user/result');
+    const { data: resultData, error } = useSWR('/user/newResult');
     console.log('[Result Test Game]:', resultData);
 
     useEffect(() => {

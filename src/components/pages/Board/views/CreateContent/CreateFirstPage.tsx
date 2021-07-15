@@ -10,7 +10,7 @@ import {
     FormInputNameContent,
     TextTopicContent,
     UploadImage,
-} from '../../shared/BoardCreate.styled';
+} from '../../shared/style/BoardCreate.styled';
 
 interface CreateContentFirstPageProps {
     updateContentData: (event: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;

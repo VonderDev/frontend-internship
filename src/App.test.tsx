@@ -13,5 +13,12 @@ window.matchMedia =
     };
 
 test('App ', () => {
-    render(<App />);
+ render(<App/>)
+});
+
+describe('env', () => {
+  it('env file', () => {
+      
+      expect(process.env.REACT_APP_API).toBeDefined();
+  });
 });

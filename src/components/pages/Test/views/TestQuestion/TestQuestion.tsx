@@ -8,6 +8,7 @@ import {
     IsLoadingSpinnerTestQuestion,
     TextIsLoadingTestQuestion,
     ButtonSeeAllResults,
+    MainContainer,
 } from '../../shared/styles/Test/TestQuestion.styled';
 import { useHistory } from 'react-router-dom';
 import { ApiGetTestData, ApiPostTestResult } from '../../apis/test.api';
@@ -146,50 +147,52 @@ function TestQuestion() {
 
     return (
         <Container header={null}>
-            <ContainerTestQuestion>
-                {/* {rendered_questions} */}
-                <Col>
-                    <TextQuestionIndex>
-                        คำถามข้อที่ {currentQuestion + 1}/{questionList?.length}
-                    </TextQuestionIndex>
-                    <ButtonSeeAllResults type="primary" onClick={showModal}>
-                        เริ่มใหม่{' '}
-                    </ButtonSeeAllResults>
-                </Col>
-                <Modal visible={visible} okText="เริ่มใหม่" cancelText="ยกเลิก" onOk={handleOk} width={400} confirmLoading={confirmLoading} onCancel={handleCancel}>
-                    ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
-                </Modal>
-                <TextQuestion>{currentQuestionDetail.questionBody}</TextQuestion>
-                {/* <TextQuestion>{data[currentQuestion].question_body}</TextQuestion> */}
-                <div>
-                    {isLoading ? (
-                        ''
-                    ) : (
-                        <ContainerButton>
-                            {buttonList.map((item, index) => {
-                                return (
-                                    <ButtonChoiceStlyed
-                                        key={index}
-                                        onClick={() => {
-                                            onNextQuestion(item.value);
-                                        }}
-                                    >
-                                        {item.label}
-                                    </ButtonChoiceStlyed>
-                                );
-                            })}
-                        </ContainerButton>
-                    )}
-                    {isLoading ? (
-                        <IsLoadingSpinnerTestQuestion>
-                            <TextIsLoadingTestQuestion>กำลังประมวลผลคำตอบน้า</TextIsLoadingTestQuestion>
-                            <Spin size="large" />
-                        </IsLoadingSpinnerTestQuestion>
-                    ) : (
-                        ''
-                    )}
-                </div>
-            </ContainerTestQuestion>
+            <MainContainer>
+                <ContainerTestQuestion>
+                    {/* {rendered_questions} */}
+                    <Col>
+                        <TextQuestionIndex>
+                            คำถามข้อที่ {currentQuestion + 1}/{questionList?.length}
+                        </TextQuestionIndex>
+                        <ButtonSeeAllResults type="primary" onClick={showModal}>
+                            เริ่มใหม่{' '}
+                        </ButtonSeeAllResults>
+                    </Col>
+                    <Modal visible={visible} okText="เริ่มใหม่" cancelText="ยกเลิก" onOk={handleOk} width={400} confirmLoading={confirmLoading} onCancel={handleCancel}>
+                        ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
+                    </Modal>
+                    <TextQuestion>{currentQuestionDetail.questionBody}</TextQuestion>
+                    {/* <TextQuestion>{data[currentQuestion].question_body}</TextQuestion> */}
+                    <div>
+                        {isLoading ? (
+                            ''
+                        ) : (
+                            <ContainerButton>
+                                {buttonList.map((item, index) => {
+                                    return (
+                                        <ButtonChoiceStlyed
+                                            key={index}
+                                            onClick={() => {
+                                                onNextQuestion(item.value);
+                                            }}
+                                        >
+                                            {item.label}
+                                        </ButtonChoiceStlyed>
+                                    );
+                                })}
+                            </ContainerButton>
+                        )}
+                        {isLoading ? (
+                            <IsLoadingSpinnerTestQuestion>
+                                <TextIsLoadingTestQuestion>กำลังประมวลผลคำตอบน้า</TextIsLoadingTestQuestion>
+                                <Spin size="large" />
+                            </IsLoadingSpinnerTestQuestion>
+                        ) : (
+                            ''
+                        )}
+                    </div>
+                </ContainerTestQuestion>
+            </MainContainer>
         </Container>
     );
 }
