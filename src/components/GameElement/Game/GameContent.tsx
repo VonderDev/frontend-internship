@@ -20,6 +20,14 @@ import door from '../Assets/Item/House/Door.png'
 import house from '../Assets/Item/House/house.png'
 import fence from '../Assets/Item/House/fenceHouse.png'
 import flower from '../Assets/Item/House/Flowers.png'
+import bgS4 from '../Assets/Background/bg_s4.png'
+import funiture from '../Assets/Item/InHome/Furniture.png'
+import sofa from '../Assets/Item/InHome/Sofa.png'
+import bgS42 from '../Assets/Background/bg_s42.png'
+import sofa2 from '../Assets/Item/InHome/Sofa2.png'
+import bgS43 from '../Assets/Background/bg_s43.png'
+import sewing from '../Assets/Item/InHome/Sewing.png'
+import tools from '../Assets/Item/InHome/Tools.png'
 
 const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 
@@ -27,17 +35,24 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     const secondScene = new PIXI.Container();
     const doorScene = new PIXI.Container();
     const homeScene = new PIXI.Container();
+    const inHomeScene = new PIXI.Container();
+    const inHome2Scene = new PIXI.Container();
+    const inHome3Scene = new PIXI.Container();
   
     secondScene.visible = false;
     doorScene.visible = false;
     homeScene.visible = false;
-  
+    inHomeScene.visible = false;
+    inHome2Scene.visible = false;
+    inHome3Scene.visible = false;
+
     app.stage.addChild(firstScene);
     app.stage.addChild(secondScene);
     app.stage.addChild(homeScene);
     app.stage.addChild(doorScene);
-
-
+    app.stage.addChild(inHomeScene);
+    app.stage.addChild(inHome2Scene);
+    app.stage.addChild(inHome3Scene);
 
     //Preload asset
     window.onload = function(){
@@ -64,6 +79,14 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
             .add('house', house)
             .add('fence', fence)
             .add('flower', flower)
+            .add('bgS4', bgS4)
+            .add('funiture', funiture)
+            .add('sofa' , sofa)
+            .add('bgS42', bgS42)
+            .add('sofa2' ,sofa2)
+            .add('bgS43' ,bgS43)
+            .add('sewing' , sewing)
+            .add('tools' , tools)
       loader.onProgress.add(showProgress);
       loader.onComplete.add(doneLoading);
       loader.onError.add(loadError);
@@ -109,6 +132,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       doorScene.visible = false;
       homeScene.visible = false;
       secondScene.visible = true;
+      inHomeScene.visible = false;
       secondScene.interactive = true;
       secondScene.buttonMode = true;
       secondScene.on('pointerdown', onClick2);
@@ -120,6 +144,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       doorScene.visible = false;
       homeScene.visible = true;
       secondScene.visible = false;
+      inHomeScene.visible = false;
       homeScene.interactive = true;
       homeScene.buttonMode = true;
       homeScene.on('pointerdown', onClick3);
@@ -131,6 +156,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       doorScene.visible = true;
       homeScene.visible = false;
       secondScene.visible = false;
+      inHomeScene.visible = false;
       doorScene.interactive = true;
       doorScene.buttonMode = true;
       doorScene.on('pointerdown', onClick4);
@@ -138,6 +164,46 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     }
     function onClick4() {
       console.log("chang to inHome")
+      firstScene.visible = false;
+      doorScene.visible = false;
+      homeScene.visible = false;
+      secondScene.visible = false;
+      inHomeScene.visible = true;
+      inHomeScene.interactive = true;
+      inHomeScene.buttonMode = true;
+      inHomeScene.on('pointerdown', onClick4_2);
+      homeScene4();
+    }
+    function onClick4_2() {
+      console.log("chang to inHome 4.2")
+      firstScene.visible = false;
+      doorScene.visible = false;
+      homeScene.visible = false;
+      secondScene.visible = false;
+      inHome2Scene.visible = true;
+      inHomeScene.visible = false;
+      inHome2Scene.interactive = true;
+      inHome2Scene.buttonMode = true;
+      inHome2Scene.on('pointerdown', onClick4_3);
+      homeScene4_2();
+    }
+
+    function onClick4_3() {
+      console.log("chang to inHome 4.3")
+      firstScene.visible = false;
+      doorScene.visible = false;
+      homeScene.visible = false;
+      secondScene.visible = false;
+      inHome2Scene.visible = false;
+      inHomeScene.visible = false;
+      inHome3Scene.visible = true;
+      inHome3Scene.interactive = true;
+      inHome3Scene.buttonMode = true;
+      inHome3Scene.on('pointerdown', onClick5);
+      homeScene4_3();
+    }
+    function onClick5() {
+      console.log("chang to Scene 5")
     }
 
     if(!gameRef.current) gameRef.current = {};
@@ -145,8 +211,20 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 
     gameRef.current.changeScene = (prop: string) =>{
       console.log('prop to pixi:',prop)
-      if(prop == 'S1'){
+      if(prop == 'S2'){
         onClick1()
+      }else if (prop == 'S3'){
+        onClick2()
+      }else if (prop == 'S3.2'){
+        onClick3()
+      }else if (prop == 'S4'){
+        onClick4()
+      }
+      else if (prop == 'S4.2'){
+        onClick4_2()
+      }
+      else if (prop == 'S4.3'){
+        onClick4_3()
       }
     }
 
@@ -242,8 +320,6 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         ticker.stop();
         }, 30000)
     }
-
-
     function gameScene2 () {
       //Background 
       const skyTexture = PIXI.Texture.from(sky);
@@ -325,7 +401,6 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       Bush1.position.set(450,600);
       secondScene.addChild(Bush1)
     }
-
     function gameScene3 () {
       //Background 
       const skyTexture = PIXI.Texture.from(sky);
@@ -392,6 +467,60 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
             flower2S3.scale.set(0.6);
             flower2S3.position.set(450,600);
             doorScene.addChild(flower2S3)
+    }
+    function homeScene4 () {
+      //Background 
+      const bgS4Texture = PIXI.Texture.from(bgS4);
+      const bgS4Home = new PIXI.Sprite(bgS4Texture);
+      bgS4Home.scale.set(0.7,0.5);
+      bgS4Home.position.set(-50,0);
+      inHomeScene.addChild(bgS4Home)
+
+      const funitureTexture = PIXI.Texture.from(funiture);
+      const funitureS4 = new PIXI.Sprite(funitureTexture);
+      funitureS4.scale.set(0.5,0.5);
+      funitureS4.position.set(-150,50);
+      inHomeScene.addChild(funitureS4)
+
+      const sofaTexture = PIXI.Texture.from(sofa);
+      const sofaS4 = new PIXI.Sprite(sofaTexture);
+      sofaS4.scale.set(0.5);
+      sofaS4.position.set(200,450);
+      inHomeScene.addChild(sofaS4)
+    }
+    function homeScene4_2 () {
+      //Background 
+      const bgS42Texture = PIXI.Texture.from(bgS42);
+      const bgS42Home = new PIXI.Sprite(bgS42Texture);
+      bgS42Home.scale.set(0.7,0.5);
+      bgS42Home.position.set(0,0);
+      inHome2Scene.addChild(bgS42Home)
+
+      const sofa2Texture = PIXI.Texture.from(sofa2);
+      const sofa2S4 = new PIXI.Sprite(sofa2Texture);
+      sofa2S4.scale.set(0.5,0.5);
+      sofa2S4.position.set(0,0);
+      inHome2Scene.addChild( sofa2S4)
+    }
+    function homeScene4_3 () {
+      //Background 
+      const bgS43Texture = PIXI.Texture.from(bgS43);
+      const bgS43Home = new PIXI.Sprite(bgS43Texture);
+      bgS43Home.scale.set(0.7,0.5);
+      bgS43Home.position.set(0,0);
+      inHome3Scene.addChild(bgS43Home)
+
+      const sewingTexture = PIXI.Texture.from(sewing);
+      const sewingS4 = new PIXI.Sprite(sewingTexture);
+      sewingS4.scale.set(0.5,0.5);
+      sewingS4.position.set(250,0);
+      inHome3Scene.addChild( sewingS4)
+
+      const toolsTexture = PIXI.Texture.from(tools);
+      const toolsS4 = new PIXI.Sprite(toolsTexture);
+      toolsS4.scale.set(0.5,0.5);
+      toolsS4.position.set(0,0);
+      inHome3Scene.addChild(toolsS4)
     }
 
     // const onMainResize = (width:number , height:number) => {
