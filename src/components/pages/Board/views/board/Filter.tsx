@@ -37,8 +37,9 @@ const Filter = () => {
     const [searchData, setSearchData] = useState<any | null>(null);
 
     //Filter Api---------------------------------------------------------------------------------------------------------
+    // เปลี่ยนเป็น useCallBack
     async function filterContentData() {
-        var res = await ApiPostFilter(contentData);
+        const res = await ApiPostFilter(contentData);
         setTagFilterData(res);
     }
     useEffect(() => {
@@ -46,6 +47,7 @@ const Filter = () => {
     }, [contentData]);
 
     //Drawer Function----------------------------------------------------------------------------------------------------
+    // Function เดียว set ให้ตรงกันข้าม
     const [visible, setVisible] = useState<boolean>(false);
     const showDrawer = () => {
         setVisible(true);
@@ -57,10 +59,11 @@ const Filter = () => {
     //Search Function (Not Finish)----------------------------------------------------------------------------------------------------
     const [searchValue, setSearchValue] = useState<string>();
     //console.log('search value', searchValue);
+    // เปลี่ยน useCallBack
     useEffect(() => {
         if (searchValue === '') {
         } else {
-            var res = ApiGetSearch(searchValue);
+            const res = ApiGetSearch(searchValue);
             setSearchData(res);
         }
     }, [searchValue]);
@@ -86,7 +89,7 @@ const Filter = () => {
                 handleChangeTag={handleChangeTag}
                 filterContentData={filterContentData}
             />
-            <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="flex-start" align="flex-start" direction="column">
+            <Box style={{ marginLeft: '20px', marginRight: '20px' }} align="flex-start" direction="column">
                 <SearchField>
                     <InputSearch
                         onChange={({ target: { value } }) => {

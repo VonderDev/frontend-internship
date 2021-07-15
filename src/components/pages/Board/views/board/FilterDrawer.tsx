@@ -3,7 +3,7 @@ import { Topic, TagBox, CustomCheckableTag, ButtonUseFilter } from '../../shared
 import { catagories, hashtag } from '../../shared/FixedTag';
 
 interface DrawerProps {
-    tagFilterData: any | null;
+    tagFilterData: any[];
     closeDrawer: (e: any) => void;
     visible: boolean;
     selectedCatagories: Array<string>;
