@@ -38,6 +38,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     const inHomeScene = new PIXI.Container();
     const inHome2Scene = new PIXI.Container();
     const inHome3Scene = new PIXI.Container();
+
+    //keep container scene in array 
   
     secondScene.visible = false;
     doorScene.visible = false;
@@ -58,6 +60,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     window.onload = function(){
 
       const loader = new PIXI.Loader();
+      let  sprite = {}
       loader.add("ground", ground)
             .add("sky", sky)
             .add("tree", tree)
@@ -91,9 +94,13 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       loader.onComplete.add(doneLoading);
       loader.onError.add(loadError);
       loader.load((loader, resource) => {
+        Object.assign(sprite, resource)
+        console.log('store:' , sprite)
       console.log("resource", resource);
     });
     }
+
+   
     const showProgress = (e : any) =>{
       console.log(e.progress)
     }
@@ -111,8 +118,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     }
 
     const ticker = new PIXI.Ticker();
-    const cloud1Texture = PIXI.Texture.from(cloud1);
-    const Cloud1 = new PIXI.Sprite(cloud1Texture );
+    // const cloud1Texture = PIXI.Texture.from(app.loader.resource.cloud1.texture);
+    const Cloud1 = new PIXI.Sprite();
     
     const cloud2Texture = PIXI.Texture.from(cloud2);
     const Cloud2 = new PIXI.Sprite(cloud2Texture );
@@ -212,10 +219,12 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
   }
     if(!gameRef.current) gameRef.current = {};
     console.log('GameRef:',gameRef.current)
-
+// change Name fuction 
+// do state machine
     gameRef.current.changeScene = (prop: string) =>{
       console.log('prop to pixi:',prop)
       if(prop == 'S2'){
+        
         onClick1()
       }else if (prop == 'S3'){
         onClick2()
@@ -325,11 +334,14 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       ticker.start();
 
       setTimeout(()=>{
-        ticker.stop();
+        // ticker.stop();
+        ticker.remove(animate)
         }, 30000)
     }
+
     function gameScene2 () {
       //Background 
+
       const skyTexture = PIXI.Texture.from(sky);
       const bgSky = new PIXI.Sprite(skyTexture);
       bgSky.scale.set(0.7);
