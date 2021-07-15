@@ -10,7 +10,6 @@ import ProfileBoardCard from './ProfileBoardCard';
 import ProfileResultCard from './ProfileResultCard';
 
 function Profile() {
-    
     //Data from get profile data API-------------------------------------------------------------
     const { data: profile, error: errorProfile } = useSWR('/user/profile');
     const isLoading = !errorProfile && !profile;

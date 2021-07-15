@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 interface CardComponentProps {
     profile: any;
+
 }
 const ProfileBoardCard: React.FC<CardComponentProps> = ({ profile }) => {
     const history = useHistory();
@@ -18,7 +19,7 @@ const ProfileBoardCard: React.FC<CardComponentProps> = ({ profile }) => {
                     <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
                 </Col>
             </RowStyled>
-            {profile?.contents.slice(0, 3).map((item: any, index: any) => {
+            {profile?.contents.map((item: any, index: any) => {
                 return (
                     <BoardCard
                         key={index}

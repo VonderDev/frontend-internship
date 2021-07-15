@@ -18,7 +18,7 @@ const ProfileResultCard: React.FC<CardComponentProps> = ({ profile }) => {
                     <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
                 </Col>
             </RowStyled>
-            {profile?.results.slice(0, 1).map((item: any, index: any) => {
+            {profile?.results.slice(0,1).map((item: any, index: any) => {
                 return (
                     <ResultCard key={index} onClick={() => history.push('/result')}>
                         <RowStyled>
