@@ -119,7 +119,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     
     function animate() {
       if(Cloud1.x + Cloud1.width < firstScene.width){
-        Cloud1.x += 0.1 *2
+        Cloud1.x += 0.1 * 3
       }
       if(Cloud2.x + Cloud2.width < firstScene.width){
         Cloud2.x -= 0.1 * 3

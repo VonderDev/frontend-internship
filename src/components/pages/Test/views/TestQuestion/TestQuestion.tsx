@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useContext} from 'react';
 import {
     TextQuestionIndex,
     TextQuestion,
@@ -23,6 +23,7 @@ import { AppProvider } from 'components/GameElement/PixiStore/AppContext';
 import GameContent from 'components/GameElement/Game/GameContent';
 import PixiApp from 'components/GameElement/PixiStore/PixiApp';
 import { Box } from 'shared/style/theme/component';
+import {AppContext} from 'components/GameElement/PixiStore/AppContext'
 
 function TestQuestion() {
     //
@@ -64,6 +65,7 @@ function TestQuestion() {
     // useEffect(() => {
     //     getTestData();
     // }, []);
+    const { changeScene }= useContext(AppContext);
 
     async function onNextQuestion(value: number) {
         console.log('[Debug]: score == ' + value);
@@ -82,6 +84,22 @@ function TestQuestion() {
             return;
         }
         setCurrentQuestion(currentQuestion + 1);
+        console.log("Q number =>>>",currentQuestion )
+        if(currentQuestion +1 === 3){
+            changeScene('S2')
+        }else if (currentQuestion +1 === 6){
+            changeScene('S3')
+        }else if (currentQuestion +1 === 8){
+            changeScene('S3.2')
+        }else if (currentQuestion +1 === 12){
+            changeScene('S4')
+        }
+        else if (currentQuestion +1 === 14){
+            changeScene('S4.2')
+        }
+        else if (currentQuestion +1 === 15){
+            changeScene('S4.3')
+        }
     }
 
     function onPrevQuestion() {
@@ -153,9 +171,9 @@ function TestQuestion() {
     return (
         <Box justify='center' align="center" direction='column'>
         <div style={{height:'100vh', width:'600px' , overflowY: 'scroll', position:'relative'}}>
-            <AppProvider>
             <PixiProvider>
                 <PixiApp content={GameContent}/>
+            </PixiProvider>
             <ContainerTestQuestion>
                 {/* {rendered_questions} */}
                 <Col>
@@ -200,8 +218,6 @@ function TestQuestion() {
                     )}
                 </div>
             </ContainerTestQuestion>
-            </PixiProvider>
-            </AppProvider>
         </div >
         </Box>
     );
