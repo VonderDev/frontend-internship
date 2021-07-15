@@ -8,7 +8,6 @@ import {
 import { Row, Col } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { CardLatest } from './CardLatest';
-import { CardRecommended } from './CardRecommended';
 import { CardTopTen } from './CardTopTen';
 
 function Board() {
@@ -17,16 +16,6 @@ function Board() {
 
   return (
     <Container header={{ left: 'back', right: 'menu', title: 'กระทู้' }} >
-      <Row>
-        <TextRecommendBoardTopic xs={{ span: 7, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-          แนะนำสำหรับคุณ
-        </TextRecommendBoardTopic>
-        <ButtonSeeAllBoard onClick={() => history.push('/boardRecommend')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
-      </Row>
-
-      <CardContainer>
-        <CardRecommended />
-      </CardContainer>
 
       <Row>
         <TextRecommendBoardTopic xs={{ span: 7, offset: 1 }} lg={{ span: 6, offset: 2 }}>

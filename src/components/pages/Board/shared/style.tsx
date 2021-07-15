@@ -1,6 +1,7 @@
-import { Card, Col, Row, List, Space } from 'antd';
+import { Card, Col, Row, List, Space, Typography } from 'antd';
 import styled from 'styled-components';
 import { RightOutlined, FormOutlined , HeartFilled } from '@ant-design/icons';
+import { CardStyle } from 'shared/style/theme/component';
 
 export const TextRecommendBoardTopic = styled(Col)`
     font-weight: bolder;
@@ -31,6 +32,10 @@ export const CardContainer = styled.div`
     /* overflow-x: scroll; */
 `;
 
+export const RowStyled = styled(Row)`
+    width: 100%;
+`;
+
 export const BoardCard = styled(Card)`
     margin-bottom: 10px;
     height: 88px;
@@ -42,20 +47,27 @@ export const BoardCard = styled(Card)`
     }
 `;
 
-export const RowStyled = styled(Row)`
-    width: 100%;
-`;
-
-export const ScrollCard = styled.div`
-    display : flex;
-`;
-
 export const GridBox = styled.div`
     display: flex;
     overflow-x: scroll;
     ::-webkit-scrollbar {
     width: 0;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
+    }
+`;
+
+export const NewCardStyle = styled(CardStyle)`
+    & .ant-card-actions {
+        border-top : none;
+        background : none;
+    }
+
+    & .ant-card-actions > li:not(:last-child) {
+    border-right: none;
+    }    
+
+    & .ant-card-meta-title {
+        font-weight : bold;
     }
 `;
 
@@ -70,6 +82,11 @@ export const HistoryImage = styled.img`
 export const CardText = styled.div`
     font-weight: bolder;
     font-size: 16px;
+`;
+
+export const RowCardContainer = styled.div`
+    display : flex;
+    flex-direction : row; 
 `;
 
 export const HistoryText = styled.div`
@@ -88,10 +105,44 @@ export const CommentIcon = styled(FormOutlined)`
     margin-right: 5px;
 `;
 
-export const HeartIcon = styled(HeartFilled)`
+export const HeartIconList = styled(HeartFilled)`
     color: var(--Gray-100);
     transform: translateY(20%);
     margin-right: 5px;
+`;
+
+export const HeartIconCard = styled(HeartFilled)`
+    color : var(--Gray-100);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 3px 8px;
+
+    position: absolute;
+    width: 48px;
+    height: 20px;
+    right: 10.46px;
+    top: 11px;
+
+    /* White */
+    background: #FFFFFF;
+    /* Shadow-Light (bottom) */
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 100px;
+`;
+
+export const HeartText = styled(Typography)`
+    color : var(--Gray-400);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 17px;
+
+    position: absolute;
+    width: 48px;
+    height: 20px;
+    right: 0px;
+    top: 11px;
 `;
 
 export const ListBoard = styled(List)`
