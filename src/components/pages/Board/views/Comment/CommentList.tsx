@@ -6,7 +6,7 @@ interface CommentProps {
     deleteComment(taskNameToDelete: string): void;
 }
 
-const TodoTask = ({ commentContent, deleteComment }: CommentProps) => {
+const CommentList = ({ commentContent, deleteComment }: CommentProps) => {
     return (
         <ContainerOfCommentList>
             <ProfileUserImage />
@@ -23,4 +23,4 @@ const TodoTask = ({ commentContent, deleteComment }: CommentProps) => {
     );
 };
 
-export default TodoTask;
+export default CommentList;

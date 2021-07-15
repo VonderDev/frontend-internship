@@ -57,21 +57,11 @@ function BoardCreateContent() {
         }
     };
 
-    const handleOnChangeFileImage = ({ file, fileList, event }: any) => {
+    const handleOnChangeFileImage = ({ fileList }: any) => {
         console.log('[FileList]:', fileList);
         //Using Hooks to update the state to the current filelist
         setDefaultFileList(fileList);
     };
-
-    //----------------- CREATE VARIABLE FOR DRAWER -----------------//
-    // const [visible, setVisible] = useState<boolean>(false);
-    // const [placement, setPlacement] = useState<string>('bottom');
-    // const showDrawer = () => {
-    //     setVisible(true);
-    // };
-    // const onCloseDrawer = () => {
-    //     setVisible(false);
-    // };
 
     //----------------- CREATE FUNCTION FOR SET HASHTAG -----------------//
     function handleChangeOfHashtag(value: any) {
@@ -85,8 +75,10 @@ function BoardCreateContent() {
     //------------ POST CONTENT FUNCTION --------------//W
     async function postContent() {
         console.log('content data sent to backend', contentData);
-        var objectID = await ApiPostContent(contentData);
-        history.push(`/boardcontent/${objectID._id}`);
+        const objectID = await ApiPostContent(contentData);
+        if (objectID) {
+            history.push(`/boardcontent/${objectID?._id}`);
+        }
     }
 
     //------------ SET STATE FOR CONTENT TYPE --------------//
@@ -96,7 +88,7 @@ function BoardCreateContent() {
         console.log('radio checked', e.target.value);
         setContentType(e.target.value);
     };
-
+    //SWITCH CASE
     return (
         <>
             <Container

@@ -47,12 +47,11 @@ function CommentOfContent() {
                 left: 'back',
             }}
         >
-            <IconSendMessage onClick={addComment} />
-            <CommentInput placeholder="แสดงความคิดเห็นของคุณ..." name="comment" value={comment} onChange={handleChangeOfComment} />
-
             {commentList.map((commentValue: IComment, key: number) => {
                 return <TodoTask key={key} commentContent={commentValue} deleteComment={deleteComment} />;
             })}
+            <IconSendMessage onClick={addComment} />
+            <CommentInput placeholder="แสดงความคิดเห็นของคุณ..." name="comment" value={comment} onChange={handleChangeOfComment} />
         </Container>
     );
 }

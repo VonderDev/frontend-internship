@@ -48,9 +48,9 @@ function BoardContent() {
         if (contentData) {
             console.log('[Newest Content data ]', contentData);
             //--------------- SET DATE FORMAT ---------------//
-            var dateCreatedContent = contentData?.created_at;
+            const dateCreatedContent = contentData?.created_at;
             const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
-            let createdContentData = new Date(dateCreatedContent);
+            const createdContentData = new Date(dateCreatedContent);
             setDateCreatedFormat(createdContentData.getDate() + ' ' + months[createdContentData.getMonth()] + ' ' + createdContentData.getFullYear());
         }
     }, [contentData, dateCreatedFormat]);
@@ -58,7 +58,7 @@ function BoardContent() {
     //--------------- CREATE VARIABLE FOR MAP ICON LIKE & COMMENT ---------------//
     const ButtonLikeAndCommentList = [
         {
-            icon: <HeartFilled style={{ color: '#3A8CE4', fontSize: '40px' }} />,
+            icon: <Rate character={<HeartFilled style={{ borderColor: 'black' }} />} count={1} style={{ color: '#F0685B', fontSize: '40px' }} />,
             length: <LengthOfLikeAndComment>0</LengthOfLikeAndComment>,
         },
         { icon: <CommentOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />, length: <LengthOfLikeAndComment>0</LengthOfLikeAndComment> },
@@ -88,16 +88,24 @@ function BoardContent() {
                     <ProfileImage />
                     <ContainerUserNameAndDate>
                         <AuthorName>{contentData?.author_username}</AuthorName>
-                        <DateCreatedContent>{contentData?.updated_at}</DateCreatedContent>
+                        <DateCreatedContent>{dateCreatedFormat}</DateCreatedContent>
                     </ContainerUserNameAndDate>
                     <ImageOfContent src={contentData?.image}></ImageOfContent>
                     <ContentBody>{contentData?.content_body}</ContentBody>
 
                     {ButtonLikeAndCommentList.map((item, index) => {
                         return (
-                            <BoxOfLikeAndComment key={index} onClick={() => history.push(`/boardcontent/${paramObjectId.id}/comment`)}>
+                            <BoxOfLikeAndComment key={index}>
                                 {item.icon}
-                                <span>{item.length}</span>
+                                <span
+                                    onClick={() => {
+                                        if (paramObjectId) {
+                                            history.push(`/boardcontent/${paramObjectId?.id}/comment`);
+                                        }
+                                    }}
+                                >
+                                    {item.length}
+                                </span>
                             </BoxOfLikeAndComment>
                         );
                     })}
