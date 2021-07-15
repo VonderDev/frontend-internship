@@ -1,11 +1,10 @@
 import Container from 'components/Container/Container';
 import { Box } from 'shared/style/theme/component';
 import { ControlOutlined, SearchOutlined } from '@ant-design/icons';
-import { ButtonFilter, SearchField, InputSearch, DrawerRadius, CustomCheckableTag, TagBox, Topic, ButtonUseFilter } from '../../shared/Filter.styles';
+import { ButtonFilter, SearchField, InputSearch } from '../../shared/Filter.styles';
 import { useEffect, useState } from 'react';
 import { ApiPostFilter, ApiGetSearch } from '../../apis/board.api';
 import FilterCard from './FilterCard';
-import { catagories, hashtag } from '../../shared/FixedTag';
 import FilterDrawer from './FilterDrawer';
 const Filter = () => {
     //Catagories----------------------------------------------------------------------------------------------------------
