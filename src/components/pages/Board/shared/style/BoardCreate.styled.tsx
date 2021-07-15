@@ -38,7 +38,7 @@ export const ButtonGoNextCreateContent = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Blue-400);
-    transform: translateY(180%);
+    transform: translateY(120%);
     margin-left: auto;
     margin-right: auto;
     width: 80%;
@@ -80,7 +80,7 @@ export const ButtonSummitPost = styled(Button)`
     transform: translateY(830%);
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    width: 73%;
     height: 7vh;
     display: flex;
     justify-content: center;

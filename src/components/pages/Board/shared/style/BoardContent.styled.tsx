@@ -75,4 +75,6 @@ export const LengthOfLikeAndComment = styled.span`
     font-size: 18px;
     color: #3a8ce4;
     font-weight: bolder;
+    padding-left: 10px;
+    transform: translateY(50%);
 `;

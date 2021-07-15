@@ -19,8 +19,8 @@ import BoardHistory from 'components/pages/Profile/views/BoardHistory';
 import BoardCreateContent from 'components/pages/Board/views/CreateContent/BoardCreateContent';
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
 import BoardContent from 'components/pages/Board/views/CreateContent/BoardContent';
-
 import TestPixi from 'components/GameElement/Game/testpixi';
+import CommentOfContent from 'components/pages/Board/views/Comment/CommentOfContent';
 
 function Routing() {
     return (
@@ -28,6 +28,7 @@ function Routing() {
             <Route exact path="/" component={Home} />
             <PrivateRoute exact path="/boardcreate" component={BoardCreateContent} />
             <Route exact path="/boardcontent/:id" component={BoardContent} />
+            <Route exact path="/boardcontent/:id/comment" component={CommentOfContent} />
             <PrivateRoute exact path="/profile" component={Profile} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />

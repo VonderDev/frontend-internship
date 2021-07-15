@@ -18,7 +18,8 @@ import {
     TextTitleContent,
     TopicTag,
 } from '../../shared/style/BoardContent.styled';
-import { HeartOutlined, CommentOutlined } from '@ant-design/icons';
+import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
+import { Rate } from 'antd';
 
 function BoardContent() {
     const history = useHistory();
@@ -50,14 +51,16 @@ function BoardContent() {
             var dateCreatedContent = contentData?.created_at;
             const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
             let createdContentData = new Date(dateCreatedContent);
-            console.log(createdContentData);
             setDateCreatedFormat(createdContentData.getDate() + ' ' + months[createdContentData.getMonth()] + ' ' + createdContentData.getFullYear());
         }
     }, [contentData, dateCreatedFormat]);
 
     //--------------- CREATE VARIABLE FOR MAP ICON LIKE & COMMENT ---------------//
     const ButtonLikeAndCommentList = [
-        { icon: <HeartOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />, length: <LengthOfLikeAndComment>{contentData?.likes}</LengthOfLikeAndComment> },
+        {
+            icon: <HeartFilled style={{ color: '#3A8CE4', fontSize: '40px' }} />,
+            length: <LengthOfLikeAndComment>0</LengthOfLikeAndComment>,
+        },
         { icon: <CommentOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />, length: <LengthOfLikeAndComment>0</LengthOfLikeAndComment> },
     ];
 
@@ -77,24 +80,24 @@ function BoardContent() {
                 <div>loading ...</div>
             ) : (
                 <ContainerBaordContent>
-                    <TextTitleContent>{contentData.title}</TextTitleContent>
+                    <TextTitleContent>{contentData?.title}</TextTitleContent>
                     <TopicTag>บทความ</TopicTag>
-                    {contentData.tag?.map((item: any, index: any) => {
+                    {contentData?.tag?.map((item: any, index: any) => {
                         return <CategoryTag key={index}>#{item}</CategoryTag>;
                     })}
                     <ProfileImage />
                     <ContainerUserNameAndDate>
-                        <AuthorName>{contentData.author_username}</AuthorName>
-                        <DateCreatedContent>{contentData.updated_at}</DateCreatedContent>
+                        <AuthorName>{contentData?.author_username}</AuthorName>
+                        <DateCreatedContent>{contentData?.updated_at}</DateCreatedContent>
                     </ContainerUserNameAndDate>
-                    <ImageOfContent src={contentData.image}></ImageOfContent>
-                    <ContentBody>{contentData.content_body}</ContentBody>
+                    <ImageOfContent src={contentData?.image}></ImageOfContent>
+                    <ContentBody>{contentData?.content_body}</ContentBody>
 
                     {ButtonLikeAndCommentList.map((item, index) => {
                         return (
-                            <BoxOfLikeAndComment key={index}>
+                            <BoxOfLikeAndComment key={index} onClick={() => history.push(`/boardcontent/${paramObjectId.id}/comment`)}>
                                 {item.icon}
-                                {item.length}
+                                <span>{item.length}</span>
                             </BoxOfLikeAndComment>
                         );
                     })}
