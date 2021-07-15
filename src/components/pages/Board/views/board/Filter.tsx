@@ -55,9 +55,9 @@ const Filter = () => {
         setVisible(false);
     };
 
-    //Search Function----------------------------------------------------------------------------------------------------
+    //Search Function (Not Finish)----------------------------------------------------------------------------------------------------
     const [searchValue, setSearchValue] = useState<string>();
-    console.log('search value', searchValue);
+    //console.log('search value', searchValue);
     useEffect(() => {
         if (searchValue === '') {
         } else {
