@@ -21,7 +21,7 @@ export async function ApiGetNewestContent() {
     return await axios
         .get('/user/newestContent')
         .then((response) => {
-            console.log('[Content Post Newest] :', response.data);
+            // console.log('[Content Post Newest] :', response.data);
             return response.data;
         })
         .catch((err) => {

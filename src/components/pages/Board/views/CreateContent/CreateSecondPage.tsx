@@ -8,7 +8,7 @@ import {
     InputHashtagInDrawer,
     OptionHashtag,
     TextTopicContent,
-} from '../../shared/BoardCreate.styled';
+} from '../../shared/style/BoardCreate.styled';
 
 interface CreateContentSecondPageProps {
     updateContentData: (event: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;
@@ -24,8 +24,8 @@ interface CreateContentSecondPageProps {
 const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({ countPage, contentType, onChangeContentType, contentData, setContentData, handleChangeOfHashtag, postContent }) => {
     //----------------- CREATE VARIABLE FOR MAP CATEGORY BOARD -----------------//
     const categoryContentList = [
-        { value: 'บทความ', label: 'บทความ' },
-        { value: 'คำถาม', label: 'คำถาม' },
+        { value: 'board', label: 'บทความ' },
+        { value: 'question', label: 'คำถาม' },
     ];
 
     //----------------- CREATE VARIABLE FOR HASHTAG -----------------//
