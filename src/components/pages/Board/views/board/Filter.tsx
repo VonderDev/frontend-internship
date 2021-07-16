@@ -90,7 +90,7 @@ const Filter = () => {
                 filterContentData={filterContentData}
             />
             <Box style={{ marginLeft: '20px', marginRight: '20px' }} align="flex-start" direction="column">
-                <SearchField>
+                <SearchField style={{marginBottom: '20px'}}>
                     <InputSearch
                         onChange={({ target: { value } }) => {
                             handleChangeSearch(value);

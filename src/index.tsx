@@ -21,7 +21,7 @@ const fetcher = (url: string) =>
     });
     
 const AppWithRouter = () => (
-    <SWRConfig value={{ refreshInterval: 3000, fetcher }}>
+    <SWRConfig value={{ fetcher }}>
         <BrowserRouter>
             <App />
         </BrowserRouter>
