@@ -561,33 +561,33 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       //Background 
       const bgS4Texture = PIXI.Texture.from(bgS4);
       const bgS4Home = new PIXI.Sprite(bgS4Texture);
-      bgS4Home.scale.set(0.7,0.5);
+      bgS4Home.scale.set(0.7,0.55);
       bgS4Home.position.set(-50,0);
       inHomeScene.addChild(bgS4Home)
 
       const funitureTexture = PIXI.Texture.from(funiture);
       const funitureS4 = new PIXI.Sprite(funitureTexture);
-      funitureS4.scale.set(0.5,0.5);
-      funitureS4.position.set(-150,50);
+      funitureS4.scale.set(0.5,0.6);
+      funitureS4.position.set(-150,20);
       inHomeScene.addChild(funitureS4)
 
       const sofaTexture = PIXI.Texture.from(sofa);
       const sofaS4 = new PIXI.Sprite(sofaTexture);
-      sofaS4.scale.set(0.5);
-      sofaS4.position.set(200,450);
+      sofaS4.scale.set(0.5,0.6);
+      sofaS4.position.set(150,500);
       inHomeScene.addChild(sofaS4)
     }
     function homeScene4_2 () {
       //Background 
       const bgS42Texture = PIXI.Texture.from(bgS42);
       const bgS42Home = new PIXI.Sprite(bgS42Texture);
-      bgS42Home.scale.set(0.7,0.5);
+      bgS42Home.scale.set(0.7,0.55);
       bgS42Home.position.set(0,0);
       inHome2Scene.addChild(bgS42Home)
 
       const sofa2Texture = PIXI.Texture.from(sofa2);
       const sofa2S4 = new PIXI.Sprite(sofa2Texture);
-      sofa2S4.scale.set(0.5,0.5);
+      sofa2S4.scale.set(0.5,0.6);
       sofa2S4.position.set(0,0);
       inHome2Scene.addChild( sofa2S4)
     }
@@ -595,14 +595,14 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       //Background 
       const bgS43Texture = PIXI.Texture.from(bgS43);
       const bgS43Home = new PIXI.Sprite(bgS43Texture);
-      bgS43Home.scale.set(0.7,0.5);
+      bgS43Home.scale.set(0.7,0.55);
       bgS43Home.position.set(0,0);
       inHome3Scene.addChild(bgS43Home)
 
       const sewingTexture = PIXI.Texture.from(sewing);
       const sewingS4 = new PIXI.Sprite(sewingTexture);
-      sewingS4.scale.set(0.5,0.5);
-      sewingS4.position.set(250,0);
+      sewingS4.scale.set(0.6);
+      sewingS4.position.set(100,-50);
       inHome3Scene.addChild( sewingS4)
 
       const toolsTexture = PIXI.Texture.from(tools);
@@ -729,8 +729,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
              
       const texture = PIXI.Texture.from(shadow);
       const shadowS6 = new PIXI.Sprite(texture);
-      shadowS6.scale.set(0.7);
-      shadowS6.anchor.set(0,1);
+      shadowS6.scale.set(0.5);
+      shadowS6.position.set(20,150);
       lastScene.addChild(shadowS6 )
 
     }
