@@ -75,14 +75,16 @@ function TestQuestion() {
 
         if (!questionList) return;
         // ถ้ามากกว่า 23 ก็คือ 24 ให้ Post Test Result
-        if (currentQuestion + 1 > questionList.length - 1) {
-            setLoading(true);
-            console.log('set Loading:', isLoading);
-            await ApiPostTestResult(testScore);
-            setLoading(false);
-            history.push('/result');
-            return;
+            if (currentQuestion + 1 > questionList.length - 1) {
+                    setLoading(true);
+                    console.log('set Loading:', isLoading);
+                    await ApiPostTestResult(testScore);
+                    setLoading(false);
+                    history.push('/result');
+                    return;
         }
+
+
         // handle condition start stop question
         setCurrentQuestion(currentQuestion + 1);
         console.log("Q number =>>>",currentQuestion )
@@ -94,6 +96,8 @@ function TestQuestion() {
             changeScene('S4.3')
         }else if (currentQuestion +1 === 14){
             changeScene('S5')
+        }else if (currentQuestion +1 === 23){
+            changeScene('S6')
         }
     }
 

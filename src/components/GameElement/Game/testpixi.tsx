@@ -22,6 +22,8 @@ const TestPixi = () => {
             changeScene('S4.3')
         }else if (value === 14){
             changeScene('S5')
+        }else if (value === 23){
+            changeScene('S6')
         }
     }
 

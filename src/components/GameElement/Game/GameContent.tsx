@@ -28,6 +28,10 @@ import sofa2 from '../Assets/Item/InHome/Sofa2.png'
 import bgS43 from '../Assets/Background/bg_s43.png'
 import sewing from '../Assets/Item/InHome/Sewing.png'
 import tools from '../Assets/Item/InHome/Tools.png'
+import bigTree from '../Assets//Item/Tree/BigTree.png'
+import lake from '../Assets/Background/Background_Lake.png'
+import water from '../Assets/Background/Water.png'
+import shadow from '../Assets/Background/Shadow.png'
 
 const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 
@@ -38,7 +42,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     const inHomeScene = new PIXI.Container();
     const inHome2Scene = new PIXI.Container();
     const inHome3Scene = new PIXI.Container();
-
+    const jungleScene = new PIXI.Container();
+    const endScene = new PIXI.Container();
+    const lastScene = new PIXI.Container();
     //keep container scene in array 
   
     secondScene.visible = false;
@@ -47,6 +53,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     inHomeScene.visible = false;
     inHome2Scene.visible = false;
     inHome3Scene.visible = false;
+    jungleScene.visible = false;
+    endScene.visible = false;
+    lastScene.visible = false;
 
     app.stage.addChild(firstScene);
     app.stage.addChild(secondScene);
@@ -55,12 +64,19 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     app.stage.addChild(inHomeScene);
     app.stage.addChild(inHome2Scene);
     app.stage.addChild(inHome3Scene);
+    app.stage.addChild(jungleScene);
+    app.stage.addChild(endScene);
+    app.stage.addChild(lastScene);
+
+
 
     //Preload asset
+    let sprites: any = []; 
     window.onload = function(){
 
       const loader = new PIXI.Loader();
-      let  sprite = {}
+      
+
       loader.add("ground", ground)
             .add("sky", sky)
             .add("tree", tree)
@@ -90,25 +106,26 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
             .add('bgS43' ,bgS43)
             .add('sewing' , sewing)
             .add('tools' , tools)
-      loader.onProgress.add(showProgress);
-      loader.onComplete.add(doneLoading);
-      loader.onError.add(loadError);
+            .add('bigTree' , bigTree)
+            .add('lake',lake)
+            .add('water', water)
+            .add('shadow', shadow)
       loader.load((loader, resource) => {
-        Object.assign(sprite, resource)
-        console.log('store:' , sprite)
       console.log("resource", resource);
-    });
-    }
+        app.loader.resources = resource
+        // Object.assign(sprite, resource)
+        // console.log('store:' , sprite)
 
-   
+    });
     const showProgress = (e : any) =>{
-      console.log(e.progress)
+      console.log(e.progress + '% loader')
     }
     const loadError = (e : any) =>{
       console.log('Error'+ e.message)
     }
 
     const doneLoading = (e : any) =>{
+      console.log("Sprites", sprites);
       console.log('Done Loading! Scene1 start')
       firstScene.interactive = true;
       firstScene.buttonMode = true;
@@ -117,12 +134,17 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 
     }
 
+    loader.onProgress.add(showProgress);
+    loader.onComplete.add(doneLoading);
+    loader.onError.add(loadError);
+
     const ticker = new PIXI.Ticker();
-    // const cloud1Texture = PIXI.Texture.from(app.loader.resource.cloud1.texture);
-    const Cloud1 = new PIXI.Sprite();
-    
+    const cloud1Texture = PIXI.Texture.from(cloud1);
     const cloud2Texture = PIXI.Texture.from(cloud2);
-    const Cloud2 = new PIXI.Sprite(cloud2Texture );
+    const Cloud1 = new PIXI.Sprite(cloud1Texture);
+    const Cloud2 = new PIXI.Sprite(cloud2Texture);
+    // const Cloud2 = PIXI.Sprite.from(app.loader.resources.cloud2.texture);
+    // const Cloud2 = PIXI.Sprite.from(app.loader.resource['cloud2'].texture);
     
     function animate() {
       if(Cloud1.x + Cloud1.width < firstScene.width){
@@ -211,7 +233,49 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     }
     function onClick5() {
       console.log("chang to Scene 5")
+      firstScene.visible = false;
+      doorScene.visible = false;
+      homeScene.visible = false;
+      secondScene.visible = false;
+      inHome2Scene.visible = false;
+      inHomeScene.visible = false;
+      inHome3Scene.visible = false;
+      jungleScene.visible = true;
+      jungleScene.interactive = true;
+      jungleScene.buttonMode = true;
+      jungleScene.on('pointerdown', onClick6);
+      gameScene5();
     }
+    function onClick6() {
+      console.log("chang to Scene 6")
+      firstScene.visible = false;
+      doorScene.visible = false;
+      homeScene.visible = false;
+      secondScene.visible = false;
+      inHome2Scene.visible = false;
+      inHomeScene.visible = false;
+      inHome3Scene.visible = false;
+      jungleScene.visible = false;
+      endScene.visible = true;
+      endScene.interactive = true;
+      endScene.buttonMode = true;
+      gameScene6();
+    }
+    function onClick6_1() {
+      console.log("chang to Scene End")
+      firstScene.visible = false;
+      doorScene.visible = false;
+      homeScene.visible = false;
+      secondScene.visible = false;
+      inHome2Scene.visible = false;
+      inHomeScene.visible = false;
+      inHome3Scene.visible = false;
+      jungleScene.visible = false;
+      endScene.visible = false;
+      lastScene.visible = true;
+      gameLastScene();
+    }
+
     function wait(duration = 0) {
       return new Promise((resolve, reject) => {
           setTimeout(resolve, duration);
@@ -242,6 +306,11 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       }
       else if (prop == 'S5'){
         onClick5()
+      }else if (prop == 'S6'){
+        onClick6()
+        wait(2000).then(() =>{
+          onClick6_1();
+        })
       }
     }
 
@@ -334,8 +403,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       ticker.start();
 
       setTimeout(()=>{
-        // ticker.stop();
-        ticker.remove(animate)
+        ticker.stop();
+        // ticker.remove(animate)
         }, 30000)
     }
 
@@ -542,6 +611,131 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       toolsS4.position.set(0,0);
       inHome3Scene.addChild(toolsS4)
     }
+    function gameScene5 () {
+           //Background 
+
+           const skyTexture = PIXI.Texture.from(sky);
+           const bgSky = new PIXI.Sprite(skyTexture);
+           bgSky.scale.set(0.7);
+           jungleScene.addChild(bgSky)
+     
+           const texture = PIXI.Texture.from(ground);
+           const dirt = new PIXI.Sprite(texture);
+           dirt.scale.set(0.7);
+           dirt.anchor.set(0,-1);
+           jungleScene.addChild(dirt)
+     
+           const treeTexture = PIXI.Texture.from(tree);
+           const bgTree = new PIXI.Sprite(treeTexture);
+           bgTree.scale.set(0.7);
+           bgTree.anchor.set(0,-1);
+           jungleScene.addChild(bgTree)
+     
+           Cloud1.scale.set(0.5);
+           Cloud1.position.set(10, 20);
+           jungleScene.addChild(Cloud1)
+     
+           Cloud2.scale.set(0.5);
+           Cloud2.position.set(500, 150);
+           jungleScene.addChild(Cloud2)
+           //Item 
+           const treeb1Texture = PIXI.Texture.from(treeb1);
+           const Treeb1 = new PIXI.Sprite(treeb1Texture);
+           Treeb1.scale.set(0.4)
+           Treeb1.position.set(250,400);
+           jungleScene.addChild(Treeb1)
+     
+           const treeb3Texture = PIXI.Texture.from(treeb3);
+           const Treeb3 = new PIXI.Sprite(treeb3Texture);
+           Treeb3.scale.set(0.3)
+           Treeb3.position.set(160,250);
+           jungleScene.addChild(Treeb3)
+     
+           const treeb2Texture = PIXI.Texture.from(treeb2);
+           const Treeb2 = new PIXI.Sprite(treeb2Texture);
+           Treeb2.scale.set(0.4)
+           Treeb2.position.set(0,300);
+           jungleScene.addChild(Treeb2)
+     
+           const bigTreeTexture = PIXI.Texture.from(bigTree);
+           const bigTreeS5 = new PIXI.Sprite(bigTreeTexture);
+           bigTreeS5.scale.set(0.7)
+           bigTreeS5.position.set(300,80);
+           jungleScene.addChild(bigTreeS5)
+     
+           const bush3Texture = PIXI.Texture.from(bush3);
+           const Bush3 = new PIXI.Sprite(bush3Texture);
+           Bush3.scale.set(0.3);
+           Bush3.position.set(-80,600);
+           jungleScene.addChild(Bush3)
+     
+           const treef2Texture = PIXI.Texture.from(treef2);
+           const Treef2 = new PIXI.Sprite(treef2Texture);
+           Treef2.scale.set(0.9);
+           Treef2.position.set(-250,-100);
+           jungleScene.addChild(Treef2)
+     
+           const bush4Texture = PIXI.Texture.from(bush4);
+           const Bush4 = new PIXI.Sprite(bush4Texture);
+           Bush4.scale.set(0.3);
+           Bush4.position.set(-5,700);
+           jungleScene.addChild(Bush4)
+     
+           const bush2Texture = PIXI.Texture.from(bush2);
+           const Bush2 = new PIXI.Sprite(bush2Texture);
+           Bush2.scale.set(0.5);
+           Bush2.position.set(350,550);
+           jungleScene.addChild(Bush2)
+     
+           const bush1Texture = PIXI.Texture.from(bush1);
+           const Bush1 = new PIXI.Sprite(bush1Texture);
+           Bush1.scale.set(0.6);
+           Bush1.position.set(450,600);
+           jungleScene.addChild(Bush1)
+    }
+    function gameScene6() {
+             //Background 
+
+             const skyTexture = PIXI.Texture.from(sky);
+             const bgSky = new PIXI.Sprite(skyTexture);
+             bgSky.scale.set(0.7);
+             endScene.addChild(bgSky)
+                    
+             const texture = PIXI.Texture.from(ground);
+             const dirt = new PIXI.Sprite(texture);
+             dirt.scale.set(0.7);
+             dirt.anchor.set(0,-1);
+             endScene.addChild(dirt)
+
+             const lakeTexture = PIXI.Texture.from(lake);
+             const lakeS5 = new PIXI.Sprite(lakeTexture);
+             lakeS5.scale.set(0.7);
+             lakeS5.anchor.set(0,-0.5);
+             endScene.addChild(lakeS5)
+       
+             Cloud1.scale.set(0.5);
+             Cloud1.position.set(10, 20);
+             endScene.addChild(Cloud1)
+       
+             Cloud2.scale.set(0.5);
+             Cloud2.position.set(500, 150);
+             endScene.addChild(Cloud2)
+    }
+    function gameLastScene() {
+      const waterTexture = PIXI.Texture.from(water);
+      const bgWater = new PIXI.Sprite(waterTexture);
+      bgWater.scale.set(0.7);
+      lastScene.addChild(bgWater)
+             
+      const texture = PIXI.Texture.from(shadow);
+      const shadowS6 = new PIXI.Sprite(texture);
+      shadowS6.scale.set(0.7);
+      shadowS6.anchor.set(0,1);
+      lastScene.addChild(shadowS6 )
+
+    }
+    }
+  
 
     // const onMainResize = (width:number , height:number) => {
     //   // TODO: resize game container at here
