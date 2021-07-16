@@ -20,7 +20,16 @@ import {
 } from '../../shared/style/BoardContent.styled';
 import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
 import { Rate } from 'antd';
-
+export enum Weeks {
+    ภาษา = 'word smart',
+    ตรรกะ = 'logic smart',
+    ดนตรี = 'music smart',
+    ธรรมชาติ = 'nature smart',
+    มิติสัมพันธ์ = 'picture smart',
+    การเคลื่อนไหว = 'body smart',
+    มนุษย์สัมพันธ์ = 'people smart',
+    เข้าใจตนเอง = 'self smart',
+}
 function BoardContent() {
     const history = useHistory();
     const paramObjectId = useParams<{ id: string }>();
@@ -39,7 +48,6 @@ function BoardContent() {
 
     //--------------- FETCHING BOARD CONTENT USING SWR ---------------//
     const { data: contentData, error: errorcontentData } = useSWR('/user/contentID/' + paramObjectId.id);
-    // const { data, error } = useSWR(`/user/${paramObjectId?.id}/comment`);
 
     const isLoadingContentData = !contentData && !errorcontentData;
 
@@ -66,6 +74,31 @@ function BoardContent() {
         { icon: <CommentOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />, length: <LengthOfLikeAndComment>0</LengthOfLikeAndComment> },
     ];
 
+    //--------------- CHANGE TAG CONTENT FROM ENGLIST TO THAI LANGUAGE ---------------//
+    const [tagName, setTagName] = useState([{}]);
+    function convertEnumToArray() {
+        const arrayObjects = [];
+        // Retrieve key and values using Object.entries() method.
+        for (const [propertyKey, propertyValue] of Object.entries(Weeks)) {
+            // Ignore keys that are not numbers
+            if (!Number.isNaN(Number(propertyKey))) {
+                continue;
+            }
+
+            // Add keys and values to array
+            arrayObjects.push({ value: propertyValue, nameTag: propertyKey });
+        }
+
+        console.log('enum', arrayObjects);
+        setTagName(arrayObjects);
+    }
+
+    useEffect(() => {
+        convertEnumToArray();
+        if (tagName) {
+            console.log('set tag', tagName);
+        }
+    }, []);
     return (
         <Container
             header={{
@@ -94,7 +127,6 @@ function BoardContent() {
                     </ContainerUserNameAndDate>
                     <ImageOfContent src={contentData?.image}></ImageOfContent>
                     <ContentBody>{contentData?.content_body}</ContentBody>
-
                     {ButtonLikeAndCommentList.map((item, index) => {
                         return (
                             <BoxOfLikeAndComment key={index}>

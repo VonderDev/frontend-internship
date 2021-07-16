@@ -34,11 +34,13 @@ export const IconSendMessage = styled.div`
 
 export const ProfileUserImage = styled.div`
     background-image: url(${profileImage});
-    width: 13%;
-    height: 9vh;
+    width: 10%;
+    height: 7vh;
     background-position: center;
     background-size: cover;
     border-radius: 50%;
+    position: relative;
+    top: 10%;
 `;
 
 export const ContainerOfCommentList = styled.span`
@@ -52,9 +54,18 @@ export const CommentBody = styled.div`
     padding-left: 10px;
     padding-top: 10px;
     width: 60%;
+    height: 9vh;
+    transform: translateX(80px) translateY(-75%);
+    font-size: 16px;
+`;
+
+export const CreatedDate = styled.div`
+    padding-left: 10px;
+    padding-top: 10px;
+    width: 60%;
     height: 7vh;
     transform: translateX(80px) translateY(-110%);
-    font-size: 16px;
+    font-size: 12px;
 `;
 
 export const ButtonDelete = styled.div`
