@@ -40,7 +40,18 @@ export const ProfileUserImage = styled.div`
     background-size: cover;
     border-radius: 50%;
     position: relative;
-    top: 10%;
+    top: 18%;
+`;
+
+export const ProfileUserImageCommentList = styled.div`
+    background-image: url(${profileImage});
+    width: 10%;
+    height: 7vh;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    position: relative;
+    top: 5%;
 `;
 
 export const ContainerOfCommentList = styled.span`
@@ -55,7 +66,7 @@ export const CommentBody = styled.div`
     padding-top: 10px;
     width: 60%;
     height: 9vh;
-    transform: translateX(80px) translateY(-75%);
+    transform: translateX(80px) translateY(-60%);
     font-size: 16px;
 `;
 
@@ -64,7 +75,7 @@ export const CreatedDate = styled.div`
     padding-top: 10px;
     width: 60%;
     height: 7vh;
-    transform: translateX(80px) translateY(-110%);
+    transform: translateX(80px) translateY(-90%);
     font-size: 12px;
 `;
 
@@ -73,4 +84,8 @@ export const ButtonDelete = styled.div`
     right: 15%;
     float: right;
     transform: translateY(-440%);
+`;
+
+export const Username = styled.div`
+    font-weight: bolder;
 `;

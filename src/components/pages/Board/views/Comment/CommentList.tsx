@@ -1,20 +1,19 @@
 import { IComment } from '../../shared/interface/Comment.interface';
-import { ButtonDelete, CommentBody, ContainerOfCommentList, ProfileUserImage } from '../../shared/style/CommentPage.styled';
+import { ButtonDelete, CommentBody, ContainerOfCommentList, ProfileUserImage, ProfileUserImageCommentList } from '../../shared/style/CommentPage.styled';
 
 interface CommentProps {
-    commentContent: IComment;
+    commentData: IComment;
     deleteComment(taskNameToDelete: string): void;
 }
 
-const CommentList = ({ commentContent, deleteComment }: CommentProps) => {
+const CommentList = ({ commentData, deleteComment }: CommentProps) => {
     return (
         <ContainerOfCommentList>
-            <ProfileUserImage />
-
-            <CommentBody>{commentContent.comment_body}</CommentBody>
+            <ProfileUserImageCommentList />
+            <CommentBody>{commentData.comment_body}</CommentBody>
             <ButtonDelete
                 onClick={() => {
-                    deleteComment(commentContent.comment_body);
+                    deleteComment(commentData.comment_body);
                 }}
             >
                 X

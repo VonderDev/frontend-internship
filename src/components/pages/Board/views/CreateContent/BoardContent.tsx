@@ -20,6 +20,7 @@ import {
 } from '../../shared/style/BoardContent.styled';
 import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
 import { Rate } from 'antd';
+import { ApiPutLikeOfBoardContent } from '../../apis/boardCreate.api';
 export enum Weeks {
     ภาษา = 'word smart',
     ตรรกะ = 'logic smart',
@@ -46,6 +47,23 @@ function BoardContent() {
         console.log('[useParams : obejctID]:', paramObjectId);
     }, []);
 
+    //----------------- PUT LIKE OF CONTENT -----------------//
+    const [addLike, setAddLike] = useState<{ content_id: string }>({
+        content_id: '',
+    });
+
+    useEffect(() => {
+        setAddLike({
+            ...addLike,
+            content_id: paramObjectId.id,
+        });
+        console.log('add Like :', addLike);
+    }, []);
+
+    function addLikeOfBoardContent() {
+        ApiPutLikeOfBoardContent(addLike);
+    }
+
     //--------------- FETCHING BOARD CONTENT USING SWR ---------------//
     const { data: contentData, error: errorcontentData } = useSWR('/user/contentID/' + paramObjectId.id);
 
@@ -68,8 +86,8 @@ function BoardContent() {
     //--------------- CREATE VARIABLE FOR MAP ICON LIKE & COMMENT ---------------//
     const ButtonLikeAndCommentList = [
         {
-            icon: <Rate character={<HeartFilled style={{ borderColor: 'black' }} />} count={1} style={{ color: '#F0685B', fontSize: '40px' }} />,
-            length: <LengthOfLikeAndComment>0</LengthOfLikeAndComment>,
+            icon: <Rate character={<HeartFilled style={{ borderColor: 'black' }} onClick={addLikeOfBoardContent} />} count={1} style={{ color: '#F0685B', fontSize: '40px' }} />,
+            length: <LengthOfLikeAndComment>{contentData?.uid_likes.length}</LengthOfLikeAndComment>,
         },
         { icon: <CommentOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />, length: <LengthOfLikeAndComment>0</LengthOfLikeAndComment> },
     ];

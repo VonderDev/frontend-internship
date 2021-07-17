@@ -40,3 +40,17 @@ export async function ApiPostFilter(data: any) {
         console.log('Cannot post Filter');
     });
 }
+
+export async function ApiPutLikeOfBoardContent(data: any) {
+    console.log('[Put Like send to backend] :', data);
+    return await axios.put('/user/content', data )
+    .then((res) => {
+        console.log("response", res.data)
+        return res.data
+    })
+    .catch((err) => {
+        console.error(err);
+        console.log('Cannot put like');
+    });
+}
+
