@@ -11,6 +11,7 @@ const AuthContext = createContext<any>(null);
 const AuthProvider = ({ children }: IAuthProps) => {
     const [user, setUser] = useState<any | null>();
     const [token, setToken] = useState<any | null>();
+    const [userID, setUserID] = useState<any | null>();
 
     const getUser = async () => {
         const token = localStorage.getItem('token');
@@ -32,6 +33,8 @@ const AuthProvider = ({ children }: IAuthProps) => {
             .post('/login', { email, password })
             .then((response) => {
                 if (response.data.token) localStorage.setItem('token', response.data.token);
+                console.log('test response data : ', response.data);
+
                 setToken(localStorage.getItem('token'));
                 setUser(response.data.resuit);
                 return user;

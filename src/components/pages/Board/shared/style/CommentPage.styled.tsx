@@ -10,10 +10,10 @@ export const CommentInput = styled(Input)`
     width: 75%;
     height: 45px;
     box-shadow: 0px 3px 6px #f1f1f1;
-    position: sticky;
-    position: -webkit-sticky;
-    top: 87%;
-    left: 5%;
+    /* position: sticky;
+    position: -webkit-sticky; */
+    /* top: 87%;
+    left: 5%; */
 `;
 
 export const IconSendMessage = styled.div`
@@ -22,10 +22,9 @@ export const IconSendMessage = styled.div`
     height: 5vh;
     background-size: cover;
     background-position: center;
-    position: -webkit-sticky;
-    top: 87.7%;
-    right: 12%;
-    position: sticky;
+    top: 5px;
+    right: 16%;
+    position: relative;
     float: right;
     :hover {
         cursor: pointer;
@@ -54,9 +53,11 @@ export const ProfileUserImageCommentList = styled.div`
     top: 5%;
 `;
 
-export const ContainerOfCommentList = styled.span`
+export const ContainerOfCommentList = styled.div`
     position: relative;
     left: 5%;
+    overflow-y: scroll;
+    height: 78vh;
 `;
 
 export const CommentBody = styled.div`
@@ -88,4 +89,13 @@ export const ButtonDelete = styled.div`
 
 export const Username = styled.div`
     font-weight: bolder;
+`;
+
+export const ContainerOfInput = styled.div`
+    position: relative;
+    left: 5%;
+`;
+
+export const BoxOfCommentList = styled.div`
+    height: 15vh;
 `;

@@ -19,8 +19,8 @@ import {
     TopicTag,
 } from '../../shared/style/BoardContent.styled';
 import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
-import { Rate } from 'antd';
 import { ApiPutLikeOfBoardContent } from '../../apis/boardCreate.api';
+import { useAuthContext } from 'components/AuthContext/AuthContext';
 export enum Weeks {
     ภาษา = 'word smart',
     ตรรกะ = 'logic smart',
@@ -72,7 +72,11 @@ function BoardContent() {
     //--------------- SET DATE CREATED CONTENT FORMAT ---------------//
     const [dateCreatedFormat, setDateCreatedFormat] = useState<string>();
 
+    const { user, login, token, getUser } = useAuthContext();
+    const [isLike, setIsLike] = useState(false);
+
     useEffect(() => {
+        console.log('user login', user);
         if (contentData) {
             console.log('[Newest Content data ]', contentData);
             //--------------- SET DATE FORMAT ---------------//
@@ -80,43 +84,24 @@ function BoardContent() {
             const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
             const createdContentData = new Date(dateCreatedContent);
             setDateCreatedFormat(createdContentData.getDate() + ' ' + months[createdContentData.getMonth()] + ' ' + createdContentData.getFullYear());
+            const uidLikes = contentData?.uid_likes;
+            console.log('[uid likes :]', uidLikes.includes('60dadd502c82f310974b8db'));
+            //---------------- set isLike ------------------//
+            setIsLike(uidLikes.includes('60dadd502c82f310974b8db'));
         }
     }, [contentData, dateCreatedFormat]);
 
-    //--------------- CREATE VARIABLE FOR MAP ICON LIKE & COMMENT ---------------//
-    const ButtonLikeAndCommentList = [
-        {
-            icon: <Rate character={<HeartFilled style={{ borderColor: 'black' }} onClick={addLikeOfBoardContent} />} count={1} style={{ color: '#F0685B', fontSize: '40px' }} />,
-            length: <LengthOfLikeAndComment>{contentData?.uid_likes.length}</LengthOfLikeAndComment>,
-        },
-        { icon: <CommentOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />, length: <LengthOfLikeAndComment>0</LengthOfLikeAndComment> },
-    ];
+    //--------------- FETCHING COMMENT DATA FOR SHOW LENGTH OF COMMENTED ---------------//
+    //--------------- AND CREATE LIST OF BUTTON LIKE AND COMMENT ---------------//
+    const { data: fetchingCommentData, error: errorfetchingComment } = useSWR(`/user/comment/get/1-100/${paramObjectId.id}`);
+    // const ButtonLikeAndCommentList = [
+    //     {
+    //         icon: ,
+    //         length: ,
+    //     },
+    //     { icon:  },
+    // ];
 
-    //--------------- CHANGE TAG CONTENT FROM ENGLIST TO THAI LANGUAGE ---------------//
-    const [tagName, setTagName] = useState([{}]);
-    function convertEnumToArray() {
-        const arrayObjects = [];
-        // Retrieve key and values using Object.entries() method.
-        for (const [propertyKey, propertyValue] of Object.entries(Weeks)) {
-            // Ignore keys that are not numbers
-            if (!Number.isNaN(Number(propertyKey))) {
-                continue;
-            }
-
-            // Add keys and values to array
-            arrayObjects.push({ value: propertyValue, nameTag: propertyKey });
-        }
-
-        console.log('enum', arrayObjects);
-        setTagName(arrayObjects);
-    }
-
-    useEffect(() => {
-        convertEnumToArray();
-        if (tagName) {
-            console.log('set tag', tagName);
-        }
-    }, []);
     return (
         <Container
             header={{
@@ -136,6 +121,31 @@ function BoardContent() {
                     <TextTitleContent>{contentData?.title}</TextTitleContent>
                     <TopicTag>บทความ</TopicTag>
                     {contentData?.tag?.map((item: any, index: any) => {
+                        //------------- Not good in future -------------//
+                        if (item === 'word smart') {
+                            return '#ภาษา';
+                        }
+                        if (item === 'logic smart') {
+                            return '#ตรรกะ';
+                        }
+                        if (item === 'music smart') {
+                            return '#ดนตรี';
+                        }
+                        if (item === 'nature smart') {
+                            return '#ธรรมชาติ';
+                        }
+                        if (item === 'picture smart') {
+                            return '#มิติสัมพันธ์';
+                        }
+                        if (item === 'body smart') {
+                            return '#การเคลื่อนไหว';
+                        }
+                        if (item === 'people smart') {
+                            return '#มนุษย์สัมพันธ์';
+                        }
+                        if (item === 'self smart') {
+                            return '#เข้าใจตนเอง';
+                        }
                         return <CategoryTag key={index}>#{item}</CategoryTag>;
                     })}
                     <ProfileImage />
@@ -145,22 +155,23 @@ function BoardContent() {
                     </ContainerUserNameAndDate>
                     <ImageOfContent src={contentData?.image}></ImageOfContent>
                     <ContentBody>{contentData?.content_body}</ContentBody>
-                    {ButtonLikeAndCommentList.map((item, index) => {
-                        return (
-                            <BoxOfLikeAndComment key={index}>
-                                {item.icon}
-                                <span
-                                    onClick={() => {
-                                        if (paramObjectId) {
-                                            history.push(`/boardcontent/${paramObjectId?.id}/comment`);
-                                        }
-                                    }}
-                                >
-                                    {item.length}
-                                </span>
-                            </BoxOfLikeAndComment>
-                        );
-                    })}
+
+                    <BoxOfLikeAndComment>
+                        {isLike ? <HeartFilled style={{ borderColor: 'green' }} onClick={addLikeOfBoardContent} /> : <HeartOutlined style={{ borderColor: 'red' }} onClick={addLikeOfBoardContent} />}
+                        <span
+                            onClick={() => {
+                                if (paramObjectId) {
+                                    history.push(`/boardcontent/${paramObjectId?.id}/comment`);
+                                }
+                            }}
+                        >
+                            <LengthOfLikeAndComment>{contentData?.uid_likes.length}</LengthOfLikeAndComment>
+                        </span>
+                        <span>
+                            <CommentOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />
+                            <LengthOfLikeAndComment>{fetchingCommentData?.length}</LengthOfLikeAndComment>
+                        </span>
+                    </BoxOfLikeAndComment>
                 </ContainerBaordContent>
             )}
         </Container>
