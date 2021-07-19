@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 
 const token = localStorage.getItem('token');
 //----------------------- AXIOS POST CONTENT -----------------------//
@@ -21,7 +20,7 @@ export async function ApiGetNewestContent() {
     return await axios
         .get('/user/newestContent')
         .then((response) => {
-            console.log('[Content Post Newest] :', response.data);
+            // console.log('[Content Post Newest] :', response.data);
             return response.data;
         })
         .catch((err) => {
@@ -41,3 +40,17 @@ export async function ApiPostFilter(data: any) {
         console.log('Cannot post Filter');
     });
 }
+
+export async function ApiPutLikeOfBoardContent(data: any) {
+    console.log('[Put Like send to backend] :', data);
+    return await axios.put('/user/content', data )
+    .then((res) => {
+        console.log("response", res.data)
+        return res.data
+    })
+    .catch((err) => {
+        console.error(err);
+        console.log('Cannot put like');
+    });
+}
+

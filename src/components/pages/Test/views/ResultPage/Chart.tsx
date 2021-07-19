@@ -10,7 +10,7 @@ interface Chartprop {
 const Charts = () => {
     //--------------- FETCHING SCORE & SKILL DATA USING SWR ---------------//
 
-    const { data: resultData, error } = useSWR('/user/result');
+    const { data: resultData, error } = useSWR('/user/newResult');
     const isLoading = !resultData && !error;
     const [score, setScore] = useState([]);
     const [skill, setSkill] = useState([]);
