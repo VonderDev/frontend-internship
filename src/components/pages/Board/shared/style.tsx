@@ -2,6 +2,7 @@ import { Card, Col, Row, List, Space, Typography } from 'antd';
 import styled from 'styled-components';
 import { RightOutlined, FormOutlined , HeartFilled } from '@ant-design/icons';
 import { CardStyle } from 'shared/style/theme/component';
+import Container from 'components/Container/Container';
 
 export const TextRecommendBoardTopic = styled(Col)`
     font-weight: bolder;
@@ -57,6 +58,9 @@ export const GridBox = styled.div`
 `;
 
 export const NewCardStyle = styled(CardStyle)`
+
+    padding : 0px;
+
     & .ant-card-actions {
         border-top : none;
         background : none;
@@ -69,6 +73,33 @@ export const NewCardStyle = styled(CardStyle)`
     & .ant-card-meta-title {
         font-weight : bold;
     }
+
+    & .ant-card-meta {
+        padding : none;
+    }
+
+    & .ant-card-body {
+        padding : 10px;
+        padding-top : 10px;
+    }
+
+    & .ant-card-actions {
+        padding : none;
+        align-items : baseline;
+    }
+
+    & .ant-card-actions > li > span {
+        font-size : 12px;
+    }
+`;
+
+export const BoardHiddenScroll = styled(Container)`
+    overflow-y : hidden;
+`;
+
+export const SpaceCard = styled(Space)`
+    padding-right : 20px;
+    padding-left : 20px;
 `;
 
 export const HistoryImage = styled.img`
@@ -77,6 +108,11 @@ export const HistoryImage = styled.img`
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     transform: translateY(-1%);
+`;
+
+export const CoverImage = styled.img`
+    width : 205px;
+    height : 148px;
 `;
 
 export const CardText = styled.div`
@@ -97,6 +133,17 @@ export const HistoryText = styled.div`
     display: block;
     overflow: hidden;
     white-space: nowrap;
+`;
+
+export const CardTextData = styled.div`
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bolder;
+    text-overflow: ellipsis; /* เพิ่ม ... จุดจุดจุดท้ายสุด */
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    color : var(--Gray-400);
 `;
 
 export const CommentIcon = styled(FormOutlined)`

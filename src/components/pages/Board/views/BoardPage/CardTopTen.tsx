@@ -5,7 +5,10 @@ import { GridBox,
   SearchField, 
   NewCardStyle, 
   HeartIconCard, 
-  HeartText } from '../../shared/style';
+  HeartText,
+  CardTextData,
+  SpaceCard,
+  CoverImage } from '../../shared/style';
 import { FormOutlined, LoadingOutlined, CalendarOutlined } from '@ant-design/icons';
 import { IIconText } from '../../shared/Card.interface';
 import { useHistory } from 'react-router';
@@ -23,7 +26,7 @@ export const CardTopTen = () => {
   const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
   const { data, error } = useSWR('/user/content/get');
   const isLoading = !data && !error;
-  console.log('Card Top10 Data : ', data?.created_at);
+  console.log('Card date : ', data?.created_at);
   const history = useHistory();
 
   //--------------- SET DATE CREATED CONTENT FORMAT ---------------//
@@ -34,7 +37,7 @@ export const CardTopTen = () => {
   //         console.log('[Newest Content data ]', contentData);
   //         //--------------- SET DATE FORMAT ---------------//
   //         var dateCreatedContent = contentData?.created_at;
-  //         const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+          const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
   //         let createdContentData = new Date(dateCreatedContent);
   //         console.log(createdContentData);
   //         setDateCreatedFormat(createdContentData.getDate() + ' ' + months[createdContentData.getMonth()] + ' ' + createdContentData.getFullYear());
@@ -44,29 +47,30 @@ export const CardTopTen = () => {
   return (
     <>
       {isLoading ? (
-        <Spin indicator={antIcon} tip="Loading..." />
+          <Spin indicator={antIcon} tip="Loading..." />
       ) : (
         <GridBox>
-          <Space direction="horizontal" >
+          <SpaceCard direction="horizontal" >
             {data?.slice(0, 10).map((item: any, index: any) => {
+              const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+              const cardDate = new Date(item?.created_at);
+              const dateFormat = cardDate.getDate() + months[cardDate.getMonth()] + cardDate.getFullYear();
               return (
-                <NewCardStyle typecard="Vertical" heightcard={350} key={index}
+                <NewCardStyle typecard="Vertical" heightcard={255} key={index}
                   hoverable
-                  onClick={() => history.push('/boardContent')}
                   cover={
-                    <img alt="default"
-                      src="https://s.keepmeme.com/files/en_posts/20200908/blurred-surprised-cat-meme-5b734a45210ef3b6657bcbe2831715fa.jpg"
-                    />
+                    <CoverImage src={item?.image} style={{ borderRadius:'12px 12px 0 0'}} />
                   }
+                  onClick={() => history.push('/boardContent')}
                   actions={
                     [
                       <IconText icon={FormOutlined} text={item?.author_username} />,
-                      <IconText icon={CalendarOutlined} text={item?.created_at} />,
+                      <IconText icon={CalendarOutlined} text={dateFormat} />,
                     ]
                   }
                 >
                   <Meta title={item?.title} />
-                  บทความ #{item?.tag}
+                  <CardTextData>บทความ <span style={{ fontWeight: 'normal'}}>#{item?.tag}</span></CardTextData>
                   <div>
                     <HeartIconCard />
                     <HeartText>
@@ -76,7 +80,7 @@ export const CardTopTen = () => {
                 </NewCardStyle>
               )
             })}
-          </Space>
+          </SpaceCard>
         </GridBox>
       )}
     </>

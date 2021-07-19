@@ -3,7 +3,9 @@ import Container from 'components/Container/Container';
 import {
   TextRecommendBoardTopic,
   ButtonSeeAllBoard,
-  CardContainer
+  CardContainer,
+  BoardHiddenScroll,
+  GridBox
 } from '../../shared/style';
 import { Row, Col } from 'antd';
 import { useHistory } from 'react-router-dom';

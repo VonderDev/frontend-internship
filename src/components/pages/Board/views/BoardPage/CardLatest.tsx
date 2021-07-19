@@ -5,7 +5,18 @@ import { useHistory } from 'react-router';
 import { CardStyle } from 'shared/style/theme/component';
 import useSWR from 'swr';
 import { IIconText, IListData } from '../../shared/Card.interface';
-import { BoardCard, CardText, CommentIcon, HeartIconList, HistoryImage, HistoryText, ImgBoardList, ListBoard, ListItemBoard, RowStyled, SearchField } from "../../shared/style";
+import { BoardCard, 
+    CardText, 
+    CommentIcon, 
+    HeartIconList, 
+    HistoryImage, 
+    HistoryText, 
+    ImgBoardList, 
+    ListBoard, 
+    ListItemBoard, 
+    RowStyled, 
+    SearchField,
+    CardTextData } from "../../shared/style";
 import { LoadingOutlined } from '@ant-design/icons';
 
 const { Meta } = Card;
@@ -40,7 +51,8 @@ export const CardLatest = () => {
                       history.push('/boardContent');
                   }}
               >
-                  <RowStyled>
+                  <HistoryImage src={item?.image} />
+                  {/* <RowStyled>
                       <Col span={7}>
                           <HistoryImage src={item?.image} />
                       </Col>
@@ -50,28 +62,28 @@ export const CardLatest = () => {
                                   <HistoryText>{item?.title}</HistoryText>
                               </Row>
                               <Row>
-                                  <HistoryText>{item?.content_body}</HistoryText>
+                                  <CardTextData>บทความ #{item?.tag}</CardTextData>
                               </Row>
                               <Row>
                                   <Col span={2}>
                                       <CommentIcon />
                                   </Col>
                                   <Col span={10}>
-                                      <HistoryText>{item?.author_username}</HistoryText>
+                                      <CardTextData>{item?.author_username}</CardTextData>
                                   </Col>
                                   <Col span={8}>
-                                      <HistoryText>{item?.created_at}</HistoryText>
+                                      <CardTextData>{item?.created_at}</CardTextData>
                                   </Col>
                                   <Col span={2}>
                                       <HeartIconList />
                                   </Col>
                                   <Col span={2}>
-                                      <HistoryText>{item?.uid_likes.length}</HistoryText>
+                                      <CardTextData>{item?.uid_likes.length}</CardTextData>
                                   </Col>
                               </Row>
                           </CardText>
                       </Col>
-                  </RowStyled>
+                  </RowStyled> */}
               </BoardCard>
           );
       })}
