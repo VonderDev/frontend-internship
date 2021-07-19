@@ -2,7 +2,7 @@ import Container from 'components/Container/Container';
 import { Box } from 'shared/style/theme/component';
 import { ControlOutlined, SearchOutlined } from '@ant-design/icons';
 import { ButtonFilter, SearchField, InputSearch } from '../../shared/Filter.styles';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ApiPostFilter, ApiGetSearch } from '../../apis/board.api';
 import FilterCard from './FilterCard';
 import FilterDrawer from './FilterDrawer';
@@ -47,29 +47,22 @@ const Filter = () => {
     }, [contentData]);
 
     //Drawer Function----------------------------------------------------------------------------------------------------
-    // Function เดียว set ให้ตรงกันข้าม
     const [visible, setVisible] = useState<boolean>(false);
     const showDrawer = () => {
-        setVisible(true);
+        setVisible(!visible);
     };
-    const closeDrawer = () => {
-        setVisible(false);
-    };
-
+    
     //Search Function (Not Finish)----------------------------------------------------------------------------------------------------
     const [searchValue, setSearchValue] = useState<string>();
-    //console.log('search value', searchValue);
-    // เปลี่ยน useCallBack
     useEffect(() => {
-        if (searchValue === '') {
-        } else {
-            const res = ApiGetSearch(searchValue);
-            setSearchData(res);
-        }
-    }, [searchValue]);
-    const handleChangeSearch = (value: string) => {
-        setSearchValue(value);
-    };
+        const delayDebounceFn = setTimeout(() => {
+          console.log(searchValue)
+          if(!searchValue){
+          }else
+          ApiGetSearch(searchValue);
+        }, 1000)
+        return () => clearTimeout(delayDebounceFn)
+      }, [searchValue])
 
     return (
         <Container
@@ -81,7 +74,7 @@ const Filter = () => {
         >
             <FilterDrawer
                 tagFilterData={tagFilterData}
-                closeDrawer={closeDrawer}
+                showDrawer={showDrawer}
                 visible={visible}
                 selectedCatagories={selectedCatagories}
                 selectedTags={selectedTags}
@@ -90,11 +83,9 @@ const Filter = () => {
                 filterContentData={filterContentData}
             />
             <Box style={{ marginLeft: '20px', marginRight: '20px' }} align="flex-start" direction="column">
-                <SearchField style={{marginBottom: '20px'}}>
+                <SearchField style={{ marginBottom: '20px' }}>
                     <InputSearch
-                        onChange={({ target: { value } }) => {
-                            handleChangeSearch(value);
-                        }}
+                        onChange={(e) => setSearchValue(e.target.value)}
                         placeholder="Search Form"
                         prefix={<SearchOutlined />}
                     />
