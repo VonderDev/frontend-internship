@@ -1,5 +1,5 @@
 import Container from 'components/Container/Container';
-import { ButtonBackToFirstPage } from '../../shared/BoardCreate.styled';
+import { ButtonBackToFirstPage } from '../../shared/style/BoardCreate.styled';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { LeftOutlined } from '@ant-design/icons';
@@ -12,10 +12,11 @@ function BoardCreateContent() {
     const history = useHistory();
     //----------------- CREATE HOOK FOR POST CONTENT -----------------//
     const [countPage, setCountPage] = useState(1);
-    const [contentData, setContentData] = useState<{ title: string; content_body: string; content_type: string; tag: Array<string> }>({
+    const [contentData, setContentData] = useState<{ title: string; content_body: string; content_type: string; image: string; tag: Array<string> }>({
         title: '',
         content_body: '',
         content_type: '',
+        image: '',
         tag: [],
     });
     const updateContentData = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -30,21 +31,25 @@ function BoardCreateContent() {
     // }, [contentData]);
 
     //----------------- CREATE FUNCTION UPLOAD IMAGE -----------------//
-    const [defaultFileList, setDefaultFileList] = useState([]);
+    const [defaultFileList, setDefaultFileList] = useState('');
 
     const uploadImage = async (options: any) => {
         const { onSuccess, onError, file } = options;
-        const formData = new FormData();
+        const ImageformData = new FormData();
         const config = {
             headers: { 'Content-Type': 'multipart/form-data' },
         };
-        formData.append('image', file);
+        ImageformData.append('photo', file);
         try {
             console.log('form data', file);
-            const res = await axios.post('https://jsonplaceholder.typicode.com/posts', formData, config);
+            const res = await axios.post('/images', ImageformData, config);
 
             onSuccess('Ok');
-            console.log('server res: ', res);
+            console.log('[Response from post image]: ', res.data);
+            setContentData({
+                ...contentData,
+                image: res.data[0],
+            });
         } catch (err) {
             console.log('Eroor: ', err);
             const error = new Error('Some error');
@@ -52,21 +57,11 @@ function BoardCreateContent() {
         }
     };
 
-    const handleOnChangeFileImage = ({ file, fileList, event }: any) => {
+    const handleOnChangeFileImage = ({ fileList }: any) => {
         console.log('[FileList]:', fileList);
         //Using Hooks to update the state to the current filelist
         setDefaultFileList(fileList);
     };
-
-    //----------------- CREATE VARIABLE FOR DRAWER -----------------//
-    // const [visible, setVisible] = useState<boolean>(false);
-    // const [placement, setPlacement] = useState<string>('bottom');
-    // const showDrawer = () => {
-    //     setVisible(true);
-    // };
-    // const onCloseDrawer = () => {
-    //     setVisible(false);
-    // };
 
     //----------------- CREATE FUNCTION FOR SET HASHTAG -----------------//
     function handleChangeOfHashtag(value: any) {
@@ -80,10 +75,10 @@ function BoardCreateContent() {
     //------------ POST CONTENT FUNCTION --------------//W
     async function postContent() {
         console.log('content data sent to backend', contentData);
-        var test = await ApiPostContent(contentData);
-        // history.push({ pathname: '/boardcontent', search: `test${test._id}` });
-        history.push(`/boardcontent/${test._id}`);
-        console.log('Testtttttttt', test._id);
+        const objectID = await ApiPostContent(contentData);
+        if (objectID) {
+            history.push(`/boardcontent/${objectID?._id}`);
+        }
     }
 
     //------------ SET STATE FOR CONTENT TYPE --------------//
@@ -93,7 +88,7 @@ function BoardCreateContent() {
         console.log('radio checked', e.target.value);
         setContentType(e.target.value);
     };
-
+    //SWITCH CASE
     return (
         <>
             <Container
