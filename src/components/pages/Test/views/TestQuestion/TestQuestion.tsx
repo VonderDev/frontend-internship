@@ -13,7 +13,7 @@ import {
 import { useHistory } from 'react-router-dom';
 import { ApiGetTestData, ApiPostTestResult } from '../../apis/test.api';
 import { IQuestion, IUserAns } from '../../shared/interface/Test.interfaces';
-import { Col, Modal, Spin } from 'antd';
+import { Col, message, Modal, Spin } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import React from 'react';
 import Container from 'components/Container/Container';
@@ -25,6 +25,8 @@ import PixiApp from 'components/GameElement/PixiStore/PixiApp';
 import { Box } from 'shared/style/theme/component';
 import {AppContext} from 'components/GameElement/PixiStore/AppContext'
 import { setTimeout } from 'timers';
+import { TextStory } from '../../shared/styles/Test/TestStory.styled';
+import { Item } from 'react-bootstrap/lib/Breadcrumb';
 
 function TestQuestion() {
     //
@@ -44,7 +46,7 @@ function TestQuestion() {
     ];
     const [testScore, setTestScore] = useState<Array<IUserAns>>([]);
     const [isLoading, setLoading] = useState(false);
-    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isModalVisible, setIsModalVisible] = useState(true);
     const { confirm } = Modal;
 
     //---------------- if using AXIOS ----------------//
@@ -52,6 +54,79 @@ function TestQuestion() {
         if (!questionList) return;
         setCurrentQuestionDetail(questionList[currentQuestion]);
     }, [currentQuestion, questionList]);
+
+    const [cutScene, setCutScene] = useState<boolean>(false);
+    const [currentCutScnen, setCurrentCutScene] = useState<number>(0)
+    const [currentMessage, setCurrentMessage] = useState<number>(0)
+    const cutSceneList = [
+        { value: 1, message:[ 'ที่นี่ที่ไหนกัน... แล้วฉันคือใคร... โอ๊ย ทำไมจำอะไรไม่ได้เลย…',
+                            'ลองเดินตามทางนี้ไปละกัน เผื่อจะจำอะไรได้มากขึ้น'] },
+        { value: 2, message: ['เอ๊ะ! ตรงนั้นมีคนนี่นา ลองเข้าไปถามดูดีกว่าเผื่อจะมีใครช่วยฉันได้']},
+        { value: 3, message: ['A:“นายนั่นแหละที่เป็นคนบอกให้มาทางนี้”' ,
+                            'B:“ฉันบอกให้ไปอีกทางนึงต่างหาก”',
+                            ' เอ๊ะ! เหมือนว่าพวกเขากำลังทะเลาะกันอยู่นะ']},
+        { value: 4, message: ['“เกิดอะไรขึ้นเหรอ”',
+                            'A: “พวกเรากำลังหาทางออกจากป่านี้อยู่ แต่เจ้านี่น่ะสิ มันพาฉันหลงทาง”',
+                            'B: “อะไรนะ นายต่างหากที่พาฉันหลงทาง!”' ,
+                            'พอดีเลย ฉันก็หาทางออกอยู่เหมือนกัน งั้นพวกเรามาหาทางออกด้วยกันไหม',
+                            'เอาสิ!!!']},
+        { value: 5, message: ['ว่าแต่ ช่วยอะไรฉันหน่อยได้ไหม พวกเธอพอจะรู้ไหมว่าฉันคือใคร',
+                            'B: “อืม พวกเราก็ไม่รู้เหมือนกันว่าเธอคือใคร ขอโทษด้วยนะ”',
+                            'อ้อ ไม่เป็นไรๆ งั้นพวกเราก็ออกเดินทางต่อเถอะ']},
+        { value: 6, message: ['เอ๊ะ มีบ้านอยู่ตรงนี้ด้วย ลองเข้าไปดูดีกว่าเผื่อมีใครอยู่']},
+        { value: 7, message: ['“ไม่มีใครอยู่เลย....แต่ในนี้มีของน่าสนใจเยอะแยะเลย”']},
+        { value: 8, message: ['เอาล่ะ เราน่าจะเดินทางต่อได้แล้ว']},
+        { value: 9, message: ['ตรงนั้นมีใครก็ไม่รู้เล่นดนตรีอยู่ ลองไปฟังกันเถอะ']},
+        { value: 10, message: ['สุดยอดไปเลย เธอเล่นดนตรีเพราะจริงๆ',
+                                'นักดนตรี: “ขอบคุณนะ พวกเธอก็เต้นเก่งมากเลย”',
+                                'ว่าแต่ ฉันขอถามอะไรหน่อยได้รึเปล่า..']},
+        { value: 11, message: ['นักดนตรี: “อ๋อ เรื่องมันเป็นอย่างนี้นี่เอง งั้นฉันขอถามกลับได้ไหม” ']},
+        { value: 12, message: ['“ถ้าเธอยังนึกไม่ออก ก็ลองไปตามทางที่ฉันบอกก็แล้วกัน” “ลองเดินไปตามทางนี้ดู เธอก็จะรู้คำตอบเองแหละ”']},
+        { value: 13, message: ['“เราออกจากป่านี้มาได้แล้ว!”',
+                                '“สวยจัง นี่มันทะเลสาบนี่นา”']},
+        { value: 14, message: [' ตกลงฉันคือใครกันนะ.. ']},
+    ];
+    useEffect(()=>{
+        cutSceneList[currentCutScnen]
+        console.log('CutScene :', cutSceneList[currentCutScnen].value ,'message:',cutSceneList[currentCutScnen].message)
+    },[currentCutScnen])
+
+    const showStory =()=>{
+        console.log('Cut ? :' ,cutScene);
+        if(currentMessage > cutSceneList[currentCutScnen].message.length){
+             if(currentCutScnen === 4)
+            {
+                changeScene('S3')
+                setCutScene(true)
+            }else if (currentCutScnen === 5){
+                changeScene('S4')
+                setCutScene(true)
+            }else if (currentCutScnen === 6){
+                setCutScene(true)
+            }else if (currentCutScnen === 7){
+                changeScene('S4.2')
+            }else if (currentCutScnen === 13){
+                changeScene('S6.2')
+                setCutScene(true)
+                setLoading(true)
+                setTimeout(async()=>{
+                            await ApiPostTestResult(testScore);
+                            setLoading(false);
+                            console.log('set Loading:', isLoading);
+                            history.push('/result');
+                            return;
+            },4000)
+            }else{
+                setCutScene(false)
+            }
+            setCurrentMessage(0)
+            setCurrentCutScene(currentCutScnen +1)
+        }else{
+            setCutScene(true)
+            setCurrentMessage(currentMessage +1)
+        }
+    }
+
 
     // async function getTestData() {
     //     const response = await ApiGetTestData();
@@ -67,7 +142,6 @@ function TestQuestion() {
     //     getTestData();
     // }, []);
     const { changeScene }= useContext(AppContext);
-
     async function onNextQuestion(value: number) {
         console.log('[Debug]: score == ' + value);
         let newTestScore = testScore;
@@ -79,48 +153,30 @@ function TestQuestion() {
         console.log("Q number =>>>",currentQuestion )
         if(currentQuestion +1 === 3){
             changeScene('S2')
+            setCutScene(true)
+        }else if(currentQuestion +1 === 4){
+            setCutScene(true)
+        }else if(currentQuestion +1 === 5){
+            setCutScene(true)
         }else if (currentQuestion +1 === 6){
-            changeScene('S3')
+            setCutScene(true)
         }else if (currentQuestion +1 === 11){
             changeScene('S4.3')
         }else if (currentQuestion +1 === 14){
             changeScene('S5')
+            setCutScene(true)
+        }else if (currentQuestion +1 === 18){
+            setCutScene(true)
+        }else if (currentQuestion +1 === 21){
+            setCutScene(true)
+        }else if (currentQuestion +1 === 23){
+            setCutScene(true)
         }
         else if (currentQuestion +1 === 24){
             changeScene('S6')
-            setLoading(true)
-            setTimeout(async()=>{
-                            await ApiPostTestResult(testScore);
-                            setLoading(false);
-                            console.log('set Loading:', isLoading);
-                            history.push('/result');
-                            return;
-                
-            },4000)
+            setCutScene(true)
         }
-        // if (!questionList) return;
-        // // ถ้ามากกว่า 23 ก็คือ 24 ให้ Post Test Result
-        // else if (currentQuestion + 1 > questionList.length-1) {
-        //     console.log("Q24",currentQuestion )
-        //     setLoading(true)
-        //     setTimeout(async()=>{
-        //                     await ApiPostTestResult(testScore);
-        //                     setLoading(false);
-        //                     console.log('set Loading:', isLoading);
-        //                     history.push('/result');
-        //                     return;
-                
-        //     },4000)
-        // }
     }
-    
-    // useEffect(()=>{
-    //     if(isLoading){
-    //         console.log('set Loading:', isLoading);
-    //         changeScene('S6')
-    //         }
-    // })
-
 
     function onPrevQuestion() {
         if (!questionList) return;
@@ -183,6 +239,7 @@ function TestQuestion() {
     if (data && !isSWRTriggered) {
         console.log('data from useSWR');
         isSetSWRTriggered(true);
+        setCutScene(true)
         setQuestionList(data); // store all question into the hook
         const resp = data;
         setCurrentQuestionDetail(resp[currentQuestion]);
@@ -211,12 +268,19 @@ function TestQuestion() {
                 </Modal>
                 {currentQuestion +1 === 25 ? null :
                 ( <>
-                <TextQuestion>{currentQuestionDetail.questionBody}</TextQuestion>
-                <div>
-                {isLoading ? (
-                    ''
-                ) : (
-                    <ContainerButton>
+                  {cutScene? 
+                        (<TextStory
+                        onClick={showStory}>
+                            {cutSceneList[currentCutScnen].message[currentMessage]}
+                            </TextStory>)
+                    :
+                     (<>
+                        <TextQuestion>{currentQuestionDetail.questionBody}</TextQuestion>
+                        <div>
+                         {isLoading ? (
+                            ''
+                        ) : (
+                        <ContainerButton>
                         {buttonList.map((item, index) => {
                             return (
                                 <ButtonChoiceStlyed
@@ -229,21 +293,20 @@ function TestQuestion() {
                                 </ButtonChoiceStlyed>
                             );
                         })}
-                    </ContainerButton>
+                        </ContainerButton>                   
                 )}
-                {isLoading ? (
+                {/* {isLoading ? (
                     <IsLoadingSpinnerTestQuestion>
                         <TextIsLoadingTestQuestion>กำลังประมวลผลคำตอบน้า</TextIsLoadingTestQuestion>
                         <Spin size="large" />
                     </IsLoadingSpinnerTestQuestion>
                 ) : (
                     ''
-                )}
+                )} */}
             </div>
-            </>
-            )}
+            </>)}
+            </>)}
                 {/* <TextQuestion>{data[currentQuestion].question_body}</TextQuestion> */}
-
             </ContainerTestQuestion>
         </div >
         </Box>
