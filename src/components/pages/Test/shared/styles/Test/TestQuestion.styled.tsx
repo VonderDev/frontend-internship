@@ -13,7 +13,15 @@ export const ContainerTestQuestion = styled.div`
 
 export const MainContainer = styled.div`
     position: relative;
-    width: 100%;
+    width: 600px;
+    height: 100vh;
+    overflow: hidden;
+    @media (max-width: 375px) {
+        width: 375px;
+    } 
+    @media (max-width: 450px) {
+        width: 410px;
+  }
 `
 
 export const TextQuestionIndex = styled.div`
@@ -76,6 +84,9 @@ export const TextQuestion = styled.div`
     white-space: initial;
     display: block;
     white-space: pre-line;
+    margin: 0 10% !important;
+    color: white !important;
+    text-shadow: 3px 1px 10px #0a0a0a  !important;
 `;
 
 export const ContainerButton = styled(Col)`
@@ -94,7 +105,7 @@ export const ButtonChoiceStlyed = styled.button`
     letter-spacing: 1px;
     background-color: white;
     border-color: white;
-    opacity: 0.8;
+    opacity: 0.7;
     position: relative;
     transform: translateY(350%);
     display: block;
@@ -141,7 +152,7 @@ export const IsLoadingSpinnerTestQuestion = styled.div`
     margin-left: auto;
     margin-right: auto;
     bottom: 0 auto;
-    transform: translateY(1000%);
+    transform: translateY(900%);
 `;
 
 export const TextIsLoadingTestQuestion = styled.h4`

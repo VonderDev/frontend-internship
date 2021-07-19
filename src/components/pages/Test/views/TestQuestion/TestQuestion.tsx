@@ -81,7 +81,8 @@ function TestQuestion() {
                                 'นักดนตรี: “ขอบคุณนะ พวกเธอก็เต้นเก่งมากเลย”',
                                 'ว่าแต่ ฉันขอถามอะไรหน่อยได้รึเปล่า..']},
         { value: 11, message: ['นักดนตรี: “อ๋อ เรื่องมันเป็นอย่างนี้นี่เอง งั้นฉันขอถามกลับได้ไหม” ']},
-        { value: 12, message: ['“ถ้าเธอยังนึกไม่ออก ก็ลองไปตามทางที่ฉันบอกก็แล้วกัน” “ลองเดินไปตามทางนี้ดู เธอก็จะรู้คำตอบเองแหละ”']},
+        { value: 12, message: ['“ถ้าเธอยังนึกไม่ออก ก็ลองไปตามทางที่ฉันบอกก็แล้วกัน”' ,
+                                '“ลองเดินไปตามทางนี้ดู เธอก็จะรู้คำตอบเองแหละ”']},
         { value: 13, message: ['“เราออกจากป่านี้มาได้แล้ว!”',
                                 '“สวยจัง นี่มันทะเลสาบนี่นา”']},
         { value: 14, message: [' ตกลงฉันคือใครกันนะ.. ']},
@@ -247,7 +248,7 @@ function TestQuestion() {
 
     return (
         <Box justify='center' align="center" direction='column'>
-        <div style={{height:'100vh', width:'600px' , overflowY: 'scroll', position:'relative'}}>
+        <MainContainer>
             <PixiProvider>
                 <PixiApp content={GameContent}/>
             </PixiProvider>
@@ -278,7 +279,7 @@ function TestQuestion() {
                 {isLoading ? (
                     <IsLoadingSpinnerTestQuestion>
                         <TextIsLoadingTestQuestion>กำลังประมวลผลคำตอบน้า</TextIsLoadingTestQuestion>
-                        <Spin size="large" />
+                        <Spin style={{fontSize: '50px'}}/>
                     </IsLoadingSpinnerTestQuestion>
                     ) : (
                         null
@@ -317,7 +318,7 @@ function TestQuestion() {
             </>)}
                 {/* <TextQuestion>{data[currentQuestion].question_body}</TextQuestion> */}
             </ContainerTestQuestion>
-        </div >
+        </MainContainer>
         </Box>
     );
 }
