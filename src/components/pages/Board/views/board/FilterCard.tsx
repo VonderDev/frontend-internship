@@ -11,6 +11,9 @@ const FilterCard: React.FC<CardComponentProps> = ({ tagFilterData }) => {
         <>
             {tagFilterData
                 ? tagFilterData.map((item: any, index: any) => {
+                      const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                      const dateCreatedFilter = new Date(item.created_at);
+                      const dateFormat = dateCreatedFilter.getDate() + ' ' + months[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
                       return (
                           <BoardCard
                               key={index}
@@ -18,7 +21,7 @@ const FilterCard: React.FC<CardComponentProps> = ({ tagFilterData }) => {
                           >
                               <EllipsisText style={{ display: 'flex' }}>
                                   <HistoryImage src={item.image} />
-                                  <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '25%'}}>
+                                  <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '25%' }}>
                                       <HistoryText style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.title}</HistoryText>
                                       <Box direction="row" justify="flex-start" align="flex-start">
                                           <HistoryText style={{ fontSize: '12px', fontWeight: 'bold' }}>{item.content_type}</HistoryText>
@@ -30,12 +33,12 @@ const FilterCard: React.FC<CardComponentProps> = ({ tagFilterData }) => {
                                               );
                                           })}
                                       </Box>
-                                      <Box direction="row" justify="space-between" align="flex-start" style={{ fontSize: '12px' , color: '#6E7282' , marginTop: '10px'}}>
+                                      <Box direction="row" justify="space-between" align="flex-start" style={{ fontSize: '12px', color: '#6E7282', marginTop: '10px' }}>
                                           <div style={{ justifyContent: 'center' }}>
                                               <CommentIcon />
                                           </div>
                                           <HistoryText>{item.author_username}</HistoryText>
-                                          <HistoryText>{"10 ก.ค. 2021"}</HistoryText>
+                                          <HistoryText>{dateFormat}</HistoryText>
                                           <div style={{ justifyContent: 'center' }}>
                                               <HeartIcon />
                                           </div>

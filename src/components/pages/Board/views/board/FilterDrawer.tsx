@@ -4,7 +4,7 @@ import { catagories, hashtag } from '../../shared/FixedTag';
 
 interface DrawerProps {
     tagFilterData: any[];
-    closeDrawer: (e: any) => void;
+    showDrawer: (e: any) => void;
     visible: boolean;
     selectedCatagories: Array<string>;
     selectedTags: Array<string>;
@@ -13,9 +13,9 @@ interface DrawerProps {
     filterContentData: (e: any) => void;
 }
 
-const FilterDrawer: React.FC<DrawerProps> = ({ closeDrawer, visible, selectedCatagories, selectedTags, handleChangeCatagories, handleChangeTag, filterContentData }) => {
+const FilterDrawer: React.FC<DrawerProps> = ({ showDrawer, visible, selectedCatagories, selectedTags, handleChangeCatagories, handleChangeTag, filterContentData }) => {
     return (
-        <DrawerRadius title="ตัวกรอง" placement="bottom" closable={false} onClose={closeDrawer} visible={visible} height={650}>
+        <DrawerRadius title="ตัวกรอง" placement="bottom" closable={false} onClose={showDrawer} visible={visible} height={650}>
             <div>
                 <Topic>ประเภทของกระทู้</Topic>
                 <TagBox style={{ fontWeight: 'bolder' }}>
