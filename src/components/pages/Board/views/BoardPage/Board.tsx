@@ -1,46 +1,45 @@
-import React from 'react'
+import React from 'react';
 import Container from 'components/Container/Container';
-import {
-  TextRecommendBoardTopic,
-  ButtonSeeAllBoard,
-  CardContainer,
-  GridBox
-} from '../../shared/style';
+import { TextRecommendBoardTopic, ButtonSeeAllBoard, CardContainer } from '../../shared/style';
 import { Row, Col } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { CardLatest } from './CardLatest';
 import { CardTopTen } from './CardTopTen';
+import Filter from '../Board/Filter';
 
 function Board() {
+    const history = useHistory();
 
-  const history = useHistory();
+    return (
+        <Container header={{ left: 'back', right: 'menu', title: 'กระทู้' }}>
+            <div>
+                <Filter />
 
-  return (
-    <Container header={{ left: 'back', right: 'menu', title: 'กระทู้' }} >
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' , padding : '0px 20px 0px 20px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <TextRecommendBoardTopic>10 อันดับสูงสุด</TextRecommendBoardTopic>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <ButtonSeeAllBoard onClick={() => history.push('/boardTopTen')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
+                    </div>
+                </div>
 
-      <Row>
-        <TextRecommendBoardTopic xs={{ span: 7, offset: 1 }} lg={{ span: 4, offset: 2 }}>
-          10 อันดับสูงสุด
-        </TextRecommendBoardTopic>
-        <ButtonSeeAllBoard onClick={() => history.push('/boardTopTen')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
-      </Row>
+                <CardContainer>
+                    <CardTopTen />
+                </CardContainer>
 
-      <CardContainer>
-        <CardTopTen />
-      </CardContainer>
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' , padding : '0px 20px 0px 20px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <TextRecommendBoardTopic>ล่าสุด</TextRecommendBoardTopic>
+                  </div>
+                </div>
 
-      <Row>
-        <TextRecommendBoardTopic xs={{ span: 7, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-          ล่าสุด
-        </TextRecommendBoardTopic>
-      </Row>
-
-      <CardContainer>
-        <CardLatest />
-      </CardContainer>
-
-    </Container>
-  );
+                <CardContainer>
+                    <CardLatest />
+                </CardContainer>
+            </div>
+        </Container>
+    );
 }
 
 export default Board;

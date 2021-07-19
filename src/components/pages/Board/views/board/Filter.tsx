@@ -65,13 +65,7 @@ const Filter = () => {
       }, [searchValue])
 
     return (
-        <Container
-            header={{
-                left: '',
-                title: 'ตัวกรอง',
-                right: '',
-            }}
-        >
+        <>
             <FilterDrawer
                 tagFilterData={tagFilterData}
                 showDrawer={showDrawer}
@@ -95,7 +89,7 @@ const Filter = () => {
                 </SearchField>
                 <FilterCard tagFilterData={tagFilterData} />
             </Box>
-        </Container>
+        </>
     );
 };
 export default Filter;

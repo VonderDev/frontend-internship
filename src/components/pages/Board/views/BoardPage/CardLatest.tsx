@@ -1,25 +1,18 @@
-import { CalendarOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
-import { Row, Col, Card, Spin } from 'antd';
+import { Card, Spin } from 'antd';
 import React from 'react';
 import { useHistory } from 'react-router';
-import { Box, CardStyle } from 'shared/style/theme/component';
+import { Box } from 'shared/style/theme/component';
 import useSWR from 'swr';
-import { IIconText, IListData } from '../../shared/Card.interface';
+import { IIconText } from '../../shared/Card.interface';
 import { BoardCard, 
-    CardText, 
-    CommentIcon, 
-    HeartIconList, 
+    CommentIcon,  
     HistoryImage, 
     HistoryText, 
-    ImgBoardList, 
-    ListBoard, 
-    ListItemBoard, 
-    RowStyled, 
-    SearchField,
-    CardTextData, 
+    SearchField, 
     EllipsisText} from "../../shared/style";
 import { LoadingOutlined } from '@ant-design/icons';
 import { HeartIcon } from 'components/pages/Profile/shared/Profile.styles';
+import { transalateToThai } from 'utils/transalator/transalator'
 
 const { Meta } = Card;
 
@@ -65,7 +58,7 @@ export const CardLatest = () => {
                                           {item?.tag?.map((item: any, index: any) => {
                                               return (
                                                   <HistoryText style={{ fontSize: '12px', paddingRight: '10px', color : 'var(--Gray-400)' }} key={index}>
-                                                      #{item}
+                                                      #{transalateToThai(item)}
                                                   </HistoryText>
                                               );
                                           })}

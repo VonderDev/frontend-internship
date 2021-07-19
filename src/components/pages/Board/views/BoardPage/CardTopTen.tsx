@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Space, Spin, Card, Row, Col } from 'antd';
+import React from 'react';
+import { Spin, Card } from 'antd';
 import useSWR from 'swr';
 import { GridBox, 
   SearchField, 
@@ -12,6 +12,7 @@ import { GridBox,
 import { FormOutlined, LoadingOutlined, CalendarOutlined } from '@ant-design/icons';
 import { IIconText } from '../../shared/Card.interface';
 import { useHistory } from 'react-router';
+import { transalateToThai } from 'utils/transalator/transalator';
 
 const { Meta } = Card;
 
@@ -29,25 +30,12 @@ export const CardTopTen = () => {
   console.log('Card date : ', data?.created_at);
   const history = useHistory();
 
-  //--------------- SET DATE CREATED CONTENT FORMAT ---------------//
-  // const [dateCreatedFormat, setDateCreatedFormat] = useState<string>();
-
-  // useEffect(() => {
-  //     if (contentData) {
-  //         console.log('[Newest Content data ]', contentData);
-  //         //--------------- SET DATE FORMAT ---------------//
-  //         var dateCreatedContent = contentData?.created_at;
-          const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
-  //         let createdContentData = new Date(dateCreatedContent);
-  //         console.log(createdContentData);
-  //         setDateCreatedFormat(createdContentData.getDate() + ' ' + months[createdContentData.getMonth()] + ' ' + createdContentData.getFullYear());
-  //     }
-  // }, [contentData, dateCreatedFormat]);
-
   return (
     <>
       {isLoading ? (
+        <div style={{ display : 'flex', alignItems : 'center'}}>
           <Spin indicator={antIcon} tip="Loading..." />
+        </div>
       ) : (
         <GridBox>
           <SpaceCard direction="horizontal" >
@@ -70,7 +58,7 @@ export const CardTopTen = () => {
                   }
                 >
                   <Meta title={item?.title} />
-                  <CardTextData>บทความ <span style={{ fontWeight: 'normal'}}>#{item?.tag}</span></CardTextData>
+                  <CardTextData>บทความ <span style={{ fontWeight: 'normal'}} key={index}>#{transalateToThai(item?.tag)}</span></CardTextData>
                   <div>
                     <HeartIconCard />
                     <HeartText>

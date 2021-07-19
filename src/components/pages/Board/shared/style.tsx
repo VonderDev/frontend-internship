@@ -4,25 +4,19 @@ import { RightOutlined, FormOutlined , HeartFilled } from '@ant-design/icons';
 import { CardStyle } from 'shared/style/theme/component';
 import Container from 'components/Container/Container';
 
-export const TextRecommendBoardTopic = styled(Col)`
+export const TextRecommendBoardTopic = styled.div`
     font-weight: bolder;
     font-size: 20px;
     display: flex;
     flex-direction: column;
-    padding-left: 5%;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    justify-content : center;
 `;
 
 export const ButtonSeeAllBoard = styled.div`
     color: var(--Blue-300);
-    height: 5vh;
-    width: 100px;
     font-weight: bolder;
-    font-size: 15px;
-    padding-top: 20px;
-    display: flex;
-    transform: translateX(280%);
+    font-size: var(--font-16);
+    font-font-weight : bold;
 
     &:hover {
         cursor: pointer;
