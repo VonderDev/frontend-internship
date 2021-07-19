@@ -51,10 +51,9 @@ function CommentOfContent() {
     //-------------------- POST COMMENT FUNCTION --------------------//
     async function postComment() {
         const newComment = await ApiPostComment(commentData);
-        const oldComment = commentList;
+        console.log('[new Comment]', newComment);
         newComment.username = username;
-        oldComment.push(newComment);
-        setCommentList(oldComment);
+        commentList.push(newComment);
         setCommentData({
             comment_body: '',
             content_id: '',

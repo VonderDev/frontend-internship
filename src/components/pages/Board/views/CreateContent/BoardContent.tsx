@@ -21,16 +21,8 @@ import {
 import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
 import { ApiPutLikeOfBoardContent } from '../../apis/boardCreate.api';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
-export enum Weeks {
-    ภาษา = 'word smart',
-    ตรรกะ = 'logic smart',
-    ดนตรี = 'music smart',
-    ธรรมชาติ = 'nature smart',
-    มิติสัมพันธ์ = 'picture smart',
-    การเคลื่อนไหว = 'body smart',
-    มนุษย์สัมพันธ์ = 'people smart',
-    เข้าใจตนเอง = 'self smart',
-}
+import { transalateToThai } from 'utils/transalator/transalator';
+
 function BoardContent() {
     const history = useHistory();
     const paramObjectId = useParams<{ id: string }>();
@@ -72,11 +64,11 @@ function BoardContent() {
     //--------------- SET DATE CREATED CONTENT FORMAT ---------------//
     const [dateCreatedFormat, setDateCreatedFormat] = useState<string>();
 
-    const { user, login, token, getUser } = useAuthContext();
+    const { username } = useAuthContext();
     const [isLike, setIsLike] = useState(false);
 
     useEffect(() => {
-        console.log('user login', user);
+        console.log('user login', username);
         if (contentData) {
             console.log('[Newest Content data ]', contentData);
             //--------------- SET DATE FORMAT ---------------//
@@ -92,15 +84,7 @@ function BoardContent() {
     }, [contentData, dateCreatedFormat]);
 
     //--------------- FETCHING COMMENT DATA FOR SHOW LENGTH OF COMMENTED ---------------//
-    //--------------- AND CREATE LIST OF BUTTON LIKE AND COMMENT ---------------//
     const { data: fetchingCommentData, error: errorfetchingComment } = useSWR(`/user/comment/get/1-100/${paramObjectId.id}`);
-    // const ButtonLikeAndCommentList = [
-    //     {
-    //         icon: ,
-    //         length: ,
-    //     },
-    //     { icon:  },
-    // ];
 
     return (
         <Container
@@ -119,34 +103,9 @@ function BoardContent() {
             ) : (
                 <ContainerBaordContent>
                     <TextTitleContent>{contentData?.title}</TextTitleContent>
-                    <TopicTag>บทความ</TopicTag>
+                    <TopicTag>{transalateToThai(contentData?.content_type)}</TopicTag>
                     {contentData?.tag?.map((item: any, index: any) => {
-                        //------------- Not good in future -------------//
-                        if (item === 'word smart') {
-                            return '#ภาษา';
-                        }
-                        if (item === 'logic smart') {
-                            return '#ตรรกะ';
-                        }
-                        if (item === 'music smart') {
-                            return '#ดนตรี';
-                        }
-                        if (item === 'nature smart') {
-                            return '#ธรรมชาติ';
-                        }
-                        if (item === 'picture smart') {
-                            return '#มิติสัมพันธ์';
-                        }
-                        if (item === 'body smart') {
-                            return '#การเคลื่อนไหว';
-                        }
-                        if (item === 'people smart') {
-                            return '#มนุษย์สัมพันธ์';
-                        }
-                        if (item === 'self smart') {
-                            return '#เข้าใจตนเอง';
-                        }
-                        return <CategoryTag key={index}>#{item}</CategoryTag>;
+                        return <CategoryTag key={index}>#{transalateToThai(item)}</CategoryTag>;
                     })}
                     <ProfileImage />
                     <ContainerUserNameAndDate>
