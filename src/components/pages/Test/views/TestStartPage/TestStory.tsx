@@ -59,7 +59,7 @@ function TestStory() {
             <ContainerTestStoryPage onClick={() => history.push('/testquestion')}>
                 <Col>
                     <TextQuestionIndex>
-                        คำถามข้อที่ {currentQuestion + 1}/{questionList?.length}
+                        คำถามข้อที่ {currentQuestion + 1}/24
                     </TextQuestionIndex>
                     <ButtonSeeAllResults type="primary" onClick={showModal}>
                         เริ่มใหม่{' '}

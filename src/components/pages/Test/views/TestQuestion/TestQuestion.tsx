@@ -24,6 +24,7 @@ import GameContent from 'components/GameElement/Game/GameContent';
 import PixiApp from 'components/GameElement/PixiStore/PixiApp';
 import { Box } from 'shared/style/theme/component';
 import {AppContext} from 'components/GameElement/PixiStore/AppContext'
+import { setTimeout } from 'timers';
 
 function TestQuestion() {
     //
@@ -72,21 +73,9 @@ function TestQuestion() {
         let newTestScore = testScore;
         newTestScore.push({ categoryId: currentQuestionDetail.category_id, score: value });
         setTestScore(newTestScore);
-
-        if (!questionList) return;
-        // ถ้ามากกว่า 23 ก็คือ 24 ให้ Post Test Result
-            if (currentQuestion + 1 > questionList.length - 1) {
-                    setLoading(true);
-                    console.log('set Loading:', isLoading);
-                    await ApiPostTestResult(testScore);
-                    setLoading(false);
-                    history.push('/result');
-                    return;
-        }
-
-
-        // handle condition start stop question
         setCurrentQuestion(currentQuestion + 1);
+        // handle condition start stop question
+        // setCurrentQuestion(currentQuestion + 1);
         console.log("Q number =>>>",currentQuestion )
         if(currentQuestion +1 === 3){
             changeScene('S2')
@@ -96,10 +85,42 @@ function TestQuestion() {
             changeScene('S4.3')
         }else if (currentQuestion +1 === 14){
             changeScene('S5')
-        }else if (currentQuestion +1 === 23){
-            changeScene('S6')
         }
+        else if (currentQuestion +1 === 24){
+            changeScene('S6')
+            setLoading(true)
+            setTimeout(async()=>{
+                            await ApiPostTestResult(testScore);
+                            setLoading(false);
+                            console.log('set Loading:', isLoading);
+                            history.push('/result');
+                            return;
+                
+            },4000)
+        }
+        // if (!questionList) return;
+        // // ถ้ามากกว่า 23 ก็คือ 24 ให้ Post Test Result
+        // else if (currentQuestion + 1 > questionList.length-1) {
+        //     console.log("Q24",currentQuestion )
+        //     setLoading(true)
+        //     setTimeout(async()=>{
+        //                     await ApiPostTestResult(testScore);
+        //                     setLoading(false);
+        //                     console.log('set Loading:', isLoading);
+        //                     history.push('/result');
+        //                     return;
+                
+        //     },4000)
+        // }
     }
+    
+    // useEffect(()=>{
+    //     if(isLoading){
+    //         console.log('set Loading:', isLoading);
+    //         changeScene('S6')
+    //         }
+    // })
+
 
     function onPrevQuestion() {
         if (!questionList) return;
@@ -176,9 +197,11 @@ function TestQuestion() {
             <ContainerTestQuestion>
                 {/* {rendered_questions} */}
                 <Col>
-                    <TextQuestionIndex>
-                        คำถามข้อที่ {currentQuestion + 1}/{questionList?.length}
-                    </TextQuestionIndex>
+                {currentQuestion +1 === 25 ? null :
+                 (<TextQuestionIndex>
+                        คำถามข้อที่ {currentQuestion + 1}/24
+                    </TextQuestionIndex>)
+                    }
                     <ButtonSeeAllResults type="primary" onClick={showModal}>
                         เริ่มใหม่{' '}
                     </ButtonSeeAllResults>
@@ -186,36 +209,41 @@ function TestQuestion() {
                 <Modal visible={visible} okText="เริ่มใหม่" cancelText="ยกเลิก" onOk={handleOk} width={400} confirmLoading={confirmLoading} onCancel={handleCancel}>
                     ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
                 </Modal>
+                {currentQuestion +1 === 25 ? null :
+                ( <>
                 <TextQuestion>{currentQuestionDetail.questionBody}</TextQuestion>
-                {/* <TextQuestion>{data[currentQuestion].question_body}</TextQuestion> */}
                 <div>
-                    {isLoading ? (
-                        ''
-                    ) : (
-                        <ContainerButton>
-                            {buttonList.map((item, index) => {
-                                return (
-                                    <ButtonChoiceStlyed
-                                        key={index}
-                                        onClick={() => {
-                                            onNextQuestion(item.value);
-                                        }}
-                                    >
-                                        {item.label}
-                                    </ButtonChoiceStlyed>
-                                );
-                            })}
-                        </ContainerButton>
-                    )}
-                    {isLoading ? (
-                        <IsLoadingSpinnerTestQuestion>
-                            <TextIsLoadingTestQuestion>กำลังประมวลผลคำตอบน้า</TextIsLoadingTestQuestion>
-                            <Spin size="large" />
-                        </IsLoadingSpinnerTestQuestion>
-                    ) : (
-                        ''
-                    )}
-                </div>
+                {isLoading ? (
+                    ''
+                ) : (
+                    <ContainerButton>
+                        {buttonList.map((item, index) => {
+                            return (
+                                <ButtonChoiceStlyed
+                                    key={index}
+                                    onClick={() => {
+                                        onNextQuestion(item.value);
+                                    }}
+                                >
+                                    {item.label}
+                                </ButtonChoiceStlyed>
+                            );
+                        })}
+                    </ContainerButton>
+                )}
+                {isLoading ? (
+                    <IsLoadingSpinnerTestQuestion>
+                        <TextIsLoadingTestQuestion>กำลังประมวลผลคำตอบน้า</TextIsLoadingTestQuestion>
+                        <Spin size="large" />
+                    </IsLoadingSpinnerTestQuestion>
+                ) : (
+                    ''
+                )}
+            </div>
+            </>
+            )}
+                {/* <TextQuestion>{data[currentQuestion].question_body}</TextQuestion> */}
+
             </ContainerTestQuestion>
         </div >
         </Box>
