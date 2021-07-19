@@ -1,43 +1,71 @@
 import Container from 'components/Container/Container';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { CommentInput, IconSendMessage } from '../../shared/style/CommentPage.styled';
-import TodoTask from './CommentList';
-import { IComment } from '../../shared/Comment.interface';
+import { BoxOfCommentList, CommentBody, CommentInput, ContainerOfCommentList, ContainerOfInput, CreatedDate, IconSendMessage, ProfileUserImage, Username } from '../../shared/style/CommentPage.styled';
+import { ApiPostComment } from '../../apis/commentContent.api';
+import useSWR from 'swr';
+import CommentList from './CommentList';
+import { IComment } from '../../shared/interface/Comment.interface';
+import React from 'react';
+import { useAuthContext } from 'components/AuthContext/AuthContext';
+import { BoxOfLikeAndComment } from '../../shared/style/BoardContent.styled';
 
 function CommentOfContent() {
+    //---------------------- GET PARAM OBJECT URL ----------------------//
     const paramObjectId = useParams<{ id: string }>();
-    useEffect(() => {
-        console.log('[useParams : obejctID]:', paramObjectId);
-    }, []);
-
     //---------------------- SET STATE & FUNCTION FOR POST COMMENT ----------------------//
-    const [comment, setComment] = useState<string>('');
-    const [commentList, setCommentList] = useState<IComment[]>([]);
+    const [commentData, setCommentData] = useState<{ comment_body: string; content_id: string }>({
+        comment_body: '',
+        content_id: '',
+    });
+    const [commentList, setCommentList] = useState<any>([]);
 
     const handleChangeOfComment = (event: ChangeEvent<HTMLInputElement>): void => {
-        if (event.target.name === 'comment') {
-            setComment(event.target.value);
+        setCommentData({
+            ...commentData,
+            [event.target.name]: event.target.value,
+            content_id: paramObjectId.id,
+        });
+    };
+
+    //------------------- FETCHING COMMENT DATA USING SWR -------------------//
+    const { data: fetchingCommentData, error: errorfetchingComment } = useSWR(`/user/comment/get/1-100/${paramObjectId.id}`);
+
+    //------------------- GET USERNAME FOR SHOW WHEN POST COMMENT SUCCESS -------------------//
+    const { getUser } = useAuthContext();
+    const [username, setUsername] = useState('');
+
+    const getUserInfo = async () => {
+        const token = localStorage.getItem('token');
+        const response = await getUser();
+        if (token) {
+            if (response) {
+                setUsername(response.username);
+            } else {
+                console.log('error');
+            }
+        } else {
+            console.log('no username found');
         }
     };
-
-    const addComment = (): void => {
-        const newComment = { comment: comment };
-        setCommentList([...commentList, newComment]);
-        setComment('');
-    };
-
-    const deleteComment = (commentToDelete: string): void => {
-        setCommentList(
-            commentList.filter((commentContent) => {
-                return commentContent.comment != commentToDelete;
-            }),
-        );
-    };
+    //-------------------- POST COMMENT FUNCTION --------------------//
+    async function postComment() {
+        const newComment = await ApiPostComment(commentData);
+        console.log('[new Comment]', newComment);
+        newComment.username = username;
+        commentList.push(newComment);
+        setCommentData({
+            comment_body: '',
+            content_id: '',
+        });
+    }
 
     useEffect(() => {
-        console.log('[Comment List]:', commentList);
-    }, [commentList]);
+        getUserInfo();
+        if (fetchingCommentData) {
+            setCommentList(fetchingCommentData);
+        }
+    }, [fetchingCommentData]);
 
     return (
         <Container
@@ -47,16 +75,32 @@ function CommentOfContent() {
                 left: 'back',
             }}
         >
-            <div>This is objectId of content: {paramObjectId.id}</div>
-            <span>
-                <IconSendMessage onClick={addComment} />
-                <CommentInput placeholder="แสดงความคิดเห็นของคุณ..." name="comment" value={comment} onChange={handleChangeOfComment} />
-            </span>
-            <div>
-                {commentList.map((commentValue: IComment, key: number) => {
-                    return <TodoTask key={key} commentContent={commentValue} deleteComment={deleteComment} />;
-                })}
-            </div>
+            {commentList.length == 0 ? (
+                <div>loading ...</div>
+            ) : (
+                <ContainerOfCommentList>
+                    {commentList?.map((item: any, index: any) => {
+                        const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                        const dateCreatedComment = new Date(item.created_at);
+                        const dateFormat = dateCreatedComment.getDate() + ' ' + months[dateCreatedComment.getMonth()] + ' ' + dateCreatedComment.getFullYear();
+                        // console.log('[Date format] =', dateFormat);
+                        return (
+                            <BoxOfCommentList style={{ height: '15vh' }} key={index}>
+                                <ProfileUserImage />
+                                <CommentBody>
+                                    <Username>{item?.username}</Username>
+                                    {item.comment_body}
+                                </CommentBody>
+                                <CreatedDate>{dateFormat}</CreatedDate>
+                            </BoxOfCommentList>
+                        );
+                    })}
+                </ContainerOfCommentList>
+            )}
+            <ContainerOfInput>
+                <CommentInput type="text" placeholder="แสดงความคิดเห็นของคุณ..." name="comment_body" value={commentData.comment_body} onChange={handleChangeOfComment} />
+                <IconSendMessage onClick={postComment} />
+            </ContainerOfInput>
         </Container>
     );
 }

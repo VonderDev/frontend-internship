@@ -93,8 +93,11 @@ export const NewCardStyle = styled(CardStyle)`
     }
 `;
 
-export const BoardHiddenScroll = styled(Container)`
-    overflow-y : hidden;
+export const EllipsisText = styled.div`
+    text-overflow: ellipsis; /* เพิ่ม ... จุดจุดจุดท้ายสุด */
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
 `;
 
 export const SpaceCard = styled(Space)`
@@ -103,11 +106,13 @@ export const SpaceCard = styled(Space)`
 `;
 
 export const HistoryImage = styled.img`
+    margin-right: 10px;
     width: 88px;
     height: 88px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     transform: translateY(-1%);
+    position: absolute;
 `;
 
 export const CoverImage = styled.img`
@@ -126,13 +131,8 @@ export const RowCardContainer = styled.div`
 `;
 
 export const HistoryText = styled.div`
+    padding-right: 15px;
     margin-top: 5px;
-    font-size: 14px;
-    font-weight: bolder;
-    text-overflow: ellipsis; /* เพิ่ม ... จุดจุดจุดท้ายสุด */
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
 `;
 
 export const CardTextData = styled.div`

@@ -19,7 +19,9 @@ import {
     TopicTag,
 } from '../../shared/style/BoardContent.styled';
 import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
-import { Rate } from 'antd';
+import { ApiPutLikeOfBoardContent } from '../../apis/boardCreate.api';
+import { useAuthContext } from 'components/AuthContext/AuthContext';
+import { transalateToThai } from 'utils/transalator/transalator';
 
 function BoardContent() {
     const history = useHistory();
@@ -37,32 +39,52 @@ function BoardContent() {
         console.log('[useParams : obejctID]:', paramObjectId);
     }, []);
 
+    //----------------- PUT LIKE OF CONTENT -----------------//
+    const [addLike, setAddLike] = useState<{ content_id: string }>({
+        content_id: '',
+    });
+
+    useEffect(() => {
+        setAddLike({
+            ...addLike,
+            content_id: paramObjectId.id,
+        });
+        console.log('add Like :', addLike);
+    }, []);
+
+    function addLikeOfBoardContent() {
+        ApiPutLikeOfBoardContent(addLike);
+    }
+
     //--------------- FETCHING BOARD CONTENT USING SWR ---------------//
     const { data: contentData, error: errorcontentData } = useSWR('/user/contentID/' + paramObjectId.id);
+
     const isLoadingContentData = !contentData && !errorcontentData;
 
     //--------------- SET DATE CREATED CONTENT FORMAT ---------------//
     const [dateCreatedFormat, setDateCreatedFormat] = useState<string>();
 
+    const { username } = useAuthContext();
+    const [isLike, setIsLike] = useState(false);
+
     useEffect(() => {
+        console.log('user login', username);
         if (contentData) {
             console.log('[Newest Content data ]', contentData);
             //--------------- SET DATE FORMAT ---------------//
-            var dateCreatedContent = contentData?.created_at;
+            const dateCreatedContent = contentData?.created_at;
             const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
-            let createdContentData = new Date(dateCreatedContent);
+            const createdContentData = new Date(dateCreatedContent);
             setDateCreatedFormat(createdContentData.getDate() + ' ' + months[createdContentData.getMonth()] + ' ' + createdContentData.getFullYear());
+            const uidLikes = contentData?.uid_likes;
+            console.log('[uid likes :]', uidLikes.includes('60dadd502c82f310974b8db'));
+            //---------------- set isLike ------------------//
+            setIsLike(uidLikes.includes('60dadd502c82f310974b8db'));
         }
     }, [contentData, dateCreatedFormat]);
 
-    //--------------- CREATE VARIABLE FOR MAP ICON LIKE & COMMENT ---------------//
-    const ButtonLikeAndCommentList = [
-        {
-            icon: <HeartFilled style={{ color: '#3A8CE4', fontSize: '40px' }} />,
-            length: <LengthOfLikeAndComment>0</LengthOfLikeAndComment>,
-        },
-        { icon: <CommentOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />, length: <LengthOfLikeAndComment>0</LengthOfLikeAndComment> },
-    ];
+    //--------------- FETCHING COMMENT DATA FOR SHOW LENGTH OF COMMENTED ---------------//
+    const { data: fetchingCommentData, error: errorfetchingComment } = useSWR(`/user/comment/get/1-100/${paramObjectId.id}`);
 
     return (
         <Container
@@ -81,26 +103,34 @@ function BoardContent() {
             ) : (
                 <ContainerBaordContent>
                     <TextTitleContent>{contentData?.title}</TextTitleContent>
-                    <TopicTag>บทความ</TopicTag>
+                    <TopicTag>{transalateToThai(contentData?.content_type)}</TopicTag>
                     {contentData?.tag?.map((item: any, index: any) => {
-                        return <CategoryTag key={index}>#{item}</CategoryTag>;
+                        return <CategoryTag key={index}>#{transalateToThai(item)}</CategoryTag>;
                     })}
                     <ProfileImage />
                     <ContainerUserNameAndDate>
                         <AuthorName>{contentData?.author_username}</AuthorName>
-                        <DateCreatedContent>{contentData?.updated_at}</DateCreatedContent>
+                        <DateCreatedContent>{dateCreatedFormat}</DateCreatedContent>
                     </ContainerUserNameAndDate>
                     <ImageOfContent src={contentData?.image}></ImageOfContent>
                     <ContentBody>{contentData?.content_body}</ContentBody>
 
-                    {ButtonLikeAndCommentList.map((item, index) => {
-                        return (
-                            <BoxOfLikeAndComment key={index} onClick={() => history.push(`/boardcontent/${paramObjectId.id}/comment`)}>
-                                {item.icon}
-                                <span>{item.length}</span>
-                            </BoxOfLikeAndComment>
-                        );
-                    })}
+                    <BoxOfLikeAndComment>
+                        {isLike ? <HeartFilled style={{ borderColor: 'green' }} onClick={addLikeOfBoardContent} /> : <HeartOutlined style={{ borderColor: 'red' }} onClick={addLikeOfBoardContent} />}
+                        <span
+                            onClick={() => {
+                                if (paramObjectId) {
+                                    history.push(`/boardcontent/${paramObjectId?.id}/comment`);
+                                }
+                            }}
+                        >
+                            <LengthOfLikeAndComment>{contentData?.uid_likes.length}</LengthOfLikeAndComment>
+                        </span>
+                        <span>
+                            <CommentOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />
+                            <LengthOfLikeAndComment>{fetchingCommentData?.length}</LengthOfLikeAndComment>
+                        </span>
+                    </BoxOfLikeAndComment>
                 </ContainerBaordContent>
             )}
         </Container>

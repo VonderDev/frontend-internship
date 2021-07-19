@@ -4,7 +4,6 @@ import {
   TextRecommendBoardTopic,
   ButtonSeeAllBoard,
   CardContainer,
-  BoardHiddenScroll,
   GridBox
 } from '../../shared/style';
 import { Row, Col } from 'antd';
@@ -20,7 +19,7 @@ function Board() {
     <Container header={{ left: 'back', right: 'menu', title: 'กระทู้' }} >
 
       <Row>
-        <TextRecommendBoardTopic xs={{ span: 7, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+        <TextRecommendBoardTopic xs={{ span: 7, offset: 1 }} lg={{ span: 4, offset: 2 }}>
           10 อันดับสูงสุด
         </TextRecommendBoardTopic>
         <ButtonSeeAllBoard onClick={() => history.push('/boardTopTen')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
