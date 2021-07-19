@@ -88,26 +88,27 @@ function TestQuestion() {
     ];
     useEffect(()=>{
         cutSceneList[currentCutScnen]
+        console.log(currentCutScnen)
         console.log('CutScene :', cutSceneList[currentCutScnen].value ,'message:',cutSceneList[currentCutScnen].message)
     },[currentCutScnen])
 
     const showStory =()=>{
         console.log('Cut ? :' ,cutScene);
-        if(currentMessage > cutSceneList[currentCutScnen].message.length){
-             if(currentCutScnen === 4)
+        console.log(' currentMessage:' ,currentMessage);
+        if(currentMessage === cutSceneList[currentCutScnen].message.length -1){
+             if(currentCutScnen + 1 === 5)
             {
                 changeScene('S3')
-                setCutScene(true)
-            }else if (currentCutScnen === 5){
+                setCutScene(true) // start cutscene v.6
+            }else if (currentCutScnen+1 === 6){
                 changeScene('S4')
-                setCutScene(true)
-            }else if (currentCutScnen === 6){
-                setCutScene(true)
-            }else if (currentCutScnen === 7){
-                changeScene('S4.2')
-            }else if (currentCutScnen === 13){
-                changeScene('S6.2')
-                setCutScene(true)
+                setCutScene(true) // start cutscene v.7
+            }else if (currentCutScnen+ 1 === 8){
+                changeScene('S5')
+                setCutScene(true) // start cutscene v.9
+            }else if (currentCutScnen + 1 === 13){
+                changeScene('S6.1')
+                setCutScene(true)// start cutscene v.14
                 setLoading(true)
                 setTimeout(async()=>{
                             await ApiPostTestResult(testScore);
@@ -153,28 +154,27 @@ function TestQuestion() {
         console.log("Q number =>>>",currentQuestion )
         if(currentQuestion +1 === 3){
             changeScene('S2')
-            setCutScene(true)
+            setCutScene(true) // start cutscene v.2
         }else if(currentQuestion +1 === 4){
-            setCutScene(true)
+            setCutScene(true) // start cutscene v.3
         }else if(currentQuestion +1 === 5){
-            setCutScene(true)
+            setCutScene(true) // start cutscene v.4
         }else if (currentQuestion +1 === 6){
-            setCutScene(true)
+            setCutScene(true)// start cutscene v.5
         }else if (currentQuestion +1 === 11){
             changeScene('S4.3')
         }else if (currentQuestion +1 === 14){
-            changeScene('S5')
-            setCutScene(true)
+            setCutScene(true) // start cutscene v.8
         }else if (currentQuestion +1 === 18){
-            setCutScene(true)
+            setCutScene(true) // start cutscene v.10
         }else if (currentQuestion +1 === 21){
-            setCutScene(true)
+            setCutScene(true)// start cutscene v.11
         }else if (currentQuestion +1 === 23){
-            setCutScene(true)
+            setCutScene(true)// start cutscene v.12
         }
         else if (currentQuestion +1 === 24){
             changeScene('S6')
-            setCutScene(true)
+            setCutScene(true)// start cutscene v.13
         }
     }
 
@@ -239,7 +239,7 @@ function TestQuestion() {
     if (data && !isSWRTriggered) {
         console.log('data from useSWR');
         isSetSWRTriggered(true);
-        setCutScene(true)
+        setCutScene(true) //start story v.1
         setQuestionList(data); // store all question into the hook
         const resp = data;
         setCurrentQuestionDetail(resp[currentQuestion]);
@@ -255,9 +255,13 @@ function TestQuestion() {
                 {/* {rendered_questions} */}
                 <Col>
                 {currentQuestion +1 === 25 ? null :
+                 (<>
+                 {cutScene? null :
                  (<TextQuestionIndex>
                         คำถามข้อที่ {currentQuestion + 1}/24
-                    </TextQuestionIndex>)
+                    </TextQuestionIndex>) 
+                    }
+                    </>)
                     }
                     <ButtonSeeAllResults type="primary" onClick={showModal}>
                         เริ่มใหม่{' '}
@@ -266,7 +270,20 @@ function TestQuestion() {
                 <Modal visible={visible} okText="เริ่มใหม่" cancelText="ยกเลิก" onOk={handleOk} width={400} confirmLoading={confirmLoading} onCancel={handleCancel}>
                     ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
                 </Modal>
-                {currentQuestion +1 === 25 ? null :
+                {currentQuestion +1 === 25 ? 
+                ( <><TextStory
+                    onClick={showStory}>
+                            {cutSceneList[currentCutScnen].message[currentMessage]}
+                </TextStory>
+                {isLoading ? (
+                    <IsLoadingSpinnerTestQuestion>
+                        <TextIsLoadingTestQuestion>กำลังประมวลผลคำตอบน้า</TextIsLoadingTestQuestion>
+                        <Spin size="large" />
+                    </IsLoadingSpinnerTestQuestion>
+                    ) : (
+                        null
+                    )} </>)
+                :
                 ( <>
                   {cutScene? 
                         (<TextStory
@@ -295,14 +312,6 @@ function TestQuestion() {
                         })}
                         </ContainerButton>                   
                 )}
-                {/* {isLoading ? (
-                    <IsLoadingSpinnerTestQuestion>
-                        <TextIsLoadingTestQuestion>กำลังประมวลผลคำตอบน้า</TextIsLoadingTestQuestion>
-                        <Spin size="large" />
-                    </IsLoadingSpinnerTestQuestion>
-                ) : (
-                    ''
-                )} */}
             </div>
             </>)}
             </>)}

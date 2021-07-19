@@ -303,6 +303,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         // })
       }else if (prop == 'S4'){
         onClick4();
+        wait(2000).then(() =>{
+          onClick4_2();
+        })
       }else if (prop == 'S4.2'){
         onClick4_2();
       }else if (prop == 'S4.3'){
@@ -312,11 +315,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         onClick5()
       }else if (prop == 'S6'){
         onClick6()
-        // wait(2000).then(() =>{
-        //   onClick6_1();
-        // })
-      }else if (prop == 'S6.2'){
-        onClick6_1();
+      }else if (prop == 'S6.1'){
+          onClick6_1();
       }
     }
 
