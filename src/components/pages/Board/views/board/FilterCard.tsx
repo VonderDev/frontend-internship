@@ -1,6 +1,7 @@
 import { BoardCard, CommentIcon, EllipsisText, HeartIcon, HistoryImage, HistoryText } from 'components/pages/Profile/shared/Profile.styles';
 import React from 'react';
 import { Box } from 'shared/style/theme/component';
+import { transalateToThai } from 'utils/transalator/transalator';
 
 interface CardComponentProps {
     tagFilterData: any | null;
@@ -24,11 +25,11 @@ const FilterCard: React.FC<CardComponentProps> = ({ tagFilterData }) => {
                                   <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '25%' }}>
                                       <HistoryText style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.title}</HistoryText>
                                       <Box direction="row" justify="flex-start" align="flex-start">
-                                          <HistoryText style={{ fontSize: '12px', fontWeight: 'bold' }}>{item.content_type}</HistoryText>
+                                          <HistoryText style={{ fontSize: '12px', fontWeight: 'bold' }}>{transalateToThai(item.content_type)}</HistoryText>
                                           {item?.tag?.map((item: any, index: any) => {
                                               return (
                                                   <HistoryText style={{ fontSize: '12px', paddingRight: '10px' }} key={index}>
-                                                      #{item}
+                                                      #{transalateToThai(item)}
                                                   </HistoryText>
                                               );
                                           })}

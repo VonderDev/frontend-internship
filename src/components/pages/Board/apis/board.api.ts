@@ -2,22 +2,11 @@ import axios from 'axios';
 
 const token = localStorage.getItem('token');
 
-export async function ApiPostFilter(data: object) {
-    console.log('[Filter Data] :', data);
-    return await axios.post('/user/content/tag', data)
-    .then((res) => {
-        console.log("response", res.data)
-        return res.data
-    })
-    .catch((err) => {
-        console.error(err);
-        console.log('Cannot Filter');
-    });
-}
+export async function ApiPostSearch(searchData: string , body: object ) {
+    console.log('[Search Data API] :', searchData);
+    console.log('[Filter Data API] :', body);
 
-export async function ApiGetSearch(data: any) {
-    console.log('[Search Data] :', data);
-    return await axios.get(`/user/search/${data}`)
+    return await axios.post(`/user/search/${searchData}`, body)
     .then((res) => {
         console.log("response", res.data)
         return res.data
@@ -25,5 +14,18 @@ export async function ApiGetSearch(data: any) {
     .catch((err) => {
         console.error(err);
         console.log('Cannot Search');
+    });
+}
+
+export async function ApiPostFilter(data: any) {
+    console.log('[Filter Data] :', data);
+    return await axios.post("/user/content/tag", data)
+    .then((res) => {
+        console.log("response", res.data)
+        return res.data
+    })
+    .catch((err) => {
+        console.error(err);
+        console.log('Cannot Filter');
     });
 }

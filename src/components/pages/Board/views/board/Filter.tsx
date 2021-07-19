@@ -3,7 +3,7 @@ import { Box } from 'shared/style/theme/component';
 import { ControlOutlined, SearchOutlined } from '@ant-design/icons';
 import { ButtonFilter, SearchField, InputSearch } from '../../shared/Filter.styles';
 import { useCallback, useEffect, useState } from 'react';
-import { ApiPostFilter, ApiGetSearch } from '../../apis/board.api';
+import { ApiPostFilter, ApiPostSearch } from '../../apis/board.api';
 import FilterCard from './FilterCard';
 import FilterDrawer from './FilterDrawer';
 const Filter = () => {
@@ -34,13 +34,18 @@ const Filter = () => {
 
     //Data that response from api----------------------------------------------------------------------------------------
     const [tagFilterData, setTagFilterData] = useState<any | null>(null);
-    const [searchData, setSearchData] = useState<any | null>(null);
 
     //Filter Api---------------------------------------------------------------------------------------------------------
     // เปลี่ยนเป็น useCallBack
     async function filterContentData() {
-        const res = await ApiPostFilter(contentData);
-        setTagFilterData(res);
+        if (!searchValue) {
+            const res = await ApiPostFilter(contentData);
+            setTagFilterData(res);
+        } else {
+            const res = await ApiPostSearch(searchValue, contentData);
+            setTagFilterData(res);
+        }
+        console.log('error');
     }
     useEffect(() => {
         console.log('content data', contentData);
@@ -51,18 +56,35 @@ const Filter = () => {
     const showDrawer = () => {
         setVisible(!visible);
     };
-    
-    //Search Function (Not Finish)----------------------------------------------------------------------------------------------------
-    const [searchValue, setSearchValue] = useState<string>();
+
+    //Search Function (Realtime and Manual Button)----------------------------------------------------------------------------------------------------
+    const [searchValue, setSearchValue] = useState<any | null>('');
+
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
-          console.log(searchValue)
-          if(!searchValue){
-          }else
-          ApiGetSearch(searchValue);
-        }, 1000)
-        return () => clearTimeout(delayDebounceFn)
-      }, [searchValue])
+            async function realTime() {
+                if (!searchValue) {
+                    const res = await ApiPostFilter(contentData);
+                    setTagFilterData(res);
+                } else {
+                    const res = await ApiPostSearch(searchValue, contentData);
+                    setTagFilterData(res);
+                }
+            }
+            realTime();
+        }, 500);
+        return () => clearTimeout(delayDebounceFn);
+    }, [searchValue]);
+
+    async function searchFirst() {
+        const res = await ApiPostSearch(searchValue, contentData);
+        setTagFilterData(res);
+    }
+
+    useEffect(() => {
+        console.log('tagFilterData', tagFilterData);
+        console.log('searchValue', searchValue);
+    }, [searchValue, tagFilterData]);
 
     return (
         <Container
@@ -84,11 +106,10 @@ const Filter = () => {
             />
             <Box style={{ marginLeft: '20px', marginRight: '20px' }} align="flex-start" direction="column">
                 <SearchField style={{ marginBottom: '20px' }}>
-                    <InputSearch
-                        onChange={(e) => setSearchValue(e.target.value)}
-                        placeholder="Search Form"
-                        prefix={<SearchOutlined />}
-                    />
+                    <InputSearch onChange={(e) => setSearchValue(e.target.value)} placeholder="Search Form" prefix={<SearchOutlined />} />
+                    <ButtonFilter onClick={searchFirst}>
+                        <SearchOutlined style={{ color: '#8a8888', fontSize: '24px' }} />
+                    </ButtonFilter>
                     <ButtonFilter onClick={showDrawer}>
                         <ControlOutlined style={{ color: '#8a8888', fontSize: '24px' }} />
                     </ButtonFilter>
