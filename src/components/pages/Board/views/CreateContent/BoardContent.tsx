@@ -22,6 +22,7 @@ import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
 import { ApiPutLikeOfBoardContent } from '../../apis/boardCreate.api';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { transalateToThai } from 'utils/transalator/transalator';
+import { MONTHS } from '../../shared/months';
 
 function BoardContent() {
     const history = useHistory();
@@ -92,9 +93,8 @@ function BoardContent() {
             console.log('[Newest Content data ]', contentData);
             //--------------- SET DATE FORMAT ---------------//
             const dateCreatedContent = contentData?.created_at;
-            const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
             const createdContentData = new Date(dateCreatedContent);
-            setDateCreatedFormat(createdContentData.getDate() + ' ' + months[createdContentData.getMonth()] + ' ' + createdContentData.getFullYear());
+            setDateCreatedFormat(createdContentData.getDate() + ' ' + MONTHS[createdContentData.getMonth()] + ' ' + createdContentData.getFullYear());
             //---------------- CHECK LIKE IF LIKE IS SET TRUE OR NOT IS FALSE ----------------//
             const uidLikes = contentData?.uid_likes;
             console.log('[uid likes :]', uidLikes.includes(userId));

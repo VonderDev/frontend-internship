@@ -20,6 +20,7 @@ import { IComment } from '../../shared/interface/Comment.interface';
 import React from 'react';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { BoxOfLikeAndComment } from '../../shared/style/BoardContent.styled';
+import { MONTHS } from '../../shared/months';
 
 function CommentOfContent() {
     //---------------------- GET PARAM OBJECT URL ----------------------//
@@ -92,9 +93,8 @@ function CommentOfContent() {
             ) : (
                 <ContainerOfCommentList>
                     {commentList?.map((item: any, index: any) => {
-                        const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
                         const dateCreatedComment = new Date(item.created_at);
-                        const dateFormat = dateCreatedComment.getDate() + ' ' + months[dateCreatedComment.getMonth()] + ' ' + dateCreatedComment.getFullYear();
+                        const dateFormat = dateCreatedComment.getDate() + ' ' + MONTHS[dateCreatedComment.getMonth()] + ' ' + dateCreatedComment.getFullYear();
                         // console.log('[Date format] =', dateFormat);
                         return (
                             <BoxOfCommentList style={{ height: '15vh' }} key={index}>
