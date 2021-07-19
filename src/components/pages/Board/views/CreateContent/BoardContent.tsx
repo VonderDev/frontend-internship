@@ -35,14 +35,13 @@ function BoardContent() {
     //         console.log('error');
     //     }
     // }
-    useEffect(() => {
-        console.log('[useParams : obejctID]:', paramObjectId);
-    }, []);
 
-    //----------------- PUT LIKE OF CONTENT -----------------//
+    //----------------- SET STATE LIKE & PUT LIKE OF CONTENT -----------------//
     const [addLike, setAddLike] = useState<{ content_id: string }>({
         content_id: '',
     });
+    const [isLike, setIsLike] = useState(false);
+    const [likeLength, setLikeLength] = useState(0);
 
     useEffect(() => {
         setAddLike({
@@ -52,23 +51,43 @@ function BoardContent() {
         console.log('add Like :', addLike);
     }, []);
 
-    function addLikeOfBoardContent() {
-        ApiPutLikeOfBoardContent(addLike);
+    async function addLikeOfBoardContent() {
+        const isLikeSuccess = await ApiPutLikeOfBoardContent(addLike);
+        if (isLikeSuccess) {
+            setIsLike(true);
+            setLikeLength(likeLength + 1);
+        }
     }
 
-    //--------------- FETCHING BOARD CONTENT USING SWR ---------------//
+    //--------------- FETCHING BOARD CONTENT & COMMENT DATA  ---------------//
     const { data: contentData, error: errorcontentData } = useSWR('/user/contentID/' + paramObjectId.id);
+    const { data: fetchingCommentData, error: errorfetchingComment } = useSWR(`/user/comment/get/1-100/${paramObjectId.id}`);
 
     const isLoadingContentData = !contentData && !errorcontentData;
 
     //--------------- SET DATE CREATED CONTENT FORMAT ---------------//
     const [dateCreatedFormat, setDateCreatedFormat] = useState<string>();
 
-    const { username } = useAuthContext();
-    const [isLike, setIsLike] = useState(false);
+    //------------------- GET USERNAME FOR CHECK LIKE -------------------//
+    const { getUser } = useAuthContext();
+    const [userId, setUserId] = useState('');
+
+    const getUserId = async () => {
+        const token = localStorage.getItem('token');
+        const response = await getUser();
+        if (token) {
+            if (response) {
+                setUserId(response._id);
+            } else {
+                console.log('error');
+            }
+        } else {
+            console.log('none');
+        }
+    };
 
     useEffect(() => {
-        console.log('user login', username);
+        getUserId();
         if (contentData) {
             console.log('[Newest Content data ]', contentData);
             //--------------- SET DATE FORMAT ---------------//
@@ -76,15 +95,13 @@ function BoardContent() {
             const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
             const createdContentData = new Date(dateCreatedContent);
             setDateCreatedFormat(createdContentData.getDate() + ' ' + months[createdContentData.getMonth()] + ' ' + createdContentData.getFullYear());
+            //---------------- CHECK LIKE IF LIKE IS SET TRUE OR NOT IS FALSE ----------------//
             const uidLikes = contentData?.uid_likes;
-            console.log('[uid likes :]', uidLikes.includes('60dadd502c82f310974b8db'));
-            //---------------- set isLike ------------------//
-            setIsLike(uidLikes.includes('60dadd502c82f310974b8db'));
+            console.log('[uid likes :]', uidLikes.includes(userId));
+            setIsLike(uidLikes.includes(userId));
+            setLikeLength(contentData?.uid_likes.length);
         }
-    }, [contentData, dateCreatedFormat]);
-
-    //--------------- FETCHING COMMENT DATA FOR SHOW LENGTH OF COMMENTED ---------------//
-    const { data: fetchingCommentData, error: errorfetchingComment } = useSWR(`/user/comment/get/1-100/${paramObjectId.id}`);
+    }, [contentData, dateCreatedFormat, userId]);
 
     return (
         <Container
@@ -116,7 +133,8 @@ function BoardContent() {
                     <ContentBody>{contentData?.content_body}</ContentBody>
 
                     <BoxOfLikeAndComment>
-                        {isLike ? <HeartFilled style={{ borderColor: 'green' }} onClick={addLikeOfBoardContent} /> : <HeartOutlined style={{ borderColor: 'red' }} onClick={addLikeOfBoardContent} />}
+                        {isLike ? <HeartFilled style={{ color: '#F0685B', fontSize: '40px' }} /> : <HeartOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} onClick={addLikeOfBoardContent} />}
+                        <LengthOfLikeAndComment>{likeLength}</LengthOfLikeAndComment>
                         <span
                             onClick={() => {
                                 if (paramObjectId) {
@@ -124,9 +142,6 @@ function BoardContent() {
                                 }
                             }}
                         >
-                            <LengthOfLikeAndComment>{contentData?.uid_likes.length}</LengthOfLikeAndComment>
-                        </span>
-                        <span>
                             <CommentOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />
                             <LengthOfLikeAndComment>{fetchingCommentData?.length}</LengthOfLikeAndComment>
                         </span>

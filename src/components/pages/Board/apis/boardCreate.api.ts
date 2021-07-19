@@ -46,11 +46,12 @@ export async function ApiPutLikeOfBoardContent(data: any) {
     return await axios.put('/user/content', data )
     .then((res) => {
         console.log("response", res.data)
-        return res.data
+        return true
     })
     .catch((err) => {
         console.error(err);
         console.log('Cannot put like');
+        return false
     });
 }
 
