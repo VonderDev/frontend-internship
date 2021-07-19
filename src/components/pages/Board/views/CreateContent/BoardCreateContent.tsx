@@ -26,23 +26,23 @@ function BoardCreateContent() {
         });
     };
 
-    useEffect(() => {
-        console.log('[Content data]:', contentData);
-    }, [contentData]);
+    // useEffect(() => {
+    //     console.log('[Content data]:', contentData);
+    // }, [contentData]);
 
     //----------------- CREATE FUNCTION UPLOAD IMAGE -----------------//
     const [defaultFileList, setDefaultFileList] = useState('');
 
     const uploadImage = async (options: any) => {
         const { onSuccess, onError, file } = options;
-        const formData = new FormData();
+        const ImageformData = new FormData();
         const config = {
             headers: { 'Content-Type': 'multipart/form-data' },
         };
-        formData.append('photo', file);
+        ImageformData.append('photo', file);
         try {
             console.log('form data', file);
-            const res = await axios.post('/images', formData, config);
+            const res = await axios.post('/images', ImageformData, config);
 
             onSuccess('Ok');
             console.log('[Response from post image]: ', res.data);
@@ -57,21 +57,11 @@ function BoardCreateContent() {
         }
     };
 
-    const handleOnChangeFileImage = ({ file, fileList, event }: any) => {
+    const handleOnChangeFileImage = ({ fileList }: any) => {
         console.log('[FileList]:', fileList);
         //Using Hooks to update the state to the current filelist
         setDefaultFileList(fileList);
     };
-
-    //----------------- CREATE VARIABLE FOR DRAWER -----------------//
-    // const [visible, setVisible] = useState<boolean>(false);
-    // const [placement, setPlacement] = useState<string>('bottom');
-    // const showDrawer = () => {
-    //     setVisible(true);
-    // };
-    // const onCloseDrawer = () => {
-    //     setVisible(false);
-    // };
 
     //----------------- CREATE FUNCTION FOR SET HASHTAG -----------------//
     function handleChangeOfHashtag(value: any) {
@@ -85,8 +75,10 @@ function BoardCreateContent() {
     //------------ POST CONTENT FUNCTION --------------//W
     async function postContent() {
         console.log('content data sent to backend', contentData);
-        var objectID = await ApiPostContent(contentData);
-        history.push(`/boardcontent/${objectID._id}`);
+        const objectID = await ApiPostContent(contentData);
+        if (objectID) {
+            history.push(`/boardcontent/${objectID?._id}`);
+        }
     }
 
     //------------ SET STATE FOR CONTENT TYPE --------------//
@@ -96,7 +88,7 @@ function BoardCreateContent() {
         console.log('radio checked', e.target.value);
         setContentType(e.target.value);
     };
-
+    //SWITCH CASE
     return (
         <>
             <Container
