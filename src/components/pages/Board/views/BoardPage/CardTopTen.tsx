@@ -1,11 +1,21 @@
 import React from 'react';
 import { Spin, Card } from 'antd';
 import useSWR from 'swr';
-import { GridBox, SearchField, NewCardStyle, HeartIconCard, HeartText, CardTextData, SpaceCard, CoverImage } from '../../shared/style';
+import { GridBox, 
+  SearchField, 
+  NewCardStyle, 
+  HeartIconCard,
+  HeartText, 
+  CardTextData, 
+  SpaceCard, 
+  CoverImage, 
+  BoardTextInfo } from '../../shared/style';
 import { FormOutlined, LoadingOutlined, CalendarOutlined } from '@ant-design/icons';
 import { IIconText } from '../../shared/Card.interface';
 import { useHistory } from 'react-router';
 import { transalateToThai } from 'utils/transalator/transalator';
+import { MONTHS } from 'components/pages/Board/shared/months';
+import { Box } from 'shared/style/theme/component';
 
 const { Meta } = Card;
 
@@ -22,11 +32,17 @@ export const CardTopTen = () => {
     console.log('Card date : ', data?.created_at);
     const history = useHistory();
 
+    if (data) {
+        data?.sort(function (a: any, b: any) {
+            return b.uid_likes.length - a.uid_likes.length;
+        });
+    }
+
     return (
         <>
             {isLoading ? (
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div>
+                <div>
+                    <div style={{ display : 'flex', justifyContent : 'center', padding : '10% 0% 10% 0%' }}>
                         <Spin indicator={antIcon} tip="Loading..." />
                     </div>
                 </div>
@@ -34,9 +50,8 @@ export const CardTopTen = () => {
                 <GridBox>
                     <SpaceCard direction="horizontal">
                         {data?.slice(0, 10).map((item: any, index: any) => {
-                            const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
                             const cardDate = new Date(item?.created_at);
-                            const dateFormat = cardDate.getDate() + months[cardDate.getMonth()] + cardDate.getFullYear();
+                            const dateFormat = cardDate.getDate() + MONTHS[cardDate.getMonth()] + cardDate.getFullYear();
                             const like = item?.uid_likes;
                             console.log('Type of likes : ', typeof item?.uid_likes.length);
                             return (
@@ -50,11 +65,18 @@ export const CardTopTen = () => {
                                     actions={[<IconText icon={FormOutlined} text={item?.author_username} />, <IconText icon={CalendarOutlined} text={dateFormat} />]}
                                 >
                                     <Meta title={item?.title} />
+
                                     <CardTextData>
-                                        บทความ{' '}
-                                        <span style={{ fontWeight: 'normal' }} key={index}>
-                                            #{transalateToThai(item?.tag)}
-                                        </span>
+                                        <Box direction="row" justify="flex-start" align="flex-start">
+                                            <BoardTextInfo style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--Gray-400)', paddingRight : '5px' }}>บทความ</BoardTextInfo>
+                                            {item?.tag?.map((item: any, index: any) => {
+                                                return (
+                                                    <BoardTextInfo style={{ fontSize: '12px', fontWeight : 'normal', paddingRight: '5px', color: 'var(--Gray-400)' }} key={index}>
+                                                        #{transalateToThai(item)}
+                                                    </BoardTextInfo>
+                                                );
+                                            })}
+                                        </Box>
                                     </CardTextData>
                                     <div>
                                         <HeartIconCard />

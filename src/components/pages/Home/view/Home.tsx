@@ -57,7 +57,7 @@ function Home() {
                             <BoardList
                                 key={index}
                                 onClick={() => {
-                                    history.push('/boardContent');
+                                    history.push(`/boardcontent/${item._id}`);
                                 }}
                             >
                                 <TextOverflowHide style={{ display: 'flex' }}>

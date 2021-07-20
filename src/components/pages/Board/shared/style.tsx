@@ -23,6 +23,11 @@ export const ButtonSeeAllBoard = styled.div`
     }
 `;
 
+export const BoardTextInfo = styled.div`
+    padding-right: 15px;
+    margin-top: 5px;
+`;
+
 export const CardContainer = styled.div`
     /* overflow-x: scroll; */
 `;
@@ -215,4 +220,10 @@ export const ImgBoardList = styled.img`
     border-radius: 15px;
     width: 120px;
     height: 130px;
+`;
+
+export const HeartIcon = styled(HeartFilled)`
+    color: var(--Gray-100);
+    padding-top: 8px;
+    padding-right: 5px;
 `;
