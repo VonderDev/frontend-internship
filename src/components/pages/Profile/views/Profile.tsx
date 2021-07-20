@@ -33,17 +33,17 @@ function Profile() {
     ];
 
     const { data, error } = useSWR('/user/find');
-    const { data: profile, error: errorProfile } = useSWR('/user/profile');
-    const isLoading = !data && !error && !errorProfile && !profile;
-    console.log('Profile data', data);
-    console.log('[Profile from user/profile]', profile);
+    const { data: boardData, error: boardError } = useSWR('/user/content/get');
+    const isLoading = !data && !error && !boardData && !boardError;
+    console.log('Profile Data', data);
+    console.log('Board Data', boardData);
 
     useEffect(() => {
-        if (data & profile) {
-            console.log('[useEffect data username] :', data.username);
-            console.log('[useEffect profile] :', profile);
+        if (data && boardData) {
+            console.log('[useEffect data username] :', data.username)
+            console.log('[useEffect boardData title] :', boardData.title);
         }
-    }, [data, profile]);
+    }, [data ,boardData]);
 
     return (
         <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
@@ -107,7 +107,7 @@ function Profile() {
                             <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
                         </Col>
                     </RowStyled>
-                    {profile?.map((item: any, index: any) => {
+                    {boardData?.map((item: any, index: any) => {
                         return (
                             <BoardCard
                                 key={index}

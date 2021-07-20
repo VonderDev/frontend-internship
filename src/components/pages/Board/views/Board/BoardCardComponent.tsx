@@ -1,34 +1,37 @@
 import { BoardCard, CommentIcon, EllipsisText, HeartIcon, HistoryImage, HistoryText } from 'components/pages/Profile/shared/Profile.styles';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Box } from 'shared/style/theme/component';
+import { transalateToThai } from 'utils/transalator/transalator';
 
 interface CardComponentProps {
-    tagFilterData: any | null;
+    data: any | null;
 }
 
-const FilterCard: React.FC<CardComponentProps> = ({ tagFilterData }) => {
+const FilterCard: React.FC<CardComponentProps> = ({ data }) => {
+    const history = useHistory();
     return (
         <>
-            {tagFilterData
-                ? tagFilterData.map((item: any, index: any) => {
+            {data
+                ? data.map((item: any, index: any) => {
                       const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
                       const dateCreatedFilter = new Date(item.created_at);
                       const dateFormat = dateCreatedFilter.getDate() + ' ' + months[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
                       return (
                           <BoardCard
                               key={index}
-                              //onClick={history.pushState(`/board`)}
+                              onClick={() => history.push(`/boardcontent/${item._id}`)}
                           >
                               <EllipsisText style={{ display: 'flex' }}>
                                   <HistoryImage src={item.image} />
                                   <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '25%' }}>
                                       <HistoryText style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.title}</HistoryText>
                                       <Box direction="row" justify="flex-start" align="flex-start">
-                                          <HistoryText style={{ fontSize: '12px', fontWeight: 'bold' }}>{item.content_type}</HistoryText>
+                                          <HistoryText style={{ fontSize: '12px', fontWeight: 'bold' }}>{transalateToThai(item.content_type)}</HistoryText>
                                           {item?.tag?.map((item: any, index: any) => {
                                               return (
                                                   <HistoryText style={{ fontSize: '12px', paddingRight: '10px' }} key={index}>
-                                                      #{item}
+                                                      #{transalateToThai(item)}
                                                   </HistoryText>
                                               );
                                           })}

@@ -1,35 +1,12 @@
 import axios from 'axios';
 
-export async function ApiGetBoardUserContent() {
-    const token = localStorage.getItem("token");
-    return await axios
-     .get('/user/content/get')
-          // เปลี่ยนเป็น try catch
-        .then((response) => {
-            console.log('[Function API_USER_Data] :', response.data);
-            return response.data;
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-}
-export async function ApiPostFilter(data: object) {
-            const token = localStorage.getItem('token');
-            console.log('[Filter Data] :', data);
-    return await axios.post('/user/content/tag', data)
-    .then((res) => {
-        console.log("response", res.data)
-        return res.data
-    })
-    .catch((err) => {
-        console.error(err);
-        console.log('Cannot Filter');
-    });
-}
+const token = localStorage.getItem('token');
 
-export async function ApiGetSearch(data: any) {
-    console.log('[Search Data] :', data);
-    return await axios.get(`/user/search/${data}`)
+export async function ApiPostSearch(searchData: string , body: object ) {
+    console.log('[Search Data] :', searchData);
+    console.log('[Filter Data] :', body);
+
+    return await axios.post(`/user/search/${searchData}`, body)
     .then((res) => {
         console.log("response", res.data)
         return res.data
@@ -37,5 +14,18 @@ export async function ApiGetSearch(data: any) {
     .catch((err) => {
         console.error(err);
         console.log('Cannot Search');
+    });
+}
+
+export async function ApiPostFilter(data: any) {
+    console.log('[Filter Data] :', data);
+    return await axios.post("/user/content/tag", data)
+    .then((res) => {
+        console.log("response", res.data)
+        return res.data
+    })
+    .catch((err) => {
+        console.error(err);
+        console.log('Cannot Filter');
     });
 }

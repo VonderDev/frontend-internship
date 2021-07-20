@@ -10,10 +10,10 @@ interface DrawerProps {
     selectedTags: Array<string>;
     handleChangeCatagories: Function;
     handleChangeTag: Function;
-    filterContentData: (e: any) => void;
+    onclickFilter: (e: any) => void;
 }
 
-const FilterDrawer: React.FC<DrawerProps> = ({ showDrawer, visible, selectedCatagories, selectedTags, handleChangeCatagories, handleChangeTag, filterContentData }) => {
+const FilterDrawer: React.FC<DrawerProps> = ({ showDrawer, visible, selectedCatagories, selectedTags, handleChangeCatagories, handleChangeTag, onclickFilter }) => {
     return (
         <DrawerRadius title="ตัวกรอง" placement="bottom" closable={false} onClose={showDrawer} visible={visible} height={650}>
             <div>
@@ -35,7 +35,7 @@ const FilterDrawer: React.FC<DrawerProps> = ({ showDrawer, visible, selectedCata
                 </TagBox>
             </div>
             <div style={{ paddingBottom: '24px', display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', height: '60%' }}>
-                <ButtonUseFilter onClick={filterContentData}>กรอง</ButtonUseFilter>
+                <ButtonUseFilter onClick={onclickFilter}>กรอง</ButtonUseFilter>
             </div>
         </DrawerRadius>
     );
