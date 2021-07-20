@@ -47,9 +47,9 @@ const Filter = () => {
         }
         console.log('error');
     }
-    useEffect(() => {
-        console.log('content data', contentData);
-    }, [contentData]);
+    // useEffect(() => {
+    //     console.log('content data', contentData);
+    // }, [contentData]);
 
     //Drawer Function----------------------------------------------------------------------------------------------------
     const [visible, setVisible] = useState<boolean>(false);
@@ -61,7 +61,7 @@ const Filter = () => {
     const [searchValue, setSearchValue] = useState<any | null>('');
 
     useEffect(() => {
-        const delayDebounceFn = setTimeout(() => {
+        const delayTime = setTimeout(() => {
             async function realTime() {
                 if (!searchValue) {
                     const res = await ApiPostFilter(contentData);
@@ -73,7 +73,7 @@ const Filter = () => {
             }
             realTime();
         }, 500);
-        return () => clearTimeout(delayDebounceFn);
+        return () => clearTimeout(delayTime);
     }, [searchValue]);
 
     async function searchFirst() {
@@ -81,15 +81,15 @@ const Filter = () => {
         setTagFilterData(res);
     }
 
-    useEffect(() => {
-        console.log('tagFilterData', tagFilterData);
-        console.log('searchValue', searchValue);
-    }, [searchValue, tagFilterData]);
+    // useEffect(() => {
+    //     console.log('tagFilterData', tagFilterData);
+    //     console.log('searchValue', searchValue);
+    // }, [searchValue, tagFilterData]);
 
     return (
         <Container
             header={{
-                left: '',
+                left: 'back',
                 title: 'ตัวกรอง',
                 right: '',
             }}
@@ -107,14 +107,14 @@ const Filter = () => {
             <Box style={{ marginLeft: '20px', marginRight: '20px' }} align="flex-start" direction="column">
                 <SearchField style={{ marginBottom: '20px' }}>
                     <InputSearch onChange={(e) => setSearchValue(e.target.value)} placeholder="Search Form" prefix={<SearchOutlined />} />
-                    <ButtonFilter onClick={searchFirst}>
+                    {/* <ButtonFilter onClick={searchFirst}>
                         <SearchOutlined style={{ color: '#8a8888', fontSize: '24px' }} />
-                    </ButtonFilter>
+                    </ButtonFilter> */}
                     <ButtonFilter onClick={showDrawer}>
                         <ControlOutlined style={{ color: '#8a8888', fontSize: '24px' }} />
                     </ButtonFilter>
                 </SearchField>
-                <FilterCard tagFilterData={tagFilterData} />
+                <FilterCard data={tagFilterData} />
             </Box>
         </Container>
     );
