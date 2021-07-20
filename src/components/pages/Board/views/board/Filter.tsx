@@ -4,7 +4,7 @@ import { ControlOutlined, SearchOutlined } from '@ant-design/icons';
 import { ButtonFilter, SearchField, InputSearch } from '../../shared/Filter.styles';
 import { useCallback, useEffect, useState } from 'react';
 import { ApiPostFilter, ApiPostSearch } from '../../apis/board.api';
-import FilterCard from './FilterCard';
+import BoardCardComponent from './BoardCardComponent';
 import FilterDrawer from './FilterDrawer';
 const Filter = () => {
     //Catagories----------------------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ const Filter = () => {
                         <ControlOutlined style={{ color: '#8a8888', fontSize: '24px' }} />
                     </ButtonFilter>
                 </SearchField>
-                <FilterCard data={tagFilterData} />
+                <BoardCardComponent data={tagFilterData} />
             </Box>
         </Container>
     );
