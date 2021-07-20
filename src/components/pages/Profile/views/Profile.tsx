@@ -5,7 +5,7 @@ import Container from 'components/Container/Container';
 import useSWR from 'swr';
 import { Box, ButtonStyle } from 'shared/style/theme/component';
 import ProfileMascot from '../../Profile/images/ProfileMascot.png';
-import { TextUserInfo1, TextUserInfo2, TextUsername, UserImage, RowStyled } from '../shared/Profile.styles';
+import { TextUserInfo1, TextUserInfo2, TextUsername, UserImage, RowStyled, LinkMoreResult, TextTopic2 } from '../shared/Profile.styles';
 import ProfileBoardCard from './ProfileBoardCard';
 import ProfileResultCard from './ProfileResultCard';
 
@@ -50,8 +50,16 @@ function Profile() {
                     <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
                         แก้ไขข้อมูลส่วนตัว
                     </ButtonStyle>
-                    <ProfileResultCard profile={profile} />
-                    <ProfileBoardCard profile={profile} />
+                    <ProfileResultCard profile={profile.results} />
+                    <RowStyled>
+                        <Col span={16}>
+                            <TextTopic2>กระทู้ของคุณ</TextTopic2>
+                        </Col>
+                        <Col span={8}>
+                            <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
+                        </Col>
+                    </RowStyled>
+                    <ProfileBoardCard data={profile.contents} />
                 </Box>
             )}
         </Container>

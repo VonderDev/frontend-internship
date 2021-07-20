@@ -1,67 +1,58 @@
-import { Col, Row } from 'antd';
-import { BoardCard, RowStyled, HistoryImage, CardText, HistoryText, CommentIcon, HeartIcon, LinkMoreResult, TextTopic2 } from 'components/pages/Profile/shared/Profile.styles';
+import { BoardCard, CommentIcon, EllipsisText, HeartIcon, HistoryImage, HistoryText } from 'components/pages/Profile/shared/Profile.styles';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { Box } from 'shared/style/theme/component';
+import { transalateToThai } from 'utils/transalator/transalator';
 
 interface CardComponentProps {
-    profile: any;
-
+    data: any | null;
 }
-const ProfileBoardCard: React.FC<CardComponentProps> = ({ profile }) => {
+
+const ProfileBoardCard: React.FC<CardComponentProps> = ({ data }) => {
     const history = useHistory();
     return (
         <>
-            <RowStyled>
-                <Col span={16}>
-                    <TextTopic2>กระทู้ของคุณ</TextTopic2>
-                </Col>
-                <Col span={8}>
-                    <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
-                </Col>
-            </RowStyled>
-            {profile?.contents.map((item: any, index: any) => {
-                return (
-                    <BoardCard
-                        key={index}
-                        onClick={() => {
-                            history.push('/Board');
-                        }}
-                    >
-                        <RowStyled>
-                            <Col span={7}>
-                                <HistoryImage src={item.image} />
-                            </Col>
-                            <Col span={17}>
-                                <CardText>
-                                    <Row>
-                                        <HistoryText>{item.title}</HistoryText>
-                                    </Row>
-                                    <Row>
-                                        <HistoryText>{item.content_body}</HistoryText>
-                                    </Row>
-                                    <Row>
-                                        <Col span={2}>
-                                            <CommentIcon />
-                                        </Col>
-                                        <Col span={10}>
-                                            <HistoryText>{item.author_username}</HistoryText>
-                                        </Col>
-                                        <Col span={8}>
-                                            <HistoryText>{item.created_at}</HistoryText>
-                                        </Col>
-                                        <Col span={2}>
-                                            <HeartIcon />
-                                        </Col>
-                                        <Col span={2}>
-                                            <HistoryText>{item.likes}</HistoryText>
-                                        </Col>
-                                    </Row>
-                                </CardText>
-                            </Col>
-                        </RowStyled>
-                    </BoardCard>
-                );
-            })}
+            {data
+                ? data.slice(0,3).map((item: any, index: any) => {
+                      const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                      const dateCreatedFilter = new Date(item.created_at);
+                      const dateFormat = dateCreatedFilter.getDate() + ' ' + months[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
+                      return (
+                          <BoardCard
+                              key={index}
+                              onClick={() => history.push(`/boardcontent/${item._id}`)}
+                          >
+                              <EllipsisText style={{ display: 'flex' }}>
+                                  <HistoryImage src={item.image} />
+                                  <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '25%' }}>
+                                      <HistoryText style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.title}</HistoryText>
+                                      <Box direction="row" justify="flex-start" align="flex-start">
+                                          <HistoryText style={{ fontSize: '12px', fontWeight: 'bold' }}>{transalateToThai(item.content_type)}</HistoryText>
+                                          {item?.tag?.map((item: any, index: any) => {
+                                              return (
+                                                  <HistoryText style={{ fontSize: '12px', paddingRight: '10px' }} key={index}>
+                                                      #{transalateToThai(item)}
+                                                  </HistoryText>
+                                              );
+                                          })}
+                                      </Box>
+                                      <Box direction="row" justify="space-between" align="flex-start" style={{ fontSize: '12px', color: '#6E7282', marginTop: '10px' }}>
+                                          <div style={{ justifyContent: 'center' }}>
+                                              <CommentIcon />
+                                          </div>
+                                          <HistoryText>{item.author_username}</HistoryText>
+                                          <HistoryText>{dateFormat}</HistoryText>
+                                          <div style={{ justifyContent: 'center' }}>
+                                              <HeartIcon />
+                                          </div>
+                                          <HistoryText>{item.uid_likes.length}</HistoryText>
+                                      </Box>
+                                  </Box>
+                              </EllipsisText>
+                          </BoardCard>
+                      );
+                  })
+                : null}
         </>
     );
 };

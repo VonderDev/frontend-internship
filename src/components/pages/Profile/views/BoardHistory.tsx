@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Box } from 'shared/style/theme/component';
 import ProfileBoardCard from './ProfileBoardCard';
 import useSWR from 'swr';
+import BoardCardComponent from 'components/pages/Board/views/board/BoardCardComponent';
 
 function BoardHistory() {
 
@@ -21,7 +22,7 @@ function BoardHistory() {
                 <div>loading ...</div>
             ) : (
             <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
-                <ProfileBoardCard profile={profile}/>
+                <BoardCardComponent data={profile.contents}/>
             </Box>
             )}
         </Container>

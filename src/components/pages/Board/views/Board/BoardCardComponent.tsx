@@ -8,7 +8,7 @@ interface CardComponentProps {
     data: any | null;
 }
 
-const FilterCard: React.FC<CardComponentProps> = ({ data }) => {
+const BoardCardComponent: React.FC<CardComponentProps> = ({ data }) => {
     const history = useHistory();
     return (
         <>
@@ -56,4 +56,4 @@ const FilterCard: React.FC<CardComponentProps> = ({ data }) => {
         </>
     );
 };
-export default FilterCard;
+export default BoardCardComponent;
