@@ -35,22 +35,24 @@ const Filter = () => {
     //Data that response from api----------------------------------------------------------------------------------------
     const [tagFilterData, setTagFilterData] = useState<any | null>(null);
 
-    //Filter Api---------------------------------------------------------------------------------------------------------
+    //Filter Api เมื่อใช้ปุ่ม---------------------------------------------------------------------------------------------------------
     // เปลี่ยนเป็น useCallBack
     async function filterContentData() {
         if (!searchValue) {
             const res = await ApiPostFilter(contentData);
             setTagFilterData(res);
-        } else {
+        } else if (searchValue) {
             const res = await ApiPostSearch(searchValue, contentData);
             setTagFilterData(res);
         }
-        console.log('error');
     }
-    // useEffect(() => {
-    //     console.log('content data', contentData);
-    // }, [contentData]);
 
+    //Filter and close drawer in one click-----------------------------------------------------------------------------------------
+    const onclickFilter = () => {
+        filterContentData();
+        setVisible(!visible);
+    };
+    
     //Drawer Function----------------------------------------------------------------------------------------------------
     const [visible, setVisible] = useState<boolean>(false);
     const showDrawer = () => {
@@ -59,32 +61,17 @@ const Filter = () => {
 
     //Search Function (Realtime and Manual Button)----------------------------------------------------------------------------------------------------
     const [searchValue, setSearchValue] = useState<any | null>('');
-
     useEffect(() => {
         const delayTime = setTimeout(() => {
-            async function realTime() {
-                if (!searchValue) {
-                    const res = await ApiPostFilter(contentData);
-                    setTagFilterData(res);
-                } else {
-                    const res = await ApiPostSearch(searchValue, contentData);
-                    setTagFilterData(res);
-                }
-            }
-            realTime();
+            filterContentData();
         }, 500);
         return () => clearTimeout(delayTime);
     }, [searchValue]);
 
-    async function searchFirst() {
-        const res = await ApiPostSearch(searchValue, contentData);
-        setTagFilterData(res);
-    }
-
-    // useEffect(() => {
-    //     console.log('tagFilterData', tagFilterData);
-    //     console.log('searchValue', searchValue);
-    // }, [searchValue, tagFilterData]);
+    // async function searchFirst() {
+    //     const res = await ApiPostSearch(searchValue, contentData);
+    //     setTagFilterData(res);
+    // }
 
     return (
         <Container
@@ -102,7 +89,7 @@ const Filter = () => {
                 selectedTags={selectedTags}
                 handleChangeCatagories={handleChangeCatagories}
                 handleChangeTag={handleChangeTag}
-                filterContentData={filterContentData}
+                onclickFilter={onclickFilter}
             />
             <Box style={{ marginLeft: '20px', marginRight: '20px' }} align="flex-start" direction="column">
                 <SearchField style={{ marginBottom: '20px' }}>
