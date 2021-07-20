@@ -1,4 +1,4 @@
-import { Button, Drawer, Form, Input, Radio, Select, Upload } from 'antd';
+import { Button, Drawer, Form, Input, Modal, Radio, Select, Upload } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import styled from 'styled-components';
 
@@ -239,4 +239,69 @@ export const DrawerContainer = styled.div`
     height: 100%;
     padding-left: 5%;
     overflow: hidden;
+`;
+
+//---------------- CREATE MODAL STYLED -----------------//
+export const ButtonExistModal = styled(Button)`
+    font-weight: bolder;
+    font-size: 15px;
+    border-radius: 10px;
+    color: white;
+    border-color: var(--Red-300);
+    background-color: var(--Red-300);
+    width: 295px;
+    height: 51px;
+    box-shadow: 0px 3px 6px #c7c7c7;
+`;
+export const ButtonCancleModal = styled(Button)`
+    font-weight: bolder;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    color: var(--Blue-400);
+    width: 65px;
+    height: 19px;
+    margin-top: 15px;
+    transform: translateY(0%);
+`;
+
+export const ModalContainer = styled(Modal)`
+    display: flex;
+    justify-content: center;
+    & .ant-modal-content {
+        width: 343px;
+        height: 249px;
+        border-radius: 15px;
+    }
+    & .ant-modal-header {
+        height: 89px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+    }
+    & .ant-modal-body {
+        height: 30px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+    & .ant-modal-footer {
+        height: 130px;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+`;
+
+export const TextBodyModal = styled.div`
+    font-weight: normal;
+    font-size: 16px;
+`;
+
+export const TextTitleModal = styled.div`
+    font-weight: bolder;
+    font-size: 24px;
 `;

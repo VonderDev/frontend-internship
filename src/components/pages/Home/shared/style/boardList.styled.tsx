@@ -24,7 +24,7 @@ export const TextOverflowHide = styled.div`
 
 export const BoardImageOfContent = styled.img`
     margin-right: 10px;
-    width: 88px;
+    width: 90px;
     height: 100px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -35,9 +35,10 @@ export const BoardImageOfContent = styled.img`
 export const BoardTextInfo = styled.div`
     padding-right: 15px;
     margin-top: 5px;
-    font-size: 12px;
+    font-size: 14px;
     padding-right: 10px;
     color: var(--Gray-400);
+    display: inline;
 `;
 
 export const CommentIcon = styled(FormOutlined)`
@@ -53,4 +54,11 @@ export const HeartIcon = styled(HeartFilled)`
 
 export const ContainerOfIcon = styled.div`
     justify-content: center;
+    display: inline;
+`;
+
+export const ContainerOfBoardInfo = styled.div``;
+
+export const ContainerOfIconAndText = styled.div`
+    padding-top: 10px;
 `;

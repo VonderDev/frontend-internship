@@ -1,10 +1,20 @@
-import { Row } from 'antd';
+import { Col, Row } from 'antd';
 import { MONTHS } from 'components/pages/Board/shared/months';
 import { useHistory } from 'react-router';
 import { Box } from 'shared/style/theme/component';
 import useSWR from 'swr';
 import { transalateToThai } from 'utils/transalator/transalator';
-import { BoardImageOfContent, BoardList, BoardTextInfo, CommentIcon, ContainerOfIcon, HeartIcon, TextOverflowHide } from '../shared/style/boardList.styled';
+import {
+    BoardImageOfContent,
+    BoardList,
+    BoardTextInfo,
+    CommentIcon,
+    ContainerOfBoardInfo,
+    ContainerOfIcon,
+    ContainerOfIconAndText,
+    HeartIcon,
+    TextOverflowHide,
+} from '../shared/style/boardList.styled';
 import { ButtonSeeAllBoard, TextBoardTopic } from '../shared/style/homepage.styles';
 
 function BoardListLatest() {
@@ -44,26 +54,28 @@ function BoardListLatest() {
                             >
                                 <TextOverflowHide>
                                     <BoardImageOfContent src={item.image} />
-                                    <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '20%' }}>
-                                        <BoardTextInfo style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.title}</BoardTextInfo>
-                                        <Box direction="row" justify="flex-start" align="flex-start">
-                                            <BoardTextInfo style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--Gray-400)' }}>บทความ</BoardTextInfo>
-                                            {item?.tag?.map((item: any, index: any) => {
-                                                return <BoardTextInfo key={index}>#{transalateToThai(item)}</BoardTextInfo>;
-                                            })}
+                                    <ContainerOfBoardInfo>
+                                        <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '52%' }}>
+                                            <BoardTextInfo style={{ fontSize: '16px', fontWeight: 'bold' }}>{item.title}</BoardTextInfo>
+                                            <Box direction="row" justify="flex-start" align="flex-start">
+                                                <BoardTextInfo style={{ fontSize: '14px', fontWeight: 'bold' }}>บทความ</BoardTextInfo>
+                                                {item?.tag?.map((item: any, index: any) => {
+                                                    return <BoardTextInfo key={index}>#{transalateToThai(item)}</BoardTextInfo>;
+                                                })}
+                                            </Box>
+                                            <ContainerOfIconAndText>
+                                                <ContainerOfIcon>
+                                                    <CommentIcon />
+                                                </ContainerOfIcon>
+                                                <BoardTextInfo>{item.author_username}</BoardTextInfo>
+                                                <BoardTextInfo>{dateFormat}</BoardTextInfo>
+                                                <ContainerOfIcon>
+                                                    <HeartIcon />
+                                                </ContainerOfIcon>
+                                                <BoardTextInfo>{item.uid_likes.length}</BoardTextInfo>
+                                            </ContainerOfIconAndText>
                                         </Box>
-                                        <Box direction="row" justify="space-between" align="flex-start" style={{ fontSize: '12px', color: '#6E7282', marginTop: '10px' }}>
-                                            <ContainerOfIcon>
-                                                <CommentIcon />
-                                            </ContainerOfIcon>
-                                            <BoardTextInfo>{item.author_username}</BoardTextInfo>
-                                            <BoardTextInfo>{dateFormat}</BoardTextInfo>
-                                            <ContainerOfIcon>
-                                                <HeartIcon />
-                                            </ContainerOfIcon>
-                                            <BoardTextInfo>{item.uid_likes.length}</BoardTextInfo>
-                                        </Box>
-                                    </Box>
+                                    </ContainerOfBoardInfo>
                                 </TextOverflowHide>
                             </BoardList>
                         );

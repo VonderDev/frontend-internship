@@ -1,5 +1,5 @@
 import Container from 'components/Container/Container';
-import { ButtonBackToFirstPage } from '../../shared/style/BoardCreate.styled';
+import { ButtonBackToFirstPage, ButtonCancleModal, ButtonExistModal, ModalContainer, TextBodyModal, TextTitleModal } from '../../shared/style/BoardCreate.styled';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { LeftOutlined } from '@ant-design/icons';
@@ -88,17 +88,55 @@ function BoardCreateContent() {
         console.log('radio checked', e.target.value);
         setContentType(e.target.value);
     };
+
+    //Modal state and function-----------------------------------------------------------------------------
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+    const handleOk = () => {
+        history.goBack();
+        setIsModalVisible(false);
+    };
     //SWITCH CASE
     return (
         <>
+            <ModalContainer
+                visible={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                title={<TextTitleModal>ออกจากหน้านี้?</TextTitleModal>}
+                footer={[
+                    <ButtonExistModal key="back" onClick={handleOk}>
+                        ออก
+                    </ButtonExistModal>,
+                    <ButtonCancleModal key="submit" onClick={handleCancel}>
+                        ยกเลิก
+                    </ButtonCancleModal>,
+                ]}
+            >
+                <TextBodyModal>การเปลี่ยนแปลงทั้งหมดจะไม่ถูกบันทึก</TextBodyModal>
+            </ModalContainer>
             <Container
                 header={{
                     title: 'สร้างกระทู้',
                     right: 'menu',
                     left: (
-                        <ButtonBackToFirstPage onClick={() => setCountPage(countPage - 1)} disabled={countPage < 2}>
-                            <LeftOutlined style={{ color: '#8a8888' }} />
-                        </ButtonBackToFirstPage>
+                        <>
+                            {countPage === 1 ? (
+                                <ButtonBackToFirstPage onClick={showModal}>
+                                    <LeftOutlined style={{ color: '#8a8888' }} />
+                                </ButtonBackToFirstPage>
+                            ) : null}
+                            {countPage === 2 ? (
+                                <ButtonBackToFirstPage onClick={() => setCountPage(countPage - 1)} disabled={countPage < 2}>
+                                    <LeftOutlined style={{ color: '#8a8888' }} />
+                                </ButtonBackToFirstPage>
+                            ) : null}
+                        </>
                     ),
                 }}
             >
