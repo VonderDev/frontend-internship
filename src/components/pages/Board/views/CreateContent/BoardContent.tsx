@@ -1,34 +1,138 @@
 import Container from 'components/Container/Container';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { ApiGetNewestContent } from '../../apis/boardCreate.api';
+import { ButtonBackToFirstPage } from '../../shared/style/BoardCreate.styled';
+import { LeftOutlined } from '@ant-design/icons';
+import useSWR from 'swr';
+import {
+    AuthorName,
+    BoxOfLikeAndComment,
+    CategoryTag,
+    ContainerBaordContent,
+    ContainerUserNameAndDate,
+    ContentBody,
+    DateCreatedContent,
+    ImageOfContent,
+    LengthOfLikeAndComment,
+    ProfileImage,
+    TextTitleContent,
+    TopicTag,
+} from '../../shared/style/BoardContent.styled';
+import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
+import { ApiPutLikeOfBoardContent } from '../../apis/boardCreate.api';
+import { useAuthContext } from 'components/AuthContext/AuthContext';
+import { transalateToThai } from 'utils/transalator/transalator';
 
 function BoardContent() {
     const history = useHistory();
-    const param = useParams<{ id: string }>();
+    const paramObjectId = useParams<{ id: string }>();
+    //--------------- FETCHING BOARD CONTENT USING AXIOS ---------------//
+    // async function getNewestContent() {
+    //     const response = await ApiGetNewestContent();
+    //     if (response) {
+    //         console.log(response);
+    //     } else {
+    //         console.log('error');
+    //     }
+    // }
+    useEffect(() => {
+        console.log('[useParams : obejctID]:', paramObjectId);
+    }, []);
+
+    //----------------- PUT LIKE OF CONTENT -----------------//
+    const [addLike, setAddLike] = useState<{ content_id: string }>({
+        content_id: '',
+    });
+
+    useEffect(() => {
+        setAddLike({
+            ...addLike,
+            content_id: paramObjectId.id,
+        });
+        console.log('add Like :', addLike);
+    }, []);
+
+    function addLikeOfBoardContent() {
+        ApiPutLikeOfBoardContent(addLike);
+    }
 
     //--------------- FETCHING BOARD CONTENT USING SWR ---------------//
-    async function getNewestContent() {
-        const response = await ApiGetNewestContent();
-        if (response) {
-            console.log(response);
-        } else {
-            console.log('error');
-        }
-    }
+    const { data: contentData, error: errorcontentData } = useSWR('/user/contentID/' + paramObjectId.id);
+
+    const isLoadingContentData = !contentData && !errorcontentData;
+
+    //--------------- SET DATE CREATED CONTENT FORMAT ---------------//
+    const [dateCreatedFormat, setDateCreatedFormat] = useState<string>();
+
+    const { username } = useAuthContext();
+    const [isLike, setIsLike] = useState(false);
+
     useEffect(() => {
-        getNewestContent();
-        console.log('paramm', param);
-    }, []);
+        console.log('user login', username);
+        if (contentData) {
+            console.log('[Newest Content data ]', contentData);
+            //--------------- SET DATE FORMAT ---------------//
+            const dateCreatedContent = contentData?.created_at;
+            const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+            const createdContentData = new Date(dateCreatedContent);
+            setDateCreatedFormat(createdContentData.getDate() + ' ' + months[createdContentData.getMonth()] + ' ' + createdContentData.getFullYear());
+            const uidLikes = contentData?.uid_likes;
+            console.log('[uid likes :]', uidLikes.includes('60dadd502c82f310974b8db'));
+            //---------------- set isLike ------------------//
+            setIsLike(uidLikes.includes('60dadd502c82f310974b8db'));
+        }
+    }, [contentData, dateCreatedFormat]);
+
+    //--------------- FETCHING COMMENT DATA FOR SHOW LENGTH OF COMMENTED ---------------//
+    const { data: fetchingCommentData, error: errorfetchingComment } = useSWR(`/user/comment/get/1-100/${paramObjectId.id}`);
+
     return (
         <Container
             header={{
                 title: 'กระทู้',
                 right: 'menu',
-                left: 'back',
+                left: (
+                    <ButtonBackToFirstPage onClick={() => history.push('/')}>
+                        <LeftOutlined style={{ color: '#8a8888' }} />
+                    </ButtonBackToFirstPage>
+                ),
             }}
         >
-            <h1>{param.id} </h1>
+            {isLoadingContentData ? (
+                <div>loading ...</div>
+            ) : (
+                <ContainerBaordContent>
+                    <TextTitleContent>{contentData?.title}</TextTitleContent>
+                    <TopicTag>{transalateToThai(contentData?.content_type)}</TopicTag>
+                    {contentData?.tag?.map((item: any, index: any) => {
+                        return <CategoryTag key={index}>#{transalateToThai(item)}</CategoryTag>;
+                    })}
+                    <ProfileImage />
+                    <ContainerUserNameAndDate>
+                        <AuthorName>{contentData?.author_username}</AuthorName>
+                        <DateCreatedContent>{dateCreatedFormat}</DateCreatedContent>
+                    </ContainerUserNameAndDate>
+                    <ImageOfContent src={contentData?.image}></ImageOfContent>
+                    <ContentBody>{contentData?.content_body}</ContentBody>
+
+                    <BoxOfLikeAndComment>
+                        {isLike ? <HeartFilled style={{ borderColor: 'green' }} onClick={addLikeOfBoardContent} /> : <HeartOutlined style={{ borderColor: 'red' }} onClick={addLikeOfBoardContent} />}
+                        <span
+                            onClick={() => {
+                                if (paramObjectId) {
+                                    history.push(`/boardcontent/${paramObjectId?.id}/comment`);
+                                }
+                            }}
+                        >
+                            <LengthOfLikeAndComment>{contentData?.uid_likes.length}</LengthOfLikeAndComment>
+                        </span>
+                        <span>
+                            <CommentOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />
+                            <LengthOfLikeAndComment>{fetchingCommentData?.length}</LengthOfLikeAndComment>
+                        </span>
+                    </BoxOfLikeAndComment>
+                </ContainerBaordContent>
+            )}
         </Container>
     );
 }

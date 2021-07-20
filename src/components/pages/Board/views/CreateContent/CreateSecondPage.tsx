@@ -8,7 +8,7 @@ import {
     InputHashtagInDrawer,
     OptionHashtag,
     TextTopicContent,
-} from '../../shared/BoardCreate.styled';
+} from '../../shared/style/BoardCreate.styled';
 
 interface CreateContentSecondPageProps {
     updateContentData: (event: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;
@@ -21,35 +21,27 @@ interface CreateContentSecondPageProps {
     postContent: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
+//----------------- CREATE VARIABLE FOR MAP CATEGORY BOARD -----------------//
+const categoryContentList = [
+    { value: 'board', label: 'บทความ' },
+    { value: 'question', label: 'คำถาม' },
+];
+
+//----------------- CREATE VARIABLE FOR HASHTAG -----------------//
+const OPTIONAL_TAG = [
+    { value: 'word smart', tagName: 'ภาษา' },
+    { value: 'logic smart', tagName: 'ตรรกะ' },
+    { value: 'music smart', tagName: 'ดนตรี' },
+    { value: 'nature smart', tagName: 'ธรรมชาติ' },
+    { value: 'picture smart', tagName: 'มิติสัมพันธ์' },
+    { value: 'body smart', tagName: 'การเคลื่อนไหว' },
+    { value: 'people smart', tagName: 'มนุษยสัมพันธ์' },
+    { value: 'self smart', tagName: 'เข้าใจตนเอง' },
+];
+
 const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({ countPage, contentType, onChangeContentType, contentData, setContentData, handleChangeOfHashtag, postContent }) => {
-    //----------------- CREATE VARIABLE FOR MAP CATEGORY BOARD -----------------//
-    const categoryContentList = [
-        { value: 'บทความ', label: 'บทความ' },
-        { value: 'คำถาม', label: 'คำถาม' },
-    ];
-
-    //----------------- CREATE VARIABLE FOR HASHTAG -----------------//
-    const optionalTag = [
-        { value: 'word smart', tagName: 'ภาษา' },
-        { value: 'logic smart', tagName: 'ตรรกะ' },
-        { value: 'music smart', tagName: 'ดนตรี' },
-        { value: 'nature smart', tagName: 'ธรรมชาติ' },
-        { value: 'picture smart', tagName: 'มิติสัมพันธ์' },
-        { value: 'body smart', tagName: 'การเคลื่อนไหว' },
-        { value: 'people smart', tagName: 'มนุษยสัมพันธ์' },
-        { value: 'self smart', tagName: 'เข้าใจตนเอง' },
-    ];
-
     return (
         <>
-            {/* {contentData.map((item, index) => {
-                            <Tag closable onClose={log}>
-                                {contentData.tag[index]}
-                            </Tag>;
-                        })} */}
-            {/* <Tag closable onClose={log}>
-                            {contentData.tag[0]}
-                        </Tag> */}
             <ContainerBoardCreate>
                 <TextTopicContent>ประเภทของกระทู้</TextTopicContent>
                 {categoryContentList.map((item, index) => {
@@ -79,8 +71,7 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({ count
                     placeholder="กรุณาเลือกแฮชเเท็กของกระทู้"
                     onChange={handleChangeOfHashtag}
                 >
-                    {' '}
-                    {optionalTag.map((item, index) => {
+                    {OPTIONAL_TAG.map((item, index) => {
                         return (
                             <OptionHashtag value={item.value} key={index}>
                                 #{item.tagName}
@@ -88,25 +79,13 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({ count
                         );
                     })}
                 </InputHashtagInDrawer>
-                {optionalTag.map((item, index) => {
+                {OPTIONAL_TAG.map((item, index) => {
                     return (
                         <OptionHashtag value={item.value} key={index}>
                             #{item.tagName}
                         </OptionHashtag>
                     );
                 })}
-                {/* <ButtonUseHashtags
-                                onClick={() => {
-                                    console.log('เลือกประเภทแฮชเเท๊ก :', contentData);
-                                }}
-                            >
-                                ใช้แฮชเเท็ก
-                            </ButtonUseHashtags> */}
-                {/* <Form initialValues={{ remember: true }}>
-                            <CreateContentForm>
-                                <FormInputNameContent onClick={showDrawer} type="text" placeholder="กรุณาเลือกแฮชเเท็กของกระทู้" />
-                            </CreateContentForm>
-                        </Form> */}
             </ContainerBoardCreate>
             <CountOfPageCreateContent>{countPage} / 2</CountOfPageCreateContent>
             <ButtonSummitPost htmlType="submit" onClick={postContent}>
