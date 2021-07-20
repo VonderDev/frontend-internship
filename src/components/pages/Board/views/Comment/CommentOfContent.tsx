@@ -1,7 +1,18 @@
 import Container from 'components/Container/Container';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { BoxOfCommentList, CommentBody, CommentInput, ContainerOfCommentList, ContainerOfInput, CreatedDate, IconSendMessage, ProfileUserImage, Username } from '../../shared/style/CommentPage.styled';
+import {
+    BoxOfCommentList,
+    CommentBody,
+    CommentInput,
+    ContainerOfCommentList,
+    ContainerOfInput,
+    ContainerOfNoCommentList,
+    CreatedDate,
+    IconSendMessage,
+    ProfileUserImage,
+    Username,
+} from '../../shared/style/CommentPage.styled';
 import { ApiPostComment } from '../../apis/commentContent.api';
 import useSWR from 'swr';
 import CommentList from './CommentList';
@@ -41,6 +52,7 @@ function CommentOfContent() {
         if (token) {
             if (response) {
                 setUsername(response.username);
+                console.log('user name', username);
             } else {
                 console.log('error');
             }
@@ -76,7 +88,7 @@ function CommentOfContent() {
             }}
         >
             {commentList.length == 0 ? (
-                <div>loading ...</div>
+                <ContainerOfNoCommentList>ยังไม่มีความคิดเห็น</ContainerOfNoCommentList>
             ) : (
                 <ContainerOfCommentList>
                     {commentList?.map((item: any, index: any) => {
