@@ -4,7 +4,7 @@ import { FormOutlined, HeartFilled } from '@ant-design/icons';
 
 export const BoardList = styled(Card)`
     margin-bottom: 10px;
-    height: 88px;
+    height: 100px;
     width: 96%;
     box-shadow: 0px 3px 6px #c7c7c7;
     border-radius: 10px;
@@ -19,12 +19,13 @@ export const TextOverflowHide = styled.div`
     display: block;
     overflow: hidden;
     white-space: nowrap;
+    display: flex;
 `;
 
 export const BoardImageOfContent = styled.img`
     margin-right: 10px;
     width: 88px;
-    height: 88px;
+    height: 100px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     transform: translateY(-1%);
@@ -34,6 +35,9 @@ export const BoardImageOfContent = styled.img`
 export const BoardTextInfo = styled.div`
     padding-right: 15px;
     margin-top: 5px;
+    font-size: 12px;
+    padding-right: 10px;
+    color: var(--Gray-400);
 `;
 
 export const CommentIcon = styled(FormOutlined)`
@@ -45,4 +49,8 @@ export const HeartIcon = styled(HeartFilled)`
     color: var(--Gray-100);
     transform: translateY(20%);
     margin-right: 5px;
+`;
+
+export const ContainerOfIcon = styled.div`
+    justify-content: center;
 `;
