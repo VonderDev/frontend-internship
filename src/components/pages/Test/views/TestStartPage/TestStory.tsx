@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Container from 'components/Container/Container';
 import { ContainerTestStoryPage, TextStory } from '../../shared/styles/Test/TestStory.styled';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { IQuestion } from '../../shared/interface/Test.interfaces';
 import { ApiGetTestData } from '../../apis/test.api';
 import { Col, Modal } from 'antd';
@@ -53,10 +53,14 @@ function TestStory() {
         console.log('Clicked cancel button');
         setVisible(false);
     };
+    // const goTest = ()=>{
+    //     return <Redirect to="/testquestion" />;
+    // }
 
     return (
         <Container header={null}>
-            <ContainerTestStoryPage onClick={() => history.push('/testquestion')}>
+            <a href='/testquestion' style={{color:'black'}} >
+            <ContainerTestStoryPage>
                 <Col>
                     <TextQuestionIndex>
                         คำถามข้อที่ {currentQuestion + 1}/24
@@ -70,6 +74,7 @@ function TestStory() {
                 </Modal>
                 <TextStory>(แตะหน้าจอเพื่อไปต่อ)</TextStory>
             </ContainerTestStoryPage>
+            </a>
         </Container>
     );
 }

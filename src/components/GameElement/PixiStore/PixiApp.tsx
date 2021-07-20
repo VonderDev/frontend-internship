@@ -2,6 +2,7 @@ import { useState, useContext, useEffect, useRef } from "react";
 import * as PIXI from 'pixi.js'
 import { AppContext } from "./AppContext";
 import { PixiContext } from "./PixiContext";
+import Animation from 'shared/style/theme/animation'
 
 const createPixiApp = (view:any, options:any) => {
   PIXI.utils.skipHello();
@@ -60,6 +61,7 @@ const createPixiApp = (view:any, options:any) => {
     }, [width, height]);
 
     return (
+       <Animation onEnter='fadeIn' key={gameRef.current} duration={1000} delay={200}>
         <canvas
         ref={viewRef}
         style={{
@@ -69,7 +71,9 @@ const createPixiApp = (view:any, options:any) => {
           maxHeight: maxHeight,
           zIndex: 1,
         }}
+        
       />
+      </Animation>
     );
   };
   
