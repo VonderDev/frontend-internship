@@ -1,4 +1,4 @@
-import { BoardCard, CommentIcon, EllipsisText, HeartIcon, HistoryImage, HistoryText } from 'components/pages/Profile/shared/Profile.styles';
+import { BoardCard, CommentIcon, CustomBox, EllipsisText, HeartIcon, HistoryImage, HistoryText } from 'components/pages/Profile/shared/Profile.styles';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Box } from 'shared/style/theme/component';
@@ -18,13 +18,12 @@ const FilterCard: React.FC<CardComponentProps> = ({ data }) => {
                       const dateCreatedFilter = new Date(item.created_at);
                       const dateFormat = dateCreatedFilter.getDate() + ' ' + months[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
                       return (
-                          <BoardCard
-                              key={index}
-                              onClick={() => history.push(`/boardcontent/${item._id}`)}
-                          >
+                          <BoardCard key={index} onClick={() => history.push(`/boardcontent/${item._id}`)}>
                               <EllipsisText style={{ display: 'flex' }}>
+                                  <div style={{}}>
                                   <HistoryImage src={item.image} />
-                                  <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '25%' }}>
+                                  </div>
+                                  <Box direction="column" justify="flex-start" align="flex-start" style={{marginLeft:'100px'}}>
                                       <HistoryText style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.title}</HistoryText>
                                       <Box direction="row" justify="flex-start" align="flex-start">
                                           <HistoryText style={{ fontSize: '12px', fontWeight: 'bold' }}>{transalateToThai(item.content_type)}</HistoryText>
@@ -36,7 +35,7 @@ const FilterCard: React.FC<CardComponentProps> = ({ data }) => {
                                               );
                                           })}
                                       </Box>
-                                      <Box direction="row" justify="space-between" align="flex-start" style={{ fontSize: '12px', color: '#6E7282', marginTop: '10px' }}>
+                                      <CustomBox direction="row" justify="space-between" align="flex-start">
                                           <div style={{ justifyContent: 'center' }}>
                                               <CommentIcon />
                                           </div>
@@ -46,7 +45,7 @@ const FilterCard: React.FC<CardComponentProps> = ({ data }) => {
                                               <HeartIcon />
                                           </div>
                                           <HistoryText>{item.uid_likes.length}</HistoryText>
-                                      </Box>
+                                      </CustomBox>
                                   </Box>
                               </EllipsisText>
                           </BoardCard>
