@@ -7,7 +7,7 @@ executors:
         working_directory: ~/project
 
 commands:
-    build:
+     build:
         description: 'Builds the project'
         steps:
             - checkout
@@ -41,9 +41,8 @@ commands:
             - run:
                   name: Firebase Deploy
                   command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN" --non-interactive --only hosting:<< parameters.env >>
-
 jobs:
-    build-deploy-dev:
+   build-deploy-dev:
         executor: node14
         steps:
             - build
@@ -66,7 +65,7 @@ jobs:
                   env: 'production'
 
 workflows:
-    version: 2
+     version: 2
     dev:
         jobs:
             - build-deploy-dev:
