@@ -1,12 +1,11 @@
-import { Card, Col, Row, List, Space, Typography } from 'antd';
+import { Card, Space, Typography } from 'antd';
 import styled from 'styled-components';
-import { RightOutlined, FormOutlined , HeartFilled } from '@ant-design/icons';
+import { FormOutlined , HeartFilled } from '@ant-design/icons';
 import { CardStyle } from 'shared/style/theme/component';
-import Container from 'components/Container/Container';
 
 export const TextRecommendBoardTopic = styled.div`
     font-weight: bolder;
-    font-size: 20px;
+    font-size: var(--font-20);
     display: flex;
     flex-direction: column;
     justify-content : center;
@@ -16,7 +15,7 @@ export const ButtonSeeAllBoard = styled.div`
     color: var(--Blue-300);
     font-weight: bolder;
     font-size: var(--font-16);
-    font-font-weight : bold;
+    font-weight : bold;
 
     &:hover {
         cursor: pointer;
@@ -26,14 +25,6 @@ export const ButtonSeeAllBoard = styled.div`
 export const BoardTextInfo = styled.div`
     padding-right: 15px;
     margin-top: 5px;
-`;
-
-export const CardContainer = styled.div`
-    /* overflow-x: scroll; */
-`;
-
-export const RowStyled = styled(Row)`
-    width: 100%;
 `;
 
 export const BoardCard = styled(Card)`
@@ -119,16 +110,6 @@ export const CoverImage = styled.img`
     height : 148px;
 `;
 
-export const CardText = styled.div`
-    font-weight: bolder;
-    font-size: 16px;
-`;
-
-export const RowCardContainer = styled.div`
-    display : flex;
-    flex-direction : row; 
-`;
-
 export const HistoryText = styled.div`
     display : flex;
     padding-right: 5px;
@@ -152,12 +133,6 @@ export const CommentIcon = styled(FormOutlined)`
     margin-right: 5px;
 `;
 
-export const HeartIconList = styled(HeartFilled)`
-    color: var(--Gray-100);
-    transform: translateY(20%);
-    margin-right: 5px;
-`;
-
 export const HeartIconCard = styled(HeartFilled)`
     color : var(--Gray-100);
     display: flex;
@@ -171,9 +146,7 @@ export const HeartIconCard = styled(HeartFilled)`
     right: 10.46px;
     top: 11px;
 
-    /* White */
     background: #FFFFFF;
-    /* Shadow-Light (bottom) */
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.05);
     border-radius: 100px;
 `;
@@ -192,34 +165,9 @@ export const HeartText = styled(Typography)`
     top: 11px;
 `;
 
-export const ListBoard = styled(List)`
-    font-weight: bolder;
-    margin: 0 auto;
-`;
-
-export const ListItemBoard = styled(List.Item)`
-    margin: 0 auto;
-    margin-bottom: 10px;
-    box-shadow: 0px 3px 6px #c7c7c7;
-    border-radius: 20px;
-    height: 130px;
-    width: 550px;
-    & .ant-list-item-action {
-        transform: translateY(-300%);
-        padding-left: 135px;
-    }
-`;
-
 export const SearchField = styled(Space)`
     display: flex;
     justify-content: center;
-`;
-
-export const ImgBoardList = styled.img`
-    transform: translateX(-15%) translateY(-6%);
-    border-radius: 15px;
-    width: 120px;
-    height: 130px;
 `;
 
 export const HeartIcon = styled(HeartFilled)`

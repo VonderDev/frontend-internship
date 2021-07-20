@@ -4,7 +4,12 @@ import { useHistory } from 'react-router';
 import { Box } from 'shared/style/theme/component';
 import useSWR from 'swr';
 import { IIconText } from '../../shared/Card.interface';
-import { BoardCard, CommentIcon, HistoryImage, HistoryText, SearchField, EllipsisText } from '../../shared/style';
+import { BoardCard, 
+    CommentIcon, 
+    HistoryImage, 
+    HistoryText, 
+    SearchField, 
+    EllipsisText } from '../../shared/style';
 import { LoadingOutlined } from '@ant-design/icons';
 import { HeartIcon } from 'components/pages/Profile/shared/Profile.styles';
 import { transalateToThai } from 'utils/transalator/transalator';
@@ -22,7 +27,6 @@ export const CardLatest = () => {
     const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     const { data, error } = useSWR('/user/content/get');
     const isLoading = !data && !error;
-    console.log('Card Top10 Data : ', data);
     const history = useHistory();
 
     if (data) {
@@ -35,9 +39,9 @@ export const CardLatest = () => {
         <>
             {isLoading ? (
                 <div>
-                    <div style={{ display: 'flex', justifyContent: 'center', padding : '10% 0% 10% 0%' }}>
+                    <Box direction="column" justify="center" align="center" style={{ padding: '10% 0% 10% 0%' }}>
                         <Spin indicator={antIcon} tip="Loading..." />
-                    </div>
+                    </Box>
                 </div>
             ) : (
                 <>

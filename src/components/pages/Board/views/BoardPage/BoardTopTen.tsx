@@ -2,7 +2,7 @@ import Container from "components/Container/Container";
 import { useHistory } from 'react-router-dom';
 import { LoadingOutlined } from "@ant-design/icons";
 import useSWR from "swr";
-import { Spin, Col, Row } from 'antd';
+import { Spin } from 'antd';
 import {
     BoardCard,
     CommentIcon,

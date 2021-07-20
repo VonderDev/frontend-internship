@@ -29,7 +29,6 @@ export const CardTopTen = () => {
     const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     const { data, error } = useSWR('/user/content/get');
     const isLoading = !data && !error;
-    console.log('Card date : ', data?.created_at);
     const history = useHistory();
 
     if (data) {
@@ -42,9 +41,9 @@ export const CardTopTen = () => {
         <>
             {isLoading ? (
                 <div>
-                    <div style={{ display : 'flex', justifyContent : 'center', padding : '10% 0% 10% 0%' }}>
+                    <Box direction="column" justify="center" align="center" style={{ padding: '10% 0% 10% 0%' }}>
                         <Spin indicator={antIcon} tip="Loading..." />
-                    </div>
+                    </Box>
                 </div>
             ) : (
                 <GridBox>
@@ -53,7 +52,6 @@ export const CardTopTen = () => {
                             const cardDate = new Date(item?.created_at);
                             const dateFormat = cardDate.getDate() + MONTHS[cardDate.getMonth()] + cardDate.getFullYear();
                             const like = item?.uid_likes;
-                            console.log('Type of likes : ', typeof item?.uid_likes.length);
                             return (
                                 <NewCardStyle
                                     typecard="Vertical"
