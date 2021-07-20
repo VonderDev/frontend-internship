@@ -27,6 +27,7 @@ import {AppContext} from 'components/GameElement/PixiStore/AppContext'
 import { setTimeout } from 'timers';
 import { TextStory } from '../../shared/styles/Test/TestStory.styled';
 import { Item } from 'react-bootstrap/lib/Breadcrumb';
+import Animation from '../../../../../shared/style/theme/animation'
 
 function TestQuestion() {
     //
@@ -58,6 +59,7 @@ function TestQuestion() {
     const [cutScene, setCutScene] = useState<boolean>(false);
     const [currentCutScnen, setCurrentCutScene] = useState<number>(0)
     const [currentMessage, setCurrentMessage] = useState<number>(0)
+    const [trigger, setTrigger] = useState<boolean>(false)
     const cutSceneList = [
         { value: 1, message:[ 'ที่นี่ที่ไหนกัน... แล้วฉันคือใคร... โอ๊ย ทำไมจำอะไรไม่ได้เลย…',
                             'ลองเดินตามทางนี้ไปละกัน เผื่อจะจำอะไรได้มากขึ้น'] },
@@ -272,10 +274,13 @@ function TestQuestion() {
                     ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
                 </Modal>
                 {currentQuestion +1 === 25 ? 
-                ( <><TextStory
+                ( <>
+                <Animation onEnter='fadeIn' key={currentMessage} duration={1000} delay={200}>
+                <TextStory
                     onClick={showStory}>
                             {cutSceneList[currentCutScnen].message[currentMessage]}
                 </TextStory>
+                </Animation>
                 {isLoading ? (
                     <IsLoadingSpinnerTestQuestion>
                         <TextIsLoadingTestQuestion>กำลังประมวลผลคำตอบน้า</TextIsLoadingTestQuestion>
@@ -287,20 +292,27 @@ function TestQuestion() {
                 :
                 ( <>
                   {cutScene? 
-                        (<TextStory
+                        (<Animation onEnter='fadeIn' key={currentMessage} duration={1000} delay={200}>
+                        <TextStory
                         onClick={showStory}>
                             {cutSceneList[currentCutScnen].message[currentMessage]}
-                            </TextStory>)
+                            </TextStory>
+                            </Animation>)
                     :
                      (<>
+                       <Animation type='fadeIn' key={currentQuestion} duration={600} delay={100}>
                         <TextQuestion>{currentQuestionDetail.questionBody}</TextQuestion>
+                        </Animation>
                         <div>
                          {isLoading ? (
                             ''
                         ) : (
+                        <Animation type='slideInLeft' duration={500} delay={100}>
+                           <Animation type='fadeIn' key={currentQuestion} duration={600} delay={100}>
                         <ContainerButton>
                         {buttonList.map((item, index) => {
                             return (
+                                
                                 <ButtonChoiceStlyed
                                     key={index}
                                     onClick={() => {
@@ -309,9 +321,12 @@ function TestQuestion() {
                                 >
                                     {item.label}
                                 </ButtonChoiceStlyed>
+                               
                             );
                         })}
-                        </ContainerButton>                   
+                        </ContainerButton>  
+                        </Animation>
+                        </Animation>                 
                 )}
             </div>
             </>)}

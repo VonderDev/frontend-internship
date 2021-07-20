@@ -31,8 +31,8 @@ const AuthProvider = ({ children }: IAuthProps) => {
         return axios
             .post('/login', { email, password })
             .then((response) => {
-                if (response.data.token) localStorage.setItem('token', response.data.token);
-
+                if (response.data.token) 
+                localStorage.setItem('token', response.data.token);
                 setToken(localStorage.getItem('token'));
                 setUser(response.data.resuit);
                 return user;
