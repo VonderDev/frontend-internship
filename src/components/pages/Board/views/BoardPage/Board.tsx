@@ -20,9 +20,6 @@ function Board() {
                     <Box direction="column" justify="center" align="center">
                         <TextRecommendBoardTopic>10 อันดับสูงสุด</TextRecommendBoardTopic>
                     </Box>
-                    <Box direction="column" justify="center" align="center">
-                        <ButtonSeeAllBoard onClick={() => history.push('/boardTopTen')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
-                    </Box>
                 </Box>
 
                 <div>
@@ -32,6 +29,9 @@ function Board() {
                 <Box direction="row" justify="space-between" align="flex-start" style={{ padding: '0px 20px 0px 20px' }}>
                     <Box direction="column" justify="center" align="center">
                         <TextRecommendBoardTopic>ล่าสุด</TextRecommendBoardTopic>
+                    </Box>
+                    <Box direction="column" justify="center" align="center">
+                        <ButtonSeeAllBoard onClick={() => history.push('/boardLatest')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
                     </Box>
                 </Box>
 

@@ -9,7 +9,8 @@ import { BoardCard,
     HistoryImage, 
     HistoryText, 
     SearchField, 
-    EllipsisText } from '../../shared/style';
+    EllipsisText,
+    CustomBox } from '../../shared/style';
 import { LoadingOutlined } from '@ant-design/icons';
 import { HeartIcon } from 'components/pages/Profile/shared/Profile.styles';
 import { transalateToThai } from 'utils/transalator/transalator';
@@ -58,7 +59,7 @@ export const CardLatest = () => {
                             >
                                 <EllipsisText style={{ display: 'flex' }}>
                                     <HistoryImage src={item.image} />
-                                    <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '20%' }}>
+                                    <CustomBox direction="column" justify="flex-start" align="flex-start" >
                                         <HistoryText style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.title}</HistoryText>
                                         <Box direction="row" justify="flex-start" align="flex-start">
                                             <HistoryText style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--Gray-400)' }}>บทความ</HistoryText>
@@ -81,7 +82,7 @@ export const CardLatest = () => {
                                             </div>
                                             <HistoryText>{item.uid_likes.length}</HistoryText>
                                         </Box>
-                                    </Box>
+                                    </CustomBox>
                                 </EllipsisText>
                             </BoardCard>
                         );

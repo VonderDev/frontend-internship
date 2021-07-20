@@ -2,6 +2,7 @@ import { Card, Space, Typography } from 'antd';
 import styled from 'styled-components';
 import { FormOutlined , HeartFilled } from '@ant-design/icons';
 import { CardStyle } from 'shared/style/theme/component';
+import { Box } from 'shared/style/theme/component';
 
 export const TextRecommendBoardTopic = styled.div`
     font-weight: bolder;
@@ -174,4 +175,8 @@ export const HeartIcon = styled(HeartFilled)`
     color: var(--Gray-100);
     padding-top: 8px;
     padding-right: 5px;
+`;
+
+export const CustomBox = styled(Box)`
+    margin-left : 100px;
 `;

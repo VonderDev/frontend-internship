@@ -14,7 +14,7 @@ import {
 import { Box } from 'shared/style/theme/component';
 import { transalateToThai } from 'utils/transalator/transalator';
 
-const BoardTopTen = () => {
+const BoardLatest = () => {
 
     const { data, error } = useSWR('/user/content/get');
     const isLoading = !data && !error;
@@ -23,12 +23,12 @@ const BoardTopTen = () => {
 
     if (data) {
         data?.sort(function (a: any, b: any) {
-            return b.uid_likes.length - a.uid_likes.length;
+            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
         });
     }
 
     return (
-        <Container header={{ left: 'back', right: 'menu', title: '10 อันดับสูงสุด' }} >
+        <Container header={{ left: 'back', right: 'menu', title: 'ล่าสุด' }} >
             {isLoading ? (
                 <div>
                     <div style={{ display: 'flex', justifyContent: 'center', padding : '10% 0% 10% 0%' }}>
@@ -37,7 +37,7 @@ const BoardTopTen = () => {
                 </div>
             ) : (
                 <>
-                    {data?.slice(0, 10).map((item: any, index: any) => {
+                    {data?.map((item: any, index: any) => {
                         const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
                         const cardDate = new Date(item?.created_at);
                         const dateFormat = cardDate.getDate() + months[cardDate.getMonth()] + cardDate.getFullYear();
@@ -84,4 +84,4 @@ const BoardTopTen = () => {
     )
 }
 
-export default BoardTopTen;
+export default BoardLatest;
