@@ -10,7 +10,7 @@ import {
     FormInputNameContent,
     TextTopicContent,
     UploadImage,
-} from '../../shared/BoardCreate.styled';
+} from '../../shared/style/BoardCreate.styled';
 
 interface CreateContentFirstPageProps {
     updateContentData: (event: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;
@@ -40,7 +40,7 @@ const CreateContentFirstPage: React.FC<CreateContentFirstPageProps> = ({ updateC
                         defaultFileList={defaultFileList}
                         className="image-upload-grid"
                     >
-                        {defaultFileList.length >= 2 ? null : (
+                        {defaultFileList.length >= 1 ? null : (
                             <div>
                                 <FileImageTwoTone style={{ fontSize: '35px' }} />
                             </div>

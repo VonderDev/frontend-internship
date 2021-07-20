@@ -44,7 +44,7 @@ const Navmenu = styled(Menu)<{ active: 'active' | '' }>`
     }}
 `;
 
- const Overlay = styled.div<{ active: 'active' | '' }>`
+const Overlay = styled.div<{ active: 'active' | '' }>`
     ${({ active }) => {
         if (active === 'active') {
             return css`
@@ -113,65 +113,62 @@ const LoginBtn = styled(Button)`
     height: 40px;
     border-radius: 10px;
     margin: 10px 0 0 0;
-    box-shadow: 0 3px 6px #e0e0e0 ;
+    box-shadow: 0 3px 6px #e0e0e0;
 `;
 const ListmenuLogout = styled(Listmenu)`
     bottom: 0;
     display: flex;
 `;
- {/* <Overlay active={sidebar ? 'active' : ''} onClick={showSidebar} /> */}
+{
+    /* <Overlay active={sidebar ? 'active' : ''} onClick={showSidebar} /> */
+}
 
 const Burger = () => {
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
     const [username, setUsername] = useState('');
     const token = localStorage.getItem('token');
-    const { logout ,getUser,user } = useAuthContext();
+    const { logout, getUser, user } = useAuthContext();
     function delay(ms: number) {
-        return new Promise( resolve => setTimeout(resolve, ms) );
+        return new Promise((resolve) => setTimeout(resolve, ms));
     }
 
-    const getUserInfo = async() =>{
+    const getUserInfo = async () => {
         const token = localStorage.getItem('token');
         const response = await getUser();
-        if(token){
+        if (token) {
             if (response) {
-                setUsername(response.username)
-                console.log('UserName :' , response.username);
+                setUsername(response.username);
+                console.log('UserName :', response.username);
             } else {
                 console.log('error');
             }
         } else {
             console.log('none');
         }
-
-      }
-  
-    useEffect(() => {
-        if(token){
-        getUserInfo()
-    }else{
-        window.location.reload;
     };
+
+    useEffect(() => {
+        if (token) {
+            getUserInfo();
+        } else {
+            window.location.reload;
+        }
     }, []);
 
     return (
-            <>
-            <MenuOutlined  style={{ color: '#8a8888' ,fontSize: '24px'}} onClick={showSidebar} />
+        <>
+            <MenuOutlined style={{ color: '#8a8888', fontSize: '24px' }} onClick={showSidebar} />
             <Navmenu active={sidebar ? 'active' : ''}>
                 <Ul onClick={showSidebar}>
                     <Avataruser>
                         <Avatar size={75} icon={<UserOutlined />} />
-                        { token ? (<AvatarName>{username}</AvatarName>)
-                        : (<AvatarName> Guest #000  </AvatarName> )}
-                        
+                        {token ? <AvatarName>{username}</AvatarName> : <AvatarName> Guest #000 </AvatarName>}
+
                         {token ? null : (
                             <BarBtn to="/login">
-                            <LoginBtn type="primary">
-                                Login
-                            </LoginBtn>
+                                <LoginBtn type="primary">Login</LoginBtn>
                             </BarBtn>
-
                         )}
                     </Avataruser>
                     {token && (
@@ -194,7 +191,7 @@ const Burger = () => {
                     })}
                     {token && (
                         <ListmenuLogout className="nav-text">
-                            <Bar to="#" onClick={ logout }>
+                            <Bar to="#" onClick={logout}>
                                 <LoginOutlined />
                                 <Span> Logout</Span>
                             </Bar>
@@ -202,8 +199,7 @@ const Burger = () => {
                     )}
                 </Ul>
             </Navmenu>
-             </>
-        
+        </>
     );
 };
 
