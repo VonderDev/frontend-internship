@@ -21,9 +21,9 @@ const FilterCard: React.FC<CardComponentProps> = ({ data }) => {
                           <BoardCard key={index} onClick={() => history.push(`/boardcontent/${item._id}`)}>
                               <EllipsisText style={{ display: 'flex' }}>
                                   <div style={{}}>
-                                  <HistoryImage src={item.image} />
+                                      <HistoryImage src={item.image} />
                                   </div>
-                                  <Box direction="column" justify="flex-start" align="flex-start" style={{marginLeft:'100px'}}>
+                                  <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '100px' }}>
                                       <HistoryText style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.title}</HistoryText>
                                       <Box direction="row" justify="flex-start" align="flex-start">
                                           <HistoryText style={{ fontSize: '12px', fontWeight: 'bold' }}>{transalateToThai(item.content_type)}</HistoryText>
