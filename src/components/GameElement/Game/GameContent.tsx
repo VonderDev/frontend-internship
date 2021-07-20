@@ -32,6 +32,7 @@ import bigTree from '../Assets//Item/Tree/BigTree.png'
 import lake from '../Assets/Background/Background_Lake.png'
 import water from '../Assets/Background/Water.png'
 import shadow from '../Assets/Background/Shadow.png'
+import TreeFnew from '../Assets//Item/Tree/TreeF_1new.png'
 
 const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 
@@ -110,6 +111,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
             .add('lake',lake)
             .add('water', water)
             .add('shadow', shadow)
+            .add('TreeFnew', TreeFnew)
       loader.load((loader, resource) => {
       console.log("resource", resource);
         app.loader.resources = resource
@@ -259,6 +261,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       endScene.visible = true;
       endScene.interactive = true;
       endScene.buttonMode = true;
+      endScene.on('pointerdown', onClick6_1);
       gameScene6();
     }
     function onClick6_1() {
@@ -367,6 +370,12 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       Treef1.position.set(-300,-100);
       firstScene.addChild(Treef1)
 
+      const bush1Texture = PIXI.Texture.from(bush1);
+      const Bush1r = new PIXI.Sprite(bush1Texture);
+      Bush1r.scale.set(0.4);
+      Bush1r.position.set(350,480);
+      firstScene.addChild(Bush1r)
+
       const treef2Texture = PIXI.Texture.from(treef2);
       const Treef2 = new PIXI.Sprite(treef2Texture);
       Treef2.scale.set(0.7)
@@ -381,17 +390,12 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       Bush2.position.set(-50,500);
       firstScene.addChild(Bush2)
 
-      const bush1Texture = PIXI.Texture.from(bush1);
       const Bush1 = new PIXI.Sprite(bush1Texture);
       Bush1.scale.set(0.7);
       Bush1.position.set(-100,600);
       firstScene.addChild(Bush1)
 
       //right
-      const Bush1r = new PIXI.Sprite(bush1Texture);
-      Bush1r.scale.set(0.3);
-      Bush1r.position.set(350,500);
-      firstScene.addChild(Bush1r)
 
       const bush3Texture = PIXI.Texture.from(bush3);
       const Bush3 = new PIXI.Sprite(bush3Texture);
@@ -413,7 +417,6 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         // ticker.remove(animate)
         }, 30000)
     }
-
     function gameScene2 () {
       //Background 
 
@@ -510,6 +513,12 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       dirtS3.anchor.set(0,-0.5);
       homeScene.addChild(dirtS3)
 
+      const treeTexture = PIXI.Texture.from(tree);
+      const bgTree = new PIXI.Sprite(treeTexture);
+      bgTree.scale.set(0.6);
+      bgTree.position.set(0,100);
+      homeScene.addChild(bgTree)
+
       Cloud1.scale.set(0.5);
       Cloud1.position.set(10, 20);
       homeScene.addChild(Cloud1)
@@ -537,6 +546,23 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       Treef2.scale.x = -1
       homeScene.addChild(Treef2)
 
+      const bush3Texture = PIXI.Texture.from(bush3);
+      const Bush3 = new PIXI.Sprite(bush3Texture);
+      Bush3.scale.set(0.7);
+      Bush3.position.set(300,450);
+      homeScene.addChild(Bush3)
+
+      const treenewTexture = PIXI.Texture.from(TreeFnew);
+      const Treefnew = new PIXI.Sprite(treenewTexture);
+      Treefnew.scale.set(0.6,1);
+      Treefnew.position.set(-450,-400);
+      homeScene.addChild(Treefnew)
+
+      const bush1Texture = PIXI.Texture.from(bush1);
+      const Bush1 = new PIXI.Sprite(bush1Texture);
+      Bush1.scale.set(0.6);
+      Bush1.position.set(-100,600);
+      homeScene.addChild(Bush1)
     }
     function doorScene3 () {
             //Background 
@@ -648,7 +674,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
            const treeb1Texture = PIXI.Texture.from(treeb1);
            const Treeb1 = new PIXI.Sprite(treeb1Texture);
            Treeb1.scale.set(0.4)
-           Treeb1.position.set(250,400);
+           Treeb1.position.set(300,350);
            jungleScene.addChild(Treeb1)
      
            const treeb3Texture = PIXI.Texture.from(treeb3);
@@ -666,7 +692,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
            const bigTreeTexture = PIXI.Texture.from(bigTree);
            const bigTreeS5 = new PIXI.Sprite(bigTreeTexture);
            bigTreeS5.scale.set(0.7)
-           bigTreeS5.position.set(300,80);
+           bigTreeS5.position.set(300,30);
            jungleScene.addChild(bigTreeS5)
      
            const bush3Texture = PIXI.Texture.from(bush3);
@@ -701,7 +727,6 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     }
     function gameScene6() {
              //Background 
-
              const skyTexture = PIXI.Texture.from(sky);
              const bgSky = new PIXI.Sprite(skyTexture);
              bgSky.scale.set(0.7);
@@ -709,14 +734,14 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
                     
              const texture = PIXI.Texture.from(ground);
              const dirt = new PIXI.Sprite(texture);
-             dirt.scale.set(0.7);
-             dirt.anchor.set(0,-1);
+             dirt.scale.set(0.7,0.6);
+             dirt.anchor.set(0,-1.5);
              endScene.addChild(dirt)
 
              const lakeTexture = PIXI.Texture.from(lake);
              const lakeS5 = new PIXI.Sprite(lakeTexture);
              lakeS5.scale.set(0.7);
-             lakeS5.anchor.set(0,-0.5);
+             lakeS5.position.set(0, 130);
              endScene.addChild(lakeS5)
        
              Cloud1.scale.set(0.5);
@@ -726,18 +751,90 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
              Cloud2.scale.set(0.5);
              Cloud2.position.set(500, 150);
              endScene.addChild(Cloud2)
+
+             const treeb2Texture = PIXI.Texture.from(treeb2);
+             const Treeb2 = new PIXI.Sprite(treeb2Texture);
+             Treeb2 .scale.set(0.5)
+             Treeb2 .position.set(380,200);
+             endScene.addChild(Treeb2 )
+
+             const bush3Texture = PIXI.Texture.from(bush3);
+             const Bush3 = new PIXI.Sprite(bush3Texture);
+             Bush3.scale.set(0.6);
+             Bush3.position.set(300,450);
+             endScene.addChild(Bush3)
+
+             const bush4Texture = PIXI.Texture.from(bush4);
+             const Bush4 = new PIXI.Sprite(bush4Texture);
+             Bush4.scale.set(0.6);
+             Bush4.position.set(350,600);
+             endScene.addChild(Bush4)
+       
+             const bush2Texture = PIXI.Texture.from(bush2);
+             const Bush2 = new PIXI.Sprite(bush2Texture);
+             Bush2.scale.set(0.5);
+             Bush2.position.set(-40,450);
+             endScene.addChild(Bush2)
+
+             const treenewTexture = PIXI.Texture.from(TreeFnew);
+             const Treefnew = new PIXI.Sprite(treenewTexture);
+             Treefnew.scale.set(0.7,0.8);
+             Treefnew.position.set(-380,-320);
+             endScene.addChild(Treefnew)
+
+             const bush1Texture = PIXI.Texture.from(bush1);
+             const Bush1 = new PIXI.Sprite(bush1Texture);
+             Bush1.scale.set(0.6);
+             Bush1.position.set(-100,600);
+             endScene.addChild(Bush1)
+ //Item
+
+
     }
     function gameLastScene() {
+
+      const verticesX = 5;
+      const verticesY = 10;
       const waterTexture = PIXI.Texture.from(water);
-      const bgWater = new PIXI.Sprite(waterTexture);
-      bgWater.scale.set(0.7);
-      lastScene.addChild(bgWater)
+      // const bgWater = new PIXI.Sprite(waterTexture);
+      // bgWater.scale.set(0.7);
+      // lastScene.addChild(bgWater)
+      const planeWater = new PIXI.SimplePlane(waterTexture, verticesX, verticesY);
              
       const texture = PIXI.Texture.from(shadow);
-      const shadowS6 = new PIXI.Sprite(texture);
-      shadowS6.scale.set(0.5);
-      shadowS6.position.set(20,150);
-      lastScene.addChild(shadowS6 )
+      // const shadowS6 = new PIXI.Sprite(texture);
+      // shadowS6.scale.set(0.5);
+      // shadowS6.position.set(20,150);
+      // lastScene.addChild(shadowS6 )
+
+          // Create the simple plane
+
+    const plane = new PIXI.SimplePlane(texture, verticesX, verticesY);
+
+    plane.x = 20;
+    plane.y = 150;
+    plane.scale.set(0.5);
+
+    planeWater.scale.set(0.7);
+    lastScene.addChild(planeWater);
+    lastScene.addChild(plane);
+
+    // Get the buffer for vertice positions.
+    const bufferWater = planeWater.geometry.getBuffer('aVertexPosition');
+    const buffer = plane.geometry.getBuffer('aVertexPosition');
+
+    // Listen for animate update
+    app.ticker.add(() => {
+        // Randomize the vertice positions a bit to create movement.
+        for (let i = 0; i < buffer.data.length; i++) {
+            buffer.data[i] += (Math.random() - 0.5);
+        }
+        buffer.update();
+        for (let i = 0; i < bufferWater.data.length; i++) {
+          bufferWater.data[i] += (Math.random() - 0.5);
+      }
+      bufferWater.update();
+    });
 
     }
     }
