@@ -24,13 +24,6 @@ const Filter = () => {
         content_type: [],
         tag: [],
     });
-    useEffect(() => {
-        setContentData({
-            ...contentData,
-            content_type: selectedCatagories,
-            tag: selectedTags,
-        });
-    }, [selectedCatagories, selectedTags]);
 
     //Data that response from api----------------------------------------------------------------------------------------
     const [tagFilterData, setTagFilterData] = useState<any | null>(null);
@@ -63,15 +56,29 @@ const Filter = () => {
     const [searchValue, setSearchValue] = useState<any | null>('');
     useEffect(() => {
         const delayTime = setTimeout(() => {
-            filterContentData();
+            async function realTime() {
+                if(!searchValue && tagFilterData){
+                    const res = await ApiPostFilter(contentData);
+                    setTagFilterData(res);
+                }else if (searchValue) {
+                    const res = await ApiPostSearch(searchValue, contentData);
+                    setTagFilterData(res);
+                }else if(!searchValue){
+                    setTagFilterData(null);
+                }
+            }
+            realTime()
         }, 500);
         return () => clearTimeout(delayTime);
     }, [searchValue]);
 
-    // async function searchFirst() {
-    //     const res = await ApiPostSearch(searchValue, contentData);
-    //     setTagFilterData(res);
-    // }
+    useEffect(() => {
+        setContentData({
+            ...contentData,
+            content_type: selectedCatagories,
+            tag: selectedTags,
+        });
+    }, [selectedCatagories, selectedTags]);
 
     return (
         <>
@@ -88,9 +95,6 @@ const Filter = () => {
             <Box style={{ marginLeft: '20px', marginRight: '20px' }} align="flex-start" direction="column">
                 <SearchField style={{ marginBottom: '20px' }}>
                     <InputSearch onChange={(e) => setSearchValue(e.target.value)} placeholder="Search Form" prefix={<SearchOutlined />} />
-                    {/* <ButtonFilter onClick={searchFirst}>
-                        <SearchOutlined style={{ color: '#8a8888', fontSize: '24px' }} />
-                    </ButtonFilter> */}
                     <ButtonFilter onClick={showDrawer}>
                         <ControlOutlined style={{ color: '#8a8888', fontSize: '24px' }} />
                     </ButtonFilter>
