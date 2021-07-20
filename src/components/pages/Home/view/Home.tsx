@@ -1,121 +1,102 @@
-/* eslint-disable jsx-a11y/alt-text */
-import React, { useEffect } from 'react';
-import { API_getStatistics } from '../apis/home.api';
 import { useHistory } from 'react-router-dom';
-import { Input, Row, List, Col } from 'antd';
-import { CalendarOutlined, FileAddOutlined, FormOutlined, HeartFilled, QuestionCircleTwoTone } from '@ant-design/icons';
-import {
-    SearchField,
-    ImageTestPage,
-    ButtonSeeAllBoard,
-    ListItemBoard,
-    ListBoard,
-    InputSearch,
-    ButtonFilter,
-    ButtonStartGame,
-    TextTopicOnImageTest,
-    ButtonReadOverviewTest,
-    ImgBoardList,
-    TextBoardTopic,
-    ButtonCreatePost,
-} from '../shared/homepage.styles';
-import { tagsData, IListData, IIconText } from '../shared/home.interface';
-import gamePreview from '../shared/images/gamepreview.png';
+import { Row, Col } from 'antd';
+import { QuestionCircleTwoTone, FileAddOutlined } from '@ant-design/icons';
+import { ImageTestPage, ButtonSeeAllBoard, ButtonStartGame, TextTopicOnImageTest, ButtonReadOverviewTest, TextBoardTopic, ButtonCreatePost } from '../shared/style/homepage.styles';
 import Container from 'components/Container/Container';
-//
-// ─── Set variable ───────────────────────────────────────────────────────────────────
-//
-const { Search } = Input;
-const onSearch = (value: any) => console.log(value);
-
-const listData: Array<IListData> = [];
-for (let i = 1; i < 10; i++) {
-    listData.push({
-        href: '/board',
-        title: `วิศวะ สอบอะไรบ้าง? พร้อมเทคนิคเตรียมสอบ... ${i}`,
-        avatar: 'https://s.isanook.com/ca/0/ud/278/1390705/1.jpg',
-        image: 'https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png',
-        description: 'บทความ #ตรรกะ  #มิติสัมพันธ์',
-    });
-}
-
-const IconText = ({ icon, text }: IIconText) => (
-    <SearchField>
-        {React.createElement(icon)}
-        {text}
-    </SearchField>
-);
+import useSWR from 'swr';
+import { Box } from 'shared/style/theme/component';
+import { transalateToThai } from 'utils/transalator/transalator';
+import { CommentIcon, HeartIcon, BoardList, BoardImageOfContent, BoardTextInfo, TextOverflowHide } from '../shared/style/boardList.styled';
+import { MONTHS } from 'components/pages/Board/shared/months';
 
 function Home() {
-    //get Data from home.api
-    async function getStatictisData() {
-        const response = await API_getStatistics();
-        if (response.success) {
-            console.log(response.data.title);
-        } else {
-            console.log('error');
-        }
-    }
-    useEffect(() => {
-        getStatictisData();
-    }, []);
-
-    //
-    // ─── Set variable ───────────────────────────────────────────────────────────────────
-    //
     const history = useHistory();
+    const { data: boardList, error: errorOfBoardList } = useSWR('/user/content/get');
+    const isLoadingBoardList = !boardList && !errorOfBoardList;
+    console.log('☯ [Board List] ☯ : ', boardList);
+
+    //-------------- SORT DATE CREATED LATEST --------------//
+    if (boardList) {
+        boardList?.sort(function (a: any, b: any) {
+            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        });
+
+        console.log('☞ [sort Board created latest] :', boardList);
+    }
 
     return (
-        <div>
-            <Container header={{ title: 'Vonder Me', right: 'menu' }}>
-                <ImageTestPage>
-                    <TextTopicOnImageTest>เกมทดสอบพหุปัญญา</TextTopicOnImageTest>
-                    <Col>
-                        <ButtonStartGame type="primary" onClick={() => history.push('/test')}>
-                            เล่นเกม
-                        </ButtonStartGame>
-                        <ButtonReadOverviewTest onClick={() => history.push('/testoverview')}>
-                            {' '}
-                            <QuestionCircleTwoTone style={{ fontSize: '150%', paddingInline: '5px' }} twoToneColor="#287fde" />
-                            พหุปัญญาคืออะไร ?
-                        </ButtonReadOverviewTest>
-                    </Col>
-                </ImageTestPage>
-                <Row>
-                    <TextBoardTopic xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-                        กระทู้
-                    </TextBoardTopic>
-                    <ButtonSeeAllBoard onClick={() => history.push('/board')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
-                </Row>
-                <ListBoard
-                    itemLayout="vertical"
-                    size="small"
-                    pagination={{
-                        onChange: (page) => {
-                            console.log(page);
-                        },
-                        pageSize: 3,
-                    }}
-                    dataSource={listData}
-                    renderItem={(item: any) => (
-                        <ListItemBoard
-                            actions={[
-                                <IconText icon={FormOutlined} text="Lookmaii" key="list-vertical-star-o" />,
-                                <IconText icon={CalendarOutlined} text="11 มิถุนายน 2564" key="list-vertical-like-o" />,
-                                <IconText icon={HeartFilled} text="12" key="list-vertical-message" />,
-                            ]}
-                        >
-                            <div onClick={() => history.push('/boardContent')}>
-                                <List.Item.Meta avatar={<ImgBoardList src={item.avatar} />} title={<a href={item.href}>{item.title}</a>} description={item.description} />
-                            </div>
-                        </ListItemBoard>
-                    )}
-                />
-                <ButtonCreatePost onClick={() => history.push('/boardcreate')} shape="circle">
-                    <FileAddOutlined />
-                </ButtonCreatePost>
-            </Container>
-        </div>
+        <Container header={{ title: 'Vonder Me', right: 'menu' }}>
+            <ImageTestPage>
+                <TextTopicOnImageTest>เกมทดสอบพหุปัญญา</TextTopicOnImageTest>
+                <Col>
+                    <ButtonStartGame type="primary" onClick={() => history.push('/test')}>
+                        เล่นเกม
+                    </ButtonStartGame>
+                    <ButtonReadOverviewTest onClick={() => history.push('/testoverview')}>
+                        {' '}
+                        <QuestionCircleTwoTone style={{ fontSize: '150%', paddingInline: '5px' }} twoToneColor="#287fde" />
+                        พหุปัญญาคืออะไร ?
+                    </ButtonReadOverviewTest>
+                </Col>
+            </ImageTestPage>
+            <Row>
+                <TextBoardTopic xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+                    กระทู้
+                </TextBoardTopic>
+                <ButtonSeeAllBoard onClick={() => history.push('/board')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
+            </Row>
+
+            {isLoadingBoardList ? (
+                <div>loading ...</div>
+            ) : (
+                <>
+                    {boardList?.slice(0, 3).map((item: any, index: any) => {
+                        const cardDate = new Date(item?.created_at);
+                        const dateFormat = cardDate.getDate() + MONTHS[cardDate.getMonth()] + cardDate.getFullYear();
+                        return (
+                            <BoardList
+                                key={index}
+                                onClick={() => {
+                                    history.push('/boardContent');
+                                }}
+                            >
+                                <TextOverflowHide style={{ display: 'flex' }}>
+                                    <BoardImageOfContent src={item.image} />
+                                    <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '20%' }}>
+                                        <BoardTextInfo style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.title}</BoardTextInfo>
+                                        <Box direction="row" justify="flex-start" align="flex-start">
+                                            <BoardTextInfo style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--Gray-400)' }}>บทความ</BoardTextInfo>
+                                            {item?.tag?.map((item: any, index: any) => {
+                                                return (
+                                                    <BoardTextInfo style={{ fontSize: '12px', paddingRight: '10px', color: 'var(--Gray-400)' }} key={index}>
+                                                        #{transalateToThai(item)}
+                                                    </BoardTextInfo>
+                                                );
+                                            })}
+                                        </Box>
+                                        <Box direction="row" justify="space-between" align="flex-start" style={{ fontSize: '12px', color: '#6E7282', marginTop: '10px' }}>
+                                            <div style={{ justifyContent: 'center' }}>
+                                                <CommentIcon />
+                                            </div>
+                                            <BoardTextInfo>{item.author_username}</BoardTextInfo>
+                                            <BoardTextInfo>{dateFormat}</BoardTextInfo>
+                                            <div style={{ justifyContent: 'center' }}>
+                                                <HeartIcon />
+                                            </div>
+                                            <BoardTextInfo>{item.uid_likes.length}</BoardTextInfo>
+                                        </Box>
+                                    </Box>
+                                </TextOverflowHide>
+                            </BoardList>
+                        );
+                    })}
+                </>
+            )}
+
+            <ButtonCreatePost onClick={() => history.push('/boardcreate')} shape="circle">
+                <FileAddOutlined />
+            </ButtonCreatePost>
+        </Container>
     );
 }
 

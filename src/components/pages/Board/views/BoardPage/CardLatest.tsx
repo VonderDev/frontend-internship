@@ -46,7 +46,7 @@ export const CardLatest = () => {
               <BoardCard
                   key={index}
                   onClick={() => {
-                      history.push('/boardContent');
+                      history.push(`/boardontent/${item._id}`);
                   }}
               >
                  <EllipsisText style={{ display: 'flex' }}>

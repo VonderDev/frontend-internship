@@ -125,7 +125,8 @@ export const RowCardContainer = styled.div`
 `;
 
 export const HistoryText = styled.div`
-    padding-right: 15px;
+    display : flex;
+    padding-right: 5px;
     margin-top: 5px;
 `;
 
