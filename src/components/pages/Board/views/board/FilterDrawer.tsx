@@ -15,7 +15,7 @@ interface DrawerProps {
 
 const FilterDrawer: React.FC<DrawerProps> = ({ showDrawer, visible, selectedCatagories, selectedTags, handleChangeCatagories, handleChangeTag, onclickFilter }) => {
     return (
-        <DrawerRadius title="ตัวกรอง" placement="bottom" closable={false} onClose={showDrawer} visible={visible} height={650}>
+        <DrawerRadius title="ตัวกรอง" placement="bottom" closable={true} onClose={showDrawer} visible={visible} height={768}>
             <div>
                 <Topic>ประเภทของกระทู้</Topic>
                 <TagBox style={{ fontWeight: 'bolder' }}>
