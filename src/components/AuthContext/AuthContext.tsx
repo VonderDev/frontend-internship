@@ -14,15 +14,17 @@ const AuthProvider = ({ children }: IAuthProps) => {
 
     const getUser = async () => {
         const token = localStorage.getItem('token');
-        try {
-            const { data } = await axios.get('/user/find', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            return data;
-        } catch (err) {
-            console.error(err);
+        if (token) {
+            try {
+                const { data } = await axios.get('/user/find', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                return data;
+            } catch (err) {
+                console.error(err);
+            }
         }
     };
 
@@ -31,8 +33,8 @@ const AuthProvider = ({ children }: IAuthProps) => {
         return axios
             .post('/login', { email, password })
             .then((response) => {
-                if (response.data.token) localStorage.setItem('token', response.data.token);
-
+                if (response.data.token) 
+                localStorage.setItem('token', response.data.token);
                 setToken(localStorage.getItem('token'));
                 setUser(response.data.resuit);
                 return user;

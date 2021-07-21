@@ -1,6 +1,6 @@
 import { Row, Col } from 'antd';
 import { IIconText } from 'components/pages/Home/shared/home.interface';
-import { ButtonSeeAllBoard, SearchField, TextBoardTopic } from 'components/pages/Home/shared/homepage.styles';
+import { ButtonSeeAllBoard, SearchField, TextBoardTopic } from 'components/pages/Home/shared/style/homepage.styles';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { BoardRecomment, CardTag, ContainerBoard, RowDetailCard, TextDateBoard } from '../../shared/styles/Result/ResultPage.styled';

@@ -2,6 +2,7 @@
 import { Button, Card, Image, Modal, Row } from 'antd';
 import styled from 'styled-components';
 import { RightOutlined, FormOutlined , HeartFilled } from '@ant-design/icons';
+import { Box } from 'shared/style/theme/component';
 
 
 export const ButtonSave = styled(Button)`
@@ -208,4 +209,16 @@ export const HeartIcon = styled(HeartFilled)`
     color: var(--Gray-100);
     padding-top: 8px;
     padding-right: 5px;
+`;
+
+export const CustomBox = styled(Box)`
+    font-size: 12px;
+    color: #6E7282;
+    margin-top: 10px;
+    /* @media(max-width: 420px){
+        margin-left: 100px;
+    }
+    @media(max-width: 320px){
+        margin-left: 100px;
+    } */
 `;

@@ -4,7 +4,8 @@ import axios from 'axios';
 
 export async function ApiGetUserData()  {
     const token = localStorage.getItem("token");
-    return await axios 
+    if(token){
+        return await axios 
         .get('/user/find',{headers: {
             "Authorization": `Bearer ${token}`
           }})
@@ -16,6 +17,7 @@ export async function ApiGetUserData()  {
         .catch((err) => {
             console.error(err);
         });
+    }
     
 }
 

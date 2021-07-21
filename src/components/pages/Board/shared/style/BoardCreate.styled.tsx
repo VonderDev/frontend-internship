@@ -1,4 +1,4 @@
-import { Button, Drawer, Form, Input, Radio, Select, Upload } from 'antd';
+import { Button, Drawer, Form, Input, Modal, Radio, Select, Upload } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import styled from 'styled-components';
 
@@ -38,15 +38,12 @@ export const ButtonGoNextCreateContent = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Blue-400);
-    transform: translateY(120%);
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
+    width: 75%;
     height: 7vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 16px;
+    transform: translateX(13%) translateY(89%);
+    font-size: 16px;
+    position: sticky;
     &:hover {
         cursor: pointer;
     }
@@ -77,15 +74,15 @@ export const ButtonSummitPost = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Green-400);
-    transform: translateY(830%);
     margin-left: auto;
     margin-right: auto;
     width: 73%;
     height: 7vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 16px;
+    display: block;
+    margin: auto;
+    position: sticky;
+    transform: translateY(798%);
     &:hover {
         cursor: pointer;
     }
@@ -167,24 +164,25 @@ export const ButtonBackToFirstPage = styled(Button)`
 export const InputHashtagInDrawer = styled(Select)`
     font-size: 16px;
     padding-top: 15px;
-
+    border-radius: 10px;
     .ant-select-selection-overflow {
         height: 45px;
     }
     .ant-select-selector {
         border-radius: 12px !important;
-        background-color: pink;
+        height: fit-content;
     }
-
-    &.ant-select-item {
-        color: blue !important;
-        font-size: 30px !important;
+    & .ant-select-selection-item {
+        background-color: #daebfd;
+        border-radius: 6px;
+        font-size: 16px;
     }
 `;
 
 export const OptionHashtag = styled(Select.Option)`
     color: whitesmoke;
     font-size: 30px !important;
+
     & .ant-select-dropdown-placement-bottomLeft {
         color: blue !important;
         box-shadow: red !important;
@@ -239,4 +237,69 @@ export const DrawerContainer = styled.div`
     height: 100%;
     padding-left: 5%;
     overflow: hidden;
+`;
+
+//---------------- CREATE MODAL STYLED -----------------//
+export const ButtonExistModal = styled(Button)`
+    font-weight: bolder;
+    font-size: 15px;
+    border-radius: 10px;
+    color: white;
+    border-color: var(--Red-300);
+    background-color: var(--Red-300);
+    width: 295px;
+    height: 51px;
+    box-shadow: 0px 3px 6px #c7c7c7;
+`;
+export const ButtonCancleModal = styled(Button)`
+    font-weight: bolder;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    color: var(--Blue-400);
+    width: 65px;
+    height: 19px;
+    margin-top: 15px;
+    transform: translateY(0%);
+`;
+
+export const ModalContainer = styled(Modal)`
+    display: flex;
+    justify-content: center;
+    & .ant-modal-content {
+        width: 343px;
+        height: 249px;
+        border-radius: 15px;
+    }
+    & .ant-modal-header {
+        height: 89px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+    }
+    & .ant-modal-body {
+        height: 30px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+    & .ant-modal-footer {
+        height: 130px;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+`;
+
+export const TextBodyModal = styled.div`
+    font-weight: normal;
+    font-size: 16px;
+`;
+
+export const TextTitleModal = styled.div`
+    font-weight: bolder;
+    font-size: 24px;
 `;
