@@ -2,38 +2,19 @@ import Routing from './routes/index';
 import GlobalStyle from 'shared/style/globalStyle';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AuthProvider } from 'components/AuthContext/AuthContext';
-import { useCallback, useEffect } from 'react';
-import axios from 'axios';
+import './utils/axios/interceptor';
+import { AppProvider } from 'components/GameElement/PixiStore/AppContext';
 
 const App = () => {
-    const axiosGlobalConfig = useCallback(() => {
-        const token = localStorage.getItem('token');
-
-        axios.interceptors.request.use(
-            (config) => {
-                if (token) {
-                    config.headers.Authorization = `Bearer ${token}`;
-                }
-                config.baseURL = `${process.env.REACT_APP_API_URL}`;
-                return config;
-            },
-            (error) => {
-                return Promise.reject(error);
-            },
-        );
-    }, []);
-
-    useEffect(() => {
-        axiosGlobalConfig();
-    }, [axiosGlobalConfig]);
-
     return (
         <>
             <AuthProvider>
+            <AppProvider>
                 <Router>
                     <GlobalStyle />
                     <Routing />
                 </Router>
+            </AppProvider>
             </AuthProvider>
         </>
     );

@@ -15,16 +15,21 @@ export const ContainerTestStoryPage = styled.div`
 
 export const TextStory = styled.div`
     background-color: white;
-    width: 300px;
+    width: fit-content;
+    max-width: 400px;
+    min-width: 300px;
     height: 100px;
+    padding: 20px;
     font-size: 20px;
     color: var(--Gray-300);
-    border-radius: 50%;
-    box-shadow: 0px 3px 30px #ffffff;
+    border-radius: 150px;
+    box-shadow: 0px 3px 80px #ffffff;
     opacity: 0.7;
-    transform: translateY(180%);
+    transform: translateY(250%);
     display: flex;
     justify-content: center;
+    align-content: center;
+    text-align: center;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
