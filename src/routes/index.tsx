@@ -37,11 +37,11 @@ function Routing() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/test" component={Test} />
-            <Route exact path="/testoverview" component={TestOverview} />
-            <Route exact path="/teststory" component={TestStory} />
-            <Route exact path="/testquestion">
+            <PrivateRoute exact path="/testoverview" component={TestOverview} />
+            <PrivateRoute exact path="/teststory" component={TestStory} />
+            <PrivateRoute exact path="/testquestion">
                     <TestQuestion />
-            </Route>
+            </PrivateRoute>
             <Route exact path="/resultoverview" component={ResultOverview} />
             <Route exact path="/resultinfo" component={ResultInfo} />
             <PrivateRoute exact path="/editProfile" component={editProfile} />
