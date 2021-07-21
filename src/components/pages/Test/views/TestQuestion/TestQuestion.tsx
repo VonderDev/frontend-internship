@@ -259,16 +259,16 @@ function TestQuestion() {
                 <Col>
                 {currentQuestion +1 === 25 ? null :
                  (<>
-                 {cutScene? null :
-                 (<TextQuestionIndex>
+                 <div style={{background: 'linear-gradient(180deg, white, transparent)'}}>
+                    <TextQuestionIndex>
                         คำถามข้อที่ {currentQuestion + 1}/24
-                    </TextQuestionIndex>) 
-                    }
-                    </>)
-                    }
+                    </TextQuestionIndex>
                     <ButtonSeeAllResults type="primary" onClick={showModal}>
                         เริ่มใหม่{' '}
                     </ButtonSeeAllResults>
+                    </div>
+                </>)
+                 }
                 </Col>
                 <Modal visible={visible} okText="เริ่มใหม่" cancelText="ยกเลิก" onOk={handleOk} width={400} confirmLoading={confirmLoading} onCancel={handleCancel}>
                     ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
