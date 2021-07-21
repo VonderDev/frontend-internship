@@ -1,0 +1,146 @@
+[
+    {
+        "categoryID": 8,
+        "categoryName":"Nature Smart",
+        "question": "ฉันเป็นคนสังเกตธรรมชาติแวดล้อม และรอบรู้เรื่องดิน ฟ้า อากาศ สัตว์ พืช",
+        "questionIndex":1
+    },
+    {
+        "categoryID": 8,
+        "categoryName":"Nature Smart",
+        "question": "ฉันชอบเรียนรู้ชื่อของสิ่งมีชีวิตรอบตัว เช่น ชื่อต้นไม้ ดอกไม้ สัตว์ต่าง ๆ",
+        "questionIndex":2
+    },
+    {
+        "categoryID": 3,
+        "categoryName":"Picture Smart",
+        "question": "ฉันไม่ค่อยหลงทิศทาง แม้จะไปในที่ที่ไม่คุ้นเคย",
+        "questionIndex":3
+    },
+    {
+        "categoryID": 6,
+        "categoryName":"People Smart",
+        "question": "เมื่อฉันมีปัญหา การขอความช่วยเหลือจากผู้อื่นไม่ใช่เรื่องยาก ",
+        "questionIndex":4
+    },
+    {
+        "categoryID": 6,
+        "categoryName":"People Smart",
+        "question": "ฉันมักจะเป็นคนกลางคอยไกล่เกลี่ยปัญหาระหว่างคนอื่น",
+        "questionIndex":5
+    },
+    {
+        "categoryID": 4,
+        "categoryName":"Body Smart",
+        "question": "ฉันมักใช้มือหรือภาษากาย แสดงท่าทางประกอบการสนทนา",
+        "questionIndex":6
+    },
+    {
+        "categoryID": 5,
+        "categoryName":"Word Smart",
+        "question": "ฉันชอบการพูดเล่นคำ สำนวน คำผวน คำคล้องจองต่าง ๆ",
+        "questionIndex":7
+    },
+    {
+        "categoryID": 1,
+        "categoryName":"Word Smart",
+        "question": "ฉันรู้จักคำมากมายและหลากหลายที่จะใช้ในการสื่อสาร",
+        "questionIndex":8
+    },
+    {
+        "categoryID": 6,
+        "categoryName":"People Smart",
+        "question": "ฉันชอบทำกิจกรรมกลุ่ม หรือเล่นกีฬาเป็นทีม มากกว่ากิจกรรมหรือกีฬาที่ทำคนเดียว",
+        "questionIndex":9
+    },
+    {
+        "categoryID": 8,
+        "categoryName":"Nature Smart",
+        "question": "ฉันสนุกกับการปลูกต้นไม้หรือดูแลสัตว์เลี้ยง",
+        "questionIndex":10
+    },
+    {
+        "categoryID": 1,
+        "categoryName":"Word Smart",
+        "question": "ฉันชอบอ่านทุกอย่าง ไม่ว่าจะเป็นหนังสือ นิตยสาร ป้ายโฆษณา หรือกระดาษห่อของ",
+        "questionIndex":11
+    },
+    {
+        "categoryID": 7,
+        "categoryName":"Self Smart",
+        "question": "ฉันเขียนบันทึกส่วนตัว เกี่ยวกับเรื่องรามที่เกิดขึ้นในชีวิตประจำวัน",
+        "questionIndex":12
+    },
+    {
+        "categoryID": 3,
+        "categoryName":"Picture Smart",
+        "question": "ฉันชอบเล่นเกมต่อภาพจิ๊กซอว์ และ หรือปริศนาเกี่ยวกับภาพ",
+        "questionIndex":13
+    },
+    {
+        "categoryID": 2,
+        "categoryName":"Logic Smart",
+        "question": "ฉันชอบเล่นหมากรุก หมากฮอส หรือเกมกลยุทธ์ต่าง ๆ",
+        "questionIndex":14
+    },
+    {
+        "categoryID": 2,
+        "categoryName":"Logic Smart",
+        "question": "เมื่อของใช้ชำรุดเสียหายหรือใช้งานไม่ได้ ฉันจะดูชิ้นส่วนประกอบ และวิธีการทำงานของมัน",
+        "questionIndex":15
+    },
+    {
+        "categoryID": 2,
+        "categoryName":"Logic Smart",
+        "question": "ฉันชอบตั้งคำถามว่าสิ่งต่าง ๆ ทำงานอย่างไร",
+        "questionIndex":16
+    },
+    {
+        "categoryID": 4,
+        "categoryName":"Body Smart",
+        "question": "ฉันชอบทำงานที่ต้องใช้มือ เช่น เย็บผ้า ทอผ้า ปั้น แกะสลัก งานไม้ ต่อโมเดล",
+        "questionIndex":17
+    },
+    {
+        "categoryID": 5,
+        "categoryName":"Music Smart",
+        "question": "ฉันสามารถใช้เวลาว่างกับเครื่องดนตรีง่าย ๆ สักชิ้น",
+        "questionIndex":18
+    },
+    {
+        "categoryID": 5,
+        "categoryName":"Music Smart",
+        "question": "ฉันมักจะฮัมทำนองเพลงที่คุ้นเคย",
+        "questionIndex":19
+    },
+    {
+        "categoryID": 5,
+        "categoryName":"Music Smart",
+        "question": "ฉันมักจะขยับตัวหรือเคาะจังหวะตามเสียงเพลง",
+        "questionIndex":20
+    },
+    {
+        "categoryID": 4,
+        "categoryName":"Body Smart",
+        "question": "สำหรับฉัน ไม่ใช่เรื่องยากที่จะเต้นรำหรือออกท่าทางต่าง ๆ",
+        "questionIndex":21
+    },
+    {
+        "categoryID": 7,
+        "categoryName":"Self Smart",
+        "question": "ฉันเข้าใจตนเองดีและรู้ว่าตนเองต้องการอะไร",
+        "questionIndex":22
+    },
+    {
+        "categoryID": 7,
+        "categoryName":"Self Smart",
+        "question": "ฉันรู้ตัวว่าจุดดีและจุดด้อยของฉันคืออะไร",
+        "questionIndex":23
+    },
+    {
+        "categoryID": 3,
+        "categoryName":"Picture Smart",
+        "question": "ฉันสามารถจินตนาการภาพในหัวได้อย่างชัดเจน",
+        "questionIndex":24
+    }
+]

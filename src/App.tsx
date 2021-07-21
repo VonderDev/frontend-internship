@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Routing from './routes/index';
+import styled from 'styled-components';
+import Burger from 'components/pages/Burger/Burger';
+import { Layout } from 'antd';
+import Flexbox from 'shared/style/theme/Flexbox';
+import Typography from 'shared/style/theme/Typograhy';
+import { BrowserRouter as Router  } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const { Header, Content, Footer } = Layout;
+const Container = styled.div`
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    z-index: 0;
+`;
+const MainContent = styled(Content)`
+    height: calc(100vh - 80px);
+    width: 100%;
+    overflow-y: scroll;
+`;
+
+
+const App = () => {
+    return (
+        <>
+        <Router>
+        <Container>
+                <Burger />
+                <MainContent>
+                    <Routing />
+                </MainContent>
+            </Container>
+        </Router>
+
+        </>
+    );
+};
 
 export default App;
