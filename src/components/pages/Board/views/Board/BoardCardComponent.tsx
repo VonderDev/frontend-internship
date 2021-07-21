@@ -19,15 +19,7 @@ const FilterCard: React.FC<CardComponentProps> = ({ data }) => {
                       const dateCreatedFilter = new Date(item.created_at);
                       const dateFormat = dateCreatedFilter.getDate() + ' ' + months[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
                       return (
-<<<<<<< HEAD
                           <BoardCard key={index} onClick={() => history.push(`/boardcontent/${item._id}`)}>
-=======
-                   
-                          <BoardCard
-                              key={index}
-                              onClick={() => history.push(`/boardcontent/${item._id}`)}
-                          >
->>>>>>> 772ee1658fb81244909894471b271076f5847549
                               <EllipsisText style={{ display: 'flex' }}>
                                   <div style={{}}>
                                       <HistoryImage src={item.image} />
