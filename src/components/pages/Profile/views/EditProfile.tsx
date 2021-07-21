@@ -10,6 +10,7 @@ import { IUser } from '../shared/Profile.interface';
 import ProfileMascot from '../../Profile/images/ProfileMascot.png';
 import { Box, InputStyle } from 'shared/style/theme/component';
 const EditProfile = () => {
+    //Modal state and function-----------------------------------------------------------------------------
     const [isModalVisible, setIsModalVisible] = useState(false);
     const showModal = () => {
         setIsModalVisible(true);
@@ -17,17 +18,14 @@ const EditProfile = () => {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
-    const history = useHistory();
-
     const handleOk = () => {
         history.goBack();
         setIsModalVisible(false);
     };
-
+    //Set data from Get API-----------------------------------------------------------------------------
     const [userInfo, setUserInfo] = useState<IUser>({ firstName: '', lastName: '', email: '', username: '' });
     async function getStatisticData() {
         const response = await ApiGetUserData();
-        //Swr ใช้เป็น custom hook
         if (response) {
             setUserInfo((prevState) => ({
                 ...prevState,
@@ -43,11 +41,10 @@ const EditProfile = () => {
     useEffect(() => {
         getStatisticData();
     }, []);
-
     const handleOnChange = (name: string, value: string) => {
         setUserInfo((prev) => ({ ...prev, [name]: value }));
     };
-
+    //Function put API-----------------------------------------------------------------------------
     const putDataOnClick = () => {
         if (userInfo.username === '') {
             alert('กรุณากรอกชื่อผู้ใช้!');
@@ -63,7 +60,7 @@ const EditProfile = () => {
         }
         console.log(typeof userInfo.username);
     };
-
+    const history = useHistory();
     return (
         <>
             <ConfirmModal
@@ -155,5 +152,4 @@ const EditProfile = () => {
         </>
     );
 };
-
 export default EditProfile;
