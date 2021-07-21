@@ -11,10 +11,6 @@ export const FormItemTextValidate = styled(Form.Item)`
     }
 `;
 
-export const LogoPage = styled(Image)`
-    padding-top: 20px;
-`;
-
 export const LogoPageCenter = styled.div`
     text-align: center;
 `;
