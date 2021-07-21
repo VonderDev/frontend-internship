@@ -43,7 +43,6 @@ function CommentOfContent() {
     const { getUser } = useAuthContext();
     const [username, setUsername] = useState('');
     const token = localStorage.getItem('token');
-    console.log('Token use in Comment', token);
 
     const getUserInfo = async () => {
         const token = localStorage.getItem('token');

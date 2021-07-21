@@ -1,16 +1,7 @@
 import React from 'react';
 import { Spin, Card } from 'antd';
 import useSWR from 'swr';
-import { GridBox, 
-  SearchField, 
-  NewCardStyle, 
-  HeartIconCard,
-  HeartText, 
-  CardTextData, 
-  SpaceCard, 
-  CoverImage, 
-  BoardTextInfo, 
-  TextRecommendBoardTopic} from '../../shared/style';
+import { GridBox, SearchField, NewCardStyle, HeartIconCard, HeartText, CardTextData, SpaceCard, CoverImage, BoardTextInfo, TextRecommendBoardTopic } from '../../shared/style';
 import { FormOutlined, LoadingOutlined, CalendarOutlined } from '@ant-design/icons';
 import { IIconText } from '../../shared/Card.interface';
 import { useHistory } from 'react-router';
@@ -41,13 +32,13 @@ export const CardTopTen = () => {
     return (
         <>
             <Box direction="row" justify="space-between" align="flex-start" style={{ padding: '0px 20px 0px 20px' }}>
-            <Box direction="column" justify="center" align="center">
-                <TextRecommendBoardTopic>10 อันดับสูงสุด</TextRecommendBoardTopic>
-            </Box>
+                <Box direction="column" justify="center" align="center">
+                    <TextRecommendBoardTopic>10 อันดับสูงสุด</TextRecommendBoardTopic>
+                </Box>
             </Box>
             {isLoading ? (
                 <Box direction="column" justify="center" align="center" style={{ padding: '10% 0% 10% 0%' }}>
-                        <Spin indicator={antIcon} tip="Loading..." />
+                    <Spin indicator={antIcon} tip="Loading..." />
                 </Box>
             ) : (
                 <GridBox>
@@ -70,10 +61,10 @@ export const CardTopTen = () => {
 
                                     <CardTextData>
                                         <Box direction="row" justify="flex-start" align="flex-start">
-                                            <BoardTextInfo style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--Gray-400)', paddingRight : '5px' }}>บทความ</BoardTextInfo>
+                                            <BoardTextInfo style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--Gray-400)', paddingRight: '5px' }}>บทความ</BoardTextInfo>
                                             {item?.tag?.map((item: any, index: any) => {
                                                 return (
-                                                    <BoardTextInfo style={{ fontSize: '12px', fontWeight : 'normal', paddingRight: '5px', color: 'var(--Gray-400)' }} key={index}>
+                                                    <BoardTextInfo style={{ fontSize: '12px', fontWeight: 'normal', paddingRight: '5px', color: 'var(--Gray-400)' }} key={index}>
                                                         #{transalateToThai(item)}
                                                     </BoardTextInfo>
                                                 );
