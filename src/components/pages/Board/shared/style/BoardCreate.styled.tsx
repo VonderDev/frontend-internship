@@ -38,15 +38,12 @@ export const ButtonGoNextCreateContent = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Blue-400);
-    transform: translateY(120%);
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%;
+    width: 75%;
     height: 7vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 16px;
+    transform: translateX(13%) translateY(89%);
+    font-size: 16px;
+    position: sticky;
     &:hover {
         cursor: pointer;
     }
@@ -77,15 +74,15 @@ export const ButtonSummitPost = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Green-400);
-    transform: translateY(830%);
     margin-left: auto;
     margin-right: auto;
     width: 73%;
     height: 7vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 16px;
+    display: block;
+    margin: auto;
+    position: sticky;
+    transform: translateY(798%);
     &:hover {
         cursor: pointer;
     }
@@ -167,24 +164,25 @@ export const ButtonBackToFirstPage = styled(Button)`
 export const InputHashtagInDrawer = styled(Select)`
     font-size: 16px;
     padding-top: 15px;
-
+    border-radius: 10px;
     .ant-select-selection-overflow {
         height: 45px;
     }
     .ant-select-selector {
         border-radius: 12px !important;
-        background-color: pink;
+        height: fit-content;
     }
-
-    &.ant-select-item {
-        color: blue !important;
-        font-size: 30px !important;
+    & .ant-select-selection-item {
+        background-color: #daebfd;
+        border-radius: 6px;
+        font-size: 16px;
     }
 `;
 
 export const OptionHashtag = styled(Select.Option)`
     color: whitesmoke;
     font-size: 30px !important;
+
     & .ant-select-dropdown-placement-bottomLeft {
         color: blue !important;
         box-shadow: red !important;

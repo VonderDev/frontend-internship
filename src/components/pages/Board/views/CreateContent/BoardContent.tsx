@@ -83,7 +83,7 @@ function BoardContent() {
                 console.log('error');
             }
         } else {
-            console.log('none');
+            console.log('No token');
         }
     };
 

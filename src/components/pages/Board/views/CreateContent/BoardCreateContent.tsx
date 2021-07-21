@@ -7,6 +7,7 @@ import { ApiPostContent } from '../../apis/boardCreate.api';
 import CreateContentFirstPage from './CreateFirstPage';
 import CreateContentSecondPage from './CreateSecondPage';
 import { useHistory } from 'react-router-dom';
+import { Alert } from 'antd';
 
 function BoardCreateContent() {
     const history = useHistory();
@@ -71,13 +72,18 @@ function BoardCreateContent() {
             tag: value,
         });
     }
+    const [isShowNotification, setIsShowNotification] = useState(false);
 
-    //------------ POST CONTENT FUNCTION --------------//W
+    //------------ POST CONTENT FUNCTION --------------//
     async function postContent() {
         console.log('content data sent to backend', contentData);
         const objectID = await ApiPostContent(contentData);
+        setIsShowNotification(true);
         if (objectID) {
-            history.push(`/boardcontent/${objectID?._id}`);
+            setTimeout(() => {
+                setIsShowNotification(false);
+                history.push(`/boardcontent/${objectID?._id}`);
+            }, 600);
         }
     }
 
@@ -89,7 +95,7 @@ function BoardCreateContent() {
         setContentType(e.target.value);
     };
 
-    //Modal state and function-----------------------------------------------------------------------------
+    //--------------------- SET MODAL STATE ---------------------//
     const [isModalVisible, setIsModalVisible] = useState(false);
     const showModal = () => {
         setIsModalVisible(true);
@@ -118,7 +124,7 @@ function BoardCreateContent() {
                     </ButtonCancleModal>,
                 ]}
             >
-                <TextBodyModal>การเปลี่ยนแปลงทั้งหมดจะไม่ถูกบันทึก</TextBodyModal>
+                <TextBodyModal>ข้อมูลทั้งหมดจะไม่ถูกบันทึก</TextBodyModal>
             </ModalContainer>
             <Container
                 header={{
@@ -161,6 +167,7 @@ function BoardCreateContent() {
                             setContentData={setContentData}
                             handleChangeOfHashtag={handleChangeOfHashtag}
                             postContent={postContent}
+                            isShowNotification={isShowNotification}
                         />
                     </>
                 ) : null}

@@ -1,6 +1,7 @@
 import { Card } from 'antd';
 import styled from 'styled-components';
 import { FormOutlined, HeartFilled } from '@ant-design/icons';
+import { Box } from 'shared/style/theme/component';
 
 export const BoardList = styled(Card)`
     margin-bottom: 10px;
@@ -41,6 +42,15 @@ export const BoardTextInfo = styled.div`
     display: inline;
 `;
 
+export const TextTitleContent = styled.div`
+    padding-right: 15px;
+    margin-top: 5px;
+    font-size: 14px;
+    padding-right: 10px;
+    display: inline;
+    font-weight: bolder;
+`;
+
 export const CommentIcon = styled(FormOutlined)`
     color: var(--Gray-100);
     transform: translateY(20%);
@@ -61,4 +71,16 @@ export const ContainerOfBoardInfo = styled.div``;
 
 export const ContainerOfIconAndText = styled.div`
     padding-top: 10px;
+`;
+
+export const BoxOfIconAndText = styled(Box)`
+    font-size: 12px;
+    color: #6e7282;
+    margin-top: 10px;
+    /* @media(max-width: 420px){
+        margin-left: 100px;
+    }
+    @media(max-width: 320px){
+        margin-left: 100px;
+    } */
 `;

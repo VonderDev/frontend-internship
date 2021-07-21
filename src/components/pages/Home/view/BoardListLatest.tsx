@@ -1,5 +1,6 @@
 import { Col, Row } from 'antd';
 import { MONTHS } from 'components/pages/Board/shared/months';
+import { BoardCard, HistoryImage, HistoryText } from 'components/pages/Profile/shared/Profile.styles';
 import { useHistory } from 'react-router';
 import { Box } from 'shared/style/theme/component';
 import useSWR from 'swr';
@@ -12,8 +13,10 @@ import {
     ContainerOfBoardInfo,
     ContainerOfIcon,
     ContainerOfIconAndText,
+    BoxOfIconAndText,
     HeartIcon,
     TextOverflowHide,
+    TextTitleContent,
 } from '../shared/style/boardList.styled';
 import { ButtonSeeAllBoard, TextBoardTopic } from '../shared/style/homepage.styles';
 
@@ -46,36 +49,35 @@ function BoardListLatest() {
                         const cardDate = new Date(item?.created_at);
                         const dateFormat = cardDate.getDate() + MONTHS[cardDate.getMonth()] + cardDate.getFullYear();
                         return (
-                            <BoardList
-                                key={index}
-                                onClick={() => {
-                                    history.push(`/boardContent/${item._id}`);
-                                }}
-                            >
-                                <TextOverflowHide>
-                                    <BoardImageOfContent src={item.image} />
-                                    <ContainerOfBoardInfo>
-                                        <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '52%' }}>
-                                            <BoardTextInfo style={{ fontSize: '16px', fontWeight: 'bold' }}>{item.title}</BoardTextInfo>
-                                            <Box direction="row" justify="flex-start" align="flex-start">
-                                                <BoardTextInfo style={{ fontSize: '14px', fontWeight: 'bold' }}>บทความ</BoardTextInfo>
-                                                {item?.tag?.map((item: any, index: any) => {
-                                                    return <BoardTextInfo key={index}>#{transalateToThai(item)}</BoardTextInfo>;
-                                                })}
-                                            </Box>
-                                            <ContainerOfIconAndText>
-                                                <ContainerOfIcon>
-                                                    <CommentIcon />
-                                                </ContainerOfIcon>
-                                                <BoardTextInfo>{item.author_username}</BoardTextInfo>
-                                                <BoardTextInfo>{dateFormat}</BoardTextInfo>
-                                                <ContainerOfIcon>
-                                                    <HeartIcon />
-                                                </ContainerOfIcon>
-                                                <BoardTextInfo>{item.uid_likes.length}</BoardTextInfo>
-                                            </ContainerOfIconAndText>
+                            <BoardList key={index} onClick={() => history.push(`/boardcontent/${item._id}`)}>
+                                <TextOverflowHide style={{ display: 'flex' }}>
+                                    <div style={{}}>
+                                        <BoardImageOfContent src={item.image} />
+                                    </div>
+                                    <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '100px' }}>
+                                        <TextTitleContent>{item.title}</TextTitleContent>
+                                        <Box direction="row" justify="flex-start" align="flex-start">
+                                            <BoardTextInfo style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--Gray-400)' }}>บทความ</BoardTextInfo>
+                                            {item?.tag?.map((item: any, index: any) => {
+                                                return (
+                                                    <BoardTextInfo style={{ fontSize: '12px', paddingRight: '10px', color: 'var(--Gray-400)' }} key={index}>
+                                                        #{transalateToThai(item)}
+                                                    </BoardTextInfo>
+                                                );
+                                            })}
                                         </Box>
-                                    </ContainerOfBoardInfo>
+                                        <BoxOfIconAndText direction="row" justify="space-between" align="flex-start">
+                                            <div style={{ justifyContent: 'center' }}>
+                                                <CommentIcon />
+                                            </div>
+                                            <BoardTextInfo>{item.author_username}</BoardTextInfo>
+                                            <BoardTextInfo>{dateFormat}</BoardTextInfo>
+                                            <div style={{ justifyContent: 'center' }}>
+                                                <HeartIcon />
+                                            </div>
+                                            <BoardTextInfo>{item.uid_likes.length}</BoardTextInfo>
+                                        </BoxOfIconAndText>
+                                    </Box>
                                 </TextOverflowHide>
                             </BoardList>
                         );
