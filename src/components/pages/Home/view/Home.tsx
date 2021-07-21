@@ -8,21 +8,22 @@ import { Box } from 'shared/style/theme/component';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { CommentIcon, HeartIcon, BoardList, BoardImageOfContent, BoardTextInfo, TextOverflowHide } from '../shared/style/boardList.styled';
 import { MONTHS } from 'components/pages/Board/shared/months';
+import Board from 'components/pages/Board/views/BoardPage/Board';
 
 function Home() {
     const history = useHistory();
-    const { data: boardList, error: errorOfBoardList } = useSWR('/user/content/get');
-    const isLoadingBoardList = !boardList && !errorOfBoardList;
-    console.log('☯ [Board List] ☯ : ', boardList);
+    // const { data: boardList, error: errorOfBoardList } = useSWR('/user/content/get');
+    // const isLoadingBoardList = !boardList && !errorOfBoardList;
+    // console.log('☯ [Board List] ☯ : ', boardList);
 
     //-------------- SORT DATE CREATED LATEST --------------//
-    if (boardList) {
-        boardList?.sort(function (a: any, b: any) {
-            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-        });
+    // if (boardList) {
+    //     boardList?.sort(function (a: any, b: any) {
+    //         return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+    //     });
 
-        console.log('☞ [sort Board created latest] :', boardList);
-    }
+    //     console.log('☞ [sort Board created latest] :', boardList);
+    // }
 
     return (
         <Container header={{ title: 'Vonder Me', right: 'menu' }}>
@@ -39,14 +40,17 @@ function Home() {
                     </ButtonReadOverviewTest>
                 </Col>
             </ImageTestPage>
-            <Row>
+            
+            <Board/>
+
+            {/* <Row>
                 <TextBoardTopic xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
                     กระทู้
                 </TextBoardTopic>
                 <ButtonSeeAllBoard onClick={() => history.push('/board')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
-            </Row>
+            </Row> */}
 
-            {isLoadingBoardList ? (
+            {/* {isLoadingBoardList ? (
                 <div>loading ...</div>
             ) : (
                 <>
@@ -91,7 +95,7 @@ function Home() {
                         );
                     })}
                 </>
-            )}
+            )} */}
 
             <ButtonCreatePost onClick={() => history.push('/boardcreate')} shape="circle">
                 <FileAddOutlined />
