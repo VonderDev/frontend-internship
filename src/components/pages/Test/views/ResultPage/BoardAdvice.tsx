@@ -3,10 +3,10 @@ import { IIconText } from 'components/pages/Home/shared/home.interface';
 import { ButtonSeeAllBoard, SearchField, TextBoardTopic } from 'components/pages/Home/shared/style/homepage.styles';
 import { useHistory } from 'react-router-dom';
 import { ContainerBoard } from '../../shared/styles/Result/ResultPage.styled';
-import { BoardCardSpace, GridBox, ImgCardCharactorList } from '../../shared/styles/Result/ResultFeature.styled';
+import { BoardCardRecommend, BoardCardSpace, GridBox } from '../../shared/styles/Result/ResultFeature.styled';
 import Meta from 'antd/lib/card/Meta';
 import { MONTHS } from 'components/pages/Board/shared/months';
-import { NewCardStyle, HeartIconCard, HeartText, CardTextData, SpaceCard, CoverImage, BoardTextInfo } from '../../../Board/shared/style';
+import { HeartIconCard, HeartText, CardTextData, CoverImage, BoardTextInfo } from '../../../Board/shared/style';
 import { Box } from 'shared/style/theme/component';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { FormOutlined, CalendarOutlined } from '@ant-design/icons';
@@ -54,7 +54,7 @@ const BoardAdvice = () => {
                             const dateFormat = cardDate.getDate() + MONTHS[cardDate.getMonth()] + cardDate.getFullYear();
                             const like = item?.uid_likes;
                             return (
-                                <ImgCardCharactorList
+                                <BoardCardRecommend
                                     typecard="Vertical"
                                     heightcard={255}
                                     key={index}
@@ -81,7 +81,7 @@ const BoardAdvice = () => {
                                         <HeartIconCard />
                                         <HeartText>{like.length}</HeartText>
                                     </div>
-                                </ImgCardCharactorList>
+                                </BoardCardRecommend>
                             );
                         })}
                     </BoardCardSpace>
