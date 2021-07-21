@@ -5,11 +5,19 @@ import PixiApp from "../PixiStore/PixiApp";
 import { PixiProvider } from "../PixiStore/PixiContext";
 import GameContent from "./GameContent";
 import { useState, useContext, useEffect, useRef } from "react";
+// import useSound from "../PixiStore/SoundContext";
+import Sound from '../Assets/Sound/soundBg.mp3';
 
 const TestPixi = () => {
-    let [value,setValue] = useState<number>(1)
+    const [audio] = useState(new Audio(Sound));
+    const [playing, setPlaying] = useState(false);
+    const toggle = () => {
+        setPlaying(!playing);
+    }
 
+    let [value,setValue] = useState<number>(1)
     const { changeScene }= useContext(AppContext);
+    // const [playing, toggle] = useSound(Sound);
 
     const onNext = () =>{
         setValue(value + 1)
@@ -29,10 +37,21 @@ const TestPixi = () => {
         }else if (value === 23){
             changeScene('S6')
         }
+        else if (value === 25){
+            setPlaying(false);
+        }
     }
 
+    // useEffect(() => { SetAudio(new Audio(Sound))},[audio]);
+    useEffect(() => {
+        playing ? audio.play() : audio.pause();
+        console.log(playing)
+      },
+      [playing]
+    );
+
     return(
-        <Container header={{ title: 'Pixi', right: 'menu' }}>
+        <Container header={{ title: 'Pixi', right: 'menu' ,left:(<button onClick={toggle}>{playing? <p>Off</p> :  <p>On</p>}</button>)}}>
             
             <PixiProvider>
                 <PixiApp content={GameContent}/>

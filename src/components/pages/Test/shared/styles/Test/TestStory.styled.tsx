@@ -26,14 +26,26 @@ export const TextStory = styled.div`
     color: var(--Gray-300);
     border-radius: 50%;
     box-shadow: 0px 3px 80px #ffffff;
-    opacity: 0.7;
+    opacity: 0.8;
     transform: translateY(250%);
     display: flex;
     justify-content: center;
     align-content: center;
     text-align: center;
     align-items: center;
+    font-weight: bolder;
     margin-left: auto;
     margin-right: auto;
-    font-weight: bolder;
+    @media(max-width: 370px){
+        font-size: 14px;
+        max-width: 320px;
+        min-width: 150px;
+        transform: translateY(130%);
+    }
+    @media(max-width: 500px){
+        font-size: 18px;
+        max-width: 320px;
+        min-width: 150px;
+        transform: translateY(150%);
+    }
 `;

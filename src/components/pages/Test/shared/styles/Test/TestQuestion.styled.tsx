@@ -40,12 +40,10 @@ export const ButtonSeeAllResults = styled(Button)`
     font-weight: bolder;
     color: var(--Blue-300);
     background-color: #ffffff;
-    margin-right: 0;
-    margin-left: auto;
-    transform: translateY(-160%) translateX(-20%);
     font-size: 16px;
     display: block;
-    width: 120px;
+    padding: 0px 10px;
+    width: fit-content;
     height: 40px;
 `;
 
@@ -84,12 +82,18 @@ export const TextQuestion = styled.div`
     white-space: initial;
     display: block;
     white-space: pre-line;
-    margin: 0 10% !important;
+    margin: 10% 10% !important;
     color: white !important;
     text-shadow: 3px 1px 10px #0a0a0a  !important;
+    @media(max-width: 370px){
+        font-size: 18px;
+    }
+    @media(max-width: 500px){
+        font-size: 20px;
+    }
 `;
 
-export const ContainerButton = styled(Col)`
+export const ContainerButton = styled.div`
     align-items: center;
     justify-content: center;
     display: grid;
@@ -99,20 +103,28 @@ export const ButtonChoiceStlyed = styled.button`
     font-size: 18px;
     font-weight: bolder;
     color: #000000;
-    width: 343px;
+    width: 60%;
     height: 60px;
-    margin-top: 5px;
+    margin-top: 2%;
     letter-spacing: 1px;
     background-color: white;
     border-color: white;
     opacity: 0.7;
     position: relative;
-    transform: translateY(350%);
+    transform: translateY(200%);
     display: block;
     &:hover {
         color: black;
         border-color: white;
         cursor: pointer;
+    }
+    @media(max-width: 370px){
+        transform: translateY(50%);
+        width: 80%;
+    }
+    @media(max-width: 500px){
+        transform: translateY(100%);
+        width: 80%;
     }
 `;
 

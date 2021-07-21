@@ -28,6 +28,8 @@ import { setTimeout } from 'timers';
 import { TextStory } from '../../shared/styles/Test/TestStory.styled';
 import { Item } from 'react-bootstrap/lib/Breadcrumb';
 import Animation from 'shared/style/theme/animation'
+import Sound from 'components/GameElement/Assets/Sound/soundBg.mp3';
+import {PauseCircleFilled ,SoundFilled} from '@ant-design/icons';
 
 function TestQuestion() {
     //
@@ -59,7 +61,17 @@ function TestQuestion() {
     const [cutScene, setCutScene] = useState<boolean>(false);
     const [currentCutScnen, setCurrentCutScene] = useState<number>(0)
     const [currentMessage, setCurrentMessage] = useState<number>(0)
-    const [disable, setDisable] = useState<boolean>(true)
+    const [audio] = useState(new Audio(Sound));
+    const [playing, setPlaying] = useState(false);
+    const toggle = () => {
+        setPlaying(!playing);
+    }
+    useEffect(() => {
+        playing ? audio.play() : audio.pause();
+        console.log(playing)
+      },
+      [playing]
+    );
     const cutSceneList = [
         { value: 1, message:[ 'ที่นี่ที่ไหนกัน... แล้วฉันคือใคร... โอ๊ย ทำไมจำอะไรไม่ได้เลย…',
                             'ลองเดินตามทางนี้ไปละกัน เผื่อจะจำอะไรได้มากขึ้น'] },
@@ -113,13 +125,14 @@ function TestQuestion() {
                 changeScene('S6.1')
                 setCutScene(true)// start cutscene v.14
                 setLoading(true)
+                setPlaying(false)
                 setTimeout(async()=>{
                             await ApiPostTestResult(testScore);
                             setLoading(false);
                             console.log('set Loading:', isLoading);
                             history.push('/result');
                             return;
-            },4000)
+            },3000)
             }else{
                 setCutScene(false)
             }
@@ -131,20 +144,6 @@ function TestQuestion() {
         }
     }
 
-
-    // async function getTestData() {
-    //     const response = await ApiGetTestData();
-    //     if (response) {
-    //         setQuestionList(response); // store all question into the hook
-    //         const resp = response;
-    //         setCurrentQuestionDetail(resp[currentQuestion]);
-    //     } else {
-    //         console.log('error');
-    //     }
-    // }
-    // useEffect(() => {
-    //     getTestData();
-    // }, []);
     const { changeScene, gameRef }= useContext(AppContext);
     async function onNextQuestion(value: number) {
         console.log('[Debug]: score == ' + value);
@@ -256,31 +255,36 @@ function TestQuestion() {
             </PixiProvider>
             <ContainerTestQuestion>
                 {/* {rendered_questions} */}
-                <Col>
+            
                 {currentQuestion +1 === 25 ? null :
                  (<>
-                 <div style={{background: 'linear-gradient(180deg, white, transparent)'}}>
+                 <Box justify='space-between' align="center" direction='row' style={{background: 'linear-gradient(180deg, white, transparent)', padding:'0px 5%'}}>
+                    <div onClick={toggle}>
+                        {playing?  <PauseCircleFilled style={{ fontSize: '30px'}}/> :  <SoundFilled style={{ fontSize: '30px' }}/> }
+                  </div>
                     <TextQuestionIndex>
                         คำถามข้อที่ {currentQuestion + 1}/24
                     </TextQuestionIndex>
                     <ButtonSeeAllResults type="primary" onClick={showModal}>
                         เริ่มใหม่{' '}
                     </ButtonSeeAllResults>
-                    </div>
+                    </Box >
                 </>)
                  }
-                </Col>
+                
                 <Modal visible={visible} okText="เริ่มใหม่" cancelText="ยกเลิก" onOk={handleOk} width={400} confirmLoading={confirmLoading} onCancel={handleCancel}>
                     ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
                 </Modal>
                 {currentQuestion +1 === 25 ? 
                 ( <>
                 <Animation onEnter='fadeIn' key={currentMessage} duration={1000} delay={200}>
+                <Box justify='center' align="center" direction='row'>
                 <TextStory
                     // disabled={disable}
                     onClick={showStory}>
                             {cutSceneList[currentCutScnen].message[currentMessage]}
                 </TextStory>
+                </Box>
                 </Animation>
                 {isLoading ? (
                     <IsLoadingSpinnerTestQuestion>
@@ -310,7 +314,7 @@ function TestQuestion() {
                         ) : (
                         <Animation type='slideInLeft' duration={500} delay={100}>
                            <Animation type='fadeIn' key={currentQuestion} duration={600} delay={100}>
-                        <ContainerButton>
+                        <Box justify='center' align='center' direction='column'>
                         {buttonList.map((item, index) => {
                             return (
                                 
@@ -325,7 +329,7 @@ function TestQuestion() {
                                
                             );
                         })}
-                        </ContainerButton>  
+                        </Box>  
                         </Animation>
                         </Animation>                 
                 )}
