@@ -59,7 +59,7 @@ function TestQuestion() {
     const [cutScene, setCutScene] = useState<boolean>(false);
     const [currentCutScnen, setCurrentCutScene] = useState<number>(0)
     const [currentMessage, setCurrentMessage] = useState<number>(0)
-    const [trigger, setTrigger] = useState<boolean>(false)
+    const [disable, setDisable] = useState<boolean>(true)
     const cutSceneList = [
         { value: 1, message:[ 'ที่นี่ที่ไหนกัน... แล้วฉันคือใคร... โอ๊ย ทำไมจำอะไรไม่ได้เลย…',
                             'ลองเดินตามทางนี้ไปละกัน เผื่อจะจำอะไรได้มากขึ้น'] },
@@ -87,7 +87,7 @@ function TestQuestion() {
                                 '“ลองเดินไปตามทางนี้ดู เธอก็จะรู้คำตอบเองแหละ”']},
         { value: 13, message: ['“เราออกจากป่านี้มาได้แล้ว!”',
                                 '“สวยจัง นี่มันทะเลสาบนี่นา”']},
-        { value: 14, message: [' ตกลงฉันคือใครกันนะ.. ']},
+        { value: 14, message: [' ตกลงฉันคือใครกันนะ.. ','.....','.....']},
     ];
     useEffect(()=>{
         cutSceneList[currentCutScnen]
@@ -277,6 +277,7 @@ function TestQuestion() {
                 ( <>
                 <Animation onEnter='fadeIn' key={currentMessage} duration={1000} delay={200}>
                 <TextStory
+                    // disabled={disable}
                     onClick={showStory}>
                             {cutSceneList[currentCutScnen].message[currentMessage]}
                 </TextStory>

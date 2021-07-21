@@ -15,6 +15,7 @@ export const ContainerTestStoryPage = styled.div`
 
 export const TextStory = styled.div`
     background-color: white;
+    border: 5px solid whitesmoke;
     /* background: radial-gradient(ellipse 50% 50px, tranparent, white 20%, beige); */
     width: fit-content;
     max-width: 400px;
