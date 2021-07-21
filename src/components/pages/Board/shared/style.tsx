@@ -50,34 +50,27 @@ export const GridBox = styled.div`
 
 export const NewCardStyle = styled(CardStyle)`
     padding: 0px;
-
     & .ant-card-actions {
         border-top: none;
         background: none;
     }
-
     & .ant-card-actions > li:not(:last-child) {
         border-right: none;
     }
-
     & .ant-card-meta-title {
         font-weight: bold;
     }
-
     & .ant-card-meta {
         padding: none;
     }
-
     & .ant-card-body {
         padding: 10px;
         padding-top: 10px;
     }
-
     & .ant-card-actions {
         padding: none;
         align-items: baseline;
     }
-
     & .ant-card-actions > li > span {
         font-size: 12px;
     }
@@ -139,13 +132,11 @@ export const HeartIconCard = styled(HeartFilled)`
     flex-direction: column;
     align-items: flex-start;
     padding: 3px 8px;
-
     position: absolute;
     width: 48px;
     height: 20px;
     right: 10.46px;
     top: 11px;
-
     background: #ffffff;
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.05);
     border-radius: 100px;
@@ -157,7 +148,6 @@ export const HeartText = styled(Typography)`
     flex-direction: column;
     align-items: flex-start;
     padding: 0px 17px;
-
     position: absolute;
     width: 48px;
     height: 20px;

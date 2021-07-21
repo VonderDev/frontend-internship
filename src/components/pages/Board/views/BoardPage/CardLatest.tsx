@@ -96,3 +96,5 @@ export const CardLatest = () => {
         </>
     );
 };
+
+export default CardLatest;

@@ -2,7 +2,6 @@ import { useState, useContext, useEffect, useRef } from "react";
 import * as PIXI from 'pixi.js'
 import { AppContext } from "./AppContext";
 import { PixiContext } from "./PixiContext";
-import Animation from 'shared/style/theme/animation'
 
 const createPixiApp = (view:any, options:any) => {
   PIXI.utils.skipHello();
@@ -17,7 +16,6 @@ const createPixiApp = (view:any, options:any) => {
       height,
       maxWidth,
       maxHeight,
-      updateRatioRef,
       gameRef,
     } = useContext(AppContext);
     const pixiContext = useContext(PixiContext);
@@ -38,15 +36,15 @@ const createPixiApp = (view:any, options:any) => {
       } else {
         const [app, onRelease] = content(
           createPixiApp(viewRef.current, initialOption),
-          gameRef,updateRatioRef
+          gameRef
         );
         appRef.current = app;
         return () => {
           onRelease();
         };
       }
-    }, [ content, gameRef, initialOption,updateRatioRef]);
-
+    }, [ content, gameRef, initialOption]);
+  
     useEffect(() => {
       if(appRef.current){
         appRef.current.renderer.resolution = resolution;
@@ -56,12 +54,10 @@ const createPixiApp = (view:any, options:any) => {
     useEffect(() => {
       if(appRef.current){
         appRef.current.renderer.resize(width, height);
-        // updateRatioRef.current.update(width, height);
       }
     }, [width, height]);
 
     return (
-       <Animation onEnter='fadeIn' key={gameRef.current} duration={1000} delay={200}>
         <canvas
         ref={viewRef}
         style={{
@@ -71,9 +67,7 @@ const createPixiApp = (view:any, options:any) => {
           maxHeight: maxHeight,
           zIndex: 1,
         }}
-        
       />
-      </Animation>
     );
   };
   
