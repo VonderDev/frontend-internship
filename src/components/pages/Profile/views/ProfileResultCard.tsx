@@ -36,7 +36,7 @@ const ProfileResultCard: React.FC<CardComponentProps> = ({ profile }) => {
                                 <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
                             </Col>
                             <Col span={12}>
-                                <CardText style={{ transform: 'translateY(67%) translateX(-10%)' }}>
+                                <CardText style={{ transform: 'translateY(67%) translateX(5%)' }}>
                                     <RowStyled>ลักษณะเด่นของคุณ</RowStyled>
 
                                     <RowStyled>{dateFormat}</RowStyled>
