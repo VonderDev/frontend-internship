@@ -182,6 +182,7 @@ export const TabsInfo = styled(Tabs)`
         margin: 0;
         letter-spacing: 1px;
         color: black;
+        width: 180px;
     }
     & .ant-tabs-nav .ant-tabs-tab-active {
         background-color: var(--Gray-500);

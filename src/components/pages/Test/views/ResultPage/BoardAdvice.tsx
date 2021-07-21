@@ -3,7 +3,7 @@ import { IIconText } from 'components/pages/Home/shared/home.interface';
 import { ButtonSeeAllBoard, SearchField, TextBoardTopic } from 'components/pages/Home/shared/style/homepage.styles';
 import { useHistory } from 'react-router-dom';
 import { ContainerBoard } from '../../shared/styles/Result/ResultPage.styled';
-import { GridBox } from '../../shared/styles/Result/ResultFeature.styled';
+import { BoardCardSpace, GridBox, ImgCardCharactorList } from '../../shared/styles/Result/ResultFeature.styled';
 import Meta from 'antd/lib/card/Meta';
 import { MONTHS } from 'components/pages/Board/shared/months';
 import { NewCardStyle, HeartIconCard, HeartText, CardTextData, SpaceCard, CoverImage, BoardTextInfo } from '../../../Board/shared/style';
@@ -28,14 +28,14 @@ const BoardAdvice = () => {
 
     useEffect(() => {
         if (boardRecommend) {
-            var newItems = [];
+            var newRandomBoard = [];
 
             for (var i = 0; i < 3; i++) {
-                var idx = Math.floor(Math.random() * boardRecommend.length);
-                newItems.push(boardRecommend[idx]);
+                var idex = Math.floor(Math.random() * boardRecommend.length);
+                newRandomBoard.push(boardRecommend[idex]);
             }
-            console.log(newItems);
-            setRandomBoard(newItems);
+            console.log('[Random board Recommend]:', newRandomBoard);
+            setRandomBoard(newRandomBoard);
         }
     }, [boardRecommend]);
 
@@ -48,13 +48,13 @@ const BoardAdvice = () => {
             <ContainerBoard>
                 {' '}
                 <GridBox>
-                    <SpaceCard direction="horizontal">
+                    <BoardCardSpace direction="horizontal">
                         {randomBoard?.map((item: any, index: any) => {
                             const cardDate = new Date(item?.created_at);
                             const dateFormat = cardDate.getDate() + MONTHS[cardDate.getMonth()] + cardDate.getFullYear();
                             const like = item?.uid_likes;
                             return (
-                                <NewCardStyle
+                                <ImgCardCharactorList
                                     typecard="Vertical"
                                     heightcard={255}
                                     key={index}
@@ -81,10 +81,10 @@ const BoardAdvice = () => {
                                         <HeartIconCard />
                                         <HeartText>{like.length}</HeartText>
                                     </div>
-                                </NewCardStyle>
+                                </ImgCardCharactorList>
                             );
                         })}
-                    </SpaceCard>
+                    </BoardCardSpace>
                 </GridBox>
             </ContainerBoard>
         </>

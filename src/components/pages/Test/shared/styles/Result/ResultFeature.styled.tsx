@@ -72,3 +72,9 @@ export const SkillNameOnImgCard = styled.div`
     text-shadow: 1px 1px 2px white, 0 0 1em white, 0 0 0.2em white;
     /* box-shadow: inset 0 0 10px #ffffff; */
 `;
+
+export const BoardCardSpace = styled(Space)`
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-bottom: 25px;
+`;
