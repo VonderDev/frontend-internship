@@ -17,14 +17,7 @@ const ProfileResultCard: React.FC<CardComponentProps> = ({ profile }) => {
     }
     return (
         <>
-            <RowStyled>
-                <Col span={16}>
-                    <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
-                </Col>
-                <Col span={8}>
-                    <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>
-                </Col>
-            </RowStyled>
+           
             {profile?.slice(0, 1).map((item: any, index: any) => {
                 const dateCreatedFilter = new Date(item[0]?.created_at);
                 const dateFormat = dateCreatedFilter.getDate() + ' ' + MONTHS[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
