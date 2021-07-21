@@ -144,7 +144,6 @@ export const ContainerBoard = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    padding-left: 4%;
 `;
 
 export const CardTag = styled(Card.Meta)`
@@ -291,7 +290,7 @@ export const ButtonGoHomeInResultFeature = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Blue-400);
-    transform: translateY(-25%);
+    transform: translateY(-20%);
     margin-left: auto;
     margin-right: auto;
     width: 75%;

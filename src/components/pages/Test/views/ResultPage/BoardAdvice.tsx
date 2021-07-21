@@ -1,7 +1,6 @@
 import { Row } from 'antd';
 import { IIconText } from 'components/pages/Home/shared/home.interface';
 import { ButtonSeeAllBoard, SearchField, TextBoardTopic } from 'components/pages/Home/shared/style/homepage.styles';
-import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { ContainerBoard } from '../../shared/styles/Result/ResultPage.styled';
 import { GridBox } from '../../shared/styles/Result/ResultFeature.styled';
@@ -12,6 +11,8 @@ import { Box } from 'shared/style/theme/component';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { FormOutlined, CalendarOutlined } from '@ant-design/icons';
 import useSWR from 'swr';
+import { useEffect, useState } from 'react';
+import React from 'react';
 
 const IconText = ({ icon, text }: IIconText) => (
     <SearchField>
@@ -22,13 +23,21 @@ const IconText = ({ icon, text }: IIconText) => (
 
 const BoardAdvice = () => {
     const history = useHistory();
-    const { data, error } = useSWR('/user/content/get');
+    const { data: boardRecommend, error: errorBoardRecommend } = useSWR('/user/content/get');
+    const [randomBoard, setRandomBoard] = useState<any>();
 
-    if (data) {
-        data?.sort(function (a: any, b: any) {
-            return b.uid_likes.length - a.uid_likes.length;
-        });
-    }
+    useEffect(() => {
+        if (boardRecommend) {
+            var newItems = [];
+
+            for (var i = 0; i < 3; i++) {
+                var idx = Math.floor(Math.random() * boardRecommend.length);
+                newItems.push(boardRecommend[idx]);
+            }
+            console.log(newItems);
+            setRandomBoard(newItems);
+        }
+    }, [boardRecommend]);
 
     return (
         <>
@@ -40,7 +49,7 @@ const BoardAdvice = () => {
                 {' '}
                 <GridBox>
                     <SpaceCard direction="horizontal">
-                        {data?.slice(0, 3).map((item: any, index: any) => {
+                        {randomBoard?.map((item: any, index: any) => {
                             const cardDate = new Date(item?.created_at);
                             const dateFormat = cardDate.getDate() + MONTHS[cardDate.getMonth()] + cardDate.getFullYear();
                             const like = item?.uid_likes;

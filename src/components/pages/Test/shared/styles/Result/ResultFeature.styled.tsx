@@ -14,7 +14,7 @@ export const GridBox = styled.div`
 export const ImgCardCharactorList = styled(CardStyle)`
     padding: 0px;
     width: 150px;
-    height: 100px;
+    height: 90px;
 
     & .ant-card-actions {
         border-top: none;
@@ -54,7 +54,7 @@ export const SpaceCharactorList = styled(Space)`
 
 export const CoverImage = styled.img`
     width: 150px;
-    height: 100px;
+    height: 90px;
     box-shadow: inset 0px 0px 20px 10px rgba(255, 255, 255, 0.6);
 `;
 
@@ -67,5 +67,8 @@ export const SkillNameOnImgCard = styled.div`
     transform: translateY(-160%);
     font-weight: bolder;
     text-align: center;
-    text-shadow: 2px 2px 4px #ffffff;
+    border-radius: 20px;
+    font-size: 16px;
+    text-shadow: 1px 1px 2px white, 0 0 1em white, 0 0 0.2em white;
+    /* box-shadow: inset 0 0 10px #ffffff; */
 `;

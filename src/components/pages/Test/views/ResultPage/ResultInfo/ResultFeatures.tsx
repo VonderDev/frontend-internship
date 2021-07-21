@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ButtonGoHomeInResultFeature, TextHeaderResult } from '../../../shared/styles/Result/ResultPage.styled';
+import { TextHeaderResult } from '../../../shared/styles/Result/ResultPage.styled';
 import { IResult } from '../../../shared/interface/Result.interfaces';
 import CharactorDetail from './CharactorDetail';
 import useSWR from 'swr';
@@ -7,7 +7,9 @@ import { useHistory } from 'react-router-dom';
 import { IIconText } from 'components/pages/Board/shared/Card.interface';
 import React from 'react';
 import { GridBox, ImgCardCharactorList, SpaceCharactorList, SearchField, CoverImage, SkillNameOnImgCard } from 'components/pages/Test/shared/styles/Result/ResultFeature.styled';
-import { Card } from 'antd';
+import { ButtonGoHomeInResultFeature } from '../../../shared/styles/Result/ResultPage.styled';
+
+import { transalateToThai } from 'utils/transalator/transalator';
 
 const ResultFeatures = () => {
     const history = useHistory();
@@ -72,7 +74,7 @@ const ResultFeatures = () => {
                                         onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)}
                                     >
                                         {' '}
-                                        <SkillNameOnImgCard>{item.skill}</SkillNameOnImgCard>
+                                        <SkillNameOnImgCard>{transalateToThai(item?.skill)}</SkillNameOnImgCard>
                                     </ImgCardCharactorList>
                                 );
                             })}
@@ -86,6 +88,7 @@ const ResultFeatures = () => {
                 skill={detailCharacter.skill}
                 img_charactor={detailCharacter.image_charactor}
             />
+            <ButtonGoHomeInResultFeature onClick={() => history.push('/')}>กลับหน้าหลัก</ButtonGoHomeInResultFeature>
         </>
     );
 };

@@ -18,9 +18,9 @@ import {
     TextTitleContent,
     TopicTag,
 } from '../../shared/style/BoardContent.styled';
+import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
 import { ApiPutLikeOfBoardContent } from '../../apis/boardCreate.api';
-import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { MONTHS } from '../../shared/months';
 
@@ -63,7 +63,6 @@ function BoardContent() {
     //--------------- FETCHING BOARD CONTENT & COMMENT DATA  ---------------//
     const { data: contentData, error: errorcontentData } = useSWR('/user/contentID/' + paramObjectId.id);
     const { data: fetchingCommentData, error: errorfetchingComment } = useSWR(`/user/comment/get/1-100/${paramObjectId.id}`);
-
     const isLoadingContentData = !contentData && !errorcontentData;
 
     //--------------- SET DATE CREATED CONTENT FORMAT ---------------//
