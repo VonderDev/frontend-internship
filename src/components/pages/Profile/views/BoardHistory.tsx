@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Box } from 'shared/style/theme/component';
 import ProfileBoardCard from './ProfileBoardCard';
 import useSWR from 'swr';
-import BoardCardComponent from 'components/pages/Board/views/board/BoardCardComponent';
+import BoardCardComponent from 'components/pages/Board/views/Board/BoardCardComponent';
 
 function BoardHistory() {
 

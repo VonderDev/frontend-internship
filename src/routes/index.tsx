@@ -21,7 +21,7 @@ import ProfileResult from 'components/pages/Profile/views/ProfileResult';
 import BoardContent from 'components/pages/Board/views/CreateContent/BoardContent';
 import TestPixi from 'components/GameElement/Game/testpixi';
 import CommentOfContent from 'components/pages/Board/views/Comment/CommentOfContent';
-import Filter from 'components/pages/Board/views/board/Filter'
+import Filter from 'components/pages/Board/views/Board/Filter'
 
 function Routing() {
     return (
