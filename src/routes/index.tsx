@@ -1,5 +1,6 @@
 import { Switch, Route } from 'react-router-dom';
 import Home from 'components/pages/Home/view/Home';
+import Board from 'components/pages/Board/views/BoardPage/Board';
 import Profile from 'components/pages/Profile/views/Profile';
 import Login from 'components/pages/Authentication/views/Login/Login';
 import Register from 'components/pages/Authentication/views/Register/Register';
@@ -18,6 +19,7 @@ import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion'
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
 import BoardCreateContent from 'components/pages/Board/views/CreateContent/BoardCreateContent';
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
+import Filter from 'components/pages/Board/views/Board/Filter'
 import BoardContent from 'components/pages/Board/views/CreateContent/BoardContent';
 import TestPixi from 'components/GameElement/Game/testpixi';
 import CommentOfContent from 'components/pages/Board/views/Comment/CommentOfContent';
@@ -30,6 +32,8 @@ function Routing() {
             <Route exact path="/boardcontent/:id" component={BoardContent} />
             <Route exact path="/boardcontent/:id/comment" component={CommentOfContent} />
             <PrivateRoute exact path="/profile" component={Profile} />
+            <Route exact path="/board" component={Board} />
+            <Route exact path="/boardContent" component={BoardContent} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/test" component={Test} />
@@ -47,6 +51,7 @@ function Routing() {
             <PrivateRoute exact path="/boardhistory" component={BoardHistory} />
             <Route exact path="/teststyle" component={TestStyle} />
             <Route exact path="/pixi" component={TestPixi} />
+            <Route exact path="/filter" component={Filter} />
         </Switch>
     );
 }

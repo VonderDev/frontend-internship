@@ -33,17 +33,17 @@ function Profile() {
     ];
 
     const { data, error } = useSWR('/user/find');
-    const { data: profile, error: errorProfile } = useSWR('/user/profile');
-    const isLoading = !data && !error && !errorProfile && !profile;
-    console.log('Profile data', data);
-    console.log('[Profile from user/profile]', profile);
+    const { data: boardData, error: boardError } = useSWR('/user/content/get');
+    const isLoading = !data && !error && !boardData && !boardError;
+    console.log('Profile Data', data);
+    console.log('Board Data', boardData);
 
     useEffect(() => {
-        if (data & profile) {
-            console.log('[useEffect data username] :', data.username);
-            console.log('[useEffect profile] :', profile);
+        if (data && boardData) {
+            console.log('[useEffect data username] :', data.username)
+            console.log('[useEffect boardData title] :', boardData.title);
         }
-    }, [data, profile]);
+    }, [data ,boardData]);
 
     return (
         <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
@@ -53,14 +53,14 @@ function Profile() {
             ) : (
                 <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
                     <UserImage src={ProfileMascot} />
-                    <TextUsername>{data.username}</TextUsername>
+                    <TextUsername>{data?.username}</TextUsername>
                     <RowStyled>
                         <Col span={8}>
                             <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
                         </Col>
                         <Col span={16}>
                             <TextUserInfo2>
-                                {data.firstName} {data.lastName}
+                                {data?.firstName} {data?.lastName}
                             </TextUserInfo2>
                         </Col>
                     </RowStyled>
@@ -69,7 +69,7 @@ function Profile() {
                             <TextUserInfo1>อีเมล :</TextUserInfo1>
                         </Col>
                         <Col span={16}>
-                            <TextUserInfo2>{data.email}</TextUserInfo2>
+                            <TextUserInfo2>{data?.email}</TextUserInfo2>
                         </Col>
                     </RowStyled>
                     <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
@@ -107,7 +107,7 @@ function Profile() {
                             <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
                         </Col>
                     </RowStyled>
-                    {cardList.map((item, index) => {
+                    {boardData?.map((item: any, index: any) => {
                         return (
                             <BoardCard
                                 key={index}
@@ -125,17 +125,17 @@ function Profile() {
                                                 <HistoryText>{item.title}</HistoryText>
                                             </Row>
                                             <Row>
-                                                <HistoryText>{item.description}</HistoryText>
+                                                <HistoryText>{item.content_body}</HistoryText>
                                             </Row>
                                             <Row>
                                                 <Col span={2}>
                                                     <CommentIcon />
                                                 </Col>
                                                 <Col span={10}>
-                                                    <HistoryText>{item.username}</HistoryText>
+                                                    <HistoryText>{data?.username}</HistoryText>
                                                 </Col>
                                                 <Col span={8}>
-                                                    <HistoryText>25 มิ.ย. 2564</HistoryText>
+                                                    <HistoryText>{item.created_at}</HistoryText>
                                                 </Col>
                                                 <Col span={2}>
                                                     <HeartIcon />
