@@ -27,7 +27,7 @@ import { AppContext } from 'components/GameElement/PixiStore/AppContext';
 import { setTimeout } from 'timers';
 import { TextStory } from '../../shared/styles/Test/TestStory.styled';
 import { Item } from 'react-bootstrap/lib/Breadcrumb';
-import Animation from 'shared/style/theme/animation';
+import Animation from 'shared/style/theme/animataion';
 
 function TestQuestion() {
     //

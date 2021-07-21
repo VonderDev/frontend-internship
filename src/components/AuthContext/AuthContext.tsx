@@ -34,7 +34,6 @@ const AuthProvider = ({ children }: IAuthProps) => {
             .post('/login', { email, password })
             .then((response) => {
                 if (response.data.token) localStorage.setItem('token', response.data.token);
-
                 setToken(localStorage.getItem('token'));
                 setUser(response.data.resuit);
                 return user;

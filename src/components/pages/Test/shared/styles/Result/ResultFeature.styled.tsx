@@ -15,34 +15,27 @@ export const ImgCardCharactorList = styled(CardStyle)`
     padding: 0px;
     width: 150px;
     height: 90px;
-
     & .ant-card-actions {
         border-top: none;
         background: none;
     }
-
     & .ant-card-actions > li:not(:last-child) {
         border-right: none;
     }
-
     & .ant-card-meta-title {
         font-weight: bold;
     }
-
     & .ant-card-meta {
         padding: none;
     }
-
     & .ant-card-body {
         padding: 10px;
         padding-top: 10px;
     }
-
     & .ant-card-actions {
         padding: none;
         align-items: baseline;
     }
-
     & .ant-card-actions > li > span {
         font-size: 12px;
     }
@@ -50,34 +43,27 @@ export const ImgCardCharactorList = styled(CardStyle)`
 
 export const BoardCardRecommend = styled(CardStyle)`
     padding: 0px;
-
     & .ant-card-actions {
         border-top: none;
         background: none;
     }
-
     & .ant-card-actions > li:not(:last-child) {
         border-right: none;
     }
-
     & .ant-card-meta-title {
         font-weight: bold;
     }
-
     & .ant-card-meta {
         padding: none;
     }
-
     & .ant-card-body {
         padding: 10px;
         padding-top: 10px;
     }
-
     & .ant-card-actions {
         padding: none;
         align-items: baseline;
     }
-
     & .ant-card-actions > li > span {
         font-size: 12px;
     }

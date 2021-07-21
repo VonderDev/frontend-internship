@@ -1,6 +1,6 @@
 import { DrawerRadius } from 'components/pages/Authentication/shared/style';
 import { Topic, TagBox, CustomCheckableTag, ButtonUseFilter } from '../../shared/Filter.styles';
-import { catagories, hashtag } from '../../shared/FixedTag';
+import { catagories, hashtag } from '../../shared/Fixedtag';
 
 interface DrawerProps {
     tagFilterData: any[];
