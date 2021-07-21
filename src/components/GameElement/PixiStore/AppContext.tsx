@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
-// import UpdateRatio from "./UpdateRatio";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
+import UpdateRatio from './UpdateRatioRef';
 
 const AppContext = createContext<any>(null);
 
@@ -30,9 +30,11 @@ const useWindowSize = () => {
 }
 
 function AppProvider({ children }: any) {
-  const gameRef = useRef({});
+  const gameRef = useRef({changeScene:(value:any)=> {}});
+
+
 //   const audioRef = useRef(new AppAudio());
-//   const updateRatioRef = useRef(new UpdateRatio());
+  const updateRatioRef = useRef<any>(UpdateRatio());
   const size = useWindowSize();
   const [width, setWidth] = useState<number>(size.width);
   const [height, setHeight] = useState<number>(size.height);
@@ -49,16 +51,26 @@ function AppProvider({ children }: any) {
     }
   }, [size]);
 
+  const changeScene = useCallback(
+    (value:string| null) => {
+     console.log('Prop context:',value)
+      if(gameRef.current.changeScene){
+        gameRef.current.changeScene(value)
+      }
+    },[])
+
+
   return (
     <AppContext.Provider
       value={{
         gameRef,
         // audioRef,
-        // updateRatioRef,
+        updateRatioRef,
         width,
         height,
         maxWidth,
         maxHeight,
+        changeScene
       }}
     >
       {children}

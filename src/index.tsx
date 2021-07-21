@@ -19,7 +19,7 @@ const fetcher = (url: string) =>
         const data = await response.data;
         return data;
     });
-
+    
 const AppWithRouter = () => (
     <SWRConfig value={{ fetcher }}>
         <BrowserRouter>

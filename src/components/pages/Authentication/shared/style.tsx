@@ -94,6 +94,9 @@ export const TextboxPrivacyCenter = styled.div`
 export const DrawerRadius = styled(Drawer)`
     & .ant-drawer-header {
         border-bottom: none;
+        display: flex;
+        justify-content: center;
+        padding: 0px;
     }
     & .ant-drawer-content {
         border-radius: 12px 12px 0px 0px;
