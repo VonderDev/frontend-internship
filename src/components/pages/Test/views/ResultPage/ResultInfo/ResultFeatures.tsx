@@ -1,9 +1,13 @@
 import { useState } from 'react';
-import { ButtonGoHomeInResultFeature, ContainerImagePreview, ImagePreview, TextHeaderResult } from '../../../shared/styles/Result/ResultPage.styled';
+import { ButtonGoHomeInResultFeature, TextHeaderResult } from '../../../shared/styles/Result/ResultPage.styled';
 import { IResult } from '../../../shared/interface/Result.interfaces';
 import CharactorDetail from './CharactorDetail';
 import useSWR from 'swr';
 import { useHistory } from 'react-router-dom';
+import { IIconText } from 'components/pages/Board/shared/Card.interface';
+import React from 'react';
+import { GridBox, ImgCardCharactorList, SpaceCharactorList, SearchField, CoverImage, SkillNameOnImgCard } from 'components/pages/Test/shared/styles/Result/ResultFeature.styled';
+import { Card } from 'antd';
 
 const ResultFeatures = () => {
     const history = useHistory();
@@ -12,6 +16,13 @@ const ResultFeatures = () => {
     const [isData, isSetData] = useState<boolean>(false);
     const { data: resultData, error } = useSWR('/user/newResult');
     const isLoading = !resultData && !error;
+
+    const IconText = ({ icon, text }: IIconText) => (
+        <SearchField>
+            {React.createElement(icon)}
+            {text}
+        </SearchField>
+    );
 
     const [detailCharacter, setDetailCharacter] = useState<IResult>({
         skill: '',
@@ -50,13 +61,23 @@ const ResultFeatures = () => {
             ) : (
                 <>
                     <TextHeaderResult>ลักษณะเด่นของคุณ ({result?.length}ด้าน)</TextHeaderResult>
-                    {result?.map((item: any, index: any) => {
-                        return (
-                            <ContainerImagePreview key={index}>
-                                <ImagePreview onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)} src={item.image_charactor} />
-                            </ContainerImagePreview>
-                        );
-                    })}
+                    <GridBox>
+                        <SpaceCharactorList>
+                            {result?.map((item: any, index: any) => {
+                                return (
+                                    <ImgCardCharactorList
+                                        typecard="Vertical"
+                                        key={index}
+                                        cover={<CoverImage src={item.image_charactor} style={{ borderRadius: '12px ' }} />}
+                                        onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)}
+                                    >
+                                        {' '}
+                                        <SkillNameOnImgCard>{item.skill}</SkillNameOnImgCard>
+                                    </ImgCardCharactorList>
+                                );
+                            })}
+                        </SpaceCharactorList>
+                    </GridBox>
                 </>
             )}
             <CharactorDetail
@@ -65,7 +86,6 @@ const ResultFeatures = () => {
                 skill={detailCharacter.skill}
                 img_charactor={detailCharacter.image_charactor}
             />
-            <ButtonGoHomeInResultFeature onClick={() => history.push('/')}>กลับหน้าหลัก</ButtonGoHomeInResultFeature>
         </>
     );
 };

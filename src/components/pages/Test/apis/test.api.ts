@@ -29,16 +29,28 @@ export async function ApiGetResult() {
 export async function ApiPostTestResult(data: any) {
     console.log('[Result Data] :', data);
     console.log('[Result length]:', data.length)
+    const token = localStorage.getItem('token');
     // return mockTestData as unknown as Array<IQuestion>;
     //
     // ─── Use axios.post when backend finish ───────────────────
     //
-    return await axios.post('/user/newResult', data,{headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
-        console.log("response", res.data)
-        return res.data
-    })
-    .catch((err) => {
-        console.error(err);
-        console.log('Cannot post result');
-    });
+    if(token){
+        return await axios.post('/user/newResult', data,{headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
+            console.log("response", res.data)
+            return res.data
+        })
+        .catch((err) => {
+            console.error(err);
+            console.log('Cannot post result');
+        });
+    } else{
+        return await axios.post('/guest/result', data).then((res) => {
+            console.log("response", res.data)
+            return res.data
+        })
+        .catch((err) => {
+            console.error(err);
+            console.log('Cannot post result');
+        });
+    }
 }

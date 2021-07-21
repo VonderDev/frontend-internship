@@ -18,12 +18,13 @@ export const TextHeader = styled.div`
 export const TextHeaderResult = styled.div`
     text-align: center;
     font-size: 22px;
-    padding: 30px;
     font-weight: bolder;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     cursor: none;
+    padding-top: 20px;
+    padding-left: 20px;
 `;
 
 export const ChartStyled = styled(Chart)`
@@ -290,7 +291,7 @@ export const ButtonGoHomeInResultFeature = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Blue-400);
-    transform: translateY(-90%);
+    transform: translateY(-25%);
     margin-left: auto;
     margin-right: auto;
     width: 75%;

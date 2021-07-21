@@ -8,7 +8,13 @@ function ResultInfo() {
     const { TabPane } = Tabs;
     return (
         <>
-            <Container header={null}>
+            <Container
+                header={{
+                    title: 'ผลลัพธ์ของคุณ',
+                    right: 'menu',
+                    left: 'back',
+                }}
+            >
                 <TabsInfo type="card">
                     <TabPane tab="ภาพรวม" key="1">
                         <ResultOverview />
