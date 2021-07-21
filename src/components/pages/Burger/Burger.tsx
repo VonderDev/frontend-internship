@@ -173,8 +173,10 @@ const Burger = () => {
                         <AvatarName>{username}</AvatarName>
                         </Box>)
                         : (<div>
+                        <Box align='center' justify='center' direction='column'>
                         <Avatar size={75} icon={<UserOutlined />} />
                         <AvatarName> Guest #000  </AvatarName> 
+                        </Box>
                         </div>
                         )}
                         
