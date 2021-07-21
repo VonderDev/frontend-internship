@@ -1,14 +1,22 @@
 import Container from 'components/Container/Container';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { BoxOfCommentList, CommentBody, CommentInput, ContainerOfCommentList, ContainerOfInput, CreatedDate, IconSendMessage, ProfileUserImage, Username } from '../../shared/style/CommentPage.styled';
+import {
+    BoxOfCommentList,
+    CommentBody,
+    CommentInput,
+    ContainerOfCommentList,
+    ContainerOfInput,
+    ContainerOfNoCommentList,
+    CreatedDate,
+    IconSendMessage,
+    ProfileUserImage,
+    Username,
+} from '../../shared/style/CommentPage.styled';
 import { ApiPostComment } from '../../apis/commentContent.api';
 import useSWR from 'swr';
-import CommentList from './CommentList';
-import { IComment } from '../../shared/interface/Comment.interface';
-import React from 'react';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
-import { BoxOfLikeAndComment } from '../../shared/style/BoardContent.styled';
+import { MONTHS } from '../../shared/months';
 
 function CommentOfContent() {
     //---------------------- GET PARAM OBJECT URL ----------------------//
@@ -34,6 +42,8 @@ function CommentOfContent() {
     //------------------- GET USERNAME FOR SHOW WHEN POST COMMENT SUCCESS -------------------//
     const { getUser } = useAuthContext();
     const [username, setUsername] = useState('');
+    const token = localStorage.getItem('token');
+    console.log('Token use in Comment', token);
 
     const getUserInfo = async () => {
         const token = localStorage.getItem('token');
@@ -41,6 +51,7 @@ function CommentOfContent() {
         if (token) {
             if (response) {
                 setUsername(response.username);
+                console.log('user name', username);
             } else {
                 console.log('error');
             }
@@ -76,14 +87,12 @@ function CommentOfContent() {
             }}
         >
             {commentList.length == 0 ? (
-                <div>loading ...</div>
+                <ContainerOfNoCommentList>ยังไม่มีความคิดเห็น</ContainerOfNoCommentList>
             ) : (
                 <ContainerOfCommentList>
                     {commentList?.map((item: any, index: any) => {
-                        const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
                         const dateCreatedComment = new Date(item.created_at);
-                        const dateFormat = dateCreatedComment.getDate() + ' ' + months[dateCreatedComment.getMonth()] + ' ' + dateCreatedComment.getFullYear();
-                        // console.log('[Date format] =', dateFormat);
+                        const dateFormat = dateCreatedComment.getDate() + ' ' + MONTHS[dateCreatedComment.getMonth()] + ' ' + dateCreatedComment.getFullYear();
                         return (
                             <BoxOfCommentList style={{ height: '15vh' }} key={index}>
                                 <ProfileUserImage />
@@ -98,8 +107,17 @@ function CommentOfContent() {
                 </ContainerOfCommentList>
             )}
             <ContainerOfInput>
-                <CommentInput type="text" placeholder="แสดงความคิดเห็นของคุณ..." name="comment_body" value={commentData.comment_body} onChange={handleChangeOfComment} />
-                <IconSendMessage onClick={postComment} />
+                {!token ? (
+                    <>
+                        <CommentInput type="text" placeholder="กรุณาเข้าสู่ระบบ เพื่อเเสดงความคิดเห็น" disabled={true} />
+                        <IconSendMessage />
+                    </>
+                ) : (
+                    <>
+                        <CommentInput type="text" placeholder="แสดงความคิดเห็นของคุณ..." name="comment_body" value={commentData.comment_body} onChange={handleChangeOfComment} />
+                        <IconSendMessage onClick={postComment} />
+                    </>
+                )}
             </ContainerOfInput>
         </Container>
     );

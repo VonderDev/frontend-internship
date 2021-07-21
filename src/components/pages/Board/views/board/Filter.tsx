@@ -88,13 +88,7 @@ const Filter = () => {
     }, [selectedCatagories, selectedTags]);
 
     return (
-        <Container
-            header={{
-                left: 'back',
-                title: 'ตัวกรอง',
-                right: '',
-            }}
-        >
+        <Container header={{ left: 'back', right: 'menu', title: 'กระทู้' }} >
             <FilterDrawer
                 tagFilterData={tagFilterData}
                 showDrawer={showDrawer}
@@ -112,9 +106,11 @@ const Filter = () => {
                         <ControlOutlined style={{ color: '#8a8888', fontSize: '24px' }} />
                     </ButtonFilter>
                 </SearchField>
+                
                 <BoardCardComponent data={tagFilterData} />
+          
             </Box>
-        </Container>
+            </Container>
     );
 };
 export default Filter;
