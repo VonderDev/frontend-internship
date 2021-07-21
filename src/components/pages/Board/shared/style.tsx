@@ -1,6 +1,6 @@
 import { Card, Space, Typography } from 'antd';
 import styled from 'styled-components';
-import { FormOutlined , HeartFilled } from '@ant-design/icons';
+import { FormOutlined, HeartFilled } from '@ant-design/icons';
 import { CardStyle } from 'shared/style/theme/component';
 import { Box } from 'shared/style/theme/component';
 
@@ -9,15 +9,15 @@ export const TextRecommendBoardTopic = styled.div`
     font-size: var(--font-20);
     display: flex;
     flex-direction: column;
-    justify-content : center;
+    justify-content: center;
 `;
 
 export const ButtonSeeAllBoard = styled.div`
     color: var(--Blue-300);
     font-weight: bolder;
     font-size: var(--font-16);
-    font-weight : bold;
-
+    font-weight: bold;
+    align-self: center;
     &:hover {
         cursor: pointer;
     }
@@ -43,44 +43,43 @@ export const GridBox = styled.div`
     display: flex;
     overflow-x: scroll;
     ::-webkit-scrollbar {
-    width: 0;  /* Remove scrollbar space */
-    background: transparent;  /* Optional: just make scrollbar invisible */
+        width: 0; /* Remove scrollbar space */
+        background: transparent; /* Optional: just make scrollbar invisible */
     }
 `;
 
 export const NewCardStyle = styled(CardStyle)`
-
-    padding : 0px;
+    padding: 0px;
 
     & .ant-card-actions {
-        border-top : none;
-        background : none;
+        border-top: none;
+        background: none;
     }
 
     & .ant-card-actions > li:not(:last-child) {
-    border-right: none;
-    }    
+        border-right: none;
+    }
 
     & .ant-card-meta-title {
-        font-weight : bold;
+        font-weight: bold;
     }
 
     & .ant-card-meta {
-        padding : none;
+        padding: none;
     }
 
     & .ant-card-body {
-        padding : 10px;
-        padding-top : 10px;
+        padding: 10px;
+        padding-top: 10px;
     }
 
     & .ant-card-actions {
-        padding : none;
-        align-items : baseline;
+        padding: none;
+        align-items: baseline;
     }
 
     & .ant-card-actions > li > span {
-        font-size : 12px;
+        font-size: 12px;
     }
 `;
 
@@ -92,8 +91,8 @@ export const EllipsisText = styled.div`
 `;
 
 export const SpaceCard = styled(Space)`
-    padding-right : 20px;
-    padding-left : 20px;
+    padding-right: 20px;
+    padding-left: 20px;
 `;
 
 export const HistoryImage = styled.img`
@@ -107,12 +106,12 @@ export const HistoryImage = styled.img`
 `;
 
 export const CoverImage = styled.img`
-    width : 205px;
-    height : 148px;
+    width: 205px;
+    height: 148px;
 `;
 
 export const HistoryText = styled.div`
-    display : flex;
+    display: flex;
     padding-right: 5px;
     margin-top: 5px;
 `;
@@ -125,7 +124,7 @@ export const CardTextData = styled.div`
     display: block;
     overflow: hidden;
     white-space: nowrap;
-    color : var(--Gray-400);
+    color: var(--Gray-400);
 `;
 
 export const CommentIcon = styled(FormOutlined)`
@@ -135,7 +134,7 @@ export const CommentIcon = styled(FormOutlined)`
 `;
 
 export const HeartIconCard = styled(HeartFilled)`
-    color : var(--Gray-100);
+    color: var(--Gray-100);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -147,13 +146,13 @@ export const HeartIconCard = styled(HeartFilled)`
     right: 10.46px;
     top: 11px;
 
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.05);
     border-radius: 100px;
 `;
 
 export const HeartText = styled(Typography)`
-    color : var(--Gray-400);
+    color: var(--Gray-400);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -178,5 +177,5 @@ export const HeartIcon = styled(HeartFilled)`
 `;
 
 export const CustomBox = styled(Box)`
-    margin-left : 100px;
+    margin-left: 100px;
 `;

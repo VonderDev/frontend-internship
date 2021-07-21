@@ -15,7 +15,7 @@ export const ListMenu = [
     },
     {
         title: 'Board',
-        path: '/board',
+        path: '/filter',
         icon: <MessageOutlined />,
         cName: 'nav-text',
     },
