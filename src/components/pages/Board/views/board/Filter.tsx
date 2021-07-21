@@ -20,7 +20,7 @@ const Filter = () => {
     };
 
     //Set catagories and tags in to object-------------------------------------------------------------------------------
-    const [contentData, setContentData] = useState<{ content_type: Array<string>; tag: Array<string> }>({
+    const [contentData, setContentData] = useState<{ content_type: string[]; tag: string[] }>({
         content_type: [],
         tag: [],
     });
@@ -45,7 +45,7 @@ const Filter = () => {
         filterContentData();
         setVisible(!visible);
     };
-    
+
     //Drawer Function----------------------------------------------------------------------------------------------------
     const [visible, setVisible] = useState<boolean>(false);
     const showDrawer = () => {
@@ -57,19 +57,26 @@ const Filter = () => {
     useEffect(() => {
         const delayTime = setTimeout(() => {
             async function realTime() {
-                if(!searchValue && tagFilterData){
+                if (!searchValue) {
                     const res = await ApiPostFilter(contentData);
                     setTagFilterData(res);
-                }else if (searchValue) {
+                } else if (searchValue) {
                     const res = await ApiPostSearch(searchValue, contentData);
                     setTagFilterData(res);
-                }else if(!searchValue){
-                    setTagFilterData(null);
                 }
             }
-            realTime()
+            realTime();
         }, 500);
+
         return () => clearTimeout(delayTime);
+    }, [searchValue]);
+
+    useEffect(() => {
+        console.log('tagFilterData', tagFilterData);
+    }, [tagFilterData]);
+
+    useEffect(() => {
+        console.log('searchValue', searchValue);
     }, [searchValue]);
 
     useEffect(() => {
@@ -100,7 +107,7 @@ const Filter = () => {
             />
             <Box style={{ marginLeft: '20px', marginRight: '20px' }} align="flex-start" direction="column">
                 <SearchField style={{ marginBottom: '20px' }}>
-                    <InputSearch onChange={(e) => setSearchValue(e.target.value)} placeholder="Search Form" prefix={<SearchOutlined />} />
+                    <InputSearch allowClear onChange={(e) => setSearchValue(e.target.value)} placeholder="Search Form" prefix={<SearchOutlined />} />
                     <ButtonFilter onClick={showDrawer}>
                         <ControlOutlined style={{ color: '#8a8888', fontSize: '24px' }} />
                     </ButtonFilter>
