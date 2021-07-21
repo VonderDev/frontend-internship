@@ -15,11 +15,7 @@ import {
 } from '../../shared/style/CommentPage.styled';
 import { ApiPostComment } from '../../apis/commentContent.api';
 import useSWR from 'swr';
-import CommentList from './CommentList';
-import { IComment } from '../../shared/interface/Comment.interface';
-import React from 'react';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
-import { BoxOfLikeAndComment } from '../../shared/style/BoardContent.styled';
 import { MONTHS } from '../../shared/months';
 
 function CommentOfContent() {
@@ -46,6 +42,8 @@ function CommentOfContent() {
     //------------------- GET USERNAME FOR SHOW WHEN POST COMMENT SUCCESS -------------------//
     const { getUser } = useAuthContext();
     const [username, setUsername] = useState('');
+    const token = localStorage.getItem('token');
+    console.log('Token use in Comment', token);
 
     const getUserInfo = async () => {
         const token = localStorage.getItem('token');
@@ -95,7 +93,6 @@ function CommentOfContent() {
                     {commentList?.map((item: any, index: any) => {
                         const dateCreatedComment = new Date(item.created_at);
                         const dateFormat = dateCreatedComment.getDate() + ' ' + MONTHS[dateCreatedComment.getMonth()] + ' ' + dateCreatedComment.getFullYear();
-                        // console.log('[Date format] =', dateFormat);
                         return (
                             <BoxOfCommentList style={{ height: '15vh' }} key={index}>
                                 <ProfileUserImage />
@@ -110,8 +107,17 @@ function CommentOfContent() {
                 </ContainerOfCommentList>
             )}
             <ContainerOfInput>
-                <CommentInput type="text" placeholder="แสดงความคิดเห็นของคุณ..." name="comment_body" value={commentData.comment_body} onChange={handleChangeOfComment} />
-                <IconSendMessage onClick={postComment} />
+                {!token ? (
+                    <>
+                        <CommentInput type="text" placeholder="กรุณาเข้าสู่ระบบ เพื่อเเสดงความคิดเห็น" disabled={true} />
+                        <IconSendMessage />
+                    </>
+                ) : (
+                    <>
+                        <CommentInput type="text" placeholder="แสดงความคิดเห็นของคุณ..." name="comment_body" value={commentData.comment_body} onChange={handleChangeOfComment} />
+                        <IconSendMessage onClick={postComment} />
+                    </>
+                )}
             </ContainerOfInput>
         </Container>
     );

@@ -1,3 +1,4 @@
+import { Alert } from 'antd';
 import styled from 'styled-components';
 import profileImage from '../images/profile.png';
 
@@ -77,4 +78,21 @@ export const LengthOfLikeAndComment = styled.span`
     font-weight: bolder;
     padding-left: 10px;
     padding-right: 36%;
+`;
+
+export const NotificationCreatedPostSuccess = styled(Alert)`
+    border-radius: 30px;
+    width: 35%;
+    background-color: #c8eee2;
+    border-color: #c8eee2;
+    font-weight: bolder;
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
+    top: 10%;
+    left: 32%;
+    z-index: 9999;
+    .ant-alert-message {
+        color: #125d45;
+    }
 `;
