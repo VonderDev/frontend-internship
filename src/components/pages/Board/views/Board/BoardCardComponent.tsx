@@ -20,7 +20,6 @@ const BoardCardComponent: React.FC<CardComponentProps> = ({ data }) => {
     }
     return (
         <>
-            <div style={{ margin: '10px 5%', width: '90%' }}>
                 {data
                     ? data.map((item: any, index: any) => {
                           const dateCreatedFilter = new Date(item.created_at);
@@ -60,7 +59,6 @@ const BoardCardComponent: React.FC<CardComponentProps> = ({ data }) => {
                           );
                       })
                     : null}
-            </div>
         </>
     );
 };

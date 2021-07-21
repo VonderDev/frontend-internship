@@ -100,15 +100,13 @@ const Filter = () => {
                 onclickFilter={onclickFilter}
             />
             <Box style={{ marginLeft: '20px', marginRight: '20px' }} align="flex-start" direction="column">
-                <SearchField style={{ marginBottom: '20px' }}>
+                <SearchField style={{ marginBottom: '20px'}}>
                     <InputSearch allowClear onChange={(e) => setSearchValue(e.target.value)} placeholder="Search Form" prefix={<SearchOutlined />} />
                     <ButtonFilter onClick={showDrawer}>
                         <ControlOutlined style={{ color: '#8a8888', fontSize: '24px' }} />
                     </ButtonFilter>
                 </SearchField>
-                
                 <BoardCardComponent data={tagFilterData} />
-          
             </Box>
             </Container>
     );

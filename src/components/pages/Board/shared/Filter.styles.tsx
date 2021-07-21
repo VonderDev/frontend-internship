@@ -43,7 +43,7 @@ export const Topic = styled.div`
 `;
 export const InputSearch = styled(Input)`
     border-radius: 10px;
-    width: 80%;
+    width: 100%;
     margin-right: 5px;
     height: 40px;
 `;
