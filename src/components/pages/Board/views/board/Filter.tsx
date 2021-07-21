@@ -2,7 +2,7 @@ import Container from 'components/Container/Container';
 import { Box } from 'shared/style/theme/component';
 import { ControlOutlined, SearchOutlined } from '@ant-design/icons';
 import { ButtonFilter, SearchField, InputSearch } from '../../shared/Filter.styles';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ApiPostFilter, ApiPostSearch } from '../../apis/board.api';
 import BoardCardComponent from './BoardCardComponent';
 import FilterDrawer from './FilterDrawer';
