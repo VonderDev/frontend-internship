@@ -1,12 +1,10 @@
 import Container from 'components/Container/Container';
 import { useEffect } from 'react';
 import { Box } from 'shared/style/theme/component';
-import ProfileBoardCard from './ProfileBoardCard';
 import useSWR from 'swr';
 import BoardCardComponent from 'components/pages/Board/views/Board/BoardCardComponent';
 
 function BoardHistory() {
-
     const { data: profile, error: errorProfile } = useSWR('/user/profile');
     const isLoading = !errorProfile && !profile;
     useEffect(() => {
@@ -21,9 +19,9 @@ function BoardHistory() {
             {isLoading ? (
                 <div>loading ...</div>
             ) : (
-            <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
-                <BoardCardComponent data={profile.contents}/>
-            </Box>
+                <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
+                    <BoardCardComponent data={profile.contents} />
+                </Box>
             )}
         </Container>
     );

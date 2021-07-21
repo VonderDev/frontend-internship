@@ -1,3 +1,4 @@
+import { MONTHS } from 'components/pages/Board/shared/months';
 import { BoardCard, CommentIcon, EllipsisText, HeartIcon, HistoryImage, HistoryText } from 'components/pages/Profile/shared/Profile.styles';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -10,21 +11,24 @@ interface CardComponentProps {
 
 const ProfileBoardCard: React.FC<CardComponentProps> = ({ data }) => {
     const history = useHistory();
+    if (data) {
+        data?.sort(function (a: any, b: any) {
+            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        });
+
+        console.log('☞ [sort Board created latest] :', data);
+    }
     return (
         <>
             {data
-                ? data.slice(0,3).map((item: any, index: any) => {
-                      const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+                ? data.slice(0, 3).map((item: any, index: any) => {
                       const dateCreatedFilter = new Date(item.created_at);
-                      const dateFormat = dateCreatedFilter.getDate() + ' ' + months[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
+                      const dateFormat = dateCreatedFilter.getDate() + ' ' + MONTHS[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
                       return (
-                          <BoardCard
-                              key={index}
-                              onClick={() => history.push(`/boardcontent/${item._id}`)}
-                          >
+                          <BoardCard key={index} onClick={() => history.push(`/boardcontent/${item._id}`)}>
                               <EllipsisText style={{ display: 'flex' }}>
                                   <HistoryImage src={item.image} />
-                                  <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '25%' }}>
+                                  <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '100px' }}>
                                       <HistoryText style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.title}</HistoryText>
                                       <Box direction="row" justify="flex-start" align="flex-start">
                                           <HistoryText style={{ fontSize: '12px', fontWeight: 'bold' }}>{transalateToThai(item.content_type)}</HistoryText>
