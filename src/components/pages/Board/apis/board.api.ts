@@ -4,7 +4,7 @@ const token = localStorage.getItem('token');
 
 export async function ApiPostSearch(searchData: string , body: object ) {
     console.log('[Search Data] :', searchData);
-    console.log('[Filter Data] :', body);
+    console.log('[Body Data] :', body);
 
     return await axios.post(`/user/search/${searchData}`, body)
     .then((res) => {

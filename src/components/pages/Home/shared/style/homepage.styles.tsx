@@ -106,8 +106,8 @@ export const ButtonSeeAllBoard = styled.div`
     font-size: 15px;
     padding-top: 20px;
     display: flex;
-    transform: translateX(280%);
-
+    position: relative;
+    margin-left: auto;
     &:hover {
         cursor: pointer;
     }
