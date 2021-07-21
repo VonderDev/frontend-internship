@@ -9,7 +9,8 @@ import { GridBox,
   CardTextData, 
   SpaceCard, 
   CoverImage, 
-  BoardTextInfo } from '../../shared/style';
+  BoardTextInfo, 
+  TextRecommendBoardTopic} from '../../shared/style';
 import { FormOutlined, LoadingOutlined, CalendarOutlined } from '@ant-design/icons';
 import { IIconText } from '../../shared/Card.interface';
 import { useHistory } from 'react-router';
@@ -39,12 +40,15 @@ export const CardTopTen = () => {
 
     return (
         <>
+            <Box direction="row" justify="space-between" align="flex-start" style={{ padding: '0px 20px 0px 20px' }}>
+            <Box direction="column" justify="center" align="center">
+                <TextRecommendBoardTopic>10 อันดับสูงสุด</TextRecommendBoardTopic>
+            </Box>
+            </Box>
             {isLoading ? (
-                <div>
-                    <Box direction="column" justify="center" align="center" style={{ padding: '10% 0% 10% 0%' }}>
+                <Box direction="column" justify="center" align="center" style={{ padding: '10% 0% 10% 0%' }}>
                         <Spin indicator={antIcon} tip="Loading..." />
-                    </Box>
-                </div>
+                </Box>
             ) : (
                 <GridBox>
                     <SpaceCard direction="horizontal">

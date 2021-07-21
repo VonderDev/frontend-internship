@@ -14,7 +14,7 @@ import { BoardCard,
 import { LoadingOutlined } from '@ant-design/icons';
 import { HeartIcon } from 'components/pages/Profile/shared/Profile.styles';
 import { transalateToThai } from 'utils/transalator/transalator';
-
+import { TextRecommendBoardTopic, ButtonSeeAllBoard } from '../../shared/style';
 const { Meta } = Card;
 
 const IconText = ({ icon, text }: IIconText) => (
@@ -38,6 +38,14 @@ export const CardLatest = () => {
 
     return (
         <>
+            <Box direction="row" justify="space-between" align="flex-start" style={{ padding: '0px 20px 0px 20px' ,margin: '10px 0px'}}>
+                <Box direction="column" justify="center" align="center">
+                        <TextRecommendBoardTopic>ล่าสุด</TextRecommendBoardTopic>
+                </Box>
+                <Box direction="column" justify="center" align="center">
+                    <ButtonSeeAllBoard onClick={() => history.push('/filter')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
+                </Box>
+            </Box>
             {isLoading ? (
                 <div>
                     <Box direction="column" justify="center" align="center" style={{ padding: '10% 0% 10% 0%' }}>
@@ -46,7 +54,8 @@ export const CardLatest = () => {
                 </div>
             ) : (
                 <>
-                    {data?.map((item: any, index: any) => {
+                <div style={{margin:'0px 5%'}}>
+                    {data?.slice(0, 3).map((item: any, index: any) => {
                         const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
                         const cardDate = new Date(item?.created_at);
                         const dateFormat = cardDate.getDate() + months[cardDate.getMonth()] + cardDate.getFullYear();
@@ -87,6 +96,7 @@ export const CardLatest = () => {
                             </BoardCard>
                         );
                     })}
+                    </div>
                 </>
             )}
         </>

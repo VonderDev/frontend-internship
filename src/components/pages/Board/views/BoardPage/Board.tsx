@@ -12,34 +12,10 @@ function Board() {
     const history = useHistory();
 
     return (
-        <Container header={{ left: 'back', right: 'menu', title: 'กระทู้' }}>
-            <div>
-                <Filter />
-
-                <Box direction="row" justify="space-between" align="flex-start" style={{ padding: '0px 20px 0px 20px' }}>
-                    <Box direction="column" justify="center" align="center">
-                        <TextRecommendBoardTopic>10 อันดับสูงสุด</TextRecommendBoardTopic>
-                    </Box>
-                </Box>
-
-                <div>
-                    <CardTopTen />
-                </div>
-
-                <Box direction="row" justify="space-between" align="flex-start" style={{ padding: '0px 20px 0px 20px' }}>
-                    <Box direction="column" justify="center" align="center">
-                        <TextRecommendBoardTopic>ล่าสุด</TextRecommendBoardTopic>
-                    </Box>
-                    <Box direction="column" justify="center" align="center">
-                        <ButtonSeeAllBoard onClick={() => history.push('/boardLatest')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
-                    </Box>
-                </Box>
-
-                <div>
-                    <CardLatest />
-                </div>
+            <div style={{marginTop: '15px'}}>
+                <CardTopTen />
+                <CardLatest />
             </div>
-        </Container>
     );
 }
 

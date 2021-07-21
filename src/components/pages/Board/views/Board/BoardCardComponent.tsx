@@ -12,13 +12,22 @@ const FilterCard: React.FC<CardComponentProps> = ({ data }) => {
     const history = useHistory();
     return (
         <>
+        <div style={{margin:'10px 5%' ,width: '90%'}}>
             {data
                 ? data.map((item: any, index: any) => {
                       const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
                       const dateCreatedFilter = new Date(item.created_at);
                       const dateFormat = dateCreatedFilter.getDate() + ' ' + months[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
                       return (
+<<<<<<< HEAD
                           <BoardCard key={index} onClick={() => history.push(`/boardcontent/${item._id}`)}>
+=======
+                   
+                          <BoardCard
+                              key={index}
+                              onClick={() => history.push(`/boardcontent/${item._id}`)}
+                          >
+>>>>>>> BoardPage
                               <EllipsisText style={{ display: 'flex' }}>
                                   <div style={{}}>
                                       <HistoryImage src={item.image} />
@@ -49,9 +58,11 @@ const FilterCard: React.FC<CardComponentProps> = ({ data }) => {
                                   </Box>
                               </EllipsisText>
                           </BoardCard>
+                        
                       );
                   })
                 : null}
+            </div>
         </>
     );
 };
