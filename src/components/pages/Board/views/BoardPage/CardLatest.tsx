@@ -42,13 +42,13 @@ export const CardLatest = () => {
                 <Box direction="column" justify="center" align="center">
                         <TextRecommendBoardTopic>ล่าสุด</TextRecommendBoardTopic>
                 </Box>
-                <Box direction="column" justify="center" align="center">
+                <Box direction="row" justify="center" align="center" style={{ alignSelf : 'center'}}>
                     <ButtonSeeAllBoard onClick={() => history.push('/filter')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
                 </Box>
             </Box>
             {isLoading ? (
                 <div>
-                    <Box direction="column" justify="center" align="center" style={{ padding: '10% 0% 10% 0%' }}>
+                    <Box direction="row" justify="center" align="center" style={{ padding: '10% 0% 10% 0%' }}>
                         <Spin indicator={antIcon} tip="Loading..." />
                     </Box>
                 </div>
