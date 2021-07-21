@@ -20,7 +20,7 @@ function BoardHistory() {
                 <div>loading ...</div>
             ) : (
                 <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
-                    <BoardCardComponent data={profile.contents} />
+                    <BoardCardComponent data={profile?.contents} />
                 </Box>
             )}
         </Container>

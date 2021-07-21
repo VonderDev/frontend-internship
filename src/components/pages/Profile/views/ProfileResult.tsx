@@ -31,8 +31,8 @@ function ProfileResult() {
                 <div>loading ...</div>
             ) : (
                 <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
-                    {profile?.results.map((item: any, index: any) => {
-                        const dateCreatedFilter = new Date(item[0].created_at);
+                    {profile?.results?.map((item: any, index: any) => {
+                        const dateCreatedFilter = new Date(item[0]?.created_at);
                         const dateFormat = dateCreatedFilter.getDate() + ' ' + MONTHS[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
                         console.log(dateFormat);
                         return (

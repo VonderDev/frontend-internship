@@ -50,7 +50,7 @@ function Profile() {
                     <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
                         แก้ไขข้อมูลส่วนตัว
                     </ButtonStyle>
-                    <ProfileResultCard profile={profile.results} />
+                    <ProfileResultCard profile={profile?.results} />
                     <RowStyled>
                         <Col span={16}>
                             <TextTopic2>กระทู้ของคุณ</TextTopic2>
@@ -59,7 +59,7 @@ function Profile() {
                             <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>
                         </Col>
                     </RowStyled>
-                    <ProfileBoardCard data={profile.contents} />
+                    <ProfileBoardCard data={profile?.contents} />
                 </Box>
             )}
         </Container>

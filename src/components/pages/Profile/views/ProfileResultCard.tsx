@@ -10,7 +10,7 @@ const ProfileResultCard: React.FC<CardComponentProps> = ({ profile }) => {
     const history = useHistory();
     if (profile) {
         profile?.sort(function (a: any, b: any) {
-            return new Date(b[0].created_at).getTime() - new Date(a[0].created_at).getTime();
+            return new Date(b[0]?.created_at).getTime() - new Date(a[0]?.created_at).getTime();
         });
 
         console.log('☞ [sort Board created latest] :', profile);
@@ -26,7 +26,7 @@ const ProfileResultCard: React.FC<CardComponentProps> = ({ profile }) => {
                 </Col>
             </RowStyled>
             {profile?.slice(0, 1).map((item: any, index: any) => {
-                const dateCreatedFilter = new Date(item[0].created_at);
+                const dateCreatedFilter = new Date(item[0]?.created_at);
                 const dateFormat = dateCreatedFilter.getDate() + ' ' + MONTHS[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
                 console.log(dateFormat);
                 return (
