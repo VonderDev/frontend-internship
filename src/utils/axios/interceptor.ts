@@ -7,8 +7,7 @@ axios.interceptors.request.use(
         const tokenGuest = localStorage.getItem('tokenGuest');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
-        }
-        if (tokenGuest) {
+        }else if(tokenGuest) {
             config.headers.Authorization = `Bearer ${tokenGuest}`;
         }
         config.baseURL = `${process.env.REACT_APP_API_URL}`;

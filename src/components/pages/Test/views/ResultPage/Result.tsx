@@ -23,17 +23,14 @@ const Result = () => {
     const tokenGuest = localStorage.getItem('tokenGuest');
 
     //-------------- CREATE MAX SCORE LIST USE SWR--------------//
-    const { data: resultData, error } = useSWR('/user/newResult');
-    // const { data: resultDataGuest, error: errorResultDataGuest } = useSWR('/guest/result');
+
+    const { data: resultData, error } = token?useSWR('/user/newResult'): useSWR('/guest/result');
 
     useEffect(() => {
         if (resultData && token) {
             setResultData(resultData.filter((data: { score: number }) => data.score === Math.max(...Object.keys(resultData).map((key) => resultData[key].score))));
             console.log('Result Data', resultData);
         }
-        // if (resultDataGuest && tokenGuest) {
-        //     setResultData(resultDataGuest.filter((data: { score: number }) => data.score === Math.max(...Object.keys(resultDataGuest).map((key) => resultDataGuest[key].score))));
-        // }
     }, [resultData]);
 
     const downloadImage = () => {

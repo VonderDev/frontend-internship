@@ -88,7 +88,12 @@ const ResultFeatures = () => {
                 skill={detailCharacter.skill}
                 img_charactor={detailCharacter.image_charactor}
             />
-            <ButtonGoHomeInResultFeature onClick={() => history.push('/')}>กลับหน้าหลัก</ButtonGoHomeInResultFeature>
+            <ButtonGoHomeInResultFeature onClick={() => {
+                history.push('/')
+                const tokenGuest = localStorage.getItem('tokenGuest');
+                if(tokenGuest){
+                    localStorage.removeItem('tokenGuest')
+                } }}>กลับหน้าหลัก</ButtonGoHomeInResultFeature>
         </>
     );
 };

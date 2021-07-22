@@ -42,6 +42,10 @@ function TestStory() {
     };
 
     const handleOk = () => {
+        const tokenGuest = localStorage.getItem('tokenGuest');
+        if(tokenGuest){
+            localStorage.removeItem('tokenGuest')
+        } 
         setConfirmLoading(true);
         setTimeout(() => {
             setVisible(false);

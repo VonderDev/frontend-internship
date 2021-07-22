@@ -132,7 +132,7 @@ function TestQuestion() {
                 setTimeout(()=>{
                     monkey.pause();
                     audio.volume = 1
-                },3000)
+                },8000)
             }else if (currentCutScnen + 1 === 13){
                 changeScene('S6.1')
                 setCutScene(true)// start cutscene v.14
@@ -204,6 +204,10 @@ function TestQuestion() {
         setVisible(true);
     };
     const handleOk = () => {
+        const tokenGuest = localStorage.getItem('tokenGuest');
+        if(tokenGuest){
+            localStorage.removeItem('tokenGuest')
+        } 
         setConfirmLoading(true);
         setTimeout(() => {
             setVisible(false);

@@ -37,7 +37,6 @@ import bearHappy from '../Assets/Item/Charecter/Bear_Friendly.png'
 import bearAngry from '../Assets/Item/Charecter/Bear_Angry.png'
 import raccoonHappy from '../Assets/Item/Charecter/Raccoon_Friendly.png'
 import raccoonAngry from '../Assets/Item/Charecter/Raccoon_Angry.png'
-import monkey from 'components/GameElement/Assets/Item/Monkey/Monkey_Flat_Final.json'
 //@ts-ignore
 import PIXISpine  from '../PixiStore/pixi-spine';
 
@@ -66,7 +65,6 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     app.stage.addChild(jungleScene);
     app.stage.addChild(endScene);
     app.stage.addChild(lastScene);
-    // app.stage.addChild(secondScene2);
 
     // ------------------- Preload Asset --------------//
     let sprites: any = {}; 
@@ -111,9 +109,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
             .add('raccoonHappy', raccoonHappy)
             .add('raccoonAngry', raccoonAngry)
             //@ts-ignore
-            // .add("Monkey", monkey);
-            .add("Monkey", 'https://dh8bdvjvmxojs.cloudfront.net/go/character/VND-001/VND-001.json');
-            // .add("Monkey", 'https://vonder-me-s3.s3.ap-southeast-1.amazonaws.com/Monkey/Monkey_Flat_Final.json');
+            .add("Monkey", 'https://vonder-me-s3.s3.ap-southeast-1.amazonaws.com/Monkey/Monkey_Flat_Final.json');
       loader.load((loader, resource) => {
       console.log("resource", resource);
       //background
@@ -166,7 +162,6 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.RaccoonHappy = new PIXI.Sprite(resource.raccoonHappy.texture);
 
         console.log('Monkey',resource.Monkey)
-        console.log('Path:',monkey)
     });
     const showProgress = (e : any) =>{
       console.log(e.progress.toFixed(2) + '% loader')
@@ -249,9 +244,6 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         }else if (prop == 'S6.1'){
             goSceneEnd();
         }
-      //   else if (prop == 'angry'){
-      //   goScene2last()
-      // }
       }
 
       // ------------------- Assete each of Scene--------------//
@@ -386,68 +378,6 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         happyFriend();
 
       }
-
-      // function gameScene2_2 () {
-      //   //Background 
-      //   sprites.BgSky.scale.set(0.7);
-      //   secondScene.addChild(sprites.BgSky)
-  
-      //   sprites.BgGround.scale.set(0.7);
-      //   sprites.BgGround.anchor.set(0,-1);
-      //   secondScene.addChild(sprites.BgGround)
-  
-      //   sprites.BgTree.scale.set(0.7);
-      //   sprites.BgTree.anchor.set(0,-1);
-      //   secondScene.addChild(sprites.BgTree);
-  
-      //   sprites.Cloud1.scale.set(0.5);
-      //   sprites.Cloud1.position.set(10, 20);
-      //   secondScene.addChild(sprites.Cloud1)
-  
-      //   sprites.Cloud2.scale.set(0.5);
-      //   sprites.Cloud2.position.set(500, 150);
-      //   secondScene.addChild(sprites.Cloud2)
-      //   //Item 
-  
-      //   sprites.TreeB1.scale.set(0.4)
-      //   sprites.TreeB1.position.set(250,400);
-      //   secondScene.addChild(sprites.TreeB1)
-  
-      //   sprites.TreeB3.scale.set(0.3)
-      //   sprites.TreeB3.position.set(160,250);
-      //   secondScene.addChild(sprites.TreeB3)
-  
-      //   sprites.TreeB2.scale.set(0.4)
-      //   sprites.TreeB2.position.set(0,300);
-      //   secondScene.addChild(sprites.TreeB2)
-  
-      //   sprites.TreeF1.scale.set(0.7)
-      //   sprites.TreeF1.position.set(300,80);
-      //   secondScene.addChild(sprites.TreeF1)
-  
-      //   sprites.Brush3.scale.set(0.3);
-      //   sprites.Brush3.position.set(-80,600);
-      //   secondScene.addChild(sprites.Brush3)
-  
-      //   sprites.TreeF2.scale.set(0.9);
-      //   sprites.TreeF2.position.set(-250,-100);
-      //   secondScene.addChild(sprites.TreeF2)
-  
-      //   sprites.Brush4.scale.set(0.3);
-      //   sprites.Brush4.position.set(-5,700);
-      //   secondScene.addChild(sprites.Brush4)
-  
-      //   sprites.Brush2.scale.set(0.5);
-      //   sprites.Brush2.position.set(350,550);
-      //   secondScene.addChild(sprites.Brush2)
-  
-      //   sprites.Brush1.scale.set(0.6);
-      //   sprites.Brush1.position.set(450,600);
-      //   secondScene.addChild(sprites.Brush1)
-
-      //   angryFriend();
-
-      // }
 
       function gameScene3 () {
         //Background 
@@ -610,12 +540,12 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
              sprites.Brush1.position.set(450,600);
              jungleScene.addChild(sprites.Brush1)
 
-             sprites.Monkey.scale.set(0.1);
-             sprites.Monkey.position.set(400,600);
+             sprites.Monkey.scale.set(0.2);
+             sprites.Monkey.position.set(400,700);
              jungleScene.addChild( sprites.Monkey)
-             if (sprites.Monkey.state.hasAnimation('Attack')) {
+             if (sprites.Monkey.state.hasAnimation('Playing Music')) {
               // run forever, little boy!
-              sprites.Monkey.state.setAnimation(0, 'Attack', true , true );
+              sprites.Monkey.state.setAnimation(0, 'Playing Music', true , true );
               // dont run too fast
               sprites.Monkey.state.timeScale = 0.1;
           }
@@ -672,18 +602,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         const verticesX = 5;
         const verticesY = 10;
         const waterTexture = PIXI.Texture.from(water);
-        // const bgWater = new PIXI.Sprite(waterTexture);
-        // bgWater.scale.set(0.7);
-        // lastScene.addChild(bgWater)
         const planeWater = new PIXI.SimplePlane(waterTexture, verticesX, verticesY);
                
         const texture = PIXI.Texture.from(shadow);
-        // const shadowS6 = new PIXI.Sprite(texture);
-        // shadowS6.scale.set(0.5);
-        // shadowS6.position.set(20,150);
-        // lastScene.addChild(shadowS6 )
-  
-            // Create the simple plane
   
       const plane = new PIXI.SimplePlane(texture, verticesX, verticesY);
   
@@ -694,9 +615,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       planeWater.scale.set(0.7);
       lastScene.addChild(planeWater);
       lastScene.addChild(plane);
-  
-      //
-      
+
       // Get the buffer for vertice positions.
       const bufferWater = planeWater.geometry.getBuffer('aVertexPosition');
       const buffer = plane.geometry.getBuffer('aVertexPosition');
@@ -743,14 +662,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         secondScene.on('pointerdown',  goScene3);
         gameScene2();
       }
-      // function goScene2last() {
-      //     console.log("chang to Scene2.2")
-      //     secondScene2.visible = true;
-      //     secondScene2.interactive = true;
-      //     secondScene2.buttonMode = true;
-      //     secondScene2.on('pointerdown', goScene3);
-      //     gameScene2_2 ()
-      // }
+
       function goScene3() {
         console.log("chang to Scene3")
         homeScene.visible = true;
