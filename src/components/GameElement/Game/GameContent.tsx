@@ -209,6 +209,18 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       talkAction.visible = false;
       pointAction.visible = false;
 
+      firstScene.pivot.set(0,1)
+      secondScene.pivot.set(0,1)
+      homeScene.pivot.set(0,1)
+      doorScene.pivot.set(0,1)
+      inHomeScene.pivot.set(0,1)
+      inHome2Scene.pivot.set(0,1)
+      inHome3Scene.pivot.set(0,1)
+      jungleScene.pivot.set(0,1)
+      endScene.pivot.set(0,1)
+      lastScene.pivot.set(0,1)
+
+
       const ticker = new PIXI.Ticker();
       function animate() {
         if(sprites.Cloud1.x + sprites.Cloud1.width < firstScene.width){
@@ -282,7 +294,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       }
 
       // ------------------- Assete each of Scene--------------//
-      function gameScene1() {
+      function gameScene1() {    
         //Background 
         sprites.BgSky.scale.set(0.7);
         firstScene.addChild(sprites.BgSky)
