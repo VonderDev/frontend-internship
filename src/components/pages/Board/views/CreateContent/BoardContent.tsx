@@ -131,22 +131,26 @@ function BoardContent() {
                     {contentData?.tag?.map((item: any, index: any) => {
                         return <CategoryTag key={index}>#{transalateToThai(item)}</CategoryTag>;
                     })}
+                    <div style={{display:'flex' , alignItems:'center' , marginBottom:'30px' , marginTop:'10px'}}>
                     <ProfileImage />
                     <ContainerUserNameAndDate>
                         <AuthorName>{contentData?.author_username}</AuthorName>
                         <DateCreatedContent>{dateCreatedFormat}</DateCreatedContent>
                     </ContainerUserNameAndDate>
+                    </div>
                     <ImageOfContent src={contentData?.image}></ImageOfContent>
                     <ContentBody>{contentData?.content_body}</ContentBody>
 
                     <BoxOfLikeAndComment>
+                        <span style={{display:'flex' , alignItems:'center'}}>
                         {isLike ? (
                             <HeartFilled style={{ color: '#F0685B', fontSize: '40px' }} onClick={unLikeOfBoardContent} />
                         ) : (
                             <HeartOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} onClick={addLikeOfBoardContent} />
                         )}
                         <LengthOfLikeAndComment>{likeLength}</LengthOfLikeAndComment>
-                        <span
+                        </span>
+                        <span style={{display:'flex' , alignItems:'center'}}
                             onClick={() => {
                                 if (paramObjectId) {
                                     history.push(`/boardcontent/${paramObjectId?.id}/comment`);

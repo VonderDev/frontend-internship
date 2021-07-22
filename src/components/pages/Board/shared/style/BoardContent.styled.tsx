@@ -33,16 +33,15 @@ export const ContentBody = styled.div`
 
 export const ProfileImage = styled.div`
     background-image: url(${profileImage});
-    width: 15%;
-    height: 10vh;
+    width: 69.5px;
+    height: 76px;
     background-position: center;
     background-size: cover;
     border-radius: 50%;
-    margin-top: 15px;
+    margin-right: 10px;
 `;
 
 export const ContainerUserNameAndDate = styled.div`
-    transform: translateY(-130%) translateX(18%);
 `;
 
 export const TopicTag = styled.span`
@@ -64,12 +63,13 @@ export const AuthorName = styled.div`
 
 export const BoxOfLikeAndComment = styled.div`
     padding-bottom: 5%;
-    display: inline;
-    position: relative;
-    left: 18%;
+    display: flex;
+    justify-content: space-evenly;
+    //position: relative;
+    /* left: 18%;
     :hover {
         cursor: pointer;
-    }
+    } */
 `;
 
 export const LengthOfLikeAndComment = styled.span`
