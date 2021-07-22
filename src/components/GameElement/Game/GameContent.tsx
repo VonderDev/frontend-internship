@@ -33,6 +33,8 @@ import lake from '../Assets/Background/Background_Lake.png'
 import water from '../Assets/Background/Water.png'
 import shadow from '../Assets/Background/Shadow.png'
 import TreeFnew from '../Assets//Item/Tree/TreeF_1new.png'
+import monkey from '../Assets/Item/Monkey/Monkey_Flat_Final.json'
+import PIXISpine  from '../PixiStore/pixi-spine';
 
 const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 
@@ -61,7 +63,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 
     //Preload asset
     let sprites: any = {}; 
-    window.onload = function(){
+    //  function loadeAsset (){
       const loader = new PIXI.Loader();
       loader.add("ground", ground)
             .add("sky", sky)
@@ -97,6 +99,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
             .add('water', water)
             .add('shadow', shadow)
             .add('TreeFnew', TreeFnew)
+            // .add("Monekey",'../Assets/Item/Monkey/Monkey_Flat_Final.json');
       loader.load((loader, resource) => {
       console.log("resource", resource);
       //background
@@ -139,6 +142,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.Sofa2 =  new PIXI.Sprite(resource.sofa2.texture);
         sprites.Sewing =  new PIXI.Sprite(resource.sewing.texture);
         sprites.Tools =  new PIXI.Sprite(resource.tools.texture);
+
+        //Animate
+        // sprites.Monkey =  new PIXISpine.Spine(resource.Monekey.spineData);
     });
     const showProgress = (e : any) =>{
       console.log(e.progress.toFixed(2) + '% loader')
@@ -156,7 +162,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     loader.onProgress.add(showProgress);
     loader.onComplete.add(doneLoading);
     loader.onError.add(loadError);
-    }
+    // }
 
     function initial(){
       firstScene.visible = true;
@@ -514,6 +520,14 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
              sprites.Brush1.scale.set(0.6);
              sprites.Brush1.position.set(450,600);
              jungleScene.addChild(sprites.Brush1)
+
+            //  jungleScene.addChild( sprites.Monkey)
+            //  if (sprites.Monkey.state.hasAnimation('Talk')) {
+            //   // run forever, little boy!
+            //   sprites.Monkey.state.setAnimation(0, 'run', true);
+            //   // dont run too fast
+            //   sprites.Monkey.state.timeScale = 0.1;
+          // }
       }
       function gameScene6() {
                //Background 

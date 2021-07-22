@@ -61,14 +61,18 @@ function TestQuestion() {
     const [cutScene, setCutScene] = useState<boolean>(false);
     const [currentCutScnen, setCurrentCutScene] = useState<number>(0)
     const [currentMessage, setCurrentMessage] = useState<number>(0)
+
+    //---------------- Play Sound ----------------//
     const [audio] = useState(new Audio(Sound));
     const [playing, setPlaying] = useState(false);
     const toggle = () => {
         setPlaying(!playing);
     }
+
     useEffect(() => {
         playing ? audio.play() : audio.pause();
         console.log(playing)
+        console.log('Winndow size:',window.innerWidth)
       },
       [playing]
     );
@@ -180,6 +184,14 @@ function TestQuestion() {
         }
     }
 
+
+        window.onload = function(){
+        changeScene('Start')
+        setTimeout(() => {
+            setPlaying(true);
+        }, 2000);
+    }
+
     function onPrevQuestion() {
         if (!questionList) return;
         if (currentQuestion - 1 < 0) return;
@@ -223,16 +235,6 @@ function TestQuestion() {
         console.log('Clicked cancel button');
         setVisible(false);
     };
-
-    // const questionListFetcher = (key: any) =>
-    //     fetch(key).then(async (res) => {
-    //         console.log('Fetcher triggered');
-    //         const data = await res.json();
-    //         setQuestionList(data); // store all question into the hook
-    //         const response = data;
-    //         setCurrentQuestionDetail(response[currentQuestion]);
-    //         return data;
-    //     });
 
     const { data, error } = useSWR('/questions');
     if (error) return <div>failed to load data , please waiting</div>;

@@ -51,8 +51,7 @@ const TestPixi = () => {
     );
 
     return(
-        <Container header={{ title: 'Pixi', right: 'menu' ,left:(<button onClick={toggle}>{playing? <p>Off</p> :  <p>On</p>}</button>)}}>
-            
+        <Container header={null}>
             <PixiProvider>
                 <PixiApp content={GameContent}/>
             </PixiProvider>
@@ -66,6 +65,7 @@ const TestPixi = () => {
                 , opacity: 0.5}}>
                     <h1 style={{fontSize: '20px'}}>This is React Content [{value} ]</h1>
                     <button style={{width: '50px' , height: '50px'}} onClick={onNext}> + </button>
+                    <button onClick={toggle}>{playing? <p>Off</p> :  <p>On</p>}</button>
                 </div>
                 </Box>
         </Container>
