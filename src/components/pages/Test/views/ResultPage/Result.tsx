@@ -48,9 +48,11 @@ const Result = () => {
                             <ContainerResultSummarize>
                                 <HeaderResultFeature>คุณมีลักษณะเด่น {result.length} ด้าน</HeaderResultFeature>
                                 <ImageCharactorCarousel src={item.img_result} />
-                                <ButtonSaveResult href={item.img_result} download onClick={() => downloadImage()}>
-                                    <DownloadOutlined />
-                                </ButtonSaveResult>
+                                {Object.keys(paramObjectId).length ? null : (
+                                    <ButtonSaveResult href={item.img_result} download onClick={() => downloadImage()}>
+                                        <DownloadOutlined />
+                                    </ButtonSaveResult>
+                                )}
                             </ContainerResultSummarize>
                         </div>
                     );

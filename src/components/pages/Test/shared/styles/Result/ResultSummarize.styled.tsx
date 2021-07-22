@@ -84,7 +84,7 @@ export const ButtonSaveResult = styled.a`
     background-color: white;
     color: var(--Blue-300);
     border-radius: 12px;
-    margin-left: 30%;
+    margin-left: 80%;
 `;
 
 export const ImgContainer = styled.img``;
