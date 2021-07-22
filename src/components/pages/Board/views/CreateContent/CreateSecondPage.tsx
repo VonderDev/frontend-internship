@@ -8,6 +8,7 @@ import {
     ContainerContentType,
     ContentTypeButton,
     CountOfPageCreateContent,
+    CountOfPageTwo,
     InputHashtagInDrawer,
     OptionHashtag,
     TextTopicContent,
@@ -107,7 +108,7 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                     <ButtonSummitPost htmlType="submit" onClick={postContent}>
                         สร้างกระทู้
                     </ButtonSummitPost>
-                    <CountOfPageCreateContent>{countPage} / 2</CountOfPageCreateContent>
+                    <CountOfPageTwo>{countPage} / 2</CountOfPageTwo>
                 </>
             )}
         </>

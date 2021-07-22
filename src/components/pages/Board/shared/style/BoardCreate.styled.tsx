@@ -41,7 +41,7 @@ export const ButtonGoNextCreateContent = styled(Button)`
     width: 75%;
     height: 7vh;
     font-size: 16px;
-    transform: translateX(13%) translateY(89%);
+    transform: translateX(13%) translateY(130%);
     font-size: 16px;
     position: sticky;
     &:hover {
@@ -82,7 +82,7 @@ export const ButtonSummitPost = styled(Button)`
     display: block;
     margin: auto;
     position: sticky;
-    transform: translateY(798%);
+    transform: translateY(790%);
     &:hover {
         cursor: pointer;
     }
@@ -94,10 +94,20 @@ export const CountOfPageCreateContent = styled.div`
     align-items: center;
     font-size: 16px;
     color: var(--Gray-400);
-    bottom: 13%;
-    left: 0;
-    right: 0;
-    position: fixed;
+    transform: translateY(-135%);
+
+    /* position: absolute; */
+`;
+
+export const CountOfPageTwo = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: var(--Gray-400);
+    transform: translateY(1380%);
+
+    /* position: absolute; */
 `;
 
 export const ButtonOfCategory = styled(Button)`
