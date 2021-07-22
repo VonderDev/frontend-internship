@@ -15,30 +15,7 @@ function ButtonLoadingStart() {
     //
     const history = useHistory();
     const [isLoading, setLoading] = useState(false);
-    // const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ questionIndex: 0, questionBody: '', category_id: 0 });
-    // const [currentQuestion, setCurrentQuestion] = useState<number>(0);
-    // const [questionList, setQuestionList] = useState<Array<IQuestion> | null>(null);
-
-    // useEffect(() => {
-    //     if (!questionList) return;
-    //     setCurrentQuestionDetail(questionList[currentQuestion]);
-    // }, [currentQuestion, questionList]);
-
-    // async function getTestData() {
-    //     const response = await ApiGetTestData();
-    //     if (response) {
-    //         setQuestionList(response); // store all question into the hook
-    //         const resp = response;
-    //         setCurrentQuestionDetail(resp[currentQuestion]);
-    //     } else {
-    //         console.log('error');
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     getTestData();
-    // }, []);
-
+ 
     const fetchData = () => {
         console.log(isLoading);
         setLoading(true);
