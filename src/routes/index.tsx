@@ -19,7 +19,7 @@ import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion'
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
 import BoardCreateContent from 'components/pages/Board/views/CreateContent/BoardCreateContent';
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
-import Filter from 'components/pages/Board/views/Board/Filter'
+import Filter from 'components/pages/Board/views/Board/Filter';
 import BoardContent from 'components/pages/Board/views/CreateContent/BoardContent';
 import TestPixi from 'components/GameElement/Game/testpixi';
 import CommentOfContent from 'components/pages/Board/views/Comment/CommentOfContent';
@@ -37,11 +37,11 @@ function Routing() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/test" component={Test} />
-            <PrivateRoute exact path="/testoverview" component={TestOverview} />
-            <PrivateRoute exact path="/teststory" component={TestStory} />
-            <PrivateRoute exact path="/testquestion">
-                    <TestQuestion />
-            </PrivateRoute>
+            <Route exact path="/testoverview" component={TestOverview} />
+            <Route exact path="/teststory" component={TestStory} />
+            <Route exact path="/testquestion">
+                <TestQuestion />
+            </Route>
             <Route exact path="/resultoverview" component={ResultOverview} />
             <Route exact path="/resultinfo" component={ResultInfo} />
             <PrivateRoute exact path="/editProfile" component={editProfile} />
