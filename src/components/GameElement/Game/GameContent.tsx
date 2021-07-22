@@ -28,12 +28,13 @@ import sofa2 from '../Assets/Item/InHome/Sofa2.png'
 import bgS43 from '../Assets/Background/bg_s43.png'
 import sewing from '../Assets/Item/InHome/Sewing.png'
 import tools from '../Assets/Item/InHome/Tools.png'
-import bigTree from '../Assets//Item/Tree/BigTree.png'
+import bigTree from '../Assets/Item/Tree/BigTree.png'
 import lake from '../Assets/Background/Background_Lake.png'
 import water from '../Assets/Background/Water.png'
 import shadow from '../Assets/Background/Shadow.png'
 import TreeFnew from '../Assets//Item/Tree/TreeF_1new.png'
-import monkey from '../Assets/Item/Monkey/Monkey_Flat_Final.json'
+import monkey from 'components/GameElement/Assets/Item/Monkey/Monkey_Flat_Final.json'
+//@ts-ignore
 import PIXISpine  from '../PixiStore/pixi-spine';
 
 const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
@@ -99,7 +100,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
             .add('water', water)
             .add('shadow', shadow)
             .add('TreeFnew', TreeFnew)
-            // .add("Monekey",'../Assets/Item/Monkey/Monkey_Flat_Final.json');
+            //@ts-ignore
+            // .add("Monkey", monkey);
+            .add("Monkey", 'https://dh8bdvjvmxojs.cloudfront.net/go/character/VND-001/VND-001.json');
       loader.load((loader, resource) => {
       console.log("resource", resource);
       //background
@@ -144,7 +147,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.Tools =  new PIXI.Sprite(resource.tools.texture);
 
         //Animate
-        // sprites.Monkey =  new PIXISpine.Spine(resource.Monekey.spineData);
+        //@ts-ignore
+        sprites.Monkey =  new PIXISpine.Spine(resource.Monkey.spineData);
+        console.log('Monkey',resource.Monkey)
     });
     const showProgress = (e : any) =>{
       console.log(e.progress.toFixed(2) + '% loader')
@@ -378,9 +383,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.Cloud2.position.set(500, 150);
         homeScene.addChild(sprites.Cloud2)
   
-        sprites.BgTree.scale.set(0.6);
-        sprites.BgTree.position.set(0,100);
-        homeScene.addChild(sprites.BgTree)
+        // sprites.BgTree.scale.set(0.6);
+        // sprites.BgTree.position.set(0,100);
+        // homeScene.addChild(sprites.BgTree)
   
         sprites.Home.scale.set(0.5);
         sprites.Home.position.set(100,200);
@@ -521,13 +526,15 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
              sprites.Brush1.position.set(450,600);
              jungleScene.addChild(sprites.Brush1)
 
-            //  jungleScene.addChild( sprites.Monkey)
-            //  if (sprites.Monkey.state.hasAnimation('Talk')) {
-            //   // run forever, little boy!
-            //   sprites.Monkey.state.setAnimation(0, 'run', true);
-            //   // dont run too fast
-            //   sprites.Monkey.state.timeScale = 0.1;
-          // }
+             sprites.Monkey.scale.set(0.1);
+             sprites.Monkey.position.set(400,600);
+             jungleScene.addChild( sprites.Monkey)
+             if (sprites.Monkey.state.hasAnimation('Attack')) {
+              // run forever, little boy!
+              sprites.Monkey.state.setAnimation(0, 'Attack', true , true );
+              // dont run too fast
+              sprites.Monkey.state.timeScale = 0.1;
+          }
       }
       function gameScene6() {
                //Background 
@@ -563,7 +570,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
                endScene.addChild(sprites.Brush4)
          
                sprites.Brush2.scale.set(0.5);
-               sprites.Brush2.position.set(-100,450);
+               sprites.Brush2.position.set(-200,450);
                endScene.addChild(sprites.Brush2);
   
                sprites.TreeFnew.scale.set(0.7,0.8);

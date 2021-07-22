@@ -1,4 +1,5 @@
 import * as PIXI from "pixi.js";
+//@ts-ignore
 import PIXISpine  from './pixi-spine.js';
 import monkey from '../Assets/Item/Monkey/Monkey_Flat_Final.json'
 
@@ -60,6 +61,7 @@ let monkeyAction = {
                 console.log("resources from app loader", resources);
                 let spineData = resources["Monekey"].Monekey.spineData;
               if (spineData) {
+                //@ts-ignore
                 let spine = new PIXISpine.Spine(spineData);
                 let container = new PIXI.Container();
 
@@ -67,10 +69,12 @@ let monkeyAction = {
                 const controller = {
                     spine,
                     container,
-                    playState: (stateName) => {
+                    playState: (stateName: string | number) => {
+                      //@ts-ignore
                         if (monkeyAction.sequence[stateName]) {
                           monkeyAction.playSequence(
                             controller.spine,
+                            //@ts-ignore
                             monkeyAction.sequence[stateName]
                           );
                         }
