@@ -59,6 +59,15 @@ export const ContainerOfCommentList = styled.div`
     overflow-y: scroll;
     height: 78vh;
 `;
+export const ContainerOfNoCommentList = styled.div`
+    position: relative;
+    overflow-y: scroll;
+    height: 78vh;
+    font-size: 18px;
+    color: grey;
+    display: flex;
+    justify-content: center;
+`;
 
 export const CommentBody = styled.div`
     background-color: var(--Blue-000);

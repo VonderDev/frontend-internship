@@ -14,53 +14,41 @@ const createPixiApp = (view:any, options:any) => {
   return app;
 };
 
-  const PixiApp = ({ content }: any) => {
-    const {
-      width,
-      height,
-      maxWidth,
-      maxHeight,
-      updateRatioRef,
-      gameRef,
-    } = useContext(AppContext);
+const PixiApp = ({ content }: any) => {
+    const { width, height, maxWidth, maxHeight, updateRatioRef, gameRef } = useContext(AppContext);
     const pixiContext = useContext(PixiContext);
     const { resolution } = pixiContext;
     const viewRef = useRef<any>();
     const appRef = useRef<any>();
     const [initialOption] = useState({
-      ...pixiContext,
-      width,
-      height,
+        ...pixiContext,
+        width,
+        height,
     });
-  
-    useEffect(() => {
-      if (appRef.current) {
-        console.error(
-          "PIXI Application will be reset if context is changed. Please don't change context!"
-        );
-      } else {
-        const [app, onRelease] = content(
-          createPixiApp(viewRef.current, initialOption),
-          gameRef,updateRatioRef
-        );
-        appRef.current = app;
-        return () => {
-          onRelease();
-        };
-      }
-    }, [ content, gameRef, initialOption,updateRatioRef]);
 
     useEffect(() => {
-      if(appRef.current){
-        appRef.current.renderer.resolution = resolution;
-      }
-    }, [resolution]);
-  
+        if (appRef.current) {
+            console.error("PIXI Application will be reset if context is changed. Please don't change context!");
+        } else {
+            const [app, onRelease] = content(createPixiApp(viewRef.current, initialOption), gameRef, updateRatioRef);
+            appRef.current = app;
+            return () => {
+                onRelease();
+            };
+        }
+    }, [content, gameRef, initialOption, updateRatioRef]);
+
     useEffect(() => {
-      if(appRef.current){
-        appRef.current.renderer.resize(width, height);
-        // updateRatioRef.current.update(width, height);
-      }
+        if (appRef.current) {
+            appRef.current.renderer.resolution = resolution;
+        }
+    }, [resolution]);
+
+    useEffect(() => {
+        if (appRef.current) {
+            appRef.current.renderer.resize(width, height);
+            // updateRatioRef.current.update(width, height);
+        }
     }, [width, height]);
 
     return (
@@ -89,6 +77,6 @@ const createPixiApp = (view:any, options:any) => {
 
       </>
     );
-  };
-  
-  export default PixiApp;
+};
+
+export default PixiApp;

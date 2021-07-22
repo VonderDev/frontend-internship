@@ -1,4 +1,4 @@
-import { useEffect, useState,useContext} from 'react';
+import { useEffect, useState, useContext } from 'react';
 import {
     TextQuestionIndex,
     TextQuestion,
@@ -8,7 +8,7 @@ import {
     IsLoadingSpinnerTestQuestion,
     TextIsLoadingTestQuestion,
     ButtonSeeAllResults,
-    MainContainer
+    MainContainer,
 } from '../../shared/styles/Test/TestQuestion.styled';
 import { useHistory } from 'react-router-dom';
 import { ApiGetTestData, ApiPostTestResult } from '../../apis/test.api';
@@ -18,12 +18,12 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import React from 'react';
 import Container from 'components/Container/Container';
 import useSWR from 'swr';
-import { PixiProvider} from 'components/GameElement/PixiStore/PixiContext';
+import { PixiProvider } from 'components/GameElement/PixiStore/PixiContext';
 import { AppProvider } from 'components/GameElement/PixiStore/AppContext';
 import GameContent from 'components/GameElement/Game/GameContent';
 import PixiApp from 'components/GameElement/PixiStore/PixiApp';
 import { Box } from 'shared/style/theme/component';
-import {AppContext} from 'components/GameElement/PixiStore/AppContext'
+import { AppContext } from 'components/GameElement/PixiStore/AppContext';
 import { setTimeout } from 'timers';
 import { TextStory } from '../../shared/styles/Test/TestStory.styled';
 import { Item } from 'react-bootstrap/lib/Breadcrumb';
@@ -105,11 +105,11 @@ function TestQuestion() {
                                 '“สวยจัง นี่มันทะเลสาบนี่นา”']},
         { value: 14, message: [' ตกลงฉันคือใครกันนะ.. ','.....','.....']},
     ];
-    useEffect(()=>{
-        cutSceneList[currentCutScnen]
-        console.log(currentCutScnen)
-        console.log('CutScene :', cutSceneList[currentCutScnen].value ,'message:',cutSceneList[currentCutScnen].message)
-    },[currentCutScnen])
+    useEffect(() => {
+        cutSceneList[currentCutScnen];
+        console.log(currentCutScnen);
+        console.log('CutScene :', cutSceneList[currentCutScnen].value, 'message:', cutSceneList[currentCutScnen].message);
+    }, [currentCutScnen]);
 
     const showStory =()=>{
         console.log('Cut ? :' ,cutScene);
@@ -140,11 +140,11 @@ function TestQuestion() {
             }else{
                 setCutScene(false)
             }
-            setCurrentMessage(0)
-            setCurrentCutScene(currentCutScnen +1)
-        }else{
-            setCutScene(true)
-            setCurrentMessage(currentMessage +1)
+            setCurrentMessage(0);
+            setCurrentCutScene(currentCutScnen + 1);
+        } else {
+            setCutScene(true);
+            setCurrentMessage(currentMessage + 1);
         }
     }
 
@@ -157,30 +157,29 @@ function TestQuestion() {
         setCurrentQuestion(currentQuestion + 1);
         // handle condition start stop question
         // setCurrentQuestion(currentQuestion + 1);
-        console.log("Q number =>>>",currentQuestion )
-        if(currentQuestion +1 === 3){
-            changeScene('S2')
-            setCutScene(true) // start cutscene v.2
-        }else if(currentQuestion +1 === 4){
-            setCutScene(true) // start cutscene v.3
-        }else if(currentQuestion +1 === 5){
-            setCutScene(true) // start cutscene v.4
-        }else if (currentQuestion +1 === 6){
-            setCutScene(true)// start cutscene v.5
-        }else if (currentQuestion +1 === 11){
-            changeScene('S4.3')
-        }else if (currentQuestion +1 === 14){
-            setCutScene(true) // start cutscene v.8
-        }else if (currentQuestion +1 === 18){
-            setCutScene(true) // start cutscene v.10
-        }else if (currentQuestion +1 === 21){
-            setCutScene(true)// start cutscene v.11
-        }else if (currentQuestion +1 === 23){
-            setCutScene(true)// start cutscene v.12
-        }
-        else if (currentQuestion +1 === 24){
-            changeScene('S6')
-            setCutScene(true)// start cutscene v.13
+        console.log('Q number =>>>', currentQuestion);
+        if (currentQuestion + 1 === 3) {
+            changeScene('S2');
+            setCutScene(true); // start cutscene v.2
+        } else if (currentQuestion + 1 === 4) {
+            setCutScene(true); // start cutscene v.3
+        } else if (currentQuestion + 1 === 5) {
+            setCutScene(true); // start cutscene v.4
+        } else if (currentQuestion + 1 === 6) {
+            setCutScene(true); // start cutscene v.5
+        } else if (currentQuestion + 1 === 11) {
+            changeScene('S4.3');
+        } else if (currentQuestion + 1 === 14) {
+            setCutScene(true); // start cutscene v.8
+        } else if (currentQuestion + 1 === 18) {
+            setCutScene(true); // start cutscene v.10
+        } else if (currentQuestion + 1 === 21) {
+            setCutScene(true); // start cutscene v.11
+        } else if (currentQuestion + 1 === 23) {
+            setCutScene(true); // start cutscene v.12
+        } else if (currentQuestion + 1 === 24) {
+            changeScene('S6');
+            setCutScene(true); // start cutscene v.13
         }
     }
 
@@ -243,7 +242,7 @@ function TestQuestion() {
     if (data && !isSWRTriggered) {
         console.log('data from useSWR');
         isSetSWRTriggered(true);
-        setCutScene(true) //start story v.1
+        setCutScene(true); //start story v.1
         setQuestionList(data); // store all question into the hook
         const resp = data;
         setCurrentQuestionDetail(resp[currentQuestion]);

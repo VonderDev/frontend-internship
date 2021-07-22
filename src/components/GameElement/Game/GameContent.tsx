@@ -89,14 +89,14 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
             .add('flower', flower)
             .add('bgS4', bgS4)
             .add('funiture', funiture)
-            .add('sofa' , sofa)
+            .add('sofa', sofa)
             .add('bgS42', bgS42)
-            .add('sofa2' ,sofa2)
-            .add('bgS43' ,bgS43)
-            .add('sewing' , sewing)
-            .add('tools' , tools)
-            .add('bigTree' , bigTree)
-            .add('lake',lake)
+            .add('sofa2', sofa2)
+            .add('bgS43', bgS43)
+            .add('sewing', sewing)
+            .add('tools', tools)
+            .add('bigTree', bigTree)
+            .add('lake', lake)
             .add('water', water)
             .add('shadow', shadow)
             .add('TreeFnew', TreeFnew)
@@ -715,10 +715,11 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     //   console.warn("pixi released");
     // };
 
-
-    const onRelease = () => { console.log('Nothing') }
-    console.log("container", firstScene);
-    return [app , onRelease]
+    const onRelease = () => {
+        console.log('Nothing');
+    };
+    console.log('container', firstScene);
+    return [app, onRelease];
 };
 
 export default GameContent;

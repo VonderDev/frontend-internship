@@ -1,18 +1,15 @@
-import { Row } from 'antd';
-import { IIconText } from 'components/pages/Home/shared/home.interface';
-import { ButtonSeeAllBoard, SearchField, TextBoardTopic } from 'components/pages/Home/shared/style/homepage.styles';
-import { useHistory } from 'react-router-dom';
-import { ContainerBoard } from '../../shared/styles/Result/ResultPage.styled';
-import { BoardCardRecommend, BoardCardSpace, GridBox } from '../../shared/styles/Result/ResultFeature.styled';
-import Meta from 'antd/lib/card/Meta';
-import { MONTHS } from 'components/pages/Board/shared/months';
-import { HeartIconCard, HeartText, CardTextData, CoverImage, BoardTextInfo } from '../../../Board/shared/style';
-import { Box } from 'shared/style/theme/component';
-import { transalateToThai } from 'utils/transalator/transalator';
-import { FormOutlined, CalendarOutlined } from '@ant-design/icons';
-import useSWR from 'swr';
-import { useEffect, useState } from 'react';
 import React from 'react';
+import { Spin, Card } from 'antd';
+import useSWR from 'swr';
+import { GridBox, SearchField, NewCardStyle, HeartIconCard, HeartText, CardTextData, SpaceCard, CoverImage, BoardTextInfo, TextRecommendBoardTopic } from '../../shared/style';
+import { FormOutlined, LoadingOutlined, CalendarOutlined } from '@ant-design/icons';
+import { IIconText } from '../../shared/Card.interface';
+import { useHistory } from 'react-router';
+import { transalateToThai } from 'utils/transalator/transalator';
+import { MONTHS } from 'components/pages/Board/shared/months';
+import { Box } from 'shared/style/theme/component';
+
+const { Meta } = Card;
 
 const IconText = ({ icon, text }: IIconText) => (
     <SearchField>
@@ -20,41 +17,38 @@ const IconText = ({ icon, text }: IIconText) => (
         {text}
     </SearchField>
 );
-
-const BoardAdvice = () => {
+export const CardTopTen = () => {
+    const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
+    const { data, error } = useSWR('/user/content/get');
+    const isLoading = !data && !error;
     const history = useHistory();
-    const { data: boardRecommend, error: errorBoardRecommend } = useSWR('/user/content/get');
-    const [randomBoard, setRandomBoard] = useState<any>();
 
-    useEffect(() => {
-        if (boardRecommend) {
-            var newRandomBoard = [];
-
-            for (var i = 0; i < 3; i++) {
-                var idex = Math.floor(Math.random() * boardRecommend.length);
-                newRandomBoard.push(boardRecommend[idex]);
-            }
-            console.log('[Random board Recommend]:', newRandomBoard);
-            setRandomBoard(newRandomBoard);
-        }
-    }, [boardRecommend]);
+    if (data) {
+        data?.sort(function (a: any, b: any) {
+            return b.uid_likes.length - a.uid_likes.length;
+        });
+    }
 
     return (
         <>
-            <Row>
-                <TextBoardTopic>แนะนำสำหรับคุณ</TextBoardTopic>
-                <ButtonSeeAllBoard onClick={() => history.push('/board')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
-            </Row>
-            <ContainerBoard>
-                {' '}
+            <Box direction="row" justify="space-between" align="flex-start" style={{ padding: '0px 20px 0px 20px' }}>
+                <Box direction="column" justify="center" align="center">
+                    <TextRecommendBoardTopic>10 อันดับสูงสุด</TextRecommendBoardTopic>
+                </Box>
+            </Box>
+            {isLoading ? (
+                <Box direction="column" justify="center" align="center" style={{ padding: '10% 0% 10% 0%' }}>
+                    <Spin indicator={antIcon} tip="Loading..." />
+                </Box>
+            ) : (
                 <GridBox>
-                    <BoardCardSpace direction="horizontal">
-                        {randomBoard?.map((item: any, index: any) => {
+                    <SpaceCard direction="horizontal">
+                        {data?.slice(0, 10).map((item: any, index: any) => {
                             const cardDate = new Date(item?.created_at);
                             const dateFormat = cardDate.getDate() + MONTHS[cardDate.getMonth()] + cardDate.getFullYear();
                             const like = item?.uid_likes;
                             return (
-                                <BoardCardRecommend
+                                <NewCardStyle
                                     typecard="Vertical"
                                     heightcard={255}
                                     key={index}
@@ -81,14 +75,12 @@ const BoardAdvice = () => {
                                         <HeartIconCard />
                                         <HeartText>{like.length}</HeartText>
                                     </div>
-                                </BoardCardRecommend>
+                                </NewCardStyle>
                             );
                         })}
-                    </BoardCardSpace>
+                    </SpaceCard>
                 </GridBox>
-            </ContainerBoard>
+            )}
         </>
     );
 };
-
-export default BoardAdvice;

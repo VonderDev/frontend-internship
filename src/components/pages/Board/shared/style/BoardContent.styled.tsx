@@ -1,3 +1,4 @@
+import { Alert } from 'antd';
 import styled from 'styled-components';
 import profileImage from '../images/profile.png';
 
@@ -61,11 +62,11 @@ export const AuthorName = styled.div`
     font-weight: bolder;
 `;
 
-export const BoxOfLikeAndComment = styled.span`
-    padding-left: 25%;
+export const BoxOfLikeAndComment = styled.div`
     padding-bottom: 5%;
-    margin-right: 0;
-    margin-left: auto;
+    display: inline;
+    position: relative;
+    left: 18%;
     :hover {
         cursor: pointer;
     }
@@ -76,5 +77,22 @@ export const LengthOfLikeAndComment = styled.span`
     color: #3a8ce4;
     font-weight: bolder;
     padding-left: 10px;
-    transform: translateY(50%);
+    padding-right: 36%;
+`;
+
+export const NotificationCreatedPostSuccess = styled(Alert)`
+    border-radius: 30px;
+    width: 35%;
+    background-color: #c8eee2;
+    border-color: #c8eee2;
+    font-weight: bolder;
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
+    top: 10%;
+    left: 32%;
+    z-index: 9999;
+    .ant-alert-message {
+        color: #125d45;
+    }
 `;

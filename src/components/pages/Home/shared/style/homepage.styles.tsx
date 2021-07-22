@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Space, Button, Col, List, Input } from 'antd';
-import gamePreviewImg from '../shared/images/gamepreview.png';
+import gamePreviewImg from '../../shared/images/gamepreview.png';
 
 export const SearchField = styled(Space)`
     display: flex;
@@ -106,8 +106,8 @@ export const ButtonSeeAllBoard = styled.div`
     font-size: 15px;
     padding-top: 20px;
     display: flex;
-    transform: translateX(280%);
-
+    position: relative;
+    margin-left: auto;
     &:hover {
         cursor: pointer;
     }
@@ -141,7 +141,7 @@ export const ButtonCreatePost = styled(Button)`
     bottom: 40px;
     width: 60px;
     height: 50px;
-    left: 480px;
+    left: 85%;
 `;
 
 export const ImgBoardList = styled.img`

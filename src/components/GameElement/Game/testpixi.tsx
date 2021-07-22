@@ -1,12 +1,12 @@
 import Container from "components/Container/Container";
-import { Box } from "shared/style/theme/component";
-import { AppContext, AppProvider, useAppContext } from "../PixiStore/AppContext";
+import { AppContext, AppProvider } from "../PixiStore/AppContext";
 import PixiApp from "../PixiStore/PixiApp";
 import { PixiProvider } from "../PixiStore/PixiContext";
 import GameContent from "./GameContent";
 import { useState, useContext, useEffect, useRef } from "react";
 // import useSound from "../PixiStore/SoundContext";
 import Sound from '../Assets/Sound/soundBg.mp3';
+import { Box } from "shared/style/theme/component";
 
 const TestPixi = () => {
     const [audio] = useState(new Audio(Sound));

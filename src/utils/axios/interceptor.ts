@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-console.log("✿ axios interceptor has been set up ✿")
+//console.log("✿ axios interceptor has been set up ✿")
 axios.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
