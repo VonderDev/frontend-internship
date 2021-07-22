@@ -6,7 +6,6 @@ import Login from 'components/pages/Authentication/views/Login/Login';
 import Register from 'components/pages/Authentication/views/Register/Register';
 import TestStyle from 'TestStyle';
 import Test from 'components/pages/Test/views/TestStartPage/Test';
-import { TestProvider } from 'components/pages/Test/views/TestQuestion/TestContext';
 import Result from 'components/pages/Test/views/ResultPage/Result';
 import editProfile from 'components/pages/Profile/views/EditProfile';
 import CharactorDetail from 'components/pages/Test/views/ResultPage/ResultInfo/CharactorDetail';
@@ -36,10 +35,10 @@ function Routing() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/test" component={Test} />
-            <PrivateRoute exact path="/testoverview" component={TestOverview} />
-            <PrivateRoute exact path="/testquestion">
+            <Route exact path="/testoverview" component={TestOverview} />
+            <Route exact path="/testquestion">
                     <TestQuestion />
-            </PrivateRoute>
+            </Route>
             <Route exact path="/resultoverview" component={ResultOverview} />
             <Route exact path="/resultinfo" component={ResultInfo} />
             <PrivateRoute exact path="/editProfile" component={editProfile} />

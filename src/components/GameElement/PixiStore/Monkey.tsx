@@ -1,7 +1,7 @@
 import * as PIXI from "pixi.js";
 //@ts-ignore
 import PIXISpine  from './pixi-spine.js';
-import monkey from '../Assets/Item/Monkey/Monkey_Flat_Final.json'
+const monkey = 'https://vonder-me-s3.s3.ap-southeast-1.amazonaws.com/Monkey/Monkey_Flat_Final.json'
 
 let monkeyAction = {
     controller: {},
