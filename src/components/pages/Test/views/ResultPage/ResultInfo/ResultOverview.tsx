@@ -1,7 +1,7 @@
 import { IResult } from 'components/pages/Test/shared/interface/Result.interfaces';
 import { ButtonGoHomeInResult, ProgressBar } from 'components/pages/Test/shared/styles/Result/ResultOverview.styled';
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import useSWR from 'swr';
 import { ContainerProgressScore, TextNameSkill } from '../../../shared/styles/Result/ResultPage.styled';
 import Chart from '../Chart';
@@ -16,17 +16,32 @@ function ResultOverview() {
     const token = localStorage.getItem('token');
     const { data: resultData, error } = useSWR(token ? '/user/newResult' : '/guest/result');
     const isLoading = !resultData && !error;
+    const paramObjectId = useParams<{ id: string; index: string }>();
+    const { data: resultHistory, error: errorResultHistory } = useSWR(Object.keys(paramObjectId).length ? `/user/getResultByIndex/${paramObjectId?.id}/${paramObjectId?.index}` : null);
 
-    if (resultData && !isData) {
-        isSetData(true);
-        const scoreList = resultData.filter((data: { score: number }) => data.score);
-        //sort score
-        scoreList.sort(function (a: any, b: any): number {
-            return b.score - a.score;
-        });
-        setResultData(scoreList);
-        console.log('[score List from useSWR]', scoreList);
-    }
+    useEffect(() => {
+        if (resultData && !isData) {
+            isSetData(true);
+            const scoreList = resultData.filter((data: { score: number }) => data.score);
+            //sort score
+            scoreList.sort(function (a: any, b: any): number {
+                return b.score - a.score;
+            });
+            setResultData(scoreList);
+            console.log('[score List from useSWR]', scoreList);
+        }
+        if (resultHistory && !isData) {
+            isSetData(true);
+            const scoreList = resultHistory.filter((data: { score: number }) => data.score);
+            //sort score
+            scoreList.sort(function (a: any, b: any): number {
+                return b.score - a.score;
+            });
+            setResultData(scoreList);
+            console.log('[score List from useSWR]', scoreList);
+        }
+    }, [resultData, paramObjectId, resultHistory]);
+
     useEffect(() => {
         console.log('Result of Progress bar', result);
     }, [result]);

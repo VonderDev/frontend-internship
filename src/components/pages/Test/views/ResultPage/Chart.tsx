@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import useSWR from 'swr';
 import { IResult } from '../../shared/interface/Result.interfaces';
 import { ChartStyled, TextHeaderResult } from '../../shared/styles/Result/ResultPage.styled';
@@ -14,17 +15,23 @@ const Charts = () => {
     const tokenGuest = localStorage.getItem('tokenGuest');
     const { data: resultData, error } = useSWR(token ? '/user/newResult' : '/guest/result');
     const isLoading = !resultData && !error;
+    const paramObjectId = useParams<{ id: string; index: string }>();
+    const { data: resultHistory, error: errorResultHistory } = useSWR(Object.keys(paramObjectId).length ? `/user/getResultByIndex/${paramObjectId?.id}/${paramObjectId?.index}` : null);
     //--------------- FETCHING SCORE & SKILL DATA USING SWR ---------------//
     const [score, setScore] = useState([]);
     const [skill, setSkill] = useState([]);
 
     useEffect(() => {
         if (resultData && (token || tokenGuest)) {
-            console.log('Result', resultData);
             setScore(resultData.map((key: { score: any }) => key.score));
             setSkill(resultData.map((key: any) => key.skill));
         }
-    }, [resultData]);
+        if (resultHistory && paramObjectId) {
+            console.log('Result History', resultHistory);
+            setScore(resultData.map((key: { score: any }) => key.score));
+            setSkill(resultData.map((key: any) => key.skill));
+        }
+    }, [resultData, paramObjectId, resultHistory]);
 
     return (
         <>
