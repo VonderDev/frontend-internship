@@ -65,9 +65,9 @@ export const TextNoCommentList = styled.div`
     color: var(--Gray-200);
     font-size: 18px;
     font-weight: bolder;
-    position: absolute;
-    top: 55%;
-    left: 30%;
+    //position: absolute;
+    //top: 55%;
+    //left: 30%;
 `;
 
 export const CommentBody = styled.div`
@@ -122,13 +122,13 @@ export const LoginText = styled.div`
 
 export const QuestionImgae = styled.div`
     background-image: url(${QuestionImage});
-    width: 45%;
+    width: 26vh;
     height: 26vh;
     background-size: cover;
     background-position: center;
-    position: absolute;
-    top: 20%;
-    left: 30%;
+    //position: absolute;
+    //top: 20%;
+    //left: 30%;
 `;
 
 export const ContainerOfIconQuestionAndText = styled.div`

@@ -91,8 +91,10 @@ function CommentOfContent() {
         >
             {commentList.length == 0 ? (
                 <ContainerOfIconQuestionAndText style={{ position: 'relative' }}>
+                    <div style={{display:'flex' , alignItems:'center' , flexDirection:'column' , height:'78vh' , justifyContent:'center'}}> 
                     <QuestionImgae />
                     <TextNoCommentList>ยังไม่มีความคิดเห็นในขณะนี้</TextNoCommentList>
+                    </div>
                 </ContainerOfIconQuestionAndText>
             ) : (
                 <ContainerOfCommentList>
