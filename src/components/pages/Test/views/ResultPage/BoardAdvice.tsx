@@ -33,7 +33,7 @@ const BoardAdvice = () => {
                 var idex = Math.floor(Math.random() * boardRecommend.length);
                 newRandomBoard.push(boardRecommend[idex]);
             }
-            console.log('[Random board Recommend]:', newRandomBoard);
+            // console.log('[Random board Recommend]:', newRandomBoard);
             setRandomBoard(newRandomBoard);
         }
     }, [boardRecommend]);

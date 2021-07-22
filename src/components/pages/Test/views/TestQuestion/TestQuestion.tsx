@@ -15,23 +15,18 @@ import { useHistory } from 'react-router-dom';
 import { ApiGetTestData, ApiPostTestResult } from '../../apis/test.api';
 import { IQuestion, IUserAns } from '../../shared/interface/Test.interfaces';
 import { Col, message, Modal, Spin } from 'antd';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
 import React from 'react';
-import Container from 'components/Container/Container';
 import useSWR from 'swr';
 import { PixiProvider } from 'components/GameElement/PixiStore/PixiContext';
-import { AppProvider } from 'components/GameElement/PixiStore/AppContext';
 import GameContent from 'components/GameElement/Game/GameContent';
 import PixiApp from 'components/GameElement/PixiStore/PixiApp';
 import { Box } from 'shared/style/theme/component';
 import { AppContext } from 'components/GameElement/PixiStore/AppContext';
 import { setTimeout } from 'timers';
 import { TextStory } from '../../shared/styles/Test/TestStory.styled';
-import { Item } from 'react-bootstrap/lib/Breadcrumb';
 import Animation from 'shared/style/theme/animation'
 import Sound from 'components/GameElement/Assets/Sound/soundBg.mp3';
 import SoundMonkey from 'components/GameElement/Assets/Sound/monkeySound.mp3';
-import {PauseCircleFilled ,SoundFilled} from '@ant-design/icons';
 import { IsLoadingSpinner } from '../../shared/styles/Test/TestPage.styled';
 import { ButtonCancleModal, ButtonLeaveModal, ConfirmModal, TextBodyModal, TextHeadModal } from 'components/pages/Profile/shared/Profile.styles';
 
@@ -73,7 +68,7 @@ function TestQuestion() {
     useEffect(() => {
         playing ? audio.play() : audio.pause();
         music? monkey.play() : monkey.pause();
-        console.log(playing , music)
+        // console.log(playing , music)
       },
       [playing,music]
     );
@@ -112,16 +107,16 @@ function TestQuestion() {
     ];
     useEffect(() => {
         cutSceneList[currentCutScnen];
-        console.log(currentCutScnen);
-        console.log('CutScene :', cutSceneList[currentCutScnen].value, 'message:', cutSceneList[currentCutScnen].message);
+        // console.log(currentCutScnen);
+        // console.log('CutScene :', cutSceneList[currentCutScnen].value, 'message:', cutSceneList[currentCutScnen].message);
         if(currentCutScnen === 10){
            setMusic(false);
         }
     }, [currentCutScnen]);
 
     const showStory =()=>{
-        console.log('Cut ? :' ,cutScene);
-        console.log(' currentMessage:' ,currentMessage);
+        // console.log('Cut ? :' ,cutScene);
+        // console.log(' currentMessage:' ,currentMessage);
         if(currentMessage === cutSceneList[currentCutScnen].message.length -1){
              if(currentCutScnen + 1 === 5)
             {
@@ -161,12 +156,12 @@ function TestQuestion() {
     const { changeScene, gameRef }= useContext(AppContext);
 
     async function onNextQuestion(value: number) {
-        console.log('[Debug]: score == ' + value);
+        // console.log('[Debug]: score == ' + value);
         let newTestScore = testScore;
         newTestScore.push({ categoryId: currentQuestionDetail.category_id, score: value });
         setTestScore(newTestScore);
         setCurrentQuestion(currentQuestion + 1);
-        console.log('Q number =>>>', currentQuestion);
+        // console.log('Q number =>>>', currentQuestion);
         if (currentQuestion + 1 === 3) {
             changeScene('S2');
             setCutScene(true); // start cutscene v.2

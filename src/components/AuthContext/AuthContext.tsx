@@ -29,7 +29,7 @@ const AuthProvider = ({ children }: IAuthProps) => {
     };
 
     const login = ({ email, password }: authData) => {
-        console.log('props: ', { email, password });
+        // console.log('props: ', { email, password });
         const tokenGuest = localStorage.getItem('tokenGuest');
         if(tokenGuest){
             localStorage.removeItem('tokenGuest')

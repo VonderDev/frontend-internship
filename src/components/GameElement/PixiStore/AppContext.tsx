@@ -51,7 +51,7 @@ function AppProvider({ children }: any) {
     }, [size]);
 
     const changeScene = useCallback((value: string | null) => {
-        console.log('Prop context:', value);
+        // console.log('Prop context:', value);
         if (gameRef.current.changeScene) {
             gameRef.current.changeScene(value);
         }

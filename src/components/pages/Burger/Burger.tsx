@@ -143,7 +143,7 @@ const Burger = () => {
         if (token) {
             if (response) {
                 setUsername(response.username);
-                console.log('UserName :', response.username);
+                // console.log('UserName :', response.username);
             } else {
                 console.log('error');
             }

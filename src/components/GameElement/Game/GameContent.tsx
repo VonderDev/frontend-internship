@@ -122,7 +122,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
             //@ts-ignore
             .add("Monkey", monkey );
       loader.load((loader, resource) => {
-      console.log("resource", resource);
+      // console.log("resource", resource);
       //background
         sprites.BgGround =  new PIXI.Sprite(resource.ground.texture);
         sprites.BgSky =  new PIXI.Sprite(resource.sky.texture);
@@ -172,7 +172,6 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.RaccoonAngry = new PIXI.Sprite(resource.raccoonAngry.texture);
         sprites.RaccoonHappy = new PIXI.Sprite(resource.raccoonHappy.texture);
 
-        console.log('Monkey',resource.Monkey)
     });
     const showProgress = (e : any) =>{
       console.log(e.progress.toFixed(2) + '% loader')
@@ -182,7 +181,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     }
 
     const doneLoading = (e : any) =>{
-      console.log("Sprites", sprites);
+      // console.log("Sprites", sprites);
       console.log('Done Loading! Scene1 start')
       initial();
     }
@@ -243,7 +242,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 
     // ------------------- Props From react --------------//
       if(!gameRef.current) gameRef.current = {};
-      console.log('GameRef:',gameRef.current)
+      // console.log('GameRef:',gameRef.current)
 
       gameRef.current.changeScene = (prop: string) =>{
         console.log('prop to pixi:',prop)

@@ -58,7 +58,7 @@ const EditProfile = () => {
                 history.push('/profile');
             }, 1200);
         }
-        console.log(typeof userInfo.username);
+        // console.log(typeof userInfo.username);
     };
     const history = useHistory();
     return (

@@ -14,7 +14,7 @@ export const RegisterForm = () => {
         if (userData.username && userData.firstName && userData.lastName && userData.email && userData.password) {
             try {
                 const response = await ApiPostDataUser(userData)
-                console.log("API response :", response)
+                // console.log("API response :", response)
                 if(response.message){
                     form.resetFields();
                     history.push("/register");

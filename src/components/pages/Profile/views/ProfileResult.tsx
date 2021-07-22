@@ -11,12 +11,6 @@ function ProfileResult() {
     const { data: profile, error: errorProfile } = useSWR('/user/profile');
     const isLoading = !errorProfile && !profile;
     const history = useHistory();
-    // useEffect(() => {
-    //     if (profile) {
-    //         console.log('[useEffect profile] :', profile);
-    //     }
-    // }, [profile]);
-
     if (profile?.results) {
         profile?.results?.sort(function (a: any, b: any) {
             return new Date(a[0].created_at).getTime() - new Date(b[0].created_at).getTime();

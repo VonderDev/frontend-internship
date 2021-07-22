@@ -23,11 +23,11 @@ const Result = () => {
         console.log('[param] :', paramObjectId);
         if (resultData && (token || tokenGuest)) {
             setResultData(resultData.filter((data: { score: number }) => data.score === Math.max(...Object.keys(resultData).map((key) => resultData[key].score))));
-            console.log('Result Data', resultData);
+            // console.log('Result Data', resultData);
         }
         if (resultHistory && paramObjectId) {
             setResultData(resultHistory?.filter((data: { score: number }) => data.score === Math.max(...Object.keys(resultHistory).map((key) => resultHistory[key]?.score))));
-            console.log('[ResultProfile data]:', result);
+            // console.log('[ResultProfile data]:', result);
         }
     }, [resultData, paramObjectId, resultHistory]);
 
