@@ -1,14 +1,21 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Button, Col } from 'antd';
 import ImgTestQuestion from '../../../shared/images/TestQuestion.png';
 
-export const ContainerTestQuestion = styled.div`
+export const ContainerTestQuestion = styled.div<{ active: 'active' | '' }>`
     position: absolute;
     top: 0px;
     width: 100%;
     height: 100vh;
     display: block;
-    background: transparent;
+    background: linear-gradient(white , transparent,transparent);
+    ${({ active }) => {
+        if (active === 'active') {
+            return css`
+            background: transparent;
+            `;
+        }
+    }}
 `;
 
 export const MainContainer = styled.div`
@@ -83,8 +90,8 @@ export const TextQuestion = styled.div`
     display: block;
     white-space: pre-line;
     margin: 10% 10% !important;
-    color: white !important;
-    text-shadow: 3px 1px 10px #0a0a0a  !important;
+    color: #000000 !important;
+    text-shadow: 3px 1px 10px #ffffff  !important;
     @media(max-width: 370px){
         font-size: 18px;
     }

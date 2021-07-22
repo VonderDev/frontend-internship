@@ -39,6 +39,7 @@ import PIXISpine  from '../PixiStore/pixi-spine';
 
 const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 
+   // ------------------- Create container --------------//
     const firstScene = new PIXI.Container();
     const secondScene = new PIXI.Container();
     const doorScene = new PIXI.Container();
@@ -62,7 +63,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     app.stage.addChild(endScene);
     app.stage.addChild(lastScene);
 
-    //Preload asset
+    // ------------------- Preload Asset --------------//
     let sprites: any = {}; 
     //  function loadeAsset (){
       const loader = new PIXI.Loader();
@@ -168,7 +169,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     loader.onComplete.add(doneLoading);
     loader.onError.add(loadError);
     // }
-
+// ------------------- Prepare Asset --------------//
     function initial(){
       firstScene.visible = true;
       secondScene.visible = false;
@@ -200,6 +201,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
             setTimeout(resolve, duration);
         });
     }
+
+    // ------------------- Props From react --------------//
       if(!gameRef.current) gameRef.current = {};
       console.log('GameRef:',gameRef.current)
 
@@ -212,12 +215,6 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
           wait(2000).then(() =>{
             goSceneDoor();
           })
-          // wait(4000).then(() =>{
-          //   goSceneDoor();
-          // })
-          // wait(6000).then(() =>{
-          //   goSceneInHome();
-          // })
         }else if (prop == 'S4'){
           goSceneInHome();
           wait(2000).then(() =>{
@@ -237,6 +234,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         }
       }
 
+      // ------------------- Assete each of Scene--------------//
       function gameScene1() {
         //Background 
         sprites.BgSky.scale.set(0.7);
@@ -631,6 +629,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       });
   
       }
+
+      // ------------------- Condition change Scene--------------//
 
       function goScene2() {
         console.log("chang to Scene2")

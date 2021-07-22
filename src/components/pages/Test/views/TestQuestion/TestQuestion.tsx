@@ -32,9 +32,8 @@ import Sound from 'components/GameElement/Assets/Sound/soundBg.mp3';
 import {PauseCircleFilled ,SoundFilled} from '@ant-design/icons';
 
 function TestQuestion() {
-    //
-    // ─── Set variable ───────────────────────────────────────────────────────────────────
-    //
+    
+ //---------------- Set state ----------------//
     const history = useHistory();
     const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ questionIndex: 0, questionBody: '', category_id: 0 });
     const [currentQuestion, setCurrentQuestion] = useState<number>(0);
@@ -49,18 +48,15 @@ function TestQuestion() {
     ];
     const [testScore, setTestScore] = useState<Array<IUserAns>>([]);
     const [isLoading, setLoading] = useState(false);
-    const [isModalVisible, setIsModalVisible] = useState(true);
-    const { confirm } = Modal;
-
-    //---------------- if using AXIOS ----------------//
-    useEffect(() => {
-        if (!questionList) return;
-        setCurrentQuestionDetail(questionList[currentQuestion]);
-    }, [currentQuestion, questionList]);
 
     const [cutScene, setCutScene] = useState<boolean>(false);
     const [currentCutScnen, setCurrentCutScene] = useState<number>(0)
     const [currentMessage, setCurrentMessage] = useState<number>(0)
+
+    useEffect(() => {
+        if (!questionList) return;
+        setCurrentQuestionDetail(questionList[currentQuestion]);
+    }, [currentQuestion, questionList]);
 
     //---------------- Play Sound ----------------//
     const [audio] = useState(new Audio(Sound));
@@ -68,7 +64,6 @@ function TestQuestion() {
     const toggle = () => {
         setPlaying(!playing);
     }
-
     useEffect(() => {
         playing ? audio.play() : audio.pause();
         console.log(playing)
@@ -76,6 +71,8 @@ function TestQuestion() {
       },
       [playing]
     );
+
+    //---------------- Cut Scene ----------------//
     const cutSceneList = [
         { value: 1, message:[ 'ที่นี่ที่ไหนกัน... แล้วฉันคือใคร... โอ๊ย ทำไมจำอะไรไม่ได้เลย…',
                             'ลองเดินตามทางนี้ไปละกัน เผื่อจะจำอะไรได้มากขึ้น'] },
@@ -147,16 +144,15 @@ function TestQuestion() {
             setCurrentMessage(currentMessage + 1);
         }
     }
-
+    // -------------- handle change scene & Question -------------- //
     const { changeScene, gameRef }= useContext(AppContext);
+
     async function onNextQuestion(value: number) {
         console.log('[Debug]: score == ' + value);
         let newTestScore = testScore;
         newTestScore.push({ categoryId: currentQuestionDetail.category_id, score: value });
         setTestScore(newTestScore);
         setCurrentQuestion(currentQuestion + 1);
-        // handle condition start stop question
-        // setCurrentQuestion(currentQuestion + 1);
         console.log('Q number =>>>', currentQuestion);
         if (currentQuestion + 1 === 3) {
             changeScene('S2');
@@ -183,7 +179,6 @@ function TestQuestion() {
         }
     }
 
-
         window.onload = function(){
         changeScene('Start')
         setTimeout(() => {
@@ -191,36 +186,12 @@ function TestQuestion() {
         }, 2000);
     }
 
-    function onPrevQuestion() {
-        if (!questionList) return;
-        if (currentQuestion - 1 < 0) return;
-        setCurrentQuestion(currentQuestion - 1);
-    }
-
-    function showPromiseConfirm() {
-        confirm({
-            title: 'ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?',
-            icon: <ExclamationCircleOutlined />,
-            okText: 'เริ่มใหม่',
-            cancelText: 'ยกเลิก',
-            onOk() {
-                setTimeout(() => {
-                    console.log('set Loading:', isLoading);
-                    setLoading(false);
-                    history.push('/result');
-                }, 1500);
-            },
-            onCancel() {},
-        });
-    }
-
+    // -------------- Show Modal -------------- //
     const [visible, setVisible] = React.useState(false);
     const [confirmLoading, setConfirmLoading] = React.useState(false);
-
     const showModal = () => {
         setVisible(true);
     };
-
     const handleOk = () => {
         setConfirmLoading(true);
         setTimeout(() => {
@@ -229,16 +200,15 @@ function TestQuestion() {
             history.push('/test');
         }, 500);
     };
-
     const handleCancel = () => {
         console.log('Clicked cancel button');
         setVisible(false);
     };
 
+    // -------------- USE SWR -------------- //
     const { data, error } = useSWR('/questions');
     if (error) return <div>failed to load data , please waiting</div>;
     if (!data) return <div>loading...</div>;
-    // -------------- OTHER SOLUTION -------------- //
     if (data && !isSWRTriggered) {
         console.log('data from useSWR');
         isSetSWRTriggered(true);
@@ -254,9 +224,7 @@ function TestQuestion() {
             <PixiProvider>
                 <PixiApp content={GameContent}/>
             </PixiProvider>
-            <ContainerTestQuestion>
-                {/* {rendered_questions} */}
-            
+            <ContainerTestQuestion active={cutScene?  'active' : ''}>
                 {currentQuestion +1 === 25 ? null :
                  (<>
                  <Box justify='space-between' align="center" direction='row' style={{background: 'linear-gradient(180deg, white, transparent)', padding:'0px 5%'}}>
@@ -281,7 +249,6 @@ function TestQuestion() {
                 <Animation onEnter='fadeIn' key={currentMessage} duration={1000} delay={200}>
                 <Box justify='center' align="center" direction='row'>
                 <TextStory
-                    // disabled={disable}
                     onClick={showStory}>
                             {cutSceneList[currentCutScnen].message[currentMessage]}
                 </TextStory>
@@ -337,7 +304,6 @@ function TestQuestion() {
             </div>
             </>)}
             </>)}
-                {/* <TextQuestion>{data[currentQuestion].question_body}</TextQuestion> */}
             </ContainerTestQuestion>
         </MainContainer>
         </Box>

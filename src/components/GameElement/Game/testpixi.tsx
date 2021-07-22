@@ -8,6 +8,10 @@ import { useState, useContext, useEffect, useRef } from "react";
 import Sound from '../Assets/Sound/soundBg.mp3';
 import { Box } from "shared/style/theme/component";
 
+//##################################################//
+//---------This file for test pixi only-------------//
+//##################################################//
+
 const TestPixi = () => {
     const [audio] = useState(new Audio(Sound));
     const [playing, setPlaying] = useState(false);
