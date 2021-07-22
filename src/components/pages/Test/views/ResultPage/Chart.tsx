@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useSWR from 'swr';
+import { transalateToThai } from 'utils/transalator/transalator';
 import { IResult } from '../../shared/interface/Result.interfaces';
 import { ChartStyled, TextHeaderResult } from '../../shared/styles/Result/ResultPage.styled';
 
@@ -24,12 +25,12 @@ const Charts = () => {
     useEffect(() => {
         if (resultData && (token || tokenGuest)) {
             setScore(resultData.map((key: { score: any }) => key.score));
-            setSkill(resultData.map((key: any) => key.skill));
+            setSkill(resultData.map((key: any) => transalateToThai(key.skill)));
         }
         if (resultHistory && paramObjectId) {
             console.log('Result History', resultHistory);
             setScore(resultData.map((key: { score: any }) => key.score));
-            setSkill(resultData.map((key: any) => key.skill));
+            setSkill(resultData.map((key: any) => transalateToThai(key.skill)));
         }
     }, [resultData, paramObjectId, resultHistory]);
 
@@ -37,6 +38,7 @@ const Charts = () => {
         <>
             <div>
                 <TextHeaderResult>แผนภูมิพหุปัญญา</TextHeaderResult>
+                <div style={{display: 'flex' , flexDirection: 'column' , alignItems: 'center'}}>
                 {isLoading ? (
                     <div>is loading ... </div>
                 ) : (
@@ -77,6 +79,7 @@ const Charts = () => {
                         type="radar"
                     />
                 )}
+                </div>
             </div>
         </>
     );

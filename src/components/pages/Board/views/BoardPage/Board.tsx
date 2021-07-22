@@ -6,9 +6,11 @@ function Board() {
     const history = useHistory();
 
     return (
-        <div style={{ marginTop: '15px' }}>
+        <div style={{ margin: '20px' }}>
             <CardTopTen />
+            <div style={{transform:'translateY(-2%)'}}>
             <CardLatest />
+            </div>
         </div>
     );
 }

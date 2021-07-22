@@ -108,5 +108,6 @@ export const DrawerRadius = styled(Drawer)`
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding-top: 0px;
     }
 `;

@@ -16,7 +16,7 @@ const BoardCardComponent: React.FC<CardComponentProps> = ({ data }) => {
             return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
         });
 
-        console.log('☞ [sort Board created latest] :', data);
+        //console.log('☞ [sort Board created latest] :', data);
     }
     return (
         <>

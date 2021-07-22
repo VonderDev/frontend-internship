@@ -2,6 +2,7 @@ import { IResult } from 'components/pages/Test/shared/interface/Result.interface
 import { ButtonGoHomeInResult, ProgressBar } from 'components/pages/Test/shared/styles/Result/ResultOverview.styled';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { Box, ButtonStyle } from 'shared/style/theme/component';
 import useSWR from 'swr';
 import { ContainerProgressScore, TextNameSkill } from '../../../shared/styles/Result/ResultPage.styled';
 import Chart from '../Chart';
@@ -47,18 +48,20 @@ function ResultOverview() {
     }, [result]);
     return (
         <>
-            {isLoading ? <div>loading ...</div> : <Chart />}
-
+            {isLoading ? <div>loading ...</div> : <div ><Chart /></div>}
+            <div style={{transform: 'translateY(-5%)'}}>
             {result?.map((item: any, index: any) => {
                 return (
                     <ContainerProgressScore key={index}>
                         <TextNameSkill>{item.skill}</TextNameSkill>
                         <div>{item.skill_summarize}</div>
-                        <ProgressBar style={{ width: 400 }} strokeLinecap="square" percent={item.score} />
+                        <ProgressBar style={{ width: '100%' }} strokeLinecap="square" percent={item.score} />
                     </ContainerProgressScore>
                 );
             })}
-            <ButtonGoHomeInResult
+            </div>
+            <Box justify='center' align='center' direction='row' style={{height: '50px' , marginBottom: '40px'}}>
+            <ButtonStyle typebutton="Large"  sizebutton={85} style={{fontSize: '16px'}}
                 onClick={() => {
                     history.push('/');
                     const tokenGuest = localStorage.getItem('tokenGuest');
@@ -68,7 +71,8 @@ function ResultOverview() {
                 }}
             >
                 กลับหน้าหลัก
-            </ButtonGoHomeInResult>
+            </ButtonStyle>
+            </Box>
         </>
     );
 }
