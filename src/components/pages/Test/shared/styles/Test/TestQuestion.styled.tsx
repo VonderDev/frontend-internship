@@ -1,21 +1,36 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Button, Col } from 'antd';
 import ImgTestQuestion from '../../../shared/images/TestQuestion.png';
 
-export const ContainerTestQuestion = styled.div`
-    background-image: url(${ImgTestQuestion});
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    height: 100vh;
+export const ContainerTestQuestion = styled.div<{ active: 'active' | '' }>`
     position: absolute;
-    top: 0;
-    display: inline-block;
+    top: 0px;
+    width: 100%;
+    height: 100vh;
+    display: block;
+    background: linear-gradient(white , transparent,transparent);
+    ${({ active }) => {
+        if (active === 'active') {
+            return css`
+            background: transparent;
+            `;
+        }
+    }}
 `;
 
 export const MainContainer = styled.div`
     position: relative;
-`;
+    width: 600px;
+    height: 100vh;
+    overflow: hidden;
+    @media (max-width: 375px) {
+        width: 375px;
+    } 
+    @media (max-width: 450px) {
+        width: 410px;
+  }
+`
+
 export const TextQuestionIndex = styled.div`
     text-align: center;
     font-size: 20px;
@@ -32,12 +47,10 @@ export const ButtonSeeAllResults = styled(Button)`
     font-weight: bolder;
     color: var(--Blue-300);
     background-color: #ffffff;
-    margin-right: 0;
-    margin-left: auto;
-    transform: translateY(-160%) translateX(-20%);
     font-size: 16px;
     display: block;
-    width: 120px;
+    padding: 0px 10px;
+    width: fit-content;
     height: 40px;
 `;
 
@@ -76,9 +89,18 @@ export const TextQuestion = styled.div`
     white-space: initial;
     display: block;
     white-space: pre-line;
+    margin: 10% 10% !important;
+    color: #000000 !important;
+    text-shadow: 3px 1px 10px #ffffff  !important;
+    @media(max-width: 370px){
+        font-size: 18px;
+    }
+    @media(max-width: 500px){
+        font-size: 20px;
+    }
 `;
 
-export const ContainerButton = styled(Col)`
+export const ContainerButton = styled.div`
     align-items: center;
     justify-content: center;
     display: grid;
@@ -88,20 +110,28 @@ export const ButtonChoiceStlyed = styled.button`
     font-size: 18px;
     font-weight: bolder;
     color: #000000;
-    width: 343px;
+    width: 60%;
     height: 60px;
-    margin-top: 5px;
+    margin-top: 2%;
     letter-spacing: 1px;
     background-color: white;
     border-color: white;
-    opacity: 0.8;
+    opacity: 0.7;
     position: relative;
-    transform: translateY(350%);
+    transform: translateY(200%);
     display: block;
     &:hover {
         color: black;
         border-color: white;
         cursor: pointer;
+    }
+    @media(max-width: 370px){
+        transform: translateY(50%);
+        width: 80%;
+    }
+    @media(max-width: 500px){
+        transform: translateY(100%);
+        width: 80%;
     }
 `;
 
@@ -141,7 +171,7 @@ export const IsLoadingSpinnerTestQuestion = styled.div`
     margin-left: auto;
     margin-right: auto;
     bottom: 0 auto;
-    transform: translateY(1000%);
+    transform: translateY(900%);
 `;
 
 export const TextIsLoadingTestQuestion = styled.h4`

@@ -1,7 +1,9 @@
 
-import { Button, Card, Drawer, Image, Input, Modal, Row } from 'antd';
+import { Button, Card, Image, Modal, Row } from 'antd';
 import styled from 'styled-components';
 import { RightOutlined, FormOutlined , HeartFilled } from '@ant-design/icons';
+import { Box } from 'shared/style/theme/component';
+
 
 export const ButtonSave = styled(Button)`
     font-weight: bolder;
@@ -93,10 +95,13 @@ export const CardText = styled.div`
     font-weight: bolder;
     font-size: 16px;
 `;
+
 export const HistoryText = styled.div`
+    padding-right: 15px;
     margin-top: 5px;
-    font-size: 14px;
-    font-weight: bolder;
+`;
+
+export const EllipsisText = styled.div`
     text-overflow: ellipsis; /* เพิ่ม ... จุดจุดจุดท้ายสุด */
     display: block;
     overflow: hidden;
@@ -117,11 +122,13 @@ export const ResultImage = styled.img`
 `;
 
 export const HistoryImage = styled.img`
+    margin-right: 10px;
     width: 88px;
     height: 88px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     transform: translateY(-1%);
+    position: absolute;
 `;
 
 export const LinkMoreResult = styled.div`
@@ -195,11 +202,24 @@ export const IconArrow = styled(RightOutlined)`
 `;
 export const CommentIcon = styled(FormOutlined)`
     color: var(--Gray-100);
-    transform: translateY(20%);
-    margin-right: 5px;
+    padding-top: 8px;
+    padding-right: 5px;
 `;
 export const HeartIcon = styled(HeartFilled)`
     color: var(--Gray-100);
-    transform: translateY(20%);
-    margin-right: 5px;
+    padding-top: 8px;
+    padding-right: 5px;
+`;
+
+export const CustomBox = styled(Box)`
+    font-size: 12px;
+    color: #6E7282;
+    margin-top: 10px;
+`;
+
+export const NotFoundText = styled.div`
+    margin-top: 15px;
+    text-align: center;
+    font-size: 16px;
+    color: var(--Gray-200);
 `;

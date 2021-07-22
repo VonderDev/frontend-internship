@@ -4,7 +4,8 @@ import axios from 'axios';
 
 export async function ApiGetUserData()  {
     const token = localStorage.getItem("token");
-    return await axios 
+    if(token){
+        return await axios 
         .get('/user/find',{headers: {
             "Authorization": `Bearer ${token}`
           }})
@@ -16,6 +17,7 @@ export async function ApiGetUserData()  {
         .catch((err) => {
             console.error(err);
         });
+    }
     
 }
 
@@ -23,7 +25,7 @@ export async function ApiPutUserData(data: object) {
     const token = localStorage.getItem("token");
     console.log('[Edited data] :', data);
     return await axios
-    .put('/user', data , {headers: {
+    .put('http://18.139.108.242:5000/user', data , {headers: {
         "Authorization": `Bearer ${token}`
       }})
       // เปลี่ยนเป็น try catch

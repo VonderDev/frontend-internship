@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import { ListMenu } from './ListMenu';
 import styled, { css } from 'styled-components';
 import { MenuOutlined, UserOutlined, LoginOutlined } from '@ant-design/icons';
-import { Layout, Menu, Avatar, Button, Spin } from 'antd';
+import { Layout, Menu, Avatar, Button, Spin, Image } from 'antd';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
 import LoadingPage from 'components/AuthContext/LoadingPage';
 import axios from 'axios';
+import ProfileMascot from '../Profile/images/ProfileMascot.png';
+import { Box } from 'shared/style/theme/component';
 
 const { Header, Sider } = Layout;
 
@@ -48,7 +50,7 @@ const Overlay = styled.div<{ active: 'active' | '' }>`
     ${({ active }) => {
         if (active === 'active') {
             return css`
-                position: absolute;
+                position: fixed;
                 display: flex;
                 top: 0;
                 left: 0;
@@ -119,9 +121,11 @@ const ListmenuLogout = styled(Listmenu)`
     bottom: 0;
     display: flex;
 `;
-{
-    /* <Overlay active={sidebar ? 'active' : ''} onClick={showSidebar} /> */
-}
+const UserImg = styled(Image)`
+    width: 90px;
+    height: 90px;
+    border-radius: 90px;
+`;
 
 const Burger = () => {
     const [sidebar, setSidebar] = useState(false);
@@ -159,11 +163,23 @@ const Burger = () => {
     return (
         <>
             <MenuOutlined style={{ color: '#8a8888', fontSize: '24px' }} onClick={showSidebar} />
-            <Navmenu active={sidebar ? 'active' : ''}>
+            <Overlay active={sidebar ? 'active' : ''} onClick={showSidebar} />
+            <Navmenu active={sidebar ? 'active' : '' }>
                 <Ul onClick={showSidebar}>
                     <Avataruser>
-                        <Avatar size={75} icon={<UserOutlined />} />
-                        {token ? <AvatarName>{username}</AvatarName> : <AvatarName> Guest #000 </AvatarName>}
+                        {token ? (
+                            <Box align="center" justify="center" direction="column">
+                                <UserImg src={ProfileMascot} />
+                                <AvatarName>{username}</AvatarName>
+                            </Box>
+                        ) : (
+                            <div>
+                                <Box align="center" justify="center" direction="column">
+                                    <Avatar size={75} icon={<UserOutlined />} />
+                                    <AvatarName> Guest #000 </AvatarName>
+                                </Box>
+                            </div>
+                        )}
 
                         {token ? null : (
                             <BarBtn to="/login">

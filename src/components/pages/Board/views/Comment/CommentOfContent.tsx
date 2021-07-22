@@ -1,28 +1,28 @@
 import Container from 'components/Container/Container';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import {
     BoxOfCommentList,
     CommentBody,
     CommentInput,
     ContainerOfCommentList,
+    ContainerOfIconQuestionAndText,
     ContainerOfInput,
-    ContainerOfNoCommentList,
     CreatedDate,
     IconSendMessage,
+    LoginText,
     ProfileUserImage,
+    QuestionImgae,
+    TextNoCommentList,
     Username,
 } from '../../shared/style/CommentPage.styled';
 import { ApiPostComment } from '../../apis/commentContent.api';
 import useSWR from 'swr';
-import CommentList from './CommentList';
-import { IComment } from '../../shared/interface/Comment.interface';
-import React from 'react';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
-import { BoxOfLikeAndComment } from '../../shared/style/BoardContent.styled';
 import { MONTHS } from '../../shared/months';
 
 function CommentOfContent() {
+    const history = useHistory();
     //---------------------- GET PARAM OBJECT URL ----------------------//
     const paramObjectId = useParams<{ id: string }>();
     //---------------------- SET STATE & FUNCTION FOR POST COMMENT ----------------------//
@@ -46,6 +46,7 @@ function CommentOfContent() {
     //------------------- GET USERNAME FOR SHOW WHEN POST COMMENT SUCCESS -------------------//
     const { getUser } = useAuthContext();
     const [username, setUsername] = useState('');
+    const token = localStorage.getItem('token');
 
     const getUserInfo = async () => {
         const token = localStorage.getItem('token');
@@ -89,13 +90,17 @@ function CommentOfContent() {
             }}
         >
             {commentList.length == 0 ? (
-                <ContainerOfNoCommentList>ยังไม่มีความคิดเห็น</ContainerOfNoCommentList>
+                <ContainerOfIconQuestionAndText style={{ position: 'relative' }}>
+                    <div style={{display:'flex' , alignItems:'center' , flexDirection:'column' , height:'78vh' , justifyContent:'center'}}> 
+                    <QuestionImgae />
+                    <TextNoCommentList>ยังไม่มีความคิดเห็นในขณะนี้</TextNoCommentList>
+                    </div>
+                </ContainerOfIconQuestionAndText>
             ) : (
                 <ContainerOfCommentList>
                     {commentList?.map((item: any, index: any) => {
                         const dateCreatedComment = new Date(item.created_at);
                         const dateFormat = dateCreatedComment.getDate() + ' ' + MONTHS[dateCreatedComment.getMonth()] + ' ' + dateCreatedComment.getFullYear();
-                        // console.log('[Date format] =', dateFormat);
                         return (
                             <BoxOfCommentList style={{ height: '15vh' }} key={index}>
                                 <ProfileUserImage />
@@ -110,8 +115,18 @@ function CommentOfContent() {
                 </ContainerOfCommentList>
             )}
             <ContainerOfInput>
-                <CommentInput type="text" placeholder="แสดงความคิดเห็นของคุณ..." name="comment_body" value={commentData.comment_body} onChange={handleChangeOfComment} />
-                <IconSendMessage onClick={postComment} />
+                {!token ? (
+                    <>
+                        <CommentInput type="text" placeholder="กรุณา เข้าสู่ระบบ เพื่อเเสดงความคิดเห็น" disabled={true} />
+                        <LoginText onClick={() => history.push('/login')}>เข้าสู่ระบบ</LoginText>
+                        <IconSendMessage />
+                    </>
+                ) : (
+                    <>
+                        <CommentInput type="text" placeholder="แสดงความคิดเห็นของคุณ..." name="comment_body" value={commentData.comment_body} onChange={handleChangeOfComment} />
+                        <IconSendMessage onClick={postComment} />
+                    </>
+                )}
             </ContainerOfInput>
         </Container>
     );

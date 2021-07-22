@@ -18,9 +18,9 @@ import {
     TextTitleContent,
     TopicTag,
 } from '../../shared/style/BoardContent.styled';
+import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
 import { ApiPutLikeOfBoardContent } from '../../apis/boardCreate.api';
-import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { MONTHS } from '../../shared/months';
 
@@ -52,18 +52,9 @@ function BoardContent() {
         console.log('add Like :', addLike);
     }, []);
 
-    async function addLikeOfBoardContent() {
-        const isLikeSuccess = await ApiPutLikeOfBoardContent(addLike);
-        if (isLikeSuccess) {
-            setIsLike(true);
-            setLikeLength(likeLength + 1);
-        }
-    }
-
     //--------------- FETCHING BOARD CONTENT & COMMENT DATA  ---------------//
     const { data: contentData, error: errorcontentData } = useSWR('/user/contentID/' + paramObjectId.id);
     const { data: fetchingCommentData, error: errorfetchingComment } = useSWR(`/user/comment/get/1-100/${paramObjectId.id}`);
-
     const isLoadingContentData = !contentData && !errorcontentData;
 
     //--------------- SET DATE CREATED CONTENT FORMAT ---------------//
@@ -83,9 +74,24 @@ function BoardContent() {
                 console.log('error');
             }
         } else {
-            console.log('none');
+            console.log('No token');
         }
     };
+
+    async function addLikeOfBoardContent() {
+        const isSuccess = await ApiPutLikeOfBoardContent(addLike);
+        if (isSuccess) {
+            setIsLike(true);
+            setLikeLength(likeLength + 1);
+        }
+    }
+    async function unLikeOfBoardContent() {
+        const isSuccess = await ApiPutLikeOfBoardContent(addLike);
+        if (isSuccess) {
+            setIsLike(false);
+            setLikeLength(likeLength - 1);
+        }
+    }
 
     useEffect(() => {
         getUserId();
@@ -100,6 +106,7 @@ function BoardContent() {
             console.log('[uid likes :]', uidLikes.includes(userId));
             setIsLike(uidLikes.includes(userId));
             setLikeLength(contentData?.uid_likes.length);
+            console.log('uid likeee', contentData?.uid_likes !== userId);
         }
     }, [contentData, dateCreatedFormat, userId]);
 
@@ -124,18 +131,26 @@ function BoardContent() {
                     {contentData?.tag?.map((item: any, index: any) => {
                         return <CategoryTag key={index}>#{transalateToThai(item)}</CategoryTag>;
                     })}
+                    <div style={{display:'flex' , alignItems:'center' , marginBottom:'30px' , marginTop:'10px'}}>
                     <ProfileImage />
                     <ContainerUserNameAndDate>
                         <AuthorName>{contentData?.author_username}</AuthorName>
                         <DateCreatedContent>{dateCreatedFormat}</DateCreatedContent>
                     </ContainerUserNameAndDate>
+                    </div>
                     <ImageOfContent src={contentData?.image}></ImageOfContent>
                     <ContentBody>{contentData?.content_body}</ContentBody>
 
                     <BoxOfLikeAndComment>
-                        {isLike ? <HeartFilled style={{ color: '#F0685B', fontSize: '40px' }} /> : <HeartOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} onClick={addLikeOfBoardContent} />}
+                        <span style={{display:'flex' , alignItems:'center'}}>
+                        {isLike ? (
+                            <HeartFilled style={{ color: '#F0685B', fontSize: '40px' }} onClick={unLikeOfBoardContent} />
+                        ) : (
+                            <HeartOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} onClick={addLikeOfBoardContent} />
+                        )}
                         <LengthOfLikeAndComment>{likeLength}</LengthOfLikeAndComment>
-                        <span
+                        </span>
+                        <span style={{display:'flex' , alignItems:'center'}}
                             onClick={() => {
                                 if (paramObjectId) {
                                     history.push(`/boardcontent/${paramObjectId?.id}/comment`);
