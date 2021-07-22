@@ -1,14 +1,17 @@
-import { useState, useContext, useEffect, useRef } from 'react';
-import * as PIXI from 'pixi.js';
-import { AppContext } from './AppContext';
-import { PixiContext } from './PixiContext';
-import Animation from 'shared/style/theme/animataion';
+import { useState, useContext, useEffect, useRef } from "react";
+import * as PIXI from 'pixi.js'
+import { AppContext } from "./AppContext";
+import { PixiContext } from "./PixiContext";
+//@ts-ignore
+import PIXISpine  from '../PixiStore/pixi-spine';
 
-const createPixiApp = (view: any, options: any) => {
-    PIXI.utils.skipHello();
-    const newOptions = { ...options, view };
-    let app = new PIXI.Application(newOptions);
-    return app;
+const createPixiApp = (view:any, options:any) => {
+  PIXI.utils.skipHello();
+  const newOptions = { ...options, view };
+  let app = new PIXI.Application(newOptions);
+  //@ts-ignore
+  PIXI.Application.registerPlugin(PIXISpine)
+  return app;
 };
 
 const PixiApp = ({ content }: any) => {
@@ -49,18 +52,30 @@ const PixiApp = ({ content }: any) => {
     }, [width, height]);
 
     return (
-        <Animation onEnter="fadeIn" key={gameRef.current} duration={1000} delay={200}>
-            <canvas
-                ref={viewRef}
-                style={{
-                    width: width,
-                    height: height,
-                    maxWidth: maxWidth,
-                    maxHeight: maxHeight,
-                    zIndex: 1,
-                }}
+      <>
+      {width < 420 ? 
+              <canvas
+              ref={viewRef}
+              style={{
+                width: '100%',
+                height: height,
+                maxWidth: '100%',
+                maxHeight: maxHeight,
+                zIndex: 1,
+              }}
             />
-        </Animation>
+      :<canvas
+      ref={viewRef}
+      style={{
+        width: width,
+        height: height,
+        maxWidth: maxWidth,
+        maxHeight: maxHeight,
+        zIndex: 1,
+      }}
+    />}
+
+      </>
     );
 };
 

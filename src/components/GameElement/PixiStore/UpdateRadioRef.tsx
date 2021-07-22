@@ -5,6 +5,11 @@ type ListProps = {
     height: number;
 };
 type List = Array<ListProps> | [];
+
+
+//##################################################//
+//---------in the future maybe use it --------------//
+//##################################################//
 const UpdateRatio = () => {
     const [list, setList] = useState<List>([]);
     const [width, setWidth] = useState<number>(0);

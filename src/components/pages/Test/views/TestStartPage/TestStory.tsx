@@ -6,6 +6,7 @@ import { IQuestion } from '../../shared/interface/Test.interfaces';
 import { ApiGetTestData } from '../../apis/test.api';
 import { Col, Modal } from 'antd';
 import { ButtonSeeAllResults, TextQuestionIndex } from '../../shared/styles/Test/TestQuestion.styled';
+import { Box } from 'shared/style/theme/component';
 
 function TestStory() {
     const history = useHistory();
@@ -61,14 +62,15 @@ function TestStory() {
         <Container header={null}>
             <a href='/testquestion' style={{color:'black'}} >
             <ContainerTestStoryPage>
-                <Col>
+                <Box justify='space-between' align="center" direction='row' style={{background: 'linear-gradient(180deg, white, transparent)', padding:'0px 5%'}}>
+                    <div></div>
                     <TextQuestionIndex>
                         คำถามข้อที่ {currentQuestion + 1}/24
                     </TextQuestionIndex>
                     <ButtonSeeAllResults type="primary" onClick={showModal}>
                         เริ่มใหม่{' '}
                     </ButtonSeeAllResults>
-                </Col>
+                </Box>
                 <Modal visible={visible} okText="เริ่มใหม่" cancelText="ยกเลิก" onOk={handleOk} width={400} confirmLoading={confirmLoading} onCancel={handleCancel}>
                     ข้อมูลทั้งหมดจะไม่ถูกบันทึก คุณจะเริ่มใหม่หรือไม่ ?
                 </Modal>
