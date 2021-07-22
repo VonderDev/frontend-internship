@@ -16,15 +16,10 @@ const ResultFeatures = () => {
     //---------------- FETCHING RESULT DATA USE SWR ----------------//
     const [result, setResultData] = useState<Array<IResult> | null>(null);
     const [isData, isSetData] = useState<boolean>(false);
-    const { data: resultData, error } = useSWR('/user/newResult');
+    //----------------------- GET TOKEN ----------------------- //
+    const token = localStorage.getItem('token');
+    const { data: resultData, error } = useSWR(token ? '/user/newResult' : '/guest/result');
     const isLoading = !resultData && !error;
-
-    const IconText = ({ icon, text }: IIconText) => (
-        <SearchField>
-            {React.createElement(icon)}
-            {text}
-        </SearchField>
-    );
 
     const [detailCharacter, setDetailCharacter] = useState<IResult>({
         skill: '',
@@ -88,12 +83,17 @@ const ResultFeatures = () => {
                 skill={detailCharacter.skill}
                 img_charactor={detailCharacter.image_charactor}
             />
-            <ButtonGoHomeInResultFeature onClick={() => {
-                history.push('/')
-                const tokenGuest = localStorage.getItem('tokenGuest');
-                if(tokenGuest){
-                    localStorage.removeItem('tokenGuest')
-                } }}>กลับหน้าหลัก</ButtonGoHomeInResultFeature>
+            <ButtonGoHomeInResultFeature
+                onClick={() => {
+                    history.push('/');
+                    const tokenGuest = localStorage.getItem('tokenGuest');
+                    if (tokenGuest) {
+                        localStorage.removeItem('tokenGuest');
+                    }
+                }}
+            >
+                กลับหน้าหลัก
+            </ButtonGoHomeInResultFeature>
         </>
     );
 };

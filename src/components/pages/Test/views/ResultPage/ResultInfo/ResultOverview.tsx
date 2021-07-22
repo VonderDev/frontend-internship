@@ -12,8 +12,9 @@ function ResultOverview() {
     //-------------- CREATE MAX SCORE LIST USE SWR--------------//
     const [isData, isSetData] = useState<boolean>(false);
     const [result, setResultData] = useState<Array<IResult> | null>(null);
-
-    const { data: resultData, error } = useSWR('/user/newResult');
+    //----------------------- GET TOKEN ----------------------- //
+    const token = localStorage.getItem('token');
+    const { data: resultData, error } = useSWR(token ? '/user/newResult' : '/guest/result');
     const isLoading = !resultData && !error;
 
     if (resultData && !isData) {
@@ -42,13 +43,17 @@ function ResultOverview() {
                     </ContainerProgressScore>
                 );
             })}
-            <ButtonGoHomeInResult onClick={() => {
-                history.push('/')
-                const tokenGuest = localStorage.getItem('tokenGuest');
-                if(tokenGuest){
-                    localStorage.removeItem('tokenGuest')
-                } 
-                }}>กลับหน้าหลัก</ButtonGoHomeInResult>
+            <ButtonGoHomeInResult
+                onClick={() => {
+                    history.push('/');
+                    const tokenGuest = localStorage.getItem('tokenGuest');
+                    if (tokenGuest) {
+                        localStorage.removeItem('tokenGuest');
+                    }
+                }}
+            >
+                กลับหน้าหลัก
+            </ButtonGoHomeInResult>
         </>
     );
 }

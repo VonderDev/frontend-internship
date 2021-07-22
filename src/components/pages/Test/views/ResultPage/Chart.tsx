@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
+import { IResult } from '../../shared/interface/Result.interfaces';
 import { ChartStyled, TextHeaderResult } from '../../shared/styles/Result/ResultPage.styled';
 
 interface Chartprop {
@@ -8,15 +9,17 @@ interface Chartprop {
 }
 
 const Charts = () => {
-    //--------------- FETCHING SCORE & SKILL DATA USING SWR ---------------//
-
-    const { data: resultData, error } = useSWR('/user/newResult');
+    //----------------------- GET TOKEN ----------------------- //
+    const token = localStorage.getItem('token');
+    const tokenGuest = localStorage.getItem('tokenGuest');
+    const { data: resultData, error } = useSWR(token ? '/user/newResult' : '/guest/result');
     const isLoading = !resultData && !error;
+    //--------------- FETCHING SCORE & SKILL DATA USING SWR ---------------//
     const [score, setScore] = useState([]);
     const [skill, setSkill] = useState([]);
 
     useEffect(() => {
-        if (resultData) {
+        if (resultData && (token || tokenGuest)) {
             console.log('Result', resultData);
             setScore(resultData.map((key: { score: any }) => key.score));
             setSkill(resultData.map((key: any) => key.skill));

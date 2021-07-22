@@ -23,15 +23,12 @@ const Result = () => {
     const tokenGuest = localStorage.getItem('tokenGuest');
 
     //-------------- CREATE MAX SCORE LIST USE SWR--------------//
-    const { data: resultData, error } = useSWR('/user/newResult');
-    const { data: resultDataGuest, error: errorResultDataGuest } = useSWR('/guest/result');
+    const { data: resultData, error } = useSWR(token ? '/user/newResult' : '/guest/result');
 
     useEffect(() => {
-        if (resultData && token) {
+        if (resultData && (token || tokenGuest)) {
             setResultData(resultData.filter((data: { score: number }) => data.score === Math.max(...Object.keys(resultData).map((key) => resultData[key].score))));
             console.log('Result Data', resultData);
-        }else if(resultDataGuest && tokenGuest) {
-            setResultData(resultDataGuest.filter((data: { score: number }) => data.score === Math.max(...Object.keys(resultDataGuest).map((key) => resultDataGuest[key].score))));
         }
     }, [resultData]);
 
@@ -43,48 +40,26 @@ const Result = () => {
         element.click();
     };
 
-    // ------------------------ IF USING AXIOS FETCH DATA --------------------//
-    // async function getResultData() {
-    //     const response = await ApiGetResult();
-    //     if (response) {
-    //         const chartScoreReal = Object.keys(response).map((key) => response[key].score);
-    //         const maxScoreListReal = response.filter((data: { score: number }) => data.score === Math.max(...chartScoreReal));
-    //         setResultData(maxScoreListReal);
-    //         console.log('max score list from axios', maxScoreListReal);
-    //     } else {
-    //         console.log('error');
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     console.log('Result of max score', result);
-    // }, [result]);
-
-    // useEffect(() => {
-    //     getResultData();
-    // }, []);
     return (
         <Container header={null}>
-            {!resultData ? null : (
-                <ContainerCarousel>
-                    {result?.map((item: any, index: any) => {
-                        return (
-                            <div key={index}>
-                                <ContainerResultSummarize>
-                                    <HeaderResultFeature>คุณมีลักษณะเด่น {result.length} ด้าน</HeaderResultFeature>
-                                    <ImageCharactorCarousel src={item.image_charactor} />
-                                    <TextSkillName>{item.skill}</TextSkillName>
-                                    <TextSkillSummarize>{item.skill_summarize}</TextSkillSummarize>
-                                    <ButtonSaveResult href={item.image_charactor} download onClick={() => downloadImage()}>
-                                        <UploadOutlined />
-                                        บันทึกผลลัพธ์
-                                    </ButtonSaveResult>
-                                </ContainerResultSummarize>
-                            </div>
-                        );
-                    })}
-                </ContainerCarousel>
-            )}
+            <ContainerCarousel>
+                {result?.map((item: any, index: any) => {
+                    return (
+                        <div key={index}>
+                            <ContainerResultSummarize>
+                                <HeaderResultFeature>คุณมีลักษณะเด่น {result.length} ด้าน</HeaderResultFeature>
+                                <ImageCharactorCarousel src={item.image_charactor} />
+                                <TextSkillName>{item.skill}</TextSkillName>
+                                <TextSkillSummarize>{item.skill_summarize}</TextSkillSummarize>
+                                <ButtonSaveResult href={item.image_charactor} download onClick={() => downloadImage()}>
+                                    <UploadOutlined />
+                                    บันทึกผลลัพธ์
+                                </ButtonSaveResult>
+                            </ContainerResultSummarize>
+                        </div>
+                    );
+                })}
+            </ContainerCarousel>
             <ButtonSeeAllResult type="primary" onClick={() => history.push('/resultinfo')}>
                 ดูผลลัพธ์ทั้งหมด
             </ButtonSeeAllResult>
