@@ -1,7 +1,9 @@
 import { Spin } from 'antd';
-import { useState } from 'react';
+import { useState ,useEffect } from 'react';
 import { ButtonLoading, ContainerButtonLoading, IsLoadingSpinner } from '../../shared/styles/Test/TestPage.styled';
 import { useHistory } from 'react-router-dom';
+import { ApiGetTestData } from '../../apis/test.api';
+import { IQuestion } from '../../shared/interface/Test.interfaces';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { cleanup } from '@testing-library/react';
 import { ApiPostTestResult } from '../../apis/test.api';
@@ -13,6 +15,29 @@ function ButtonLoadingStart() {
     //
     const history = useHistory();
     const [isLoading, setLoading] = useState(false);
+    // const [currentQuestionDetail, setCurrentQuestionDetail] = useState<IQuestion>({ questionIndex: 0, questionBody: '', category_id: 0 });
+    // const [currentQuestion, setCurrentQuestion] = useState<number>(0);
+    // const [questionList, setQuestionList] = useState<Array<IQuestion> | null>(null);
+
+    // useEffect(() => {
+    //     if (!questionList) return;
+    //     setCurrentQuestionDetail(questionList[currentQuestion]);
+    // }, [currentQuestion, questionList]);
+
+    // async function getTestData() {
+    //     const response = await ApiGetTestData();
+    //     if (response) {
+    //         setQuestionList(response); // store all question into the hook
+    //         const resp = response;
+    //         setCurrentQuestionDetail(resp[currentQuestion]);
+    //     } else {
+    //         console.log('error');
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     getTestData();
+    // }, []);
 
     const fetchData = () => {
         console.log(isLoading);
@@ -21,7 +46,7 @@ function ButtonLoadingStart() {
             console.log('set Loading:', isLoading);
             setLoading(false);
             ApiPostCreateGuestToken();
-            history.push('/teststory');
+            history.push('/testquestion');
         }, 1500);
     };
 
@@ -62,6 +87,3 @@ function ButtonLoadingStart() {
 }
 
 export default ButtonLoadingStart;
-function useEffect(arg0: () => void, arg1: never[]) {
-    throw new Error('Function not implemented.');
-}

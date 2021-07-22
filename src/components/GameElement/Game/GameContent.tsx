@@ -37,6 +37,7 @@ import bearHappy from '../Assets/Item/Charecter/Bear_Friendly.png'
 import bearAngry from '../Assets/Item/Charecter/Bear_Angry.png'
 import raccoonHappy from '../Assets/Item/Charecter/Raccoon_Friendly.png'
 import raccoonAngry from '../Assets/Item/Charecter/Raccoon_Angry.png'
+const monkey = 'https://vonder-me-s3.s3.ap-southeast-1.amazonaws.com/Monkey/Monkey_Flat_Final.json'
 //@ts-ignore
 import PIXISpine  from '../PixiStore/pixi-spine';
 
@@ -52,7 +53,11 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     const jungleScene = new PIXI.Container();
     const endScene = new PIXI.Container();
     const lastScene = new PIXI.Container();
-    const secondScene2 = new PIXI.Container();
+    const happyAction = new PIXI.Container();
+    const angryAction = new PIXI.Container();
+    const musicAction = new PIXI.Container();
+    const talkAction = new PIXI.Container();
+    const pointAction = new PIXI.Container();
     //keep container scene in array 
 
     app.stage.addChild(firstScene);
@@ -65,6 +70,12 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     app.stage.addChild(jungleScene);
     app.stage.addChild(endScene);
     app.stage.addChild(lastScene);
+    app.stage.addChild(happyAction);
+    app.stage.addChild(angryAction);
+    app.stage.addChild(musicAction );
+    app.stage.addChild(talkAction );
+    app.stage.addChild(pointAction);
+
 
     // ------------------- Preload Asset --------------//
     let sprites: any = {}; 
@@ -109,7 +120,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
             .add('raccoonHappy', raccoonHappy)
             .add('raccoonAngry', raccoonAngry)
             //@ts-ignore
-            .add("Monkey", 'https://vonder-me-s3.s3.ap-southeast-1.amazonaws.com/Monkey/Monkey_Flat_Final.json');
+            .add("Monkey", monkey );
       loader.load((loader, resource) => {
       console.log("resource", resource);
       //background
@@ -192,7 +203,23 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       jungleScene.visible = false;
       endScene.visible = false;
       lastScene.visible = false;
-      // secondScene2.visible = false;
+      happyAction.visible = false;
+      angryAction.visible = false;
+      musicAction.visible = false;
+      talkAction.visible = false;
+      pointAction.visible = false;
+
+      firstScene.pivot.set(0,1)
+      secondScene.pivot.set(0,1)
+      homeScene.pivot.set(0,1)
+      doorScene.pivot.set(0,1)
+      inHomeScene.pivot.set(0,1)
+      inHome2Scene.pivot.set(0,1)
+      inHome3Scene.pivot.set(0,1)
+      jungleScene.pivot.set(0,1)
+      endScene.pivot.set(0,1)
+      lastScene.pivot.set(0,1)
+
 
       const ticker = new PIXI.Ticker();
       function animate() {
@@ -243,11 +270,31 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
           goSceneLake()
         }else if (prop == 'S6.1'){
             goSceneEnd();
-        }
+        }else if (prop == 'angry'){
+          happyAction.visible = false;
+          angryAction.visible = true;
+          angryAction.pivot.set(0,1);
+          angryFriend()
+      }else if (prop == 'happy'){
+        happyAction.visible = true;
+        angryAction.visible = false;
+        happyAction.pivot.set(0,1);
+        happyFriend()
+    }else if (prop == 'talk'){
+      musicAction.visible = false;
+      talkAction.visible = true;
+      talkAction.pivot.set(0,1);
+      Talk()
+    }else if (prop == 'point'){
+      talkAction.visible = false;
+      pointAction.visible = true;
+      pointAction.pivot.set(0,1);
+      Point()
+    }
       }
 
       // ------------------- Assete each of Scene--------------//
-      function gameScene1() {
+      function gameScene1() {    
         //Background 
         sprites.BgSky.scale.set(0.7);
         firstScene.addChild(sprites.BgSky)
@@ -458,6 +505,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.Sofa.position.set(150,500);
         inHomeScene.addChild(sprites.Sofa)
       }
+
       function homeScene4_2 () {
         //Background 
         sprites.BgHomein.scale.set(0.7,0.55);
@@ -468,6 +516,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.Sofa2.position.set(0,0);
         inHome2Scene.addChild( sprites.Sofa2)
       }
+
       function homeScene4_3 () {
         //Background 
         sprites.BgHomein2.scale.set(0.7,0.55);
@@ -482,6 +531,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.Tools.position.set(0,0);
         inHome3Scene.addChild(sprites.Tools)
       }
+
       function gameScene5 () {
              //Background 
              sprites.BgSky.scale.set(0.7);
@@ -515,9 +565,15 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
              sprites.TreeB2.scale.set(0.4)
              sprites.TreeB2.position.set(0,300);
              jungleScene.addChild(sprites.TreeB2)
-       
-             sprites.BigTree.scale.set(0.7)
-             sprites.BigTree.position.set(300,30);
+
+             sprites.Brush2.scale.set(0.5);
+             sprites.Brush2.position.set(350,400);
+             jungleScene.addChild(sprites.Brush2)
+
+             playMusic()
+
+             sprites.BigTree.scale.set(0.8)
+             sprites.BigTree.position.set(180,-80);
              jungleScene.addChild(sprites.BigTree)
        
              sprites.Brush3.scale.set(0.3);
@@ -531,24 +587,11 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
              sprites.Brush4.scale.set(0.3);
              sprites.Brush4.position.set(-5,700);
              jungleScene.addChild(sprites.Brush4)
-  
-             sprites.Brush2.scale.set(0.5);
-             sprites.Brush2.position.set(350,550);
-             jungleScene.addChild(sprites.Brush2)
        
              sprites.Brush1.scale.set(0.6);
              sprites.Brush1.position.set(450,600);
              jungleScene.addChild(sprites.Brush1)
 
-             sprites.Monkey.scale.set(0.2);
-             sprites.Monkey.position.set(400,700);
-             jungleScene.addChild( sprites.Monkey)
-             if (sprites.Monkey.state.hasAnimation('Playing Music')) {
-              // run forever, little boy!
-              sprites.Monkey.state.setAnimation(0, 'Playing Music', true , true );
-              // dont run too fast
-              sprites.Monkey.state.timeScale = 0.1;
-          }
       }
       function gameScene6() {
                //Background 
@@ -597,6 +640,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
    //Item
   
       }
+
       function gameLastScene() {
   
         const verticesX = 5;
@@ -634,23 +678,52 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       });
   
       }
+
       // ------------------- Charecter --------------//
       function happyFriend(){
         sprites.BearHappy.scale.set(0.1);
         sprites.BearHappy.position.set(200,600);
         sprites.RaccoonHappy.scale.set(0.1);
         sprites.RaccoonHappy.position.set(300,600);
-        secondScene.addChild(sprites.BearHappy)
-        secondScene.addChild(sprites.RaccoonHappy)
+        happyAction.addChild(sprites.BearHappy)
+        happyAction.addChild(sprites.RaccoonHappy)
       }
-      // function angryFriend(){
-      //   sprites.BearAngry.scale.set(0.1);
-      //   sprites.BearAngry.position.set(200,600);
-      //   sprites.RaccoonAngry.scale.set(0.1);
-      //   sprites.RaccoonAngry.position.set(300,600);
-      //   secondScene2.addChild(sprites.RaccoonAngry)
-      //   secondScene2.addChild(sprites.RaccoonHappy)
-      // }
+      function angryFriend(){
+        sprites.BearAngry.scale.set(0.1);
+        sprites.BearAngry.position.set(200,600);
+        sprites.RaccoonAngry.scale.set(0.1);
+        sprites.RaccoonAngry.position.set(300,600);
+        angryAction.addChild(sprites.BearAngry)
+        angryAction.addChild(sprites.RaccoonAngry)
+      }
+      function playMusic(){
+        sprites.Monkey.scale.set(0.2);
+        sprites.Monkey.position.set(400,800);
+        musicAction.addChild( sprites.Monkey);
+             if (sprites.Monkey.state.hasAnimation('Playing Music')) {
+              sprites.Monkey.state.setAnimation(0, 'Playing Music', true , true );
+              sprites.Monkey.state.timeScale = 0.5;
+              }
+      }
+      function Talk(){
+        sprites.Monkey.scale.set(0.2);
+        sprites.Monkey.position.set(400,800);
+        talkAction.addChild( sprites.Monkey);
+        if (sprites.Monkey.state.hasAnimation('Talk')) {
+          sprites.Monkey.state.setAnimation(0, 'Talk', true , true );
+          sprites.Monkey.state.timeScale = 0.5;
+          }
+        
+      }
+      function Point(){
+        sprites.Monkey.scale.set(0.2);
+        sprites.Monkey.position.set(400,800);
+        pointAction.addChild( sprites.Monkey);
+        if (sprites.Monkey.state.hasAnimation('Point')) {
+          sprites.Monkey.state.setAnimation(0, 'Point', 'Talk', true );
+          sprites.Monkey.state.timeScale = 0.5;
+          }
+      }
 
       // ------------------- Condition change Scene--------------//
 
@@ -659,12 +732,16 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         secondScene.visible = true;
         secondScene.interactive = true;
         secondScene.buttonMode = true;
+        happyAction.visible = true;
+        happyAction.pivot.set(0,1);
         secondScene.on('pointerdown',  goScene3);
         gameScene2();
       }
 
       function goScene3() {
         console.log("chang to Scene3")
+        happyAction.visible = false;
+        angryAction.visible = false;
         homeScene.visible = true;
         homeScene.interactive = true;
         homeScene.buttonMode = true;
@@ -705,6 +782,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       }
       function goScene5() {
         console.log("chang to Scene 5")
+        musicAction.visible = true;
         jungleScene.visible = true;
         jungleScene.interactive = true;
         jungleScene.buttonMode = true;
@@ -713,6 +791,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       }
       function goSceneLake() {
         console.log("chang to Scene 6")
+        pointAction.visible = false;
         endScene.visible = true;
         endScene.interactive = true;
         endScene.buttonMode = true;
@@ -726,7 +805,6 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       }
 
     }
-
 
     // const onMainResize = (width:number , height:number) => {
     //   // TODO: resize game container at here

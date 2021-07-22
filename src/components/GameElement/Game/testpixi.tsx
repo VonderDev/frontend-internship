@@ -21,13 +21,16 @@ const TestPixi = () => {
 
     let [value,setValue] = useState<number>(1)
     const { changeScene }= useContext(AppContext);
-    // const [playing, toggle] = useSound(Sound);
 
     const onNext = () =>{
         setValue(value + 1)
         console.log(value)    
         if(value === 3){
             changeScene('S2')
+        }else if (value === 4){
+            changeScene('angry')
+        }else if (value === 5){
+            changeScene('happy')
         }else if (value === 6){
             changeScene('S3')
         }else if (value === 11){
@@ -45,8 +48,6 @@ const TestPixi = () => {
             setPlaying(false);
         }
     }
-
-    // useEffect(() => { SetAudio(new Audio(Sound))},[audio]);
     useEffect(() => {
         playing ? audio.play() : audio.pause();
         console.log(playing)
