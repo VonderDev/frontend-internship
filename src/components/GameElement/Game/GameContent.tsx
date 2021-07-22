@@ -42,7 +42,6 @@ import monkey from 'components/GameElement/Assets/Item/Monkey/Monkey_Flat_Final.
 import PIXISpine  from '../PixiStore/pixi-spine';
 
 const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
-
    // ------------------- Create container --------------//
     const firstScene = new PIXI.Container();
     const secondScene = new PIXI.Container();
@@ -54,6 +53,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     const jungleScene = new PIXI.Container();
     const endScene = new PIXI.Container();
     const lastScene = new PIXI.Container();
+    const secondScene2 = new PIXI.Container();
     //keep container scene in array 
 
     app.stage.addChild(firstScene);
@@ -66,6 +66,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     app.stage.addChild(jungleScene);
     app.stage.addChild(endScene);
     app.stage.addChild(lastScene);
+    // app.stage.addChild(secondScene2);
 
     // ------------------- Preload Asset --------------//
     let sprites: any = {}; 
@@ -196,6 +197,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       jungleScene.visible = false;
       endScene.visible = false;
       lastScene.visible = false;
+      // secondScene2.visible = false;
 
       const ticker = new PIXI.Ticker();
       function animate() {
@@ -246,11 +248,10 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
           goSceneLake()
         }else if (prop == 'S6.1'){
             goSceneEnd();
-        }else if (prop == 'happy'){
-          happyFriend();
-      }else if (prop == 'angry'){
-        angryFriend();
-    }
+        }
+      //   else if (prop == 'angry'){
+      //   goScene2last()
+      // }
       }
 
       // ------------------- Assete each of Scene--------------//
@@ -382,13 +383,72 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.Brush1.position.set(450,600);
         secondScene.addChild(sprites.Brush1)
 
-
-        happyFriend()
-        wait(2000).then(() =>{
-          angryFriend();
-        })
+        happyFriend();
 
       }
+
+      // function gameScene2_2 () {
+      //   //Background 
+      //   sprites.BgSky.scale.set(0.7);
+      //   secondScene.addChild(sprites.BgSky)
+  
+      //   sprites.BgGround.scale.set(0.7);
+      //   sprites.BgGround.anchor.set(0,-1);
+      //   secondScene.addChild(sprites.BgGround)
+  
+      //   sprites.BgTree.scale.set(0.7);
+      //   sprites.BgTree.anchor.set(0,-1);
+      //   secondScene.addChild(sprites.BgTree);
+  
+      //   sprites.Cloud1.scale.set(0.5);
+      //   sprites.Cloud1.position.set(10, 20);
+      //   secondScene.addChild(sprites.Cloud1)
+  
+      //   sprites.Cloud2.scale.set(0.5);
+      //   sprites.Cloud2.position.set(500, 150);
+      //   secondScene.addChild(sprites.Cloud2)
+      //   //Item 
+  
+      //   sprites.TreeB1.scale.set(0.4)
+      //   sprites.TreeB1.position.set(250,400);
+      //   secondScene.addChild(sprites.TreeB1)
+  
+      //   sprites.TreeB3.scale.set(0.3)
+      //   sprites.TreeB3.position.set(160,250);
+      //   secondScene.addChild(sprites.TreeB3)
+  
+      //   sprites.TreeB2.scale.set(0.4)
+      //   sprites.TreeB2.position.set(0,300);
+      //   secondScene.addChild(sprites.TreeB2)
+  
+      //   sprites.TreeF1.scale.set(0.7)
+      //   sprites.TreeF1.position.set(300,80);
+      //   secondScene.addChild(sprites.TreeF1)
+  
+      //   sprites.Brush3.scale.set(0.3);
+      //   sprites.Brush3.position.set(-80,600);
+      //   secondScene.addChild(sprites.Brush3)
+  
+      //   sprites.TreeF2.scale.set(0.9);
+      //   sprites.TreeF2.position.set(-250,-100);
+      //   secondScene.addChild(sprites.TreeF2)
+  
+      //   sprites.Brush4.scale.set(0.3);
+      //   sprites.Brush4.position.set(-5,700);
+      //   secondScene.addChild(sprites.Brush4)
+  
+      //   sprites.Brush2.scale.set(0.5);
+      //   sprites.Brush2.position.set(350,550);
+      //   secondScene.addChild(sprites.Brush2)
+  
+      //   sprites.Brush1.scale.set(0.6);
+      //   sprites.Brush1.position.set(450,600);
+      //   secondScene.addChild(sprites.Brush1)
+
+      //   angryFriend();
+
+      // }
+
       function gameScene3 () {
         //Background 
         sprites.BgSky.scale.set(0.7);
@@ -664,14 +724,14 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         secondScene.addChild(sprites.BearHappy)
         secondScene.addChild(sprites.RaccoonHappy)
       }
-      function angryFriend(){
-        sprites.BearAngry.scale.set(0.1);
-        sprites.BearAngry.position.set(200,600);
-        sprites.RaccoonAngry.scale.set(0.1);
-        sprites.RaccoonAngry.position.set(300,600);
-        secondScene.addChild(sprites.RaccoonAngry)
-        secondScene.addChild(sprites.RaccoonHappy)
-      }
+      // function angryFriend(){
+      //   sprites.BearAngry.scale.set(0.1);
+      //   sprites.BearAngry.position.set(200,600);
+      //   sprites.RaccoonAngry.scale.set(0.1);
+      //   sprites.RaccoonAngry.position.set(300,600);
+      //   secondScene2.addChild(sprites.RaccoonAngry)
+      //   secondScene2.addChild(sprites.RaccoonHappy)
+      // }
 
       // ------------------- Condition change Scene--------------//
 
@@ -680,9 +740,17 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         secondScene.visible = true;
         secondScene.interactive = true;
         secondScene.buttonMode = true;
-        secondScene.on('pointerdown', goScene3);
+        secondScene.on('pointerdown',  goScene3);
         gameScene2();
       }
+      // function goScene2last() {
+      //     console.log("chang to Scene2.2")
+      //     secondScene2.visible = true;
+      //     secondScene2.interactive = true;
+      //     secondScene2.buttonMode = true;
+      //     secondScene2.on('pointerdown', goScene3);
+      //     gameScene2_2 ()
+      // }
       function goScene3() {
         console.log("chang to Scene3")
         homeScene.visible = true;
@@ -766,3 +834,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 };
 
 export default GameContent;
+function useSate<T>(arg0: boolean): [any, any] {
+  throw new Error('Function not implemented.')
+}
+

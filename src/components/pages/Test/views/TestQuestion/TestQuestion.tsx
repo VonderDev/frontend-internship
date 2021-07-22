@@ -29,6 +29,7 @@ import { TextStory } from '../../shared/styles/Test/TestStory.styled';
 import { Item } from 'react-bootstrap/lib/Breadcrumb';
 import Animation from 'shared/style/theme/animation'
 import Sound from 'components/GameElement/Assets/Sound/soundBg.mp3';
+import SoundMonkey from 'components/GameElement/Assets/Sound/monkeySound.mp3';
 import {PauseCircleFilled ,SoundFilled} from '@ant-design/icons';
 
 function TestQuestion() {
@@ -59,13 +60,14 @@ function TestQuestion() {
     }, [currentQuestion, questionList]);
 
     //---------------- Play Sound ----------------//
-    const [audio] = useState(new Audio(Sound));
+    const [audio, setAudio] = useState(new Audio(Sound));
     const [playing, setPlaying] = useState(false);
     const toggle = () => {
         setPlaying(!playing);
     }
     useEffect(() => {
         playing ? audio.play() : audio.pause();
+        console.log('value',audio.volume)
         console.log(playing)
         console.log('Winndow size:',window.innerWidth)
       },
@@ -124,6 +126,13 @@ function TestQuestion() {
             }else if (currentCutScnen+ 1 === 8){
                 changeScene('S5')
                 setCutScene(true) // start cutscene v.9
+                audio.volume = 0.2
+                var monkey = new Audio(SoundMonkey);
+                monkey.play();
+                setTimeout(()=>{
+                    monkey.pause();
+                    audio.volume = 1
+                },3000)
             }else if (currentCutScnen + 1 === 13){
                 changeScene('S6.1')
                 setCutScene(true)// start cutscene v.14
