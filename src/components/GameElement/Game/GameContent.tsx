@@ -33,6 +33,10 @@ import lake from '../Assets/Background/Background_Lake.png'
 import water from '../Assets/Background/Water.png'
 import shadow from '../Assets/Background/Shadow.png'
 import TreeFnew from '../Assets//Item/Tree/TreeF_1new.png'
+import bearHappy from '../Assets/Item/Charecter/Bear_Friendly.png'
+import bearAngry from '../Assets/Item/Charecter/Bear_Angry.png'
+import raccoonHappy from '../Assets/Item/Charecter/Raccoon_Friendly.png'
+import raccoonAngry from '../Assets/Item/Charecter/Raccoon_Angry.png'
 import monkey from 'components/GameElement/Assets/Item/Monkey/Monkey_Flat_Final.json'
 //@ts-ignore
 import PIXISpine  from '../PixiStore/pixi-spine';
@@ -101,9 +105,14 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
             .add('water', water)
             .add('shadow', shadow)
             .add('TreeFnew', TreeFnew)
+            .add('bearHappy', bearHappy)
+            .add('bearAngry', bearAngry)
+            .add('raccoonHappy', raccoonHappy)
+            .add('raccoonAngry', raccoonAngry)
             //@ts-ignore
             // .add("Monkey", monkey);
             .add("Monkey", 'https://dh8bdvjvmxojs.cloudfront.net/go/character/VND-001/VND-001.json');
+            // .add("Monkey", 'https://vonder-me-s3.s3.ap-southeast-1.amazonaws.com/Monkey/Monkey_Flat_Final.json');
       loader.load((loader, resource) => {
       console.log("resource", resource);
       //background
@@ -150,7 +159,13 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         //Animate
         //@ts-ignore
         sprites.Monkey =  new PIXISpine.Spine(resource.Monkey.spineData);
+        sprites.BearHappy = new PIXI.Sprite(resource.bearHappy.texture);
+        sprites.BearAngry = new PIXI.Sprite(resource.bearAngry.texture);
+        sprites.RaccoonAngry = new PIXI.Sprite(resource.raccoonAngry.texture);
+        sprites.RaccoonHappy = new PIXI.Sprite(resource.raccoonHappy.texture);
+
         console.log('Monkey',resource.Monkey)
+        console.log('Path:',monkey)
     });
     const showProgress = (e : any) =>{
       console.log(e.progress.toFixed(2) + '% loader')
@@ -231,7 +246,11 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
           goSceneLake()
         }else if (prop == 'S6.1'){
             goSceneEnd();
-        }
+        }else if (prop == 'happy'){
+          happyFriend();
+      }else if (prop == 'angry'){
+        angryFriend();
+    }
       }
 
       // ------------------- Assete each of Scene--------------//
@@ -362,6 +381,13 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.Brush1.scale.set(0.6);
         sprites.Brush1.position.set(450,600);
         secondScene.addChild(sprites.Brush1)
+
+
+        happyFriend()
+        wait(2000).then(() =>{
+          angryFriend();
+        })
+
       }
       function gameScene3 () {
         //Background 
@@ -628,6 +654,23 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         bufferWater.update();
       });
   
+      }
+      // ------------------- Charecter --------------//
+      function happyFriend(){
+        sprites.BearHappy.scale.set(0.1);
+        sprites.BearHappy.position.set(200,600);
+        sprites.RaccoonHappy.scale.set(0.1);
+        sprites.RaccoonHappy.position.set(300,600);
+        secondScene.addChild(sprites.BearHappy)
+        secondScene.addChild(sprites.RaccoonHappy)
+      }
+      function angryFriend(){
+        sprites.BearAngry.scale.set(0.1);
+        sprites.BearAngry.position.set(200,600);
+        sprites.RaccoonAngry.scale.set(0.1);
+        sprites.RaccoonAngry.position.set(300,600);
+        secondScene.addChild(sprites.RaccoonAngry)
+        secondScene.addChild(sprites.RaccoonHappy)
       }
 
       // ------------------- Condition change Scene--------------//
