@@ -12,7 +12,6 @@ import editProfile from 'components/pages/Profile/views/EditProfile';
 import CharactorDetail from 'components/pages/Test/views/ResultPage/ResultInfo/CharactorDetail';
 import TestOverview from 'components/pages/Test/views/TestStartPage/TestOverview';
 import PrivateRoute from 'components/AuthContext/PrivateRoute';
-import TestStory from 'components/pages/Test/views/TestStartPage/TestStory';
 import ResultOverview from 'components/pages/Test/views/ResultPage/ResultInfo/ResultOverview';
 import ResultInfo from 'components/pages/Test/views/ResultPage/ResultInfo/ResultInfo';
 import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion';
@@ -38,7 +37,6 @@ function Routing() {
             <Route exact path="/register" component={Register} />
             <Route exact path="/test" component={Test} />
             <PrivateRoute exact path="/testoverview" component={TestOverview} />
-            <PrivateRoute exact path="/teststory" component={TestStory} />
             <PrivateRoute exact path="/testquestion">
                     <TestQuestion />
             </PrivateRoute>
