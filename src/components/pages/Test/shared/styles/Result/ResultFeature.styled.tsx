@@ -99,3 +99,14 @@ export const BoardCardSpace = styled(Space)`
     padding-left: 20px;
     padding-bottom: 25px;
 `;
+
+export const ListCategoryAndTag = styled.div`
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bolder;
+    text-overflow: ellipsis;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    color: var(--Gray-400);
+`;

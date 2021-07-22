@@ -3,7 +3,7 @@ import { IIconText } from 'components/pages/Home/shared/home.interface';
 import { ButtonSeeAllBoard, SearchField, TextBoardTopic } from 'components/pages/Home/shared/style/homepage.styles';
 import { useHistory } from 'react-router-dom';
 import { ContainerBoard } from '../../shared/styles/Result/ResultPage.styled';
-import { BoardCardRecommend, BoardCardSpace, GridBox } from '../../shared/styles/Result/ResultFeature.styled';
+import { BoardCardRecommend, BoardCardSpace, GridBox, ListCategoryAndTag } from '../../shared/styles/Result/ResultFeature.styled';
 import Meta from 'antd/lib/card/Meta';
 import { MONTHS } from 'components/pages/Board/shared/months';
 import { HeartIconCard, HeartText, CardTextData, CoverImage, BoardTextInfo } from '../../../Board/shared/style';
@@ -28,8 +28,7 @@ const BoardAdvice = () => {
 
     useEffect(() => {
         if (boardRecommend) {
-            var newRandomBoard = [];
-
+            const newRandomBoard = [];
             for (var i = 0; i < 3; i++) {
                 var idex = Math.floor(Math.random() * boardRecommend.length);
                 newRandomBoard.push(boardRecommend[idex]);
@@ -64,8 +63,7 @@ const BoardAdvice = () => {
                                     actions={[<IconText icon={FormOutlined} text={item?.author_username} />, <IconText icon={CalendarOutlined} text={dateFormat} />]}
                                 >
                                     <Meta title={item?.title} />
-
-                                    <CardTextData>
+                                    <ListCategoryAndTag>
                                         <Box direction="row" justify="flex-start" align="flex-start">
                                             <BoardTextInfo style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--Gray-400)', paddingRight: '5px' }}>บทความ</BoardTextInfo>
                                             {item?.tag?.map((item: any, index: any) => {
@@ -76,7 +74,7 @@ const BoardAdvice = () => {
                                                 );
                                             })}
                                         </Box>
-                                    </CardTextData>
+                                    </ListCategoryAndTag>
                                     <div>
                                         <HeartIconCard />
                                         <HeartText>{like.length}</HeartText>
