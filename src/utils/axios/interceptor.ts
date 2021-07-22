@@ -4,9 +4,12 @@ import axios from 'axios';
 axios.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
+        const tokenGuest = localStorage.getItem('tokenGuest');
         if (token) {
-            // console.log('[This is token]:', token);
             config.headers.Authorization = `Bearer ${token}`;
+        }
+        if (tokenGuest) {
+            config.headers.Authorization = `Bearer ${tokenGuest}`;
         }
         config.baseURL = `${process.env.REACT_APP_API_URL}`;
         return config;

@@ -18,16 +18,22 @@ import { IResult } from '../../shared/interface/Result.interfaces';
 const Result = () => {
     const history = useHistory();
     const [result, setResultData] = useState<Array<IResult> | null>(null);
+    //----------------------- GET TOKEN ----------------------- //
+    const token = localStorage.getItem('token');
+    const tokenGuest = localStorage.getItem('tokenGuest');
 
     //-------------- CREATE MAX SCORE LIST USE SWR--------------//
     const { data: resultData, error } = useSWR('/user/newResult');
-    console.log('[Result Test Game]:', resultData);
+    // const { data: resultDataGuest, error: errorResultDataGuest } = useSWR('/guest/result');
 
     useEffect(() => {
-        if (resultData) {
+        if (resultData && token) {
             setResultData(resultData.filter((data: { score: number }) => data.score === Math.max(...Object.keys(resultData).map((key) => resultData[key].score))));
-            console.log('[Result data]:', result);
+            console.log('Result Data', resultData);
         }
+        // if (resultDataGuest && tokenGuest) {
+        //     setResultData(resultDataGuest.filter((data: { score: number }) => data.score === Math.max(...Object.keys(resultDataGuest).map((key) => resultDataGuest[key].score))));
+        // }
     }, [resultData]);
 
     const downloadImage = () => {
@@ -60,9 +66,7 @@ const Result = () => {
     // }, []);
     return (
         <Container header={null}>
-            {!resultData ? (
-                <div>loading ...</div>
-            ) : (
+            {!resultData ? null : (
                 <ContainerCarousel>
                     {result?.map((item: any, index: any) => {
                         return (
