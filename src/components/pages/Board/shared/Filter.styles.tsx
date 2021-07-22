@@ -87,7 +87,7 @@ export const CustomTag = styled(Tag)<{ active: 'active' | '' }>`
 export const CustomCheckableTag = styled(CheckableTag)`
     font-size: 16px;
     color: #6e7282;
-    width: 107px;
+    width: 100%;
     height: 47px;
     display: flex;
     justify-content: center;

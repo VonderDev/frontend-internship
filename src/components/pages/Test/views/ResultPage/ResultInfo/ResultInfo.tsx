@@ -15,6 +15,7 @@ function ResultInfo() {
                     left: 'back',
                 }}
             >
+                
                 <TabsInfo type="card">
                     <TabPane tab="ภาพรวม" key="1">
                         <ResultOverview />

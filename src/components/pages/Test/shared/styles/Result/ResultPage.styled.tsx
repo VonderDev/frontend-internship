@@ -28,11 +28,11 @@ export const TextHeaderResult = styled.div`
 `;
 
 export const ChartStyled = styled(Chart)`
-    transform: translateY(-20%);
-    width: 580px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    //transform: translateY(-5%);
+    width: 120%;
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
 `;
 
 export const TextBoxDescript = styled.div`
@@ -157,8 +157,12 @@ export const RowDetailCard = styled(Row)`
 export const ProgressScore = styled(Progress)``;
 
 export const ContainerProgressScore = styled.div`
-    padding-left: 20px;
-    transform: translateY(-150%);
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    margin-right: 30px;
+    //padding-left: 20px;
+    //transform: translateY(-70%);
 `;
 export const TextNameSkill = styled.div`
     font-weight: bolder;

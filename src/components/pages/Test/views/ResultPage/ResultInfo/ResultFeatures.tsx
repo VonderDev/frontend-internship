@@ -3,7 +3,7 @@ import { TextHeaderResult } from '../../../shared/styles/Result/ResultPage.style
 import { IResult } from '../../../shared/interface/Result.interfaces';
 import CharactorDetail from './CharactorDetail';
 import useSWR from 'swr';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { IIconText } from 'components/pages/Board/shared/Card.interface';
 import React from 'react';
 import { GridBox, ImgCardCharactorList, SpaceCharactorList, SearchField, CoverImage, SkillNameOnImgCard } from 'components/pages/Test/shared/styles/Result/ResultFeature.styled';
@@ -16,15 +16,10 @@ const ResultFeatures = () => {
     //---------------- FETCHING RESULT DATA USE SWR ----------------//
     const [result, setResultData] = useState<Array<IResult> | null>(null);
     const [isData, isSetData] = useState<boolean>(false);
-    const { data: resultData, error } = useSWR('/user/newResult');
+    //----------------------- GET TOKEN ----------------------- //
+    const token = localStorage.getItem('token');
+    const { data: resultData, error } = useSWR(token ? '/user/newResult' : '/guest/result');
     const isLoading = !resultData && !error;
-
-    const IconText = ({ icon, text }: IIconText) => (
-        <SearchField>
-            {React.createElement(icon)}
-            {text}
-        </SearchField>
-    );
 
     const [detailCharacter, setDetailCharacter] = useState<IResult>({
         skill: '',
@@ -33,10 +28,27 @@ const ResultFeatures = () => {
         description_career: '',
     });
 
+    const paramObjectId = useParams<{ id: string; index: string }>();
+    const { data: resultHistory, error: errorResultHistory } = useSWR(Object.keys(paramObjectId).length ? `/user/getResultByIndex/${paramObjectId?.id}/${paramObjectId?.index}` : null);
+
     if (resultData && !isData) {
         isSetData(true);
         const chartScore = Object.keys(resultData).map((key) => resultData[key].score);
         const maxScoreList = resultData.filter((data: { score: number }) => data.score === Math.max(...chartScore));
+        setResultData(maxScoreList);
+        const maxScoreDefault = maxScoreList[0];
+        setDetailCharacter({
+            skill: maxScoreDefault.skill,
+            image_charactor: maxScoreDefault.image_charactor,
+            description: maxScoreDefault.description,
+            description_career: maxScoreDefault.description_career,
+        });
+        console.log('[max Score List from useSWR]', maxScoreList);
+    }
+    if (resultHistory && !isData) {
+        isSetData(true);
+        const chartScore = Object.keys(resultHistory).map((key) => resultHistory[key].score);
+        const maxScoreList = resultHistory.filter((data: { score: number }) => data.score === Math.max(...chartScore));
         setResultData(maxScoreList);
         const maxScoreDefault = maxScoreList[0];
         setDetailCharacter({
@@ -88,12 +100,17 @@ const ResultFeatures = () => {
                 skill={detailCharacter.skill}
                 img_charactor={detailCharacter.image_charactor}
             />
-            <ButtonGoHomeInResultFeature onClick={() => {
-                history.push('/')
-                const tokenGuest = localStorage.getItem('tokenGuest');
-                if(tokenGuest){
-                    localStorage.removeItem('tokenGuest')
-                } }}>กลับหน้าหลัก</ButtonGoHomeInResultFeature>
+            <ButtonGoHomeInResultFeature
+                onClick={() => {
+                    history.push('/');
+                    const tokenGuest = localStorage.getItem('tokenGuest');
+                    if (tokenGuest) {
+                        localStorage.removeItem('tokenGuest');
+                    }
+                }}
+            >
+                กลับหน้าหลัก
+            </ButtonGoHomeInResultFeature>
         </>
     );
 };

@@ -41,8 +41,10 @@ function Routing() {
             </Route>
             <Route exact path="/resultoverview" component={ResultOverview} />
             <Route exact path="/resultinfo" component={ResultInfo} />
+            <Route exact path="/resultinfo/:id/:index" component={ResultInfo} />
             <PrivateRoute exact path="/editProfile" component={editProfile} />
             <Route exact path="/result" component={Result} />
+            <Route exact path="/result/:id/:index" component={Result} />
             <Route exact path="/charactordetail" component={CharactorDetail} />
             <PrivateRoute exact path="/profileresult" component={ProfileResult} />
             <PrivateRoute exact path="/boardhistory" component={BoardHistory} />
