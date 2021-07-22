@@ -33,10 +33,10 @@ const Result = () => {
     }, [resultData]);
 
     const downloadImage = () => {
-        var element = document.createElement('a');
-        var file = new Blob(['https://cdn.discordapp.com/attachments/821804175767764995/857648803897540678/Nature.png'], { type: 'image/*' });
+        const element = document.createElement('a');
+        const file = new Blob([`${resultData?.img_result}`], { type: 'image/*' });
         element.href = URL.createObjectURL(file);
-        element.download = 'image.png';
+        element.download = 'vonder-meCharactor.png';
         element.click();
     };
 
@@ -48,11 +48,9 @@ const Result = () => {
                         <div key={index}>
                             <ContainerResultSummarize>
                                 <HeaderResultFeature>คุณมีลักษณะเด่น {result.length} ด้าน</HeaderResultFeature>
-                                <ImageCharactorCarousel src={item.image_charactor} />
-                                <TextSkillName>{item.skill}</TextSkillName>
-                                <TextSkillSummarize>{item.skill_summarize}</TextSkillSummarize>
-                                <ButtonSaveResult href={item.image_charactor} download onClick={() => downloadImage()}>
-                                    <UploadOutlined />
+                                <ImageCharactorCarousel src={item.img_result} />
+                                <ButtonSaveResult href={item.img_result} download onClick={() => downloadImage()}>
+                                    {/* <UploadOutlined /> */}
                                     บันทึกผลลัพธ์
                                 </ButtonSaveResult>
                             </ContainerResultSummarize>
