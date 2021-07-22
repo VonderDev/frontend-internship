@@ -42,7 +42,6 @@ const BoardAdvice = () => {
         <>
             <Row>
                 <TextBoardTopic>แนะนำสำหรับคุณ</TextBoardTopic>
-                <ButtonSeeAllBoard onClick={() => history.push('/board')}>ดูเพิ่มเติม</ButtonSeeAllBoard>
             </Row>
             <ContainerBoard>
                 {' '}

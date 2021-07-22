@@ -1,11 +1,12 @@
 import Container from 'components/Container/Container';
 import { Box } from 'shared/style/theme/component';
-import { ControlOutlined, SearchOutlined } from '@ant-design/icons';
-import { ButtonFilter, SearchField, InputSearch } from '../../shared/Filter.styles';
+import { ControlOutlined, SearchOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { ButtonFilter, SearchField, InputSearch, TagBox, CustomCheckableTag } from '../../shared/Filter.styles';
 import { useEffect, useState } from 'react';
 import { ApiPostFilter, ApiPostSearch } from '../../apis/board.api';
 import BoardCardComponent from './BoardCardComponent';
 import FilterDrawer from './FilterDrawer';
+import { transalateToThai } from 'utils/transalator/transalator';
 const Filter = () => {
     //Catagories----------------------------------------------------------------------------------------------------------
     const [selectedCatagories, setSelectedCatagories] = useState<any>(Array);
@@ -100,12 +101,35 @@ const Filter = () => {
                 onclickFilter={onclickFilter}
             />
             <Box style={{ marginLeft: '20px', marginRight: '20px' }} align="flex-start" direction="column">
-                <SearchField style={{ marginBottom: '20px' }}>
+                <SearchField>
                     <InputSearch allowClear onChange={(e: any) => setSearchValue(e.target.value)} placeholder="Search Form" prefix={<SearchOutlined />} />
                     <ButtonFilter onClick={showDrawer}>
                         <ControlOutlined style={{ color: '#8a8888', fontSize: '24px' }} />
                     </ButtonFilter>
                 </SearchField>
+                <div style={{ marginTop: '10px', fontSize: '16px', color: 'var(--Gray-400)', fontWeight: 'bold' }}>ตัวกรอง ({contentData.content_type.length + contentData.tag.length})</div>
+                <TagBox style={{ fontWeight: 'bolder', marginBottom: '20px', marginTop: '0px' }}>
+                    {contentData.content_type.map((item: any, index) => (
+                        <div key={index} style={{ marginRight: '10px', marginBottom: '5px' }}>
+                            <CustomCheckableTag key={index} checked={selectedCatagories.indexOf(item) > -1} onChange={(checked) => handleChangeCatagories(item, checked)}>
+                                {transalateToThai(item)}
+                                <div style={{ marginLeft: '3px', transform: 'translateY(1px)' }}>
+                                    <CheckCircleOutlined />
+                                </div>
+                            </CustomCheckableTag>
+                        </div>
+                    ))}
+                    {contentData.tag.map((item: any, index) => (
+                        <div key={index} style={{ marginRight: '10px', marginBottom: '5px' }}>
+                            <CustomCheckableTag style={{ fontWeight: 'normal' }} key={index} checked={selectedTags.indexOf(item) > -1} onChange={(checked) => handleChangeTag(item, checked)}>
+                                #{transalateToThai(item)}
+                                <div style={{ marginLeft: '3px', transform: 'translateY(1px)' }}>
+                                    <CheckCircleOutlined />
+                                </div>
+                            </CustomCheckableTag>
+                        </div>
+                    ))}
+                </TagBox>
                 <BoardCardComponent data={tagFilterData} />
             </Box>
         </Container>

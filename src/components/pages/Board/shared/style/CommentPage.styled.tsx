@@ -19,8 +19,8 @@ export const CommentInput = styled(Input)`
 
 export const IconSendMessage = styled.div`
     background-image: url(${sendMessageIcon});
-    width: 6.5%;
-    height: 5vh;
+    width: 40px;
+    height: 5.6vh;
     background-size: cover;
     background-position: center;
     top: 4px;

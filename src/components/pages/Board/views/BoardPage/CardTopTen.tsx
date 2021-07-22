@@ -31,7 +31,7 @@ export const CardTopTen = () => {
 
     return (
         <>
-            <Box direction="row" justify="space-between" align="flex-start" style={{ padding: '0px 20px 0px 20px' }}>
+            <Box direction="row" justify="space-between" align="flex-start" >
                 <Box direction="column" justify="center" align="center">
                     <TextRecommendBoardTopic>10 อันดับสูงสุด</TextRecommendBoardTopic>
                 </Box>
@@ -42,7 +42,7 @@ export const CardTopTen = () => {
                 </Box>
             ) : (
                 <GridBox>
-                    <SpaceCard direction="horizontal">
+                    <SpaceCard>
                         {data?.slice(0, 10).map((item: any, index: any) => {
                             const cardDate = new Date(item?.created_at);
                             const dateFormat = cardDate.getDate() + MONTHS[cardDate.getMonth()] + cardDate.getFullYear();

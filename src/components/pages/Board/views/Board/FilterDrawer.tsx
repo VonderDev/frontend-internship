@@ -1,6 +1,7 @@
 import { DrawerRadius } from 'components/pages/Authentication/shared/style';
 import { Topic, TagBox, CustomCheckableTag, ButtonUseFilter } from '../../shared/Filter.styles';
 import { catagories, hashtag } from '../../shared/FixedTag';
+import { CheckCircleOutlined } from '@ant-design/icons';
 
 interface DrawerProps {
     tagFilterData: any[];
@@ -13,24 +14,34 @@ interface DrawerProps {
     onclickFilter: (e: any) => void;
 }
 
-const FilterDrawer: React.FC<DrawerProps> = ({ showDrawer, visible, selectedCatagories, selectedTags, handleChangeCatagories, handleChangeTag, onclickFilter }) => {
+const FilterDrawer: React.FC<DrawerProps> = ({ showDrawer, visible, selectedCatagories, selectedTags, handleChangeCatagories, handleChangeTag, onclickFilter}) => {
     return (
         <DrawerRadius title="ตัวกรอง" placement="bottom" closable={true} onClose={showDrawer} visible={visible} height={768}>
             <div>
                 <Topic>ประเภทของกระทู้</Topic>
                 <TagBox style={{ fontWeight: 'bolder' }}>
-                    {catagories.map((item) => (
-                        <CustomCheckableTag key={item.value} checked={selectedCatagories.indexOf(item.value) > -1} onChange={(checked) => handleChangeCatagories(item.value, checked)}>
-                            {item.tag}
-                        </CustomCheckableTag>
+                    {catagories.map((item, index) => (
+                        <div key={index} style={{ marginRight: '10px', marginBottom: '5px' }}>
+                            <CustomCheckableTag key={item.value} checked={selectedCatagories.indexOf(item.value) > -1} onChange={(checked) => handleChangeCatagories(item.value, checked)}>
+                                {item.tag}
+                                <div style={{ marginLeft: '3px', transform: 'translateY(1px)' }}>
+                                    <CheckCircleOutlined />
+                                </div>
+                            </CustomCheckableTag>
+                        </div>
                     ))}
                 </TagBox>
                 <Topic>แฮชแท็กของกระทู้</Topic>
                 <TagBox>
-                    {hashtag.map((item) => (
-                        <CustomCheckableTag key={item.value} checked={selectedTags.indexOf(item.value) > -1} onChange={(checked) => handleChangeTag(item.value, checked)}>
-                            #{item.tag}
-                        </CustomCheckableTag>
+                    {hashtag.map((item, index) => (
+                        <div key={index} style={{ marginRight: '10px', marginBottom: '5px' }}>
+                            <CustomCheckableTag key={item.value} checked={selectedTags.indexOf(item.value) > -1} onChange={(checked) => handleChangeTag(item.value, checked)}>
+                                #{item.tag}
+                                <div style={{ marginLeft: '3px', transform: 'translateY(1px)' }}>
+                                    <CheckCircleOutlined />
+                                </div>
+                            </CustomCheckableTag>
+                        </div>
                     ))}
                 </TagBox>
             </div>

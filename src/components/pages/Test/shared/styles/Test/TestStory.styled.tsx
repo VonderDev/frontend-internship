@@ -14,19 +14,16 @@ export const ContainerTestStoryPage = styled.div`
 `;
 
 export const TextStory = styled.div`
-    background-color: white;
-    border: 5px solid whitesmoke;
+    background: radial-gradient(60% 60% at 50% 50%, rgba(255, 255, 255, 0.8) 63.54%, rgba(255, 255, 255, 0) 85.42%);
     width: fit-content;
-    max-width: 400px;
-    min-width: 300px;
-    height: 100px;
-    padding: 20px;
+    padding: 0 10%;
+    max-width: 600px;
+    min-width: 500px;
+    height: 120px;
     font-size: 20px;
-    color: var(--Gray-300);
-    border-radius: 35px;
-    box-shadow: 0px 3px 80px #ffffff;
+    color: var(--Gray-600);
     opacity: 0.8;
-    transform: translateY(250%);
+    transform: translateY(200%);
     display: flex;
     justify-content: center;
     align-content: center;

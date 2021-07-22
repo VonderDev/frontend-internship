@@ -13,7 +13,7 @@ import {
     OptionHashtag,
     TextTopicContent,
 } from '../../shared/style/BoardCreate.styled';
-
+import { CheckCircleOutlined } from '@ant-design/icons';
 interface CreateContentSecondPageProps {
     updateContentData: (event: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;
     countPage: number;
@@ -75,6 +75,9 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                                             });
                                         }}
                                     >
+                                        <span style={{ marginRight: '10px' }}>
+                                            <CheckCircleOutlined />
+                                        </span>
                                         {item.label}
                                     </ContentTypeButton>
                                 </ContainerContentType>
@@ -84,7 +87,7 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                         <InputHashtagInDrawer
                             dropdownStyle={{ boxShadow: 'unset' }}
                             mode="multiple"
-                            // defaultOpen={true}
+                            showSearch={false}
                             style={{ width: '90%' }}
                             placeholder="กรุณาเลือกแฮชเเท็กของกระทู้"
                             onChange={handleChangeOfHashtag}

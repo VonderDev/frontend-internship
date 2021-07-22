@@ -11,15 +11,15 @@ function ProfileResult() {
     const { data: profile, error: errorProfile } = useSWR('/user/profile');
     const isLoading = !errorProfile && !profile;
     const history = useHistory();
-    useEffect(() => {
-        if (profile) {
-            console.log('[useEffect profile] :', profile);
-        }
-    }, [profile]);
+    // useEffect(() => {
+    //     if (profile) {
+    //         console.log('[useEffect profile] :', profile);
+    //     }
+    // }, [profile]);
 
-    if (profile.results) {
-        profile.results?.sort(function (a: any, b: any) {
-            return new Date(b[0].created_at).getTime() - new Date(a[0].created_at).getTime();
+    if (profile?.results) {
+        profile?.results?.sort(function (a: any, b: any) {
+            return new Date(a[0].created_at).getTime() - new Date(b[0].created_at).getTime();
         });
 
         console.log('☞ [sort Board created latest] :', profile);
@@ -36,7 +36,7 @@ function ProfileResult() {
                         const dateFormat = dateCreatedFilter.getDate() + ' ' + MONTHS[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
                         console.log(dateFormat);
                         return (
-                            <ResultCard style={{ marginBottom: '10px' }} key={index} onClick={() => history.push('/result')}>
+                            <ResultCard style={{ marginBottom: '10px' }} key={index} onClick={() => history.push(`/result/${profile.auth[0]._id}/${index}`)}>
                                 <RowStyled>
                                     <Col span={10}>
                                         <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />

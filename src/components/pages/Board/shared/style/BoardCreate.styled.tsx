@@ -105,7 +105,7 @@ export const CountOfPageTwo = styled.div`
     align-items: center;
     font-size: 16px;
     color: var(--Gray-400);
-    transform: translateY(1380%);
+    transform: translateY(1250%);
 
     /* position: absolute; */
 `;
@@ -140,9 +140,7 @@ export const ContentTypeButton = styled(Radio.Button)`
     .ant-radio-inner:after {
         border-radius: 0 !important;
     }
-    .ant-radio-inner:after {
-        border: none !important;
-    }
+
     border-radius: 12px !important;
     & .ant-radio-button-wrapper::first-child {
         border-color: white !important;
@@ -154,8 +152,16 @@ export const ContentTypeButton = styled(Radio.Button)`
         border-radius: 12px !important;
         font-size: 14px;
         color: var(--Gray-500) !important;
+        border-radius: var(--Blue-000);
 
         /* border-radius: 12px !important; */
+    }
+    &.ant-radio-button-wrapper:first-child {
+        width: 127px;
+        height: 44px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 `;
 export const ButtonBackToFirstPage = styled(Button)`

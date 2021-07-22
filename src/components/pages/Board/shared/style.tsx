@@ -40,7 +40,7 @@ export const BoardCard = styled(Card)`
 `;
 
 export const GridBox = styled.div`
-    display: flex;
+    //display: flex;
     overflow-x: scroll;
     ::-webkit-scrollbar {
         width: 0; /* Remove scrollbar space */
@@ -50,6 +50,8 @@ export const GridBox = styled.div`
 
 export const NewCardStyle = styled(CardStyle)`
     padding: 0px;
+    margin: 0px !important;
+    margin-right: 10px !important;
     & .ant-card-actions {
         border-top: none;
         background: none;
@@ -84,8 +86,12 @@ export const EllipsisText = styled.div`
 `;
 
 export const SpaceCard = styled(Space)`
-    padding-right: 20px;
-    padding-left: 20px;
+    //padding-right: 20px;
+    //padding-left: 20px;
+    margin-bottom: 10px;
+    .ant-space-item{
+        padding-left: 0px ;
+    }
 `;
 
 export const HistoryImage = styled.img`
