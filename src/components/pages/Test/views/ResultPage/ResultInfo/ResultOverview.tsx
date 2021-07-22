@@ -42,7 +42,13 @@ function ResultOverview() {
                     </ContainerProgressScore>
                 );
             })}
-            <ButtonGoHomeInResult onClick={() => history.push('/')}>กลับหน้าหลัก</ButtonGoHomeInResult>
+            <ButtonGoHomeInResult onClick={() => {
+                history.push('/')
+                const tokenGuest = localStorage.getItem('tokenGuest');
+                if(tokenGuest){
+                    localStorage.removeItem('tokenGuest')
+                } 
+                }}>กลับหน้าหลัก</ButtonGoHomeInResult>
         </>
     );
 }

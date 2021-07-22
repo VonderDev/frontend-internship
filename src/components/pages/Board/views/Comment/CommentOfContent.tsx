@@ -1,16 +1,19 @@
 import Container from 'components/Container/Container';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import {
     BoxOfCommentList,
     CommentBody,
     CommentInput,
     ContainerOfCommentList,
+    ContainerOfIconQuestionAndText,
     ContainerOfInput,
-    ContainerOfNoCommentList,
     CreatedDate,
     IconSendMessage,
+    LoginText,
     ProfileUserImage,
+    QuestionImgae,
+    TextNoCommentList,
     Username,
 } from '../../shared/style/CommentPage.styled';
 import { ApiPostComment } from '../../apis/commentContent.api';
@@ -19,6 +22,7 @@ import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { MONTHS } from '../../shared/months';
 
 function CommentOfContent() {
+    const history = useHistory();
     //---------------------- GET PARAM OBJECT URL ----------------------//
     const paramObjectId = useParams<{ id: string }>();
     //---------------------- SET STATE & FUNCTION FOR POST COMMENT ----------------------//
@@ -86,7 +90,12 @@ function CommentOfContent() {
             }}
         >
             {commentList.length == 0 ? (
-                <ContainerOfNoCommentList>ยังไม่มีความคิดเห็น</ContainerOfNoCommentList>
+                <ContainerOfIconQuestionAndText style={{ position: 'relative' }}>
+                    <div style={{display:'flex' , alignItems:'center' , flexDirection:'column' , height:'78vh' , justifyContent:'center'}}> 
+                    <QuestionImgae />
+                    <TextNoCommentList>ยังไม่มีความคิดเห็นในขณะนี้</TextNoCommentList>
+                    </div>
+                </ContainerOfIconQuestionAndText>
             ) : (
                 <ContainerOfCommentList>
                     {commentList?.map((item: any, index: any) => {
@@ -108,7 +117,8 @@ function CommentOfContent() {
             <ContainerOfInput>
                 {!token ? (
                     <>
-                        <CommentInput type="text" placeholder="กรุณาเข้าสู่ระบบ เพื่อเเสดงความคิดเห็น" disabled={true} />
+                        <CommentInput type="text" placeholder="กรุณา เข้าสู่ระบบ เพื่อเเสดงความคิดเห็น" disabled={true} />
+                        <LoginText onClick={() => history.push('/login')}>เข้าสู่ระบบ</LoginText>
                         <IconSendMessage />
                     </>
                 ) : (

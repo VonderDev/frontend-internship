@@ -18,7 +18,7 @@ import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion'
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
 import BoardCreateContent from 'components/pages/Board/views/CreateContent/BoardCreateContent';
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
-import Filter from 'components/pages/Board/views/Board/Filter'
+import Filter from 'components/pages/Board/views/Board/Filter';
 import BoardContent from 'components/pages/Board/views/CreateContent/BoardContent';
 import TestPixi from 'components/GameElement/Game/testpixi';
 import CommentOfContent from 'components/pages/Board/views/Comment/CommentOfContent';

@@ -646,18 +646,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         const verticesX = 5;
         const verticesY = 10;
         const waterTexture = PIXI.Texture.from(water);
-        // const bgWater = new PIXI.Sprite(waterTexture);
-        // bgWater.scale.set(0.7);
-        // lastScene.addChild(bgWater)
         const planeWater = new PIXI.SimplePlane(waterTexture, verticesX, verticesY);
                
         const texture = PIXI.Texture.from(shadow);
-        // const shadowS6 = new PIXI.Sprite(texture);
-        // shadowS6.scale.set(0.5);
-        // shadowS6.position.set(20,150);
-        // lastScene.addChild(shadowS6 )
-  
-            // Create the simple plane
   
       const plane = new PIXI.SimplePlane(texture, verticesX, verticesY);
   
@@ -668,9 +659,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       planeWater.scale.set(0.7);
       lastScene.addChild(planeWater);
       lastScene.addChild(plane);
-  
-      //
-      
+
       // Get the buffer for vertice positions.
       const bufferWater = planeWater.geometry.getBuffer('aVertexPosition');
       const buffer = plane.geometry.getBuffer('aVertexPosition');

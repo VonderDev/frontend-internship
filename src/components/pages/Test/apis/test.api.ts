@@ -30,6 +30,7 @@ export async function ApiPostTestResult(data: any) {
     console.log('[Result Data] :', data);
     console.log('[Result length]:', data.length)
     const token = localStorage.getItem('token');
+    const tokenGuest = localStorage.getItem('tokenGuest');
     // return mockTestData as unknown as Array<IQuestion>;
     //
     // ─── Use axios.post when backend finish ───────────────────
@@ -43,14 +44,15 @@ export async function ApiPostTestResult(data: any) {
             console.error(err);
             console.log('Cannot post result');
         });
-    } else{
-        return await axios.post('/guest/result', data).then((res) => {
-            console.log("response", res.data)
+    }
+    else if(tokenGuest){
+        return await axios.post('/guest/result', data,{headers: { 'Authorization': `Bearer ${tokenGuest}` }}).then((res) => {
+            console.log("response for guest", res.data)
             return res.data
         })
         .catch((err) => {
             console.error(err);
-            console.log('Cannot post result');
+            console.log('Cannot post result for guest');
         });
-    }
+    } 
 }
