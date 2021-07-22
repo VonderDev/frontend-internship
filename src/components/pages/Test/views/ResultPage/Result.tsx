@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Container from 'components/Container/Container';
 import { useEffect, useState } from 'react';
 import {
@@ -19,16 +19,25 @@ const Result = () => {
     const history = useHistory();
     const [result, setResultData] = useState<Array<IResult> | null>(null);
 
-    //-------------- CREATE MAX SCORE LIST USE SWR--------------//
+    //-------------- Param From Profile --------------//
+    const param = useParams<{ id: string , index: string }>();
+    const { data: resultProfile, error: errorResultProfile } = useSWR(param ? `/user/getResultByIndex/${param?.id}/${param?.index}` : null);
+    
+    //-------------- CREATE MAX SCORE LIST USE SWR --------------//
     const { data: resultData, error } = useSWR('/user/newResult');
     console.log('[Result Test Game]:', resultData);
 
     useEffect(() => {
+        if(param && resultProfile){
+            setResultData(resultProfile?.filter((data: { score: number }) => data.score === Math.max(...Object.keys(resultProfile).map((key) => resultProfile[key]?.score))));
+            console.log('[ResultProfile data]:', result);
+        }else 
         if (resultData) {
-            setResultData(resultData.filter((data: { score: number }) => data.score === Math.max(...Object.keys(resultData).map((key) => resultData[key].score))));
+            setResultData(resultData?.filter((data: { score: number }) => data.score === Math.max(...Object.keys(resultData).map((key) => resultData[key].score))));
             console.log('[Result data]:', result);
         }
-    }, [resultData]);
+        console.log(param)
+    }, [resultData , param , resultProfile]);
 
     const downloadImage = () => {
         var element = document.createElement('a');
