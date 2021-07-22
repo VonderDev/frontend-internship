@@ -179,7 +179,7 @@ export const IsLoadingSpinnerTestQuestion = styled.div`
     margin-left: auto;
     margin-right: auto;
     bottom: 0 auto;
-    transform: translateY(800%);
+    transform: translateY(600%);
 `;
 
 export const TextIsLoadingTestQuestion = styled.h4`

@@ -135,7 +135,7 @@ function TestQuestion() {
                 setTimeout(()=>{
                     monkey.pause();
                     audio.volume = 1
-                },3000)
+                },7000)
             }else if (currentCutScnen + 1 === 13){
                 changeScene('S6.1')
                 setCutScene(true)// start cutscene v.14
@@ -193,13 +193,6 @@ function TestQuestion() {
         }
     }
 
-    //     window.onload = function(){
-    //     changeScene('Start')
-    //     setTimeout(() => {
-    //         setPlaying(true);
-    //     }, 2000);
-    // }
-
     // -------------- Show Modal -------------- //
     const [visible, setVisible] = React.useState(false);
     const [confirmLoading, setConfirmLoading] = React.useState(false);
@@ -223,10 +216,12 @@ function TestQuestion() {
     const { data, error } = useSWR('/questions');
     if (error) return <div>failed to load data , please waiting</div>;
     if (!data) return (
+        <div style={{marginTop: '30%'}}>
         <IsLoadingSpinner>
             กำลังโหลดข้อมูล
         <Spin size="large" />
-        </IsLoadingSpinner>) ;
+        </IsLoadingSpinner>
+        </div>) ;
         
     if (data && !isSWRTriggered) {
         console.log('data from useSWR');
