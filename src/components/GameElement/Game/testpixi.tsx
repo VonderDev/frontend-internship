@@ -28,6 +28,10 @@ const TestPixi = () => {
         console.log(value)    
         if(value === 3){
             changeScene('S2')
+        }else if (value === 4){
+            changeScene('angry')
+        }else if (value === 5){
+            changeScene('happy')
         }else if (value === 6){
             changeScene('S3')
         }else if (value === 11){

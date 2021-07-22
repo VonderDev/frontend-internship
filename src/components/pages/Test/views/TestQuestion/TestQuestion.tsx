@@ -64,17 +64,18 @@ function TestQuestion() {
 
     //---------------- Play Sound ----------------//
     const [audio, setAudio] = useState(new Audio(Sound));
+    const [monkey] = useState(new Audio(SoundMonkey));
     const [playing, setPlaying] = useState(false);
+    const [music, setMusic] = useState(false);
     const toggle = () => {
         setPlaying(!playing);
     }
     useEffect(() => {
         playing ? audio.play() : audio.pause();
-        console.log('value',audio.volume)
-        console.log(playing)
-        console.log('Winndow size:',window.innerWidth)
+        music? monkey.play() : monkey.pause();
+        console.log(playing , music)
       },
-      [playing]
+      [playing,music]
     );
 
     //---------------- Cut Scene ----------------//
@@ -113,6 +114,9 @@ function TestQuestion() {
         cutSceneList[currentCutScnen];
         console.log(currentCutScnen);
         console.log('CutScene :', cutSceneList[currentCutScnen].value, 'message:', cutSceneList[currentCutScnen].message);
+        if(currentCutScnen === 10){
+           setMusic(false);
+        }
     }, [currentCutScnen]);
 
     const showStory =()=>{
@@ -130,12 +134,7 @@ function TestQuestion() {
                 changeScene('S5')
                 setCutScene(true) // start cutscene v.9
                 audio.volume = 0.2
-                var monkey = new Audio(SoundMonkey);
-                monkey.play();
-                setTimeout(()=>{
-                    monkey.pause();
-                    audio.volume = 1
-                },7000)
+                setMusic(true)
             }else if (currentCutScnen + 1 === 13){
                 changeScene('S6.1')
                 setCutScene(true)// start cutscene v.14
@@ -173,20 +172,25 @@ function TestQuestion() {
             setCutScene(true); // start cutscene v.2
         } else if (currentQuestion + 1 === 4) {
             setCutScene(true); // start cutscene v.3
+            changeScene('angry');
         } else if (currentQuestion + 1 === 5) {
             setCutScene(true); // start cutscene v.4
         } else if (currentQuestion + 1 === 6) {
             setCutScene(true); // start cutscene v.5
+            changeScene('happy');
         } else if (currentQuestion + 1 === 11) {
             changeScene('S4.3');
         } else if (currentQuestion + 1 === 14) {
             setCutScene(true); // start cutscene v.8
         } else if (currentQuestion + 1 === 18) {
             setCutScene(true); // start cutscene v.10
+            changeScene('talk');
+            audio.volume = 1
         } else if (currentQuestion + 1 === 21) {
             setCutScene(true); // start cutscene v.11
         } else if (currentQuestion + 1 === 23) {
             setCutScene(true); // start cutscene v.12
+             changeScene('point');
         } else if (currentQuestion + 1 === 24) {
             changeScene('S6');
             setCutScene(true); // start cutscene v.13
