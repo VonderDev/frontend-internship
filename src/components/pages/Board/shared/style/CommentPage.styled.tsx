@@ -57,7 +57,7 @@ export const ProfileUserImageCommentList = styled.div`
 export const ContainerOfCommentList = styled.div`
     position: relative;
     left: 5%;
-    overflow-y: hidden;
+    overflow-y: scroll;
     height: 78vh;
 `;
 export const TextNoCommentList = styled.div`
