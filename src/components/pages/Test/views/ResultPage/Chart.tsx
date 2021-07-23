@@ -1,69 +1,88 @@
 import { useEffect, useState } from 'react';
-import Chart from 'react-apexcharts';
+import { useParams } from 'react-router-dom';
+import useSWR from 'swr';
+import { transalateToThai } from 'utils/transalator/transalator';
+import { IResult } from '../../shared/interface/Result.interfaces';
+import { ChartStyled, TextHeaderResult } from '../../shared/styles/Result/ResultPage.styled';
 
 interface Chartprop {
     options: any;
-    series?: any
+    series?: any;
 }
 
 const Charts = () => {
-  const MockScore = require('../../mocks/result.json')
-  const chartScore = MockScore.map((key: { score: any; }) => key.score)
-  const chartSkill = Object.keys(MockScore).map(key => MockScore[key].skill)
-
-    const [chartValue, setchartValue] = useState<Chartprop>({
-        series:[
-            {
-               name: "Skill",
-               data: chartScore
-            }
-         ],
-         options :{
-                chart: {
-                  height: 350,
-                  type: "radar",
-                  dropShadow: {
-                    enabled: true,
-                    blur: 1,
-                    left: 1,
-                    top: 1
-                  }
-                },
-                stroke: {
-                  width: 2
-                },
-                fill: {
-                  opacity: 0.1
-                },
-                markers: {
-                    size: 5,
-                    hover: {
-                      size: 10
-                    }
-                  },
-                xaxis: {
-                  categories: chartSkill
-                }
-        }           
-    });
+    //----------------------- GET TOKEN ----------------------- //
+    const token = localStorage.getItem('token');
+    const tokenGuest = localStorage.getItem('tokenGuest');
+    const { data: resultData, error } = useSWR(token ? '/user/newResult' : '/guest/result');
+    const isLoading = !resultData && !error;
+    const paramObjectId = useParams<{ id: string; index: string }>();
+    const { data: resultHistory, error: errorResultHistory } = useSWR(Object.keys(paramObjectId).length ? `/user/getResultByIndex/${paramObjectId?.id}/${paramObjectId?.index}` : null);
+    //--------------- FETCHING SCORE & SKILL DATA USING SWR ---------------//
+    const [score, setScore] = useState([]);
+    const [skill, setSkill] = useState([]);
 
     useEffect(() => {
-        console.log(chartValue.options)
-        console.log(chartValue.series)
-        console.log(MockScore )
-    }, [])
+        if (resultData && (token || tokenGuest)) {
+            setScore(resultData.map((key: { score: any }) => key.score));
+            setSkill(resultData.map((key: any) => transalateToThai(key.skill)));
+        }
+        if (resultHistory && paramObjectId) {
+            console.log('Result History', resultHistory);
+            setScore(resultData.map((key: { score: any }) => key.score));
+            setSkill(resultData.map((key: any) => transalateToThai(key.skill)));
+        }
+    }, [resultData, paramObjectId, resultHistory]);
 
     return (
         <>
-        <div>
-            <Chart
-            options = { chartValue.options } 
-            series = { chartValue.series }
-            type ="radar"
-            />
-        </div>
+            <div>
+                <TextHeaderResult>แผนภูมิพหุปัญญา</TextHeaderResult>
+                <div style={{display: 'flex' , flexDirection: 'column' , alignItems: 'center'}}>
+                {isLoading ? (
+                    <div>is loading ... </div>
+                ) : (
+                    <ChartStyled
+                        options={{
+                            chart: {
+                                height: 350,
+                                type: 'radar',
+                                dropShadow: {
+                                    enabled: true,
+                                    blur: 1,
+                                    left: 1,
+                                    top: 1,
+                                },
+                            },
+                            stroke: {
+                                width: 2,
+                            },
+                            fill: {
+                                opacity: 0.1,
+                            },
+                            markers: {
+                                size: 5,
+                                hover: {
+                                    size: 10,
+                                },
+                            },
+                            xaxis: {
+                                categories: skill,
+                            },
+                        }}
+                        series={[
+                            {
+                                name: 'Skill',
+                                data: score,
+                            },
+                        ]}
+                        type="radar"
+                    />
+                )}
+                </div>
+            </div>
         </>
     );
 };
 
-export default Charts
+export default Charts;

@@ -1,174 +1,225 @@
-import { Button, Input, Card, Image , List } from 'antd';
-import Layout from 'antd/lib/layout/layout';
+
+import { Button, Card, Image, Modal, Row } from 'antd';
 import styled from 'styled-components';
-import { RightOutlined , HeartOutlined , FormOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { RightOutlined, FormOutlined , HeartFilled } from '@ant-design/icons';
+import { Box } from 'shared/style/theme/component';
 
-export const MoveCenter = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+export const ButtonSave = styled(Button)`
+    font-weight: bolder;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    padding: 5px;
+    margin: 5px;
+    color: var(--Blue-400);
 `;
 
-export const Container = styled.div`
-    padding: 10px;
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-`;
-
-export const AlignRight = styled.div`
-    float: right;
-`;
-
-export const AlignLeft = styled.div`
-    float: left;
-`;
-
-export const ButtonSubmit = styled(Button)`
-    font-family: 'Kanit', sans-serif;
+export const ButtonLeaveModal = styled(Button)`
     font-weight: bolder;
     font-size: 15px;
     border-radius: 10px;
-    color: #3a8ce4;
-    border-color: #3a8ce4;
+    color: white;
+    border-color: var(--Red-300);
+    background-color: var(--Red-300);
+    width: 295px;
+    height: 51px;
+    box-shadow: 0px 3px 6px #c7c7c7;
+`;
+export const ButtonCancleModal = styled(Button)`
     font-weight: bolder;
-    width: 300px;
-    height: 50px;
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    color: var(--Blue-400);
+    width: 65px;
+    height: 19px;
     margin-top: 15px;
-    margin-bottom: 0px;
-    box-shadow: 0px 3px 6px #c7c7c7;
+    transform: translateY(0%);
 `;
 
-export const BgColor = styled(Layout)`
-    background-color: white;
+export const TextTopicEditProfile = styled.div`
+    width: 343px;
+    text-align: left;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: var(--Gray-400);
 `;
 
-export const FormInput = styled(Input)`
-    font-family: 'Kanit', sans-serif;
-    font-size: 15px;
-    border-radius: 10px;
-    background-color: white;
-    width: 300px;
-    box-shadow: 0px 3px 6px #c7c7c7;
-`;
-
-export const TextTopic = styled.div`
-    font-family: 'Kanit', sans-serif;
-    font-weight: bolder;
-    font-size: 30px;
-    padding-bottom: 5px;
-`;
 export const TextTopic2 = styled.div`
-    font-family: 'Kanit', sans-serif;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 100%;
+    padding-top: 15px;
+    text-align: left;
     font-weight: bolder;
-    font-size: 17px;
+    font-size: 22px;
     margin-top: 15px;
     margin-bottom: 0px;
 `;
 
-export const TextUserInfo = styled.div`
-    font-family: 'Kanit', sans-serif;
+export const TextUserInfo1 = styled.div`
+    text-align: left;
     font-weight: bolder;
-    font-size: 15px;
+    font-size: 16px;
     margin-top: 10px;
-    margin-bottom: 5px;
+`;
+export const TextUserInfo2 = styled.div`
+    text-align: right;
+    float: right;
+    font-weight: normal;
+    font-size: 16px;
+    margin-top: 10px;
 `;
 
 export const TextUsername = styled.div`
-    font-family: 'Kanit', sans-serif;
     font-weight: bolder;
-    font-size: 15px;
+    font-size: 22px;
     margin-top: 10px;
     padding-bottom: 0px;
 `;
-export const CardText = styled.div`
-    font-family: 'Kanit', sans-serif;
+export const TextHeadModal = styled.div`
     font-weight: bolder;
-    font-size: 12px;
-    transform: translateY(80%) translateX(12%);
+    font-size: 24px;
+`;
+export const TextBodyModal = styled.div`
+    font-weight: normal;
+    font-size: 16px;
 `;
 
-
-export const ResultCard = styled(Card)`
-    box-shadow: 0px 3px 6px #c7c7c7;
-    margin-top: 0px;
-    height: 110px;
-    width: 300px;
-    border-radius: 10px;
-    & .ant-card-body {
-        padding: 5px;
-    }
+export const CardText = styled.div`
+    font-weight: bolder;
+    font-size: 16px;
 `;
 
-export const HistoryCard = styled(Card)`
-    box-shadow: 0px 3px 6px #c7c7c7;
-    margin-top: 0px;
-    height: 110px;
-    width: 300px;
-    border-radius: 10px;
-    & .ant-card-body {
-        padding: 5px;
-    }
+export const HistoryText = styled.div`
+    padding-right: 15px;
+    margin-top: 5px;
+`;
+
+export const EllipsisText = styled.div`
+    text-overflow: ellipsis; /* เพิ่ม ... จุดจุดจุดท้ายสุด */
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
 `;
 
 export const UserImage = styled(Image)`
-    width: 80px;
+    width: 120px;
+    height: 120px;
     border-radius: 90px;
 `;
 
 export const ResultImage = styled.img`
-    width: 100px;
+    width: 111px;
+    height: 112px;
     border-radius: 90px;
-    transform: translateY(-1%);
+    transform: translateY(4%);
 `;
 
 export const HistoryImage = styled.img`
-    width: 100px;
-    border-radius: 90px;
-    transform: translateY(-17%);
+    margin-right: 10px;
+    width: 88px;
+    height: 88px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transform: translateY(-1%);
+    position: absolute;
+`;
+
+export const LinkMoreResult = styled.div`
+    width: 100%;
+    padding-top: 15px;
+    margin-top: 15px;
+    text-align: right;
+    font-size: 16px;
+    color: var(--Blue-300);
+`;
+
+export const ResultCard = styled(Card)`
+    box-shadow: 0px 3px 6px #c7c7c7;
+    margin-top: 0px;
+    height: 130px;
+    width: 100%;
+    border-radius: 10px;
+    & .ant-card-body {
+        padding: 5px;
+    }
+`;
+
+export const BoardCard = styled(Card)`
+    margin-bottom: 10px;
+    height: 88px;
+    width: 100%;
+    box-shadow: 0px 3px 6px #c7c7c7;
+    border-radius: 10px;
+    & .ant-card-body {
+        padding: 0px;
+    }
+`;
+
+export const RowStyled = styled(Row)`
+    width: 100%;
+`;
+
+export const ConfirmModal = styled(Modal)`
+    display: flex;
+    justify-content: center;
+    & .ant-modal-content {
+        width: 343px;
+        height: 249px;
+        border-radius: 15px;
+    }
+    & .ant-modal-header {
+        height: 89px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+    }
+    & .ant-modal-body {
+        height: 30px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+    & .ant-modal-footer {
+        height: 130px;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
 `;
 
 export const IconArrow = styled(RightOutlined)`
     color: #3a8ce4;
-    width: 100px;
-    transform: translateY(0%) translateX(120%);
+    transform: translateY(350%);
 `;
-export const IconLove = styled(HeartOutlined)`
-    //color: #3a8ce4;
-    width: 100px;
-    //display: flex;
-    transform: translateY(100) translateX(200);
+export const CommentIcon = styled(FormOutlined)`
+    color: var(--Gray-100);
+    padding-top: 8px;
+    padding-right: 5px;
 `;
-
-export const IconWrite = styled(FormOutlined)`
-    //color: #3a8ce4;
-    width: 100px;
-    //display: flex;
-    //transform: translateY(500%) translateX(100%);
+export const HeartIcon = styled(HeartFilled)`
+    color: var(--Gray-100);
+    padding-top: 8px;
+    padding-right: 5px;
 `;
 
-export const LinkResult = styled(Link)`
-    margin: 0px;
-    padding: 0px;
-`;
-
-export const ProfileListBoard = styled(List)`
-    margin-left: 50px;
-    font-weight: bolder;
-    margin: 0 auto;
-    width: 300px;
-`;
-
-export const ProfileListItemBoard = styled(List.Item)`
-    margin-left: -20px;
-    font-family: 'Kanit', sans-serif;
+export const CustomBox = styled(Box)`
     font-size: 12px;
-    & .ant-list-item-meta-title {
-        font-size: 12px;
-    }
-    & .ant-list-item-meta {
-        font-size: 12px;
-        transform: translateY(0%) translateX(0%);
-    }
+    color: #6E7282;
+    margin-top: 10px;
+`;
+
+export const NotFoundText = styled.div`
+    margin-top: 15px;
+    text-align: center;
+    font-size: 16px;
+    color: var(--Gray-200);
 `;

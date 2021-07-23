@@ -15,20 +15,20 @@ export const ListMenu = [
     },
     {
         title: 'Board',
-        path: '/board',
+        path: '/filter',
         icon: <MessageOutlined />,
         cName: 'nav-text',
     },
-    {
-        title: 'Login',
-        path: '/login',
-        icon: <LoginOutlined />,
-        cName: 'nav-text',
-    },
-    {
-        title: 'Register',
-        path: '/register',
-        icon: <UserAddOutlined />,
-        cName: 'nav-text',
-    },
+    // {
+    //     title: 'Login',
+    //     path: '/login',
+    //     icon: <LoginOutlined />,
+    //     cName: 'nav-text',
+    // },
+    // {
+    //     title: 'Register',
+    //     path: '/register',
+    //     icon: <UserAddOutlined />,
+    //     cName: 'nav-text',
+    // },
 ];

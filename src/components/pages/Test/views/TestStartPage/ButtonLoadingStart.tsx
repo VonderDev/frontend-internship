@@ -1,7 +1,8 @@
 import { Spin } from 'antd';
 import { useState } from 'react';
-import { ButtonLoading, IsLoadingSpinner, TextIsLoading } from '../../shared/styles/TestPage.styled';
+import { ButtonLoading, ContainerButtonLoading, IsLoadingSpinner } from '../../shared/styles/Test/TestPage.styled';
 import { useHistory } from 'react-router-dom';
+import { ApiPostCreateGuestToken } from '../../apis/GuestTest.api';
 
 function ButtonLoadingStart() {
     //
@@ -9,28 +10,28 @@ function ButtonLoadingStart() {
     //
     const history = useHistory();
     const [isLoading, setLoading] = useState(false);
-
+ 
     const fetchData = () => {
         console.log(isLoading);
         setLoading(true);
         setTimeout(() => {
             console.log('set Loading:', isLoading);
             setLoading(false);
+            ApiPostCreateGuestToken();
             history.push('/testquestion');
         }, 1500);
     };
 
     return (
-        <div>
+        <ContainerButtonLoading>
             {isLoading ? (
                 <IsLoadingSpinner>
-                    <TextIsLoading>Fetching Data</TextIsLoading>
                     <Spin size="large" />
                 </IsLoadingSpinner>
             ) : (
-                <ButtonLoading onClick={fetchData}>เริ่มการทดสอบ</ButtonLoading>
+                <ButtonLoading onClick={fetchData}>เริ่มเกม</ButtonLoading>
             )}
-        </div>
+        </ContainerButtonLoading>
     );
 }
 

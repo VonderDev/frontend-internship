@@ -15,7 +15,7 @@ const TestProvider = ({ children }: IcontextProps) => {
 
     const addScoreList = useCallback(
         ({ categoryID, score }: Result) => {
-            console.log(scoreList);
+            // console.log(scoreList);
             setScoreList((prev) => {
                 const newData = [...prev];
                 newData.push({ categoryID, score });

@@ -1,13 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
- 
+
 const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-    max-width: 600px;
-    height: 100vh;
-    overflow-y: scroll;
-  }
   html{
     //COLORS
     --White: #FFFFFF;
@@ -16,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     --Silver-100: #FAFAFC;
 
     //COLORS_BLUE
-    --Blue-700: #093F7A;
+    --Blue-400: #093F7A;
     --Blue-600: #11549E;
     --Blue-500: #1B6ABF;
     --Blue-400: #287FDE;
@@ -82,13 +75,26 @@ const GlobalStyle = createGlobalStyle`
     --font-14: 14px;
 
     //BREAKPOINT
-    --mobile-small: 300px;
-    --mobile-medium: 400px;
-    --mobile-large: 500px ;
-    
-    
+    --mobile-small: (max-width: 300px);
+    --mobile-medium: (max-width: 400px);
+    --mobile-large: (max-width: 500px) ;
 
+    //Radius
+    --Radius-12: 12px;
+    --Radius-15: 15px;
+
+    //SHADOW
+    --Shadow-light-bottom:  0 3px 6px #e0e0e0;
+    --Shadow-medium-top: 0px -8px 16px #00000014;
   }
+
+  body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 400;
+  }
+
 `;
- 
+
 export default GlobalStyle;

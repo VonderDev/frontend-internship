@@ -1,20 +1,58 @@
-import mockTestData from '../mocks/question.json'
-import { IQuestion, IUserAns } from '../shared/interface/Test.interfaces'
-import axios from 'axios'
+import axios from 'axios';
 
+const token = localStorage.getItem('token');
 
-export async function API_GetTestData() {
-    console.log("[Mock Data] :",mockTestData)
-   return mockTestData as unknown as Array<IQuestion>
+export async function ApiGetTestData() {
+    return await axios
+        .get('/questions')
+        .then((response) => {
+            console.log('[Function API_GetTestData] :', response.data);
+            return response.data;
+        })
+        .catch((err) => {
+            console.error(err);
+        });
 }
 
-export async function API_PostTestResult(data : any) {
-    console.log("[Result Data] :",data)
-    return mockTestData as unknown as Array<IQuestion>
+export async function ApiGetResult() {
+    return await axios
+        .get('/user/result',  {headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
+            console.log('[Result Data] :', res.data); 
+        return res.data
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+}
+
+
+export async function ApiPostTestResult(data: any) {
+    console.log('[Result Data] :', data);
+    console.log('[Result length]:', data.length)
+    const token = localStorage.getItem('token');
+    const tokenGuest = localStorage.getItem('tokenGuest');
+    // return mockTestData as unknown as Array<IQuestion>;
     //
     // ─── Use axios.post when backend finish ───────────────────
     //
-    // return await axios.post('/api/post', data).then((res) => {
-    //     return res.data
-    // })
+    if(token){
+        return await axios.post('/user/newResult', data,{headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
+            console.log("response", res.data)
+            return res.data
+        })
+        .catch((err) => {
+            console.error(err);
+            console.log('Cannot post result');
+        });
+    }
+    else if(tokenGuest){
+        return await axios.post('/guest/result', data,{headers: { 'Authorization': `Bearer ${tokenGuest}` }}).then((res) => {
+            console.log("response for guest", res.data)
+            return res.data
+        })
+        .catch((err) => {
+            console.error(err);
+            console.log('Cannot post result for guest');
+        });
+    } 
 }

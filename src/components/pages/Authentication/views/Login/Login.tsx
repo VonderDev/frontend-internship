@@ -1,90 +1,76 @@
 import { useState } from 'react';
-import { Form, Space } from 'antd';
-import styled from 'styled-components';
-import { useHistory } from 'react-router';
+import { useHistory, Redirect } from 'react-router-dom';
+import { useAuthContext } from 'components/AuthContext/AuthContext';
+import {
+  FontTextHeader,
+  LogoPage,
+  MoveCenter,
+  PrivacyContainer,
+  CheckboxPrivacy,
+  DrawerRadius,
+  TextAgree,
+  TextRegister
+} from 'components/pages/Authentication/shared/style';
+import { LoginForm } from './LoginForm';
+import Container from 'components/Container/Container';
+import logo from '../../images/logo.png';
+import Privacy from './Privacy';
+import { ButtonStyle } from 'shared/style/theme/component';
 
-import { ILogin } from '../../shared/login.interface';
-import { ButtonColor, FontText, FontTextHeader, BaseInput } from 'components/pages/Authentication/shared/style';
+const Login = () => {
 
-const MoveCeneter = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`;
+  const [visible, setVisible] = useState<boolean>(false);
+  const [placement, setPlacement] = useState<string>('bottom');
+  const { user, login,token } = useAuthContext();
+  const [checked, setChecked] = useState(false);
+  const history = useHistory();
 
-function Login() {
-    const history = useHistory();
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
+  function confirmPolicy() {
+    history.push('/register');
+  }
 
-    const onFinish = (values: ILogin) => {
-        const mockUser = require('../../mocks/user.json');
-        const currentUser = mockUser.find((user: ILogin) => user.email === values.email);
+  const showDrawer = () => {
+    setVisible(true);
+  };
 
-        mockUser.find((user: ILogin) => console.log(user));
-        if (values.password === currentUser?.password) {
-            history.push('/');
-        } else {
-            console.log('Failed login');
-        }
-        console.log('Success:', values);
-    };
+  const onClose = () => {
+    setVisible(false);
+  };
 
-    function checkdatajson() {
-        const mockUser = require('../../mocks/user.json');
-        const currentUser = mockUser.find((user: ILogin) => user.email === email);
-
-        mockUser.find((user: ILogin) => console.log(user));
-        if (password === currentUser?.password) {
-            history.push('/');
-        } else {
-            console.log('Failed login');
-        }
-    }
-
-    return (
-        <div>
-            <MoveCeneter>
-                <Space align="start">
-                    <FontTextHeader>เข้าสู่ระบบ</FontTextHeader>
-                </Space>
-                <Form initialValues={{ remember: true }} onFinish={onFinish}>
-                    <Form.Item
-                        name="email"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'กรุณาใส่อีเมล!',
-                            },
-                        ]}
-                    >
-                        <BaseInput placeholder="อีเมล" />
-                    </Form.Item>
-                    <Form.Item
-                        name="password"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'กรุณาใส่รหัสผ่าน!',
-                            },
-                        ]}
-                    >
-                        <BaseInput type="password" placeholder="รหัสผ่าน" />
-                    </Form.Item>
-
-                    <Form.Item>
-                        <ButtonColor onClick={checkdatajson} htmlType="submit">
-                            เข้าสู่ระบบ
-                        </ButtonColor>
-                    </Form.Item>
-                </Form>
-
-                <FontText>
-                    ยังไม่มีบัญชีใช่ไหม? <a onClick={() => history.push('/register')}>สร้างบัญชีกันเถอะ!</a>
-                </FontText>
-            </MoveCeneter>
-        </div>
-    );
+  if (token){return  <Redirect to='/'/>}
+  return (
+    <Container header={{ left: 'back', right: 'menu' }}>
+      <PrivacyContainer>
+        <LogoPage src={logo} preview={false} />
+        <MoveCenter>
+          <DrawerRadius
+            title="นโยบายความเป็นส่วนตัว"
+            placement="bottom"
+            closable={false}
+            onClose={onClose}
+            visible={visible}
+            key={placement}
+            getContainer={false}
+            height={650}
+            style={{ position: 'absolute', overflowY: 'hidden' }}
+          >
+            <Privacy />
+            <CheckboxPrivacy checked={checked} onChange={() => { setChecked(prev => !prev) }} >
+              <TextAgree> ฉันได้ทำความเข้าใจ และยินยอมตาม <span style={{ color: '#3A8CE4', fontWeight: 'bold' }}>นโยบายความเป็นส่วนตัว</span></TextAgree>
+            </CheckboxPrivacy>
+            <ButtonStyle typebutton="Large" sizebutton={95} onClick={confirmPolicy} htmlType="submit" disabled={!checked}>
+              ยืนยัน
+            </ButtonStyle>
+          </DrawerRadius>
+          <FontTextHeader>เข้าสู่ระบบ</FontTextHeader>
+          <LoginForm />
+          <TextRegister>
+            ไม่มีบัญชีใช่ไหม? <a onClick={showDrawer} style={{ fontWeight: 'bold' }}>สร้างบัญชีกันเถอะ!</a>
+          </TextRegister>
+        </MoveCenter>
+      </PrivacyContainer>
+    </Container>
+  );
 }
 
 export default Login;
