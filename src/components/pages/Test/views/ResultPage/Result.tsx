@@ -48,11 +48,11 @@ const Result = () => {
                             <ContainerResultSummarize>
                                 <HeaderResultFeature>คุณมีลักษณะเด่น {result.length} ด้าน</HeaderResultFeature>
                                 <ImageCharactorCarousel src={item.img_result} />
-                                {Object.keys(paramObjectId).length ? null : (
-                                    <ButtonSaveResult href={item.img_result} download onClick={() => downloadImage()}>
-                                        <DownloadOutlined />
-                                    </ButtonSaveResult>
-                                )}
+
+                                <ButtonSaveResult href={item.img_result} download onClick={() => downloadImage()}>
+                                    <DownloadOutlined style={{ paddingLeft: '20px' }} />
+                                    บันทึกผลลัพธ์
+                                </ButtonSaveResult>
                             </ContainerResultSummarize>
                         </div>
                     );
