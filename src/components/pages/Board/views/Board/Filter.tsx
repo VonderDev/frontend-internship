@@ -1,6 +1,6 @@
 import Container from 'components/Container/Container';
 import { Box } from 'shared/style/theme/component';
-import { ControlOutlined, SearchOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import { ControlOutlined, SearchOutlined, CloseCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import { ButtonFilter, SearchField, InputSearch, TagBox, CustomCheckableTag } from '../../shared/Filter.styles';
 import { useEffect, useState } from 'react';
 import { ApiPostFilter, ApiPostSearch } from '../../apis/board.api';
@@ -76,7 +76,7 @@ const Filter = () => {
         }, 500);
 
         return () => clearTimeout(delayTime);
-    }, [searchValue]);
+    }, [searchValue, contentData]);
 
     useEffect(() => {
         console.log('tagFilterData', tagFilterData);

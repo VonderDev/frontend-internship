@@ -13,7 +13,7 @@ const ProfileResultCard: React.FC<CardComponentProps> = ({ profile }) => {
             return new Date(b[0].created_at).getTime() - new Date(a[0].created_at).getTime();
         });
 
-        console.log('☞ [sort Board created latest] :', profile);
+        //console.log('☞ [sort Board created latest] :', profile);
     }
     return (
         <>
