@@ -1,7 +1,8 @@
-import { DrawerRadius } from 'components/pages/Authentication/shared/style';
-import { Topic, TagBox, CustomCheckableTag, ButtonUseFilter } from '../../shared/Filter.styles';
+import { DrawerContainer, DrawerFilter, DrawerRadius, MoveCenter, PrivacyContainer } from 'components/pages/Authentication/shared/style';
+import { Topic, TagBox, CustomCheckableTag, ButtonUseFilter, ButtonClearFilter } from '../../shared/Filter.styles';
 import { catagories, hashtag } from '../../shared/FixedTag';
 import { CheckCircleOutlined } from '@ant-design/icons';
+import { useState } from 'react';
 
 interface DrawerProps {
     tagFilterData: any[];
@@ -12,11 +13,24 @@ interface DrawerProps {
     handleChangeCatagories: Function;
     handleChangeTag: Function;
     onclickFilter: (e: any) => void;
+    onclickClear: (e: any) => void;
 }
 
-const FilterDrawer: React.FC<DrawerProps> = ({ showDrawer, visible, selectedCatagories, selectedTags, handleChangeCatagories, handleChangeTag, onclickFilter}) => {
+const FilterDrawer: React.FC<DrawerProps> = ({ onclickClear, showDrawer, visible, selectedCatagories, selectedTags, handleChangeCatagories, handleChangeTag, onclickFilter }) => {
+    const [placement, setPlacement] = useState<any>('bottom');
+
     return (
-        <DrawerRadius title="ตัวกรอง" placement="bottom" closable={true} onClose={showDrawer} visible={visible} height={768}>
+        <DrawerFilter
+            style={{ position: 'absolute', overflowY: 'hidden' }}
+            title="ตัวกรอง"
+            key={placement}
+            placement={placement}
+            getContainer={false}
+            closable={true}
+            onClose={showDrawer}
+            visible={visible}
+            height={768}
+        >
             <div>
                 <Topic>ประเภทของกระทู้</Topic>
                 <TagBox style={{ fontWeight: 'bolder' }}>
@@ -45,10 +59,11 @@ const FilterDrawer: React.FC<DrawerProps> = ({ showDrawer, visible, selectedCata
                     ))}
                 </TagBox>
             </div>
-            <div style={{ paddingBottom: '24px', display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', height: '60%' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', height: '30%' }}>
+                <ButtonClearFilter onClick={onclickClear}>ล้างทั้งหมด</ButtonClearFilter>
                 <ButtonUseFilter onClick={onclickFilter}>กรอง</ButtonUseFilter>
             </div>
-        </DrawerRadius>
+        </DrawerFilter>
     );
 };
 export default FilterDrawer;

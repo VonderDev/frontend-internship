@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { BackHeader } from 'components/Container/Header.styled';
-import { ConfirmModal, ButtonLeaveModal, ButtonCancleModal, TextHeadModal, TextBodyModal, ButtonSave, TextTopicEditProfile, UserImage } from '../shared/Profile.styles';
+import { ConfirmModal, ButtonLeaveModal, ButtonCancleModal, TextHeadModal, TextBodyModal, ButtonSave, TextTopicEditProfile, UserImage, CustomAlert } from '../shared/Profile.styles';
 import { LeftOutlined } from '@ant-design/icons';
 import Container from 'components/Container/Container';
 import { useHistory } from 'react-router-dom';
-import { Form } from 'antd';
+import { Alert, Form } from 'antd';
 import { ApiGetUserData, ApiPutUserData } from '../apis/profile.api';
 import { IUser } from '../shared/Profile.interface';
 import ProfileMascot from '../../Profile/images/ProfileMascot.png';
@@ -12,6 +12,7 @@ import { Box, InputStyle } from 'shared/style/theme/component';
 const EditProfile = () => {
     //Modal state and function-----------------------------------------------------------------------------
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isShowNotification, setIsShowNotification] = useState(false);
     const showModal = () => {
         setIsModalVisible(true);
     };
@@ -46,12 +47,12 @@ const EditProfile = () => {
     };
     //Function put API-----------------------------------------------------------------------------
     const putDataOnClick = () => {
-        if (userInfo.username === '') {
-            alert('กรุณากรอกชื่อผู้ใช้!');
-        } else if (userInfo.firstName === '') {
-            alert('กรุณากรอกชื่อจริง!');
-        } else if (userInfo.lastName === '') {
-            alert('กรุณากรอกนามสกุล!');
+        setIsShowNotification(false);
+        if (userInfo.username === '' || userInfo.firstName === '' || userInfo.lastName === '') {
+            setIsShowNotification(true);
+            setTimeout(() => {
+                setIsShowNotification(false);
+            }, 2000);
         } else {
             ApiPutUserData(userInfo);
             setTimeout(() => {
@@ -63,6 +64,11 @@ const EditProfile = () => {
     const history = useHistory();
     return (
         <>
+            {isShowNotification ? (
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <CustomAlert message="Error" description="กรุณากรอกมูลให้ครบก่อนบันทึก!!!" type="error" showIcon />
+                </div>
+            ) : null}
             <ConfirmModal
                 visible={isModalVisible}
                 onOk={handleOk}

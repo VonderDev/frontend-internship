@@ -78,13 +78,8 @@ export const ContainerCarousel = styled(Carousel)`
 export const ButtonSaveResult = styled.a`
     position: absolute;
     font-size: 18px;
-    bottom: 94%;
-    padding: 0px 10px;
-    width: fit-content;
-    background-color: white;
+    bottom: 10%;
     color: var(--Blue-300);
-    border-radius: 12px;
-    margin-left: 80%;
 `;
 
 export const ImgContainer = styled.img``;
