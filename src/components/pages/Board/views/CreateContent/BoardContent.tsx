@@ -22,20 +22,11 @@ import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
 import { ApiPutLikeOfBoardContent } from '../../apis/boardCreate.api';
 import { transalateToThai } from 'utils/transalator/transalator';
-import { MONTHS } from '../../shared/months';
+import { dateFormat } from 'utils/Date/DateFormat';
 
 function BoardContent() {
     const history = useHistory();
     const paramObjectId = useParams<{ id: string }>();
-    //--------------- FETCHING BOARD CONTENT USING AXIOS ---------------//
-    // async function getNewestContent() {
-    //     const response = await ApiGetNewestContent();
-    //     if (response) {
-    //         console.log(response);
-    //     } else {
-    //         console.log('error');
-    //     }
-    // }
 
     //----------------- SET STATE LIKE & PUT LIKE OF CONTENT -----------------//
     const [addLike, setAddLike] = useState<{ content_id: string }>({
@@ -53,12 +44,9 @@ function BoardContent() {
     }, []);
 
     //--------------- FETCHING BOARD CONTENT & COMMENT DATA  ---------------//
-    const { data: contentData, error: errorcontentData } = useSWR('/user/contentID/' + paramObjectId.id);
+    const { data: contentData, error: errorcontentData, mutate: updateContentData } = useSWR('/user/contentID/' + paramObjectId.id);
     const { data: fetchingCommentData, error: errorfetchingComment } = useSWR(`/user/comment/get/1-100/${paramObjectId.id}`);
     const isLoadingContentData = !contentData && !errorcontentData;
-
-    //--------------- SET DATE CREATED CONTENT FORMAT ---------------//
-    const [dateCreatedFormat, setDateCreatedFormat] = useState<string>();
 
     //------------------- GET USERNAME FOR CHECK LIKE -------------------//
     const { getUser } = useAuthContext();
@@ -80,14 +68,15 @@ function BoardContent() {
 
     async function addLikeOfBoardContent() {
         const isSuccess = await ApiPutLikeOfBoardContent(addLike);
+        await updateContentData();
         if (isSuccess) {
             setIsLike(true);
             setLikeLength(likeLength + 1);
         }
     }
     async function unLikeOfBoardContent() {
-        const isSuccess = await ApiPutLikeOfBoardContent(addLike);
-        if (isSuccess) {
+        const isUnlikeSuccess = await ApiPutLikeOfBoardContent(addLike);
+        if (isUnlikeSuccess) {
             setIsLike(false);
             setLikeLength(likeLength - 1);
         }
@@ -97,18 +86,13 @@ function BoardContent() {
         getUserId();
         if (contentData) {
             console.log('[Newest Content data ]', contentData);
-            //--------------- SET DATE FORMAT ---------------//
-            const dateCreatedContent = contentData?.created_at;
-            const createdContentData = new Date(dateCreatedContent);
-            setDateCreatedFormat(createdContentData.getDate() + ' ' + MONTHS[createdContentData.getMonth()] + ' ' + createdContentData.getFullYear());
             //---------------- CHECK LIKE IF LIKE IS SET TRUE OR NOT IS FALSE ----------------//
             const uidLikes = contentData?.uid_likes;
             console.log('[uid likes :]', uidLikes.includes(userId));
             setIsLike(uidLikes.includes(userId));
             setLikeLength(contentData?.uid_likes.length);
-            console.log('uid likeee', contentData?.uid_likes !== userId);
         }
-    }, [contentData, dateCreatedFormat, userId]);
+    }, [contentData, userId]);
 
     return (
         <Container
@@ -116,7 +100,15 @@ function BoardContent() {
                 title: 'กระทู้',
                 right: 'menu',
                 left: (
-                    <ButtonBackToFirstPage onClick={() => history.push('/')}>
+                    <ButtonBackToFirstPage
+                        onClick={() => {
+                            history.push('/');
+                            const tokenGuest = localStorage.getItem('tokenGuest');
+                            if (tokenGuest) {
+                                localStorage.removeItem('tokenGuest');
+                            }
+                        }}
+                    >
                         <LeftOutlined style={{ color: '#8a8888' }} />
                     </ButtonBackToFirstPage>
                 ),
@@ -131,26 +123,27 @@ function BoardContent() {
                     {contentData?.tag?.map((item: any, index: any) => {
                         return <CategoryTag key={index}>#{transalateToThai(item)}</CategoryTag>;
                     })}
-                    <div style={{display:'flex' , alignItems:'center' , marginBottom:'30px' , marginTop:'10px'}}>
-                    <ProfileImage />
-                    <ContainerUserNameAndDate>
-                        <AuthorName>{contentData?.author_username}</AuthorName>
-                        <DateCreatedContent>{dateCreatedFormat}</DateCreatedContent>
-                    </ContainerUserNameAndDate>
+                    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '30px', marginTop: '10px' }}>
+                        <ProfileImage />
+                        <ContainerUserNameAndDate>
+                            <AuthorName>{contentData?.author_username}</AuthorName>
+                            <DateCreatedContent>{dateFormat(contentData?.created_at)}</DateCreatedContent>
+                        </ContainerUserNameAndDate>
                     </div>
                     <ImageOfContent src={contentData?.image}></ImageOfContent>
                     <ContentBody>{contentData?.content_body}</ContentBody>
 
                     <BoxOfLikeAndComment>
-                        <span style={{display:'flex' , alignItems:'center'}}>
-                        {isLike ? (
-                            <HeartFilled style={{ color: '#F0685B', fontSize: '40px' }} onClick={unLikeOfBoardContent} />
-                        ) : (
-                            <HeartOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} onClick={addLikeOfBoardContent} />
-                        )}
-                        <LengthOfLikeAndComment>{likeLength}</LengthOfLikeAndComment>
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                            {isLike ? (
+                                <HeartFilled style={{ color: '#F0685B', fontSize: '40px' }} onClick={unLikeOfBoardContent} />
+                            ) : (
+                                <HeartOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} onClick={addLikeOfBoardContent} />
+                            )}
+                            <LengthOfLikeAndComment>{likeLength}</LengthOfLikeAndComment>
                         </span>
-                        <span style={{display:'flex' , alignItems:'center'}}
+                        <span
+                            style={{ display: 'flex', alignItems: 'center' }}
                             onClick={() => {
                                 if (paramObjectId) {
                                     history.push(`/boardcontent/${paramObjectId?.id}/comment`);

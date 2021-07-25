@@ -5,6 +5,7 @@ import { CardStyle } from 'shared/style/theme/component';
 export const GridBox = styled.div`
     display: flex;
     overflow-x: scroll;
+    overflow-y: hidden;
     ::-webkit-scrollbar {
         width: 0;
         background: transparent;

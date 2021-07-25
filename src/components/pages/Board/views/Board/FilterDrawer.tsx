@@ -1,4 +1,4 @@
-import { DrawerContainer, DrawerFilter, DrawerRadius, MoveCenter, PrivacyContainer } from 'components/pages/Authentication/shared/style';
+import { DrawerFilter } from 'components/pages/Authentication/shared/style';
 import { Topic, TagBox, CustomCheckableTag, ButtonUseFilter, ButtonClearFilter } from '../../shared/Filter.styles';
 import { catagories, hashtag } from '../../shared/FixedTag';
 import { CheckCircleOutlined } from '@ant-design/icons';

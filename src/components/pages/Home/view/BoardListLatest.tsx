@@ -1,9 +1,8 @@
-import { Col, Row } from 'antd';
-import { MONTHS } from 'components/pages/Board/shared/months';
-import { BoardCard, HistoryImage, HistoryText } from 'components/pages/Profile/shared/Profile.styles';
-import { useHistory } from 'react-router';
+import { Row } from 'antd';
+import { useHistory } from 'react-router-dom';
 import { Box } from 'shared/style/theme/component';
 import useSWR from 'swr';
+import { dateFormat } from 'utils/Date/DateFormat';
 import { transalateToThai } from 'utils/transalator/transalator';
 import {
     BoardImageOfContent,
@@ -46,8 +45,6 @@ function BoardListLatest() {
             ) : (
                 <>
                     {boardList?.slice(0, 3).map((item: any, index: any) => {
-                        const cardDate = new Date(item?.created_at);
-                        const dateFormat = cardDate.getDate() + MONTHS[cardDate.getMonth()] + cardDate.getFullYear();
                         return (
                             <BoardList key={index} onClick={() => history.push(`/boardcontent/${item._id}`)}>
                                 <TextOverflowHide style={{ display: 'flex' }}>
@@ -71,7 +68,7 @@ function BoardListLatest() {
                                                 <CommentIcon />
                                             </div>
                                             <BoardTextInfo>{item.author_username}</BoardTextInfo>
-                                            <BoardTextInfo>{dateFormat}</BoardTextInfo>
+                                            <BoardTextInfo>{dateFormat(item?.created_at)}</BoardTextInfo>
                                             <div style={{ justifyContent: 'center' }}>
                                                 <HeartIcon />
                                             </div>
