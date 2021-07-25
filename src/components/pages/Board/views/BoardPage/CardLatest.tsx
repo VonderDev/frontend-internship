@@ -9,6 +9,7 @@ import { HeartIcon } from 'components/pages/Profile/shared/Profile.styles';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { TextRecommendBoardTopic, ButtonSeeAllBoard } from '../../shared/style';
 import { MONTHS } from '../../shared/months';
+import { dateFormat } from 'utils/Date/DateFormat';
 
 export const CardLatest = () => {
     const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -24,7 +25,7 @@ export const CardLatest = () => {
 
     return (
         <>
-            <Box direction="row" justify="space-between" align="flex-start" >
+            <Box direction="row" justify="space-between" align="flex-start">
                 <Box direction="column" justify="center" align="center">
                     <TextRecommendBoardTopic>ล่าสุด</TextRecommendBoardTopic>
                 </Box>
@@ -42,8 +43,6 @@ export const CardLatest = () => {
                 <>
                     {data
                         ? data.slice(0, 3).map((item: any, index: any) => {
-                              const dateCreatedFilter = new Date(item?.created_at);
-                              const dateFormat = dateCreatedFilter.getDate() + ' ' + MONTHS[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
                               return (
                                   <BoardCard key={index} onClick={() => history.push(`/boardcontent/${item?._id}`)}>
                                       <EllipsisText style={{ display: 'flex' }}>
@@ -65,7 +64,7 @@ export const CardLatest = () => {
                                                       <CommentIcon />
                                                   </div>
                                                   <HistoryText>{item?.author_username}</HistoryText>
-                                                  <HistoryText>{dateFormat}</HistoryText>
+                                                  <HistoryText>{dateFormat(item?.created_at)}</HistoryText>
                                                   <div style={{ justifyContent: 'center' }}>
                                                       <HeartIcon />
                                                   </div>

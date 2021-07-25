@@ -23,19 +23,11 @@ import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
 import { ApiPutLikeOfBoardContent } from '../../apis/boardCreate.api';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { MONTHS } from '../../shared/months';
+import { dateFormat } from 'utils/Date/DateFormat';
 
 function BoardContent() {
     const history = useHistory();
     const paramObjectId = useParams<{ id: string }>();
-    //--------------- FETCHING BOARD CONTENT USING AXIOS ---------------//
-    // async function getNewestContent() {
-    //     const response = await ApiGetNewestContent();
-    //     if (response) {
-    //         console.log(response);
-    //     } else {
-    //         console.log('error');
-    //     }
-    // }
 
     //----------------- SET STATE LIKE & PUT LIKE OF CONTENT -----------------//
     const [addLike, setAddLike] = useState<{ content_id: string }>({
@@ -56,9 +48,6 @@ function BoardContent() {
     const { data: contentData, error: errorcontentData, mutate: updateContentData } = useSWR('/user/contentID/' + paramObjectId.id);
     const { data: fetchingCommentData, error: errorfetchingComment } = useSWR(`/user/comment/get/1-100/${paramObjectId.id}`);
     const isLoadingContentData = !contentData && !errorcontentData;
-
-    //--------------- SET DATE CREATED CONTENT FORMAT ---------------//
-    const [dateCreatedFormat, setDateCreatedFormat] = useState<string>();
 
     //------------------- GET USERNAME FOR CHECK LIKE -------------------//
     const { getUser } = useAuthContext();
@@ -98,17 +87,13 @@ function BoardContent() {
         getUserId();
         if (contentData) {
             console.log('[Newest Content data ]', contentData);
-            //--------------- SET DATE FORMAT ---------------//
-            const dateCreatedContent = contentData?.created_at;
-            const createdContentData = new Date(dateCreatedContent);
-            setDateCreatedFormat(createdContentData.getDate() + ' ' + MONTHS[createdContentData.getMonth()] + ' ' + createdContentData.getFullYear());
             //---------------- CHECK LIKE IF LIKE IS SET TRUE OR NOT IS FALSE ----------------//
             const uidLikes = contentData?.uid_likes;
             console.log('[uid likes :]', uidLikes.includes(userId));
             setIsLike(uidLikes.includes(userId));
             setLikeLength(contentData?.uid_likes.length);
         }
-    }, [contentData, dateCreatedFormat, userId]);
+    }, [contentData, userId]);
 
     return (
         <Container
@@ -143,7 +128,7 @@ function BoardContent() {
                         <ProfileImage />
                         <ContainerUserNameAndDate>
                             <AuthorName>{contentData?.author_username}</AuthorName>
-                            <DateCreatedContent>{dateCreatedFormat}</DateCreatedContent>
+                            <DateCreatedContent>{dateFormat(contentData?.created_at)}</DateCreatedContent>
                         </ContainerUserNameAndDate>
                     </div>
                     <ImageOfContent src={contentData?.image}></ImageOfContent>

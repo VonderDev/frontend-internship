@@ -1,21 +1,15 @@
 import { Col } from 'antd';
 import Container from 'components/Container/Container';
-import { MONTHS } from 'components/pages/Board/shared/months';
-import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Box } from 'shared/style/theme/component';
 import useSWR from 'swr';
+import { dateFormat } from 'utils/Date/DateFormat';
 import { RowStyled, ResultImage, CardText, IconArrow, ResultCard } from '../shared/Profile.styles';
 
 function ProfileResult() {
     const { data: profile, error: errorProfile } = useSWR('/user/profile');
     const isLoading = !errorProfile && !profile;
     const history = useHistory();
-    // useEffect(() => {
-    //     if (profile) {
-    //         console.log('[useEffect profile] :', profile);
-    //     }
-    // }, [profile]);
 
     if (profile?.results) {
         profile?.results?.sort(function (a: any, b: any) {
@@ -32,9 +26,6 @@ function ProfileResult() {
             ) : (
                 <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
                     {profile?.results?.map((item: any, index: any) => {
-                        const dateCreatedFilter = new Date(item[0]?.created_at);
-                        const dateFormat = dateCreatedFilter.getDate() + ' ' + MONTHS[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
-                        console.log(dateFormat);
                         return (
                             <ResultCard style={{ marginBottom: '10px' }} key={index} onClick={() => history.push(`/result/${profile.auth[0]._id}/${index}`)}>
                                 <RowStyled>
@@ -45,7 +36,7 @@ function ProfileResult() {
                                         <CardText style={{ transform: 'translateY(67%) translateX(5%)' }}>
                                             <RowStyled>ลักษณะเด่นของคุณ</RowStyled>
 
-                                            <RowStyled>{dateFormat}</RowStyled>
+                                            <RowStyled>{dateFormat(item[0]?.created_at)}</RowStyled>
                                         </CardText>
                                     </Col>
                                     <Col span={2}>
