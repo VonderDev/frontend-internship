@@ -2,13 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import useSWR from 'swr';
 import { transalateToThai } from 'utils/transalator/transalator';
-import { IResult } from '../../shared/interface/Result.interfaces';
 import { ChartStyled, TextHeaderResult } from '../../shared/styles/Result/ResultPage.styled';
-
-interface Chartprop {
-    options: any;
-    series?: any;
-}
 
 const Charts = () => {
     //----------------------- GET TOKEN ----------------------- //

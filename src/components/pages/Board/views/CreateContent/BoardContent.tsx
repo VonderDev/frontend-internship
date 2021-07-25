@@ -22,7 +22,6 @@ import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
 import { ApiPutLikeOfBoardContent } from '../../apis/boardCreate.api';
 import { transalateToThai } from 'utils/transalator/transalator';
-import { MONTHS } from '../../shared/months';
 import { dateFormat } from 'utils/Date/DateFormat';
 
 function BoardContent() {

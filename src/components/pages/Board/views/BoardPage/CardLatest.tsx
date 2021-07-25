@@ -8,7 +8,6 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { HeartIcon } from 'components/pages/Profile/shared/Profile.styles';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { TextRecommendBoardTopic, ButtonSeeAllBoard } from '../../shared/style';
-import { MONTHS } from '../../shared/months';
 import { dateFormat } from 'utils/Date/DateFormat';
 
 export const CardLatest = () => {

@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import { ContainerBoard } from '../../shared/styles/Result/ResultPage.styled';
 import { BoardCardRecommend, BoardCardSpace, GridBox, ListCategoryAndTag } from '../../shared/styles/Result/ResultFeature.styled';
 import Meta from 'antd/lib/card/Meta';
-import { MONTHS } from 'components/pages/Board/shared/months';
 import { HeartIconCard, HeartText, CoverImage, BoardTextInfo } from '../../../Board/shared/style';
 import { Box } from 'shared/style/theme/component';
 import { transalateToThai } from 'utils/transalator/transalator';
@@ -13,6 +12,7 @@ import { FormOutlined, CalendarOutlined } from '@ant-design/icons';
 import useSWR from 'swr';
 import { useEffect, useState } from 'react';
 import React from 'react';
+import { dateFormat } from 'utils/Date/DateFormat';
 
 const IconText = ({ icon, text }: IIconText) => (
     <SearchField>
@@ -49,8 +49,6 @@ const BoardAdvice = () => {
                 <GridBox>
                     <BoardCardSpace direction="horizontal">
                         {boardRecommend?.map((item: any, index: any) => {
-                            const cardDate = new Date(item?.created_at);
-                            const dateFormat = cardDate.getDate() + MONTHS[cardDate.getMonth()] + cardDate.getFullYear();
                             const like = item?.uid_likes;
                             return (
                                 <BoardCardRecommend
@@ -60,7 +58,7 @@ const BoardAdvice = () => {
                                     hoverable
                                     cover={<CoverImage src={item?.image} style={{ borderRadius: '12px 12px 0 0' }} />}
                                     onClick={() => history.push(`/boardcontent/${item._id}`)}
-                                    actions={[<IconText icon={FormOutlined} text={item?.author_username} />, <IconText icon={CalendarOutlined} text={dateFormat} />]}
+                                    actions={[<IconText icon={FormOutlined} text={item?.author_username} />, <IconText icon={CalendarOutlined} text={dateFormat(item?.created_at)} />]}
                                 >
                                     <Meta title={item?.title} />
                                     <ListCategoryAndTag>
