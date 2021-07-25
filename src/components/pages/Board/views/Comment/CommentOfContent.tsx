@@ -44,7 +44,7 @@ function CommentOfContent() {
     const { data: fetchingCommentData, error: errorfetchingComment } = useSWR(`/user/comment/get/1-100/${paramObjectId.id}`);
 
     //------------------- GET USERNAME FOR SHOW WHEN POST COMMENT SUCCESS -------------------//
-    const { getUser } = useAuthContext();
+    const { getUser, user } = useAuthContext();
     const [username, setUsername] = useState('');
     const token = localStorage.getItem('token');
 
@@ -91,9 +91,9 @@ function CommentOfContent() {
         >
             {commentList.length == 0 ? (
                 <ContainerOfIconQuestionAndText style={{ position: 'relative' }}>
-                    <div style={{display:'flex' , alignItems:'center' , flexDirection:'column' , height:'78vh' , justifyContent:'center'}}> 
-                    <QuestionImgae />
-                    <TextNoCommentList>ยังไม่มีความคิดเห็นในขณะนี้</TextNoCommentList>
+                    <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', height: '78vh', justifyContent: 'center' }}>
+                        <QuestionImgae />
+                        <TextNoCommentList>ยังไม่มีความคิดเห็นในขณะนี้</TextNoCommentList>
                     </div>
                 </ContainerOfIconQuestionAndText>
             ) : (

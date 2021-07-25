@@ -29,8 +29,8 @@ const Charts = () => {
         }
         if (resultHistory && paramObjectId) {
             console.log('Result History', resultHistory);
-            setScore(resultData.map((key: { score: any }) => key.score));
-            setSkill(resultData.map((key: any) => transalateToThai(key.skill)));
+            setScore(resultHistory.map((key: { score: any }) => key.score));
+            setSkill(resultHistory.map((key: any) => transalateToThai(key.skill)));
         }
     }, [resultData, paramObjectId, resultHistory]);
 
@@ -38,47 +38,47 @@ const Charts = () => {
         <>
             <div>
                 <TextHeaderResult>แผนภูมิพหุปัญญา</TextHeaderResult>
-                <div style={{display: 'flex' , flexDirection: 'column' , alignItems: 'center'}}>
-                {isLoading ? (
-                    <div>is loading ... </div>
-                ) : (
-                    <ChartStyled
-                        options={{
-                            chart: {
-                                height: 350,
-                                type: 'radar',
-                                dropShadow: {
-                                    enabled: true,
-                                    blur: 1,
-                                    left: 1,
-                                    top: 1,
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    {isLoading ? (
+                        <div>is loading ... </div>
+                    ) : (
+                        <ChartStyled
+                            options={{
+                                chart: {
+                                    height: 350,
+                                    type: 'radar',
+                                    dropShadow: {
+                                        enabled: true,
+                                        blur: 1,
+                                        left: 1,
+                                        top: 1,
+                                    },
                                 },
-                            },
-                            stroke: {
-                                width: 2,
-                            },
-                            fill: {
-                                opacity: 0.1,
-                            },
-                            markers: {
-                                size: 5,
-                                hover: {
-                                    size: 10,
+                                stroke: {
+                                    width: 2,
                                 },
-                            },
-                            xaxis: {
-                                categories: skill,
-                            },
-                        }}
-                        series={[
-                            {
-                                name: 'Skill',
-                                data: score,
-                            },
-                        ]}
-                        type="radar"
-                    />
-                )}
+                                fill: {
+                                    opacity: 0.1,
+                                },
+                                markers: {
+                                    size: 5,
+                                    hover: {
+                                        size: 10,
+                                    },
+                                },
+                                xaxis: {
+                                    categories: skill,
+                                },
+                            }}
+                            series={[
+                                {
+                                    name: 'Skill',
+                                    data: score,
+                                },
+                            ]}
+                            type="radar"
+                        />
+                    )}
                 </div>
             </div>
         </>
