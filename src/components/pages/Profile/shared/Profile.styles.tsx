@@ -1,5 +1,5 @@
 
-import { Button, Card, Image, Modal, Row } from 'antd';
+import { Alert, Button, Card, Image, Modal, Row } from 'antd';
 import styled from 'styled-components';
 import { RightOutlined, FormOutlined , HeartFilled } from '@ant-design/icons';
 import { Box } from 'shared/style/theme/component';
@@ -222,4 +222,16 @@ export const NotFoundText = styled.div`
     text-align: center;
     font-size: 16px;
     color: var(--Gray-200);
+`;
+
+export const CustomAlert = styled(Alert)`
+    &.ant-alert-with-description {
+    align-items: flex-start;
+    padding: 15px 15px 15px 24px;
+    position: absolute;
+    z-index: 10;
+    width: 25%;
+    margin-top: 20px;
+    border-radius: 12px;
+}
 `;
