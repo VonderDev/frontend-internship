@@ -34,14 +34,12 @@ export const CardTopTen = () => {
     const toptenCard = useMemo(() => {
         const cards = data;
         cards?.sort(function (a: any, b: any) {
-            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+            return b?.uid_likes?.length - a?.uid_likes?.length
         });
         return (
             <GridBox>
                 <SpaceCard direction="horizontal">
                     {cards?.slice(0, 10).map((item: any, index: any) => {
-                        const cardDate = new Date(item?.created_at);
-                        const dateFormat = cardDate.getDate() + MONTHS[cardDate.getMonth()] + cardDate.getFullYear();
                         const like = item?.uid_likes;
                         return (
                             <NewCardStyle
@@ -51,7 +49,7 @@ export const CardTopTen = () => {
                                 hoverable
                                 cover={<CoverImage src={item?.image} style={{ borderRadius: '12px 12px 0 0' }} />}
                                 onClick={() => history.push(`/boardcontent/${item._id}`)}
-                                actions={[<IconText icon={FormOutlined} text={item?.author_username} />, <IconText icon={CalendarOutlined} text={dateFormat} />]}
+                                actions={[<IconText icon={FormOutlined} text={item?.author_username} />, <IconText icon={CalendarOutlined} text={dateFormat(item?.created_at)} />]}
                             >
                                 <Meta title={item?.title} />
 
@@ -69,7 +67,7 @@ export const CardTopTen = () => {
                                 </CardTextData>
                                 <div>
                                     <HeartIconCard />
-                                    <HeartText>{like.length}</HeartText>
+                                    <HeartText>{like?.length}</HeartText>
                                 </div>
                             </NewCardStyle>
                         );

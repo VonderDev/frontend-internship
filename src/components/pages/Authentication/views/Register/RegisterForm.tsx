@@ -11,7 +11,7 @@ export const RegisterForm = () => {
     const [userData, setUserData] = useState<ILogin>({ firstName: '', lastName: '', email: '', username: '', password: '' });
     const [newResponse, setNewResponse] = useState<any>();
     const [thaiMessage, setThaiMessage] = useState<string>();
-    const [catState, setCatState] = useState<boolean>(false);
+    const [textState, setTextState] = useState<boolean>(false);
 
     async function RegisterUser() {
         if (userData.username && userData.firstName && userData.lastName && userData.email && userData.password) {
@@ -45,17 +45,17 @@ export const RegisterForm = () => {
 
     useEffect(() => {
         if (newResponse === 500) {
-            setCatState(true);
+            setTextState(true);
             setTimeout(() => {
                 form.resetFields();
-                setCatState(false);
+                setTextState(false);
             }, 2000);
         }
     }, [newResponse]);
 
     return (
         <>
-            {catState ? (
+            {textState ? (
                 <Box direction="column" justify="center" align="center">
                     <div style={{ display : 'contents', justifyContent : 'center'}}>
                         <CustomAlert message="" description={thaiMessage} type="error" showIcon />

@@ -26,8 +26,6 @@ export const CardLatest = () => {
         return (
             <div style={{ margin: '0px 5%' }}>
                 {cards?.slice(0, 3).map((item: any, index: any) => {
-                    const cardDate = new Date(item?.created_at);
-                    const dateFormat = cardDate.getDate() + months[cardDate.getMonth()] + cardDate.getFullYear();
                     return (
                         <BoardCard
                             key={index}
@@ -54,7 +52,7 @@ export const CardLatest = () => {
                                             <CommentIcon />
                                         </div>
                                         <HistoryText>{item.author_username}</HistoryText>
-                                        <HistoryText>{dateFormat}</HistoryText>
+                                        <HistoryText>{dateFormat(item?.created_at)}</HistoryText>
                                         <div style={{ justifyContent: 'center' }}>
                                             <HeartIcon />
                                         </div>
