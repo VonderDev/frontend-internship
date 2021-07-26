@@ -30,11 +30,14 @@ const AuthProvider = ({ children }: IAuthProps) => {
 
     const login = ({ email, password }: authData) => {
         console.log('props: ', { email, password });
+        const tokenGuest = localStorage.getItem('tokenGuest');
+        if(tokenGuest){
+            localStorage.removeItem('tokenGuest')
+        } 
         return axios
             .post('/login', { email, password })
             .then((response) => {
-                if (response.data.token) 
-                localStorage.setItem('token', response.data.token);
+                if (response.data.token) localStorage.setItem('token', response.data.token);
                 setToken(localStorage.getItem('token'));
                 setUser(response.data.resuit);
                 return user;
@@ -53,7 +56,9 @@ const AuthProvider = ({ children }: IAuthProps) => {
         localStorage.removeItem('token');
         setToken(localStorage.getItem('token'));
         setUser(undefined);
+        window.location.href = '/'
     };
+
     useEffect(() => {
         const tokenkey = localStorage.getItem('token');
         if (tokenkey) {

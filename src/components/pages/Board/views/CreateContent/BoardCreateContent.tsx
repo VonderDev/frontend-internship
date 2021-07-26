@@ -1,13 +1,12 @@
 import Container from 'components/Container/Container';
 import { ButtonBackToFirstPage, ButtonCancleModal, ButtonExistModal, ModalContainer, TextBodyModal, TextTitleModal } from '../../shared/style/BoardCreate.styled';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { LeftOutlined } from '@ant-design/icons';
 import { ApiPostContent } from '../../apis/boardCreate.api';
 import CreateContentFirstPage from './CreateFirstPage';
 import CreateContentSecondPage from './CreateSecondPage';
 import { useHistory } from 'react-router-dom';
-import { Alert } from 'antd';
 
 function BoardCreateContent() {
     const history = useHistory();

@@ -50,13 +50,13 @@ const CreateContentFirstPage: React.FC<CreateContentFirstPageProps> = ({ updateC
                     <CreateContentForm name="content" rules={[{ required: true, message: 'กรุณากรอกเนื้อหากระทู้ก่อนดำเนินการต่อ' }]}>
                         <FormInputContent name="content_body" placeholder="กรุณากรอกเนื้อหาของกระทู้" onChange={updateContentData} />
                     </CreateContentForm>
-                    <CountOfPageCreateContent>{countPage} / 2</CountOfPageCreateContent>
 
                     <ButtonGoNextCreateContent htmlType="submit" disabled={countPage > 2}>
                         ดำเนินการต่อ
                     </ButtonGoNextCreateContent>
                 </Form>
             </ContainerBoardCreate>
+            <CountOfPageCreateContent>{countPage} / 2</CountOfPageCreateContent>
         </>
     );
 };

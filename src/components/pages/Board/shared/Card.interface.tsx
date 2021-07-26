@@ -12,9 +12,9 @@ export interface IIconText {
 }
 
 export interface ICardData {
-    title : string;
-    tag : string;
-    author_username : string;
-    images : any;
-    likes : any;
+    title: string;
+    tag: string;
+    author_username: string;
+    images: any;
+    likes: any;
 }

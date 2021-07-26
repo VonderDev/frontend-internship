@@ -1,5 +1,5 @@
 
-import { Button, Card, Image, Modal, Row } from 'antd';
+import { Alert, Button, Card, Image, Modal, Row } from 'antd';
 import styled from 'styled-components';
 import { RightOutlined, FormOutlined , HeartFilled } from '@ant-design/icons';
 import { Box } from 'shared/style/theme/component';
@@ -215,10 +215,23 @@ export const CustomBox = styled(Box)`
     font-size: 12px;
     color: #6E7282;
     margin-top: 10px;
-    /* @media(max-width: 420px){
-        margin-left: 100px;
-    }
-    @media(max-width: 320px){
-        margin-left: 100px;
-    } */
+`;
+
+export const NotFoundText = styled.div`
+    margin-top: 15px;
+    text-align: center;
+    font-size: 16px;
+    color: var(--Gray-200);
+`;
+
+export const CustomAlert = styled(Alert)`
+    &.ant-alert-with-description {
+    align-items: flex-start;
+    padding: 15px 15px 15px 24px;
+    position: absolute;
+    z-index: 10;
+    width: 25%;
+    margin-top: 20px;
+    border-radius: 12px;
+}
 `;

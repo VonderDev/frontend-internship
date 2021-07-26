@@ -4,7 +4,6 @@ import { Button, Carousel, Image } from 'antd';
 export const ImageCharactorCarousel = styled.img`
     width: 100%;
     height: 90vh;
-    /* box-shadow: 10px 100px 100px 100px #fff; */
     :hover {
         cursor: pointer;
     }
@@ -59,12 +58,11 @@ export const ContainerCarousel = styled(Carousel)`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
     & .slick-dots li.slick-active button {
         background: #3e4357 !important;
         height: 10px !important;
         border-radius: 15px;
-        transform: translateY(-30px);
+        transform: translateY(5px);
     }
 
     & .slick-dots li button {
@@ -73,7 +71,7 @@ export const ContainerCarousel = styled(Carousel)`
         border-radius: 15px;
         margin-right: 30px !important;
         opacity: 0.9;
-        transform: translateY(-30px);
+        transform: translateY(5px);
     }
 `;
 

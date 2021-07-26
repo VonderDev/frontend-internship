@@ -1,72 +1,79 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import useSWR from 'swr';
+import { transalateToThai } from 'utils/transalator/transalator';
 import { ChartStyled, TextHeaderResult } from '../../shared/styles/Result/ResultPage.styled';
 
-interface Chartprop {
-    options: any;
-    series?: any;
-}
-
 const Charts = () => {
-    //--------------- FETCHING SCORE & SKILL DATA USING SWR ---------------//
-
-    const { data: resultData, error } = useSWR('/user/newResult');
+    //----------------------- GET TOKEN ----------------------- //
+    const token = localStorage.getItem('token');
+    const tokenGuest = localStorage.getItem('tokenGuest');
+    const { data: resultData, error } = useSWR(token ? '/user/newResult' : '/guest/result');
     const isLoading = !resultData && !error;
+    const paramObjectId = useParams<{ id: string; index: string }>();
+    const { data: resultHistory, error: errorResultHistory } = useSWR(Object.keys(paramObjectId).length ? `/user/getResultByIndex/${paramObjectId?.id}/${paramObjectId?.index}` : null);
+    //--------------- FETCHING SCORE & SKILL DATA USING SWR ---------------//
     const [score, setScore] = useState([]);
     const [skill, setSkill] = useState([]);
 
     useEffect(() => {
-        if (resultData) {
-            console.log('Result', resultData);
+        if (resultData && (token || tokenGuest)) {
             setScore(resultData.map((key: { score: any }) => key.score));
-            setSkill(resultData.map((key: any) => key.skill));
+            setSkill(resultData.map((key: any) => transalateToThai(key.skill)));
         }
-    }, [resultData]);
+        if (resultHistory && paramObjectId) {
+            console.log('Result History', resultHistory);
+            setScore(resultHistory.map((key: { score: any }) => key.score));
+            setSkill(resultHistory.map((key: any) => transalateToThai(key.skill)));
+        }
+    }, [resultData, paramObjectId, resultHistory]);
 
     return (
         <>
             <div>
                 <TextHeaderResult>แผนภูมิพหุปัญญา</TextHeaderResult>
-                {isLoading ? (
-                    <div>is loading ... </div>
-                ) : (
-                    <ChartStyled
-                        options={{
-                            chart: {
-                                height: 350,
-                                type: 'radar',
-                                dropShadow: {
-                                    enabled: true,
-                                    blur: 1,
-                                    left: 1,
-                                    top: 1,
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    {isLoading ? (
+                        <div>is loading ... </div>
+                    ) : (
+                        <ChartStyled
+                            options={{
+                                chart: {
+                                    height: 350,
+                                    type: 'radar',
+                                    dropShadow: {
+                                        enabled: true,
+                                        blur: 1,
+                                        left: 1,
+                                        top: 1,
+                                    },
                                 },
-                            },
-                            stroke: {
-                                width: 2,
-                            },
-                            fill: {
-                                opacity: 0.1,
-                            },
-                            markers: {
-                                size: 5,
-                                hover: {
-                                    size: 10,
+                                stroke: {
+                                    width: 2,
                                 },
-                            },
-                            xaxis: {
-                                categories: skill,
-                            },
-                        }}
-                        series={[
-                            {
-                                name: 'Skill',
-                                data: score,
-                            },
-                        ]}
-                        type="radar"
-                    />
-                )}
+                                fill: {
+                                    opacity: 0.1,
+                                },
+                                markers: {
+                                    size: 5,
+                                    hover: {
+                                        size: 10,
+                                    },
+                                },
+                                xaxis: {
+                                    categories: skill,
+                                },
+                            }}
+                            series={[
+                                {
+                                    name: 'Skill',
+                                    data: score,
+                                },
+                            ]}
+                            type="radar"
+                        />
+                    )}
+                </div>
             </div>
         </>
     );

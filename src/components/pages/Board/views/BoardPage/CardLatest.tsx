@@ -3,20 +3,12 @@ import React, { useMemo } from 'react';
 import { useHistory } from 'react-router';
 import { Box } from 'shared/style/theme/component';
 import useSWR from 'swr';
-import { IIconText } from '../../shared/Card.interface';
 import { BoardCard, CommentIcon, HistoryImage, HistoryText, SearchField, EllipsisText, CustomBox } from '../../shared/style';
 import { LoadingOutlined } from '@ant-design/icons';
 import { HeartIcon } from 'components/pages/Profile/shared/Profile.styles';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { TextRecommendBoardTopic, ButtonSeeAllBoard } from '../../shared/style';
-const { Meta } = Card;
-
-const IconText = ({ icon, text }: IIconText) => (
-    <SearchField>
-        {React.createElement(icon)}
-        {text}
-    </SearchField>
-);
+import { dateFormat } from 'utils/Date/DateFormat';
 
 const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
 
@@ -100,7 +92,7 @@ export const CardLatest = () => {
 
     return (
         <>
-            <Box direction="row" justify="space-between" align="flex-start" style={{ padding: '0px 20px 0px 20px', margin: '10px 0px' }}>
+            <Box direction="row" justify="space-between" align="flex-start">
                 <Box direction="column" justify="center" align="center">
                     <TextRecommendBoardTopic>ล่าสุด</TextRecommendBoardTopic>
                 </Box>

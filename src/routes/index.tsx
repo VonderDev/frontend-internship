@@ -6,20 +6,18 @@ import Login from 'components/pages/Authentication/views/Login/Login';
 import Register from 'components/pages/Authentication/views/Register/Register';
 import TestStyle from 'TestStyle';
 import Test from 'components/pages/Test/views/TestStartPage/Test';
-import { TestProvider } from 'components/pages/Test/views/TestQuestion/TestContext';
 import Result from 'components/pages/Test/views/ResultPage/Result';
 import editProfile from 'components/pages/Profile/views/EditProfile';
 import CharactorDetail from 'components/pages/Test/views/ResultPage/ResultInfo/CharactorDetail';
 import TestOverview from 'components/pages/Test/views/TestStartPage/TestOverview';
 import PrivateRoute from 'components/AuthContext/PrivateRoute';
-import TestStory from 'components/pages/Test/views/TestStartPage/TestStory';
 import ResultOverview from 'components/pages/Test/views/ResultPage/ResultInfo/ResultOverview';
 import ResultInfo from 'components/pages/Test/views/ResultPage/ResultInfo/ResultInfo';
 import TestQuestion from 'components/pages/Test/views/TestQuestion/TestQuestion';
 import BoardHistory from 'components/pages/Profile/views/BoardHistory';
 import BoardCreateContent from 'components/pages/Board/views/CreateContent/BoardCreateContent';
 import ProfileResult from 'components/pages/Profile/views/ProfileResult';
-import Filter from 'components/pages/Board/views/Board/Filter'
+import Filter from 'components/pages/Board/views/Board/Filter';
 import BoardContent from 'components/pages/Board/views/CreateContent/BoardContent';
 import TestPixi from 'components/GameElement/Game/testpixi';
 import CommentOfContent from 'components/pages/Board/views/Comment/CommentOfContent';
@@ -37,15 +35,16 @@ function Routing() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/test" component={Test} />
-            <PrivateRoute exact path="/testoverview" component={TestOverview} />
-            <PrivateRoute exact path="/teststory" component={TestStory} />
-            <PrivateRoute exact path="/testquestion">
+            <Route exact path="/testoverview" component={TestOverview} />
+            <Route exact path="/testquestion">
                     <TestQuestion />
-            </PrivateRoute>
+            </Route>
             <Route exact path="/resultoverview" component={ResultOverview} />
             <Route exact path="/resultinfo" component={ResultInfo} />
+            <Route exact path="/resultinfo/:id/:index" component={ResultInfo} />
             <PrivateRoute exact path="/editProfile" component={editProfile} />
             <Route exact path="/result" component={Result} />
+            <Route exact path="/result/:id/:index" component={Result} />
             <Route exact path="/charactordetail" component={CharactorDetail} />
             <PrivateRoute exact path="/profileresult" component={ProfileResult} />
             <PrivateRoute exact path="/boardhistory" component={BoardHistory} />

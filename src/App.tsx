@@ -9,12 +9,12 @@ const App = () => {
     return (
         <>
             <AuthProvider>
-            <AppProvider>
-                <Router>
-                    <GlobalStyle />
-                    <Routing />
-                </Router>
-            </AppProvider>
+                <AppProvider>
+                    <Router>
+                        <GlobalStyle />
+                        <Routing />
+                    </Router>
+                </AppProvider>
             </AuthProvider>
         </>
     );

@@ -15,8 +15,8 @@ import { FormOutlined, LoadingOutlined, CalendarOutlined } from '@ant-design/ico
 import { IIconText } from '../../shared/Card.interface';
 import { useHistory } from 'react-router';
 import { transalateToThai } from 'utils/transalator/transalator';
-import { MONTHS } from 'components/pages/Board/shared/months';
 import { Box } from 'shared/style/theme/component';
+import { dateFormat } from 'utils/Date/DateFormat';
 
 const { Meta } = Card;
 
