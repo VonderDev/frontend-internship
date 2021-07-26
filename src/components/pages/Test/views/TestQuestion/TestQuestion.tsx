@@ -71,8 +71,18 @@ function TestQuestion() {
         setPlaying(!playing);
     }
     useEffect(() => {
-        playing ? audio.play() : audio.pause();
-        music? monkey.play() : monkey.pause();
+        if(playing){
+            audio.play();
+            audio.volume = 0.5
+        }else{
+            audio.pause();
+        }
+        if(music){
+            monkey.play();
+            monkey.volume = 0.5
+        }else{
+            monkey.pause();
+        } 
         console.log(playing , music)
       },
       [playing,music]
@@ -133,7 +143,7 @@ function TestQuestion() {
             }else if (currentCutScnen+ 1 === 8){
                 changeScene('S5')
                 setCutScene(true) // start cutscene v.9
-                audio.volume = 0.2
+                audio.volume = 0.1
                 setMusic(true)
             }else if (currentCutScnen + 1 === 13){
                 changeScene('S6.1')
@@ -185,7 +195,7 @@ function TestQuestion() {
         } else if (currentQuestion + 1 === 18) {
             setCutScene(true); // start cutscene v.10
             changeScene('talk');
-            audio.volume = 1
+            audio.volume = 0.8
         } else if (currentQuestion + 1 === 21) {
             setCutScene(true); // start cutscene v.11
         } else if (currentQuestion + 1 === 23) {

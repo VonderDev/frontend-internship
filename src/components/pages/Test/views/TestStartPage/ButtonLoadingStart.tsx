@@ -14,10 +14,10 @@ function ButtonLoadingStart() {
     const fetchData = () => {
         console.log(isLoading);
         setLoading(true);
+        console.log('set Loading:', isLoading);
+        setLoading(false);
+        ApiPostCreateGuestToken();
         setTimeout(() => {
-            console.log('set Loading:', isLoading);
-            setLoading(false);
-            ApiPostCreateGuestToken();
             window.location.href = '/testquestion';
         }, 1500);
     };
