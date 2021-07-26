@@ -4,11 +4,11 @@ import { Row, Col } from 'antd';
 
 export const RowHeader = styled(Row)`
     width: 100%;
-    height: 74px;
+    height: 8%;
     top: 0;
     display: flex;
     align-items: center;
-    background-color: white;
+    background-color: var(--White);
 `;
 
 export const TextHeader = styled.div`
