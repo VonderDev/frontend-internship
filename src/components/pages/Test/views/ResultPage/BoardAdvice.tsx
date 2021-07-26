@@ -13,6 +13,7 @@ import useSWR from 'swr';
 import { useEffect, useState } from 'react';
 import React from 'react';
 import { dateFormat } from 'utils/Date/DateFormat';
+import { useParams } from 'react-router-dom';
 
 const IconText = ({ icon, text }: IIconText) => (
     <SearchField>
@@ -23,8 +24,28 @@ const IconText = ({ icon, text }: IIconText) => (
 
 const BoardAdvice = () => {
     const history = useHistory();
+    //----------------------- GET TOKEN ----------------------- //
+    const token = localStorage.getItem('token');
+    const tokenGuest = localStorage.getItem('tokenGuest');
+    const [recommendContent, setRecommendContent] = useState<any>(null);
+
     const { data: boardRecommend, error: errorBoardRecommend } = useSWR('/user/content/result');
-    const [randomBoard, setRandomBoard] = useState<any>();
+
+    //---------------------- GET PARAM & BOARD RECOMMEND FOR RESULT HISTORY ----------------------//
+    const paramObjectId = useParams<{ id: string; index: string }>();
+    const { data: boardRecommendHistory, error: errorBoardRecommendHistory } = useSWR(Object.keys(paramObjectId).length ? `/user/content/result/${paramObjectId?.index}` : null);
+
+    useEffect(() => {
+        console.log('[param] :', paramObjectId);
+        if (boardRecommend && (token || tokenGuest)) {
+            setRecommendContent(boardRecommend);
+            console.log('Result Data', recommendContent);
+        }
+        if (boardRecommendHistory && paramObjectId) {
+            setRecommendContent(boardRecommendHistory);
+            console.log('[Result Profile data]:', recommendContent);
+        }
+    }, [paramObjectId, boardRecommend, boardRecommendHistory]);
 
     //-------------------- RANDOM RECOMMENT BOARD --------------------//
     // useEffect(() => {
@@ -48,7 +69,7 @@ const BoardAdvice = () => {
                 {' '}
                 <GridBox>
                     <BoardCardSpace direction="horizontal">
-                        {boardRecommend?.map((item: any, index: any) => {
+                        {recommendContent?.map((item: any, index: any) => {
                             const like = item?.uid_likes;
                             return (
                                 <BoardCardRecommend
@@ -75,7 +96,7 @@ const BoardAdvice = () => {
                                     </ListCategoryAndTag>
                                     <div>
                                         <HeartIconCard />
-                                        <HeartText>{like.length}</HeartText>
+                                        <HeartText>{like?.length}</HeartText>
                                     </div>
                                 </BoardCardRecommend>
                             );
