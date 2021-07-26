@@ -121,10 +121,10 @@ function CommentOfContent() {
                         <IconSendMessage />
                     </>
                 ) : (
-                    <>
+                    <div>
                         <CommentInput type="text" placeholder="แสดงความคิดเห็นของคุณ..." name="comment_body" value={commentData.comment_body} onChange={handleChangeOfComment} />
                         <IconSendMessage onClick={postComment} />
-                    </>
+                    </div>
                 )}
             </ContainerOfInput>
         </Container>
