@@ -58,9 +58,11 @@ export const Topic = styled.div`
 `;
 export const InputSearch = styled(Input)`
     border-radius: 10px;
+    border: none;
     width: 100%;
     margin-right: 5px;
     height: 40px;
+    box-shadow: 0 3px 6px #e0e0e0;
 `;
 
 export const DrawerRadius = styled(Drawer)`
