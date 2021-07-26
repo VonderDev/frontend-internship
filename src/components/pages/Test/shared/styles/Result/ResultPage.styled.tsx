@@ -28,11 +28,7 @@ export const TextHeaderResult = styled.div`
 `;
 
 export const ChartStyled = styled(Chart)`
-    //transform: translateY(-5%);
     width: 120%;
-    //display: flex;
-    //justify-content: center;
-    //align-items: center;
 `;
 
 export const TextBoxDescript = styled.div`
@@ -161,8 +157,6 @@ export const ContainerProgressScore = styled.div`
     flex-direction: column;
     margin-left: 30px;
     margin-right: 30px;
-    //padding-left: 20px;
-    //transform: translateY(-70%);
 `;
 export const TextNameSkill = styled.div`
     font-weight: bolder;

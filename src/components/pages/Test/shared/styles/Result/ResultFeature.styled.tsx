@@ -12,13 +12,23 @@ export const GridBox = styled.div`
     }
 `;
 
+export const ContainerImgCharactor = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* box-shadow: inset 10px 100px 100px 120px #999999 !important; */
+    /* background: linear-gradient(180deg, white, transparent); */
+`;
+
 export const ImgCardCharactorList = styled(CardStyle)`
     padding: 0px;
     width: 150px;
     height: 90px;
+    position: relative;
     & .ant-card-actions {
         border-top: none;
         background: none;
+        box-shadow: inset 3px 3px 10px 0 #ffffff !important;
     }
     & .ant-card-actions > li:not(:last-child) {
         border-right: none;
@@ -32,6 +42,7 @@ export const ImgCardCharactorList = styled(CardStyle)`
     & .ant-card-body {
         padding: 10px;
         padding-top: 10px;
+        box-shadow: inset 10px 10px 50px #fff !important;
     }
     & .ant-card-actions {
         padding: none;
@@ -77,7 +88,9 @@ export const SpaceCharactorList = styled(Space)`
 export const CoverImage = styled.img`
     width: 150px;
     height: 90px;
+    /* position: relative; */
     box-shadow: inset 0px 0px 20px 10px rgba(255, 255, 255, 0.6);
+    z-index: 20;
 `;
 
 export const SearchField = styled(Space)`
@@ -92,6 +105,7 @@ export const SkillNameOnImgCard = styled.div`
     border-radius: 20px;
     font-size: 16px;
     text-shadow: 1px 1px 2px white, 0 0 1em white, 0 0 0.2em white;
+
     /* box-shadow: inset 0 0 10px #ffffff; */
 `;
 

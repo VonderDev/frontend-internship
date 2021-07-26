@@ -52,6 +52,7 @@ export const ContainerResultSummarize = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    /* box-shadow: 10px 100px 100px 120px #fff; */
 `;
 
 export const ContainerCarousel = styled(Carousel)`
