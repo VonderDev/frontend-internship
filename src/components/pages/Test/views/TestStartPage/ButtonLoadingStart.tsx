@@ -14,6 +14,9 @@ function ButtonLoadingStart() {
     const fetchData = () => {
         console.log(isLoading);
         setLoading(true);
+        console.log('set Loading:', isLoading);
+        setLoading(false);
+        ApiPostCreateGuestToken();
         setTimeout(() => {
             window.location.href = '/testquestion';
         }, 800);

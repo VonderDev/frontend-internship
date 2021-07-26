@@ -64,10 +64,22 @@ function TestQuestion() {
         setPlaying(!playing);
     };
     useEffect(() => {
-        playing ? audio.play() : audio.pause();
-        music ? monkey.play() : monkey.pause();
-        console.log(playing, music);
-    }, [playing, music]);
+        if(playing){
+            audio.play();
+            audio.volume = 0.5
+        }else{
+            audio.pause();
+        }
+        if(music){
+            monkey.play();
+            monkey.volume = 0.5
+        }else{
+            monkey.pause();
+        } 
+        console.log(playing , music)
+      },
+      [playing,music]
+    );
 
     //---------------- Cut Scene ----------------//
     const cutSceneList = [
@@ -113,35 +125,36 @@ function TestQuestion() {
         }
     }, [currentCutScnen]);
 
-    const showStory = () => {
-        console.log('Cut ? :', cutScene);
-        console.log(' currentMessage:', currentMessage);
-        if (currentMessage === cutSceneList[currentCutScnen].message.length - 1) {
-            if (currentCutScnen + 1 === 5) {
-                changeScene('S3');
-                setCutScene(true); // start cutscene v.6
-            } else if (currentCutScnen + 1 === 6) {
-                changeScene('S4');
-                setCutScene(true); // start cutscene v.7
-            } else if (currentCutScnen + 1 === 8) {
-                changeScene('S5');
-                setCutScene(true); // start cutscene v.9
-                audio.volume = 0.2;
-                setMusic(true);
-            } else if (currentCutScnen + 1 === 13) {
-                changeScene('S6.1');
-                setCutScene(true); // start cutscene v.14
-                setLoading(true);
-                setPlaying(false);
-                setTimeout(async () => {
-                    await ApiPostTestResult(testScore);
-                    setLoading(false);
-                    console.log('set Loading:', isLoading);
-                    history.push('/result');
-                    return;
-                }, 3000);
-            } else {
-                setCutScene(false);
+    const showStory =()=>{
+        console.log('Cut ? :' ,cutScene);
+        console.log(' currentMessage:' ,currentMessage);
+        if(currentMessage === cutSceneList[currentCutScnen].message.length -1){
+             if(currentCutScnen + 1 === 5)
+            {
+                changeScene('S3')
+                setCutScene(true) // start cutscene v.6
+            }else if (currentCutScnen+1 === 6){
+                changeScene('S4')
+                setCutScene(true) // start cutscene v.7
+            }else if (currentCutScnen+ 1 === 8){
+                changeScene('S5')
+                setCutScene(true) // start cutscene v.9
+                audio.volume = 0.1
+                setMusic(true)
+            }else if (currentCutScnen + 1 === 13){
+                changeScene('S6.1')
+                setCutScene(true)// start cutscene v.14
+                setLoading(true)
+                setPlaying(false)
+                setTimeout(async()=>{
+                            await ApiPostTestResult(testScore);
+                            setLoading(false);
+                            console.log('set Loading:', isLoading);
+                            history.push('/result');
+                            return;
+            },3000)
+            }else{
+                setCutScene(false)
             }
             setCurrentMessage(0);
             setCurrentCutScene(currentCutScnen + 1);
@@ -178,7 +191,7 @@ function TestQuestion() {
         } else if (currentQuestion + 1 === 18) {
             setCutScene(true); // start cutscene v.10
             changeScene('talk');
-            audio.volume = 1;
+            audio.volume = 0.8
         } else if (currentQuestion + 1 === 21) {
             setCutScene(true); // start cutscene v.11
         } else if (currentQuestion + 1 === 23) {
