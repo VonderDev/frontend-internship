@@ -55,7 +55,7 @@ function TestQuestion() {
         setCurrentQuestionDetail(questionList[currentQuestion]);
     }, [currentQuestion, questionList]);
 
-    //---------------- Play Sound ----------------//
+    //---------------- Play Sound ----------------////
     const [audio, setAudio] = useState(new Audio(Sound));
     const [monkey] = useState(new Audio(SoundMonkey));
     const [playing, setPlaying] = useState(false);
