@@ -23,8 +23,8 @@ const AppContainer = styled.div`
 `;
 const MainContent = styled(Content)<BodyProps>`
     height: ${(props) => {
-        const isheader = props?.isheader ? 74 : 0;
-        return `calc(100vh - ${isheader}px); `;
+        const isheader = props?.isheader ? 8 : 0;
+        return `calc(100vh - ${isheader}%); `;
     }};
     width: 100%;
     overflow-y: scroll;

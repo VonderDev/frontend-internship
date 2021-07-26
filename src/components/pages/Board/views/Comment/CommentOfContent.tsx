@@ -19,7 +19,7 @@ import {
 import { ApiPostComment } from '../../apis/commentContent.api';
 import useSWR from 'swr';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
-import { MONTHS } from '../../shared/months';
+import { dateFormat } from 'utils/Date/DateFormat';
 
 function CommentOfContent() {
     const history = useHistory();
@@ -41,10 +41,10 @@ function CommentOfContent() {
     };
 
     //------------------- FETCHING COMMENT DATA USING SWR -------------------//
-    const { data: fetchingCommentData, error: errorfetchingComment } = useSWR(`/user/comment/get/1-100/${paramObjectId.id}`);
+    const { data: fetchingCommentData, error: errorfetchingComment, mutate: updateComment } = useSWR(`/user/comment/get/1-100/${paramObjectId.id}`);
 
     //------------------- GET USERNAME FOR SHOW WHEN POST COMMENT SUCCESS -------------------//
-    const { getUser } = useAuthContext();
+    const { getUser, user } = useAuthContext();
     const [username, setUsername] = useState('');
     const token = localStorage.getItem('token');
 
@@ -65,7 +65,8 @@ function CommentOfContent() {
     //-------------------- POST COMMENT FUNCTION --------------------//
     async function postComment() {
         const newComment = await ApiPostComment(commentData);
-        // console.log('[new Comment]', newComment);
+        await updateComment();
+        console.log('[new Comment]', newComment);
         newComment.username = username;
         commentList.push(newComment);
         setCommentData({
@@ -89,7 +90,7 @@ function CommentOfContent() {
                 left: 'back',
             }}
         >
-            {commentList.length == 0 ? (
+            {fetchingCommentData?.length == 0 ? (
                 <ContainerOfIconQuestionAndText style={{ position: 'relative' }}>
                     <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', height: '78vh', justifyContent: 'center' }}>
                         <QuestionImgae />
@@ -98,9 +99,7 @@ function CommentOfContent() {
                 </ContainerOfIconQuestionAndText>
             ) : (
                 <ContainerOfCommentList>
-                    {commentList?.map((item: any, index: any) => {
-                        const dateCreatedComment = new Date(item.created_at);
-                        const dateFormat = dateCreatedComment.getDate() + ' ' + MONTHS[dateCreatedComment.getMonth()] + ' ' + dateCreatedComment.getFullYear();
+                    {fetchingCommentData?.map((item: any, index: any) => {
                         return (
                             <BoxOfCommentList style={{ height: '15vh' }} key={index}>
                                 <ProfileUserImage />
@@ -108,7 +107,7 @@ function CommentOfContent() {
                                     <Username>{item?.username}</Username>
                                     {item.comment_body}
                                 </CommentBody>
-                                <CreatedDate>{dateFormat}</CreatedDate>
+                                <CreatedDate>{dateFormat(item?.created_at)}</CreatedDate>
                             </BoxOfCommentList>
                         );
                     })}
@@ -122,10 +121,10 @@ function CommentOfContent() {
                         <IconSendMessage />
                     </>
                 ) : (
-                    <>
+                    <div>
                         <CommentInput type="text" placeholder="แสดงความคิดเห็นของคุณ..." name="comment_body" value={commentData.comment_body} onChange={handleChangeOfComment} />
                         <IconSendMessage onClick={postComment} />
-                    </>
+                    </div>
                 )}
             </ContainerOfInput>
         </Container>

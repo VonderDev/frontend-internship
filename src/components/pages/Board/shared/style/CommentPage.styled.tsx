@@ -11,6 +11,9 @@ export const CommentInput = styled(Input)`
     width: 80%;
     height: 45px;
     box-shadow: 0px 3px 6px #f1f1f1;
+    position: absolute;
+    margin-right: 10px;
+    z-index: 100 !important;
     /* position: sticky;
     position: -webkit-sticky; */
     /* top: 87%;
@@ -19,17 +22,23 @@ export const CommentInput = styled(Input)`
 
 export const IconSendMessage = styled.div`
     background-image: url(${sendMessageIcon});
-    width: 40px;
-    height: 5.6vh;
+    width: 35px;
+    height: 5vh;
+    margin-right: -10px;
+    margin-left: -20px;
     background-size: cover;
     background-position: center;
     top: 4px;
     right: 12%;
     position: absolute;
     float: right;
+
     :hover {
         cursor: pointer;
     }
+    /* @media (min-width: 460px) {
+        margin-left: 20px;
+    } */
 `;
 
 export const ProfileUserImage = styled.div`

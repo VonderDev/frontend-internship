@@ -31,10 +31,6 @@ export async function ApiPostTestResult(data: any) {
     console.log('[Result length]:', data.length)
     const token = localStorage.getItem('token');
     const tokenGuest = localStorage.getItem('tokenGuest');
-    // return mockTestData as unknown as Array<IQuestion>;
-    //
-    // ─── Use axios.post when backend finish ───────────────────
-    //
     if(token){
         return await axios.post('/user/newResult', data,{headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
             console.log("response", res.data)

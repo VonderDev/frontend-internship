@@ -222,12 +222,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 
       const ticker = new PIXI.Ticker();
       function animate() {
-        if(sprites.Cloud1.x + sprites.Cloud1.width < firstScene.width){
-          sprites.Cloud1.x += 0.1 * 3
-        }
-        if(sprites.Cloud2.x + sprites.Cloud2.width < firstScene.width){
-          sprites.Cloud2.x -= 0.1 * 3
-        }
+        sprites.Cloud1.x += 0.1 * 2
+        sprites.Cloud2.x -= 0.1 * 3
       }
       gameScene1()
       firstScene.interactive = true;
@@ -354,14 +350,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.Brush4.scale.set(0.4);
         sprites.Brush4.position.set(450,620);
         firstScene.addChild(sprites.Brush4)
-  
         ticker.add(animate);
         ticker.start();
   
-        setTimeout(()=>{
-          ticker.stop();
-          // ticker.remove(animate)
-          }, 30000)
       }
       function gameScene2 () {
         //Background 
@@ -422,6 +413,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         secondScene.addChild(sprites.Brush1)
 
         happyFriend();
+        ticker.add(animate);
+        ticker.start();
 
       }
 
@@ -471,6 +464,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.Brush1.scale.set(0.6);
         sprites.Brush1.position.set(-100,600);
         homeScene.addChild(sprites.Brush1)
+        ticker.add(animate);
+        ticker.start();
       }
       function doorScene3 () {
               //Background 
@@ -591,6 +586,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
              sprites.Brush1.position.set(450,600);
              jungleScene.addChild(sprites.Brush1)
 
+             ticker.add(animate);
+             ticker.start();
+
       }
       function gameScene6() {
                //Background 
@@ -636,6 +634,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
                sprites.Brush1.scale.set(0.6);
                sprites.Brush1.position.set(-100,600);
                endScene.addChild(sprites.Brush1)
+
+               ticker.add(animate);
+               ticker.start();
    //Item
   
       }

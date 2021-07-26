@@ -1,5 +1,3 @@
-import { Alert, Spin } from 'antd';
-import { IsLoadingSpinner } from 'components/pages/Test/shared/styles/Test/TestPage.styled';
 import React from 'react';
 import { NotificationCreatedPostSuccess } from '../../shared/style/BoardContent.styled';
 import {
@@ -7,7 +5,6 @@ import {
     ContainerBoardCreate,
     ContainerContentType,
     ContentTypeButton,
-    CountOfPageCreateContent,
     CountOfPageTwo,
     InputHashtagInDrawer,
     OptionHashtag,

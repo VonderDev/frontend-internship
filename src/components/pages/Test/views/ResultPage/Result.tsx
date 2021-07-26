@@ -27,7 +27,7 @@ const Result = () => {
         }
         if (resultHistory && paramObjectId) {
             setResultData(resultHistory?.filter((data: { score: number }) => data.score === Math.max(...Object.keys(resultHistory).map((key) => resultHistory[key]?.score))));
-            // console.log('[ResultProfile data]:', result);
+            console.log('[Result Profile data]:', result);
         }
     }, [resultData, paramObjectId, resultHistory]);
 
