@@ -10,16 +10,16 @@ function ButtonLoadingStart() {
     //
     const history = useHistory();
     const [isLoading, setLoading] = useState(false);
- 
+
     const fetchData = () => {
         console.log(isLoading);
         setLoading(true);
         setTimeout(() => {
-            console.log('set Loading:', isLoading);
-            setLoading(false);
-            ApiPostCreateGuestToken();
             window.location.href = '/testquestion';
-        }, 1500);
+        }, 800);
+        console.log('set Loading:', isLoading);
+        setLoading(false);
+        ApiPostCreateGuestToken();
     };
 
     return (
