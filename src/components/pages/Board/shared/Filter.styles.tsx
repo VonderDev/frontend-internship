@@ -12,6 +12,7 @@ export const ButtonFilter = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    padding: 5px;
 `;
 
 export const ButtonUseFilter = styled.div`
