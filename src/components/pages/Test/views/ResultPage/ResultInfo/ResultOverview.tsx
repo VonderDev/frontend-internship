@@ -44,9 +44,7 @@ function ResultOverview() {
         }
     }, [resultData, paramObjectId, resultHistory]);
 
-    useEffect(() => {
-        console.log('Result of Progress bar', result);
-    }, [result]);
+    useEffect(() => {}, [result]);
     return (
         <>
             {isLoading ? (

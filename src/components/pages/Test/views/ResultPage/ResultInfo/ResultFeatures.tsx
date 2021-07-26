@@ -4,7 +4,7 @@ import { IResult } from '../../../shared/interface/Result.interfaces';
 import CharactorDetail from './CharactorDetail';
 import useSWR from 'swr';
 import { useHistory, useParams } from 'react-router-dom';
-import { GridBox, ImgCardCharactorList, SpaceCharactorList, CoverImage, SkillNameOnImgCard } from 'components/pages/Test/shared/styles/Result/ResultFeature.styled';
+import { GridBox, ImgCardCharactorList, SpaceCharactorList, CoverImage, SkillNameOnImgCard, ContainerImgCharactor } from 'components/pages/Test/shared/styles/Result/ResultFeature.styled';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { Box, ButtonStyle } from 'shared/style/theme/component';
 
@@ -72,15 +72,19 @@ const ResultFeatures = () => {
                         <SpaceCharactorList>
                             {result?.map((item: any, index: any) => {
                                 return (
-                                    <ImgCardCharactorList
-                                        typecard="Vertical"
-                                        key={index}
-                                        cover={<CoverImage src={item.image_charactor} style={{ borderRadius: '12px ' }} />}
-                                        onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)}
-                                    >
-                                        {' '}
-                                        <SkillNameOnImgCard>{transalateToThai(item?.skill)}</SkillNameOnImgCard>
-                                    </ImgCardCharactorList>
+                                    <div key={index}>
+                                        <ContainerImgCharactor>
+                                            <ImgCardCharactorList
+                                                typecard="Vertical"
+                                                key={index}
+                                                cover={<CoverImage src={item.image_charactor} style={{ borderRadius: '12px ' }} />}
+                                                onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)}
+                                            >
+                                                {' '}
+                                                <SkillNameOnImgCard>{transalateToThai(item?.skill)}</SkillNameOnImgCard>
+                                            </ImgCardCharactorList>
+                                        </ContainerImgCharactor>
+                                    </div>
                                 );
                             })}
                         </SpaceCharactorList>

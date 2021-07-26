@@ -13,7 +13,8 @@ export const CommentInput = styled(Input)`
     box-shadow: 0px 3px 6px #f1f1f1;
     position: absolute;
     margin-right: 10px;
-    z-index: 100 !important;
+    z-index: 20;
+
     /* position: sticky;
     position: -webkit-sticky; */
     /* top: 87%;
@@ -122,8 +123,9 @@ export const BoxOfCommentList = styled.div`
 export const LoginText = styled.div`
     color: var(--Blue-200);
     font-size: 16px;
-    transform: translateX(88%) translateY(-141%);
-    position: fixed;
+    transform: translateX(88%) translateY(45%);
+    position: absolute;
+    z-index: 100 !important;
     :hover {
         cursor: pointer;
     }
