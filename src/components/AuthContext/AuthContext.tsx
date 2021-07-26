@@ -56,7 +56,9 @@ const AuthProvider = ({ children }: IAuthProps) => {
         localStorage.removeItem('token');
         setToken(localStorage.getItem('token'));
         setUser(undefined);
+        window.location.href = '/'
     };
+
     useEffect(() => {
         const tokenkey = localStorage.getItem('token');
         if (tokenkey) {

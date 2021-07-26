@@ -18,7 +18,7 @@ function ButtonLoadingStart() {
             console.log('set Loading:', isLoading);
             setLoading(false);
             ApiPostCreateGuestToken();
-            history.push('/testquestion');
+            window.location.href = '/testquestion';
         }, 1500);
     };
 
