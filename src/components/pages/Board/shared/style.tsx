@@ -108,6 +108,7 @@ export const HistoryImage = styled.img`
 export const CoverImage = styled.img`
     width: 205px;
     height: 148px;
+    object-fit : cover;
 `;
 
 export const HistoryText = styled.div`
