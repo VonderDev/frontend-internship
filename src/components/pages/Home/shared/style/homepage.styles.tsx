@@ -60,7 +60,7 @@ export const ButtonStartGame = styled(Button)`
     justify-content: center;
     margin-right: 20px;
     width: 20%;
-    height: 35px;
+    height: 40px;
     align-items: center;
     font-size: 18px;
     transform: translateY(-10px);

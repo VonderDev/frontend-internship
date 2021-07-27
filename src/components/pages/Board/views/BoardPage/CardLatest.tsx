@@ -10,8 +10,6 @@ import { transalateToThai } from 'utils/transalator/transalator';
 import { TextRecommendBoardTopic, ButtonSeeAllBoard } from '../../shared/style';
 import { dateFormat } from 'utils/Date/DateFormat';
 
-const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
-
 export const CardLatest = () => {
     const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
     const { data, error } = useSWR('/user/content/get');
@@ -68,8 +66,6 @@ export const CardLatest = () => {
     }, [data]);
 
     const allCard = useMemo(() => {
-        console.log('This is from db : ', data);
-        console.log('This is error from db : ', error);
         const isLoading = !data && !error;
         switch (true) {
             case error:

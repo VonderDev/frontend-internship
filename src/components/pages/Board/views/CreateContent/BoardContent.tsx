@@ -12,11 +12,15 @@ import {
     ContainerUserNameAndDate,
     ContentBody,
     DateCreatedContent,
+    IconLikeUnSuccess,
     ImageOfContent,
     LengthOfLikeAndComment,
     ProfileImage,
     TextTitleContent,
     TopicTag,
+    IconComment,
+    IconLikeSuccess,
+    LengthOfLikeAndCommentSuccess,
 } from '../../shared/style/BoardContent.styled';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
@@ -138,12 +142,8 @@ function BoardContent() {
 
                     <BoxOfLikeAndComment>
                         <span style={{ display: 'flex', alignItems: 'center' }}>
-                            {isLike ? (
-                                <HeartFilled style={{ color: '#F0685B', fontSize: '40px' }} onClick={unLikeOfBoardContent} />
-                            ) : (
-                                <HeartOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} onClick={addLikeOfBoardContent} />
-                            )}
-                            <LengthOfLikeAndComment>{likeLength}</LengthOfLikeAndComment>
+                            {isLike ? <IconLikeSuccess onClick={unLikeOfBoardContent} /> : <IconLikeUnSuccess onClick={addLikeOfBoardContent} />}
+                            {isLike ? <LengthOfLikeAndCommentSuccess>{likeLength}</LengthOfLikeAndCommentSuccess> : <LengthOfLikeAndComment>{likeLength}</LengthOfLikeAndComment>}
                         </span>
                         <span
                             style={{ display: 'flex', alignItems: 'center' }}
@@ -153,7 +153,7 @@ function BoardContent() {
                                 }
                             }}
                         >
-                            <CommentOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />
+                            <IconComment />
                             <LengthOfLikeAndComment>{fetchingCommentData?.length}</LengthOfLikeAndComment>
                         </span>
                     </BoxOfLikeAndComment>

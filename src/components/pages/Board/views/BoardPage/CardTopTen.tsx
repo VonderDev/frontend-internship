@@ -69,8 +69,6 @@ export const CardTopTen = () => {
     }, [data]);
 
     const allCard = useMemo(() => {
-        console.log('This is from db : ', data);
-        console.log('This is error from db : ', error);
         const isLoading = !data && !error;
         switch (true) {
             case error:
