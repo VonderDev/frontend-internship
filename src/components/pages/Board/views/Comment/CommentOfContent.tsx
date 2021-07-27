@@ -81,7 +81,6 @@ function CommentOfContent() {
 
     useEffect(() => {
         getUserInfo();
-        console.log('[Comment Data]', commentData);
         if (fetchingCommentData) {
             setCommentList(fetchingCommentData);
         }
