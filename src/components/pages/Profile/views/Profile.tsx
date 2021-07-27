@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { Col } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Container from 'components/Container/Container';
 import useSWR from 'swr';
 import { Box, ButtonStyle } from 'shared/style/theme/component';
@@ -23,6 +23,57 @@ function Profile() {
     }, [data, fetchProfileData]);
 
     const history = useHistory();
+
+    const resultCardProfile = useMemo(() => {
+        return (
+            <>
+                <RowStyled>
+                    <Col span={16}>
+                        <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
+                    </Col>
+                    <Col span={8}>{fetchProfileData?.results.length === 0 ? <div></div> : <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>}</Col>
+                </RowStyled>
+                {fetchProfileData?.results.length === 0 ? (
+                    <NotFoundText>
+                        คุณยังไม่มีผลลัพธ์
+                        <br />
+                        เมื่อคุณทดสอบพหุปัญญา ผลลัพธ์จะปรากฏที่นี่
+                        <div style={{ color: 'var(--Blue-300)', fontWeight: 'bolder', marginTop: '10px' }} onClick={() => history.push('/test')}>
+                            เล่นเกมทดสอบพหุปัญญา
+                        </div>
+                    </NotFoundText>
+                ) : (
+                    <ProfileResultCard profile={fetchProfileData?.results} />
+                )}
+            </>
+        );
+    }, [fetchProfileData]);
+
+    const boardCardProfile = useMemo(() => {
+        return (
+            <>
+                <RowStyled>
+                    <Col span={16}>
+                        <TextTopic2>กระทู้ของคุณ</TextTopic2>
+                    </Col>
+                    <Col span={8}>{fetchProfileData?.contents.length === 0 ? <div></div> : <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>}</Col>
+                </RowStyled>
+                {fetchProfileData?.contents.length === 0 ? (
+                    <NotFoundText>
+                        คุณยังไม่เคยสร้างกระทู้
+                        <br />
+                        เมื่อคุณสร้างกระทู้ กระทู้จะปรากฏที่นี่
+                        <div style={{ color: 'var(--Blue-300)', fontWeight: 'bolder', marginTop: '10px' }} onClick={() => history.push('/boardcreate')}>
+                            สร้างกระทู้แรก
+                        </div>
+                    </NotFoundText>
+                ) : (
+                    <ProfileBoardCard data={fetchProfileData?.contents} />
+                )}
+            </>
+        );
+    }, [fetchProfileData]);
+
     return (
         <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
             {error && <div>error </div>}
@@ -53,42 +104,8 @@ function Profile() {
                     <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
                         แก้ไขข้อมูลส่วนตัว
                     </ButtonStyle>
-                    <RowStyled>
-                        <Col span={16}>
-                            <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
-                        </Col>
-                        <Col span={8}>{fetchProfileData?.results.length === 0 ? <div></div> : <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>}</Col>
-                    </RowStyled>
-                    {fetchProfileData?.results.length === 0 ? (
-                        <NotFoundText>
-                            คุณยังไม่มีผลลัพธ์
-                            <br />
-                            เมื่อคุณทดสอบพหุปัญญา ผลลัพธ์จะปรากฏที่นี่
-                            <div style={{ color: 'var(--Blue-300)', fontWeight: 'bolder', marginTop: '10px' }} onClick={() => history.push('/test')}>
-                                เล่นเกมทดสอบพหุปัญญา
-                            </div>
-                        </NotFoundText>
-                    ) : (
-                        <ProfileResultCard profile={fetchProfileData?.results} />
-                    )}
-                    <RowStyled>
-                        <Col span={16}>
-                            <TextTopic2>กระทู้ของคุณ</TextTopic2>
-                        </Col>
-                        <Col span={8}>{fetchProfileData?.contents.length === 0 ? <div></div> : <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>}</Col>
-                    </RowStyled>
-                    {fetchProfileData?.contents.length === 0 ? (
-                        <NotFoundText>
-                            คุณยังไม่เคยสร้างกระทู้
-                            <br />
-                            เมื่อคุณสร้างกระทู้ กระทู้จะปรากฏที่นี่
-                            <div style={{ color: 'var(--Blue-300)', fontWeight: 'bolder', marginTop: '10px' }} onClick={() => history.push('/boardcreate')}>
-                                สร้างกระทู้แรก
-                            </div>
-                        </NotFoundText>
-                    ) : (
-                        <ProfileBoardCard data={fetchProfileData?.contents} />
-                    )}
+                    {resultCardProfile}
+                    {boardCardProfile}
                 </Box>
             )}
         </Container>
