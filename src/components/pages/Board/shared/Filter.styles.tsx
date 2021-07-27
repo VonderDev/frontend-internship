@@ -1,6 +1,9 @@
 import { Drawer, Input, Tag } from 'antd';
 import CheckableTag from 'antd/lib/tag/CheckableTag';
 import styled, { css } from 'styled-components';
+import SelectTagImg from '../shared/images/selectedTag.png';
+import CancleTagImg from '../shared/images/cancleTag.png';
+import SelectedTrueImg from '../shared/images/selectedTrue.png';
 
 export const ButtonFilter = styled.div`
     background-color: #ffffff;
@@ -122,4 +125,22 @@ export const CustomCheckableTag = styled(CheckableTag)`
     &.ant-tag-checkable:not(.ant-tag-checkable-checked):hover {
         color: #6e7282;
     }
+`;
+
+export const SelectedTag = styled.div`
+    background-image: url(${SelectTagImg});
+    width: 18px;
+    height: 18px;
+`;
+
+export const CancleTag = styled.div`
+    background-image: url(${CancleTagImg});
+    width: 18px;
+    height: 18px;
+`;
+
+export const SelectedTrue = styled.div`
+    background-image: url(${SelectedTrueImg});
+    width: 18px;
+    height: 18px;
 `;
