@@ -59,7 +59,9 @@ const FilterDrawer: React.FC<DrawerProps> = ({ onclickClear, showDrawer, visible
                     ))}
                 </TagBox>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end', height: '30%' }}>
+            <div style={{ display: 'flex', justifyContent:'space-between',
+             alignItems: 'center',position:'absolute',bottom:'0',
+             flexDirection:'row',width:'90%'}}>
                 <ButtonClearFilter onClick={onclickClear}>ล้างทั้งหมด</ButtonClearFilter>
                 <ButtonUseFilter onClick={onclickFilter}>กรอง</ButtonUseFilter>
             </div>
