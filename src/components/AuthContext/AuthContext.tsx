@@ -11,6 +11,7 @@ const AuthContext = createContext<any>(null);
 const AuthProvider = ({ children }: IAuthProps) => {
     const [user, setUser] = useState<any | null>();
     const [token, setToken] = useState<any | null>();
+    const [hide, setHide] = useState<boolean>(true);
 
     const getUser = async () => {
         const token = localStorage.getItem('token');
@@ -44,8 +45,8 @@ const AuthProvider = ({ children }: IAuthProps) => {
             })
             .catch((err) => {
                 console.error(err);
-                alert('อีเมลและรหัสผ่านที่คุณกรอกไม่ตรงกับข้อมูลในระบบ \nโปรดตรวจสอบและลองอีกครั้ง');
                 console.log('Failed login');
+                setHide(false)
             });
     };
 
@@ -56,7 +57,9 @@ const AuthProvider = ({ children }: IAuthProps) => {
         localStorage.removeItem('token');
         setToken(localStorage.getItem('token'));
         setUser(undefined);
+        window.location.href = '/'
     };
+
     useEffect(() => {
         const tokenkey = localStorage.getItem('token');
         if (tokenkey) {
@@ -73,6 +76,7 @@ const AuthProvider = ({ children }: IAuthProps) => {
                 user,
                 token,
                 getUser,
+                hide
             }}
         >
             {children}

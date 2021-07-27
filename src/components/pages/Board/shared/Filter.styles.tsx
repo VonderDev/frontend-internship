@@ -1,6 +1,9 @@
 import { Drawer, Input, Tag } from 'antd';
 import CheckableTag from 'antd/lib/tag/CheckableTag';
 import styled, { css } from 'styled-components';
+import SelectTagImg from '../shared/images/selectedTag.png';
+import CancleTagImg from '../shared/images/cancleTag.png';
+import SelectedTrueImg from '../shared/images/selectedTrue.png';
 
 export const ButtonFilter = styled.div`
     background-color: #ffffff;
@@ -12,6 +15,7 @@ export const ButtonFilter = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    padding: 5px;
 `;
 
 export const ButtonUseFilter = styled.div`
@@ -21,10 +25,24 @@ export const ButtonUseFilter = styled.div`
     align-items: center;
     background-color: var(--Blue-400);
     color: white;
-    width: 159px;
+    width: 40%;
     height: 51px;
     border-radius: 12px;
     padding: 16px 120px;
+    font-weight: bolder;
+`;
+
+export const ButtonClearFilter = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    color: var(--Blue-200);
+    width: 159px;
+    height: 51px;
+    border-radius: 12px;
+    font-weight: bolder;
 `;
 export const SearchField = styled.div`
     display: flex;
@@ -42,10 +60,11 @@ export const Topic = styled.div`
     font-weight: bold;
 `;
 export const InputSearch = styled(Input)`
-    border-radius: 10px;
+    border: none;
     width: 100%;
     margin-right: 5px;
     height: 40px;
+    box-shadow: 0 3px 6px #e0e0e0;
 `;
 
 export const DrawerRadius = styled(Drawer)`
@@ -108,4 +127,22 @@ export const CustomCheckableTag = styled(CheckableTag)`
     &.ant-tag-checkable:not(.ant-tag-checkable-checked):hover {
         color: #6e7282;
     }
+`;
+
+export const SelectedTag = styled.div`
+    background-image: url(${SelectTagImg});
+    width: 18px;
+    height: 18px;
+`;
+
+export const CancleTag = styled.div`
+    background-image: url(${CancleTagImg});
+    width: 20px;
+    height: 20px;
+`;
+
+export const SelectedTrue = styled.div`
+    background-image: url(${SelectedTrueImg});
+    width: 18px;
+    height: 18px;
 `;

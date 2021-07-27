@@ -1,6 +1,8 @@
 import { Button, Drawer, Form, Input, Modal, Radio, Select, Upload } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import styled from 'styled-components';
+import CircleChoiceImg from '../images/circleCategorie.png';
+import CirCleSelectionImg from '../images/ChoiceSelection.png';
 
 //------------------ CREATE CONTENT PAGE 1 ------------------//
 export const FormInputNameContent = styled(Input)`
@@ -140,25 +142,17 @@ export const ContentTypeButton = styled(Radio.Button)`
     .ant-radio-inner:after {
         border-radius: 0 !important;
     }
-
     border-radius: 12px !important;
-    & .ant-radio-button-wrapper::first-child {
-        border-color: white !important;
-        border-radius: 12px !important;
-        width: 100px;
-    }
     & .ant-radio-button {
         background-color: var(--Blue-000);
         border-radius: 12px !important;
         font-size: 14px;
         color: var(--Gray-500) !important;
         border-radius: var(--Blue-000);
-
-        /* border-radius: 12px !important; */
     }
     &.ant-radio-button-wrapper:first-child {
-        width: 127px;
-        height: 44px;
+        width: 130px;
+        height: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -182,11 +176,11 @@ export const InputHashtagInDrawer = styled(Select)`
     padding-top: 15px;
     border-radius: 10px;
     .ant-select-selection-overflow {
-        height: 45px;
+        height: auto;
+        min-height: 45px !important;
     }
     .ant-select-selector {
         border-radius: 12px !important;
-        height: fit-content;
     }
     & .ant-select-selection-item {
         background-color: #daebfd;
@@ -318,4 +312,16 @@ export const TextBodyModal = styled.div`
 export const TextTitleModal = styled.div`
     font-weight: bolder;
     font-size: 24px;
+`;
+
+export const CircleChoice = styled.div`
+    background-image: url(${CircleChoiceImg});
+    width: 20px;
+    height: 20px;
+`;
+
+export const CircleSelection = styled.div`
+    background-image: url(${CirCleSelectionImg});
+    width: 20px;
+    height: 20px;
 `;

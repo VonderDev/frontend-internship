@@ -69,11 +69,10 @@ export const ButtonReadOverviewTest = styled.div`
     position: absolute;
     font-weight: bolder;
     letter-spacing: 1px;
-    font-size: 18px;
+    font-size: 17px;
     text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px white;
     position: absolute;
     transform: translateY(-120%) translateX(10%);
-    padding-left: 20px;
     &:hover {
         cursor: pointer;
     }
@@ -86,7 +85,8 @@ export const TextTopicOnImageTest = styled.div`
     padding-left: 30px;
     padding-top: 15px;
     margin-bottom: 140px;
-    text-shadow: 1px 1px 2px black, 0 0 25px #afd4ff, 0 0 5px white;
+    /* text-shadow: 1px 1px 2px black, 0 0 25px #afd4ff, 0 0 5px white; */
+    letter-spacing: 2px;
 `;
 export const TextBoardTopic = styled(Col)`
     font-weight: bolder;

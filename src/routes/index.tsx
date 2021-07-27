@@ -37,7 +37,7 @@ function Routing() {
             <Route exact path="/test" component={Test} />
             <Route exact path="/testoverview" component={TestOverview} />
             <Route exact path="/testquestion">
-                    <TestQuestion />
+                <TestQuestion />
             </Route>
             <Route exact path="/resultoverview" component={ResultOverview} />
             <Route exact path="/resultinfo" component={ResultInfo} />

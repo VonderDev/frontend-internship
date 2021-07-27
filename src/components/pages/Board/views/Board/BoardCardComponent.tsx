@@ -2,8 +2,8 @@ import { BoardCard, CommentIcon, CustomBox, EllipsisText, HeartIcon, HistoryImag
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Box } from 'shared/style/theme/component';
+import { dateFormat } from 'utils/Date/DateFormat';
 import { transalateToThai } from 'utils/transalator/transalator';
-import { MONTHS } from '../../shared/months';
 
 interface CardComponentProps {
     data: any | null;
@@ -22,8 +22,6 @@ const BoardCardComponent: React.FC<CardComponentProps> = ({ data }) => {
         <>
             {data
                 ? data.map((item: any, index: any) => {
-                      const dateCreatedFilter = new Date(item.created_at);
-                      const dateFormat = dateCreatedFilter.getDate() + ' ' + MONTHS[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
                       return (
                           <BoardCard key={index} onClick={() => history.push(`/boardcontent/${item._id}`)}>
                               <EllipsisText style={{ display: 'flex' }}>
@@ -47,7 +45,7 @@ const BoardCardComponent: React.FC<CardComponentProps> = ({ data }) => {
                                               <CommentIcon />
                                           </div>
                                           <HistoryText>{item.author_username}</HistoryText>
-                                          <HistoryText>{dateFormat}</HistoryText>
+                                          <HistoryText>{dateFormat(item?.created_at)}</HistoryText>
                                           <div style={{ justifyContent: 'center' }}>
                                               <HeartIcon />
                                           </div>

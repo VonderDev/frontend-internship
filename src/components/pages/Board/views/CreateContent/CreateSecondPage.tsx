@@ -1,13 +1,12 @@
-import { Alert, Spin } from 'antd';
-import { IsLoadingSpinner } from 'components/pages/Test/shared/styles/Test/TestPage.styled';
 import React from 'react';
 import { NotificationCreatedPostSuccess } from '../../shared/style/BoardContent.styled';
 import {
     ButtonSummitPost,
+    CircleChoice,
+    CircleSelection,
     ContainerBoardCreate,
     ContainerContentType,
     ContentTypeButton,
-    CountOfPageCreateContent,
     CountOfPageTwo,
     InputHashtagInDrawer,
     OptionHashtag,
@@ -75,10 +74,8 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                                             });
                                         }}
                                     >
-                                        <span style={{ marginRight: '10px' }}>
-                                            <CheckCircleOutlined />
-                                        </span>
-                                        {item.label}
+                                        <div style={{ transform: 'translateY(15px) translateX(-30px)' }}>{contentData.content_type.includes(item.value) ? <CircleSelection /> : <CircleChoice />}</div>
+                                        <div style={{ transform: 'translateY(-10px)' }}>{item.label}</div>
                                     </ContentTypeButton>
                                 </ContainerContentType>
                             );

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Image, Checkbox, Drawer, Typography, Form } from 'antd';
+import { Alert, Checkbox, Drawer, Typography, Form } from 'antd';
 
 export const FormLogin = styled(Form)`
     width: 90%;
@@ -9,10 +9,6 @@ export const FormItemTextValidate = styled(Form.Item)`
     & .ant-form-item-control {
         text-align: left;
     }
-`;
-
-export const LogoPage = styled(Image)`
-    padding-top: 20px;
 `;
 
 export const LogoPageCenter = styled.div`
@@ -44,6 +40,14 @@ export const PrivacyContainer = styled.div`
     text-align: center;
     border: 1px solid #ebedf0;
     border-radius: 2px;
+`;
+
+export const DrawerContainer = styled.div`
+    position: relative;
+    height: 120%;
+    overflow: hidden;
+    border-radius: 2px;
+    z-index: 20 !important;
 `;
 
 export const CheckboxPrivacy = styled(Checkbox)`
@@ -109,5 +113,38 @@ export const DrawerRadius = styled(Drawer)`
         flex-direction: column;
         align-items: center;
         padding-top: 0px;
+    }
+`;
+
+export const DrawerFilter = styled(Drawer)`
+    & .ant-drawer-header {
+        border-bottom: none;
+    }
+    & .ant-drawer-content {
+        border-radius: 12px 12px 0px 0px;
+    }
+    & .ant-drawer-title {
+        padding-top: 30px;
+        font-size: var(--font-22);
+        align-items: center;
+        font-weight: bold;
+    }
+    & .ant-drawer-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 0px;
+    }
+`;
+
+export const CustomAlert = styled(Alert)`
+    transform: translateY(-220px);
+    &.ant-alert-with-description {
+        align-items: flex-start;
+        padding: 15px 15px 15px 24px;
+        position: absolute;
+        z-index: 10;
+        width: 40%;
+        border-radius: 12px;
     }
 `;

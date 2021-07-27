@@ -5,7 +5,7 @@ export const catagories = [
 
 export const hashtag = [
     { tag: 'ภาษา', value: 'word smart' },
-    { tag: 'ตรรกกะ', value: 'logic smart' },
+    { tag: 'ตรรกะ', value: 'logic smart' },
     { tag: 'ดนตรี', value: 'music smart' },
     { tag: 'ธรรมชาติ', value: 'nature smart' },
     { tag: 'มิติสัมพันธ์', value: 'picture smart' },

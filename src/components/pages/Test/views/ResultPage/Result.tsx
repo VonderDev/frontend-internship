@@ -5,6 +5,7 @@ import { ButtonSaveResult, ButtonSeeAllResult, ContainerCarousel, ContainerResul
 import useSWR from 'swr';
 import { IResult } from '../../shared/interface/Result.interfaces';
 import { DownloadOutlined } from '@ant-design/icons';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 
 const Result = () => {
     const history = useHistory();
@@ -27,7 +28,7 @@ const Result = () => {
         }
         if (resultHistory && paramObjectId) {
             setResultData(resultHistory?.filter((data: { score: number }) => data.score === Math.max(...Object.keys(resultHistory).map((key) => resultHistory[key]?.score))));
-            // console.log('[ResultProfile data]:', result);
+            console.log('[Result Profile data]:', resultHistory);
         }
     }, [resultData, paramObjectId, resultHistory]);
 
@@ -41,6 +42,7 @@ const Result = () => {
 
     return (
         <Container header={null}>
+            {error && errorResultHistory && <ErrorPage />}
             <ContainerCarousel>
                 {result?.map((item: any, index: any) => {
                     return (
@@ -48,11 +50,11 @@ const Result = () => {
                             <ContainerResultSummarize>
                                 <HeaderResultFeature>คุณมีลักษณะเด่น {result.length} ด้าน</HeaderResultFeature>
                                 <ImageCharactorCarousel src={item.img_result} />
-                                {Object.keys(paramObjectId).length ? null : (
-                                    <ButtonSaveResult href={item.img_result} download onClick={() => downloadImage()}>
-                                        <DownloadOutlined />
-                                    </ButtonSaveResult>
-                                )}
+
+                                <ButtonSaveResult href={item.img_result} download onClick={() => downloadImage()}>
+                                    <DownloadOutlined style={{ paddingLeft: '20px' }} />
+                                    บันทึกผลลัพธ์
+                                </ButtonSaveResult>
                             </ContainerResultSummarize>
                         </div>
                     );

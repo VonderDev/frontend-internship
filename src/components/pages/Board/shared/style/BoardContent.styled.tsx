@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import profileImage from '../images/profile.png';
 
 export const ContainerBaordContent = styled.div`
-    padding-left: 30px;
-    padding-top: 30px;
-    padding-right: 30px;
+    padding-left: 16px;
+    padding-top: 16px;
+    padding-right: 16px;
 `;
 
 export const TextTitleContent = styled.div`
@@ -33,16 +33,15 @@ export const ContentBody = styled.div`
 
 export const ProfileImage = styled.div`
     background-image: url(${profileImage});
-    width: 69.5px;
-    height: 76px;
+    width: 60px;
+    height: 60px;
     background-position: center;
     background-size: cover;
     border-radius: 50%;
     margin-right: 10px;
 `;
 
-export const ContainerUserNameAndDate = styled.div`
-`;
+export const ContainerUserNameAndDate = styled.div``;
 
 export const TopicTag = styled.span`
     font-size: 14px;

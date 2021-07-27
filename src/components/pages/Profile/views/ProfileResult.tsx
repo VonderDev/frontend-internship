@@ -1,10 +1,10 @@
 import { Col } from 'antd';
 import Container from 'components/Container/Container';
-import { MONTHS } from 'components/pages/Board/shared/months';
-import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 import { Box } from 'shared/style/theme/component';
 import useSWR from 'swr';
+import { dateFormat } from 'utils/Date/DateFormat';
 import { RowStyled, ResultImage, CardText, IconArrow, ResultCard } from '../shared/Profile.styles';
 
 function ProfileResult() {
@@ -21,14 +21,12 @@ function ProfileResult() {
 
     return (
         <Container header={{ left: 'back', title: 'ประวัติการทำแบบทดสอบ', right: 'menu' }}>
+            {errorProfile && <ErrorPage />}
             {isLoading ? (
                 <div>loading ...</div>
             ) : (
                 <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
                     {profile?.results?.map((item: any, index: any) => {
-                        const dateCreatedFilter = new Date(item[0]?.created_at);
-                        const dateFormat = dateCreatedFilter.getDate() + ' ' + MONTHS[dateCreatedFilter.getMonth()] + ' ' + dateCreatedFilter.getFullYear();
-                        console.log(dateFormat);
                         return (
                             <ResultCard style={{ marginBottom: '10px' }} key={index} onClick={() => history.push(`/result/${profile.auth[0]._id}/${index}`)}>
                                 <RowStyled>
@@ -39,7 +37,7 @@ function ProfileResult() {
                                         <CardText style={{ transform: 'translateY(67%) translateX(5%)' }}>
                                             <RowStyled>ลักษณะเด่นของคุณ</RowStyled>
 
-                                            <RowStyled>{dateFormat}</RowStyled>
+                                            <RowStyled>{dateFormat(item[0]?.created_at)}</RowStyled>
                                         </CardText>
                                     </Col>
                                     <Col span={2}>
