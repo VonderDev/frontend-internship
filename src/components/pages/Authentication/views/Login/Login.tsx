@@ -31,7 +31,7 @@ const Login = () => {
         return <Redirect to="/" />;
     }
     return (
-        <Container header={{ left: 'back', right: 'menu' }}>
+        <Container header={{ left: 'back' }}>
             <PrivacyContainer>
                 <LogoPage src={logo} preview={false} />
                 <MoveCenter>
@@ -55,7 +55,7 @@ const Login = () => {
                         >
                             <TextAgree>
                                 {' '}
-                                ฉันได้ทำความเข้าใจ และยินยอมตาม <span style={{ color: '#3A8CE4', fontWeight: 'bold' }}>นโยบายความเป็นส่วนตัว</span>
+                                I've read and agreed to the <span style={{ color: '#3A8CE4', fontWeight: 'bold' }}>Privacy Policy</span>
                             </TextAgree>
                         </CheckboxPrivacy>
                         <ButtonStyle typebutton="Large" sizebutton={95} onClick={confirmPolicy} htmlType="submit" disabled={!checked}>
