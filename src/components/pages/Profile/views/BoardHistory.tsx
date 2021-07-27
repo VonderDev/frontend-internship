@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Box } from 'shared/style/theme/component';
 import useSWR from 'swr';
 import BoardCardComponent from 'components/pages/Board/views/Board/BoardCardComponent';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 
 function BoardHistory() {
     const { data: profile, error: errorProfile } = useSWR('/user/profile');
@@ -15,7 +16,7 @@ function BoardHistory() {
 
     return (
         <Container header={{ left: 'back', title: 'กระทู้ของคุณ', right: 'menu' }}>
-            {errorProfile && <div>error </div>}
+            {errorProfile && <ErrorPage />}
             {isLoading ? (
                 <div>loading ...</div>
             ) : (

@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
-import { FontTextHeader, LogoPage, MoveCenter, PrivacyContainer, CheckboxPrivacy, DrawerRadius, TextAgree, TextRegister } from 'components/pages/Authentication/shared/style';
+import { FontTextHeader, MoveCenter, PrivacyContainer, CheckboxPrivacy, DrawerRadius, TextAgree, TextRegister } from 'components/pages/Authentication/shared/style';
 import { LoginForm } from './LoginForm';
 import Container from 'components/Container/Container';
 import logo from '../../images/logo.png';
 import Privacy from './Privacy';
-import { ButtonStyle } from 'shared/style/theme/component';
+import { Box, ButtonStyle } from 'shared/style/theme/component';
+import { Image } from 'antd';
 
 const Login = () => {
     const [visible, setVisible] = useState<boolean>(false);
@@ -33,7 +34,11 @@ const Login = () => {
     return (
         <Container header={{ left: 'back', right: 'menu' }}>
             <PrivacyContainer>
-                <LogoPage src={logo} preview={false} />
+                <Box direction="row" justify="center" align="flex-start" style={{ padding: '0px 20px 0px 20px', margin: '10px 0px' }}>
+                    <Box direction="row" justify="center" align="center">
+                        <Image src={logo} preview={false} />
+                    </Box>
+                </Box>
                 <MoveCenter>
                     <DrawerRadius
                         title="นโยบายความเป็นส่วนตัว"

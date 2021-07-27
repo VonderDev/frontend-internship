@@ -8,6 +8,7 @@ import ProfileMascot from '../../Profile/images/ProfileMascot.png';
 import { TextUserInfo1, TextUserInfo2, TextUsername, UserImage, RowStyled, LinkMoreResult, TextTopic2, NotFoundText } from '../shared/Profile.styles';
 import ProfileBoardCard from './ProfileBoardCard';
 import ProfileResultCard from './ProfileResultCard';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 
 function Profile() {
     //Data from get profile data API-------------------------------------------------------------
@@ -25,7 +26,7 @@ function Profile() {
     const history = useHistory();
     return (
         <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
-            {error && <div>error </div>}
+            {error && <ErrorPage />}
             {isLoading ? (
                 <div>loading ...</div>
             ) : (

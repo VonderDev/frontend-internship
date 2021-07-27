@@ -15,6 +15,7 @@ export const ButtonFilter = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    padding: 5px;
 `;
 
 export const ButtonUseFilter = styled.div`
@@ -59,10 +60,11 @@ export const Topic = styled.div`
     font-weight: bold;
 `;
 export const InputSearch = styled(Input)`
-    border-radius: 10px;
+    border: none;
     width: 100%;
     margin-right: 5px;
     height: 40px;
+    box-shadow: 0 3px 6px #e0e0e0;
 `;
 
 export const DrawerRadius = styled(Drawer)`
@@ -135,8 +137,8 @@ export const SelectedTag = styled.div`
 
 export const CancleTag = styled.div`
     background-image: url(${CancleTagImg});
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
 `;
 
 export const SelectedTrue = styled.div`
