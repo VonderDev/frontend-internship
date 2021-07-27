@@ -69,7 +69,7 @@ const ResultFeatures = () => {
                 <div>loading ...</div>
             ) : (
                 <>
-                    <TextHeaderResult>ลักษณะเด่นของคุณ ({result?.length}ด้าน)</TextHeaderResult>
+                    <TextHeaderResult>ลักษณะเด่นของคุณ ({result?.length} ด้าน)</TextHeaderResult>
                     <GridBox>
                         <SpaceCharactorList>
                             {result?.map((item: any, index: any) => {

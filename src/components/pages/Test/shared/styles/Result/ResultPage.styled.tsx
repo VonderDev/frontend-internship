@@ -181,12 +181,18 @@ export const TabsInfo = styled(Tabs)`
         letter-spacing: 1px;
         color: black;
         width: 180px;
+        margin-left: 0px !important;
+        display: flex;
+        justify-content: center;
     }
     & .ant-tabs-nav .ant-tabs-tab-active {
         background-color: var(--Gray-500);
         height: 52px;
+        display: flex;
+        justify-content: center;
         border-radius: 12px 12px 12px 0px !important;
         letter-spacing: 1px;
+        margin-left: 0px !important;
     }
 
     & .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
