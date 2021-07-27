@@ -14,7 +14,7 @@ export const RowHeader = styled(Row)`
 export const TextHeader = styled.div`
     width: 100%;
     height: 36px;
-    color: var(--Gray-700);
+    color: var(--Gray-400);
     font-size: 18px;
     font-weight: bold;
     text-align: center;
