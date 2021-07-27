@@ -66,7 +66,7 @@ export const InputSearch = styled(Input)`
     width: 100%;
     margin-right: 5px;
     height: 40px;
-    box-shadow: 0 1px 15px #e0e0e0;
+    box-shadow: 5px 8px 10px #f5f5f5;
     border-radius: 12px;
     margin-top: 17px;
 `;

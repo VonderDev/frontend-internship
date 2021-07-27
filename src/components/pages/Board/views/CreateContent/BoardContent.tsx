@@ -21,6 +21,7 @@ import {
     IconComment,
     IconLikeSuccess,
     LengthOfLikeAndCommentSuccess,
+    DefaultImage,
 } from '../../shared/style/BoardContent.styled';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
@@ -137,7 +138,9 @@ function BoardContent() {
                             <DateCreatedContent>{dateFormat(contentData?.created_at)}</DateCreatedContent>
                         </ContainerUserNameAndDate>
                     </div>
-                    <ImageOfContent src={contentData?.image}></ImageOfContent>
+
+                    {contentData?.image !== '-' ? <ImageOfContent src={contentData?.image} /> : <DefaultImage />}
+
                     <ContentBody>{contentData?.content_body}</ContentBody>
 
                     <BoxOfLikeAndComment>

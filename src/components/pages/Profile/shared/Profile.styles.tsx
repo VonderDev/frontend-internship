@@ -158,7 +158,7 @@ export const BoardCard = styled(Card)`
     margin-bottom: 15px;
     height: 88px;
     width: 100%;
-    box-shadow: 0 1px 15px #e0e0e0;
+    box-shadow: 5px 8px 10px #f5f5f5;
     border-radius: 10px;
     & .ant-card-body {
         padding: 0px;

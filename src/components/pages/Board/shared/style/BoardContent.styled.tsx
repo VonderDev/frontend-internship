@@ -4,6 +4,7 @@ import profileImage from '../images/AvatarStudent.png';
 import IconLikeUnSuccessImg from '../images/IconLikeUnsuccess.png';
 import IconLikeSuccessImg from '../images/IconLikeSuccess.png';
 import CommentIconImg from '../images/IconCommentUnsuccuess.png';
+import DefaultImageContent from '../images/ImageDefault.png';
 
 export const ContainerBaordContent = styled.div`
     padding-left: 16px;
@@ -45,6 +46,18 @@ export const ProfileImage = styled.div`
     margin-right: 10px;
 `;
 
+export const DefaultImage = styled.div`
+    background-image: url(${DefaultImageContent});
+    border-radius: 12px;
+    width: 100%;
+    height: 55vh;
+    margin-top: -15px;
+    margin-bottom: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+`;
+
 export const ContainerUserNameAndDate = styled.div``;
 
 export const TopicTag = styled.span`
@@ -68,11 +81,6 @@ export const BoxOfLikeAndComment = styled.div`
     padding-bottom: 5%;
     display: flex;
     justify-content: space-evenly;
-    //position: relative;
-    /* left: 18%;
-    :hover {
-        cursor: pointer;
-    } */
 `;
 
 export const LengthOfLikeAndComment = styled.span`

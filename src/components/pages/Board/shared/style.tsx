@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { FormOutlined, HeartFilled } from '@ant-design/icons';
 import { CardStyle } from 'shared/style/theme/component';
 import { Box } from 'shared/style/theme/component';
+import DefaultImageContent from '../../Board/shared/images/ImageDefault.png';
 
 export const TextRecommendBoardTopic = styled.div`
     font-weight: bolder;
@@ -105,6 +106,20 @@ export const HistoryImage = styled.img`
     border-bottom-left-radius: 10px;
     transform: translateY(-1%);
     position: absolute;
+`;
+
+export const HistoryImageDefault = styled.img`
+    background-image: url(${DefaultImageContent});
+    margin-right: 10px;
+    width: 88px;
+    height: 88px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transform: translateY(-1%);
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 `;
 
 export const CoverImage = styled.img`
