@@ -18,9 +18,9 @@ const theme = {
     large: "3em"
   },
   breakPoints: {
-    mobileS: '320px',
-    mobileM: '375px',
-    mobileL: '425px'
+    mobileS: '300px',
+    mobileM: '400px',
+    mobileL: '500px'
   }
 };
 

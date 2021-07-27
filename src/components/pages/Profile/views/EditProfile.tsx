@@ -1,29 +1,40 @@
-import { useState, useEffect } from 'react';
-import { API_Profile_Data } from '../apis/profile.api';
-import { IProfile } from '../shared/Profile.interface';
-import { Form } from 'antd';
-import { Container, MoveCenter, ButtonSubmit, BgColor, FormInput, UserImage, TextTopic, TextUserInfo } from '../shared/Profile.styles';
-
-function EditProfile() {
-    const [cred, setCred] = useState<IProfile>({ name: '', surname: '', email: '', result: '', pic: '', username: '' });
-    const [userName, setUserName] = useState<string>('');
-    const [name, setName] = useState<string>('');
-    const [surname, setSurname] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
-
-    const handleOnChange = (name: string, value: string) => {
-        setCred((prev) => ({ ...prev, [name]: value }));
-        console.log(cred.username);
+import { useEffect, useState } from 'react';
+import { BackHeader } from 'components/Container/Header.styled';
+import { ConfirmModal, ButtonLeaveModal, ButtonCancleModal, TextHeadModal, TextBodyModal, ButtonSave, TextTopicEditProfile, UserImage, CustomAlert } from '../shared/Profile.styles';
+import { LeftOutlined } from '@ant-design/icons';
+import Container from 'components/Container/Container';
+import { useHistory } from 'react-router-dom';
+import { Alert, Form } from 'antd';
+import { ApiGetUserData, ApiPutUserData } from '../apis/profile.api';
+import { IUser } from '../shared/Profile.interface';
+import ProfileMascot from '../../Profile/images/ProfileMascot.png';
+import { Box, InputStyle } from 'shared/style/theme/component';
+const EditProfile = () => {
+    //Modal state and function-----------------------------------------------------------------------------
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isShowNotification, setIsShowNotification] = useState(false);
+    const showModal = () => {
+        setIsModalVisible(true);
     };
-
-    const editedUser = () => {
-        console.log(cred);
+    const handleCancel = () => {
+        setIsModalVisible(false);
     };
-
+    const handleOk = () => {
+        history.goBack();
+        setIsModalVisible(false);
+    };
+    //Set data from Get API-----------------------------------------------------------------------------
+    const [userInfo, setUserInfo] = useState<IUser>({ firstName: '', lastName: '', email: '', username: '' });
     async function getStatisticData() {
-        const response = await API_Profile_Data();
+        const response = await ApiGetUserData();
         if (response) {
-            setCred((prevState) => ({ ...prevState, name: response.name, surname: response.surname, email: response.email, result: response.result, pic: response.pic, username: response.username }));
+            setUserInfo((prevState) => ({
+                ...prevState,
+                firstName: response.firstName,
+                lastName: response.lastName,
+                email: response.email,
+                username: response.username,
+            }));
         } else {
             console.log('error');
         }
@@ -31,58 +42,120 @@ function EditProfile() {
     useEffect(() => {
         getStatisticData();
     }, []);
-
+    const handleOnChange = (name: string, value: string) => {
+        setUserInfo((prev) => ({ ...prev, [name]: value }));
+    };
+    //Function put API-----------------------------------------------------------------------------
+    const putDataOnClick = () => {
+        setIsShowNotification(false);
+        if (userInfo.username === '' || userInfo.firstName === '' || userInfo.lastName === '') {
+            setIsShowNotification(true);
+            setTimeout(() => {
+                setIsShowNotification(false);
+            }, 2000);
+        } else {
+            ApiPutUserData(userInfo);
+            setTimeout(() => {
+                history.push('/profile');
+            }, 1200);
+        }
+        // console.log(typeof userInfo.username);
+    };
+    const history = useHistory();
     return (
-        <div>
-            <BgColor>
-                <Container>
-                    <MoveCenter>
-                        <TextTopic>แก้ไขข้อมูลส่วนตัว</TextTopic>
-                        <UserImage src={cred.pic} />
-                        <form>
-                            <TextUserInfo>ชื่อผู้ใช้</TextUserInfo>
-                            <FormInput
+        <>
+            {isShowNotification ? (
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <CustomAlert message="Error" description="กรุณากรอกมูลให้ครบก่อนบันทึก!!!" type="error" showIcon />
+                </div>
+            ) : null}
+            <ConfirmModal
+                visible={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                title={<TextHeadModal>ออกจากหน้านี้?</TextHeadModal>}
+                footer={[
+                    <ButtonLeaveModal key="back" onClick={handleOk}>
+                        ออก
+                    </ButtonLeaveModal>,
+                    <ButtonCancleModal key="submit" onClick={handleCancel}>
+                        ยกเลิก
+                    </ButtonCancleModal>,
+                ]}
+            >
+                <TextBodyModal>การเปลี่ยนแปลงทั้งหมดจะไม่ถูกบันทึก</TextBodyModal>
+            </ConfirmModal>
+            <Container
+                header={{
+                    left: (
+                        <BackHeader onClick={showModal}>
+                            <LeftOutlined style={{ color: '#8a8888' }} />
+                        </BackHeader>
+                    ),
+                    title: 'แก้ไขข้อมูลส่วนตัว',
+                    right: (
+                        <ButtonSave htmlType="submit" onClick={putDataOnClick}>
+                            บันทึก
+                        </ButtonSave>
+                    ),
+                }}
+            >
+                <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
+                    <UserImage src={ProfileMascot} />
+                    <TextTopicEditProfile>ชื่อผู้ใช้</TextTopicEditProfile>
+                    <Form>
+                        <Form.Item rules={[{ required: true, message: 'กรุณาใส่ชื่อผู้ใช้!' }]}>
+                            <InputStyle
+                                type="text"
+                                typeinput="Large"
                                 name="username"
-                                value={cred.username}
+                                value={userInfo.username}
                                 onChange={({ target: { value, name } }) => {
                                     handleOnChange(name, value);
                                 }}
                             />
-                            <TextUserInfo>อีเมล</TextUserInfo>
-                            <FormInput
+                        </Form.Item>
+                        <TextTopicEditProfile>ชื่อจริง</TextTopicEditProfile>
+                        <Form.Item rules={[{ required: true, message: 'กรุณาใส่ชื่อจริง!' }]}>
+                            <InputStyle
+                                type="text"
+                                typeinput="Large"
+                                name="firstName"
+                                value={userInfo.firstName}
+                                onChange={({ target: { value, name } }) => {
+                                    handleOnChange(name, value);
+                                }}
+                            />
+                        </Form.Item>
+                        <TextTopicEditProfile>นามสกุล</TextTopicEditProfile>
+                        <Form.Item rules={[{ required: true, message: 'กรุณาใส่นามสกุล!' }]}>
+                            <InputStyle
+                                type="text"
+                                typeinput="Large"
+                                name="lastName"
+                                value={userInfo.lastName}
+                                onChange={({ target: { value, name } }) => {
+                                    handleOnChange(name, value);
+                                }}
+                            />
+                        </Form.Item>
+                        <TextTopicEditProfile>อีเมล</TextTopicEditProfile>
+                        <Form.Item rules={[{ required: true, message: 'กรุณาใส่อีเมล!' }]}>
+                            <InputStyle
+                                type="text"
+                                typeinput="Large"
                                 name="email"
-                                value={cred.email}
+                                value={userInfo.email}
                                 onChange={({ target: { value, name } }) => {
                                     handleOnChange(name, value);
                                 }}
                                 disabled
                             />
-                            <TextUserInfo>ชื่อจริง</TextUserInfo>
-                            <FormInput
-                                name="name"
-                                value={cred.name}
-                                onChange={({ target: { value, name } }) => {
-                                    handleOnChange(name, value);
-                                }}
-                            />
-                            <TextUserInfo>นามสกุล</TextUserInfo>
-                            <FormInput
-                                name="surname"
-                                value={cred.surname}
-                                onChange={({ target: { value, name } }) => {
-                                    handleOnChange(name, value);
-                                }}
-                            />
-                        </form>
-                        <br />
-                        <Form.Item>
-                            <ButtonSubmit onClick={editedUser}>ยืนยันการเปลี่ยนแปลง</ButtonSubmit>
                         </Form.Item>
-                    </MoveCenter>
-                </Container>
-            </BgColor>
-        </div>
+                    </Form>
+                </Box>
+            </Container>
+        </>
     );
-}
-
+};
 export default EditProfile;

@@ -1,17 +1,23 @@
-import TestAnimation from './TestAnimation';
 import ButtonLoadingStart from './ButtonLoadingStart';
-import { TextHeader, TextDescription, Container } from '../../shared/styles/TestPage.styled';
+import Container from 'components/Container/Container';
+import { TextHeader, TextDescription, ContainerTestPage, ButtonBack } from '../../shared/styles/Test/TestPage.styled';
+import { LeftOutlined } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
 
 function TestStartPage() {
+    const history = useHistory();
+
     return (
-        <Container>
-            <TextHeader>แบบทดสอบความถนัด</TextHeader>
-            <TestAnimation />
-            <TextDescription>
-                แบบทดสอบนี้ทำขึ้นเพื่อ ... lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy <br />
-                text ever since the 1500s
-            </TextDescription>
-            <ButtonLoadingStart />
+        <Container header={null}>
+            <ContainerTestPage>
+                <ButtonBack onClick={() => history.push('/')} icon={<LeftOutlined />} />
+                <TextHeader>เกมทดสอบพหุปัญญา</TextHeader>
+                <TextDescription>
+                    มาค้นหาตัวเอง <br />
+                    ผ่านการเดินทางของคุณเองกันเถอะ
+                </TextDescription>
+                <ButtonLoadingStart />
+            </ContainerTestPage>
         </Container>
     );
 }

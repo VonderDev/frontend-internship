@@ -1,133 +1,98 @@
-import { Link, useHistory } from 'react-router-dom';
-import { API_Profile_Data } from '../apis/profile.api';
-import { Form, List } from 'antd';
-import { useEffect } from 'react';
-import { IIconTextProfile, IListDataProfile, IProfile } from '../shared/Profile.interface';
-import { useState } from 'react';
-import {
-    Container,
-    MoveCenter,
-    AlignRight,
-    ButtonSubmit,
-    BgColor,
-    TextUserInfo,
-    TextTopic,
-    TextUsername,
-    ResultCard,
-    UserImage,
-    TextTopic2,
-    AlignLeft,
-    ResultImage,
-    CardText,
-    IconArrow,
-    LinkResult,
-    HistoryCard,
-    IconLove,
-    IconWrite,
-    ProfileListBoard,
-    ProfileListItemBoard,
-    HistoryImage,
-} from '../shared/Profile.styles';
-import React from 'react';
+import { useHistory } from 'react-router-dom';
+import { Col } from 'antd';
+import { useEffect, useState } from 'react';
+import Container from 'components/Container/Container';
+import useSWR from 'swr';
+import { Box, ButtonStyle } from 'shared/style/theme/component';
+import ProfileMascot from '../../Profile/images/ProfileMascot.png';
+import { TextUserInfo1, TextUserInfo2, TextUsername, UserImage, RowStyled, LinkMoreResult, TextTopic2, NotFoundText } from '../shared/Profile.styles';
+import ProfileBoardCard from './ProfileBoardCard';
+import ProfileResultCard from './ProfileResultCard';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 
 function Profile() {
-    const [cred, setCred] = useState<IProfile>({ name: '', surname: '', email: '', result: '', pic: '', username: '' });
-    const history = useHistory();
-    async function getStatisticData() {
-        const response = await API_Profile_Data();
-        if (response) {
-            console.log(response.name);
-            setCred((prevState) => ({ ...prevState, name: response.name, surname: response.surname, email: response.email, result: response.result, pic: response.pic, username: response.username }));
-        } else {
-            console.log('error');
-        }
-    }
+    //Data from get profile data API-------------------------------------------------------------
+    const [fetchProfileData, setFetchProfileData] = useState<any>();
+    const { data, error } = useSWR('/user/profile');
+    const isLoading = !error && !fetchProfileData;
+
     useEffect(() => {
-        getStatisticData();
-    }, []);
+        if (data) {
+            setFetchProfileData(data);
+            console.log('[useEffect profile] :', fetchProfileData);
+        }
+    }, [data, fetchProfileData]);
 
-    const listData: Array<IListDataProfile> = [];
-    for (let i = 1; i < 2; i++) {
-        listData.push({
-            href: '/board',
-            title: 'แนะนำหนังสือสำหรับคนอยากไปสายวิศวะ',
-            avatar: 'https://scontent.fbkk12-1.fna.fbcdn.net/v/t1.6435-9/59064493_437047506858059_6394542383404417024_n.png?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=aMf0eSHrFroAX87NAZJ&tn=CeGl5CLqXgfyZu7t&_nc_ht=scontent.fbkk12-1.fna&oh=2b1b5b5642904a40a58edd5a57f17a7e&oe=60CB2D93',
-            description: 'บทความ',
-        });
-    }
-
-    const IconText = ({ icon, text }: IIconTextProfile) => React.createElement(icon);
+    const history = useHistory();
     return (
-        <div>
-            <BgColor>
-                <Container>
-                    <MoveCenter>
-                        <TextTopic>ข้อมูลส่วนตัว</TextTopic>
-                        <UserImage src={cred.pic} />
-                        <TextUsername>{cred.username}</TextUsername>
-                    </MoveCenter>
-                    <TextUserInfo>
-                        ชื่อ-นามสกุล :
-                        <AlignRight>
-                            {cred.name} {cred.surname}
-                        </AlignRight>
-                    </TextUserInfo>
-                    <TextUserInfo>
-                        อีเมล : <AlignRight>{cred.email}</AlignRight>
-                    </TextUserInfo>
-                    <Link to="/editProfile">
-                        <Form.Item>
-                            <MoveCenter>
-                                <ButtonSubmit>แก้ไขข้อมูลส่วนตัว</ButtonSubmit>
-                            </MoveCenter>
-                        </Form.Item>
-                    </Link>
-                    <TextTopic2>ผลลัพธ์จากแบบทดสอบ</TextTopic2>
-                    <MoveCenter>
-                        <LinkResult to="/">
-                            <ResultCard>
-                                <AlignLeft>
-                                    <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
-                                </AlignLeft>
-                                <CardText>
-                                    ลักษณะเด่นของคุณ
-                                    <br />
-                                    วันที่ 15 มิ.ย. 2564
-                                </CardText>
-                                <IconArrow />
-                            </ResultCard>
-                        </LinkResult>
-                    </MoveCenter>
-                    <TextTopic2>ประวัติการสร้างกระทู้</TextTopic2>
-                    <MoveCenter>
-                        <HistoryCard onClick={() => history.push('/')}>
-                            <ProfileListBoard
-                                itemLayout="vertical"
-                                size="large"
-                                pagination={{
-                                    onChange: (page) => {
-                                        console.log(page);
-                                    },
-                                    pageSize: 3,
-                                }}
-                                dataSource={listData}
-                                renderItem={(item: any) => (
-                                    <ProfileListItemBoard
-                                        key={item.title}
-                                        actions={[<IconText icon={IconWrite} text="username" key="list-vertical-star-o" />, <IconText icon={IconLove} text="2" key="list-vertical-message" />]}
-                                    >
-                                        <div>
-                                            <List.Item.Meta avatar={<HistoryImage src={item.avatar} width={100} />} title={<a href={item.href}>{item.title}</a>} description={item.description} />
-                                        </div>
-                                    </ProfileListItemBoard>
-                                )}
-                            />
-                        </HistoryCard>
-                    </MoveCenter>
-                </Container>
-            </BgColor>
-        </div>
+        <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
+            {error && <ErrorPage />}
+            {isLoading ? (
+                <div>loading ...</div>
+            ) : (
+                <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
+                    <UserImage src={ProfileMascot} />
+                    <TextUsername>{fetchProfileData?.auth[0].username}</TextUsername>
+                    <RowStyled>
+                        <Col span={8}>
+                            <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
+                        </Col>
+                        <Col span={16}>
+                            <TextUserInfo2>
+                                {fetchProfileData?.auth[0].firstName} {fetchProfileData?.auth[0].lastName}
+                            </TextUserInfo2>
+                        </Col>
+                    </RowStyled>
+                    <RowStyled>
+                        <Col span={8}>
+                            <TextUserInfo1>อีเมล :</TextUserInfo1>
+                        </Col>
+                        <Col span={16}>
+                            <TextUserInfo2>{fetchProfileData?.auth[0].email}</TextUserInfo2>
+                        </Col>
+                    </RowStyled>
+                    <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
+                        แก้ไขข้อมูลส่วนตัว
+                    </ButtonStyle>
+                    <RowStyled>
+                        <Col span={16}>
+                            <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
+                        </Col>
+                        <Col span={8}>{fetchProfileData?.results.length === 0 ? <div></div> : <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>}</Col>
+                    </RowStyled>
+                    {fetchProfileData?.results.length === 0 ? (
+                        <NotFoundText>
+                            คุณยังไม่มีผลลัพธ์
+                            <br />
+                            เมื่อคุณทดสอบพหุปัญญา ผลลัพธ์จะปรากฏที่นี่
+                            <div style={{ color: 'var(--Blue-300)', fontWeight: 'bolder', marginTop: '10px' }} onClick={() => history.push('/test')}>
+                                เล่นเกมทดสอบพหุปัญญา
+                            </div>
+                        </NotFoundText>
+                    ) : (
+                        <ProfileResultCard profile={fetchProfileData?.results} />
+                    )}
+                    <RowStyled>
+                        <Col span={16}>
+                            <TextTopic2>กระทู้ของคุณ</TextTopic2>
+                        </Col>
+                        <Col span={8}>{fetchProfileData?.contents.length === 0 ? <div></div> : <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>}</Col>
+                    </RowStyled>
+                    {fetchProfileData?.contents.length === 0 ? (
+                        <NotFoundText>
+                            คุณยังไม่เคยสร้างกระทู้
+                            <br />
+                            เมื่อคุณสร้างกระทู้ กระทู้จะปรากฏที่นี่
+                            <div style={{ color: 'var(--Blue-300)', fontWeight: 'bolder', marginTop: '10px' }} onClick={() => history.push('/boardcreate')}>
+                                สร้างกระทู้แรก
+                            </div>
+                        </NotFoundText>
+                    ) : (
+                        <ProfileBoardCard data={fetchProfileData?.contents} />
+                    )}
+                </Box>
+            )}
+        </Container>
     );
 }
-
 export default Profile;
