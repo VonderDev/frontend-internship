@@ -23,6 +23,7 @@ import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
 import { ApiPutLikeOfBoardContent } from '../../apis/boardCreate.api';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { dateFormat } from 'utils/Date/DateFormat';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 
 function BoardContent() {
     const history = useHistory();
@@ -114,6 +115,7 @@ function BoardContent() {
                 ),
             }}
         >
+            {errorcontentData && errorfetchingComment && <ErrorPage />}
             {isLoadingContentData ? (
                 <div>loading ...</div>
             ) : (

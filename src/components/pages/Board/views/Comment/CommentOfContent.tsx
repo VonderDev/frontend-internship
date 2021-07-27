@@ -20,6 +20,7 @@ import { ApiPostComment } from '../../apis/commentContent.api';
 import useSWR from 'swr';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { dateFormat } from 'utils/Date/DateFormat';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 
 function CommentOfContent() {
     const history = useHistory();
@@ -90,6 +91,7 @@ function CommentOfContent() {
                 left: 'back',
             }}
         >
+            {errorfetchingComment && <ErrorPage />}
             {fetchingCommentData?.length == 0 ? (
                 <ContainerOfIconQuestionAndText style={{ position: 'relative' }}>
                     <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', height: '78vh', justifyContent: 'center' }}>
