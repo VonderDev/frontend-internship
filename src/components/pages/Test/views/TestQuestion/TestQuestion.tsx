@@ -190,10 +190,9 @@ function TestQuestion() {
             setCutScene(true); // start cutscene v.2
         } else if (currentQuestion + 1 === 4) {
             setCutScene(true); // start cutscene v.3
-            changeScene('angry');
+            changeScene('ZoomAngry');
         } else if (currentQuestion + 1 === 5) {
             setCutScene(true); // start cutscene v.4
-            changeScene('Zoom');
         } else if (currentQuestion + 1 === 6) {
             setCutScene(true); // start cutscene v.5
             changeScene('happy');

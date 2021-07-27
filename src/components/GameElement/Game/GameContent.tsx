@@ -59,6 +59,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     const talkAction = new PIXI.Container();
     const pointAction = new PIXI.Container();
     const zoomTalk = new PIXI.Container();
+    const zoomAngry = new PIXI.Container();
     //keep container scene in array 
 
     app.stage.addChild(firstScene);
@@ -77,7 +78,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     app.stage.addChild(talkAction );
     app.stage.addChild(pointAction);
     app.stage.addChild(zoomTalk);
-
+    app.stage.addChild(zoomAngry);
 
     // ------------------- Preload Asset --------------//
     let sprites: any = {}; 
@@ -211,6 +212,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       talkAction.visible = false;
       pointAction.visible = false;
       zoomTalk.visible = false;
+      zoomAngry.visible = false;
 
       firstScene.pivot.set(0,1)
       secondScene.pivot.set(0,1)
@@ -223,6 +225,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       endScene.pivot.set(0,1)
       lastScene.pivot.set(0,1)
       zoomTalk.pivot.set(0,1)
+      zoomAngry.pivot.set(0,1)
 
       const ticker = new PIXI.Ticker();
       function animate() {
@@ -291,10 +294,15 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       pointAction.visible = true;
       pointAction.pivot.set(0,1);
       Point()
-    }else if (prop == 'Zoom'){
+    }else if (prop == 'ZoomHappy'){
       angryAction.visible = false;
       zoomTalk.visible = true;
       happyZoom()
+    }else if (prop == 'ZoomAngry'){
+      angryAction.visible = false;
+      zoomTalk.visible = false;
+      zoomAngry.visible = true;
+      angryZoom()
     }
       }
 
@@ -691,25 +699,33 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       // ------------------- Charecter --------------//
       function happyFriend(){
         sprites.BearHappy.scale.set(0.1);
-        sprites.BearHappy.position.set(200,600);
+        sprites.BearHappy.position.set(150,600);
         sprites.RaccoonHappy.scale.set(0.1);
-        sprites.RaccoonHappy.position.set(300,600);
+        sprites.RaccoonHappy.position.set(250,650);
         happyAction.addChild(sprites.BearHappy)
         happyAction.addChild(sprites.RaccoonHappy)
       }
       function happyZoom(){
         sprites.BearHappy.scale.set(0.4);
-        sprites.BearHappy.position.set(0,200);
+        sprites.BearHappy.position.set(-50,200);
         sprites.RaccoonHappy.scale.set(0.4);
-        sprites.RaccoonHappy.position.set(100,400);
+        sprites.RaccoonHappy.position.set(120,460);
         zoomTalk.addChild(sprites.BearHappy)
         zoomTalk.addChild(sprites.RaccoonHappy)
       }
+      function angryZoom(){
+        sprites.BearAngry.scale.set(0.3);
+        sprites.BearAngry.position.set(-100,350);
+        sprites.RaccoonAngry.scale.set(0.3);
+        sprites.RaccoonAngry.position.set(200,480);
+        zoomAngry.addChild(sprites.BearAngry)
+        zoomAngry.addChild(sprites.RaccoonAngry)
+      }
       function angryFriend(){
         sprites.BearAngry.scale.set(0.1);
-        sprites.BearAngry.position.set(200,600);
+        sprites.BearAngry.position.set(150,600);
         sprites.RaccoonAngry.scale.set(0.1);
-        sprites.RaccoonAngry.position.set(300,600);
+        sprites.RaccoonAngry.position.set(250,650);
         angryAction.addChild(sprites.BearAngry)
         angryAction.addChild(sprites.RaccoonAngry)
       }
