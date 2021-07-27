@@ -7,16 +7,16 @@ executors:
     working_directory: ~/project
 
 commands:
-  # env-prod:
-  #   description: "test .env variable"
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: "What a number in this .env"
-  #         command: touch .env ; echo "REACT_APP_API=$REACT_APP_PROD" >> .env
-  #     - run:
-  #         name: "Check file .env"
-  #         command: ls -la ; cat .env
+  env-prod:
+    description: "test .env variable"
+    steps:
+      - checkout
+      - run:
+          name: "What a number in this .env"
+          command: touch .env ; echo "REACT_APP_API=$REACT_APP_PROD" >> .env
+      - run:
+          name: "Check file .env"
+          command: ls -la ; cat .env
   env-stag:
     description: "test .env variable"
     steps:
@@ -92,7 +92,7 @@ jobs:
   build-deploy-production:
     executor: node14
     steps:
-      # - env-prod
+      - env-prod
       - build
       - test
       - deploy:
