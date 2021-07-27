@@ -30,7 +30,7 @@ const TestPixi = () => {
         }else if (value === 4){
             changeScene('angry')
         }else if (value === 5){
-            changeScene('happy')
+            changeScene('Zoom')
         }else if (value === 6){
             changeScene('S3')
         }else if (value === 11){

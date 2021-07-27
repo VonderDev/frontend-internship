@@ -193,6 +193,7 @@ function TestQuestion() {
             changeScene('angry');
         } else if (currentQuestion + 1 === 5) {
             setCutScene(true); // start cutscene v.4
+            changeScene('Zoom');
         } else if (currentQuestion + 1 === 6) {
             setCutScene(true); // start cutscene v.5
             changeScene('happy');
