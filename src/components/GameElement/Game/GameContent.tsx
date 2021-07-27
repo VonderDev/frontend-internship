@@ -295,6 +295,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       pointAction.pivot.set(0,1);
       Point()
     }else if (prop == 'ZoomHappy'){
+      zoomAngry.visible = false;
       angryAction.visible = false;
       zoomTalk.visible = true;
       happyZoom()
@@ -775,6 +776,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         console.log("chang to Scene3")
         happyAction.visible = false;
         angryAction.visible = false;
+        zoomAngry.visible = false;
+        zoomTalk.visible = false;
         homeScene.visible = true;
         homeScene.interactive = true;
         homeScene.buttonMode = true;

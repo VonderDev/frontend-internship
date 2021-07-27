@@ -144,6 +144,9 @@ function TestQuestion() {
             {
                 changeScene('S3')
                 setCutScene(true) // start cutscene v.6
+            }else if (currentCutScnen+1 === 4 && currentMessage === 4){
+                changeScene('ZoomHappy');
+                setCutScene(false)
             }else if (currentCutScnen+1 === 6){
                 changeScene('S4')
                 setCutScene(true) // start cutscene v.7
@@ -193,9 +196,10 @@ function TestQuestion() {
             changeScene('ZoomAngry');
         } else if (currentQuestion + 1 === 5) {
             setCutScene(true); // start cutscene v.4
+            changeScene('ZoomAngry');
         } else if (currentQuestion + 1 === 6) {
             setCutScene(true); // start cutscene v.5
-            changeScene('happy');
+            changeScene('ZoomHappy');
         } else if (currentQuestion + 1 === 11) {
             changeScene('S4.3');
         } else if (currentQuestion + 1 === 14) {
