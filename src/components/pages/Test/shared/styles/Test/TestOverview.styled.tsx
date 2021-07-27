@@ -23,7 +23,8 @@ export const ImgMultipleInterlligences = styled.div`
 export const ParagraphDescription = styled(Row)`
     font-size: 16px;
     display: inline-block;
-    padding-left: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
     padding-top: 10px;
 `;
 

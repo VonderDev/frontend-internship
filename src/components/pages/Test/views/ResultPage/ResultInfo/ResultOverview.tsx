@@ -2,6 +2,7 @@ import { IResult } from 'components/pages/Test/shared/interface/Result.interface
 import { ProgressBar } from 'components/pages/Test/shared/styles/Result/ResultOverview.styled';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 import { Box, ButtonStyle } from 'shared/style/theme/component';
 import useSWR from 'swr';
 import { ContainerProgressScore, TextNameSkill } from '../../../shared/styles/Result/ResultPage.styled';
@@ -44,11 +45,10 @@ function ResultOverview() {
         }
     }, [resultData, paramObjectId, resultHistory]);
 
-    useEffect(() => {
-        console.log('Result of Progress bar', result);
-    }, [result]);
+    useEffect(() => {}, [result]);
     return (
         <>
+            {error && errorResultHistory && <ErrorPage />}
             {isLoading ? (
                 <div>loading ...</div>
             ) : (

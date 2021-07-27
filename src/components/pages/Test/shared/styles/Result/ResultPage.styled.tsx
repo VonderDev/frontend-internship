@@ -28,11 +28,7 @@ export const TextHeaderResult = styled.div`
 `;
 
 export const ChartStyled = styled(Chart)`
-    //transform: translateY(-5%);
     width: 120%;
-    //display: flex;
-    //justify-content: center;
-    //align-items: center;
 `;
 
 export const TextBoxDescript = styled.div`
@@ -161,8 +157,6 @@ export const ContainerProgressScore = styled.div`
     flex-direction: column;
     margin-left: 30px;
     margin-right: 30px;
-    //padding-left: 20px;
-    //transform: translateY(-70%);
 `;
 export const TextNameSkill = styled.div`
     font-weight: bolder;
@@ -187,12 +181,18 @@ export const TabsInfo = styled(Tabs)`
         letter-spacing: 1px;
         color: black;
         width: 180px;
+        margin-left: 0px !important;
+        display: flex;
+        justify-content: center;
     }
     & .ant-tabs-nav .ant-tabs-tab-active {
         background-color: var(--Gray-500);
         height: 52px;
+        display: flex;
+        justify-content: center;
         border-radius: 12px 12px 12px 0px !important;
         letter-spacing: 1px;
+        margin-left: 0px !important;
     }
 
     & .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {

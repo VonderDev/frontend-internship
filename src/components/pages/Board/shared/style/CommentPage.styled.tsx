@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import sendMessageIcon from '../images/Vector.png';
 import profileImage from '../images/profile.png';
 import QuestionImage from '../images/Question.png';
+import CommentGrayImg from '../images/CommentGray.png';
 
 export const CommentInput = styled(Input)`
     color: grey;
@@ -11,6 +12,10 @@ export const CommentInput = styled(Input)`
     width: 80%;
     height: 45px;
     box-shadow: 0px 3px 6px #f1f1f1;
+    position: absolute;
+    margin-right: 10px;
+    z-index: 20;
+
     /* position: sticky;
     position: -webkit-sticky; */
     /* top: 87%;
@@ -19,17 +24,23 @@ export const CommentInput = styled(Input)`
 
 export const IconSendMessage = styled.div`
     background-image: url(${sendMessageIcon});
-    width: 40px;
-    height: 5.6vh;
+    width: 35px;
+    height: 5vh;
+    margin-right: -10px;
+    margin-left: -20px;
     background-size: cover;
     background-position: center;
     top: 4px;
     right: 12%;
     position: absolute;
     float: right;
+
     :hover {
         cursor: pointer;
     }
+    /* @media (min-width: 460px) {
+        margin-left: 20px;
+    } */
 `;
 
 export const ProfileUserImage = styled.div`
@@ -113,8 +124,9 @@ export const BoxOfCommentList = styled.div`
 export const LoginText = styled.div`
     color: var(--Blue-200);
     font-size: 16px;
-    transform: translateX(88%) translateY(-141%);
-    position: fixed;
+    transform: translateX(88%) translateY(45%);
+    position: absolute;
+    z-index: 100 !important;
     :hover {
         cursor: pointer;
     }
@@ -134,4 +146,22 @@ export const QuestionImgae = styled.div`
 export const ContainerOfIconQuestionAndText = styled.div`
     width: 100%;
     height: 78vh;
+`;
+
+export const CommentGray = styled.div`
+    background-image: url(${CommentGrayImg});
+    width: 35px;
+    height: 5vh;
+    margin-right: -10px;
+    margin-left: -20px;
+    background-size: cover;
+    background-position: center;
+    top: 4px;
+    right: 12%;
+    position: absolute;
+    float: right;
+
+    :hover {
+        cursor: pointer;
+    }
 `;

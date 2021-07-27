@@ -92,7 +92,7 @@ export const CardLatest = () => {
         <>
             <Box direction="row" justify="space-between" align="flex-start">
                 <Box direction="column" justify="center" align="center">
-                    <TextRecommendBoardTopic>ล่าสุด</TextRecommendBoardTopic>
+                    <TextRecommendBoardTopic>กระทู้</TextRecommendBoardTopic>
                 </Box>
                 <Box direction="column" justify="center" align="center" style={{ alignSelf: 'center' }}>
                     <ButtonSeeAllBoard onClick={() => history.push('/filter')}>ดูเพิ่มเติม</ButtonSeeAllBoard>

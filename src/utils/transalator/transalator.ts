@@ -5,7 +5,7 @@ const languagePacks = {
     "nature smart": "ธรรมชาติ",
     "picture smart": "มิติสัมพันธ์",
     "body smart": "การเคลื่อนไหว",
-    "people smart": "ปฎิสัมพันธ์",
+    "people smart": "มนุษย์สัมพันธ์",
     "self smart": "เข้าใจตนเอง",
     "board": "บทความ",
     "question": "คำถาม",

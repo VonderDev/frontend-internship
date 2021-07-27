@@ -47,7 +47,7 @@ export const DrawerContainer = styled.div`
     height: 120%;
     overflow: hidden;
     border-radius: 2px;
-    z-index: 100 !important;
+    z-index: 20 !important;
 `;
 
 export const CheckboxPrivacy = styled(Checkbox)`

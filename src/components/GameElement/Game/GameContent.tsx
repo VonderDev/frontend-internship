@@ -58,6 +58,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     const musicAction = new PIXI.Container();
     const talkAction = new PIXI.Container();
     const pointAction = new PIXI.Container();
+    const grround = new PIXI.Container();
     //keep container scene in array 
 
     app.stage.addChild(firstScene);
@@ -75,6 +76,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     app.stage.addChild(musicAction );
     app.stage.addChild(talkAction );
     app.stage.addChild(pointAction);
+    app.stage.addChild(grround);
 
 
     // ------------------- Preload Asset --------------//
@@ -223,12 +225,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 
       const ticker = new PIXI.Ticker();
       function animate() {
-        if(sprites.Cloud1.x + sprites.Cloud1.width < firstScene.width){
-          sprites.Cloud1.x += 0.1 * 3
-        }
-        if(sprites.Cloud2.x + sprites.Cloud2.width < firstScene.width){
-          sprites.Cloud2.x -= 0.1 * 3
-        }
+        sprites.Cloud1.x += 0.1 * 2
+        sprites.Cloud2.x -= 0.1 * 3
       }
       gameScene1()
       firstScene.interactive = true;
@@ -251,12 +249,12 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
           goScene2()
         }else if (prop == 'S3'){
           goScene3()
-          wait(2000).then(() =>{
+          wait(3000).then(() =>{
             goSceneDoor();
           })
         }else if (prop == 'S4'){
           goSceneInHome();
-          wait(2000).then(() =>{
+          wait(3000).then(() =>{
             goSceneInHome2();
           })
         }else if (prop == 'S4.2'){
@@ -296,7 +294,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       // ------------------- Assete each of Scene--------------//
       function gameScene1() {    
         //Background 
-        sprites.BgSky.scale.set(0.7);
+        sprites.BgSky.scale.set(0.7,0.5);
         firstScene.addChild(sprites.BgSky)
   
         sprites.BgGround.scale.set(0.7);
@@ -355,18 +353,13 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.Brush4.scale.set(0.4);
         sprites.Brush4.position.set(450,620);
         firstScene.addChild(sprites.Brush4)
-  
         ticker.add(animate);
         ticker.start();
   
-        setTimeout(()=>{
-          ticker.stop();
-          // ticker.remove(animate)
-          }, 30000)
       }
       function gameScene2 () {
         //Background 
-        sprites.BgSky.scale.set(0.7);
+        sprites.BgSky.scale.set(0.7,0.5);
         secondScene.addChild(sprites.BgSky)
   
         sprites.BgGround.scale.set(0.7);
@@ -422,13 +415,14 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.Brush1.position.set(450,600);
         secondScene.addChild(sprites.Brush1)
 
-        happyFriend();
+        angryFriend();
+        ticker.add(animate);
+        ticker.start();
 
       }
-
       function gameScene3 () {
         //Background 
-        sprites.BgSky.scale.set(0.7);
+        sprites.BgSky.scale.set(0.7,0.5);
         sprites.BgSky.anchor.set(0,0);
         homeScene.addChild(sprites.BgSky)
   
@@ -472,10 +466,12 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.Brush1.scale.set(0.6);
         sprites.Brush1.position.set(-100,600);
         homeScene.addChild(sprites.Brush1)
+        ticker.add(animate);
+        ticker.start();
       }
       function doorScene3 () {
               //Background 
-              sprites.BgOutHome.scale.set(0.7);
+              sprites.BgOutHome.scale.set(0.7,0.5);
               sprites.BgOutHome.anchor.set(0,0);
               doorScene.addChild(sprites.BgOutHome)
   
@@ -534,7 +530,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 
       function gameScene5 () {
              //Background 
-             sprites.BgSky.scale.set(0.7);
+             sprites.BgSky.scale.set(0.7,0.5);
              jungleScene.addChild(sprites.BgSky)
        
              sprites.BgGround.scale.set(0.7);
@@ -592,10 +588,13 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
              sprites.Brush1.position.set(450,600);
              jungleScene.addChild(sprites.Brush1)
 
+             ticker.add(animate);
+             ticker.start();
+
       }
       function gameScene6() {
                //Background 
-               sprites.BgSky.scale.set(0.7);
+               sprites.BgSky.scale.set(0.7,0.5);
                endScene.addChild(sprites.BgSky)
                       
                sprites.BgGround.scale.set(0.7,0.6);
@@ -637,6 +636,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
                sprites.Brush1.scale.set(0.6);
                sprites.Brush1.position.set(-100,600);
                endScene.addChild(sprites.Brush1)
+
+               ticker.add(animate);
+               ticker.start();
    //Item
   
       }
@@ -732,8 +734,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         secondScene.visible = true;
         secondScene.interactive = true;
         secondScene.buttonMode = true;
-        happyAction.visible = true;
-        happyAction.pivot.set(0,1);
+        angryAction.visible = true;
+        angryAction.pivot.set(0,1);
         secondScene.on('pointerdown',  goScene3);
         gameScene2();
       }
@@ -767,6 +769,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       function goSceneInHome2() {
         console.log("chang to inHome 4.2")
         inHome2Scene.visible = true;
+        inHomeScene.visible = false;
         inHome2Scene.interactive = true;
         inHome2Scene.buttonMode = true;
         inHome2Scene.on('pointerdown',goSceneInHome3);
@@ -775,6 +778,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       function goSceneInHome3() {
         console.log("chang to inHome 4.3")
         inHome3Scene.visible = true;
+        inHome2Scene.visible = false;
         inHome3Scene.interactive = true;
         inHome3Scene.buttonMode = true;
         inHome3Scene.on('pointerdown', goScene5);
@@ -783,6 +787,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       function goScene5() {
         console.log("chang to Scene 5")
         musicAction.visible = true;
+        inHome3Scene.visible = false;
         jungleScene.visible = true;
         jungleScene.interactive = true;
         jungleScene.buttonMode = true;

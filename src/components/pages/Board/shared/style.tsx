@@ -10,6 +10,7 @@ export const TextRecommendBoardTopic = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-bottom: 15px;
 `;
 
 export const ButtonSeeAllBoard = styled.div`
@@ -89,8 +90,8 @@ export const SpaceCard = styled(Space)`
     //padding-right: 20px;
     //padding-left: 20px;
     margin-bottom: 10px;
-    .ant-space-item{
-        padding-left: 0px ;
+    .ant-space-item {
+        padding-left: 0px;
     }
 `;
 
