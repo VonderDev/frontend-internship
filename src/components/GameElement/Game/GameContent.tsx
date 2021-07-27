@@ -58,7 +58,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     const musicAction = new PIXI.Container();
     const talkAction = new PIXI.Container();
     const pointAction = new PIXI.Container();
-    const grround = new PIXI.Container();
+    const zoomTalk = new PIXI.Container();
+    const zoomAngry = new PIXI.Container();
     //keep container scene in array 
 
     app.stage.addChild(firstScene);
@@ -76,8 +77,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     app.stage.addChild(musicAction );
     app.stage.addChild(talkAction );
     app.stage.addChild(pointAction);
-    app.stage.addChild(grround);
-
+    app.stage.addChild(zoomTalk);
+    app.stage.addChild(zoomAngry);
 
     // ------------------- Preload Asset --------------//
     let sprites: any = {}; 
@@ -210,6 +211,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       musicAction.visible = false;
       talkAction.visible = false;
       pointAction.visible = false;
+      zoomTalk.visible = false;
+      zoomAngry.visible = false;
 
       firstScene.pivot.set(0,1)
       secondScene.pivot.set(0,1)
@@ -221,7 +224,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       jungleScene.pivot.set(0,1)
       endScene.pivot.set(0,1)
       lastScene.pivot.set(0,1)
-
+      zoomTalk.pivot.set(0,1)
+      zoomAngry.pivot.set(0,1)
 
       const ticker = new PIXI.Ticker();
       function animate() {
@@ -275,10 +279,12 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
           angryFriend()
       }else if (prop == 'happy'){
         happyAction.visible = true;
+        zoomTalk.visible = false;
         angryAction.visible = false;
         happyAction.pivot.set(0,1);
         happyFriend()
     }else if (prop == 'talk'){
+      zoomTalk.visible = false;
       musicAction.visible = false;
       talkAction.visible = true;
       talkAction.pivot.set(0,1);
@@ -288,6 +294,16 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       pointAction.visible = true;
       pointAction.pivot.set(0,1);
       Point()
+    }else if (prop == 'ZoomHappy'){
+      zoomAngry.visible = false;
+      angryAction.visible = false;
+      zoomTalk.visible = true;
+      happyZoom()
+    }else if (prop == 'ZoomAngry'){
+      angryAction.visible = false;
+      zoomTalk.visible = false;
+      zoomAngry.visible = true;
+      angryZoom()
     }
       }
 
@@ -684,17 +700,33 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       // ------------------- Charecter --------------//
       function happyFriend(){
         sprites.BearHappy.scale.set(0.1);
-        sprites.BearHappy.position.set(200,600);
+        sprites.BearHappy.position.set(150,600);
         sprites.RaccoonHappy.scale.set(0.1);
-        sprites.RaccoonHappy.position.set(300,600);
+        sprites.RaccoonHappy.position.set(250,650);
         happyAction.addChild(sprites.BearHappy)
         happyAction.addChild(sprites.RaccoonHappy)
       }
+      function happyZoom(){
+        sprites.BearHappy.scale.set(0.4);
+        sprites.BearHappy.position.set(-50,200);
+        sprites.RaccoonHappy.scale.set(0.4);
+        sprites.RaccoonHappy.position.set(120,460);
+        zoomTalk.addChild(sprites.BearHappy)
+        zoomTalk.addChild(sprites.RaccoonHappy)
+      }
+      function angryZoom(){
+        sprites.BearAngry.scale.set(0.3);
+        sprites.BearAngry.position.set(-100,350);
+        sprites.RaccoonAngry.scale.set(0.3);
+        sprites.RaccoonAngry.position.set(200,480);
+        zoomAngry.addChild(sprites.BearAngry)
+        zoomAngry.addChild(sprites.RaccoonAngry)
+      }
       function angryFriend(){
         sprites.BearAngry.scale.set(0.1);
-        sprites.BearAngry.position.set(200,600);
+        sprites.BearAngry.position.set(150,600);
         sprites.RaccoonAngry.scale.set(0.1);
-        sprites.RaccoonAngry.position.set(300,600);
+        sprites.RaccoonAngry.position.set(250,650);
         angryAction.addChild(sprites.BearAngry)
         angryAction.addChild(sprites.RaccoonAngry)
       }
@@ -744,6 +776,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         console.log("chang to Scene3")
         happyAction.visible = false;
         angryAction.visible = false;
+        zoomAngry.visible = false;
+        zoomTalk.visible = false;
         homeScene.visible = true;
         homeScene.interactive = true;
         homeScene.buttonMode = true;

@@ -46,10 +46,9 @@ export const ButtonSound = styled(Button)`
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.08);
     background-color: #ffffff;
     display: block;
-    padding: 9px 20px 8px;
-    width: fit-content;
-    height: 40px;
-    margin-right: 12px;
+    padding: 5px 0px 0px 0px !important;
+    width: 36px;
+    height: 36px;
 `;
 
 export const ButtonSeeAllResults = styled(Button)`
@@ -62,8 +61,9 @@ export const ButtonSeeAllResults = styled(Button)`
     font-size: 16px;
     display: block;
     padding: 9px 20px 8px;
+    margin: 0px 10px;
     width: fit-content;
-    height: 40px;
+    height: 36px;
 `;
 
 export const ButtonNextQuestion = styled(Button)`
@@ -120,7 +120,7 @@ export const ButtonChoiceStlyed = styled.button`
     color: #000000;
     width: 60%;
     height: 60px;
-    margin-top: 2%;
+    margin-top: 16px;
     letter-spacing: 1px;
     background-color: white;
     border-color: white;
