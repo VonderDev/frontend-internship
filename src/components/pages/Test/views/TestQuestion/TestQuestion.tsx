@@ -274,11 +274,11 @@ function TestQuestion() {
                 <TextBodyModal>การเปลี่ยนแปลงทั้งหมดจะไม่ถูกบันทึก</TextBodyModal>
             </ConfirmModal>
 
-            <MainContainer>
+            <MainContainer onClick={()=>{cutScene && showStory()}}>
                 <PixiProvider>
                     <PixiApp content={GameContent} />
                 </PixiProvider>
-                <ContainerTestQuestion active={cutScene ? 'active' : ''}>
+                <ContainerTestQuestion active={cutScene ? 'active' : ''}  >
                     {currentQuestion + 1 === 25 ? null : (
                         <>
                             <Box justify="space-between" align="center" direction="row" style={{ background: 'linear-gradient(180deg, white, transparent)', padding: '0px 5%' }}>
