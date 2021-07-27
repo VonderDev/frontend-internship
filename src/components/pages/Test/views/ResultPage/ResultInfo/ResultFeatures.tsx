@@ -7,6 +7,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { GridBox, ImgCardCharactorList, SpaceCharactorList, CoverImage, SkillNameOnImgCard, ContainerImgCharactor } from 'components/pages/Test/shared/styles/Result/ResultFeature.styled';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { Box, ButtonStyle } from 'shared/style/theme/component';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 
 const ResultFeatures = () => {
     const history = useHistory();
@@ -63,11 +64,12 @@ const ResultFeatures = () => {
 
     return (
         <>
+            {error && errorResultHistory && <ErrorPage />}
             {isLoading ? (
                 <div>loading ...</div>
             ) : (
                 <>
-                    <TextHeaderResult>ลักษณะเด่นของคุณ ({result?.length}ด้าน)</TextHeaderResult>
+                    <TextHeaderResult>ลักษณะเด่นของคุณ ({result?.length} ด้าน)</TextHeaderResult>
                     <GridBox>
                         <SpaceCharactorList>
                             {result?.map((item: any, index: any) => {

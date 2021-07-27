@@ -1,6 +1,7 @@
 import { Col } from 'antd';
 import Container from 'components/Container/Container';
 import { useHistory } from 'react-router-dom';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 import { Box } from 'shared/style/theme/component';
 import useSWR from 'swr';
 import { dateFormat } from 'utils/Date/DateFormat';
@@ -20,6 +21,7 @@ function ProfileResult() {
 
     return (
         <Container header={{ left: 'back', title: 'ประวัติการทำแบบทดสอบ', right: 'menu' }}>
+            {errorProfile && <ErrorPage />}
             {isLoading ? (
                 <div>loading ...</div>
             ) : (

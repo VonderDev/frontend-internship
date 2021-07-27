@@ -62,11 +62,15 @@ function TestQuestion() {
     const [music, setMusic] = useState(false);
     const toggle = () => {
         setPlaying(!playing);
+        if(currentCutScnen+ 1 > 8 && currentCutScnen <= 10 ){
+            setMusic(!music)
+        }
     };
     useEffect(() => {
         if(playing){
             audio.play();
-            audio.volume = 0.5
+            audio.volume = 0.6
+            audio.loop = true;
         }else{
             audio.pause();
         }
@@ -81,17 +85,24 @@ function TestQuestion() {
       [playing,music]
     );
 
+    useEffect(() => {
+        if(currentCutScnen+ 1 > 8 && currentCutScnen <= 10 ){
+            setMusic(!music)
+        }else{
+            setMusic(false)
+        }
+    }, [currentCutScnen]);
     //---------------- Cut Scene ----------------//
     const cutSceneList = [
-        { value: 1, message: ['แตะกล่องข้อความเพื่อไปต่อ', 'ที่นี่ที่ไหนกัน... แล้วฉันคือใคร...', 'โอ๊ย ทำไมจำอะไรไม่ได้เลย…', 'ลองเดินตามทางนี้ไปละกัน เผื่อจะจำอะไรได้มากขึ้น'] },
+        { value: 1, message: ['แตะหน้าจอเพื่อไปต่อ..', 'ที่นี่ที่ไหนกัน... แล้วฉันคือใคร...', 'โอ๊ย ทำไมจำอะไรไม่ได้เลย…', 'ลองเดินตามทางนี้ไปละกัน เผื่อจะจำอะไรได้มากขึ้น'] },
         { value: 2, message: ['เอ๊ะ! ตรงนั้นมีคนนี่นา ลองเข้าไปถามดูดีกว่าเผื่อจะมีใครช่วยฉันได้'] },
-        { value: 3, message: ['A: “นายนั่นแหละที่เป็นคนบอกให้มาทางนี้” ', 'B: “ฉันบอกให้ไปอีกทางนึงต่างหาก” ', ' เอ๊ะ! เหมือนว่าพวกเขากำลังทะเลาะกันอยู่นะ'] },
+        { value: 3, message: ['หมี: “นายนั่นแหละที่เป็นคนบอกให้มาทางนี้” ', 'แรคคูน: “ฉันบอกให้ไปอีกทางนึงต่างหาก” ', ' เอ๊ะ! เหมือนว่าพวกเขากำลังทะเลาะกันอยู่นะ'] },
         {
             value: 4,
             message: [
                 '“เกิดอะไรขึ้นเหรอ”',
-                'A: “พวกเรากำลังหาทางออกจากป่านี้อยู่ แต่เจ้านี่น่ะสิ มันพาฉันหลงทาง”',
-                'B: “อะไรนะ นายต่างหากที่พาฉันหลงทาง!”',
+                'หมี: “พวกเรากำลังหาทางออกจากป่านี้อยู่ แต่เจ้านี่น่ะสิ มันพาฉันหลงทาง”',
+                'แรคคูน: “อะไรนะ นายต่างหากที่พาฉันหลงทาง!”',
                 ' "พอดีเลย ฉันก็หาทางออกอยู่เหมือนกัน งั้นพวกเรามาหาทางออกด้วยกันไหม"',
                 ' "เอาสิ!!!"',
             ],
@@ -100,9 +111,9 @@ function TestQuestion() {
             value: 5,
             message: [
                 '"ว่าแต่ ช่วยอะไรฉันหน่อยได้ไหม พวกเธอพอจะรู้ไหมว่าฉันคือใคร" ',
-                'A: “หืม ทำไมเธอถึงไม่รู้ว่าตัวเองคือใครล่ะ”',
+                'หมี: “หืม ทำไมเธอถึงไม่รู้ว่าตัวเองคือใครล่ะ”',
                 '“ฉันก็ไม่รู้เหมือนกันว่าเกิดอะไรขึ้น แต่อยู่ ๆ พอฉันตื่นขึ้นมาก็จำอะไรไม่ได้เลย”',
-                'B: “อืม พวกเราก็ไม่รู้เหมือนกันว่าเธอคือใคร ขอโทษด้วยนะ”',
+                'แรคคูน: “อืม พวกเราก็ไม่รู้เหมือนกันว่าเธอคือใคร ขอโทษด้วยนะ”',
                 '"อ้อ ไม่เป็นไร ๆ งั้นพวกเราออกเดินทางต่อเถอะ"',
             ],
         },
@@ -139,7 +150,7 @@ function TestQuestion() {
             }else if (currentCutScnen+ 1 === 8){
                 changeScene('S5')
                 setCutScene(true) // start cutscene v.9
-                audio.volume = 0.1
+                audio.volume = 0.05
                 setMusic(true)
             }else if (currentCutScnen + 1 === 13){
                 changeScene('S6.1')
@@ -163,6 +174,7 @@ function TestQuestion() {
             setCurrentMessage(currentMessage + 1);
         }
     };
+
     // -------------- handle change scene & Question -------------- //
     const { changeScene, gameRef } = useContext(AppContext);
 
@@ -191,7 +203,7 @@ function TestQuestion() {
         } else if (currentQuestion + 1 === 18) {
             setCutScene(true); // start cutscene v.10
             changeScene('talk');
-            audio.volume = 0.8
+            audio.volume = 0.6
         } else if (currentQuestion + 1 === 21) {
             setCutScene(true); // start cutscene v.11
         } else if (currentQuestion + 1 === 23) {
@@ -274,11 +286,11 @@ function TestQuestion() {
                 <TextBodyModal>การเปลี่ยนแปลงทั้งหมดจะไม่ถูกบันทึก</TextBodyModal>
             </ConfirmModal>
 
-            <MainContainer>
+            <MainContainer onClick={()=>{cutScene && showStory()}}>
                 <PixiProvider>
                     <PixiApp content={GameContent} />
                 </PixiProvider>
-                <ContainerTestQuestion active={cutScene ? 'active' : ''}>
+                <ContainerTestQuestion active={cutScene ? 'active' : ''}  >
                     {currentQuestion + 1 === 25 ? null : (
                         <>
                             <Box justify="space-between" align="center" direction="row" style={{ background: 'linear-gradient(180deg, white, transparent)', padding: '0px 5%' }}>

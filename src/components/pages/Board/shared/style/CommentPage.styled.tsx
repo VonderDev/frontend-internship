@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import sendMessageIcon from '../images/Vector.png';
 import profileImage from '../images/profile.png';
 import QuestionImage from '../images/Question.png';
+import CommentGrayImg from '../images/CommentGray.png';
 
 export const CommentInput = styled(Input)`
     color: grey;
@@ -145,4 +146,22 @@ export const QuestionImgae = styled.div`
 export const ContainerOfIconQuestionAndText = styled.div`
     width: 100%;
     height: 78vh;
+`;
+
+export const CommentGray = styled.div`
+    background-image: url(${CommentGrayImg});
+    width: 35px;
+    height: 5vh;
+    margin-right: -10px;
+    margin-left: -20px;
+    background-size: cover;
+    background-position: center;
+    top: 4px;
+    right: 12%;
+    position: absolute;
+    float: right;
+
+    :hover {
+        cursor: pointer;
+    }
 `;
