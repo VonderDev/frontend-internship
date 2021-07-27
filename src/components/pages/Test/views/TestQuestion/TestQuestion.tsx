@@ -70,6 +70,7 @@ function TestQuestion() {
         if(playing){
             audio.play();
             audio.volume = 0.6
+            audio.loop = true;
         }else{
             audio.pause();
         }
@@ -87,7 +88,6 @@ function TestQuestion() {
     useEffect(() => {
         if(currentCutScnen+ 1 > 8 && currentCutScnen <= 10 ){
             setMusic(!music)
-            audio.volume = 0.05
         }else{
             setMusic(false)
         }

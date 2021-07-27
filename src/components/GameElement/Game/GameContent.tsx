@@ -58,6 +58,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     const musicAction = new PIXI.Container();
     const talkAction = new PIXI.Container();
     const pointAction = new PIXI.Container();
+    const grround = new PIXI.Container();
     //keep container scene in array 
 
     app.stage.addChild(firstScene);
@@ -75,6 +76,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     app.stage.addChild(musicAction );
     app.stage.addChild(talkAction );
     app.stage.addChild(pointAction);
+    app.stage.addChild(grround);
 
 
     // ------------------- Preload Asset --------------//
