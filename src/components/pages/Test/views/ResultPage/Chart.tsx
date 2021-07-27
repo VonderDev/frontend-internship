@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 import useSWR from 'swr';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { ChartStyled, TextHeaderResult } from '../../shared/styles/Result/ResultPage.styled';
@@ -31,6 +32,7 @@ const Charts = () => {
     return (
         <>
             <div>
+                {error && errorResultHistory && <ErrorPage />}
                 <TextHeaderResult>แผนภูมิพหุปัญญา</TextHeaderResult>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     {isLoading ? (

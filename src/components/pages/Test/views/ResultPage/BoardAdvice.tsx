@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import React from 'react';
 import { dateFormat } from 'utils/Date/DateFormat';
 import { useParams } from 'react-router-dom';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 
 const IconText = ({ icon, text }: IIconText) => (
     <SearchField>
@@ -62,6 +63,8 @@ const BoardAdvice = () => {
 
     return (
         <>
+            {errorBoardRecommend && errorBoardRecommendHistory && <ErrorPage />}
+
             <Row>
                 <TextBoardTopic>แนะนำสำหรับคุณ</TextBoardTopic>
             </Row>
