@@ -2,6 +2,8 @@ import { Alert, Button, Card, Image, Modal, Row } from 'antd';
 import styled from 'styled-components';
 import { RightOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
 import { Box } from 'shared/style/theme/component';
+import ArrowIconImage from '../images/ArrowSeeResultAll.png';
+import RadarImage from '../images/Chart.png';
 
 export const ButtonSave = styled(Button)`
     font-weight: bolder;
@@ -57,7 +59,7 @@ export const TextTopic2 = styled.div`
     font-weight: bolder;
     font-size: 22px;
     margin-top: 15px;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
 `;
 
 export const TextUserInfo1 = styled.div`
@@ -78,7 +80,9 @@ export const TextUsername = styled.div`
     font-weight: bolder;
     font-size: 22px;
     margin-top: 10px;
-    padding-bottom: 0px;
+    padding-top: 10px;
+    color: var(--Gray-600);
+    padding-bottom: 25px;
 `;
 export const TextHeadModal = styled.div`
     font-weight: bolder;
@@ -110,12 +114,12 @@ export const UserImage = styled(Image)`
     width: 120px;
     height: 120px;
     border-radius: 90px;
+    margin-top: 16px;
 `;
 
 export const ResultImage = styled.img`
     width: 111px;
     height: 112px;
-    border-radius: 90px;
     transform: translateY(4%);
 `;
 
@@ -132,14 +136,15 @@ export const HistoryImage = styled.img`
 export const LinkMoreResult = styled.div`
     width: 100%;
     padding-top: 15px;
-    margin-top: 15px;
+    margin-top: 20px;
     text-align: right;
     font-size: 16px;
     color: var(--Blue-300);
+    font-weight: bolder;
 `;
 
 export const ResultCard = styled(Card)`
-    box-shadow: 0px 3px 6px #c7c7c7;
+    box-shadow: 0 6px 15px #e0e0e0;
     margin-top: 0px;
     height: 130px;
     width: 100%;
@@ -150,10 +155,10 @@ export const ResultCard = styled(Card)`
 `;
 
 export const BoardCard = styled(Card)`
-    margin-bottom: 16px;
+    margin-bottom: 15px;
     height: 88px;
     width: 100%;
-    box-shadow: 0px 3px 6px #c7c7c7;
+    box-shadow: 0 1px 15px #e0e0e0;
     border-radius: 10px;
     & .ant-card-body {
         padding: 0px;
@@ -171,6 +176,7 @@ export const ConfirmModal = styled(Modal)`
         width: 343px;
         height: 249px;
         border-radius: 15px;
+        margin-top: 100px;
     }
     & .ant-modal-header {
         height: 89px;
@@ -232,4 +238,22 @@ export const CustomAlert = styled(Alert)`
         margin-top: 20px;
         border-radius: 12px;
     }
+`;
+
+export const ButtonEditedProfile = styled(Button)`
+    margin-top: 10;
+    width: 100%;
+    height: 51px;
+    border-radius: 12px;
+    border: 2px solid #3a8ce4;
+    color: #287fde;
+    font-size: 16px;
+    font-weight: bolder;
+`;
+
+export const ArrowIcon = styled.div`
+    background-image: url(${ArrowIconImage});
+    width: 11.77px;
+    height: 23.79px;
+    margin-top: 45px;
 `;
