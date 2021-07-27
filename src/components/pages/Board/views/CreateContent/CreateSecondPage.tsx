@@ -2,6 +2,8 @@ import React from 'react';
 import { NotificationCreatedPostSuccess } from '../../shared/style/BoardContent.styled';
 import {
     ButtonSummitPost,
+    CircleChoice,
+    CircleSelection,
     ContainerBoardCreate,
     ContainerContentType,
     ContentTypeButton,
@@ -72,10 +74,8 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                                             });
                                         }}
                                     >
-                                        <span style={{ marginRight: '10px' }}>
-                                            <CheckCircleOutlined />
-                                        </span>
-                                        {item.label}
+                                        <div style={{ transform: 'translateY(15px) translateX(-30px)' }}>{contentData.content_type.includes(item.value) ? <CircleSelection /> : <CircleChoice />}</div>
+                                        <div style={{ transform: 'translateY(-10px)' }}>{item.label}</div>
                                     </ContentTypeButton>
                                 </ContainerContentType>
                             );
