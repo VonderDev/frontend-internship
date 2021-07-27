@@ -1,9 +1,7 @@
-
 import { Alert, Button, Card, Image, Modal, Row } from 'antd';
 import styled from 'styled-components';
-import { RightOutlined, FormOutlined , HeartFilled } from '@ant-design/icons';
+import { RightOutlined, FormOutlined, HeartFilled } from '@ant-design/icons';
 import { Box } from 'shared/style/theme/component';
-
 
 export const ButtonSave = styled(Button)`
     font-weight: bolder;
@@ -152,7 +150,7 @@ export const ResultCard = styled(Card)`
 `;
 
 export const BoardCard = styled(Card)`
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     height: 88px;
     width: 100%;
     box-shadow: 0px 3px 6px #c7c7c7;
@@ -213,7 +211,7 @@ export const HeartIcon = styled(HeartFilled)`
 
 export const CustomBox = styled(Box)`
     font-size: 12px;
-    color: #6E7282;
+    color: #6e7282;
     margin-top: 10px;
 `;
 
@@ -226,12 +224,12 @@ export const NotFoundText = styled.div`
 
 export const CustomAlert = styled(Alert)`
     &.ant-alert-with-description {
-    align-items: flex-start;
-    padding: 15px 15px 15px 24px;
-    position: absolute;
-    z-index: 10;
-    width: 25%;
-    margin-top: 20px;
-    border-radius: 12px;
-}
+        align-items: flex-start;
+        padding: 15px 15px 15px 24px;
+        position: absolute;
+        z-index: 10;
+        width: 25%;
+        margin-top: 20px;
+        border-radius: 12px;
+    }
 `;

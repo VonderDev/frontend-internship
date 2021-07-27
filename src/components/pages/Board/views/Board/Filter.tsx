@@ -1,7 +1,7 @@
 import Container from 'components/Container/Container';
 import { Box } from 'shared/style/theme/component';
 import { ControlOutlined, SearchOutlined, CloseCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
-import { ButtonFilter, SearchField, InputSearch, TagBox, CustomCheckableTag, CancleTag } from '../../shared/Filter.styles';
+import { ButtonFilter, SearchField, InputSearch, TagBox, CustomCheckableTag, CancleTag, SearchIcon } from '../../shared/Filter.styles';
 import { useEffect, useState } from 'react';
 import { ApiPostFilter, ApiPostSearch } from '../../apis/board.api';
 import BoardCardComponent from './BoardCardComponent';
@@ -114,7 +114,7 @@ const Filter = () => {
                 </div>
                 <Box style={{ marginLeft: '20px', marginRight: '20px' }} align="flex-start" direction="column">
                     <SearchField>
-                        <InputSearch allowClear onChange={(e: any) => setSearchValue(e.target.value)} placeholder="Search Form" prefix={<SearchOutlined />} />
+                        <InputSearch allowClear onChange={(e: any) => setSearchValue(e.target.value)} placeholder="ค้นหา" prefix={<SearchIcon />} />
                         <ButtonFilter onClick={showDrawer}>
                             <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
