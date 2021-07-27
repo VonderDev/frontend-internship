@@ -1,6 +1,7 @@
 import { Col } from 'antd';
 import Container from 'components/Container/Container';
 import { useHistory } from 'react-router-dom';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 import { Box } from 'shared/style/theme/component';
 import useSWR from 'swr';
 import { dateFormat } from 'utils/Date/DateFormat';
@@ -20,17 +21,18 @@ function ProfileResult() {
     }
 
     return (
-        <Container header={{ left: 'back', title: 'ประวัติการทำแบบทดสอบ', right: 'menu' }}>
+        <Container header={{ left: 'back', title: 'ผลลัพธ์ของคุณ', right: 'menu' }}>
+            {errorProfile && <ErrorPage />}
             {isLoading ? (
                 <div>loading ...</div>
             ) : (
                 <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
                     {profile?.results?.map((item: any, index: any) => {
                         return (
-                            <ResultCard style={{ marginBottom: '10px' }} key={index} onClick={() => history.push(`/result/${profile.auth[0]._id}/${index}`)}>
+                            <ResultCard style={{ marginBottom: '10px', marginTop: '10px' }} key={index} onClick={() => history.push(`/result/${profile.auth[0]._id}/${index}`)}>
                                 <RowStyled>
                                     <Col span={10}>
-                                        <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
+                                        <ResultImage src="https://www.linkpicture.com/q/Radar-chart.png" />
                                     </Col>
                                     <Col span={12}>
                                         <CardText style={{ transform: 'translateY(67%) translateX(5%)' }}>

@@ -3,7 +3,7 @@ import { Button, Carousel, Image } from 'antd';
 
 export const ImageCharactorCarousel = styled.img`
     width: 100%;
-    height: 90vh;
+    height: 100vh;
     :hover {
         cursor: pointer;
     }
@@ -45,7 +45,8 @@ export const ButtonSeeAllResult = styled(Button)`
     align-items: center;
     justify-content: center;
     position: relative;
-    box-shadow: 10px 100px 100px 120px #fff;
+    box-shadow: 10px 100px 100px 100px #fff;
+    transform: translateY(-70px);
 `;
 
 export const ContainerResultSummarize = styled.div`
@@ -63,7 +64,7 @@ export const ContainerCarousel = styled(Carousel)`
         background: #3e4357 !important;
         height: 10px !important;
         border-radius: 15px;
-        transform: translateY(5px);
+        transform: translateY(-70px);
     }
 
     & .slick-dots li button {
@@ -72,14 +73,14 @@ export const ContainerCarousel = styled(Carousel)`
         border-radius: 15px;
         margin-right: 30px !important;
         opacity: 0.9;
-        transform: translateY(5px);
+        transform: translateY(-70px);
     }
 `;
 
 export const ButtonSaveResult = styled.a`
     position: absolute;
     font-size: 18px;
-    bottom: 10%;
+    bottom: 14%;
     color: var(--Blue-300);
 `;
 

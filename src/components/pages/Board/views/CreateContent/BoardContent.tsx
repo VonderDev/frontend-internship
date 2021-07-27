@@ -12,17 +12,22 @@ import {
     ContainerUserNameAndDate,
     ContentBody,
     DateCreatedContent,
+    IconLikeUnSuccess,
     ImageOfContent,
     LengthOfLikeAndComment,
     ProfileImage,
     TextTitleContent,
     TopicTag,
+    IconComment,
+    IconLikeSuccess,
+    LengthOfLikeAndCommentSuccess,
 } from '../../shared/style/BoardContent.styled';
 import { useAuthContext } from 'components/AuthContext/AuthContext';
 import { HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
 import { ApiPutLikeOfBoardContent } from '../../apis/boardCreate.api';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { dateFormat } from 'utils/Date/DateFormat';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 
 function BoardContent() {
     const history = useHistory();
@@ -99,21 +104,23 @@ function BoardContent() {
             header={{
                 title: 'กระทู้',
                 right: 'menu',
-                left: (
-                    <ButtonBackToFirstPage
-                        onClick={() => {
-                            history.push('/');
-                            const tokenGuest = localStorage.getItem('tokenGuest');
-                            if (tokenGuest) {
-                                localStorage.removeItem('tokenGuest');
-                            }
-                        }}
-                    >
-                        <LeftOutlined style={{ color: '#8a8888' }} />
-                    </ButtonBackToFirstPage>
-                ),
+                left: 'back',
+                // (
+                //     <ButtonBackToFirstPage
+                //         onClick={() => {
+                //             history.push('/');
+                //             const tokenGuest = localStorage.getItem('tokenGuest');
+                //             if (tokenGuest) {
+                //                 localStorage.removeItem('tokenGuest');
+                //             }
+                //         }}
+                //     >
+                //         <LeftOutlined style={{ color: '#8a8888' }} />
+                //     </ButtonBackToFirstPage>
+                // ),
             }}
         >
+            {errorcontentData && errorfetchingComment && <ErrorPage />}
             {isLoadingContentData ? (
                 <div>loading ...</div>
             ) : (
@@ -135,12 +142,8 @@ function BoardContent() {
 
                     <BoxOfLikeAndComment>
                         <span style={{ display: 'flex', alignItems: 'center' }}>
-                            {isLike ? (
-                                <HeartFilled style={{ color: '#F0685B', fontSize: '40px' }} onClick={unLikeOfBoardContent} />
-                            ) : (
-                                <HeartOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} onClick={addLikeOfBoardContent} />
-                            )}
-                            <LengthOfLikeAndComment>{likeLength}</LengthOfLikeAndComment>
+                            {isLike ? <IconLikeSuccess onClick={unLikeOfBoardContent} /> : <IconLikeUnSuccess onClick={addLikeOfBoardContent} />}
+                            {isLike ? <LengthOfLikeAndCommentSuccess>{likeLength}</LengthOfLikeAndCommentSuccess> : <LengthOfLikeAndComment>{likeLength}</LengthOfLikeAndComment>}
                         </span>
                         <span
                             style={{ display: 'flex', alignItems: 'center' }}
@@ -150,7 +153,7 @@ function BoardContent() {
                                 }
                             }}
                         >
-                            <CommentOutlined style={{ color: '#3A8CE4', fontSize: '40px' }} />
+                            <IconComment />
                             <LengthOfLikeAndComment>{fetchingCommentData?.length}</LengthOfLikeAndComment>
                         </span>
                     </BoxOfLikeAndComment>

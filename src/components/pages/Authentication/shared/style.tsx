@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Image, Checkbox, Drawer, Typography, Form } from 'antd';
+import { Alert, Checkbox, Drawer, Typography, Form } from 'antd';
 
 export const FormLogin = styled(Form)`
     width: 90%;
@@ -9,10 +9,6 @@ export const FormItemTextValidate = styled(Form.Item)`
     & .ant-form-item-control {
         text-align: left;
     }
-`;
-
-export const LogoPage = styled(Image)`
-    padding-top: 20px;
 `;
 
 export const LogoPageCenter = styled.div`
@@ -136,5 +132,17 @@ export const DrawerFilter = styled(Drawer)`
         flex-direction: column;
         align-items: center;
         padding-top: 0px;
+    }
+`;
+
+export const CustomAlert = styled(Alert)`
+    transform: translateY(-220px);
+    &.ant-alert-with-description {
+        align-items: flex-start;
+        padding: 15px 15px 15px 24px;
+        position: absolute;
+        z-index: 10;
+        width: 40%;
+        border-radius: 12px;
     }
 `;

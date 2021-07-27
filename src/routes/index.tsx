@@ -21,6 +21,7 @@ import Filter from 'components/pages/Board/views/Board/Filter';
 import BoardContent from 'components/pages/Board/views/CreateContent/BoardContent';
 import TestPixi from 'components/GameElement/Game/testpixi';
 import CommentOfContent from 'components/pages/Board/views/Comment/CommentOfContent';
+import ErrorPage from 'shared/errorPage/ErrorPage';
 
 function Routing() {
     return (
@@ -37,7 +38,7 @@ function Routing() {
             <Route exact path="/test" component={Test} />
             <Route exact path="/testoverview" component={TestOverview} />
             <Route exact path="/testquestion">
-                    <TestQuestion />
+                <TestQuestion />
             </Route>
             <Route exact path="/resultoverview" component={ResultOverview} />
             <Route exact path="/resultinfo" component={ResultInfo} />
@@ -51,6 +52,7 @@ function Routing() {
             <Route exact path="/teststyle" component={TestStyle} />
             <Route exact path="/pixi" component={TestPixi} />
             <Route exact path="/filter" component={Filter} />
+            <Route exact path="/errorpage" component={ErrorPage} />
         </Switch>
     );
 }
