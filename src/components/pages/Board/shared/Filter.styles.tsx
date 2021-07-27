@@ -137,8 +137,8 @@ export const SelectedTag = styled.div`
 
 export const CancleTag = styled.div`
     background-image: url(${CancleTagImg});
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
 `;
 
 export const SelectedTrue = styled.div`
