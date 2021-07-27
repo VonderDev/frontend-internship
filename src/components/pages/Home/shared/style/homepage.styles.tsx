@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Space, Button, Col, List, Input } from 'antd';
 import gamePreviewImg from '../../shared/images/gamepreview.png';
+import { QuestionCircleTwoTone } from '@ant-design/icons';
+import CreateContentImg from '../images/CreateContentIcon.png';
 
 export const SearchField = styled(Space)`
     display: flex;
@@ -41,7 +43,6 @@ export const ImageTestPage = styled.div`
     background-image: url(${gamePreviewImg});
     transition: 0.5s ease;
     margin-top: 0;
-    border-radius: 10px;
     height: 250px;
     background-position: center;
     background-repeat: no-repeat;
@@ -58,10 +59,12 @@ export const ButtonStartGame = styled(Button)`
     letter-spacing: 1px;
     justify-content: center;
     margin-right: 20px;
-    width: 25%;
-    height: 6vh;
+    width: 20%;
+    height: 35px;
     align-items: center;
     font-size: 18px;
+    transform: translateY(-10px);
+    margin-bottom: 10px;
 `;
 
 export const ButtonReadOverviewTest = styled.div`
@@ -69,10 +72,12 @@ export const ButtonReadOverviewTest = styled.div`
     position: absolute;
     font-weight: bolder;
     letter-spacing: 1px;
+
     font-size: 17px;
-    text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px white;
+    text-shadow: 0 0 6px #72bd90;
     position: absolute;
     transform: translateY(-120%) translateX(10%);
+    padding-bottom: 15px;
     &:hover {
         cursor: pointer;
     }
@@ -144,9 +149,25 @@ export const ButtonCreatePost = styled(Button)`
     left: 85%;
 `;
 
+export const CreateContentIcon = styled.div`
+    background-image: url(${CreateContentImg});
+
+    position: sticky;
+    padding-bottom: 50px;
+    bottom: 40px;
+    width: 85px;
+    height: 75px;
+    left: 80%;
+    margin-right: 10px;
+`;
+
 export const ImgBoardList = styled.img`
     transform: translateX(-15%) translateY(-6%);
     border-radius: 15px;
     width: 120px;
     height: 130px;
+`;
+
+export const IconReadMore = styled(QuestionCircleTwoTone)`
+    transform: translateY(4px);
 `;

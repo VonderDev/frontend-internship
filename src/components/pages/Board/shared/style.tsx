@@ -10,8 +10,9 @@ export const TextRecommendBoardTopic = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 15px;
     color: var(--Gray-600);
+    align-self: center;
+    margin-bottom: 15px;
 `;
 
 export const ButtonSeeAllBoard = styled.div`
@@ -109,7 +110,7 @@ export const HistoryImage = styled.img`
 export const CoverImage = styled.img`
     width: 205px;
     height: 148px;
-    object-fit : cover;
+    object-fit: cover;
 `;
 
 export const HistoryText = styled.div`

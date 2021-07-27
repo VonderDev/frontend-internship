@@ -24,7 +24,7 @@ export const CardLatest = () => {
         });
 
         return (
-            <div style={{ margin: '0px 5%' }}>
+            <div style={{ margin: '0px 0%' }}>
                 {cards?.slice(0, 3).map((item: any, index: any) => {
                     return (
                         <BoardCard
@@ -90,8 +90,8 @@ export const CardLatest = () => {
 
     return (
         <>
-            <Box direction="row" justify="space-between" align="flex-start">
-                <Box direction="column" justify="center" align="center">
+            <Box direction="row" justify="space-between" align="flex-start" style={{ marginBottom: '15px' }}>
+                <Box direction="column" justify="center" align="center" style={{ alignSelf: 'center' }}>
                     <TextRecommendBoardTopic>กระทู้</TextRecommendBoardTopic>
                 </Box>
                 <Box direction="column" justify="center" align="center" style={{ alignSelf: 'center' }}>
