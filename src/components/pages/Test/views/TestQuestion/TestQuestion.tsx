@@ -350,7 +350,7 @@ function TestQuestion() {
                     {currentQuestion + 1 === 25 ? (
                         <>
                             <Animation onEnter="fadeIn" key={currentMessage} duration={1000} delay={200}>
-                                <Box justify="center" align="center" direction="row">
+                                <Box justify="center" align="center" direction="row" style={{width:'100%', marginTop:'40%'}}>
                                     <TextStory onClick={showStory}>{cutSceneList[currentCutScnen].message[currentMessage]}</TextStory>
                                 </Box>
                             </Animation>
@@ -365,7 +365,9 @@ function TestQuestion() {
                         <>
                             {cutScene ? (
                                 <Animation onEnter="fadeIn" key={currentMessage} duration={1000} delay={200}>
+                                    <div style={{width:'100%', marginTop:'40%'}}>
                                     <TextStory onClick={showStory}>{cutSceneList[currentCutScnen].message[currentMessage]}</TextStory>
+                                    </div>
                                 </Animation>
                             ) : (
                                 <>
