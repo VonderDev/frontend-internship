@@ -1,5 +1,5 @@
 import { DrawerFilter } from 'components/pages/Authentication/shared/style';
-import { Topic, TagBox, CustomCheckableTag, ButtonUseFilter, ButtonClearFilter } from '../../shared/Filter.styles';
+import { Topic, TagBox, CustomCheckableTag, ButtonUseFilter, ButtonClearFilter, SelectedTag, SelectedTrue } from '../../shared/Filter.styles';
 import { catagories, hashtag } from '../../shared/FixedTag';
 import { CheckCircleOutlined } from '@ant-design/icons';
 import { useState } from 'react';
@@ -18,6 +18,7 @@ interface DrawerProps {
 
 const FilterDrawer: React.FC<DrawerProps> = ({ onclickClear, showDrawer, visible, selectedCatagories, selectedTags, handleChangeCatagories, handleChangeTag, onclickFilter }) => {
     const [placement, setPlacement] = useState<any>('bottom');
+    const [isSelect, setIsSelect] = useState(false);
 
     return (
         <DrawerFilter
@@ -34,16 +35,16 @@ const FilterDrawer: React.FC<DrawerProps> = ({ onclickClear, showDrawer, visible
             <div>
                 <Topic>ประเภทของกระทู้</Topic>
                 <TagBox style={{ fontWeight: 'bolder' }}>
-                    {catagories.map((item, index) => (
-                        <div key={index} style={{ marginRight: '10px', marginBottom: '5px' }}>
-                            <CustomCheckableTag key={item.value} checked={selectedCatagories.indexOf(item.value) > -1} onChange={(checked) => handleChangeCatagories(item.value, checked)}>
-                                {item.tag}
-                                <div style={{ marginLeft: '3px', transform: 'translateY(1px)' }}>
-                                    <CheckCircleOutlined />
-                                </div>
-                            </CustomCheckableTag>
-                        </div>
-                    ))}
+                    <>
+                        {catagories.map((item, index) => (
+                            <div key={index} style={{ marginRight: '10px', marginBottom: '5px' }}>
+                                <CustomCheckableTag key={item.value} checked={selectedCatagories.indexOf(item.value) > -1} onChange={(checked) => handleChangeCatagories(item.value, checked)}>
+                                    {item.tag}
+                                    <div style={{ marginLeft: '3px', transform: 'translateY(1px)' }}>{selectedCatagories.includes(item.value) ? <SelectedTrue /> : <SelectedTag />}</div>
+                                </CustomCheckableTag>
+                            </div>
+                        ))}
+                    </>
                 </TagBox>
                 <Topic>แฮชแท็กของกระทู้</Topic>
                 <TagBox>
@@ -51,9 +52,7 @@ const FilterDrawer: React.FC<DrawerProps> = ({ onclickClear, showDrawer, visible
                         <div key={index} style={{ marginRight: '10px', marginBottom: '5px' }}>
                             <CustomCheckableTag key={item.value} checked={selectedTags.indexOf(item.value) > -1} onChange={(checked) => handleChangeTag(item.value, checked)}>
                                 #{item.tag}
-                                <div style={{ marginLeft: '3px', transform: 'translateY(1px)' }}>
-                                    <CheckCircleOutlined />
-                                </div>
+                                <div style={{ marginLeft: '3px', transform: 'translateY(1px)' }}>{selectedTags.includes(item.value) ? <SelectedTrue /> : <SelectedTag />}</div>
                             </CustomCheckableTag>
                         </div>
                     ))}

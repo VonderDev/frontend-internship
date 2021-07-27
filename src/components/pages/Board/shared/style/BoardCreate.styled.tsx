@@ -1,6 +1,8 @@
 import { Button, Drawer, Form, Input, Modal, Radio, Select, Upload } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import styled from 'styled-components';
+import CircleChoiceImg from '../images/circleCategorie.png';
+import CirCleSelectionImg from '../images/ChoiceSelection.png';
 
 //------------------ CREATE CONTENT PAGE 1 ------------------//
 export const FormInputNameContent = styled(Input)`
@@ -310,4 +312,16 @@ export const TextBodyModal = styled.div`
 export const TextTitleModal = styled.div`
     font-weight: bolder;
     font-size: 24px;
+`;
+
+export const CircleChoice = styled.div`
+    background-image: url(${CircleChoiceImg});
+    width: 20px;
+    height: 20px;
+`;
+
+export const CircleSelection = styled.div`
+    background-image: url(${CirCleSelectionImg});
+    width: 20px;
+    height: 20px;
 `;
