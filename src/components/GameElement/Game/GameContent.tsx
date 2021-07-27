@@ -247,12 +247,12 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
           goScene2()
         }else if (prop == 'S3'){
           goScene3()
-          wait(2000).then(() =>{
+          wait(3000).then(() =>{
             goSceneDoor();
           })
         }else if (prop == 'S4'){
           goSceneInHome();
-          wait(2000).then(() =>{
+          wait(3000).then(() =>{
             goSceneInHome2();
           })
         }else if (prop == 'S4.2'){
@@ -413,7 +413,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         sprites.Brush1.position.set(450,600);
         secondScene.addChild(sprites.Brush1)
 
-        happyFriend();
+        angryFriend();
         ticker.add(animate);
         ticker.start();
 
@@ -733,8 +733,8 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         secondScene.visible = true;
         secondScene.interactive = true;
         secondScene.buttonMode = true;
-        happyAction.visible = true;
-        happyAction.pivot.set(0,1);
+        angryAction.visible = true;
+        angryAction.pivot.set(0,1);
         secondScene.on('pointerdown',  goScene3);
         gameScene2();
       }

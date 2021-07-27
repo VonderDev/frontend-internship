@@ -62,11 +62,14 @@ function TestQuestion() {
     const [music, setMusic] = useState(false);
     const toggle = () => {
         setPlaying(!playing);
+        if(currentCutScnen+ 1 > 8 && currentCutScnen <= 10 ){
+            setMusic(!music)
+        }
     };
     useEffect(() => {
         if(playing){
             audio.play();
-            audio.volume = 0.5
+            audio.volume = 0.6
         }else{
             audio.pause();
         }
@@ -81,9 +84,17 @@ function TestQuestion() {
       [playing,music]
     );
 
+    useEffect(() => {
+        if(currentCutScnen+ 1 > 8 && currentCutScnen <= 10 ){
+            setMusic(!music)
+            audio.volume = 0.05
+        }else{
+            setMusic(false)
+        }
+    }, [currentCutScnen]);
     //---------------- Cut Scene ----------------//
     const cutSceneList = [
-        { value: 1, message: ['แตะกล่องข้อความเพื่อไปต่อ', 'ที่นี่ที่ไหนกัน... แล้วฉันคือใคร...', 'โอ๊ย ทำไมจำอะไรไม่ได้เลย…', 'ลองเดินตามทางนี้ไปละกัน เผื่อจะจำอะไรได้มากขึ้น'] },
+        { value: 1, message: ['แตะหน้าจอเพื่อไปต่อ..', 'ที่นี่ที่ไหนกัน... แล้วฉันคือใคร...', 'โอ๊ย ทำไมจำอะไรไม่ได้เลย…', 'ลองเดินตามทางนี้ไปละกัน เผื่อจะจำอะไรได้มากขึ้น'] },
         { value: 2, message: ['เอ๊ะ! ตรงนั้นมีคนนี่นา ลองเข้าไปถามดูดีกว่าเผื่อจะมีใครช่วยฉันได้'] },
         { value: 3, message: ['หมี: “นายนั่นแหละที่เป็นคนบอกให้มาทางนี้” ', 'แรคคูน: “ฉันบอกให้ไปอีกทางนึงต่างหาก” ', ' เอ๊ะ! เหมือนว่าพวกเขากำลังทะเลาะกันอยู่นะ'] },
         {
@@ -120,7 +131,7 @@ function TestQuestion() {
         cutSceneList[currentCutScnen];
         console.log(currentCutScnen);
         console.log('CutScene :', cutSceneList[currentCutScnen].value, 'message:', cutSceneList[currentCutScnen].message);
-        if (currentCutScnen === 10) {
+        if (currentCutScnen === 10 ) {
             setMusic(false);
         }
     }, [currentCutScnen]);
@@ -139,7 +150,7 @@ function TestQuestion() {
             }else if (currentCutScnen+ 1 === 8){
                 changeScene('S5')
                 setCutScene(true) // start cutscene v.9
-                audio.volume = 0.1
+                audio.volume = 0.05
                 setMusic(true)
             }else if (currentCutScnen + 1 === 13){
                 changeScene('S6.1')
@@ -163,6 +174,7 @@ function TestQuestion() {
             setCurrentMessage(currentMessage + 1);
         }
     };
+
     // -------------- handle change scene & Question -------------- //
     const { changeScene, gameRef } = useContext(AppContext);
 
@@ -191,7 +203,7 @@ function TestQuestion() {
         } else if (currentQuestion + 1 === 18) {
             setCutScene(true); // start cutscene v.10
             changeScene('talk');
-            audio.volume = 0.8
+            audio.volume = 0.6
         } else if (currentQuestion + 1 === 21) {
             setCutScene(true); // start cutscene v.11
         } else if (currentQuestion + 1 === 23) {
