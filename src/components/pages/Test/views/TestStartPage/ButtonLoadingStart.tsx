@@ -2,6 +2,7 @@ import { Spin } from 'antd';
 import { useState } from 'react';
 import { ButtonLoading, ContainerButtonLoading, IsLoadingSpinner } from '../../shared/styles/Test/TestPage.styled';
 import { useHistory } from 'react-router-dom';
+import { ApiPostCreateGuestToken } from '../../apis/GuestTest.api';
 
 function ButtonLoadingStart() {
     //
@@ -13,11 +14,15 @@ function ButtonLoadingStart() {
     const fetchData = () => {
         console.log(isLoading);
         setLoading(true);
+        console.log('set Loading:', isLoading);
+        setLoading(false);
+        ApiPostCreateGuestToken();
         setTimeout(() => {
-            console.log('set Loading:', isLoading);
-            setLoading(false);
-            history.push('/teststory');
-        }, 1500);
+            window.location.href = '/testquestion';
+        }, 800);
+        console.log('set Loading:', isLoading);
+        setLoading(false);
+        ApiPostCreateGuestToken();
     };
 
     return (

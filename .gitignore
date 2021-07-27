@@ -20,11 +20,12 @@
 .env.test.local
 .env.production.local
 .env
-.yml
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.circleci
 
 READMETEST.md
+
+TestStyle.tsx
+testpixi.tsx

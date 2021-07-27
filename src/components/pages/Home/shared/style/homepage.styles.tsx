@@ -69,11 +69,10 @@ export const ButtonReadOverviewTest = styled.div`
     position: absolute;
     font-weight: bolder;
     letter-spacing: 1px;
-    font-size: 18px;
+    font-size: 17px;
     text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px white;
     position: absolute;
     transform: translateY(-120%) translateX(10%);
-    padding-left: 20px;
     &:hover {
         cursor: pointer;
     }

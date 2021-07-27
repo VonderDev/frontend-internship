@@ -29,16 +29,26 @@ export async function ApiGetResult() {
 export async function ApiPostTestResult(data: any) {
     console.log('[Result Data] :', data);
     console.log('[Result length]:', data.length)
-    // return mockTestData as unknown as Array<IQuestion>;
-    //
-    // ─── Use axios.post when backend finish ───────────────────
-    //
-    return await axios.post('/user/newResult', data,{headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
-        console.log("response", res.data)
-        return res.data
-    })
-    .catch((err) => {
-        console.error(err);
-        console.log('Cannot post result');
-    });
+    const token = localStorage.getItem('token');
+    const tokenGuest = localStorage.getItem('tokenGuest');
+    if(token){
+        return await axios.post('/user/newResult', data,{headers: { 'Authorization': `Bearer ${token}` }}).then((res) => {
+            console.log("response", res.data)
+            return res.data
+        })
+        .catch((err) => {
+            console.error(err);
+            console.log('Cannot post result');
+        });
+    }
+    else if(tokenGuest){
+        return await axios.post('/guest/result', data,{headers: { 'Authorization': `Bearer ${tokenGuest}` }}).then((res) => {
+            console.log("response for guest", res.data)
+            return res.data
+        })
+        .catch((err) => {
+            console.error(err);
+            console.log('Cannot post result for guest');
+        });
+    } 
 }

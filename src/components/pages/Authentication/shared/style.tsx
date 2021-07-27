@@ -46,6 +46,14 @@ export const PrivacyContainer = styled.div`
     border-radius: 2px;
 `;
 
+export const DrawerContainer = styled.div`
+    position: relative;
+    height: 120%;
+    overflow: hidden;
+    border-radius: 2px;
+    z-index: 20 !important;
+`;
+
 export const CheckboxPrivacy = styled(Checkbox)`
     padding-top: 20px;
     padding-bottom: 20px;
@@ -94,9 +102,6 @@ export const TextboxPrivacyCenter = styled.div`
 export const DrawerRadius = styled(Drawer)`
     & .ant-drawer-header {
         border-bottom: none;
-        display: flex;
-        justify-content: center;
-        padding: 0px;
     }
     & .ant-drawer-content {
         border-radius: 12px 12px 0px 0px;
@@ -111,5 +116,27 @@ export const DrawerRadius = styled(Drawer)`
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding-top: 0px;
+    }
+`;
+
+export const DrawerFilter = styled(Drawer)`
+    & .ant-drawer-header {
+        border-bottom: none;
+    }
+    & .ant-drawer-content {
+        border-radius: 12px 12px 0px 0px;
+    }
+    & .ant-drawer-title {
+        padding-top: 30px;
+        font-size: var(--font-22);
+        align-items: center;
+        font-weight: bold;
+    }
+    & .ant-drawer-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 0px;
     }
 `;

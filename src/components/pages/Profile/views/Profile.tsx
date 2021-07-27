@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { Col } from 'antd';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Container from 'components/Container/Container';
 import useSWR from 'swr';
 import { Box, ButtonStyle } from 'shared/style/theme/component';
@@ -11,31 +11,34 @@ import ProfileResultCard from './ProfileResultCard';
 
 function Profile() {
     //Data from get profile data API-------------------------------------------------------------
-    const { data: profile, error: errorProfile } = useSWR('/user/profile');
-    const isLoading = !errorProfile && !profile;
+    const [fetchProfileData, setFetchProfileData] = useState<any>();
+    const { data, error } = useSWR('/user/profile');
+    const isLoading = !error && !fetchProfileData;
+
     useEffect(() => {
-        if (profile) {
-            console.log('[useEffect profile] :', profile);
+        if (data) {
+            setFetchProfileData(data);
+            console.log('[useEffect profile] :', fetchProfileData);
         }
-    }, [profile]);
+    }, [data, fetchProfileData]);
 
     const history = useHistory();
     return (
         <Container header={{ left: 'back', title: 'ข้อมูลส่วนตัว', right: 'menu' }}>
-            {errorProfile && <div>error </div>}
+            {error && <div>error </div>}
             {isLoading ? (
                 <div>loading ...</div>
             ) : (
                 <Box style={{ marginLeft: '20px', marginRight: '20px' }} justify="center" align="center" direction="column">
                     <UserImage src={ProfileMascot} />
-                    <TextUsername>{profile?.auth[0].username}</TextUsername>
+                    <TextUsername>{fetchProfileData?.auth[0].username}</TextUsername>
                     <RowStyled>
                         <Col span={8}>
                             <TextUserInfo1>ชื่อ-นามสกุล :</TextUserInfo1>
                         </Col>
                         <Col span={16}>
                             <TextUserInfo2>
-                                {profile?.auth[0].firstName} {profile?.auth[0].lastName}
+                                {fetchProfileData?.auth[0].firstName} {fetchProfileData?.auth[0].lastName}
                             </TextUserInfo2>
                         </Col>
                     </RowStyled>
@@ -44,7 +47,7 @@ function Profile() {
                             <TextUserInfo1>อีเมล :</TextUserInfo1>
                         </Col>
                         <Col span={16}>
-                            <TextUserInfo2>{profile?.auth[0].email}</TextUserInfo2>
+                            <TextUserInfo2>{fetchProfileData?.auth[0].email}</TextUserInfo2>
                         </Col>
                     </RowStyled>
                     <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
@@ -54,9 +57,9 @@ function Profile() {
                         <Col span={16}>
                             <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>
                         </Col>
-                        <Col span={8}>{profile?.results.length === 0 ? <div></div> : <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>}</Col>
+                        <Col span={8}>{fetchProfileData?.results.length === 0 ? <div></div> : <LinkMoreResult onClick={() => history.push('/profileresult')}>ดูเพิ่มเติม</LinkMoreResult>}</Col>
                     </RowStyled>
-                    {profile?.contents.length === 0 ? (
+                    {fetchProfileData?.results.length === 0 ? (
                         <NotFoundText>
                             คุณยังไม่มีผลลัพธ์
                             <br />
@@ -66,15 +69,15 @@ function Profile() {
                             </div>
                         </NotFoundText>
                     ) : (
-                        <ProfileResultCard profile={profile.results} />
+                        <ProfileResultCard profile={fetchProfileData?.results} />
                     )}
                     <RowStyled>
                         <Col span={16}>
                             <TextTopic2>กระทู้ของคุณ</TextTopic2>
                         </Col>
-                        <Col span={8}>{profile?.contents.length === 0 ? <div></div> : <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>}</Col>
+                        <Col span={8}>{fetchProfileData?.contents.length === 0 ? <div></div> : <LinkMoreResult onClick={() => history.push('/boardhistory')}>ดูเพิ่มเติม</LinkMoreResult>}</Col>
                     </RowStyled>
-                    {profile?.contents.length === 0 ? (
+                    {fetchProfileData?.contents.length === 0 ? (
                         <NotFoundText>
                             คุณยังไม่เคยสร้างกระทู้
                             <br />
@@ -84,7 +87,7 @@ function Profile() {
                             </div>
                         </NotFoundText>
                     ) : (
-                        <ProfileBoardCard data={profile.contents} />
+                        <ProfileBoardCard data={fetchProfileData?.contents} />
                     )}
                 </Box>
             )}

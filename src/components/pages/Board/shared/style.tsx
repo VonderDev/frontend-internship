@@ -10,6 +10,7 @@ export const TextRecommendBoardTopic = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-bottom: 15px;
 `;
 
 export const ButtonSeeAllBoard = styled.div`
@@ -40,7 +41,7 @@ export const BoardCard = styled(Card)`
 `;
 
 export const GridBox = styled.div`
-    display: flex;
+    //display: flex;
     overflow-x: scroll;
     ::-webkit-scrollbar {
         width: 0; /* Remove scrollbar space */
@@ -50,34 +51,29 @@ export const GridBox = styled.div`
 
 export const NewCardStyle = styled(CardStyle)`
     padding: 0px;
-
+    margin: 0px !important;
+    margin-right: 10px !important;
     & .ant-card-actions {
         border-top: none;
         background: none;
     }
-
     & .ant-card-actions > li:not(:last-child) {
         border-right: none;
     }
-
     & .ant-card-meta-title {
         font-weight: bold;
     }
-
     & .ant-card-meta {
         padding: none;
     }
-
     & .ant-card-body {
         padding: 10px;
         padding-top: 10px;
     }
-
     & .ant-card-actions {
         padding: none;
         align-items: baseline;
     }
-
     & .ant-card-actions > li > span {
         font-size: 12px;
     }
@@ -91,8 +87,12 @@ export const EllipsisText = styled.div`
 `;
 
 export const SpaceCard = styled(Space)`
-    padding-right: 20px;
-    padding-left: 20px;
+    //padding-right: 20px;
+    //padding-left: 20px;
+    margin-bottom: 10px;
+    .ant-space-item {
+        padding-left: 0px;
+    }
 `;
 
 export const HistoryImage = styled.img`
@@ -139,13 +139,11 @@ export const HeartIconCard = styled(HeartFilled)`
     flex-direction: column;
     align-items: flex-start;
     padding: 3px 8px;
-
     position: absolute;
     width: 48px;
     height: 20px;
     right: 10.46px;
     top: 11px;
-
     background: #ffffff;
     box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.05);
     border-radius: 100px;
@@ -157,7 +155,6 @@ export const HeartText = styled(Typography)`
     flex-direction: column;
     align-items: flex-start;
     padding: 0px 17px;
-
     position: absolute;
     width: 48px;
     height: 20px;

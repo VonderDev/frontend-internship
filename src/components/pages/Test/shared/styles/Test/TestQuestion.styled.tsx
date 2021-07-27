@@ -1,14 +1,21 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Button, Col } from 'antd';
 import ImgTestQuestion from '../../../shared/images/TestQuestion.png';
 
-export const ContainerTestQuestion = styled.div`
+export const ContainerTestQuestion = styled.div<{ active: 'active' | '' }>`
     position: absolute;
     top: 0px;
     width: 100%;
     height: 100vh;
     display: block;
-    background: transparent;
+    background: linear-gradient(white , transparent,transparent);
+    ${({ active }) => {
+        if (active === 'active') {
+            return css`
+            background: transparent;
+            `;
+        }
+    }}
 `;
 
 export const MainContainer = styled.div`
@@ -33,19 +40,29 @@ export const TextQuestionIndex = styled.div`
     justify-content: center;
     align-items: center;
 `;
+export const ButtonSound = styled(Button)`
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+    display: block;
+    padding: 9px 20px 8px;
+    width: fit-content;
+    height: 40px;
+    margin-right: 12px;
+`;
 
 export const ButtonSeeAllResults = styled(Button)`
-    border-radius: 12px;
-    border: 2px solid var(--Blue-300);
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0px 8px 16px rgb(0 0 0 / 10%);
     font-weight: bolder;
     color: var(--Blue-300);
     background-color: #ffffff;
-    margin-right: 0;
-    margin-left: auto;
-    transform: translateY(-160%) translateX(-20%);
     font-size: 16px;
     display: block;
-    width: 120px;
+    padding: 9px 20px 8px;
+    width: fit-content;
     height: 40px;
 `;
 
@@ -77,19 +94,21 @@ export const TextQuestion = styled.div`
     font-size: 24px;
     font-weight: bolder;
     line-height: 30pt;
-    /* display: -webkit-box;
-    -webkit-line-clamp: 20;
-    -webkit-box-orient: vertical;
-    white-space: pre-line; */
     white-space: initial;
     display: block;
     white-space: pre-line;
-    margin: 0 10% !important;
-    color: white !important;
-    text-shadow: 3px 1px 10px #0a0a0a  !important;
+    margin: 10% 10% !important;
+    color: #000000 !important;
+    text-shadow: 3px 1px 10px #ffffff  !important;
+    @media(max-width: 370px){
+        font-size: 18px;
+    }
+    @media(max-width: 500px){
+        font-size: 20px;
+    }
 `;
 
-export const ContainerButton = styled(Col)`
+export const ContainerButton = styled.div`
     align-items: center;
     justify-content: center;
     display: grid;
@@ -99,20 +118,28 @@ export const ButtonChoiceStlyed = styled.button`
     font-size: 18px;
     font-weight: bolder;
     color: #000000;
-    width: 343px;
+    width: 60%;
     height: 60px;
-    margin-top: 5px;
+    margin-top: 2%;
     letter-spacing: 1px;
     background-color: white;
     border-color: white;
-    opacity: 0.7;
+    opacity: 0.8;
     position: relative;
-    transform: translateY(350%);
+    transform: translateY(200%);
     display: block;
     &:hover {
         color: black;
         border-color: white;
         cursor: pointer;
+    }
+    @media(max-width: 370px){
+        transform: translateY(50%);
+        width: 80%;
+    }
+    @media(max-width: 500px){
+        transform: translateY(100%);
+        width: 80%;
     }
 `;
 
@@ -144,7 +171,7 @@ export const ContainerButtonStartOver = styled(Col)`
 `;
 
 export const IsLoadingSpinnerTestQuestion = styled.div`
-    width: 12rem;
+    width: 50%;
     height: 6vh;
     display: flex;
     flex-direction: column;
@@ -152,9 +179,11 @@ export const IsLoadingSpinnerTestQuestion = styled.div`
     margin-left: auto;
     margin-right: auto;
     bottom: 0 auto;
-    transform: translateY(900%);
+    transform: translateY(600%);
 `;
 
 export const TextIsLoadingTestQuestion = styled.h4`
     font-weight: bolder;
+    text-shadow: 3px 1px 10px #ffffff  !important;
+    font-size: 20px;
 `;

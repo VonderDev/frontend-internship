@@ -41,7 +41,7 @@ export const ButtonGoNextCreateContent = styled(Button)`
     width: 75%;
     height: 7vh;
     font-size: 16px;
-    transform: translateX(13%) translateY(89%);
+    transform: translateX(13%) translateY(130%);
     font-size: 16px;
     position: sticky;
     &:hover {
@@ -82,7 +82,7 @@ export const ButtonSummitPost = styled(Button)`
     display: block;
     margin: auto;
     position: sticky;
-    transform: translateY(798%);
+    transform: translateY(790%);
     &:hover {
         cursor: pointer;
     }
@@ -94,10 +94,20 @@ export const CountOfPageCreateContent = styled.div`
     align-items: center;
     font-size: 16px;
     color: var(--Gray-400);
-    bottom: 13%;
-    left: 0;
-    right: 0;
-    position: fixed;
+    transform: translateY(-135%);
+
+    /* position: absolute; */
+`;
+
+export const CountOfPageTwo = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: var(--Gray-400);
+    transform: translateY(1250%);
+
+    /* position: absolute; */
 `;
 
 export const ButtonOfCategory = styled(Button)`
@@ -130,22 +140,20 @@ export const ContentTypeButton = styled(Radio.Button)`
     .ant-radio-inner:after {
         border-radius: 0 !important;
     }
-    .ant-radio-inner:after {
-        border: none !important;
-    }
     border-radius: 12px !important;
-    & .ant-radio-button-wrapper::first-child {
-        border-color: white !important;
-        border-radius: 12px !important;
-        width: 100px;
-    }
     & .ant-radio-button {
         background-color: var(--Blue-000);
         border-radius: 12px !important;
         font-size: 14px;
         color: var(--Gray-500) !important;
-
-        /* border-radius: 12px !important; */
+        border-radius: var(--Blue-000);
+    }
+    &.ant-radio-button-wrapper:first-child {
+        width: 130px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 `;
 export const ButtonBackToFirstPage = styled(Button)`
@@ -166,11 +174,11 @@ export const InputHashtagInDrawer = styled(Select)`
     padding-top: 15px;
     border-radius: 10px;
     .ant-select-selection-overflow {
-        height: 45px;
+        height: auto;
+        min-height: 45px !important;
     }
     .ant-select-selector {
         border-radius: 12px !important;
-        height: fit-content;
     }
     & .ant-select-selection-item {
         background-color: #daebfd;

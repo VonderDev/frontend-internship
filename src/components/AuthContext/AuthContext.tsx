@@ -11,6 +11,7 @@ const AuthContext = createContext<any>(null);
 const AuthProvider = ({ children }: IAuthProps) => {
     const [user, setUser] = useState<any | null>();
     const [token, setToken] = useState<any | null>();
+    const [hide, setHide] = useState<boolean>(true);
 
     const getUser = async () => {
         const token = localStorage.getItem('token');
@@ -30,19 +31,22 @@ const AuthProvider = ({ children }: IAuthProps) => {
 
     const login = ({ email, password }: authData) => {
         console.log('props: ', { email, password });
+        const tokenGuest = localStorage.getItem('tokenGuest');
+        if(tokenGuest){
+            localStorage.removeItem('tokenGuest')
+        } 
         return axios
             .post('/login', { email, password })
             .then((response) => {
-                if (response.data.token) 
-                localStorage.setItem('token', response.data.token);
+                if (response.data.token) localStorage.setItem('token', response.data.token);
                 setToken(localStorage.getItem('token'));
                 setUser(response.data.resuit);
                 return user;
             })
             .catch((err) => {
                 console.error(err);
-                alert('อีเมลและรหัสผ่านที่คุณกรอกไม่ตรงกับข้อมูลในระบบ \nโปรดตรวจสอบและลองอีกครั้ง');
                 console.log('Failed login');
+                setHide(false)
             });
     };
 
@@ -53,7 +57,9 @@ const AuthProvider = ({ children }: IAuthProps) => {
         localStorage.removeItem('token');
         setToken(localStorage.getItem('token'));
         setUser(undefined);
+        window.location.href = '/'
     };
+
     useEffect(() => {
         const tokenkey = localStorage.getItem('token');
         if (tokenkey) {
@@ -70,6 +76,7 @@ const AuthProvider = ({ children }: IAuthProps) => {
                 user,
                 token,
                 getUser,
+                hide
             }}
         >
             {children}

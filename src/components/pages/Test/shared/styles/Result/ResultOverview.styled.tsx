@@ -16,11 +16,8 @@ export const ButtonGoHomeInResult = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Blue-400);
-    transform: translateY(-130%);
-    margin-left: auto;
-    margin-right: auto;
     width: 75%;
-    height: 5%;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;

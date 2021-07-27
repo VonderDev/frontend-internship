@@ -28,14 +28,21 @@ import sofa2 from '../Assets/Item/InHome/Sofa2.png'
 import bgS43 from '../Assets/Background/bg_s43.png'
 import sewing from '../Assets/Item/InHome/Sewing.png'
 import tools from '../Assets/Item/InHome/Tools.png'
-import bigTree from '../Assets//Item/Tree/BigTree.png'
+import bigTree from '../Assets/Item/Tree/BigTree.png'
 import lake from '../Assets/Background/Background_Lake.png'
 import water from '../Assets/Background/Water.png'
 import shadow from '../Assets/Background/Shadow.png'
 import TreeFnew from '../Assets//Item/Tree/TreeF_1new.png'
+import bearHappy from '../Assets/Item/Charecter/Bear_Friendly.png'
+import bearAngry from '../Assets/Item/Charecter/Bear_Angry.png'
+import raccoonHappy from '../Assets/Item/Charecter/Raccoon_Friendly.png'
+import raccoonAngry from '../Assets/Item/Charecter/Raccoon_Angry.png'
+const monkey = 'https://vonder-me-s3.s3.ap-southeast-1.amazonaws.com/Monkey/Monkey_Flat_Final.json'
+//@ts-ignore
+import PIXISpine  from '../PixiStore/pixi-spine';
 
 const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
-
+   // ------------------- Create container --------------//
     const firstScene = new PIXI.Container();
     const secondScene = new PIXI.Container();
     const doorScene = new PIXI.Container();
@@ -46,17 +53,12 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     const jungleScene = new PIXI.Container();
     const endScene = new PIXI.Container();
     const lastScene = new PIXI.Container();
+    const happyAction = new PIXI.Container();
+    const angryAction = new PIXI.Container();
+    const musicAction = new PIXI.Container();
+    const talkAction = new PIXI.Container();
+    const pointAction = new PIXI.Container();
     //keep container scene in array 
-  
-    secondScene.visible = false;
-    doorScene.visible = false;
-    homeScene.visible = false;
-    inHomeScene.visible = false;
-    inHome2Scene.visible = false;
-    inHome3Scene.visible = false;
-    jungleScene.visible = false;
-    endScene.visible = false;
-    lastScene.visible = false;
 
     app.stage.addChild(firstScene);
     app.stage.addChild(secondScene);
@@ -68,16 +70,17 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     app.stage.addChild(jungleScene);
     app.stage.addChild(endScene);
     app.stage.addChild(lastScene);
+    app.stage.addChild(happyAction);
+    app.stage.addChild(angryAction);
+    app.stage.addChild(musicAction );
+    app.stage.addChild(talkAction );
+    app.stage.addChild(pointAction);
 
 
-
-    //Preload asset
-    let sprites: any = []; 
-    window.onload = function(){
-
+    // ------------------- Preload Asset --------------//
+    let sprites: any = {}; 
+    //  function loadeAsset (){
       const loader = new PIXI.Loader();
-      
-
       loader.add("ground", ground)
             .add("sky", sky)
             .add("tree", tree)
@@ -101,26 +104,78 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
             .add('flower', flower)
             .add('bgS4', bgS4)
             .add('funiture', funiture)
-            .add('sofa' , sofa)
+            .add('sofa', sofa)
             .add('bgS42', bgS42)
-            .add('sofa2' ,sofa2)
-            .add('bgS43' ,bgS43)
-            .add('sewing' , sewing)
-            .add('tools' , tools)
-            .add('bigTree' , bigTree)
-            .add('lake',lake)
+            .add('sofa2', sofa2)
+            .add('bgS43', bgS43)
+            .add('sewing', sewing)
+            .add('tools', tools)
+            .add('bigTree', bigTree)
+            .add('lake', lake)
             .add('water', water)
             .add('shadow', shadow)
             .add('TreeFnew', TreeFnew)
+            .add('bearHappy', bearHappy)
+            .add('bearAngry', bearAngry)
+            .add('raccoonHappy', raccoonHappy)
+            .add('raccoonAngry', raccoonAngry)
+            //@ts-ignore
+            .add("Monkey", monkey );
       loader.load((loader, resource) => {
       console.log("resource", resource);
-        app.loader.resources = resource
-        // Object.assign(sprite, resource)
-        // console.log('store:' , sprite)
+      //background
+        sprites.BgGround =  new PIXI.Sprite(resource.ground.texture);
+        sprites.BgSky =  new PIXI.Sprite(resource.sky.texture);
+        sprites.BgTree =  new PIXI.Sprite(resource.tree.texture);
+        sprites.BgOutHome =  new PIXI.Sprite(resource.bgHouseS3.texture);
+        sprites.BgGroundS3 =  new PIXI.Sprite(resource.groundS3.texture);
+        sprites.BgHome =  new PIXI.Sprite(resource.bgS4.texture);
+        sprites.BgHomein =  new PIXI.Sprite(resource.bgS42.texture);
+        sprites.BgHomein2 =  new PIXI.Sprite(resource.bgS43.texture);
+        sprites.BgWater =  new PIXI.Sprite(resource.water.texture);
 
+      //item jungle
+        sprites.Cloud1 =  new PIXI.Sprite(resource.cloud1.texture);
+        sprites.Cloud2 =  new PIXI.Sprite(resource.cloud2.texture);
+        sprites.Cloud3 =  new PIXI.Sprite(resource.cloud3.texture);
+        sprites.TreeF1 =  new PIXI.Sprite(resource.treef1.texture);
+        sprites.TreeF2 =  new PIXI.Sprite(resource.treef2.texture);
+        sprites.TreeFnew =  new PIXI.Sprite(resource.TreeFnew.texture);
+        sprites.TreeB1 =  new PIXI.Sprite(resource.treeb1.texture);
+        sprites.TreeB2 =  new PIXI.Sprite(resource.treeb2.texture);
+        sprites.TreeB3 =  new PIXI.Sprite(resource.treeb3.texture);
+        sprites.BigTree =  new PIXI.Sprite(resource.bigTree.texture);
+        sprites.Brush1 =  new PIXI.Sprite(resource.bush1.texture);
+        sprites.Brush2 =  new PIXI.Sprite(resource.bush3.texture);
+        sprites.Brush3 =  new PIXI.Sprite(resource.bush3.texture);
+        sprites.Brush4 =  new PIXI.Sprite(resource.bush4.texture);
+        sprites.Lake =  new PIXI.Sprite(resource.lake.texture);
+        sprites.Shadow =  new PIXI.Sprite(resource.shadow.texture);
+
+        //item inHome
+        sprites.Door =  new PIXI.Sprite(resource.door.texture);
+        sprites.Home =  new PIXI.Sprite(resource.house.texture);
+        sprites.Fence =  new PIXI.Sprite(resource.fence.texture);
+        sprites.Flower =  new PIXI.Sprite(resource.flower.texture);
+        sprites.Flower2 =  new PIXI.Sprite(resource.flower.texture);
+        sprites.Funiture =  new PIXI.Sprite(resource.funiture.texture);
+        sprites.Sofa =  new PIXI.Sprite(resource.sofa.texture);
+        sprites.Sofa2 =  new PIXI.Sprite(resource.sofa2.texture);
+        sprites.Sewing =  new PIXI.Sprite(resource.sewing.texture);
+        sprites.Tools =  new PIXI.Sprite(resource.tools.texture);
+
+        //Animate
+        //@ts-ignore
+        sprites.Monkey =  new PIXISpine.Spine(resource.Monkey.spineData);
+        sprites.BearHappy = new PIXI.Sprite(resource.bearHappy.texture);
+        sprites.BearAngry = new PIXI.Sprite(resource.bearAngry.texture);
+        sprites.RaccoonAngry = new PIXI.Sprite(resource.raccoonAngry.texture);
+        sprites.RaccoonHappy = new PIXI.Sprite(resource.raccoonHappy.texture);
+
+        console.log('Monkey',resource.Monkey)
     });
     const showProgress = (e : any) =>{
-      console.log(e.progress + '% loader')
+      console.log(e.progress.toFixed(2) + '% loader')
     }
     const loadError = (e : any) =>{
       console.log('Error'+ e.message)
@@ -129,716 +184,628 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     const doneLoading = (e : any) =>{
       console.log("Sprites", sprites);
       console.log('Done Loading! Scene1 start')
-      firstScene.interactive = true;
-      firstScene.buttonMode = true;
-      firstScene.on('pointerdown', onClick1);
-      gameScene1();
-
+      initial();
     }
 
     loader.onProgress.add(showProgress);
     loader.onComplete.add(doneLoading);
     loader.onError.add(loadError);
-
-    const ticker = new PIXI.Ticker();
-    const cloud1Texture = PIXI.Texture.from(cloud1);
-    const cloud2Texture = PIXI.Texture.from(cloud2);
-    const Cloud1 = new PIXI.Sprite(cloud1Texture);
-    const Cloud2 = new PIXI.Sprite(cloud2Texture);
-    // const Cloud2 = PIXI.Sprite.from(app.loader.resources.cloud2.texture);
-    // const Cloud2 = PIXI.Sprite.from(app.loader.resource['cloud2'].texture);
-    
-    function animate() {
-      if(Cloud1.x + Cloud1.width < firstScene.width){
-        Cloud1.x += 0.1 * 3
-      }
-      if(Cloud2.x + Cloud2.width < firstScene.width){
-        Cloud2.x -= 0.1 * 3
-      }
-    }
-
-    function onClick1() {
-      console.log("chang to Scene2")
-      firstScene.visible = false;
+    // }
+// ------------------- Prepare Asset --------------//
+    function initial(){
+      firstScene.visible = true;
+      secondScene.visible = false;
       doorScene.visible = false;
       homeScene.visible = false;
-      secondScene.visible = true;
       inHomeScene.visible = false;
-      secondScene.interactive = true;
-      secondScene.buttonMode = true;
-      secondScene.on('pointerdown', onClick2);
-      gameScene2();
-    }
-    function onClick2() {
-      console.log("chang to Scene3")
-      firstScene.visible = false;
-      doorScene.visible = false;
-      homeScene.visible = true;
-      secondScene.visible = false;
-      inHomeScene.visible = false;
-      homeScene.interactive = true;
-      homeScene.buttonMode = true;
-      homeScene.on('pointerdown', onClick3);
-      gameScene3();
-    }
-    function onClick3() {
-      console.log("chang to doorScene")
-      firstScene.visible = false;
-      doorScene.visible = true;
-      homeScene.visible = false;
-      secondScene.visible = false;
-      inHomeScene.visible = false;
-      doorScene.interactive = true;
-      doorScene.buttonMode = true;
-      doorScene.on('pointerdown', onClick4);
-      doorScene3();
-    }
-    function onClick4() {
-      console.log("chang to inHome")
-      firstScene.visible = false;
-      doorScene.visible = false;
-      homeScene.visible = false;
-      secondScene.visible = false;
-      inHomeScene.visible = true;
-      inHomeScene.interactive = true;
-      inHomeScene.buttonMode = true;
-      inHomeScene.on('pointerdown', onClick4_2);
-      homeScene4();
-    }
-    function onClick4_2() {
-      console.log("chang to inHome 4.2")
-      firstScene.visible = false;
-      doorScene.visible = false;
-      homeScene.visible = false;
-      secondScene.visible = false;
-      inHome2Scene.visible = true;
-      inHomeScene.visible = false;
-      inHome2Scene.interactive = true;
-      inHome2Scene.buttonMode = true;
-      inHome2Scene.on('pointerdown', onClick4_3);
-      homeScene4_2();
-    }
-
-    function onClick4_3() {
-      console.log("chang to inHome 4.3")
-      firstScene.visible = false;
-      doorScene.visible = false;
-      homeScene.visible = false;
-      secondScene.visible = false;
       inHome2Scene.visible = false;
-      inHomeScene.visible = false;
-      inHome3Scene.visible = true;
-      inHome3Scene.interactive = true;
-      inHome3Scene.buttonMode = true;
-      inHome3Scene.on('pointerdown', onClick5);
-      homeScene4_3();
-    }
-    function onClick5() {
-      console.log("chang to Scene 5")
-      firstScene.visible = false;
-      doorScene.visible = false;
-      homeScene.visible = false;
-      secondScene.visible = false;
-      inHome2Scene.visible = false;
-      inHomeScene.visible = false;
-      inHome3Scene.visible = false;
-      jungleScene.visible = true;
-      jungleScene.interactive = true;
-      jungleScene.buttonMode = true;
-      jungleScene.on('pointerdown', onClick6);
-      gameScene5();
-    }
-    function onClick6() {
-      console.log("chang to Scene 6")
-      firstScene.visible = false;
-      doorScene.visible = false;
-      homeScene.visible = false;
-      secondScene.visible = false;
-      inHome2Scene.visible = false;
-      inHomeScene.visible = false;
-      inHome3Scene.visible = false;
-      jungleScene.visible = false;
-      endScene.visible = true;
-      endScene.interactive = true;
-      endScene.buttonMode = true;
-      endScene.on('pointerdown', onClick6_1);
-      gameScene6();
-    }
-    function onClick6_1() {
-      console.log("chang to Scene End")
-      firstScene.visible = false;
-      doorScene.visible = false;
-      homeScene.visible = false;
-      secondScene.visible = false;
-      inHome2Scene.visible = false;
-      inHomeScene.visible = false;
       inHome3Scene.visible = false;
       jungleScene.visible = false;
       endScene.visible = false;
-      lastScene.visible = true;
-      gameLastScene();
-    }
+      lastScene.visible = false;
+      happyAction.visible = false;
+      angryAction.visible = false;
+      musicAction.visible = false;
+      talkAction.visible = false;
+      pointAction.visible = false;
 
-    function wait(duration = 0) {
-      return new Promise((resolve, reject) => {
-          setTimeout(resolve, duration);
-      });
-  }
-    if(!gameRef.current) gameRef.current = {};
-    console.log('GameRef:',gameRef.current)
-// change Name fuction 
-// do state machine
-    gameRef.current.changeScene = (prop: string) =>{
-      console.log('prop to pixi:',prop)
-      if(prop == 'S2'){
-        
-        onClick1()
-      }else if (prop == 'S3'){
-        onClick2()
-        wait(2000).then(() =>{
-          onClick3();
-        })
-        // wait(4000).then(() =>{
-        //   onClick4();
-        // })
-        // wait(6000).then(() =>{
-        //   onClick4_2();
-        // })
-      }else if (prop == 'S4'){
-        onClick4();
-        wait(2000).then(() =>{
-          onClick4_2();
-        })
-      }else if (prop == 'S4.2'){
-        onClick4_2();
-      }else if (prop == 'S4.3'){
-        onClick4_3()
+      firstScene.pivot.set(0,1)
+      secondScene.pivot.set(0,1)
+      homeScene.pivot.set(0,1)
+      doorScene.pivot.set(0,1)
+      inHomeScene.pivot.set(0,1)
+      inHome2Scene.pivot.set(0,1)
+      inHome3Scene.pivot.set(0,1)
+      jungleScene.pivot.set(0,1)
+      endScene.pivot.set(0,1)
+      lastScene.pivot.set(0,1)
+
+
+      const ticker = new PIXI.Ticker();
+      function animate() {
+        sprites.Cloud1.x += 0.1 * 2
+        sprites.Cloud2.x -= 0.1 * 3
       }
-      else if (prop == 'S5'){
-        onClick5()
-      }else if (prop == 'S6'){
-        onClick6()
-      }else if (prop == 'S6.1'){
-          onClick6_1();
-      }
+      gameScene1()
+      firstScene.interactive = true;
+      firstScene.buttonMode = true;
+      firstScene.on('pointerdown', goScene2);
+
+      function wait(duration = 0) {
+        return new Promise((resolve, reject) => {
+            setTimeout(resolve, duration);
+        });
     }
 
-    function gameScene1() {
-      //Background 
-      const skyTexture = PIXI.Texture.from(sky);
-      const bgSky = new PIXI.Sprite(skyTexture);
-      bgSky.scale.set(0.7);
-      firstScene.addChild(bgSky)
+    // ------------------- Props From react --------------//
+      if(!gameRef.current) gameRef.current = {};
+      console.log('GameRef:',gameRef.current)
 
-      const texture = PIXI.Texture.from(ground);
-      const dirt = new PIXI.Sprite(texture);
-      dirt.scale.set(0.7);
-      dirt.anchor.set(0,-1);
-      firstScene.addChild(dirt)
-
-      const treeTexture = PIXI.Texture.from(tree);
-      const bgTree = new PIXI.Sprite(treeTexture);
-      bgTree.scale.set(0.7);
-      bgTree.anchor.set(0,-1);
-      firstScene.addChild(bgTree)
-
-      Cloud1.scale.set(0.5);
-      Cloud1.position.set(10, 20);
-      firstScene.addChild(Cloud1)
-
-      Cloud2.scale.set(0.5);
-      Cloud2.position.set(500, 150);
-      firstScene.addChild(Cloud2)
-
-      //Item 
-
-      const treeb2Texture = PIXI.Texture.from(treeb2);
-      const Treeb2 = new PIXI.Sprite(treeb2Texture);
-      Treeb2.scale.set(0.3);
-      Treeb2.position.set(150,230);
-      firstScene.addChild(Treeb2)
-
-      const treeb1Texture = PIXI.Texture.from(treeb1);
-      const Treeb1 = new PIXI.Sprite(treeb1Texture);
-      Treeb1.scale.set(0.5);
-      Treeb1.position.set(-20,300);
-      firstScene.addChild(Treeb1)
-
-      const treef1Texture = PIXI.Texture.from(treef1);
-      const Treef1 = new PIXI.Sprite(treef1Texture);
-      Treef1.scale.set(0.8);
-      Treef1.position.set(-300,-100);
-      firstScene.addChild(Treef1)
-
-      const bush1Texture = PIXI.Texture.from(bush1);
-      const Bush1r = new PIXI.Sprite(bush1Texture);
-      Bush1r.scale.set(0.4);
-      Bush1r.position.set(350,480);
-      firstScene.addChild(Bush1r)
-
-      const treef2Texture = PIXI.Texture.from(treef2);
-      const Treef2 = new PIXI.Sprite(treef2Texture);
-      Treef2.scale.set(0.7)
-      Treef2.position.set(850,0);
-      Treef2.scale.x = -1
-      firstScene.addChild(Treef2)
-
-      //left
-      const bush2Texture = PIXI.Texture.from(bush2);
-      const Bush2 = new PIXI.Sprite(bush2Texture);
-      Bush2.scale.set(0.4);
-      Bush2.position.set(-50,500);
-      firstScene.addChild(Bush2)
-
-      const Bush1 = new PIXI.Sprite(bush1Texture);
-      Bush1.scale.set(0.7);
-      Bush1.position.set(-100,600);
-      firstScene.addChild(Bush1)
-
-      //right
-
-      const bush3Texture = PIXI.Texture.from(bush3);
-      const Bush3 = new PIXI.Sprite(bush3Texture);
-      Bush3.scale.set(0.4);
-      Bush3.position.set(350,550);
-      firstScene.addChild(Bush3)
-
-      const bush4Texture = PIXI.Texture.from(bush4);
-      const Bush4 = new PIXI.Sprite(bush4Texture);
-      Bush4.scale.set(0.4);
-      Bush4.position.set(450,620);
-      firstScene.addChild(Bush4)
-
-      ticker.add(animate);
-      ticker.start();
-
-      setTimeout(()=>{
-        ticker.stop();
-        // ticker.remove(animate)
-        }, 30000)
-    }
-    function gameScene2 () {
-      //Background 
-
-      const skyTexture = PIXI.Texture.from(sky);
-      const bgSky = new PIXI.Sprite(skyTexture);
-      bgSky.scale.set(0.7);
-      secondScene.addChild(bgSky)
-
-      const texture = PIXI.Texture.from(ground);
-      const dirt = new PIXI.Sprite(texture);
-      dirt.scale.set(0.7);
-      dirt.anchor.set(0,-1);
-      secondScene.addChild(dirt)
-
-      const treeTexture = PIXI.Texture.from(tree);
-      const bgTree = new PIXI.Sprite(treeTexture);
-      bgTree.scale.set(0.7);
-      bgTree.anchor.set(0,-1);
-      secondScene.addChild(bgTree)
-
-      Cloud1.scale.set(0.5);
-      Cloud1.position.set(10, 20);
-      secondScene.addChild(Cloud1)
-
-      Cloud2.scale.set(0.5);
-      Cloud2.position.set(500, 150);
-      secondScene.addChild(Cloud2)
-      //Item 
-      const treeb1Texture = PIXI.Texture.from(treeb1);
-      const Treeb1 = new PIXI.Sprite(treeb1Texture);
-      Treeb1.scale.set(0.4)
-      Treeb1.position.set(250,400);
-      secondScene.addChild(Treeb1)
-
-      const treeb3Texture = PIXI.Texture.from(treeb3);
-      const Treeb3 = new PIXI.Sprite(treeb3Texture);
-      Treeb3.scale.set(0.3)
-      Treeb3.position.set(160,250);
-      secondScene.addChild(Treeb3)
-
-      const treeb2Texture = PIXI.Texture.from(treeb2);
-      const Treeb2 = new PIXI.Sprite(treeb2Texture);
-      Treeb2.scale.set(0.4)
-      Treeb2.position.set(0,300);
-      secondScene.addChild(Treeb2)
-
-      const treef1Texture = PIXI.Texture.from(treef1);
-      const Treef1 = new PIXI.Sprite(treef1Texture);
-      Treef1.scale.set(0.7)
-      Treef1.position.set(300,80);
-      secondScene.addChild(Treef1)
-
-      const bush3Texture = PIXI.Texture.from(bush3);
-      const Bush3 = new PIXI.Sprite(bush3Texture);
-      Bush3.scale.set(0.3);
-      Bush3.position.set(-80,600);
-      secondScene.addChild(Bush3)
-
-      const treef2Texture = PIXI.Texture.from(treef2);
-      const Treef2 = new PIXI.Sprite(treef2Texture);
-      Treef2.scale.set(0.9);
-      Treef2.position.set(-250,-100);
-      secondScene.addChild(Treef2)
-
-      const bush4Texture = PIXI.Texture.from(bush4);
-      const Bush4 = new PIXI.Sprite(bush4Texture);
-      Bush4.scale.set(0.3);
-      Bush4.position.set(-5,700);
-      secondScene.addChild(Bush4)
-
-      const bush2Texture = PIXI.Texture.from(bush2);
-      const Bush2 = new PIXI.Sprite(bush2Texture);
-      Bush2.scale.set(0.5);
-      Bush2.position.set(350,550);
-      secondScene.addChild(Bush2)
-
-      const bush1Texture = PIXI.Texture.from(bush1);
-      const Bush1 = new PIXI.Sprite(bush1Texture);
-      Bush1.scale.set(0.6);
-      Bush1.position.set(450,600);
-      secondScene.addChild(Bush1)
-    }
-    function gameScene3 () {
-      //Background 
-      const skyTexture = PIXI.Texture.from(sky);
-      const bgSky = new PIXI.Sprite(skyTexture);
-      bgSky.scale.set(0.7);
-      bgSky.anchor.set(0,0);
-      homeScene.addChild(bgSky)
-
-      const texture = PIXI.Texture.from(groundS3);
-      const dirtS3 = new PIXI.Sprite(texture);
-      dirtS3.scale.set(0.7);
-      dirtS3.anchor.set(0,-0.5);
-      homeScene.addChild(dirtS3)
-
-      const treeTexture = PIXI.Texture.from(tree);
-      const bgTree = new PIXI.Sprite(treeTexture);
-      bgTree.scale.set(0.6);
-      bgTree.position.set(0,100);
-      homeScene.addChild(bgTree)
-
-      Cloud1.scale.set(0.5);
-      Cloud1.position.set(10, 20);
-      homeScene.addChild(Cloud1)
-
-      Cloud2.scale.set(0.5);
-      Cloud2.position.set(500, 150);
-      homeScene.addChild(Cloud2)
-
-      const houseTexture = PIXI.Texture.from(house);
-      const houseS3 = new PIXI.Sprite(houseTexture);
-      houseS3.scale.set(0.5);
-      houseS3.position.set(100,200);
-      homeScene.addChild(houseS3)
-
-      const fenceTexture = PIXI.Texture.from(fence);
-      const fenceS3 = new PIXI.Sprite(fenceTexture);
-      fenceS3.scale.set(0.8);
-      fenceS3.position.set(50,300);
-      homeScene.addChild(fenceS3)
-
-      const treef2Texture = PIXI.Texture.from(treef2);
-      const Treef2 = new PIXI.Sprite(treef2Texture);
-      Treef2.scale.set(1)
-      Treef2.position.set(820,-350);
-      Treef2.scale.x = -1
-      homeScene.addChild(Treef2)
-
-      const bush3Texture = PIXI.Texture.from(bush3);
-      const Bush3 = new PIXI.Sprite(bush3Texture);
-      Bush3.scale.set(0.7);
-      Bush3.position.set(300,450);
-      homeScene.addChild(Bush3)
-
-      const treenewTexture = PIXI.Texture.from(TreeFnew);
-      const Treefnew = new PIXI.Sprite(treenewTexture);
-      Treefnew.scale.set(0.6,1);
-      Treefnew.position.set(-450,-400);
-      homeScene.addChild(Treefnew)
-
-      const bush1Texture = PIXI.Texture.from(bush1);
-      const Bush1 = new PIXI.Sprite(bush1Texture);
-      Bush1.scale.set(0.6);
-      Bush1.position.set(-100,600);
-      homeScene.addChild(Bush1)
-    }
-    function doorScene3 () {
-            //Background 
-            const bghouseTexture = PIXI.Texture.from(bgHouseS3);
-            const bghouse = new PIXI.Sprite(bghouseTexture);
-            bghouse.scale.set(0.7);
-            bghouse.anchor.set(0,0);
-            doorScene.addChild(bghouse)
-
-            const doorTexture = PIXI.Texture.from(door);
-            const doorS3 = new PIXI.Sprite(doorTexture);
-            doorS3.scale.set(0.5);
-            doorS3.position.set(70,100);
-            doorScene.addChild(doorS3)
-
-            const flowerTexture = PIXI.Texture.from(flower);
-            const flowerS3 = new PIXI.Sprite(flowerTexture);
-            flowerS3.scale.set(0.6);
-            flowerS3.position.set(-100,600);
-            doorScene.addChild(flowerS3)
-    
-            const flower2S3 = new PIXI.Sprite(flowerTexture);
-            flower2S3.scale.set(0.6);
-            flower2S3.position.set(450,600);
-            doorScene.addChild(flower2S3)
-    }
-    function homeScene4 () {
-      //Background 
-      const bgS4Texture = PIXI.Texture.from(bgS4);
-      const bgS4Home = new PIXI.Sprite(bgS4Texture);
-      bgS4Home.scale.set(0.7,0.55);
-      bgS4Home.position.set(-50,0);
-      inHomeScene.addChild(bgS4Home)
-
-      const funitureTexture = PIXI.Texture.from(funiture);
-      const funitureS4 = new PIXI.Sprite(funitureTexture);
-      funitureS4.scale.set(0.5,0.6);
-      funitureS4.position.set(-150,20);
-      inHomeScene.addChild(funitureS4)
-
-      const sofaTexture = PIXI.Texture.from(sofa);
-      const sofaS4 = new PIXI.Sprite(sofaTexture);
-      sofaS4.scale.set(0.5,0.6);
-      sofaS4.position.set(150,500);
-      inHomeScene.addChild(sofaS4)
-    }
-    function homeScene4_2 () {
-      //Background 
-      const bgS42Texture = PIXI.Texture.from(bgS42);
-      const bgS42Home = new PIXI.Sprite(bgS42Texture);
-      bgS42Home.scale.set(0.7,0.55);
-      bgS42Home.position.set(0,0);
-      inHome2Scene.addChild(bgS42Home)
-
-      const sofa2Texture = PIXI.Texture.from(sofa2);
-      const sofa2S4 = new PIXI.Sprite(sofa2Texture);
-      sofa2S4.scale.set(0.5,0.6);
-      sofa2S4.position.set(0,0);
-      inHome2Scene.addChild( sofa2S4)
-    }
-    function homeScene4_3 () {
-      //Background 
-      const bgS43Texture = PIXI.Texture.from(bgS43);
-      const bgS43Home = new PIXI.Sprite(bgS43Texture);
-      bgS43Home.scale.set(0.7,0.55);
-      bgS43Home.position.set(0,0);
-      inHome3Scene.addChild(bgS43Home)
-
-      const sewingTexture = PIXI.Texture.from(sewing);
-      const sewingS4 = new PIXI.Sprite(sewingTexture);
-      sewingS4.scale.set(0.6);
-      sewingS4.position.set(100,-50);
-      inHome3Scene.addChild( sewingS4)
-
-      const toolsTexture = PIXI.Texture.from(tools);
-      const toolsS4 = new PIXI.Sprite(toolsTexture);
-      toolsS4.scale.set(0.5,0.5);
-      toolsS4.position.set(0,0);
-      inHome3Scene.addChild(toolsS4)
-    }
-    function gameScene5 () {
-           //Background 
-
-           const skyTexture = PIXI.Texture.from(sky);
-           const bgSky = new PIXI.Sprite(skyTexture);
-           bgSky.scale.set(0.7);
-           jungleScene.addChild(bgSky)
-     
-           const texture = PIXI.Texture.from(ground);
-           const dirt = new PIXI.Sprite(texture);
-           dirt.scale.set(0.7);
-           dirt.anchor.set(0,-1);
-           jungleScene.addChild(dirt)
-     
-           const treeTexture = PIXI.Texture.from(tree);
-           const bgTree = new PIXI.Sprite(treeTexture);
-           bgTree.scale.set(0.7);
-           bgTree.anchor.set(0,-1);
-           jungleScene.addChild(bgTree)
-     
-           Cloud1.scale.set(0.5);
-           Cloud1.position.set(10, 20);
-           jungleScene.addChild(Cloud1)
-     
-           Cloud2.scale.set(0.5);
-           Cloud2.position.set(500, 150);
-           jungleScene.addChild(Cloud2)
-           //Item 
-           const treeb1Texture = PIXI.Texture.from(treeb1);
-           const Treeb1 = new PIXI.Sprite(treeb1Texture);
-           Treeb1.scale.set(0.4)
-           Treeb1.position.set(300,350);
-           jungleScene.addChild(Treeb1)
-     
-           const treeb3Texture = PIXI.Texture.from(treeb3);
-           const Treeb3 = new PIXI.Sprite(treeb3Texture);
-           Treeb3.scale.set(0.3)
-           Treeb3.position.set(160,250);
-           jungleScene.addChild(Treeb3)
-     
-           const treeb2Texture = PIXI.Texture.from(treeb2);
-           const Treeb2 = new PIXI.Sprite(treeb2Texture);
-           Treeb2.scale.set(0.4)
-           Treeb2.position.set(0,300);
-           jungleScene.addChild(Treeb2)
-     
-           const bigTreeTexture = PIXI.Texture.from(bigTree);
-           const bigTreeS5 = new PIXI.Sprite(bigTreeTexture);
-           bigTreeS5.scale.set(0.7)
-           bigTreeS5.position.set(300,30);
-           jungleScene.addChild(bigTreeS5)
-     
-           const bush3Texture = PIXI.Texture.from(bush3);
-           const Bush3 = new PIXI.Sprite(bush3Texture);
-           Bush3.scale.set(0.3);
-           Bush3.position.set(-80,600);
-           jungleScene.addChild(Bush3)
-     
-           const treef2Texture = PIXI.Texture.from(treef2);
-           const Treef2 = new PIXI.Sprite(treef2Texture);
-           Treef2.scale.set(0.9);
-           Treef2.position.set(-250,-100);
-           jungleScene.addChild(Treef2)
-     
-           const bush4Texture = PIXI.Texture.from(bush4);
-           const Bush4 = new PIXI.Sprite(bush4Texture);
-           Bush4.scale.set(0.3);
-           Bush4.position.set(-5,700);
-           jungleScene.addChild(Bush4)
-     
-           const bush2Texture = PIXI.Texture.from(bush2);
-           const Bush2 = new PIXI.Sprite(bush2Texture);
-           Bush2.scale.set(0.5);
-           Bush2.position.set(350,550);
-           jungleScene.addChild(Bush2)
-     
-           const bush1Texture = PIXI.Texture.from(bush1);
-           const Bush1 = new PIXI.Sprite(bush1Texture);
-           Bush1.scale.set(0.6);
-           Bush1.position.set(450,600);
-           jungleScene.addChild(Bush1)
-    }
-    function gameScene6() {
-             //Background 
-             const skyTexture = PIXI.Texture.from(sky);
-             const bgSky = new PIXI.Sprite(skyTexture);
-             bgSky.scale.set(0.7);
-             endScene.addChild(bgSky)
-                    
-             const texture = PIXI.Texture.from(ground);
-             const dirt = new PIXI.Sprite(texture);
-             dirt.scale.set(0.7,0.6);
-             dirt.anchor.set(0,-1.5);
-             endScene.addChild(dirt)
-
-             const lakeTexture = PIXI.Texture.from(lake);
-             const lakeS5 = new PIXI.Sprite(lakeTexture);
-             lakeS5.scale.set(0.7);
-             lakeS5.position.set(0, 130);
-             endScene.addChild(lakeS5)
-       
-             Cloud1.scale.set(0.5);
-             Cloud1.position.set(10, 20);
-             endScene.addChild(Cloud1)
-       
-             Cloud2.scale.set(0.5);
-             Cloud2.position.set(500, 150);
-             endScene.addChild(Cloud2)
-
-             const treeb2Texture = PIXI.Texture.from(treeb2);
-             const Treeb2 = new PIXI.Sprite(treeb2Texture);
-             Treeb2 .scale.set(0.5)
-             Treeb2 .position.set(380,200);
-             endScene.addChild(Treeb2 )
-
-             const bush3Texture = PIXI.Texture.from(bush3);
-             const Bush3 = new PIXI.Sprite(bush3Texture);
-             Bush3.scale.set(0.6);
-             Bush3.position.set(300,450);
-             endScene.addChild(Bush3)
-
-             const bush4Texture = PIXI.Texture.from(bush4);
-             const Bush4 = new PIXI.Sprite(bush4Texture);
-             Bush4.scale.set(0.6);
-             Bush4.position.set(350,600);
-             endScene.addChild(Bush4)
-       
-             const bush2Texture = PIXI.Texture.from(bush2);
-             const Bush2 = new PIXI.Sprite(bush2Texture);
-             Bush2.scale.set(0.5);
-             Bush2.position.set(-40,450);
-             endScene.addChild(Bush2)
-
-             const treenewTexture = PIXI.Texture.from(TreeFnew);
-             const Treefnew = new PIXI.Sprite(treenewTexture);
-             Treefnew.scale.set(0.7,0.8);
-             Treefnew.position.set(-380,-320);
-             endScene.addChild(Treefnew)
-
-             const bush1Texture = PIXI.Texture.from(bush1);
-             const Bush1 = new PIXI.Sprite(bush1Texture);
-             Bush1.scale.set(0.6);
-             Bush1.position.set(-100,600);
-             endScene.addChild(Bush1)
- //Item
-
-
-    }
-    function gameLastScene() {
-
-      const verticesX = 5;
-      const verticesY = 10;
-      const waterTexture = PIXI.Texture.from(water);
-      // const bgWater = new PIXI.Sprite(waterTexture);
-      // bgWater.scale.set(0.7);
-      // lastScene.addChild(bgWater)
-      const planeWater = new PIXI.SimplePlane(waterTexture, verticesX, verticesY);
-             
-      const texture = PIXI.Texture.from(shadow);
-      // const shadowS6 = new PIXI.Sprite(texture);
-      // shadowS6.scale.set(0.5);
-      // shadowS6.position.set(20,150);
-      // lastScene.addChild(shadowS6 )
-
-          // Create the simple plane
-
-    const plane = new PIXI.SimplePlane(texture, verticesX, verticesY);
-
-    plane.x = 20;
-    plane.y = 150;
-    plane.scale.set(0.5);
-
-    planeWater.scale.set(0.7);
-    lastScene.addChild(planeWater);
-    lastScene.addChild(plane);
-
-    // Get the buffer for vertice positions.
-    const bufferWater = planeWater.geometry.getBuffer('aVertexPosition');
-    const buffer = plane.geometry.getBuffer('aVertexPosition');
-
-    // Listen for animate update
-    app.ticker.add(() => {
-        // Randomize the vertice positions a bit to create movement.
-        for (let i = 0; i < buffer.data.length; i++) {
-            buffer.data[i] += (Math.random() - 0.5);
+      gameRef.current.changeScene = (prop: string) =>{
+        console.log('prop to pixi:',prop)
+        if(prop == 'S2'){
+          goScene2()
+        }else if (prop == 'S3'){
+          goScene3()
+          wait(2000).then(() =>{
+            goSceneDoor();
+          })
+        }else if (prop == 'S4'){
+          goSceneInHome();
+          wait(2000).then(() =>{
+            goSceneInHome2();
+          })
+        }else if (prop == 'S4.2'){
+          goSceneInHome2();
+        }else if (prop == 'S4.3'){
+         goSceneInHome3()
         }
-        buffer.update();
-        for (let i = 0; i < bufferWater.data.length; i++) {
-          bufferWater.data[i] += (Math.random() - 0.5);
+        else if (prop == 'S5'){
+          goScene5()
+        }else if (prop == 'S6'){
+          goSceneLake()
+        }else if (prop == 'S6.1'){
+            goSceneEnd();
+        }else if (prop == 'angry'){
+          happyAction.visible = false;
+          angryAction.visible = true;
+          angryAction.pivot.set(0,1);
+          angryFriend()
+      }else if (prop == 'happy'){
+        happyAction.visible = true;
+        angryAction.visible = false;
+        happyAction.pivot.set(0,1);
+        happyFriend()
+    }else if (prop == 'talk'){
+      musicAction.visible = false;
+      talkAction.visible = true;
+      talkAction.pivot.set(0,1);
+      Talk()
+    }else if (prop == 'point'){
+      talkAction.visible = false;
+      pointAction.visible = true;
+      pointAction.pivot.set(0,1);
+      Point()
+    }
       }
-      bufferWater.update();
-    });
+
+      // ------------------- Assete each of Scene--------------//
+      function gameScene1() {    
+        //Background 
+        sprites.BgSky.scale.set(0.7);
+        firstScene.addChild(sprites.BgSky)
+  
+        sprites.BgGround.scale.set(0.7);
+        sprites.BgGround.anchor.set(0,-1);
+        firstScene.addChild(sprites.BgGround)
+  
+        sprites.BgTree.scale.set(0.7);
+        sprites.BgTree.anchor.set(0,-1);
+        firstScene.addChild(sprites.BgTree)
+  
+        sprites.Cloud1.scale.set(0.5);
+        sprites.Cloud1.position.set(10, 20);
+        firstScene.addChild(sprites.Cloud1)
+  
+        sprites.Cloud2.scale.set(0.5);
+        sprites.Cloud2.position.set(500, 150);
+        firstScene.addChild(sprites.Cloud2)
+  
+        //Item 
+        sprites.TreeB2.scale.set(0.3);
+        sprites.TreeB2.position.set(150,230);
+        firstScene.addChild(sprites.TreeB2)
+  
+        sprites.TreeB1.scale.set(0.5);
+        sprites.TreeB1.position.set(-20,300);
+        firstScene.addChild(sprites.TreeB1)
+  
+        sprites.TreeF1.scale.set(0.8);
+        sprites.TreeF1.position.set(-260,-100);
+        firstScene.addChild(sprites.TreeF1)
+  
+        sprites.Brush1.scale.set(0.4);
+        sprites.Brush1.position.set(350,480);
+        firstScene.addChild(sprites.Brush1)
+  
+        sprites.TreeF2.scale.set(0.7)
+        sprites.TreeF2.position.set(850,0);
+        sprites.TreeF2.scale.x = -1
+        firstScene.addChild(sprites.TreeF2)
+  
+        //left
+        sprites.Brush2.scale.set(0.4);
+        sprites.Brush2.position.set(-150,550);
+        firstScene.addChild(sprites.Brush2)
+  
+        const Brush1new = sprites.Brush1
+        Brush1new.scale.set(0.7);
+        Brush1new.position.set(-100,600);
+        firstScene.addChild(Brush1new)
+  
+        //right
+        sprites.Brush3.scale.set(0.4);
+        sprites.Brush3.position.set(350,550);
+        firstScene.addChild(sprites.Brush3)
+  
+        sprites.Brush4.scale.set(0.4);
+        sprites.Brush4.position.set(450,620);
+        firstScene.addChild(sprites.Brush4)
+        ticker.add(animate);
+        ticker.start();
+  
+      }
+      function gameScene2 () {
+        //Background 
+        sprites.BgSky.scale.set(0.7);
+        secondScene.addChild(sprites.BgSky)
+  
+        sprites.BgGround.scale.set(0.7);
+        sprites.BgGround.anchor.set(0,-1);
+        secondScene.addChild(sprites.BgGround)
+  
+        sprites.BgTree.scale.set(0.7);
+        sprites.BgTree.anchor.set(0,-1);
+        secondScene.addChild(sprites.BgTree);
+  
+        sprites.Cloud1.scale.set(0.5);
+        sprites.Cloud1.position.set(10, 20);
+        secondScene.addChild(sprites.Cloud1)
+  
+        sprites.Cloud2.scale.set(0.5);
+        sprites.Cloud2.position.set(500, 150);
+        secondScene.addChild(sprites.Cloud2)
+        //Item 
+  
+        sprites.TreeB1.scale.set(0.4)
+        sprites.TreeB1.position.set(250,400);
+        secondScene.addChild(sprites.TreeB1)
+  
+        sprites.TreeB3.scale.set(0.3)
+        sprites.TreeB3.position.set(160,250);
+        secondScene.addChild(sprites.TreeB3)
+  
+        sprites.TreeB2.scale.set(0.4)
+        sprites.TreeB2.position.set(0,300);
+        secondScene.addChild(sprites.TreeB2)
+  
+        sprites.TreeF1.scale.set(0.7)
+        sprites.TreeF1.position.set(300,80);
+        secondScene.addChild(sprites.TreeF1)
+  
+        sprites.Brush3.scale.set(0.3);
+        sprites.Brush3.position.set(-80,600);
+        secondScene.addChild(sprites.Brush3)
+  
+        sprites.TreeF2.scale.set(0.9);
+        sprites.TreeF2.position.set(-250,-100);
+        secondScene.addChild(sprites.TreeF2)
+  
+        sprites.Brush4.scale.set(0.3);
+        sprites.Brush4.position.set(-5,700);
+        secondScene.addChild(sprites.Brush4)
+  
+        sprites.Brush2.scale.set(0.5);
+        sprites.Brush2.position.set(350,550);
+        secondScene.addChild(sprites.Brush2)
+  
+        sprites.Brush1.scale.set(0.6);
+        sprites.Brush1.position.set(450,600);
+        secondScene.addChild(sprites.Brush1)
+
+        happyFriend();
+        ticker.add(animate);
+        ticker.start();
+
+      }
+
+      function gameScene3 () {
+        //Background 
+        sprites.BgSky.scale.set(0.7);
+        sprites.BgSky.anchor.set(0,0);
+        homeScene.addChild(sprites.BgSky)
+  
+        sprites.BgGroundS3.scale.set(0.7);
+        sprites.BgGroundS3.anchor.set(0,-0.5);
+        homeScene.addChild(sprites.BgGroundS3)
+  
+        sprites.Cloud1.scale.set(0.5);
+        sprites.Cloud1.position.set(10, 20);
+        homeScene.addChild(sprites.Cloud1)
+  
+        sprites.Cloud2.scale.set(0.5);
+        sprites.Cloud2.position.set(500, 150);
+        homeScene.addChild(sprites.Cloud2)
+  
+        // sprites.BgTree.scale.set(0.6);
+        // sprites.BgTree.position.set(0,100);
+        // homeScene.addChild(sprites.BgTree)
+  
+        sprites.Home.scale.set(0.5);
+        sprites.Home.position.set(100,200);
+        homeScene.addChild(sprites.Home)
+  
+        sprites.Fence.scale.set(0.8);
+        sprites.Fence.position.set(50,300);
+        homeScene.addChild(sprites.Fence)
+  
+        sprites.TreeF2.scale.set(1)
+        sprites.TreeF2.position.set(820,-350);
+        sprites.TreeF2.scale.x = -1
+        homeScene.addChild(sprites.TreeF2)
+  
+        sprites.Brush3.scale.set(0.7);
+        sprites.Brush3.position.set(300,450);
+        homeScene.addChild(sprites.Brush3)
+  
+        sprites.TreeFnew.scale.set(0.6,1);
+        sprites.TreeFnew.position.set(-450,-400);
+        homeScene.addChild(sprites.TreeFnew)
+  
+        sprites.Brush1.scale.set(0.6);
+        sprites.Brush1.position.set(-100,600);
+        homeScene.addChild(sprites.Brush1)
+        ticker.add(animate);
+        ticker.start();
+      }
+      function doorScene3 () {
+              //Background 
+              sprites.BgOutHome.scale.set(0.7);
+              sprites.BgOutHome.anchor.set(0,0);
+              doorScene.addChild(sprites.BgOutHome)
+  
+              sprites.Door.scale.set(0.5);
+              sprites.Door.position.set(70,100);
+              doorScene.addChild(sprites.Door)
+  
+              sprites.Flower.scale.set(0.6);
+              sprites.Flower.position.set(-100,600);
+              doorScene.addChild(sprites.Flower)
+      
+              sprites.Flower2.scale.set(0.6);
+              sprites.Flower.position.set(450,600);
+              doorScene.addChild(sprites.Flower)
+      }
+      function homeScene4 () {
+        //Background 
+        sprites.BgHome.scale.set(0.7,0.55);
+        sprites.BgHome.position.set(-50,0);
+        inHomeScene.addChild(sprites.BgHome)
+  
+        sprites.Funiture.scale.set(0.5,0.6);
+        sprites.Funiture.position.set(-150,20);
+        inHomeScene.addChild(sprites.Funiture)
+  
+        sprites.Sofa.scale.set(0.5,0.6);
+        sprites.Sofa.position.set(150,500);
+        inHomeScene.addChild(sprites.Sofa)
+      }
+
+      function homeScene4_2 () {
+        //Background 
+        sprites.BgHomein.scale.set(0.7,0.55);
+        sprites.BgHomein.position.set(0,0);
+        inHome2Scene.addChild(sprites.BgHomein)
+  
+        sprites.Sofa2.scale.set(0.5,0.6);
+        sprites.Sofa2.position.set(0,0);
+        inHome2Scene.addChild( sprites.Sofa2)
+      }
+
+      function homeScene4_3 () {
+        //Background 
+        sprites.BgHomein2.scale.set(0.7,0.55);
+        sprites.BgHomein2.position.set(0,0);
+        inHome3Scene.addChild(sprites.BgHomein2)
+  
+        sprites.Sewing.scale.set(0.6);
+        sprites.Sewing.position.set(100,-50);
+        inHome3Scene.addChild( sprites.Sewing)
+  
+        sprites.Tools.scale.set(0.5,0.5);
+        sprites.Tools.position.set(0,0);
+        inHome3Scene.addChild(sprites.Tools)
+      }
+
+      function gameScene5 () {
+             //Background 
+             sprites.BgSky.scale.set(0.7);
+             jungleScene.addChild(sprites.BgSky)
+       
+             sprites.BgGround.scale.set(0.7);
+             sprites.BgGround.anchor.set(0,-1);
+             jungleScene.addChild(sprites.BgGround)
+       
+             sprites.BgTree.scale.set(0.7);
+             sprites.BgTree.anchor.set(0,-1);
+             jungleScene.addChild(sprites.BgTree)
+       
+             sprites.Cloud1.scale.set(0.5);
+             sprites.Cloud1.position.set(10, 20);
+             jungleScene.addChild(sprites.Cloud1)
+       
+             sprites.Cloud2.scale.set(0.5);
+             sprites.Cloud2.position.set(500, 150);
+             jungleScene.addChild(sprites.Cloud2)
+             //Item 
+    
+             sprites.TreeB1.scale.set(0.4)
+             sprites.TreeB1.position.set(300,350);
+             jungleScene.addChild(sprites.TreeB1)
+       
+             sprites.TreeB3.scale.set(0.3)
+             sprites.TreeB3.position.set(160,250);
+             jungleScene.addChild(sprites.TreeB3)
+       
+             sprites.TreeB2.scale.set(0.4)
+             sprites.TreeB2.position.set(0,300);
+             jungleScene.addChild(sprites.TreeB2)
+
+             sprites.Brush2.scale.set(0.5);
+             sprites.Brush2.position.set(350,400);
+             jungleScene.addChild(sprites.Brush2)
+
+             playMusic()
+
+             sprites.BigTree.scale.set(0.8)
+             sprites.BigTree.position.set(180,-80);
+             jungleScene.addChild(sprites.BigTree)
+       
+             sprites.Brush3.scale.set(0.3);
+             sprites.Brush3.position.set(-80,600);
+             jungleScene.addChild(sprites.Brush3)
+  
+             sprites.TreeF2.scale.set(0.9);
+             sprites.TreeF2.position.set(-250,-100);
+             jungleScene.addChild(sprites.TreeF2)
+       
+             sprites.Brush4.scale.set(0.3);
+             sprites.Brush4.position.set(-5,700);
+             jungleScene.addChild(sprites.Brush4)
+       
+             sprites.Brush1.scale.set(0.6);
+             sprites.Brush1.position.set(450,600);
+             jungleScene.addChild(sprites.Brush1)
+
+             ticker.add(animate);
+             ticker.start();
+
+      }
+      function gameScene6() {
+               //Background 
+               sprites.BgSky.scale.set(0.7);
+               endScene.addChild(sprites.BgSky)
+                      
+               sprites.BgGround.scale.set(0.7,0.6);
+               sprites.BgGround.anchor.set(0,-1.5);
+               endScene.addChild(sprites.BgGround)
+  
+               sprites.Lake.scale.set(0.7);
+               sprites.Lake.position.set(0, 130);
+               endScene.addChild(sprites.Lake)
+         
+               sprites.Cloud1.scale.set(0.5);
+               sprites.Cloud1.position.set(10, 20);
+               endScene.addChild(sprites.Cloud1)
+         
+               sprites.Cloud2.scale.set(0.5);
+               sprites.Cloud2.position.set(500, 150);
+               endScene.addChild(sprites.Cloud2)
+  
+               sprites.TreeB2.scale.set(0.5)
+               sprites.TreeB2.position.set(380,200);
+               endScene.addChild(sprites.TreeB2)
+  
+               sprites.Brush3.scale.set(0.6);
+               sprites.Brush3.position.set(300,450);
+               endScene.addChild(sprites.Brush3)
+  
+               sprites.Brush4.scale.set(0.6);
+               sprites.Brush4.position.set(350,600);
+               endScene.addChild(sprites.Brush4)
+         
+               sprites.Brush2.scale.set(0.5);
+               sprites.Brush2.position.set(-200,450);
+               endScene.addChild(sprites.Brush2);
+  
+               sprites.TreeFnew.scale.set(0.7,0.8);
+               sprites.TreeFnew.position.set(-380,-320);
+               endScene.addChild(sprites.TreeFnew)
+  
+               sprites.Brush1.scale.set(0.6);
+               sprites.Brush1.position.set(-100,600);
+               endScene.addChild(sprites.Brush1)
+
+               ticker.add(animate);
+               ticker.start();
+   //Item
+  
+      }
+
+      function gameLastScene() {
+  
+        const verticesX = 5;
+        const verticesY = 10;
+        const waterTexture = PIXI.Texture.from(water);
+        const planeWater = new PIXI.SimplePlane(waterTexture, verticesX, verticesY);
+               
+        const texture = PIXI.Texture.from(shadow);
+  
+      const plane = new PIXI.SimplePlane(texture, verticesX, verticesY);
+  
+      plane.x = 20;
+      plane.y = 150;
+      plane.scale.set(0.5);
+  
+      planeWater.scale.set(0.7);
+      lastScene.addChild(planeWater);
+      lastScene.addChild(plane);
+
+      // Get the buffer for vertice positions.
+      const bufferWater = planeWater.geometry.getBuffer('aVertexPosition');
+      const buffer = plane.geometry.getBuffer('aVertexPosition');
+  
+      // Listen for animate update
+      app.ticker.add(() => {
+          // Randomize the vertice positions a bit to create movement.
+          for (let i = 0; i < buffer.data.length; i++) {
+              buffer.data[i] += (Math.random() - 0.5);
+          }
+          buffer.update();
+          for (let i = 0; i < bufferWater.data.length; i++) {
+            bufferWater.data[i] += (Math.random() - 0.5);
+        }
+        bufferWater.update();
+      });
+  
+      }
+
+      // ------------------- Charecter --------------//
+      function happyFriend(){
+        sprites.BearHappy.scale.set(0.1);
+        sprites.BearHappy.position.set(200,600);
+        sprites.RaccoonHappy.scale.set(0.1);
+        sprites.RaccoonHappy.position.set(300,600);
+        happyAction.addChild(sprites.BearHappy)
+        happyAction.addChild(sprites.RaccoonHappy)
+      }
+      function angryFriend(){
+        sprites.BearAngry.scale.set(0.1);
+        sprites.BearAngry.position.set(200,600);
+        sprites.RaccoonAngry.scale.set(0.1);
+        sprites.RaccoonAngry.position.set(300,600);
+        angryAction.addChild(sprites.BearAngry)
+        angryAction.addChild(sprites.RaccoonAngry)
+      }
+      function playMusic(){
+        sprites.Monkey.scale.set(0.2);
+        sprites.Monkey.position.set(400,800);
+        musicAction.addChild( sprites.Monkey);
+             if (sprites.Monkey.state.hasAnimation('Playing Music')) {
+              sprites.Monkey.state.setAnimation(0, 'Playing Music', true , true );
+              sprites.Monkey.state.timeScale = 0.5;
+              }
+      }
+      function Talk(){
+        sprites.Monkey.scale.set(0.2);
+        sprites.Monkey.position.set(400,800);
+        talkAction.addChild( sprites.Monkey);
+        if (sprites.Monkey.state.hasAnimation('Talk')) {
+          sprites.Monkey.state.setAnimation(0, 'Talk', true , true );
+          sprites.Monkey.state.timeScale = 0.5;
+          }
+        
+      }
+      function Point(){
+        sprites.Monkey.scale.set(0.2);
+        sprites.Monkey.position.set(400,800);
+        pointAction.addChild( sprites.Monkey);
+        if (sprites.Monkey.state.hasAnimation('Point')) {
+          sprites.Monkey.state.setAnimation(0, 'Point', 'Talk', true );
+          sprites.Monkey.state.timeScale = 0.5;
+          }
+      }
+
+      // ------------------- Condition change Scene--------------//
+
+      function goScene2() {
+        console.log("chang to Scene2")
+        secondScene.visible = true;
+        secondScene.interactive = true;
+        secondScene.buttonMode = true;
+        happyAction.visible = true;
+        happyAction.pivot.set(0,1);
+        secondScene.on('pointerdown',  goScene3);
+        gameScene2();
+      }
+
+      function goScene3() {
+        console.log("chang to Scene3")
+        happyAction.visible = false;
+        angryAction.visible = false;
+        homeScene.visible = true;
+        homeScene.interactive = true;
+        homeScene.buttonMode = true;
+        homeScene.on('pointerdown', goSceneDoor);
+        gameScene3();
+      }
+      function goSceneDoor() {
+        console.log("chang to doorScene")
+        doorScene.visible = true;
+        doorScene.interactive = true;
+        doorScene.buttonMode = true;
+        doorScene.on('pointerdown', goSceneInHome);
+        doorScene3();
+      }
+      function goSceneInHome() {
+        console.log("chang to inHome")
+        inHomeScene.visible = true;
+        inHomeScene.interactive = true;
+        inHomeScene.buttonMode = true;
+        inHomeScene.on('pointerdown', goSceneInHome2);
+        homeScene4();
+      }
+      function goSceneInHome2() {
+        console.log("chang to inHome 4.2")
+        inHome2Scene.visible = true;
+        inHome2Scene.interactive = true;
+        inHome2Scene.buttonMode = true;
+        inHome2Scene.on('pointerdown',goSceneInHome3);
+        homeScene4_2();
+      }
+      function goSceneInHome3() {
+        console.log("chang to inHome 4.3")
+        inHome3Scene.visible = true;
+        inHome3Scene.interactive = true;
+        inHome3Scene.buttonMode = true;
+        inHome3Scene.on('pointerdown', goScene5);
+        homeScene4_3();
+      }
+      function goScene5() {
+        console.log("chang to Scene 5")
+        musicAction.visible = true;
+        jungleScene.visible = true;
+        jungleScene.interactive = true;
+        jungleScene.buttonMode = true;
+        jungleScene.on('pointerdown', goSceneLake);
+        gameScene5();
+      }
+      function goSceneLake() {
+        console.log("chang to Scene 6")
+        pointAction.visible = false;
+        endScene.visible = true;
+        endScene.interactive = true;
+        endScene.buttonMode = true;
+        endScene.on('pointerdown', goSceneEnd);
+        gameScene6();
+      }
+      function goSceneEnd() {
+        console.log("chang to Scene End")
+        lastScene.visible = true;
+        gameLastScene();
+      }
 
     }
-    }
-  
 
     // const onMainResize = (width:number , height:number) => {
     //   // TODO: resize game container at here
@@ -850,10 +817,15 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
     //   console.warn("pixi released");
     // };
 
-
-    const onRelease = () => { console.log('Nothing') }
-    console.log("container", firstScene);
-    return [app , onRelease]
+    const onRelease = () => {
+        console.log('Nothing');
+    };
+    console.log('container', firstScene);
+    return [app, onRelease];
 };
 
 export default GameContent;
+function useSate<T>(arg0: boolean): [any, any] {
+  throw new Error('Function not implemented.')
+}
+

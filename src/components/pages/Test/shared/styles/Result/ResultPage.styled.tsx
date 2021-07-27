@@ -18,20 +18,17 @@ export const TextHeader = styled.div`
 export const TextHeaderResult = styled.div`
     text-align: center;
     font-size: 22px;
-    padding: 30px;
     font-weight: bolder;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     cursor: none;
+    padding-top: 20px;
+    padding-left: 20px;
 `;
 
 export const ChartStyled = styled(Chart)`
-    transform: translateY(-20%);
-    width: 580px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 120%;
 `;
 
 export const TextBoxDescript = styled.div`
@@ -143,7 +140,6 @@ export const ContainerBoard = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    padding-left: 4%;
 `;
 
 export const CardTag = styled(Card.Meta)`
@@ -157,8 +153,10 @@ export const RowDetailCard = styled(Row)`
 export const ProgressScore = styled(Progress)``;
 
 export const ContainerProgressScore = styled.div`
-    padding-left: 20px;
-    transform: translateY(-150%);
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    margin-right: 30px;
 `;
 export const TextNameSkill = styled.div`
     font-weight: bolder;
@@ -182,6 +180,7 @@ export const TabsInfo = styled(Tabs)`
         margin: 0;
         letter-spacing: 1px;
         color: black;
+        width: 180px;
     }
     & .ant-tabs-nav .ant-tabs-tab-active {
         background-color: var(--Gray-500);
@@ -268,7 +267,7 @@ export const TextNameSkillInImg = styled.div`
 
 export const ResultImgCharactorDetail = styled(Image)`
     width: 100%;
-    height: 55vh;
+    height: 70vh;
 `;
 
 export const ContainerCharactorDetail = styled.div`
@@ -290,7 +289,7 @@ export const ButtonGoHomeInResultFeature = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Blue-400);
-    transform: translateY(-90%);
+    transform: translateY(-20%);
     margin-left: auto;
     margin-right: auto;
     width: 75%;

@@ -21,10 +21,24 @@ export const ButtonUseFilter = styled.div`
     align-items: center;
     background-color: var(--Blue-400);
     color: white;
-    width: 159px;
+    width: 40%;
     height: 51px;
     border-radius: 12px;
     padding: 16px 120px;
+    font-weight: bolder;
+`;
+
+export const ButtonClearFilter = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    color: var(--Blue-200);
+    width: 159px;
+    height: 51px;
+    border-radius: 12px;
+    font-weight: bolder;
 `;
 export const SearchField = styled.div`
     display: flex;
@@ -87,7 +101,7 @@ export const CustomTag = styled(Tag)<{ active: 'active' | '' }>`
 export const CustomCheckableTag = styled(CheckableTag)`
     font-size: 16px;
     color: #6e7282;
-    width: 107px;
+    width: 100%;
     height: 47px;
     display: flex;
     justify-content: center;
