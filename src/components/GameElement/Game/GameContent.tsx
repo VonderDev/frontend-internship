@@ -294,7 +294,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       // ------------------- Assete each of Scene--------------//
       function gameScene1() {    
         //Background 
-        sprites.BgSky.scale.set(0.7);
+        sprites.BgSky.scale.set(0.7,0.5);
         firstScene.addChild(sprites.BgSky)
   
         sprites.BgGround.scale.set(0.7);
@@ -359,7 +359,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       }
       function gameScene2 () {
         //Background 
-        sprites.BgSky.scale.set(0.7);
+        sprites.BgSky.scale.set(0.7,0.5);
         secondScene.addChild(sprites.BgSky)
   
         sprites.BgGround.scale.set(0.7);
@@ -420,10 +420,9 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
         ticker.start();
 
       }
-
       function gameScene3 () {
         //Background 
-        sprites.BgSky.scale.set(0.7);
+        sprites.BgSky.scale.set(0.7,0.5);
         sprites.BgSky.anchor.set(0,0);
         homeScene.addChild(sprites.BgSky)
   
@@ -472,7 +471,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       }
       function doorScene3 () {
               //Background 
-              sprites.BgOutHome.scale.set(0.7);
+              sprites.BgOutHome.scale.set(0.7,0.5);
               sprites.BgOutHome.anchor.set(0,0);
               doorScene.addChild(sprites.BgOutHome)
   
@@ -531,7 +530,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
 
       function gameScene5 () {
              //Background 
-             sprites.BgSky.scale.set(0.7);
+             sprites.BgSky.scale.set(0.7,0.5);
              jungleScene.addChild(sprites.BgSky)
        
              sprites.BgGround.scale.set(0.7);
@@ -595,7 +594,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       }
       function gameScene6() {
                //Background 
-               sprites.BgSky.scale.set(0.7);
+               sprites.BgSky.scale.set(0.7,0.5);
                endScene.addChild(sprites.BgSky)
                       
                sprites.BgGround.scale.set(0.7,0.6);
@@ -770,6 +769,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       function goSceneInHome2() {
         console.log("chang to inHome 4.2")
         inHome2Scene.visible = true;
+        inHomeScene.visible = false;
         inHome2Scene.interactive = true;
         inHome2Scene.buttonMode = true;
         inHome2Scene.on('pointerdown',goSceneInHome3);
@@ -778,6 +778,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       function goSceneInHome3() {
         console.log("chang to inHome 4.3")
         inHome3Scene.visible = true;
+        inHome2Scene.visible = false;
         inHome3Scene.interactive = true;
         inHome3Scene.buttonMode = true;
         inHome3Scene.on('pointerdown', goScene5);
@@ -786,6 +787,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       function goScene5() {
         console.log("chang to Scene 5")
         musicAction.visible = true;
+        inHome3Scene.visible = false;
         jungleScene.visible = true;
         jungleScene.interactive = true;
         jungleScene.buttonMode = true;
