@@ -11,6 +11,7 @@ export const TextRecommendBoardTopic = styled.div`
     flex-direction: column;
     justify-content: center;
     margin-bottom: 15px;
+    color: var(--Gray-600);
 `;
 
 export const ButtonSeeAllBoard = styled.div`
