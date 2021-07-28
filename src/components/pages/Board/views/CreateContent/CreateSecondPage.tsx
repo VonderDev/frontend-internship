@@ -110,12 +110,12 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                                 </OptionHashtag>
                             );
                         })}
-                        {contentData?.tag.map((item: any, index: any) => {
+                        {/* {contentData?.tag.map((item: any, index: any) => {
                             let tagIndex = contentData?.tag.indexOf(item);
                             return (
                                 <div key={index}>
                                     {/* onClick={contentData?.tag.indexOf(item) > -1} */}
-                                    <ButtonSelectedTag>
+                        {/* <ButtonSelectedTag>
                                         {' '}
                                         #{transalateToThai(item)}
                                         <div style={{ marginLeft: '3px', transform: 'translateY(1px)' }}>
@@ -132,7 +132,7 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                                     </ButtonSelectedTag>
                                 </div>
                             );
-                        })}
+                        })} */}
                         {contentData?.tag.map((item: any, index: any) => (
                             <div key={index} style={{ marginRight: '10px', marginBottom: '5px' }}>
                                 <OptionHashtag style={{ fontWeight: 'normal' }} key={index} value={item.value} onChange={handleChangeOfHashtag}>

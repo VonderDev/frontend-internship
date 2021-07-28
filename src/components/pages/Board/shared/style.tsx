@@ -13,7 +13,7 @@ export const TextRecommendBoardTopic = styled.div`
     justify-content: center;
     color: var(--Gray-600);
     align-self: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 `;
 
 export const ButtonSeeAllBoard = styled.div`
@@ -29,7 +29,6 @@ export const ButtonSeeAllBoard = styled.div`
 
 export const BoardTextInfo = styled.div`
     padding-right: 15px;
-    margin-top: 5px;
 `;
 
 export const BoardCard = styled(Card)`
@@ -93,9 +92,8 @@ export const EllipsisText = styled.div`
 `;
 
 export const SpaceCard = styled(Space)`
-    //padding-right: 20px;
-    //padding-left: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    margin-top: 15px;
 `;
 
 export const HistoryImage = styled.img`

@@ -105,20 +105,19 @@ function BoardContent() {
             header={{
                 title: 'กระทู้',
                 right: 'menu',
-                left: 'back',
-                // (
-                //     <ButtonBackToFirstPage
-                //         onClick={() => {
-                //             history.push('/');
-                //             const tokenGuest = localStorage.getItem('tokenGuest');
-                //             if (tokenGuest) {
-                //                 localStorage.removeItem('tokenGuest');
-                //             }
-                //         }}
-                //     >
-                //         <LeftOutlined style={{ color: '#8a8888' }} />
-                //     </ButtonBackToFirstPage>
-                // ),
+                left: (
+                    <ButtonBackToFirstPage
+                        onClick={() => {
+                            history.push('/');
+                            const tokenGuest = localStorage.getItem('tokenGuest');
+                            if (tokenGuest) {
+                                localStorage.removeItem('tokenGuest');
+                            }
+                        }}
+                    >
+                        <LeftOutlined style={{ color: '#8a8888' }} />
+                    </ButtonBackToFirstPage>
+                ),
             }}
         >
             {errorcontentData && errorfetchingComment && <ErrorPage />}

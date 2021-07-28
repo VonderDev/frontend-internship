@@ -8,6 +8,8 @@ import BoardCardComponent from './BoardCardComponent';
 import FilterDrawer from './FilterDrawer';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { DrawerContainer, MoveCenter } from 'components/pages/Authentication/shared/style';
+import { CreateContentIcon } from 'components/pages/Home/shared/style/homepage.styles';
+import { useHistory } from 'react-router-dom';
 
 const Filter = () => {
     //Catagories----------------------------------------------------------------------------------------------------------
@@ -95,6 +97,7 @@ const Filter = () => {
             tag: selectedTags,
         });
     }, [selectedCatagories, selectedTags]);
+    const history = useHistory();
 
     return (
         <Container header={{ left: 'back', right: 'menu', title: 'กระทู้' }}>
