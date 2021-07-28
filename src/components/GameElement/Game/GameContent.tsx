@@ -253,14 +253,10 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
           goScene2()
         }else if (prop == 'S3'){
           goScene3()
-          wait(3000).then(() =>{
-            goSceneDoor();
-          })
+        }else if (prop == 'door'){
+          goSceneDoor();
         }else if (prop == 'S4'){
           goSceneInHome();
-          wait(3000).then(() =>{
-            goSceneInHome2();
-          })
         }else if (prop == 'S4.2'){
           goSceneInHome2();
         }else if (prop == 'S4.3'){
@@ -786,6 +782,7 @@ const GameContent = (app: any,gameRef: any, updateRatioRef: any) => {
       }
       function goSceneDoor() {
         console.log("chang to doorScene")
+        homeScene.visible = false;
         doorScene.visible = true;
         doorScene.interactive = true;
         doorScene.buttonMode = true;
