@@ -30,7 +30,7 @@ const FilterDrawer: React.FC<DrawerProps> = ({ onclickClear, showDrawer, visible
             closable={true}
             onClose={showDrawer}
             visible={visible}
-            height={768}
+            height={750}
         >
             <div>
                 <Topic>ประเภทของกระทู้</Topic>
