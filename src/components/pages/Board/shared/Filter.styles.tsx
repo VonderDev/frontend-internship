@@ -30,7 +30,6 @@ export const ButtonUseFilter = styled.div`
     width: 40%;
     height: 51px;
     border-radius: 12px;
-    padding: 16px 120px;
     font-weight: bolder;
 `;
 
