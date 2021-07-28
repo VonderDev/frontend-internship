@@ -203,4 +203,6 @@ export const HeartIcon = styled(HeartFilled)`
 
 export const CustomBox = styled(Box)`
     margin-left: 100px;
+    width: 100%;
+    margin-right: 10px;
 `;
