@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { useHistory } from 'react-router';
 import { Box } from 'shared/style/theme/component';
 import useSWR from 'swr';
-import { BoardCard, CommentIcon, HistoryImage, HistoryText, SearchField, EllipsisText, CustomBox, HistoryImageDefault } from '../../shared/style';
+import { BoardCard, CommentIcon, HistoryImage, HistoryText, RowBox, EllipsisText, CustomBox, HistoryImageDefault } from '../../shared/style';
 import { LoadingOutlined } from '@ant-design/icons';
 import { HeartIcon } from 'components/pages/Profile/shared/Profile.styles';
 import { transalateToThai } from 'utils/transalator/transalator';
@@ -47,7 +47,9 @@ export const CardLatest = () => {
                                             );
                                         })}
                                     </Box>
-                                    <Box direction="row" justify="space-between" align="flex-start" style={{ fontSize: '12px', color: '#6E7282', marginTop: '10px', display: 'flex', width: '100%' }}>
+                                    <RowBox direction="row" justify="space-between" align="flex-start" 
+                                    style={{ fontSize: '12px', color: '#6E7282', marginTop: '10px', 
+                                    display: 'flex', width: '80%',position:'absolute',bottom:'10px'}}>
                                         <div style={{ justifyContent: 'center', flexDirection: 'row', display: 'flex' }}>
                                             <CommentIcon style={{ alignItems: 'center', display: 'flex' }} />
                                             <HistoryText>{item.author_username}</HistoryText>
@@ -57,7 +59,7 @@ export const CardLatest = () => {
                                             <HeartIcon />
                                             <HistoryText>{item.uid_likes.length}</HistoryText>
                                         </div>
-                                    </Box>
+                                    </RowBox>
                                 </CustomBox>
                             </EllipsisText>
                         </BoardCard>
