@@ -42,8 +42,6 @@ export const PrivacyContainer = styled.div`
 `;
 
 export const DrawerContainer = styled.div`
-    position: relative;
-    height: 120%;
     overflow: hidden;
     border-radius: 2px;
     z-index: 20 !important;
