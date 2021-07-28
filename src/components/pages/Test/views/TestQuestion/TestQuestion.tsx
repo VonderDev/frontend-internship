@@ -318,7 +318,7 @@ function TestQuestion() {
                 <TextBodyModal>การเปลี่ยนแปลงทั้งหมดจะไม่ถูกบันทึก</TextBodyModal>
             </ConfirmModal>
 
-            <MainContainer onClick={()=>{cutScene && showStory()}}>
+            <MainContainer>
                 <PixiProvider>
                     <PixiApp content={GameContent} />
                 </PixiProvider>
@@ -393,7 +393,7 @@ function TestQuestion() {
                         <>
                             {cutScene ? (
                                 <Animation onEnter="fadeIn" key={currentMessage} duration={1000} delay={200}>
-                                    <div style={{width:'100%', marginTop:'40%'}}>
+                                    <div style={{width:'100%', paddingTop:'40%',height:'100vh'}} onClick={()=>{cutScene && showStory()}}>
                                     <TextStory onClick={showStory}>{cutSceneList[currentCutScnen].message[currentMessage]}</TextStory>
                                     </div>
                                 </Animation>
