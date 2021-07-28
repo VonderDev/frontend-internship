@@ -126,7 +126,6 @@ export const ButtonChoiceStlyed = styled.button`
     border-color: white;
     opacity: 0.8;
     position: relative;
-    transform: translateY(200%);
     display: block;
     &:hover {
         color: black;
@@ -139,7 +138,7 @@ export const ButtonChoiceStlyed = styled.button`
     }
     @media(max-width: 500px){
         transform: translateY(100%);
-        width: 80%;
+        width: 70%;
     }
 `;
 

@@ -104,7 +104,7 @@ function TestQuestion() {
                 'หมี: “พวกเรากำลังหาทางออกจากป่านี้อยู่ แต่เจ้านี่น่ะสิ มันพาฉันหลงทาง”',
                 'แรคคูน: “อะไรนะ นายต่างหากที่พาฉันหลงทาง!”',
                 ' "พอดีเลย ฉันก็หาทางออกอยู่เหมือนกัน งั้นพวกเรามาหาทางออกด้วยกันไหม"',
-                ' "เอาสิ!!!"',
+                ' "เอาสิ!"',
             ],
         },
         {
@@ -117,14 +117,14 @@ function TestQuestion() {
                 '"อ้อ ไม่เป็นไร ๆ งั้นพวกเราออกเดินทางต่อเถอะ"',
             ],
         },
-        { value: 6, message: ['"เอ๊ะ มีบ้านอยู่ตรงนี้ด้วย ลองเข้าไปดูดีกว่าเผื่อมีใครอยู่"'] },
+        { value: 6, message: ['"เอ๊ะ มีบ้านอยู่ตรงนี้ด้วย"','"ลองเข้าไปดูดีกว่าเผื่อมีใครอยู่"'] },
         { value: 7, message: ['“ไม่มีใครอยู่เลย...”', '"แต่ในนี้มีของน่าสนใจเยอะแยะเลย"'] },
         { value: 8, message: ['"เอาล่ะ เราน่าจะเดินทางต่อได้แล้ว"'] },
         { value: 9, message: ['"ตรงนั้นมีใครก็ไม่รู้เล่นดนตรีอยู่ ลองไปฟังกันเถอะ"'] },
-        { value: 10, message: ['"สุดยอดไปเลย เธอเล่นดนตรีเพราะจริง ๆ"', 'นักดนตรี: “ขอบคุณนะ พวกเธอก็เต้นเก่งมากเลย”', '"ว่าแต่ ฉันขอถามอะไรหน่อยได้รึเปล่า.."','จากนั้นฉันก็เราเรื่องทั้งหมดให้เขาฟัง...'] },
+        { value: 10, message: ['"สุดยอดไปเลย เธอเล่นดนตรีเพราะจริง ๆ"', 'นักดนตรี: “ขอบคุณนะ พวกเธอก็เต้นเก่งมากเลย”', '"ว่าแต่ ฉันขอถามอะไรหน่อยได้ได้ไหม.."','จากนั้นฉันก็เล่าเรื่องทั้งหมดให้เขาฟัง...'] },
         { value: 11, message: ['นักดนตรี: “อ๋อ เรื่องมันเป็นอย่างนี้นี่เอง งั้นฉันขอถามกลับได้ไหม” '] },
         { value: 12, message: ['“ถ้าเธอยังนึกไม่ออก ลองไปตามทางที่ฉันบอกก็แล้วกัน”', '“เธอจะรู้คำตอบเองแหละ”'] },
-        { value: 13, message: ['“เราออกจากป่านี้มาได้แล้ว!”', '“สวยจัง นี่มันทะเลสาบนี่นา”'] },
+        { value: 13, message: ['“เราออกจากป่านี้ได้แล้ว!”', '“สวยจัง นี่มันทะเลสาบนี่นา”'] },
         { value: 14, message: [' ตกลงฉันคือใครกันนะ.. ', '.....', '.....'] },
     ];
     useEffect(() => {
@@ -134,22 +134,31 @@ function TestQuestion() {
         if (currentCutScnen === 10 ) {
             setMusic(false);
         }
+
     }, [currentCutScnen]);
 
     const showStory =()=>{
         console.log('Cut ? :' ,cutScene);
         console.log(' currentMessage:' ,currentMessage);
+        if(cutSceneList[currentCutScnen].value === 6 && currentMessage === 0){
+            changeScene('door');
+        }
+        if(cutSceneList[currentCutScnen].value === 4 && currentMessage === 3){
+            changeScene('ZoomHappy');
+        }
         if(currentMessage === cutSceneList[currentCutScnen].message.length -1){
              if(currentCutScnen + 1 === 5)
             {
                 changeScene('S3')
                 setCutScene(true) // start cutscene v.6
             }else if (currentCutScnen+1 === 4 && currentMessage === 4){
-                changeScene('ZoomHappy');
                 setCutScene(false)
             }else if (currentCutScnen+1 === 6){
                 changeScene('S4')
                 setCutScene(true) // start cutscene v.7
+            }else if (currentCutScnen+1 === 7 && currentMessage === 1) {
+                changeScene('S4.2');
+                setCutScene(false)
             }else if (currentCutScnen+ 1 === 8){
                 changeScene('S5')
                 setCutScene(true) // start cutscene v.9
@@ -226,6 +235,8 @@ function TestQuestion() {
         setVisible(true);
     };
     const handleOk = () => {
+        setPlaying(false);
+        setMusic(false);
         const tokenGuest = localStorage.getItem('tokenGuest');
         if (tokenGuest) {
             localStorage.removeItem('tokenGuest');
@@ -380,7 +391,7 @@ function TestQuestion() {
                                         ) : (
                                             <Animation type="slideInLeft" duration={500} delay={100}>
                                                 <Animation type="fadeIn" key={currentQuestion} duration={600} delay={100}>
-                                                    <Box justify="center" align="center" direction="column">
+                                                    <Box justify="center" align="center" direction="column" style={{width:'100%',position:'absolute'}}>
                                                         {buttonList.map((item, index) => {
                                                             return (
                                                                 <ButtonChoiceStlyed
