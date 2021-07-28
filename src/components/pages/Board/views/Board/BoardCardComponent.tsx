@@ -1,10 +1,10 @@
-import { BoardCard, CommentIcon, CustomBox, EllipsisText, HeartIcon, HistoryImage, HistoryText } from 'components/pages/Profile/shared/Profile.styles';
+import { BoardCard, CommentIcon, EllipsisText, HeartIcon, HistoryImage, HistoryText } from 'components/pages/Profile/shared/Profile.styles';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Box } from 'shared/style/theme/component';
 import { dateFormat } from 'utils/Date/DateFormat';
 import { transalateToThai } from 'utils/transalator/transalator';
-import { HistoryImageDefault } from '../../shared/style';
+import { HistoryImageDefault , RowBox} from '../../shared/style';
 
 interface CardComponentProps {
     data: any | null;
@@ -27,7 +27,7 @@ const BoardCardComponent: React.FC<CardComponentProps> = ({ data }) => {
                           <BoardCard key={index} onClick={() => history.push(`/boardcontent/${item._id}`)}>
                               <EllipsisText style={{ display: 'flex' }}>
                                   <div style={{}}>{item?.image !== '' ? <HistoryImage src={item.image} /> : <HistoryImageDefault />}</div>
-                                  <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '100px' }}>
+                                  <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '100px',width:'100%' }}>
                                       <HistoryText style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.title}</HistoryText>
                                       <Box direction="row" justify="flex-start" align="flex-start">
                                           <HistoryText style={{ fontSize: '12px', fontWeight: 'bold' }}>{transalateToThai(item.content_type)}</HistoryText>
@@ -39,17 +39,19 @@ const BoardCardComponent: React.FC<CardComponentProps> = ({ data }) => {
                                               );
                                           })}
                                       </Box>
-                                      <CustomBox direction="row" justify="space-between" align="flex-start">
-                                          <div style={{ justifyContent: 'center' }}>
-                                              <CommentIcon />
-                                          </div>
-                                          <HistoryText>{item.author_username}</HistoryText>
-                                          <HistoryText>{dateFormat(item?.created_at)}</HistoryText>
-                                          <div style={{ justifyContent: 'center' }}>
-                                              <HeartIcon />
-                                          </div>
-                                          <HistoryText>{item.uid_likes.length}</HistoryText>
-                                      </CustomBox>
+                                      <RowBox direction="row" justify="space-between" align="flex-start" 
+                                    style={{ fontSize: '12px', color: '#6E7282', marginTop: '10px', 
+                                    display: 'flex', width: '80%',position:'absolute',bottom:'10px'}}>
+                                        <div style={{ justifyContent: 'center', flexDirection: 'row', display: 'flex' }}>
+                                            <CommentIcon style={{ alignItems: 'center', display: 'flex' }} />
+                                            <HistoryText>{item.author_username}</HistoryText>
+                                        </div>
+                                        <div style={{ justifyContent: 'center', flexDirection: 'row', display: 'flex' }}>
+                                            <HistoryText style={{ marginRight: '20px' }}>{dateFormat(item?.created_at)}</HistoryText>
+                                            <HeartIcon />
+                                            <HistoryText>{item.uid_likes.length}</HistoryText>
+                                        </div>
+                                    </RowBox>
                                   </Box>
                               </EllipsisText>
                           </BoardCard>

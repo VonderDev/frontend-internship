@@ -140,6 +140,15 @@ export const HistoryText = styled.div`
     padding-right: 5px;
     margin-top: 5px;
 `;
+export const RowBox = styled(Box)`
+    width: 80%;
+    @media(max-width: 500px){
+        width: 70% !important;
+    }
+    @media(max-width: 400px){
+        width: 65% !important;
+    }
+`;
 
 export const CardTextData = styled.div`
     margin-top: 5px;
