@@ -173,6 +173,7 @@ const Filter = () => {
                     <BoardCardComponent data={tagFilterData} />
                 </Box>
             </DrawerContainer>
+            <CreateContentIcon onClick={() => history.push('/boardcreate')} />
         </Container>
     );
 };

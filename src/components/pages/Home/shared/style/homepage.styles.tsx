@@ -160,6 +160,7 @@ export const CreateContentIcon = styled.div`
     height: 75px;
     left: 80%;
     margin-right: 10px;
+    z-index: 30;
     /* z-index: 100 !important; */
     :hover {
         cursor: pointer;

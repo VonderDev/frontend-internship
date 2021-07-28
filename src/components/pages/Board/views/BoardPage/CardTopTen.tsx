@@ -14,10 +14,9 @@ import {
     TextRecommendBoardTopic,
     CoverImageDefault,
     CommentIcon,
-    HeartIcon,
     HistoryText,
 } from '../../shared/style';
-import { FormOutlined, LoadingOutlined, CalendarOutlined } from '@ant-design/icons';
+import { LoadingOutlined } from '@ant-design/icons';
 import { IIconText } from '../../shared/Card.interface';
 import { useHistory } from 'react-router';
 import { transalateToThai } from 'utils/transalator/transalator';

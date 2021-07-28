@@ -16,8 +16,6 @@ export const ContainerImgCharactor = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* box-shadow: inset 10px 100px 100px 120px #999999 !important; */
-    /* background: linear-gradient(180deg, white, transparent); */
 `;
 
 export const ImgCardCharactorList = styled(CardStyle)`

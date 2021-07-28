@@ -3,7 +3,7 @@ import { Col } from 'antd';
 import { useEffect, useState } from 'react';
 import Container from 'components/Container/Container';
 import useSWR from 'swr';
-import { Box, ButtonStyle } from 'shared/style/theme/component';
+import { Box } from 'shared/style/theme/component';
 import ProfileMascot from '../../Profile/images/AvatarStudent.png';
 import { TextUserInfo1, TextUserInfo2, TextUsername, UserImage, RowStyled, LinkMoreResult, TextTopic2, NotFoundText, ButtonEditedProfile } from '../shared/Profile.styles';
 import ProfileBoardCard from './ProfileBoardCard';

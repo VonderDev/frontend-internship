@@ -132,7 +132,7 @@ export const ButtonOfCategory = styled(Button)`
 `;
 
 export const ContainerContentType = styled(Radio.Group)`
-    margin-left: 10px;
+    margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
     right: 10px;
@@ -176,6 +176,7 @@ export const InputHashtagInDrawer = styled(Select)`
     font-size: 16px;
     padding-top: 15px;
     border-radius: 10px;
+
     .ant-select-selection-overflow {
         height: auto;
         min-height: 45px !important;
@@ -190,6 +191,13 @@ export const InputHashtagInDrawer = styled(Select)`
         border-color: white;
         padding: 0;
         transform: translateX(10px);
+    }
+
+    & .ant-select-selection-item-content {
+        background: var(--Blue-000);
+        border-radius: 6px;
+        width: 100%;
+        text-align: center;
     }
 `;
 
@@ -340,4 +348,5 @@ export const ButtonSelectedTag = styled.div`
     align-items: center;
     color: #3a8ce4;
     font-size: 16px;
+    /* display: inline-block; */
 `;

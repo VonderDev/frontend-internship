@@ -1,7 +1,6 @@
 import React from 'react';
 import { NotificationCreatedPostSuccess } from '../../shared/style/BoardContent.styled';
 import {
-    ButtonSelectedTag,
     ButtonSummitPost,
     CircleChoice,
     CircleSelection,
@@ -13,10 +12,7 @@ import {
     OptionHashtag,
     TextTopicContent,
 } from '../../shared/style/BoardCreate.styled';
-import { CheckCircleOutlined } from '@ant-design/icons';
-import { CancleTag, CustomCheckableTag } from '../../shared/Filter.styles';
 import { transalateToThai } from 'utils/transalator/transalator';
-import { Box } from 'shared/style/theme/component';
 interface CreateContentSecondPageProps {
     updateContentData: (event: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;
     countPage: number;
@@ -102,35 +98,25 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                                 );
                             })}
                         </InputHashtagInDrawer>
-                        {contentData?.tag.map((item: any, index: any) => {
-                            console.log('In Option', contentData?.tag);
-                            return (
-                                <OptionHashtag value={item} key={index}>
-                                    #{item}
-                                </OptionHashtag>
-                            );
-                        })}
                         {/* {contentData?.tag.map((item: any, index: any) => {
                             let tagIndex = contentData?.tag.indexOf(item);
                             return (
-                                <div key={index}>
-                                    {/* onClick={contentData?.tag.indexOf(item) > -1} */}
-                        {/* <ButtonSelectedTag>
+                                <ContainerContentType key={index} onChange={onChangeContentType} value={contentType}>
+                                    <ButtonSelectedTag>
                                         {' '}
                                         #{transalateToThai(item)}
                                         <div style={{ marginLeft: '3px', transform: 'translateY(1px)' }}>
                                             <CancleTag
                                                 onClick={() => {
                                                     console.log(contentData?.tag);
-                                                    let test = contentData?.tag.filter((e: any, i: any) => i != tagIndex);
-                                                    console.log('Data real', test);
-
-                                                    handleChangeOfHashtag(test);
+                                                    const removeTag = contentData?.tag.filter((e: any, i: any) => i != tagIndex);
+                                                    console.log('Clicke for Remove tag', removeTag);
+                                                    handleChangeOfHashtag(removeTag);
                                                 }}
                                             />
                                         </div>
                                     </ButtonSelectedTag>
-                                </div>
+                                </ContainerContentType>
                             );
                         })} */}
                         {contentData?.tag.map((item: any, index: any) => (

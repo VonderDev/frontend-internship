@@ -13,7 +13,6 @@ export const TextRecommendBoardTopic = styled.div`
     justify-content: center;
     color: var(--Gray-600);
     align-self: center;
-    margin-bottom: 10px;
 `;
 
 export const ButtonSeeAllBoard = styled.div`

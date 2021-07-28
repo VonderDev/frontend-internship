@@ -1,15 +1,14 @@
-import { Card, Spin } from 'antd';
-import React, { useMemo } from 'react';
+import { Spin } from 'antd';
+import { useMemo } from 'react';
 import { useHistory } from 'react-router';
 import { Box } from 'shared/style/theme/component';
 import useSWR from 'swr';
-import { BoardCard, CommentIcon, HistoryImage, HistoryText, SearchField, EllipsisText, CustomBox, HistoryImageDefault } from '../../shared/style';
+import { BoardCard, CommentIcon, HistoryImage, HistoryText, EllipsisText, CustomBox, HistoryImageDefault } from '../../shared/style';
 import { LoadingOutlined } from '@ant-design/icons';
 import { HeartIcon } from 'components/pages/Profile/shared/Profile.styles';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { TextRecommendBoardTopic, ButtonSeeAllBoard } from '../../shared/style';
 import { dateFormat } from 'utils/Date/DateFormat';
-import { DefaultImage } from '../../shared/style/BoardContent.styled';
 
 export const CardLatest = () => {
     const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;

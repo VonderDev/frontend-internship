@@ -65,7 +65,6 @@ function BoardCreateContent() {
 
     //----------------- CREATE FUNCTION FOR SET HASHTAG -----------------//
     function handleChangeOfHashtag(value: any) {
-        console.log('testtt ' + value);
         console.log(`[เลือกประเภทแฮชเเท็ก] = ${value}`);
         setContentData({
             ...contentData,
