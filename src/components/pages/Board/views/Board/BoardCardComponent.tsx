@@ -26,7 +26,7 @@ const BoardCardComponent: React.FC<CardComponentProps> = ({ data }) => {
                       return (
                           <BoardCard key={index} onClick={() => history.push(`/boardcontent/${item._id}`)}>
                               <EllipsisText style={{ display: 'flex' }}>
-                                  <div style={{}}>{item?.image !== '-' ? <HistoryImage src={item.image} /> : <HistoryImageDefault />}</div>
+                                  <div style={{}}>{item?.image !== '' ? <HistoryImage src={item.image} /> : <HistoryImageDefault />}</div>
                                   <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '100px' }}>
                                       <HistoryText style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.title}</HistoryText>
                                       <Box direction="row" justify="flex-start" align="flex-start">

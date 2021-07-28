@@ -33,7 +33,7 @@ export const CardLatest = () => {
                             }}
                         >
                             <EllipsisText style={{ display: 'flex' }}>
-                                {item?.image !== '-' ? <HistoryImage src={item.image} /> : <HistoryImageDefault />}
+                                {item?.image !== '' ? <HistoryImage src={item.image} /> : <HistoryImageDefault />}
 
                                 <CustomBox direction="column" justify="flex-start" align="flex-start">
                                     <HistoryText style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.title}</HistoryText>

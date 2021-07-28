@@ -139,7 +139,7 @@ function BoardContent() {
                         </ContainerUserNameAndDate>
                     </div>
 
-                    {contentData?.image !== '-' ? <ImageOfContent src={contentData?.image} /> : <DefaultImage />}
+                    {contentData?.image !== '' ? <ImageOfContent src={contentData?.image} /> : <DefaultImage />}
 
                     <ContentBody>{contentData?.content_body}</ContentBody>
 

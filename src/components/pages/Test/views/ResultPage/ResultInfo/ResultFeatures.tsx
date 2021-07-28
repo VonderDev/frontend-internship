@@ -73,17 +73,23 @@ const ResultFeatures = () => {
                     <GridBox>
                         <SpaceCharactorList>
                             {result?.map((item: any, index: any) => {
+                                let border = '';
+                                let textColor = '';
+                                if (detailCharacter.skill == item.skill) {
+                                    border = '3px #56A0EF solid';
+                                    textColor = '#3A8CE4';
+                                }
                                 return (
                                     <div key={index}>
                                         <ContainerImgCharactor>
                                             <ImgCardCharactorList
                                                 typecard="Vertical"
                                                 key={index}
-                                                cover={<CoverImage src={item.image_charactor} style={{ borderRadius: '12px ' }} />}
+                                                cover={<CoverImage src={item.image_charactor} style={{ border: border, borderRadius: '12px ' }} />}
                                                 onClick={() => onClickImage(item.description, item.description_career, item.skill, item.image_charactor)}
                                             >
                                                 {' '}
-                                                <SkillNameOnImgCard>{transalateToThai(item?.skill)}</SkillNameOnImgCard>
+                                                <SkillNameOnImgCard style={{ color: textColor, fontWeight: 'bold' }}>{transalateToThai(item?.skill)}</SkillNameOnImgCard>
                                             </ImgCardCharactorList>
                                         </ContainerImgCharactor>
                                     </div>

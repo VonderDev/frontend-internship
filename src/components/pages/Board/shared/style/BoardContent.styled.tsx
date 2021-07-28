@@ -118,12 +118,12 @@ export const NotificationCreatedPostSuccess = styled(Alert)`
 
 export const IconLikeUnSuccess = styled.div`
     background-image: url(${IconLikeUnSuccessImg});
-    width: 57px;
+    width: 57.3px;
     height: 24px;
 `;
 export const IconLikeSuccess = styled.div`
     background-image: url(${IconLikeSuccessImg});
-    width: 57px;
+    width: 54.5px;
     height: 24px;
 `;
 

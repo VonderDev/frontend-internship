@@ -128,6 +128,16 @@ export const CoverImage = styled.img`
     object-fit: cover;
 `;
 
+export const CoverImageDefault = styled.img`
+    width: 205px;
+    height: 148px;
+    object-fit: cover;
+    background-image: url(${DefaultImageContent});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+`;
+
 export const HistoryText = styled.div`
     display: flex;
     padding-right: 5px;

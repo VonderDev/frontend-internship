@@ -1,3 +1,4 @@
+import { HistoryImageDefault } from 'components/pages/Board/shared/style';
 import { BoardCard, CommentIcon, EllipsisText, HeartIcon, HistoryImage, HistoryText } from 'components/pages/Profile/shared/Profile.styles';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -26,6 +27,7 @@ const ProfileBoardCard: React.FC<CardComponentProps> = ({ data }) => {
                           <BoardCard key={index} onClick={() => history.push(`/boardcontent/${item?._id}`)}>
                               <EllipsisText style={{ display: 'flex' }}>
                                   <HistoryImage src={item?.image} />
+                                  {item?.image !== '-' ? <HistoryImage src={item.image} /> : <HistoryImageDefault />}
                                   <Box direction="column" justify="flex-start" align="flex-start" style={{ marginLeft: '100px' }}>
                                       <HistoryText style={{ fontSize: '14px', fontWeight: 'bold' }}>{item?.title}</HistoryText>
                                       <Box direction="row" justify="flex-start" align="flex-start">

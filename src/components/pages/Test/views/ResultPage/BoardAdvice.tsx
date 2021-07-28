@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { ContainerBoard } from '../../shared/styles/Result/ResultPage.styled';
 import { BoardCardRecommend, BoardCardSpace, GridBox, ListCategoryAndTag } from '../../shared/styles/Result/ResultFeature.styled';
 import Meta from 'antd/lib/card/Meta';
-import { HeartIconCard, HeartText, CoverImage, BoardTextInfo } from '../../../Board/shared/style';
+import { HeartIconCard, HeartText, CoverImage, BoardTextInfo, CoverImageDefault } from '../../../Board/shared/style';
 import { Box } from 'shared/style/theme/component';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { FormOutlined, CalendarOutlined } from '@ant-design/icons';
@@ -15,6 +15,7 @@ import React from 'react';
 import { dateFormat } from 'utils/Date/DateFormat';
 import { useParams } from 'react-router-dom';
 import ErrorPage from 'shared/errorPage/ErrorPage';
+import { DefaultImage } from 'components/pages/Board/shared/style/BoardContent.styled';
 
 const IconText = ({ icon, text }: IIconText) => (
     <SearchField>
@@ -80,7 +81,13 @@ const BoardAdvice = () => {
                                     heightcard={255}
                                     key={index}
                                     hoverable
-                                    cover={<CoverImage src={item?.image} style={{ borderRadius: '12px 12px 0 0' }} />}
+                                    cover={
+                                        item?.image !== '' ? (
+                                            <CoverImage src={item?.image} style={{ borderRadius: '12px 12px 0 0' }} />
+                                        ) : (
+                                            <CoverImageDefault style={{ borderRadius: '12px 12px 0 0' }} />
+                                        )
+                                    }
                                     onClick={() => history.push(`/boardcontent/${item._id}`)}
                                     actions={[<IconText icon={FormOutlined} text={item?.author_username} />, <IconText icon={CalendarOutlined} text={dateFormat(item?.created_at)} />]}
                                 >
