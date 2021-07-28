@@ -97,7 +97,6 @@ const Span = styled.span`
     margin-left: 16px;
 `;
 const Avataruser = styled.div`
-    margin: 24px 0px 0px 0px;
     padding: 20px 0px;
     background-color: #FAFAFC;
     display: flex;
