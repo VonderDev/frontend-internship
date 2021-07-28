@@ -21,7 +21,7 @@ export const FormInputContent = styled(TextArea)`
     width: 90%;
     height: 220px;
     box-shadow: 0px 3px 6px #f1f1f1;
-    padding-bottom: 30%;
+    padding-bottom: 20%;
 `;
 
 export const CreateContentForm = styled(Form.Item)`
@@ -40,12 +40,15 @@ export const ButtonGoNextCreateContent = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Blue-400);
-    width: 75%;
+    width: 400px;
     height: 7vh;
+    position: absolute;
+    bottom: 10px;
+    left: 0px;
+    right: 0px;
     font-size: 16px;
-    transform: translateX(13%) translateY(130%);
-    font-size: 16px;
-    position: sticky;
+    margin-left: auto;
+    margin-right: auto;
     &:hover {
         cursor: pointer;
     }
@@ -77,15 +80,16 @@ export const ButtonSummitPost = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Green-400);
-    margin-left: auto;
-    margin-right: auto;
-    width: 73%;
+    width: 400px;
     height: 7vh;
     font-size: 16px;
     display: block;
     margin: auto;
-    position: sticky;
-    transform: translateY(790%);
+    position: absolute;
+    bottom: 10px;
+    left: 0px;
+    right: 0px;
+
     &:hover {
         cursor: pointer;
     }
@@ -97,9 +101,10 @@ export const CountOfPageCreateContent = styled.div`
     align-items: center;
     font-size: 16px;
     color: var(--Gray-400);
-    transform: translateY(-135%);
-
-    /* position: absolute; */
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 70px;
 `;
 
 export const CountOfPageTwo = styled.div`
@@ -108,9 +113,10 @@ export const CountOfPageTwo = styled.div`
     align-items: center;
     font-size: 16px;
     color: var(--Gray-400);
-    transform: translateY(1250%);
-
-    /* position: absolute; */
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 70px;
 `;
 
 export const ButtonOfCategory = styled(Button)`
