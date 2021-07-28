@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ILogin } from '../../shared/login.interface';
 import { useHistory } from 'react-router';
 import { ApiPostDataUser } from '../../apis/user.api';
@@ -9,7 +9,6 @@ export const RegisterForm = () => {
     const [form] = Form.useForm();
     const history = useHistory();
     const [userData, setUserData] = useState<ILogin>({ firstName: '', lastName: '', email: '', username: '', password: '' });
-    const [newResponse, setNewResponse] = useState<any>();
     const [thaiMessage, setThaiMessage] = useState<string>();
     const [textState, setTextState] = useState<boolean>(false);
 
@@ -17,16 +16,30 @@ export const RegisterForm = () => {
         if (userData.username && userData.firstName && userData.lastName && userData.email && userData.password) {
             try {
                 const response = await ApiPostDataUser(userData);
-                setNewResponse(response.status);
                 if (response.message) {
                     form.resetFields();
                     history.push('/register');
                 } else if (response.data.error === 'Username has been used.') {
                     setThaiMessage('มีชื่อผู้ใช้งานนี้แล้ว');
+                    setTextState(true);
+                    setTimeout(() => {
+                        form.resetFields();
+                        setTextState(false);
+                    }, 2000);
                 } else if (response.data.error === 'Email has been used.') {
                     setThaiMessage('มีอีเมลนี้แล้ว');
+                    setTextState(true);
+                    setTimeout(() => {
+                        form.resetFields();
+                        setTextState(false);
+                    }, 2000);
                 } else if (response.data.error === 'Email and Username has been used.') {
                     setThaiMessage('มีชื่อผู้ใช้งานและอีเมลนี้แล้ว');
+                    setTextState(true);
+                    setTimeout(() => {
+                        form.resetFields();
+                        setTextState(false);
+                    }, 2000);
                 }
             } catch (error) {
                 console.log('Go to login');
@@ -35,22 +48,15 @@ export const RegisterForm = () => {
         } else {
             console.log('คุณยังไม่ได้กรอก');
         }
+        setTimeout(() => {
+            form.resetFields();
+            setTextState(false);
+        }, 2000);
     }
 
     const handleOnChange = (name: string, value: string) => {
         setUserData((prev) => ({ ...prev, [name]: value }));
-        // setUserData(value)
     };
-
-    useEffect(() => {
-        if (newResponse === 500) {
-            setTextState(true);
-            setTimeout(() => {
-                form.resetFields();
-                setTextState(false);
-            }, 2000);
-        }
-    }, [newResponse]);
 
     return (
         <>
