@@ -16,7 +16,8 @@ export const RegisterForm = () => {
     async function RegisterUser() {
         if (userData.username && userData.firstName && userData.lastName && userData.email && userData.password) {
             try {
-                const response = await ApiPostDataUser(userData)
+                const response = await ApiPostDataUser(userData);
+                setNewResponse(response.status);
                 // console.log("API response :", response)
                 if(response.message){
                     form.resetFields();
