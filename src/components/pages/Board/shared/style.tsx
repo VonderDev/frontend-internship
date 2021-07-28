@@ -36,7 +36,8 @@ export const BoardCard = styled(Card)`
     margin-bottom: 10px;
     height: 88px;
     width: 100%;
-    box-shadow: 0px 3px 6px #c7c7c7;
+
+    box-shadow: 5px 8px 10px #f0f0f0;
     border-radius: 10px;
     & .ant-card-body {
         padding: 0px;
@@ -56,6 +57,8 @@ export const NewCardStyle = styled(CardStyle)`
     padding: 0px;
     margin: 0px !important;
     margin-right: 10px !important;
+
+    box-shadow: 5px 8px 10px #f0f0f0;
     & .ant-card-actions {
         border-top: none;
         background: none;
@@ -93,9 +96,6 @@ export const SpaceCard = styled(Space)`
     //padding-right: 20px;
     //padding-left: 20px;
     margin-bottom: 10px;
-    .ant-space-item {
-        padding-left: 0px;
-    }
 `;
 
 export const HistoryImage = styled.img`

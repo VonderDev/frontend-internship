@@ -24,7 +24,7 @@ export const CardLatest = () => {
 
         return (
             <div style={{ margin: '0px 0%' }}>
-                {cards?.slice(0, 3).map((item: any, index: any) => {
+                {cards?.slice(0, 5).map((item: any, index: any) => {
                     return (
                         <BoardCard
                             key={index}
@@ -36,7 +36,7 @@ export const CardLatest = () => {
                                 {item?.image !== '' ? <HistoryImage src={item.image} /> : <HistoryImageDefault />}
 
                                 <CustomBox direction="column" justify="flex-start" align="flex-start">
-                                    <span style={{ fontSize: '14px', fontWeight: 'bold',textOverflow:'ellipsis'}}>{item.title}</span>
+                                    <span style={{ fontSize: '14px', fontWeight: 'bold', textOverflow: 'ellipsis' }}>{item.title}</span>
                                     <Box direction="row" justify="flex-start" align="flex-start">
                                         <HistoryText style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--Gray-400)' }}>บทความ</HistoryText>
                                         {item?.tag?.map((item: any, index: any) => {
@@ -47,18 +47,16 @@ export const CardLatest = () => {
                                             );
                                         })}
                                     </Box>
-                                    <Box direction="row" justify="space-between" align="flex-start" 
-                                    style={{ fontSize: '12px', color: '#6E7282', marginTop: '10px',display:'flex',width:'100%'}}>
-                                        <div style={{ justifyContent: 'center' ,flexDirection:'row',display:'flex'}}>
-                                            <CommentIcon  style={{ alignItems:'center',display:'flex'}}/>
+                                    <Box direction="row" justify="space-between" align="flex-start" style={{ fontSize: '12px', color: '#6E7282', marginTop: '10px', display: 'flex', width: '100%' }}>
+                                        <div style={{ justifyContent: 'center', flexDirection: 'row', display: 'flex' }}>
+                                            <CommentIcon style={{ alignItems: 'center', display: 'flex' }} />
                                             <HistoryText>{item.author_username}</HistoryText>
                                         </div>
-                                        <div style={{ justifyContent: 'center',flexDirection:'row' ,display:'flex'}}>
-                                        <HistoryText style={{marginRight:'20px'}}>{dateFormat(item?.created_at)}</HistoryText>
+                                        <div style={{ justifyContent: 'center', flexDirection: 'row', display: 'flex' }}>
+                                            <HistoryText style={{ marginRight: '20px' }}>{dateFormat(item?.created_at)}</HistoryText>
                                             <HeartIcon />
                                             <HistoryText>{item.uid_likes.length}</HistoryText>
                                         </div>
-                                       
                                     </Box>
                                 </CustomBox>
                             </EllipsisText>

@@ -109,7 +109,7 @@ export const SkillNameOnImgCard = styled.div`
 
 export const BoardCardSpace = styled(Space)`
     padding-right: 20px;
-    padding-left: 20px;
+    padding-left: 10px;
     padding-bottom: 25px;
 `;
 

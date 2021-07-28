@@ -54,6 +54,7 @@ export const ButtonGoNextCreateContent = styled(Button)`
 export const TextTopicContent = styled.div`
     font-size: 16px;
     color: var(--Gray-400);
+    margin-top: 8;
 `;
 
 export const UploadImage = styled(Upload)`
@@ -151,7 +152,7 @@ export const ContentTypeButton = styled(Radio.Button)`
         border-radius: var(--Blue-000);
     }
     &.ant-radio-button-wrapper:first-child {
-        width: 130px;
+        width: 168px;
         height: 50px;
         display: flex;
         justify-content: center;

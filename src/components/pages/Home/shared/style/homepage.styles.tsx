@@ -47,6 +47,7 @@ export const ImageTestPage = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    margin-bottom: 22px;
 `;
 
 export const ButtonStartGame = styled(Button)`
@@ -159,6 +160,9 @@ export const CreateContentIcon = styled.div`
     height: 75px;
     left: 80%;
     margin-right: 10px;
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 export const ImgBoardList = styled.img`
