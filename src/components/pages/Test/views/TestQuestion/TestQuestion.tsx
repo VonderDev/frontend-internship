@@ -117,7 +117,7 @@ function TestQuestion() {
                 '"อ้อ ไม่เป็นไร ๆ งั้นพวกเราออกเดินทางต่อเถอะ"',
             ],
         },
-        { value: 6, message: ['"เอ๊ะ มีบ้านอยู่ตรงนี้ด้วย ลองเข้าไปดูดีกว่าเผื่อมีใครอยู่"'] },
+        { value: 6, message: ['"เอ๊ะ มีบ้านอยู่ตรงนี้ด้วย"','"ลองเข้าไปดูดีกว่าเผื่อมีใครอยู่"'] },
         { value: 7, message: ['“ไม่มีใครอยู่เลย...”', '"แต่ในนี้มีของน่าสนใจเยอะแยะเลย"'] },
         { value: 8, message: ['"เอาล่ะ เราน่าจะเดินทางต่อได้แล้ว"'] },
         { value: 9, message: ['"ตรงนั้นมีใครก็ไม่รู้เล่นดนตรีอยู่ ลองไปฟังกันเถอะ"'] },
@@ -134,22 +134,31 @@ function TestQuestion() {
         if (currentCutScnen === 10 ) {
             setMusic(false);
         }
+
     }, [currentCutScnen]);
 
     const showStory =()=>{
         console.log('Cut ? :' ,cutScene);
         console.log(' currentMessage:' ,currentMessage);
+        if(cutSceneList[currentCutScnen].value === 6 && currentMessage === 0){
+            changeScene('door');
+        }
+        if(cutSceneList[currentCutScnen].value === 4 && currentMessage === 3){
+            changeScene('ZoomHappy');
+        }
         if(currentMessage === cutSceneList[currentCutScnen].message.length -1){
              if(currentCutScnen + 1 === 5)
             {
                 changeScene('S3')
                 setCutScene(true) // start cutscene v.6
             }else if (currentCutScnen+1 === 4 && currentMessage === 4){
-                changeScene('ZoomHappy');
                 setCutScene(false)
             }else if (currentCutScnen+1 === 6){
                 changeScene('S4')
                 setCutScene(true) // start cutscene v.7
+            }else if (currentCutScnen+1 === 7 && currentMessage === 1) {
+                changeScene('S4.2');
+                setCutScene(false)
             }else if (currentCutScnen+ 1 === 8){
                 changeScene('S5')
                 setCutScene(true) // start cutscene v.9
