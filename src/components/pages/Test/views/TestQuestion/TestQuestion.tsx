@@ -63,7 +63,7 @@ function TestQuestion() {
     const toggle = () => {
         setPlaying(!playing);
         if(currentCutScnen+ 1 > 8 && currentQuestion + 1 <= 18){
-
+            setPlaying(false);
             setMusic(!music)
         }else if (currentCutScnen >= 10 ){
             setMusic(false)
@@ -93,11 +93,8 @@ function TestQuestion() {
 
     useEffect(() => {
         if(currentCutScnen+ 1 > 8 && currentQuestion + 1 <= 18){
-            if(playing){
+                setPlaying(false)
                 setMusic(true)
-            }else{
-                setMusic(false)
-            }
         }else if (currentCutScnen >= 10 ){
             setMusic(false)
         }
@@ -146,7 +143,7 @@ function TestQuestion() {
         console.log('CutScene :', cutSceneList[currentCutScnen].value, 'message:', cutSceneList[currentCutScnen].message);
         if(cutSceneList[currentCutScnen].value === 9 && currentMessage === 0){
             if(playing){
-                audio.volume = 0.05
+                audio.pause()
                 setMusic(true)
             }else{
                 setMusic(false)
@@ -330,7 +327,7 @@ function TestQuestion() {
                                 <Box justify="space-between" align="center" direction="row">
                                     <div onClick={toggle}>
                                         <ButtonSound>
-                                            {playing ? (
+                                            {playing || music ? (
                                                 <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M15.9069 14.8595V6.40947H15.9251V1.34987C15.9259 1.23944 15.9031 1.13011 15.8585 1.02911C15.8138 0.928114 
