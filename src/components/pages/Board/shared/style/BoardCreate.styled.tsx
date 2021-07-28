@@ -54,6 +54,7 @@ export const ButtonGoNextCreateContent = styled(Button)`
 export const TextTopicContent = styled.div`
     font-size: 16px;
     color: var(--Gray-400);
+    margin-top: 8;
 `;
 
 export const UploadImage = styled(Upload)`
@@ -131,7 +132,7 @@ export const ButtonOfCategory = styled(Button)`
 `;
 
 export const ContainerContentType = styled(Radio.Group)`
-    margin-left: 10px;
+    margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
     right: 10px;
@@ -151,7 +152,7 @@ export const ContentTypeButton = styled(Radio.Button)`
         border-radius: var(--Blue-000);
     }
     &.ant-radio-button-wrapper:first-child {
-        width: 130px;
+        width: 168px;
         height: 50px;
         display: flex;
         justify-content: center;
@@ -175,6 +176,7 @@ export const InputHashtagInDrawer = styled(Select)`
     font-size: 16px;
     padding-top: 15px;
     border-radius: 10px;
+
     .ant-select-selection-overflow {
         height: auto;
         min-height: 45px !important;
@@ -183,9 +185,19 @@ export const InputHashtagInDrawer = styled(Select)`
         border-radius: 12px !important;
     }
     & .ant-select-selection-item {
-        background-color: #daebfd;
+        background-color: #ffffff;
         border-radius: 6px;
         font-size: 16px;
+        border-color: white;
+        padding: 0;
+        transform: translateX(10px);
+    }
+
+    & .ant-select-selection-item-content {
+        background: var(--Blue-000);
+        border-radius: 6px;
+        width: 100%;
+        text-align: center;
     }
 `;
 
@@ -324,4 +336,17 @@ export const CircleSelection = styled.div`
     background-image: url(${CirCleSelectionImg});
     width: 20px;
     height: 20px;
+`;
+
+export const ButtonSelectedTag = styled.div`
+    background-color: #daebfd;
+    width: 130px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3a8ce4;
+    font-size: 16px;
+    /* display: inline-block; */
 `;

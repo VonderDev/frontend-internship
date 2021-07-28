@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { FormOutlined, HeartFilled } from '@ant-design/icons';
 import { CardStyle } from 'shared/style/theme/component';
 import { Box } from 'shared/style/theme/component';
+import DefaultImageContent from '../../Board/shared/images/ImageDefault.png';
 
 export const TextRecommendBoardTopic = styled.div`
     font-weight: bolder;
@@ -10,8 +11,8 @@ export const TextRecommendBoardTopic = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-bottom: 15px;
     color: var(--Gray-600);
+    align-self: center;
 `;
 
 export const ButtonSeeAllBoard = styled.div`
@@ -27,14 +28,14 @@ export const ButtonSeeAllBoard = styled.div`
 
 export const BoardTextInfo = styled.div`
     padding-right: 15px;
-    margin-top: 5px;
 `;
 
 export const BoardCard = styled(Card)`
     margin-bottom: 10px;
     height: 88px;
     width: 100%;
-    box-shadow: 0px 3px 6px #c7c7c7;
+
+    box-shadow: 5px 8px 10px #f0f0f0;
     border-radius: 10px;
     & .ant-card-body {
         padding: 0px;
@@ -54,6 +55,8 @@ export const NewCardStyle = styled(CardStyle)`
     padding: 0px;
     margin: 0px !important;
     margin-right: 10px !important;
+
+    box-shadow: 5px 8px 10px #f0f0f0;
     & .ant-card-actions {
         border-top: none;
         background: none;
@@ -88,12 +91,8 @@ export const EllipsisText = styled.div`
 `;
 
 export const SpaceCard = styled(Space)`
-    //padding-right: 20px;
-    //padding-left: 20px;
-    margin-bottom: 10px;
-    .ant-space-item {
-        padding-left: 0px;
-    }
+    margin-bottom: 15px;
+    margin-top: 15px;
 `;
 
 export const HistoryImage = styled.img`
@@ -106,16 +105,49 @@ export const HistoryImage = styled.img`
     position: absolute;
 `;
 
+export const HistoryImageDefault = styled.img`
+    background-image: url(${DefaultImageContent});
+    margin-right: 10px;
+    width: 88px;
+    height: 88px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transform: translateY(-1%);
+    position: absolute;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+`;
+
 export const CoverImage = styled.img`
     width: 205px;
     height: 148px;
-    object-fit : cover;
+    object-fit: cover;
+`;
+
+export const CoverImageDefault = styled.img`
+    width: 205px;
+    height: 148px;
+    object-fit: cover;
+    background-image: url(${DefaultImageContent});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 `;
 
 export const HistoryText = styled.div`
     display: flex;
     padding-right: 5px;
     margin-top: 5px;
+`;
+export const RowBox = styled(Box)`
+    width: 80%;
+    @media(max-width: 500px){
+        width: 70% !important;
+    }
+    @media(max-width: 400px){
+        width: 65% !important;
+    }
 `;
 
 export const CardTextData = styled.div`
@@ -177,4 +209,6 @@ export const HeartIcon = styled(HeartFilled)`
 
 export const CustomBox = styled(Box)`
     margin-left: 100px;
+    width: 100%;
+    margin-right: 10px;
 `;

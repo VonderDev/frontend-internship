@@ -12,7 +12,7 @@ import {
     OptionHashtag,
     TextTopicContent,
 } from '../../shared/style/BoardCreate.styled';
-import { CheckCircleOutlined } from '@ant-design/icons';
+import { transalateToThai } from 'utils/transalator/transalator';
 interface CreateContentSecondPageProps {
     updateContentData: (event: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;
     countPage: number;
@@ -88,8 +88,9 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                             style={{ width: '90%' }}
                             placeholder="กรุณาเลือกแฮชเเท็กของกระทู้"
                             onChange={handleChangeOfHashtag}
+                            removeIcon={false}
                         >
-                            {OPTIONAL_TAG.map((item, index) => {
+                            {OPTIONAL_TAG.map((item: any, index: any) => {
                                 return (
                                     <OptionHashtag value={item.value} key={index}>
                                         #{item.tagName}
@@ -97,13 +98,34 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                                 );
                             })}
                         </InputHashtagInDrawer>
-                        {OPTIONAL_TAG.map((item, index) => {
+                        {/* {contentData?.tag.map((item: any, index: any) => {
+                            let tagIndex = contentData?.tag.indexOf(item);
                             return (
-                                <OptionHashtag value={item.value} key={index}>
-                                    #{item.tagName}
-                                </OptionHashtag>
+                                <ContainerContentType key={index} onChange={onChangeContentType} value={contentType}>
+                                    <ButtonSelectedTag>
+                                        {' '}
+                                        #{transalateToThai(item)}
+                                        <div style={{ marginLeft: '3px', transform: 'translateY(1px)' }}>
+                                            <CancleTag
+                                                onClick={() => {
+                                                    console.log(contentData?.tag);
+                                                    const removeTag = contentData?.tag.filter((e: any, i: any) => i != tagIndex);
+                                                    console.log('Clicke for Remove tag', removeTag);
+                                                    handleChangeOfHashtag(removeTag);
+                                                }}
+                                            />
+                                        </div>
+                                    </ButtonSelectedTag>
+                                </ContainerContentType>
                             );
-                        })}
+                        })} */}
+                        {contentData?.tag.map((item: any, index: any) => (
+                            <div key={index} style={{ marginRight: '10px', marginBottom: '5px' }}>
+                                <OptionHashtag style={{ fontWeight: 'normal' }} key={index} value={item.value} onChange={handleChangeOfHashtag}>
+                                    #{transalateToThai(item)}
+                                </OptionHashtag>
+                            </div>
+                        ))}
                     </ContainerBoardCreate>
                     <ButtonSummitPost htmlType="submit" onClick={postContent}>
                         สร้างกระทู้

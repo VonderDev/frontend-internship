@@ -60,9 +60,9 @@ function ResultOverview() {
                 {result?.map((item: any, index: any) => {
                     return (
                         <ContainerProgressScore key={index}>
-                            <TextNameSkill>{item.skill}</TextNameSkill>
-                            <div>{item.skill_summarize}</div>
-                            <ProgressBar style={{ width: '100%' }} strokeLinecap="square" percent={item.score} />
+                            <TextNameSkill>{item?.skill}</TextNameSkill>
+                            <div style={{ paddingBottom: '4px', fontSize: '16px', color: '#6E7282' }}>{item.skill_summarize}</div>
+                            <ProgressBar style={{ width: '100%', paddingBottom: '24px' }} strokeLinecap="square" percent={item.score} />
                         </ContainerProgressScore>
                     );
                 })}

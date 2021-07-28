@@ -18,8 +18,7 @@ export const RegisterForm = () => {
             try {
                 const response = await ApiPostDataUser(userData);
                 setNewResponse(response.status);
-                // console.log("API response :", response)
-                if(response.message){
+                if (response.message) {
                     form.resetFields();
                     history.push('/register');
                 } else if (response.data.error === 'Username has been used.') {
@@ -57,7 +56,7 @@ export const RegisterForm = () => {
         <>
             {textState ? (
                 <Box direction="column" justify="center" align="center">
-                    <div style={{ display : 'contents', justifyContent : 'center'}}>
+                    <div style={{ display: 'contents', justifyContent: 'center' }}>
                         <CustomAlert message="" description={thaiMessage} type="error" showIcon />
                     </div>
                 </Box>

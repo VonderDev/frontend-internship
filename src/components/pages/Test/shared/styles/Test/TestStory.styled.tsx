@@ -23,7 +23,7 @@ export const TextStory = styled.div`
     font-size: 20px;
     color: var(--Gray-600);
     opacity: 0.8;
-    transform: translateY(200%);
+    /* transform: translateY(200%); */
     display: flex;
     justify-content: center;
     align-content: center;
@@ -36,12 +36,12 @@ export const TextStory = styled.div`
         font-size: 14px;
         max-width: 320px;
         min-width: 150px;
-        transform: translateY(130%);
+        /* transform: translateY(130%); */
     }
     @media(max-width: 500px){
         font-size: 18px;
         max-width: 320px;
         min-width: 150px;
-        transform: translateY(150%);
+        /* transform: translateY(150%); */
     }
 `;

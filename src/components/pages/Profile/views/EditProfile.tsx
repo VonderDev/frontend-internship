@@ -74,6 +74,7 @@ const EditProfile = () => {
                 onOk={handleOk}
                 onCancel={handleCancel}
                 title={<TextHeadModal>ออกจากหน้านี้?</TextHeadModal>}
+                closable={false}
                 footer={[
                     <ButtonLeaveModal key="back" onClick={handleOk}>
                         ออก

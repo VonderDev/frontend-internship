@@ -160,6 +160,8 @@ export const ContainerProgressScore = styled.div`
 `;
 export const TextNameSkill = styled.div`
     font-weight: bolder;
+    padding-bottom: 4px;
+    font-size: 16px;
 `;
 
 //------------ STYLED RESULT INFO TAB ------------//
@@ -272,7 +274,7 @@ export const TextNameSkillInImg = styled.div`
 `;
 
 export const ResultImgCharactorDetail = styled(Image)`
-    width: 100%;
+    width: 1000px;
     height: 70vh;
 `;
 

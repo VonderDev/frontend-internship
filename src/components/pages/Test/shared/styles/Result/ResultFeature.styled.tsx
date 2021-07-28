@@ -16,8 +16,6 @@ export const ContainerImgCharactor = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* box-shadow: inset 10px 100px 100px 120px #999999 !important; */
-    /* background: linear-gradient(180deg, white, transparent); */
 `;
 
 export const ImgCardCharactorList = styled(CardStyle)`
@@ -105,13 +103,11 @@ export const SkillNameOnImgCard = styled.div`
     border-radius: 20px;
     font-size: 16px;
     text-shadow: 1px 1px 10px white, 0 0 1em white, 0 0 0.2em white;
-
-    /* box-shadow: inset 0 0 10px #ffffff; */
 `;
 
 export const BoardCardSpace = styled(Space)`
     padding-right: 20px;
-    padding-left: 20px;
+    padding-left: 10px;
     padding-bottom: 25px;
 `;
 
