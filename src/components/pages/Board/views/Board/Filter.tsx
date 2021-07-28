@@ -81,7 +81,7 @@ const Filter = () => {
     }, [searchValue, contentData]);
 
     useEffect(() => {
-        console.log('tagFilterData', tagFilterData);
+        // console.log('tagFilterData', tagFilterData);
         console.log('select tag', selectedTags);
         console.log('select categories', selectedCatagories);
     }, [tagFilterData, selectedTags, selectedCatagories]);
