@@ -382,7 +382,7 @@ function TestQuestion() {
                                         ) : (
                                             <Animation type="slideInLeft" duration={500} delay={100}>
                                                 <Animation type="fadeIn" key={currentQuestion} duration={600} delay={100}>
-                                                    <Box justify="center" align="center" direction="column">
+                                                    <Box justify="center" align="center" direction="column" style={{width:'100%',position:'absolute'}}>
                                                         {buttonList.map((item, index) => {
                                                             return (
                                                                 <ButtonChoiceStlyed
