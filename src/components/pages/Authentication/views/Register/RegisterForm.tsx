@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ILogin } from '../../shared/login.interface';
 import { useHistory } from 'react-router';
 import { ApiPostDataUser } from '../../apis/user.api';
@@ -56,18 +56,7 @@ export const RegisterForm = () => {
 
     const handleOnChange = (name: string, value: string) => {
         setUserData((prev) => ({ ...prev, [name]: value }));
-        // setUserData(value)
     };
-
-    // useEffect(() => {
-    //     if (newResponse === 500) {
-    //         setTextState(true);
-    //         setTimeout(() => {
-    //             form.resetFields();
-    //             setTextState(false);
-    //         }, 2000);
-    //     }
-    // }, [newResponse]);
 
     return (
         <>
