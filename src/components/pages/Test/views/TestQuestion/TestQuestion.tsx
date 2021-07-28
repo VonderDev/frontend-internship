@@ -62,8 +62,14 @@ function TestQuestion() {
     const [music, setMusic] = useState(false);
     const toggle = () => {
         setPlaying(!playing);
-        if(currentCutScnen+ 1 > 8 && currentCutScnen <= 10 ){
+        if(currentCutScnen+ 1 > 8 && currentQuestion + 1 <= 18){
+
             setMusic(!music)
+        }else if (currentCutScnen >= 10 ){
+            setMusic(false)
+        }
+        else{
+            setMusic(false)
         }
     };
     useEffect(() => {
@@ -86,9 +92,16 @@ function TestQuestion() {
     );
 
     useEffect(() => {
-        if(currentCutScnen+ 1 > 8 && currentCutScnen <= 10 ){
-            setMusic(!music)
-        }else{
+        if(currentCutScnen+ 1 > 8 && currentQuestion + 1 <= 18){
+            if(playing){
+                setMusic(true)
+            }else{
+                setMusic(false)
+            }
+        }else if (currentCutScnen >= 10 ){
+            setMusic(false)
+        }
+        else{
             setMusic(false)
         }
     }, [currentCutScnen]);
@@ -131,8 +144,13 @@ function TestQuestion() {
         cutSceneList[currentCutScnen];
         console.log(currentCutScnen);
         console.log('CutScene :', cutSceneList[currentCutScnen].value, 'message:', cutSceneList[currentCutScnen].message);
-        if (currentCutScnen === 10 ) {
-            setMusic(false);
+        if(cutSceneList[currentCutScnen].value === 9 && currentMessage === 0){
+            if(playing){
+                audio.volume = 0.05
+                setMusic(true)
+            }else{
+                setMusic(false)
+            }
         }
 
     }, [currentCutScnen]);
@@ -162,8 +180,6 @@ function TestQuestion() {
             }else if (currentCutScnen+ 1 === 8){
                 changeScene('S5')
                 setCutScene(true) // start cutscene v.9
-                audio.volume = 0.05
-                setMusic(true)
             }else if (currentCutScnen + 1 === 13){
                 changeScene('S6.1')
                 setCutScene(true)// start cutscene v.14
@@ -216,6 +232,7 @@ function TestQuestion() {
         } else if (currentQuestion + 1 === 18) {
             setCutScene(true); // start cutscene v.10
             changeScene('talk');
+            setMusic(false);
             audio.volume = 0.6
         } else if (currentQuestion + 1 === 21) {
             setCutScene(true); // start cutscene v.11
