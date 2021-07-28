@@ -57,7 +57,7 @@ export const RegisterForm = () => {
         <>
             {textState ? (
                 <Box direction="column" justify="center" align="center">
-                    <div style={{ display : 'contents', justifyContent : 'center'}}>
+                    <div style={{ display: 'contents', justifyContent: 'center' }}>
                         <CustomAlert message="" description={thaiMessage} type="error" showIcon />
                     </div>
                 </Box>

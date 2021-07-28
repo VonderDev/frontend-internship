@@ -144,7 +144,7 @@ export const LinkMoreResult = styled.div`
 `;
 
 export const ResultCard = styled(Card)`
-    box-shadow: 0 6px 15px #e0e0e0;
+    box-shadow: 5px 8px 10px #f0f0f0;
     margin-top: 0px;
     height: 130px;
     width: 100%;
@@ -158,7 +158,7 @@ export const BoardCard = styled(Card)`
     margin-bottom: 15px;
     height: 88px;
     width: 100%;
-    box-shadow: 5px 8px 10px #f5f5f5;
+    box-shadow: 5px 8px 10px #f0f0f0;
     border-radius: 10px;
     & .ant-card-body {
         padding: 0px;
