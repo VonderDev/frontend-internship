@@ -12,7 +12,7 @@ export async function ApiPostDataUser(data : any) {
         await axios.post('/signup', data)
         return data
     } catch (error) {
-        console.log("catch ERORRRR : ",error.response)
+        console.log("Error : ",error.response)
         return error.response
     }
 }

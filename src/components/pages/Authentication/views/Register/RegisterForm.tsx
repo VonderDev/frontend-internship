@@ -18,7 +18,6 @@ export const RegisterForm = () => {
             try {
                 const response = await ApiPostDataUser(userData);
                 setNewResponse(response.status);
-                console.log('API response :', response);
                 if (response.message) {
                     form.resetFields();
                     history.push('/register');
