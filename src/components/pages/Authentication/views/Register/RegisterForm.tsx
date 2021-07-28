@@ -9,7 +9,6 @@ export const RegisterForm = () => {
     const [form] = Form.useForm();
     const history = useHistory();
     const [userData, setUserData] = useState<ILogin>({ firstName: '', lastName: '', email: '', username: '', password: '' });
-    const [newResponse, setNewResponse] = useState<any>();
     const [thaiMessage, setThaiMessage] = useState<string>();
     const [textState, setTextState] = useState<boolean>(false);
 
@@ -17,15 +16,29 @@ export const RegisterForm = () => {
         if (userData.username && userData.firstName && userData.lastName && userData.email && userData.password) {
             try {
                 const response = await ApiPostDataUser(userData);
-                setNewResponse(response.status);
                 if (response.message) {
                     form.resetFields();
                     history.push('/register');
                 } else if (response.data.error === 'Username has been used.') {
+                    setTextState(true);
+                    setTimeout(() => {
+                        form.resetFields();
+                        setTextState(false);
+                    }, 2000);
                     setThaiMessage('มีชื่อผู้ใช้งานนี้แล้ว');
                 } else if (response.data.error === 'Email has been used.') {
+                    setTextState(true);
+                    setTimeout(() => {
+                        form.resetFields();
+                        setTextState(false);
+                    }, 2000);
                     setThaiMessage('มีอีเมลนี้แล้ว');
                 } else if (response.data.error === 'Email and Username has been used.') {
+                    setTextState(true);
+                    setTimeout(() => {
+                        form.resetFields();
+                        setTextState(false);
+                    }, 2000);
                     setThaiMessage('มีชื่อผู้ใช้งานและอีเมลนี้แล้ว');
                 }
             } catch (error) {
@@ -39,18 +52,7 @@ export const RegisterForm = () => {
 
     const handleOnChange = (name: string, value: string) => {
         setUserData((prev) => ({ ...prev, [name]: value }));
-        // setUserData(value)
     };
-
-    useEffect(() => {
-        if (newResponse === 500) {
-            setTextState(true);
-            setTimeout(() => {
-                form.resetFields();
-                setTextState(false);
-            }, 2000);
-        }
-    }, [newResponse]);
 
     return (
         <>
