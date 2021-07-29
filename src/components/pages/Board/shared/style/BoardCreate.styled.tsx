@@ -144,6 +144,13 @@ export const ContainerContentType = styled(Radio.Group)`
     right: 10px;
 `;
 
+export const ContainerTag = styled(Radio.Group)`
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    right: 10px;
+`;
+
 export const ContentTypeButton = styled(Radio.Button)`
     .ant-radio-inner,
     .ant-radio-inner:after {

@@ -1,11 +1,13 @@
 import React from 'react';
 import { NotificationCreatedPostSuccess } from '../../shared/style/BoardContent.styled';
 import {
+    ButtonSelectedTag,
     ButtonSummitPost,
     CircleChoice,
     CircleSelection,
     ContainerBoardCreate,
     ContainerContentType,
+    ContainerTag,
     ContentTypeButton,
     CountOfPageTwo,
     InputHashtagInDrawer,
@@ -13,6 +15,7 @@ import {
     TextTopicContent,
 } from '../../shared/style/BoardCreate.styled';
 import { transalateToThai } from 'utils/transalator/transalator';
+import { CancleTag } from '../../shared/Filter.styles';
 interface CreateContentSecondPageProps {
     updateContentData: (event: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => void;
     countPage: number;
@@ -101,11 +104,11 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                         {/* {contentData?.tag.map((item: any, index: any) => {
                             let tagIndex = contentData?.tag.indexOf(item);
                             return (
-                                <ContainerContentType key={index} onChange={onChangeContentType} value={contentType}>
+                                <ContainerTag key={index} onChange={onChangeContentType} value={contentType}>
                                     <ButtonSelectedTag>
                                         {' '}
                                         #{transalateToThai(item)}
-                                        <div style={{ marginLeft: '3px', transform: 'translateY(1px)' }}>
+                                        <div style={{ marginLeft: '3px', transform: 'translateY(0.3px)' }}>
                                             <CancleTag
                                                 onClick={() => {
                                                     console.log(contentData?.tag);
@@ -116,7 +119,7 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                                             />
                                         </div>
                                     </ButtonSelectedTag>
-                                </ContainerContentType>
+                                </ContainerTag>
                             );
                         })} */}
                         {contentData?.tag.map((item: any, index: any) => (

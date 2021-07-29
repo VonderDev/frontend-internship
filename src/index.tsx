@@ -3,7 +3,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import 'antd/dist/antd.css';
 import { SWRConfig } from 'swr';
 import axios from 'axios';
 
