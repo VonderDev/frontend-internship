@@ -375,16 +375,16 @@ function TestQuestion() {
                     {currentQuestion + 1 === 25 ? (
                         <>
                             <Animation onEnter="fadeIn" key={currentMessage} duration={1000} delay={200}>
-                                <Box justify="center" align="center" direction="row" style={{width:'100%',height:'100vh'}} onClick={()=>{cutScene && showStory()}}>
+                                <Box justify="center" align="center" direction='column' style={{width:'100%',height:'100vh'}} onClick={()=>{cutScene && showStory()}}>
                                     <TextStory onClick={showStory}>{cutSceneList[currentCutScnen].message[currentMessage]}</TextStory>
+                                    {isLoading ? (
+                                    <IsLoadingSpinnerTestQuestion>
+                                        <TextIsLoadingTestQuestion>กำลังประมวลผลคำตอบ</TextIsLoadingTestQuestion>
+                                        <Spin style={{ fontSize: '50px' }} />
+                                    </IsLoadingSpinnerTestQuestion>
+                            ) : null}{' '}
                                 </Box>
                             </Animation>
-                            {isLoading ? (
-                                <IsLoadingSpinnerTestQuestion>
-                                    <TextIsLoadingTestQuestion>กำลังประมวลผลคำตอบ</TextIsLoadingTestQuestion>
-                                    <Spin style={{ fontSize: '50px' }} />
-                                </IsLoadingSpinnerTestQuestion>
-                            ) : null}{' '}
                         </>
                     ) : (
                         <>
