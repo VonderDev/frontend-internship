@@ -8,14 +8,12 @@ import Meta from 'antd/lib/card/Meta';
 import { HeartIconCard, HeartText, CoverImage, BoardTextInfo, CoverImageDefault, CommentIcon, HistoryText } from '../../../Board/shared/style';
 import { Box } from 'shared/style/theme/component';
 import { transalateToThai } from 'utils/transalator/transalator';
-import { FormOutlined, CalendarOutlined } from '@ant-design/icons';
 import useSWR from 'swr';
 import { useEffect, useState } from 'react';
 import React from 'react';
 import { dateFormat } from 'utils/Date/DateFormat';
 import { useParams } from 'react-router-dom';
 import ErrorPage from 'shared/errorPage/ErrorPage';
-import { DefaultImage } from 'components/pages/Board/shared/style/BoardContent.styled';
 
 const IconText = ({ icon, text }: IIconText) => (
     <SearchField>

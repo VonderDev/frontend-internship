@@ -6,7 +6,7 @@ import { ApiPostFilter, ApiPostSearch } from '../../apis/board.api';
 import BoardCardComponent from './BoardCardComponent';
 import FilterDrawer from './FilterDrawer';
 import { transalateToThai } from 'utils/transalator/transalator';
-import { DrawerContainer, MoveCenter } from 'components/pages/Authentication/shared/style';
+import { DrawerContainer } from 'components/pages/Authentication/shared/style';
 import { CreateContentIcon } from 'components/pages/Home/shared/style/homepage.styles';
 import { useHistory } from 'react-router-dom';
 

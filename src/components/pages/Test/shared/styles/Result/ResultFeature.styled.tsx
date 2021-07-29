@@ -20,8 +20,9 @@ export const ContainerImgCharactor = styled.div`
 
 export const ImgCardCharactorList = styled(CardStyle)`
     padding: 0px;
-    width: 150px;
-    height: 90px;
+    width: 130px;
+    height: 100px;
+    transition: all 0.2s ease;
     position: relative;
     & .ant-card-actions {
         border-top: none;
@@ -84,8 +85,8 @@ export const SpaceCharactorList = styled(Space)`
 `;
 
 export const CoverImage = styled.img`
-    width: 150px;
-    height: 90px;
+    width: 130px;
+    height: 100px;
     /* position: relative; */
     box-shadow: inset 0px 0px 20px 10px rgba(255, 255, 255, 0.6);
     z-index: 20;

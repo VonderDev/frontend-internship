@@ -152,8 +152,7 @@ export const ButtonCreatePost = styled(Button)`
 
 export const CreateContentIcon = styled.div`
     background-image: url(${CreateContentImg});
-
-    position: sticky;
+    position: absolute;
     padding-bottom: 50px;
     bottom: 40px;
     width: 85px;
@@ -161,7 +160,6 @@ export const CreateContentIcon = styled.div`
     left: 80%;
     margin-right: 10px;
     z-index: 30;
-    /* z-index: 100 !important; */
     :hover {
         cursor: pointer;
     }

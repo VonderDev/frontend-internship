@@ -275,7 +275,7 @@ export const TextNameSkillInImg = styled.div`
 
 export const ResultImgCharactorDetail = styled(Image)`
     width: 1000px;
-    height: 70vh;
+    height: auto;
 `;
 
 export const ContainerCharactorDetail = styled.div`

@@ -63,7 +63,7 @@ function TestQuestion() {
     const toggle = () => {
         setPlaying(!playing);
         if(currentCutScnen+ 1 > 8 && currentQuestion + 1 <= 18){
-
+            setPlaying(false);
             setMusic(!music)
         }else if (currentCutScnen >= 10 ){
             setMusic(false)
@@ -93,11 +93,8 @@ function TestQuestion() {
 
     useEffect(() => {
         if(currentCutScnen+ 1 > 8 && currentQuestion + 1 <= 18){
-            if(playing){
+                setPlaying(false)
                 setMusic(true)
-            }else{
-                setMusic(false)
-            }
         }else if (currentCutScnen >= 10 ){
             setMusic(false)
         }
@@ -108,12 +105,12 @@ function TestQuestion() {
     //---------------- Cut Scene ----------------//
     const cutSceneList = [
         { value: 1, message: ['แตะหน้าจอเพื่อไปต่อ..', 'ที่นี่ที่ไหนกัน... แล้วฉันคือใคร...', 'โอ๊ย ทำไมจำอะไรไม่ได้เลย…', 'ลองเดินตามทางนี้ไปละกัน เผื่อจะจำอะไรได้มากขึ้น'] },
-        { value: 2, message: ['เอ๊ะ! ตรงนั้นมีคนนี่นา ลองเข้าไปถามดูดีกว่าเผื่อจะมีใครช่วยฉันได้'] },
+        { value: 2, message: ['เอ๊ะ! ตรงนั้นมีคนนี่นา ลองเข้าไปถามดูดีกว่า เผื่อจะมีใครช่วยฉันได้'] },
         { value: 3, message: ['หมี: “นายนั่นแหละที่เป็นคนบอกให้มาทางนี้” ', 'แรคคูน: “ฉันบอกให้ไปอีกทางนึงต่างหาก” ', ' เอ๊ะ! เหมือนว่าพวกเขากำลังทะเลาะกันอยู่นะ'] },
         {
             value: 4,
             message: [
-                '“เกิดอะไรขึ้นเหรอ”',
+                '“เกิดอะไรขึ้นเหรอ?”',
                 'หมี: “พวกเรากำลังหาทางออกจากป่านี้อยู่ แต่เจ้านี่น่ะสิ มันพาฉันหลงทาง”',
                 'แรคคูน: “อะไรนะ นายต่างหากที่พาฉันหลงทาง!”',
                 ' "พอดีเลย ฉันก็หาทางออกอยู่เหมือนกัน งั้นพวกเรามาหาทางออกด้วยกันไหม"',
@@ -130,11 +127,11 @@ function TestQuestion() {
                 '"อ้อ ไม่เป็นไร ๆ งั้นพวกเราออกเดินทางต่อเถอะ"',
             ],
         },
-        { value: 6, message: ['"เอ๊ะ มีบ้านอยู่ตรงนี้ด้วย"','"ลองเข้าไปดูดีกว่าเผื่อมีใครอยู่"'] },
+        { value: 6, message: ['"เอ๊ะ มีบ้านอยู่ตรงนี้ด้วย"','"ลองเข้าไปดูดีกว่า เผื่อมีใครอยู่"'] },
         { value: 7, message: ['“ไม่มีใครอยู่เลย...”', '"แต่ในนี้มีของน่าสนใจเยอะแยะเลย"'] },
         { value: 8, message: ['"เอาล่ะ เราน่าจะเดินทางต่อได้แล้ว"'] },
         { value: 9, message: ['"ตรงนั้นมีใครก็ไม่รู้เล่นดนตรีอยู่ ลองไปฟังกันเถอะ"'] },
-        { value: 10, message: ['"สุดยอดไปเลย เธอเล่นดนตรีเพราะจริง ๆ"', 'นักดนตรี: “ขอบคุณนะ พวกเธอก็เต้นเก่งมากเลย”', '"ว่าแต่ ฉันขอถามอะไรหน่อยได้ได้ไหม.."','จากนั้นฉันก็เล่าเรื่องทั้งหมดให้เขาฟัง...'] },
+        { value: 10, message: ['"สุดยอดไปเลย เธอเล่นดนตรีเพราะจริง ๆ"', 'นักดนตรี: “ขอบคุณนะ พวกเธอก็เต้นเก่งมากเลย”', '"ว่าแต่ ฉันขอถามอะไรหน่อยได้ไหม"','จากนั้นฉันก็เล่าเรื่องทั้งหมดให้เขาฟัง...'] },
         { value: 11, message: ['นักดนตรี: “อ๋อ เรื่องมันเป็นอย่างนี้นี่เอง งั้นฉันขอถามกลับได้ไหม” '] },
         { value: 12, message: ['“ถ้าเธอยังนึกไม่ออก ลองไปตามทางที่ฉันบอกก็แล้วกัน”', '“เธอจะรู้คำตอบเองแหละ”'] },
         { value: 13, message: ['“เราออกจากป่านี้ได้แล้ว!”', '“สวยจัง นี่มันทะเลสาบนี่นา”'] },
@@ -146,7 +143,7 @@ function TestQuestion() {
         // console.log('CutScene :', cutSceneList[currentCutScnen].value, 'message:', cutSceneList[currentCutScnen].message);
         if(cutSceneList[currentCutScnen].value === 9 && currentMessage === 0){
             if(playing){
-                audio.volume = 0.05
+                audio.pause()
                 setMusic(true)
             }else{
                 setMusic(false)
@@ -318,7 +315,7 @@ function TestQuestion() {
                 <TextBodyModal>การเปลี่ยนแปลงทั้งหมดจะไม่ถูกบันทึก</TextBodyModal>
             </ConfirmModal>
 
-            <MainContainer onClick={()=>{cutScene && showStory()}}>
+            <MainContainer>
                 <PixiProvider>
                     <PixiApp content={GameContent} />
                 </PixiProvider>
@@ -330,7 +327,7 @@ function TestQuestion() {
                                 <Box justify="space-between" align="center" direction="row">
                                     <div onClick={toggle}>
                                         <ButtonSound>
-                                            {playing ? (
+                                            {playing || music ? (
                                                 <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path
                                                         d="M15.9069 14.8595V6.40947H15.9251V1.34987C15.9259 1.23944 15.9031 1.13011 15.8585 1.02911C15.8138 0.928114 
@@ -384,7 +381,7 @@ function TestQuestion() {
                             </Animation>
                             {isLoading ? (
                                 <IsLoadingSpinnerTestQuestion>
-                                    <TextIsLoadingTestQuestion>กำลังประมวลผลคำตอบน้า</TextIsLoadingTestQuestion>
+                                    <TextIsLoadingTestQuestion>กำลังประมวลผลคำตอบ</TextIsLoadingTestQuestion>
                                     <Spin style={{ fontSize: '50px' }} />
                                 </IsLoadingSpinnerTestQuestion>
                             ) : null}{' '}
@@ -393,7 +390,7 @@ function TestQuestion() {
                         <>
                             {cutScene ? (
                                 <Animation onEnter="fadeIn" key={currentMessage} duration={1000} delay={200}>
-                                    <div style={{width:'100%', marginTop:'40%'}}>
+                                    <div style={{width:'100%', paddingTop:'40%',height:'100vh'}} onClick={()=>{cutScene && showStory()}}>
                                     <TextStory onClick={showStory}>{cutSceneList[currentCutScnen].message[currentMessage]}</TextStory>
                                     </div>
                                 </Animation>
