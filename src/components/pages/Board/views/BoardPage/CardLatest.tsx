@@ -37,7 +37,7 @@ export const CardLatest = () => {
                                 <CustomBox direction="column" justify="flex-start" align="flex-start">
                                     <span style={{ fontSize: '14px', fontWeight: 'bold', textOverflow: 'ellipsis' }}>{item.title}</span>
                                     <Box direction="row" justify="flex-start" align="flex-start">
-                                        <HistoryText style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--Gray-400)' }}>บทความ</HistoryText>
+                                        <HistoryText style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--Gray-400)' }}>{transalateToThai(item.content_type)}</HistoryText>
                                         {item?.tag?.map((item: any, index: any) => {
                                             return (
                                                 <HistoryText style={{ fontSize: '12px', paddingRight: '10px', color: 'var(--Gray-400)' }} key={index}>
