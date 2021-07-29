@@ -101,7 +101,7 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                                 );
                             })}
                         </InputHashtagInDrawer>
-                        {contentData?.tag.map((item: any, index: any) => {
+                        {/* {contentData?.tag.map((item: any, index: any) => {
                             let tagIndex = contentData?.tag.indexOf(item);
                             return (
                                 <ContainerTag key={index} onChange={onChangeContentType} value={contentType}>
@@ -121,7 +121,7 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                                     </ButtonSelectedTag>
                                 </ContainerTag>
                             );
-                        })}
+                        })} */}
                         {contentData?.tag.map((item: any, index: any) => (
                             <div key={index} style={{ marginRight: '10px', marginBottom: '5px' }}>
                                 <OptionHashtag style={{ fontWeight: 'normal' }} key={index} value={item.value} onChange={handleChangeOfHashtag}>
