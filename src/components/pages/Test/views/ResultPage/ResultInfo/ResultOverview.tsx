@@ -68,23 +68,22 @@ function ResultOverview() {
                 })}
             </div>
             <Box justify="center" align="center" direction="row" style={{ height: '50px', marginBottom: '40px' }}>
-                <ContainerButtonGoHome>
-                    {' '}
-                    <ButtonStyle
-                        typebutton="Large"
-                        sizebutton={85}
-                        style={{ fontSize: '16px', fontWeight: 'bolder', position: 'absolute', left: '0', right: '0', marginLeft: 'auto', bottom: '25px', marginRight: 'auto' }}
-                        onClick={() => {
-                            history.push('/');
-                            const tokenGuest = localStorage.getItem('tokenGuest');
-                            if (tokenGuest) {
-                                localStorage.removeItem('tokenGuest');
-                            }
-                        }}
-                    >
-                        กลับหน้าหลัก
-                    </ButtonStyle>
-                </ContainerButtonGoHome>
+                {/* <ContainerButtonGoHome> */}{' '}
+                <ButtonStyle
+                    typebutton="Large"
+                    sizebutton={85}
+                    style={{ fontSize: '16px', fontWeight: 'bolder' }}
+                    onClick={() => {
+                        history.push('/');
+                        const tokenGuest = localStorage.getItem('tokenGuest');
+                        if (tokenGuest) {
+                            localStorage.removeItem('tokenGuest');
+                        }
+                    }}
+                >
+                    กลับหน้าหลัก
+                </ButtonStyle>
+                {/* </ContainerButtonGoHome> */}
             </Box>
         </>
     );

@@ -25,7 +25,6 @@ export const ButtonGoHomeInResult = styled(Button)`
 `;
 
 export const ContainerButtonGoHome = styled.div`
-    border-radius: 12px;
     font-weight: bolder;
     color: white;
     background-color: #ffffff;

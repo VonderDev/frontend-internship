@@ -139,7 +139,7 @@ function BoardContent() {
                     <ContentBody>{contentData?.content_body}</ContentBody>
 
                     <BoxOfLikeAndComment>
-                        <span style={{ display: 'flex', alignItems: 'center', transform: 'translateX(80px)' }}>
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
                             {isLike ? (
                                 <div onClick={unLikeOfBoardContent} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                     <svg width="29" height="24" viewBox="0 0 29 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -165,7 +165,7 @@ function BoardContent() {
                             {isLike ? <LengthOfLikeAndCommentSuccess>{likeLength}</LengthOfLikeAndCommentSuccess> : <LengthOfLikeAndComment>{likeLength}</LengthOfLikeAndComment>}
                         </span>
                         <span
-                            style={{ display: 'flex', alignItems: 'center', transform: 'translateX(350px)' }}
+                            style={{ display: 'flex', alignItems: 'center' }}
                             onClick={() => {
                                 if (paramObjectId) {
                                     history.push(`/boardcontent/${paramObjectId?.id}/comment`);

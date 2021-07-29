@@ -78,19 +78,9 @@ export const AuthorName = styled.div`
 `;
 
 export const BoxOfLikeAndComment = styled.div`
-    font-weight: bolder;
-    color: white;
-    background-color: #ffffff;
-    width: 570px;
-    height: 11vh;
-    font-size: 16px;
-    display: block;
-    margin: auto;
-    position: absolute;
-    bottom: -2px;
-    left: 0px;
-    right: 0px;
+    padding-bottom: 5%;
     display: flex;
+    justify-content: space-evenly;
 `;
 
 export const LengthOfLikeAndComment = styled.span`
