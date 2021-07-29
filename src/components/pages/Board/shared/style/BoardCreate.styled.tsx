@@ -40,8 +40,6 @@ export const ButtonGoNextCreateContent = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Blue-400);
-    width: 400px;
-    height: 7vh;
     position: absolute;
     bottom: 10px;
     left: 0px;
@@ -51,6 +49,18 @@ export const ButtonGoNextCreateContent = styled(Button)`
     margin-right: auto;
     &:hover {
         cursor: pointer;
+    }
+    @media(max-width:400px){
+        width: 90% !important;
+        height: 51px;
+    }
+    @media(max-width:1024px){
+        width: 400px;
+        height: 51px;
+    } 
+    @media(min-width:1024px){
+        width: 400px;
+        height: 51px;
     }
 `;
 
@@ -80,18 +90,29 @@ export const ButtonSummitPost = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Green-400);
-    width: 400px;
-    height: 7vh;
     font-size: 16px;
-    display: block;
-    margin: auto;
+    display: flex;
     position: absolute;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
     bottom: 10px;
     left: 0px;
     right: 0px;
-
     &:hover {
         cursor: pointer;
+    }
+    @media(max-width:400px){
+        width: 90% !important;
+        height: 51px;
+    }
+    @media(max-width:1024px){
+        width: 400px;
+        height: 51px;
+    } 
+    @media(min-width:1024px){
+        width: 400px;
+        height: 51px;
     }
 `;
 
