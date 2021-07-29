@@ -84,7 +84,7 @@ const Listmenu = styled.li`
         height: 100%;
         display: flex;
         align-items: center;
-        padding-left: 15%;
+        padding-left: 8%;
         border-radius: 4px;
     }
     &.nav-text a:hover {
