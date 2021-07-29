@@ -28,12 +28,12 @@ function ResultInfo() {
                             <ResultFeatures />
                         </TabPane>
                     </TabsInfo>
-                    <Box justify="center" align="center" direction="row" style={{ height: '50px', margin: '2% 0px' ,position:'sticky',bottom:'5px',backgroundColor:'white'}}>
+                    <Box justify="center" align="center" direction="row" style={{position:'sticky',bottom:'0px',backgroundColor:'white'}}>
                     {' '}
                 <ButtonStyle
                     typebutton="Large"
                     sizebutton={85}
-                    style={{ fontSize: '16px', fontWeight: 'bolder' }}
+                    style={{ fontSize: '16px', fontWeight: 'bolder',margin:'2% 0px' }}
                     onClick={() => {
                         history.push('/');
                         const tokenGuest = localStorage.getItem('tokenGuest');
