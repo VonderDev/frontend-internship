@@ -15,6 +15,7 @@ import {
     CoverImageDefault,
     CommentIcon,
     HistoryText,
+    TextRecommendBoardTopTen,
 } from '../../shared/style';
 import { LoadingOutlined } from '@ant-design/icons';
 import { IIconText } from '../../shared/Card.interface';
@@ -122,7 +123,7 @@ export const CardTopTen = () => {
         <>
             <Box direction="row" justify="space-between" align="flex-start">
                 <Box direction="column" justify="center" align="center">
-                    <TextRecommendBoardTopic>10 อันดับสูงสุด</TextRecommendBoardTopic>
+                    <TextRecommendBoardTopTen>10 อันดับสูงสุด</TextRecommendBoardTopTen>
                 </Box>
             </Box>
             {allCard}

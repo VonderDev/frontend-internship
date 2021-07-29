@@ -15,6 +15,17 @@ export const TextRecommendBoardTopic = styled.div`
     align-self: center;
 `;
 
+export const TextRecommendBoardTopTen = styled.div`
+    font-weight: bolder;
+    font-size: var(--font-20);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--Gray-600);
+    align-self: center;
+    padding-left: 18px;
+`;
+
 export const ButtonSeeAllBoard = styled.div`
     color: var(--Blue-300);
     font-weight: bolder;
@@ -93,6 +104,7 @@ export const EllipsisText = styled.div`
 export const SpaceCard = styled(Space)`
     margin-bottom: 15px;
     margin-top: 15px;
+    margin-left: 15px;
 `;
 
 export const HistoryImage = styled.img`
@@ -142,10 +154,10 @@ export const HistoryText = styled.div`
 `;
 export const RowBox = styled(Box)`
     width: 80%;
-    @media(max-width: 500px){
+    @media (max-width: 500px) {
         width: 70% !important;
     }
-    @media(max-width: 400px){
+    @media (max-width: 400px) {
         width: 65% !important;
     }
 `;

@@ -1,5 +1,5 @@
 import { IResult } from 'components/pages/Test/shared/interface/Result.interfaces';
-import { ProgressBar } from 'components/pages/Test/shared/styles/Result/ResultOverview.styled';
+import { ContainerButtonGoHome, ProgressBar } from 'components/pages/Test/shared/styles/Result/ResultOverview.styled';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import ErrorPage from 'shared/errorPage/ErrorPage';
@@ -68,20 +68,23 @@ function ResultOverview() {
                 })}
             </div>
             <Box justify="center" align="center" direction="row" style={{ height: '50px', marginBottom: '40px' }}>
-                <ButtonStyle
-                    typebutton="Large"
-                    sizebutton={85}
-                    style={{ fontSize: '16px', fontWeight: 'bolder' }}
-                    onClick={() => {
-                        history.push('/');
-                        const tokenGuest = localStorage.getItem('tokenGuest');
-                        if (tokenGuest) {
-                            localStorage.removeItem('tokenGuest');
-                        }
-                    }}
-                >
-                    กลับหน้าหลัก
-                </ButtonStyle>
+                <ContainerButtonGoHome>
+                    {' '}
+                    <ButtonStyle
+                        typebutton="Large"
+                        sizebutton={85}
+                        style={{ fontSize: '16px', fontWeight: 'bolder', position: 'absolute', left: '0', right: '0', marginLeft: 'auto', bottom: '25px', marginRight: 'auto' }}
+                        onClick={() => {
+                            history.push('/');
+                            const tokenGuest = localStorage.getItem('tokenGuest');
+                            if (tokenGuest) {
+                                localStorage.removeItem('tokenGuest');
+                            }
+                        }}
+                    >
+                        กลับหน้าหลัก
+                    </ButtonStyle>
+                </ContainerButtonGoHome>
             </Box>
         </>
     );

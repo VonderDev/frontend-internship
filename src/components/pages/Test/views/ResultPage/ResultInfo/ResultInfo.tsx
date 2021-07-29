@@ -15,14 +15,17 @@ function ResultInfo() {
                     left: 'back',
                 }}
             >
-                <TabsInfo type="card">
-                    <TabPane tab="ภาพรวม" key="1">
-                        <ResultOverview />
-                    </TabPane>
-                    <TabPane tab="ลักษณะเด่น" key="2">
-                        <ResultFeatures />
-                    </TabPane>
-                </TabsInfo>
+                <div>
+                    {' '}
+                    <TabsInfo type="card">
+                        <TabPane tab="ภาพรวม" key="1">
+                            <ResultOverview />
+                        </TabPane>
+                        <TabPane tab="ลักษณะเด่น" key="2">
+                            <ResultFeatures />
+                        </TabPane>
+                    </TabsInfo>
+                </div>
             </Container>
         </>
     );
