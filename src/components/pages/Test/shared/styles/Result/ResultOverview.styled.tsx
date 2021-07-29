@@ -23,3 +23,18 @@ export const ButtonGoHomeInResult = styled(Button)`
     justify-content: center;
     font-size: 18px;
 `;
+
+export const ContainerButtonGoHome = styled.div`
+    font-weight: bolder;
+    color: white;
+    background-color: #ffffff;
+    width: 530px;
+    height: 11vh;
+    font-size: 16px;
+    display: block;
+    margin: auto;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+`;

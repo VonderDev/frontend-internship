@@ -7,7 +7,7 @@ function Board() {
 
     return (
         <div>
-            <div style={{ marginLeft: '16px' }}>
+            <div>
                 <CardTopTen />
             </div>
 

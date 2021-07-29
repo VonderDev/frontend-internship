@@ -77,7 +77,7 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                                             });
                                         }}
                                     >
-                                        <div style={{ transform: 'translateY(15px) translateX(-30px)' }}>{contentData.content_type.includes(item.value) ? <CircleSelection /> : <CircleChoice />}</div>
+                                        <div style={{ transform: 'translateY(15px) translateX(-40px)' }}>{contentData.content_type.includes(item.value) ? <CircleSelection /> : <CircleChoice />}</div>
                                         <div style={{ transform: 'translateY(-10px)' }}>{item.label}</div>
                                     </ContentTypeButton>
                                 </ContainerContentType>
@@ -101,7 +101,7 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                                 );
                             })}
                         </InputHashtagInDrawer>
-                        {/* {contentData?.tag.map((item: any, index: any) => {
+                        {contentData?.tag.map((item: any, index: any) => {
                             let tagIndex = contentData?.tag.indexOf(item);
                             return (
                                 <ContainerTag key={index} onChange={onChangeContentType} value={contentType}>
@@ -121,7 +121,7 @@ const CreateContentSecondPage: React.FC<CreateContentSecondPageProps> = ({
                                     </ButtonSelectedTag>
                                 </ContainerTag>
                             );
-                        })} */}
+                        })}
                         {contentData?.tag.map((item: any, index: any) => (
                             <div key={index} style={{ marginRight: '10px', marginBottom: '5px' }}>
                                 <OptionHashtag style={{ fontWeight: 'normal' }} key={index} value={item.value} onChange={handleChangeOfHashtag}>

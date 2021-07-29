@@ -78,7 +78,10 @@ export const AuthorName = styled.div`
 `;
 
 export const BoxOfLikeAndComment = styled.div`
-    padding-bottom: 5%;
+    padding: 3%;
+    position: sticky;
+    background-color: white;
+    bottom: 0;
     display: flex;
     justify-content: space-evenly;
 `;

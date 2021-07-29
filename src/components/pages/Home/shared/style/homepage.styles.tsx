@@ -152,7 +152,7 @@ export const ButtonCreatePost = styled(Button)`
 
 export const CreateContentIcon = styled.div`
     background-image: url(${CreateContentImg});
-    position: absolute;
+    position: sticky;
     padding-bottom: 50px;
     bottom: 40px;
     width: 85px;
