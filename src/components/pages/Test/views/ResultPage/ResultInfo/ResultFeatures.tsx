@@ -6,11 +6,9 @@ import useSWR from 'swr';
 import { useHistory, useParams } from 'react-router-dom';
 import { GridBox, ImgCardCharactorList, SpaceCharactorList, CoverImage, SkillNameOnImgCard, ContainerImgCharactor } from 'components/pages/Test/shared/styles/Result/ResultFeature.styled';
 import { transalateToThai } from 'utils/transalator/transalator';
-import { Box, ButtonStyle } from 'shared/style/theme/component';
 import ErrorPage from 'shared/errorPage/ErrorPage';
 
 const ResultFeatures = () => {
-    const history = useHistory();
     //---------------- FETCHING RESULT DATA USE SWR ----------------//
     const [result, setResultData] = useState<Array<IResult> | null>(null);
     const [isData, isSetData] = useState<boolean>(false);
@@ -105,22 +103,6 @@ const ResultFeatures = () => {
                 skill={detailCharacter.skill}
                 img_charactor={detailCharacter.image_charactor}
             />
-            <Box justify="center" align="center" direction="row" style={{ height: '50px', marginBottom: '40px' }}>
-                <ButtonStyle
-                    typebutton="Large"
-                    sizebutton={85}
-                    style={{ fontSize: '16px', fontWeight: 'bolder' }}
-                    onClick={() => {
-                        history.push('/');
-                        const tokenGuest = localStorage.getItem('tokenGuest');
-                        if (tokenGuest) {
-                            localStorage.removeItem('tokenGuest');
-                        }
-                    }}
-                >
-                    กลับหน้าหลัก
-                </ButtonStyle>
-            </Box>
         </>
     );
 };

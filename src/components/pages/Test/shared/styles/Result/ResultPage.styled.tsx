@@ -260,8 +260,9 @@ export const TextBoxDescription = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    width: 100%;
     font-size: 16px;
+    padding: 0px 2% 0px 0px;
 `;
 
 export const TextNameSkillInImg = styled.div`
