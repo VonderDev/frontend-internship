@@ -25,6 +25,8 @@ import { ApiPutLikeOfBoardContent } from '../../apis/boardCreate.api';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { dateFormat } from 'utils/Date/DateFormat';
 import ErrorPage from 'shared/errorPage/ErrorPage';
+import { IsLoadingSpinnerTestQuestion, TextIsLoadingTestQuestion } from 'components/pages/Test/shared/styles/Test/TestQuestion.styled';
+import { Spin } from 'antd';
 
 function BoardContent() {
     const history = useHistory();
@@ -118,7 +120,10 @@ function BoardContent() {
         >
             {errorcontentData && errorfetchingComment && <ErrorPage />}
             {isLoadingContentData ? (
-                <div>loading ...</div>
+                <IsLoadingSpinnerTestQuestion>
+                <TextIsLoadingTestQuestion>Loading....</TextIsLoadingTestQuestion>
+                <Spin style={{ fontSize: '50px' }} />
+                </IsLoadingSpinnerTestQuestion>
             ) : (
                 <ContainerBaordContent>
                     <TextTitleContent>{contentData?.title}</TextTitleContent>
