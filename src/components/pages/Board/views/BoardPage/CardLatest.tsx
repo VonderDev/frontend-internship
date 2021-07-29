@@ -1,16 +1,14 @@
-import { Card, Spin } from 'antd';
-import React, { useMemo } from 'react';
+import { Spin } from 'antd';
+import { useMemo } from 'react';
 import { useHistory } from 'react-router';
 import { Box } from 'shared/style/theme/component';
 import useSWR from 'swr';
-import { BoardCard, CommentIcon, HistoryImage, HistoryText, SearchField, EllipsisText, CustomBox } from '../../shared/style';
+import { BoardCard, CommentIcon, HistoryImage, HistoryText, RowBox, EllipsisText, CustomBox, HistoryImageDefault } from '../../shared/style';
 import { LoadingOutlined } from '@ant-design/icons';
 import { HeartIcon } from 'components/pages/Profile/shared/Profile.styles';
 import { transalateToThai } from 'utils/transalator/transalator';
 import { TextRecommendBoardTopic, ButtonSeeAllBoard } from '../../shared/style';
 import { dateFormat } from 'utils/Date/DateFormat';
-
-const months = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
 
 export const CardLatest = () => {
     const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -24,8 +22,8 @@ export const CardLatest = () => {
         });
 
         return (
-            <div style={{ margin: '0px 5%' }}>
-                {cards?.slice(0, 3).map((item: any, index: any) => {
+            <div style={{ margin: '0px 0%' }}>
+                {cards?.slice(0, 5).map((item: any, index: any) => {
                     return (
                         <BoardCard
                             key={index}
@@ -34,9 +32,10 @@ export const CardLatest = () => {
                             }}
                         >
                             <EllipsisText style={{ display: 'flex' }}>
-                                <HistoryImage src={item.image} />
+                                {item?.image !== '' ? <HistoryImage src={item.image} /> : <HistoryImageDefault />}
+
                                 <CustomBox direction="column" justify="flex-start" align="flex-start">
-                                    <HistoryText style={{ fontSize: '14px', fontWeight: 'bold' }}>{item.title}</HistoryText>
+                                    <span style={{ fontSize: '14px', fontWeight: 'bold', textOverflow: 'ellipsis' }}>{item.title}</span>
                                     <Box direction="row" justify="flex-start" align="flex-start">
                                         <HistoryText style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--Gray-400)' }}>บทความ</HistoryText>
                                         {item?.tag?.map((item: any, index: any) => {
@@ -47,17 +46,22 @@ export const CardLatest = () => {
                                             );
                                         })}
                                     </Box>
-                                    <Box direction="row" justify="space-between" align="flex-start" style={{ fontSize: '12px', color: '#6E7282', marginTop: '10px' }}>
-                                        <div style={{ justifyContent: 'center' }}>
-                                            <CommentIcon />
+                                    <RowBox
+                                        direction="row"
+                                        justify="space-between"
+                                        align="flex-start"
+                                        style={{ fontSize: '12px', color: '#6E7282', marginTop: '10px', display: 'flex', width: '80%', position: 'absolute', bottom: '10px' }}
+                                    >
+                                        <div style={{ justifyContent: 'center', flexDirection: 'row', display: 'flex' }}>
+                                            <CommentIcon style={{ alignItems: 'center', display: 'flex' }} />
+                                            <HistoryText>{item.author_username}</HistoryText>
                                         </div>
-                                        <HistoryText>{item.author_username}</HistoryText>
-                                        <HistoryText>{dateFormat(item?.created_at)}</HistoryText>
-                                        <div style={{ justifyContent: 'center' }}>
+                                        <div style={{ justifyContent: 'center', flexDirection: 'row', display: 'flex' }}>
+                                            <HistoryText style={{ marginRight: '20px' }}>{dateFormat(item?.created_at)}</HistoryText>
                                             <HeartIcon />
+                                            <HistoryText>{item.uid_likes.length}</HistoryText>
                                         </div>
-                                        <HistoryText>{item.uid_likes.length}</HistoryText>
-                                    </Box>
+                                    </RowBox>
                                 </CustomBox>
                             </EllipsisText>
                         </BoardCard>
@@ -68,8 +72,6 @@ export const CardLatest = () => {
     }, [data]);
 
     const allCard = useMemo(() => {
-        console.log('This is from db : ', data);
-        console.log('This is error from db : ', error);
         const isLoading = !data && !error;
         switch (true) {
             case error:
@@ -90,8 +92,8 @@ export const CardLatest = () => {
 
     return (
         <>
-            <Box direction="row" justify="space-between" align="flex-start">
-                <Box direction="column" justify="center" align="center">
+            <Box direction="row" justify="space-between" align="flex-start" style={{ marginBottom: '15px' }}>
+                <Box direction="column" justify="center" align="center" style={{ alignSelf: 'center' }}>
                     <TextRecommendBoardTopic>กระทู้</TextRecommendBoardTopic>
                 </Box>
                 <Box direction="column" justify="center" align="center" style={{ alignSelf: 'center' }}>

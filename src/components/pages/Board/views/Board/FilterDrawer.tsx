@@ -30,7 +30,7 @@ const FilterDrawer: React.FC<DrawerProps> = ({ onclickClear, showDrawer, visible
             closable={true}
             onClose={showDrawer}
             visible={visible}
-            height={768}
+            height={750}
         >
             <div>
                 <Topic>ประเภทของกระทู้</Topic>
@@ -59,7 +59,7 @@ const FilterDrawer: React.FC<DrawerProps> = ({ onclickClear, showDrawer, visible
                 </TagBox>
             </div>
             <div style={{ display: 'flex', justifyContent:'space-between',
-             alignItems: 'center',position:'absolute',bottom:'0',
+             alignItems: 'center',position:'absolute',bottom:'20px',
              flexDirection:'row',width:'90%'}}>
                 <ButtonClearFilter onClick={onclickClear}>ล้างทั้งหมด</ButtonClearFilter>
                 <ButtonUseFilter onClick={onclickFilter}>กรอง</ButtonUseFilter>

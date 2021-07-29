@@ -1,5 +1,5 @@
 import { Col } from 'antd';
-import { RowStyled, CardText, IconArrow, ResultCard, ResultImage } from 'components/pages/Profile/shared/Profile.styles';
+import { RowStyled, CardText, ResultCard, ResultImage, ArrowIcon } from 'components/pages/Profile/shared/Profile.styles';
 import { useHistory } from 'react-router-dom';
 import { dateFormat } from 'utils/Date/DateFormat';
 
@@ -17,10 +17,10 @@ const ProfileResultCard: React.FC<CardComponentProps> = ({ profile }) => {
         <>
             {profile?.slice(0, 1).map((item: any, index: any) => {
                 return (
-                    <ResultCard style={{ marginBottom: '10px' }} key={index} onClick={() => history.push('/result')}>
+                    <ResultCard style={{ marginBottom: '10px', marginTop: '5px' }} key={index} onClick={() => history.push('/result')}>
                         <RowStyled>
                             <Col span={10}>
-                                <ResultImage src="https://www.datanovia.com/en/wp-content/uploads/2020/12/radar-chart-in-r-customized-fmstb-radar-chart-1.png" />
+                                <ResultImage src="https://www.linkpicture.com/q/Radar-chart.png" />
                             </Col>
                             <Col span={12}>
                                 <CardText style={{ transform: 'translateY(67%) translateX(5%)' }}>
@@ -30,7 +30,7 @@ const ProfileResultCard: React.FC<CardComponentProps> = ({ profile }) => {
                                 </CardText>
                             </Col>
                             <Col span={2}>
-                                <IconArrow />
+                                <ArrowIcon />
                             </Col>
                         </RowStyled>
                     </ResultCard>

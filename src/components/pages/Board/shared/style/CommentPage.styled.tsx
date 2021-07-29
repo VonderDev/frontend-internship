@@ -1,7 +1,7 @@
 import { Input } from 'antd';
 import styled from 'styled-components';
 import sendMessageIcon from '../images/Vector.png';
-import profileImage from '../images/profile.png';
+import profileImage from '../images/AvatarStudent.png';
 import QuestionImage from '../images/Question.png';
 import CommentGrayImg from '../images/CommentGray.png';
 
@@ -24,14 +24,14 @@ export const CommentInput = styled(Input)`
 
 export const IconSendMessage = styled.div`
     background-image: url(${sendMessageIcon});
-    width: 35px;
-    height: 5vh;
+    width: 30px;
+    height: 30px;
     margin-right: -10px;
     margin-left: -20px;
     background-size: cover;
     background-position: center;
-    top: 4px;
-    right: 12%;
+    top: 7px;
+    right: 14%;
     position: absolute;
     float: right;
 
@@ -45,8 +45,8 @@ export const IconSendMessage = styled.div`
 
 export const ProfileUserImage = styled.div`
     background-image: url(${profileImage});
-    width: 10%;
-    height: 7vh;
+    width: 60px;
+    height: 60px;
     background-position: center;
     background-size: cover;
     border-radius: 50%;
@@ -86,10 +86,13 @@ export const CommentBody = styled.div`
     border-radius: 12px;
     padding-left: 10px;
     padding-top: 10px;
-    width: 60%;
+    width: 70%;
     height: 9vh;
-    transform: translateX(80px) translateY(-60%);
+    transform: translateX(70px) translateY(-60%);
     font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 `;
 
 export const CreatedDate = styled.div`
@@ -97,7 +100,7 @@ export const CreatedDate = styled.div`
     padding-top: 10px;
     width: 60%;
     height: 7vh;
-    transform: translateX(80px) translateY(-90%);
+    transform: translateX(70px) translateY(-90%);
     font-size: 12px;
 `;
 
@@ -150,14 +153,14 @@ export const ContainerOfIconQuestionAndText = styled.div`
 
 export const CommentGray = styled.div`
     background-image: url(${CommentGrayImg});
-    width: 35px;
-    height: 5vh;
+    width: 30px;
+    height: 30px;
     margin-right: -10px;
     margin-left: -20px;
     background-size: cover;
     background-position: center;
-    top: 4px;
-    right: 12%;
+    top: 7px;
+    right: 14%;
     position: absolute;
     float: right;
 

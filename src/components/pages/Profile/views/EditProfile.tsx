@@ -4,7 +4,7 @@ import { ConfirmModal, ButtonLeaveModal, ButtonCancleModal, TextHeadModal, TextB
 import { LeftOutlined } from '@ant-design/icons';
 import Container from 'components/Container/Container';
 import { useHistory } from 'react-router-dom';
-import { Alert, Form } from 'antd';
+import { Form } from 'antd';
 import { ApiGetUserData, ApiPutUserData } from '../apis/profile.api';
 import { IUser } from '../shared/Profile.interface';
 import ProfileMascot from '../../Profile/images/ProfileMascot.png';
@@ -74,6 +74,7 @@ const EditProfile = () => {
                 onOk={handleOk}
                 onCancel={handleCancel}
                 title={<TextHeadModal>ออกจากหน้านี้?</TextHeadModal>}
+                closable={false}
                 footer={[
                     <ButtonLeaveModal key="back" onClick={handleOk}>
                         ออก

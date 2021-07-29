@@ -3,9 +3,9 @@ import { Col } from 'antd';
 import { useEffect, useState } from 'react';
 import Container from 'components/Container/Container';
 import useSWR from 'swr';
-import { Box, ButtonStyle } from 'shared/style/theme/component';
-import ProfileMascot from '../../Profile/images/ProfileMascot.png';
-import { TextUserInfo1, TextUserInfo2, TextUsername, UserImage, RowStyled, LinkMoreResult, TextTopic2, NotFoundText } from '../shared/Profile.styles';
+import { Box } from 'shared/style/theme/component';
+import ProfileMascot from '../../Profile/images/AvatarStudent.png';
+import { TextUserInfo1, TextUserInfo2, TextUsername, UserImage, RowStyled, LinkMoreResult, TextTopic2, NotFoundText, ButtonEditedProfile } from '../shared/Profile.styles';
 import ProfileBoardCard from './ProfileBoardCard';
 import ProfileResultCard from './ProfileResultCard';
 import ErrorPage from 'shared/errorPage/ErrorPage';
@@ -51,9 +51,9 @@ function Profile() {
                             <TextUserInfo2>{fetchProfileData?.auth[0].email}</TextUserInfo2>
                         </Col>
                     </RowStyled>
-                    <ButtonStyle style={{ marginTop: '10px' }} typebutton="Large" pattern="Light" onClick={() => history.push('/editProfile')}>
+                    <ButtonEditedProfile style={{ marginTop: '10px' }} onClick={() => history.push('/editProfile')}>
                         แก้ไขข้อมูลส่วนตัว
-                    </ButtonStyle>
+                    </ButtonEditedProfile>
                     <RowStyled>
                         <Col span={16}>
                             <TextTopic2>ผลลัพธ์ของคุณ</TextTopic2>

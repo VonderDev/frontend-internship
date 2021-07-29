@@ -38,13 +38,10 @@ export const PrivacyContainer = styled.div`
     padding: 48px;
     overflow: hidden;
     text-align: center;
-    border: 1px solid #ebedf0;
     border-radius: 2px;
 `;
 
 export const DrawerContainer = styled.div`
-    position: relative;
-    height: 120%;
     overflow: hidden;
     border-radius: 2px;
     z-index: 20 !important;
@@ -56,7 +53,6 @@ export const CheckboxPrivacy = styled(Checkbox)`
 `;
 
 export const TextboxPrivacy = styled.div`
-    width: 90%;
     height: 75%;
     border-radius: 12px;
     overflow-y: scroll;

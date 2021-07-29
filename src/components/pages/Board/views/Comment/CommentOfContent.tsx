@@ -81,7 +81,6 @@ function CommentOfContent() {
 
     useEffect(() => {
         getUserInfo();
-        console.log('[Comment Data]', commentData);
         if (fetchingCommentData) {
             setCommentList(fetchingCommentData);
         }
@@ -128,7 +127,7 @@ function CommentOfContent() {
                                     <LeftOutlined style={{ color: '#8a8888' }} />
                                 </ButtonBackToFirstPage>
                             ) : (
-                                <ButtonBackToFirstPage onClick={() => history.push('/')}>
+                                <ButtonBackToFirstPage onClick={() => history.push(`/boardcontent/${paramObjectId?.id}`)}>
                                     <LeftOutlined style={{ color: '#8a8888' }} />
                                 </ButtonBackToFirstPage>
                             )}

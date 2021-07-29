@@ -19,13 +19,13 @@ const Charts = () => {
 
     useEffect(() => {
         if (resultData && (token || tokenGuest)) {
-            setScore(resultData.map((key: { score: any }) => key.score));
-            setSkill(resultData.map((key: any) => transalateToThai(key.skill)));
+            setScore(resultData?.map((key: { score: any }) => key.score));
+            setSkill(resultData?.map((key: any) => transalateToThai(key.skill)));
         }
         if (resultHistory && paramObjectId) {
             console.log('Result History', resultHistory);
-            setScore(resultHistory.map((key: { score: any }) => key.score));
-            setSkill(resultHistory.map((key: any) => transalateToThai(key.skill)));
+            setScore(resultHistory?.map((key: { score: any }) => key.score));
+            setSkill(resultHistory?.map((key: any) => transalateToThai(key.skill)));
         }
     }, [resultData, paramObjectId, resultHistory]);
 

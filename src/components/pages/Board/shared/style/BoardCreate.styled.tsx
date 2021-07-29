@@ -21,7 +21,7 @@ export const FormInputContent = styled(TextArea)`
     width: 90%;
     height: 220px;
     box-shadow: 0px 3px 6px #f1f1f1;
-    padding-bottom: 30%;
+    padding-bottom: 20%;
 `;
 
 export const CreateContentForm = styled(Form.Item)`
@@ -40,20 +40,34 @@ export const ButtonGoNextCreateContent = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Blue-400);
-    width: 75%;
-    height: 7vh;
+    position: absolute;
+    bottom: 10px;
+    left: 0px;
+    right: 0px;
     font-size: 16px;
-    transform: translateX(13%) translateY(130%);
-    font-size: 16px;
-    position: sticky;
+    margin-left: auto;
+    margin-right: auto;
     &:hover {
         cursor: pointer;
+    }
+    @media(max-width:400px){
+        width: 90% !important;
+        height: 51px;
+    }
+    @media(max-width:1024px){
+        width: 400px;
+        height: 51px;
+    } 
+    @media(min-width:1024px){
+        width: 400px;
+        height: 51px;
     }
 `;
 
 export const TextTopicContent = styled.div`
     font-size: 16px;
     color: var(--Gray-400);
+    margin-top: 8;
 `;
 
 export const UploadImage = styled(Upload)`
@@ -76,17 +90,29 @@ export const ButtonSummitPost = styled(Button)`
     font-weight: bolder;
     color: white;
     background-color: var(--Green-400);
-    margin-left: auto;
-    margin-right: auto;
-    width: 73%;
-    height: 7vh;
     font-size: 16px;
-    display: block;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
     margin: auto;
-    position: sticky;
-    transform: translateY(790%);
+    bottom: 10px;
+    left: 0px;
+    right: 0px;
     &:hover {
         cursor: pointer;
+    }
+    @media(max-width:400px){
+        width: 90% !important;
+        height: 51px;
+    }
+    @media(max-width:1024px){
+        width: 400px;
+        height: 51px;
+    } 
+    @media(min-width:1024px){
+        width: 400px;
+        height: 51px;
     }
 `;
 
@@ -96,9 +122,10 @@ export const CountOfPageCreateContent = styled.div`
     align-items: center;
     font-size: 16px;
     color: var(--Gray-400);
-    transform: translateY(-135%);
-
-    /* position: absolute; */
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 70px;
 `;
 
 export const CountOfPageTwo = styled.div`
@@ -107,9 +134,10 @@ export const CountOfPageTwo = styled.div`
     align-items: center;
     font-size: 16px;
     color: var(--Gray-400);
-    transform: translateY(1250%);
-
-    /* position: absolute; */
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 70px;
 `;
 
 export const ButtonOfCategory = styled(Button)`
@@ -131,9 +159,16 @@ export const ButtonOfCategory = styled(Button)`
 `;
 
 export const ContainerContentType = styled(Radio.Group)`
-    margin-left: 10px;
+    margin-right: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
+    right: 10px;
+`;
+
+export const ContainerTag = styled(Radio.Group)`
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
     right: 10px;
 `;
 
@@ -151,7 +186,7 @@ export const ContentTypeButton = styled(Radio.Button)`
         border-radius: var(--Blue-000);
     }
     &.ant-radio-button-wrapper:first-child {
-        width: 130px;
+        width: 168px;
         height: 50px;
         display: flex;
         justify-content: center;
@@ -175,6 +210,7 @@ export const InputHashtagInDrawer = styled(Select)`
     font-size: 16px;
     padding-top: 15px;
     border-radius: 10px;
+
     .ant-select-selection-overflow {
         height: auto;
         min-height: 45px !important;
@@ -183,9 +219,19 @@ export const InputHashtagInDrawer = styled(Select)`
         border-radius: 12px !important;
     }
     & .ant-select-selection-item {
-        background-color: #daebfd;
+        background-color: #ffffff;
         border-radius: 6px;
         font-size: 16px;
+        border-color: white;
+        padding: 0;
+        transform: translateX(10px);
+    }
+
+    & .ant-select-selection-item-content {
+        background: var(--Blue-000);
+        border-radius: 6px;
+        width: 100%;
+        text-align: center;
     }
 `;
 
@@ -324,4 +370,17 @@ export const CircleSelection = styled.div`
     background-image: url(${CirCleSelectionImg});
     width: 20px;
     height: 20px;
+`;
+
+export const ButtonSelectedTag = styled.div`
+    background-color: #daebfd;
+    width: 130px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3a8ce4;
+    font-size: 16px;
+    /* display: inline-block; */
 `;

@@ -1,6 +1,10 @@
 import { Alert } from 'antd';
 import styled from 'styled-components';
-import profileImage from '../images/profile.png';
+import profileImage from '../images/AvatarStudent.png';
+import IconLikeUnSuccessImg from '../images/IconLikeUnsuccess.png';
+import IconLikeSuccessImg from '../images/IconLikeSuccess.png';
+import CommentIconImg from '../images/IconCommentUnsuccuess.png';
+import DefaultImageContent from '../images/ImageDefault.png';
 
 export const ContainerBaordContent = styled.div`
     padding-left: 16px;
@@ -16,6 +20,7 @@ export const TextTitleContent = styled.div`
 export const CategoryTag = styled.div`
     display: inline;
     color: var(--Gray-400);
+    padding-right: 5px;
 `;
 
 export const ImageOfContent = styled.img`
@@ -41,6 +46,18 @@ export const ProfileImage = styled.div`
     margin-right: 10px;
 `;
 
+export const DefaultImage = styled.div`
+    background-image: url(${DefaultImageContent});
+    border-radius: 12px;
+    width: 100%;
+    height: 55vh;
+    margin-top: -15px;
+    margin-bottom: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+`;
+
 export const ContainerUserNameAndDate = styled.div``;
 
 export const TopicTag = styled.span`
@@ -52,28 +69,34 @@ export const TopicTag = styled.span`
 
 export const DateCreatedContent = styled.div`
     color: var(--Gray-400);
-    font-size: 14px;
+    font-size: 12px;
 `;
 
 export const AuthorName = styled.div`
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bolder;
 `;
 
 export const BoxOfLikeAndComment = styled.div`
-    padding-bottom: 5%;
+    padding: 3%;
+    position: sticky;
+    background-color: white;
+    bottom: 0;
     display: flex;
     justify-content: space-evenly;
-    //position: relative;
-    /* left: 18%;
-    :hover {
-        cursor: pointer;
-    } */
 `;
 
 export const LengthOfLikeAndComment = styled.span`
     font-size: 18px;
     color: #3a8ce4;
+    font-weight: bolder;
+    padding-left: 10px;
+    padding-right: 36%;
+`;
+
+export const LengthOfLikeAndCommentSuccess = styled.span`
+    font-size: 18px;
+    color: var(--Red-300);
     font-weight: bolder;
     padding-left: 10px;
     padding-right: 36%;
@@ -94,4 +117,21 @@ export const NotificationCreatedPostSuccess = styled(Alert)`
     .ant-alert-message {
         color: #125d45;
     }
+`;
+
+export const IconLikeUnSuccess = styled.div`
+    background-image: url(${IconLikeUnSuccessImg});
+    width: 57.3px;
+    height: 24px;
+`;
+export const IconLikeSuccess = styled.div`
+    background-image: url(${IconLikeSuccessImg});
+    width: 54.5px;
+    height: 24px;
+`;
+
+export const IconComment = styled.div`
+    background-image: url(${CommentIconImg});
+    width: 52px;
+    height: 24px;
 `;
