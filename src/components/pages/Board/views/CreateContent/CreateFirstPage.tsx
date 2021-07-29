@@ -22,6 +22,23 @@ interface CreateContentFirstPageProps {
 }
 
 const CreateContentFirstPage: React.FC<CreateContentFirstPageProps> = ({ updateContentData, uploadImage, handleOnChangeFileImage, defaultFileList, countPage, setCountPage }) => {
+    const onImagePreview = async (file: any) => {
+        let src = file.url;
+        if (!src) {
+            src = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file.originFileObj);
+                reader.onload = () => resolve(reader.result);
+            });
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src);
+        if (imgWindow !== null) {
+            imgWindow.document.write(image.outerHTML);
+        }
+    };
+
     return (
         <>
             <ContainerBoardCreate>
@@ -38,6 +55,7 @@ const CreateContentFirstPage: React.FC<CreateContentFirstPageProps> = ({ updateC
                         onChange={handleOnChangeFileImage}
                         listType="picture-card"
                         defaultFileList={defaultFileList}
+                        onPreview={onImagePreview}
                         className="image-upload-grid"
                     >
                         {defaultFileList.length >= 1 ? null : (
