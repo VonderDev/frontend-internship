@@ -1,7 +1,7 @@
 import { QuestionCircleTwoTone } from '@ant-design/icons';
 import { Col } from 'antd';
 import { useHistory } from 'react-router';
-import { ButtonReadOverviewTest, ButtonStartGame, ImageTestPage, TextTopicOnImageTest } from '../shared/style/homepage.styles';
+import { ButtonReadOverviewTest, ButtonStartGame, IconReadMore, ImageTestPage, TextTopicOnImageTest } from '../shared/style/homepage.styles';
 
 function StartTestComponent() {
     const history = useHistory();
@@ -14,7 +14,7 @@ function StartTestComponent() {
                 </ButtonStartGame>
                 <ButtonReadOverviewTest onClick={() => history.push('/testoverview')}>
                     {' '}
-                    <QuestionCircleTwoTone style={{ fontSize: '150%', paddingInline: '5px' }} twoToneColor="#287fde" />
+                    <IconReadMore style={{ fontSize: '150%', paddingInline: '5px' }} twoToneColor="#287fde" />
                     พหุปัญญาคืออะไร ?
                 </ButtonReadOverviewTest>
             </Col>

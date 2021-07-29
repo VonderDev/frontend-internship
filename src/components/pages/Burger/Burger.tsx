@@ -67,11 +67,12 @@ const Ul = styled.ul`
     width: 100%;
 `;
 const Listmenu = styled.li`
+    font-weight: 500 !important;
     &.nav-text {
         display: flex;
         justify-content: start;
         align-items: center;
-        padding: 8px 0px 8px 0px;
+        padding: 12px 0px;
         list-style: none;
         height: 60px;
     }
@@ -83,7 +84,7 @@ const Listmenu = styled.li`
         height: 100%;
         display: flex;
         align-items: center;
-        padding-left: 15%;
+        padding-left: 8%;
         border-radius: 4px;
     }
     &.nav-text a:hover {
@@ -96,7 +97,6 @@ const Span = styled.span`
     margin-left: 16px;
 `;
 const Avataruser = styled.div`
-    margin:0px;
     padding: 20px 0px;
     background-color: #FAFAFC;
     display: flex;
@@ -105,9 +105,9 @@ const Avataruser = styled.div`
     flex-direction: column;
 `;
 const AvatarName = styled.span`
-    margin-top: 20%;
+    margin-top: 30px;
     font-size: 22px;
-    font-weight: 300;
+    font-weight: bolder !important;
 `;
 
 const LoginBtn = styled(Button)`
@@ -120,14 +120,15 @@ const LoginBtn = styled(Button)`
     box-shadow: 0 3px 6px #e0e0e0;
 `;
 const ListmenuLogout = styled(Listmenu)`
-    bottom: 0;
+    bottom: 30px;
     display: flex;
     position: absolute;
     width: 100%;
+
 `;
 const UserImg = styled(Image)`
-    width: 90px;
-    height: 90px;
+    width: 110px;
+    height: 110px;
     border-radius: 90px;
 `;
 
@@ -166,7 +167,14 @@ const Burger = () => {
 
     return (
         <>
-            <MenuOutlined style={{ color: '#8a8888', fontSize: '24px' }} onClick={showSidebar} />
+        <div onClick={showSidebar}>
+        <svg width="29" height="24" viewBox="0 0 29 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4.2963 12.0001C4.2963 11.0532 5.01754 10.2858 5.90741 10.2858H27.3889C28.2788 10.2858 29 11.0532 29 12.0001C29 12.9469 28.2788 13.7143 27.3889 13.7143H5.90741C5.01754 13.7143 4.2963 12.9469 4.2963 12.0001Z" fill="#BEC3CE"/>
+        <path d="M27.3889 20.5714C28.2788 20.5714 29 21.3389 29 22.2857C29 23.2326 28.2788 24 27.3889 24H10.2037C9.31384 24 8.5926 23.2326 8.5926 22.2857C8.5926 21.3389 9.31384 20.5714 10.2037 20.5714H27.3889Z" fill="#BEC3CE"/>
+        <path d="M0 1.71428C0 0.767425 0.72124 0 1.61111 0H27.3889C28.2788 0 29 0.767425 29 1.71428C29 2.66113 28.2788 3.42856 27.3889 3.42856H1.61111C0.72124 3.42856 0 2.66113 0 1.71428Z" fill="#BEC3CE"/>
+        </svg>
+        </div>
+            {/* <MenuOutlined style={{ color: '#8a8888', fontSize: '24px' }} onClick={showSidebar} /> */}
             <Overlay active={sidebar ? 'active' : ''} onClick={showSidebar} />
             <Navmenu active={sidebar ? 'active' : '' }>
                 <Ul onClick={showSidebar}>
@@ -179,7 +187,7 @@ const Burger = () => {
                                 </>
                                 ) : (  
                                 <>
-                                    <Avatar size={75} icon={<UserOutlined />} />
+                                    <Avatar size={110} icon={<UserOutlined />} />
                                     <AvatarName> Guest #000 </AvatarName>
                                 </>
                                   )}

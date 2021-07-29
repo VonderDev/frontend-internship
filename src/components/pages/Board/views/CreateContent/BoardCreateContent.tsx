@@ -1,6 +1,6 @@
 import Container from 'components/Container/Container';
 import { ButtonBackToFirstPage, ButtonCancleModal, ButtonExistModal, ModalContainer, TextBodyModal, TextTitleModal } from '../../shared/style/BoardCreate.styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { LeftOutlined } from '@ant-design/icons';
 import { ApiPostContent } from '../../apis/boardCreate.api';
@@ -106,7 +106,10 @@ function BoardCreateContent() {
         history.goBack();
         setIsModalVisible(false);
     };
-    //SWITCH CASE
+
+    // useEffect(() => {
+    //     console.log('content data', contentData);
+    // }, [contentData]);
     return (
         <>
             <ModalContainer

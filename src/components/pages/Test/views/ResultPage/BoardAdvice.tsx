@@ -5,10 +5,9 @@ import { useHistory } from 'react-router-dom';
 import { ContainerBoard } from '../../shared/styles/Result/ResultPage.styled';
 import { BoardCardRecommend, BoardCardSpace, GridBox, ListCategoryAndTag } from '../../shared/styles/Result/ResultFeature.styled';
 import Meta from 'antd/lib/card/Meta';
-import { HeartIconCard, HeartText, CoverImage, BoardTextInfo } from '../../../Board/shared/style';
+import { HeartIconCard, HeartText, CoverImage, BoardTextInfo, CoverImageDefault, CommentIcon, HistoryText } from '../../../Board/shared/style';
 import { Box } from 'shared/style/theme/component';
 import { transalateToThai } from 'utils/transalator/transalator';
-import { FormOutlined, CalendarOutlined } from '@ant-design/icons';
 import useSWR from 'swr';
 import { useEffect, useState } from 'react';
 import React from 'react';
@@ -80,9 +79,30 @@ const BoardAdvice = () => {
                                     heightcard={255}
                                     key={index}
                                     hoverable
-                                    cover={<CoverImage src={item?.image} style={{ borderRadius: '12px 12px 0 0' }} />}
+                                    cover={
+                                        item?.image !== '' ? (
+                                            <CoverImage src={item?.image} style={{ borderRadius: '12px 12px 0 0' }} />
+                                        ) : (
+                                            <CoverImageDefault style={{ borderRadius: '12px 12px 0 0' }} />
+                                        )
+                                    }
                                     onClick={() => history.push(`/boardcontent/${item._id}`)}
-                                    actions={[<IconText icon={FormOutlined} text={item?.author_username} />, <IconText icon={CalendarOutlined} text={dateFormat(item?.created_at)} />]}
+                                    actions={[
+                                        <Box
+                                            direction="row"
+                                            justify="space-between"
+                                            align="flex-start"
+                                            style={{ fontSize: '12px', color: '#6E7282', marginLeft: '12px', display: 'flex', width: '100%', transform: 'translateY(-5px)' }}
+                                        >
+                                            <div style={{ justifyContent: 'center', flexDirection: 'row', display: 'flex' }}>
+                                                <CommentIcon style={{ alignItems: 'center', display: 'flex' }} />
+                                                <HistoryText>{item.author_username}</HistoryText>
+                                            </div>
+                                            <div style={{ justifyContent: 'center', flexDirection: 'row', display: 'flex' }}>
+                                                <HistoryText style={{ marginRight: '20px' }}>{dateFormat(item?.created_at)}</HistoryText>
+                                            </div>
+                                        </Box>,
+                                    ]}
                                 >
                                     <Meta title={item?.title} />
                                     <ListCategoryAndTag>

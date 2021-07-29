@@ -8,12 +8,11 @@ export async function API_Login_Data() {
 }
 
 export async function ApiPostDataUser(data : any) {
-    console.log(data);
     try {
         await axios.post('/signup', data)
         return data
     } catch (error) {
-        console.log("catch ERORRRR : ",error.response)
+        console.log("Error : ",error.response)
         return error.response
     }
 }

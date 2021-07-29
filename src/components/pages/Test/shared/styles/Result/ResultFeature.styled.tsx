@@ -16,14 +16,13 @@ export const ContainerImgCharactor = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* box-shadow: inset 10px 100px 100px 120px #999999 !important; */
-    /* background: linear-gradient(180deg, white, transparent); */
 `;
 
 export const ImgCardCharactorList = styled(CardStyle)`
     padding: 0px;
-    width: 150px;
-    height: 90px;
+    width: 130px;
+    height: 100px;
+    transition: all 0.2s ease;
     position: relative;
     & .ant-card-actions {
         border-top: none;
@@ -86,8 +85,8 @@ export const SpaceCharactorList = styled(Space)`
 `;
 
 export const CoverImage = styled.img`
-    width: 150px;
-    height: 90px;
+    width: 130px;
+    height: 100px;
     /* position: relative; */
     box-shadow: inset 0px 0px 20px 10px rgba(255, 255, 255, 0.6);
     z-index: 20;
@@ -105,13 +104,11 @@ export const SkillNameOnImgCard = styled.div`
     border-radius: 20px;
     font-size: 16px;
     text-shadow: 1px 1px 10px white, 0 0 1em white, 0 0 0.2em white;
-
-    /* box-shadow: inset 0 0 10px #ffffff; */
 `;
 
 export const BoardCardSpace = styled(Space)`
     padding-right: 20px;
-    padding-left: 20px;
+    padding-left: 10px;
     padding-bottom: 25px;
 `;
 
